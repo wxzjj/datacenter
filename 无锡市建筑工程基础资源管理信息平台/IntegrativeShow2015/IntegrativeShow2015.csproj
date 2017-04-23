@@ -1,0 +1,742 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4C4EC108-9F9A-484A-A3F0-59C8FBC72555}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IntegrativeShow2</RootNamespace>
+    <AssemblyName>IntegrativeShow2</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bigdesk8, Version=8.0.0.0, Culture=neutral, PublicKeyToken=3bb521609454f0e9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\基础类库和组件\Bigdesk8\bin\Debug\Bigdesk8.dll</HintPath>
+    </Reference>
+    <Reference Include="DataExport, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\系统依赖程序集集合\SZProject73\DataExport.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\DataDefine.cs" />
+    <Compile Include="Common\Definitions.cs" />
+    <Compile Include="Common\HandleBusiness.cs" />
+    <Compile Include="Common\SystemBLL.cs" />
+    <Compile Include="Common\SystemDAL.cs" />
+    <Compile Include="Common\UserInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\WebCommon.cs" />
+    <Compile Include="Common\DataHandle.cs" />
+    <Compile Include="ModelsZhjg\HandleSQLZHJG.cs" />
+    <Compile Include="Common\InterfaceBusiness.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysFiles\Handler\Data.ashx.cs">
+      <DependentUpon>Data.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Aqbj_List.aspx.cs">
+      <DependentUpon>Zhjg_Aqbj_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Aqbj_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Aqbj_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Aqbj_View.aspx.cs">
+      <DependentUpon>Zhjg_Aqbj_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Aqbj_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Aqbj_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Htba_List.aspx.cs">
+      <DependentUpon>Zhjg_Htba_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Htba_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Htba_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Htba_View.aspx.cs">
+      <DependentUpon>Zhjg_Htba_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Htba_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Htba_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Jgba_List.aspx.cs">
+      <DependentUpon>Zhjg_Jgba_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Jgba_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Jgba_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Jgba_View.aspx.cs">
+      <DependentUpon>Zhjg_Jgba_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Jgba_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Jgba_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_Dxgc_View.aspx.cs">
+      <DependentUpon>Zhjg_Lxxmdj_Dxgc_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_Dxgc_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Lxxmdj_Dxgc_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_List.aspx.cs">
+      <DependentUpon>Zhjg_Lxxmdj_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Lxxmdj_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_Menu.aspx.cs">
+      <DependentUpon>Zhjg_Lxxmdj_Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_Menu.aspx.designer.cs">
+      <DependentUpon>Zhjg_Lxxmdj_Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_View.aspx.cs">
+      <DependentUpon>Zhjg_Lxxmdj_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Lxxmdj_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Menu.aspx.cs">
+      <DependentUpon>Zhjg_Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Menu.aspx.designer.cs">
+      <DependentUpon>Zhjg_Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Sgtsc_List.aspx.cs">
+      <DependentUpon>Zhjg_Sgtsc_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Sgtsc_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Sgtsc_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Sgtsc_View.aspx.cs">
+      <DependentUpon>Zhjg_Sgtsc_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Sgtsc_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Sgtsc_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Sgxkz_List.aspx.cs">
+      <DependentUpon>Zhjg_Sgxkz_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Sgxkz_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Sgxkz_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Sgxkz_View.aspx.cs">
+      <DependentUpon>Zhjg_Sgxkz_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Sgxkz_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Sgxkz_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Zbtb_List.aspx.cs">
+      <DependentUpon>Zhjg_Zbtb_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Zbtb_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Zbtb_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Zbtb_View.aspx.cs">
+      <DependentUpon>Zhjg_Zbtb_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Zbtb_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Zbtb_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Zlbj_List.aspx.cs">
+      <DependentUpon>Zhjg_Zlbj_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Zlbj_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Zlbj_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Zlbj_View.aspx.cs">
+      <DependentUpon>Zhjg_Zlbj_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\PagesZhjg\Zhjg_Zlbj_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Zlbj_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\Pages\FrameView.aspx.cs">
+      <DependentUpon>FrameView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\Pages\FrameView.aspx.designer.cs">
+      <DependentUpon>FrameView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysFiles\Pages\Index_View.aspx.cs">
+      <DependentUpon>Index_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysFiles\Pages\Index_View.aspx.designer.cs">
+      <DependentUpon>Index_View.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\Themes_Standard\BottomFrame_Bk.jpg" />
+    <Content Include="App_Themes\Themes_Standard\BottomFrame_Bk_New.jpg" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_4_OnClick.png" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_4_UnClick.png" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_8_OnClick.jpg" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_8_UnClick.jpg" />
+    <Content Include="App_Themes\Themes_Standard\Skin1.skin" />
+    <Content Include="App_Themes\Themes_Standard\Stylesheet1.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Browsers\Other.browser" />
+    <Content Include="App_Themes\Themes_Standard\center_bk.jpg" />
+    <Content Include="App_Themes\Themes_Standard\FrameMain_Bk.jpg" />
+    <Content Include="App_Themes\Themes_Standard\Gcxx_Title.gif" />
+    <Content Include="App_Themes\Themes_Standard\MainFrame_Bk.jpg" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_4_OnClick.jpg" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_4_UnClick.jpg" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_6_OnClick.jpg" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_6_UnClick.jpg" />
+    <Content Include="App_Themes\Themes_Standard\MenuItem_BK.png" />
+    <Content Include="Common\FusionCharts.js" />
+    <Content Include="Common\jquery-1.3.2.min.js" />
+    <Content Include="Common\SearchContrl.js" />
+    <Content Include="DLL\DataExport.dll" />
+    <Content Include="DLL\Newtonsoft.Json.Net20.dll" />
+    <Content Include="SysFiles\Charts\Area2D.swf" />
+    <Content Include="SysFiles\Charts\Bar2D.swf" />
+    <Content Include="SysFiles\Charts\Bubble.swf" />
+    <Content Include="SysFiles\Charts\Column2D.swf" />
+    <Content Include="SysFiles\Charts\Column3D.swf" />
+    <Content Include="SysFiles\Charts\Doughnut2D.swf" />
+    <Content Include="SysFiles\Charts\Doughnut3D.swf" />
+    <Content Include="SysFiles\Charts\FCExporter.swf" />
+    <Content Include="SysFiles\Charts\Funnel.swf" />
+    <Content Include="SysFiles\Charts\InverseMSArea.swf" />
+    <Content Include="SysFiles\Charts\InverseMSColumn2D.swf" />
+    <Content Include="SysFiles\Charts\InverseMSLine.swf" />
+    <Content Include="SysFiles\Charts\Line.swf" />
+    <Content Include="SysFiles\Charts\LogMSColumn2D.swf" />
+    <Content Include="SysFiles\Charts\LogMSLine.swf" />
+    <Content Include="SysFiles\Charts\MSArea.swf" />
+    <Content Include="SysFiles\Charts\MSBar2D.swf" />
+    <Content Include="SysFiles\Charts\MSBar3D.swf" />
+    <Content Include="SysFiles\Charts\MSColumn2D.swf" />
+    <Content Include="SysFiles\Charts\MSColumn3D.swf" />
+    <Content Include="SysFiles\Charts\MSColumn3DLineDY.swf" />
+    <Content Include="SysFiles\Charts\MSColumnLine3D.swf" />
+    <Content Include="SysFiles\Charts\MSCombi2D.swf" />
+    <Content Include="SysFiles\Charts\MSCombi3D.swf" />
+    <Content Include="SysFiles\Charts\MSCombiDY2D.swf" />
+    <Content Include="SysFiles\Charts\MSLine.swf" />
+    <Content Include="SysFiles\Charts\MSSpline.swf" />
+    <Content Include="SysFiles\Charts\MSSplineArea.swf" />
+    <Content Include="SysFiles\Charts\MSStackedColumn2D.swf" />
+    <Content Include="SysFiles\Charts\MSStackedColumn2DLineDY.swf" />
+    <Content Include="SysFiles\Charts\Pie2D.swf" />
+    <Content Include="SysFiles\Charts\Pie3D.swf" />
+    <Content Include="SysFiles\Charts\Pyramid.swf" />
+    <Content Include="SysFiles\Charts\Scatter.swf" />
+    <Content Include="SysFiles\Charts\ScrollArea2D.swf" />
+    <Content Include="SysFiles\Charts\ScrollColumn2D.swf" />
+    <Content Include="SysFiles\Charts\ScrollCombi2D.swf" />
+    <Content Include="SysFiles\Charts\ScrollCombiDY2D.swf" />
+    <Content Include="SysFiles\Charts\ScrollLine2D.swf" />
+    <Content Include="SysFiles\Charts\ScrollStackedColumn2D.swf" />
+    <Content Include="SysFiles\Charts\Spline.swf" />
+    <Content Include="SysFiles\Charts\SplineArea.swf" />
+    <Content Include="SysFiles\Charts\SSGrid.swf" />
+    <Content Include="SysFiles\Charts\StackedArea2D.swf" />
+    <Content Include="SysFiles\Charts\StackedBar2D.swf" />
+    <Content Include="SysFiles\Charts\StackedBar3D.swf" />
+    <Content Include="SysFiles\Charts\StackedColumn2D.swf" />
+    <Content Include="SysFiles\Charts\StackedColumn3D.swf" />
+    <Content Include="SysFiles\Charts\StackedColumn3DLineDY.swf" />
+    <Content Include="SysFiles\Images\BottomFrame_Bk.jpg" />
+    <Content Include="SysFiles\Images\BottomFrame_Bk_New.jpg" />
+    <Content Include="SysFiles\Images\FrameBottom\Bottom_01.jpg" />
+    <Content Include="SysFiles\Images\FrameBottom\Bottom_02.jpg" />
+    <Content Include="SysFiles\Images\FrameBottom\Bottom_03.jpg" />
+    <Content Include="SysFiles\Images\FrameCenter\Center_01.jpg" />
+    <Content Include="SysFiles\Images\FrameCenter\Center_02.jpg" />
+    <Content Include="SysFiles\Images\FrameCenter\center_bk.jpg" />
+    <Content Include="SysFiles\Images\FrameCenter\main_bk.gif" />
+    <Content Include="SysFiles\Images\FrameCenter\main_center.gif" />
+    <Content Include="SysFiles\Images\FrameLeft_Bk.jpg" />
+    <Content Include="SysFiles\Images\FrameMain_Bk.jpg" />
+    <Content Include="SysFiles\Images\FrameMenu_Bk.jpg" />
+    <Content Include="SysFiles\Images\FrameMenu_Title.jpg" />
+    <Content Include="SysFiles\Images\FrameMenu_Title_BK.jpg" />
+    <Content Include="SysFiles\Images\FrameTop\Top_01.jpg" />
+    <Content Include="SysFiles\Images\FrameTop\Top_02.jpg" />
+    <Content Include="SysFiles\Images\FrameTop\Top_03.jpg" />
+    <Content Include="SysFiles\Images\FrameTop\Top_04.jpg" />
+    <Content Include="SysFiles\Images\FrameTop_Bk.jpg" />
+    <Content Include="SysFiles\Images\FrameTop_Title.jpg" />
+    <Content Include="SysFiles\Images\FrameTop_Title_New.jpg" />
+    <Content Include="SysFiles\Images\FrameView\Top_title.jpg" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work1_01.gif" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work1_02.gif" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work1_03.gif" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work1_04.gif" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work1_05.gif" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work2_02.gif" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work3_02.gif" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work4_02.gif" />
+    <Content Include="SysFiles\Images\FrameWorkArea\work_jcfz_01.gif" />
+    <Content Include="SysFiles\Images\Icons\Gcxx_jg.png" />
+    <Content Include="SysFiles\Images\Icons\Gcxx_List.gif" />
+    <Content Include="SysFiles\Images\Icons\Gcxx_zj.png" />
+    <Content Include="SysFiles\Images\Icons\Link1.png" />
+    <Content Include="SysFiles\Images\Icons\Link2.png" />
+    <Content Include="SysFiles\Images\Icons\Link3.png" />
+    <Content Include="SysFiles\Images\Icons\Link4.png" />
+    <Content Include="SysFiles\Images\Icons\Link5.png" />
+    <Content Include="SysFiles\Images\Icons\ListShowBljl.png" />
+    <Content Include="SysFiles\Images\Icons\ListShowBljl_Y.png" />
+    <Content Include="SysFiles\Images\Icons\ListShow_wjx.png" />
+    <Content Include="SysFiles\Images\Icons\main_11.gif" />
+    <Content Include="SysFiles\Images\Icons\top_1.gif" />
+    <Content Include="SysFiles\Images\Icons\top_10.gif" />
+    <Content Include="SysFiles\Images\Icons\top_11.gif" />
+    <Content Include="SysFiles\Images\Icons\top_12.gif" />
+    <Content Include="SysFiles\Images\Icons\top_13.gif" />
+    <Content Include="SysFiles\Images\Icons\top_14.gif" />
+    <Content Include="SysFiles\Images\Icons\top_15.gif" />
+    <Content Include="SysFiles\Images\Icons\top_16.gif" />
+    <Content Include="SysFiles\Images\Icons\top_17.gif" />
+    <Content Include="SysFiles\Images\Icons\top_18.gif" />
+    <Content Include="SysFiles\Images\Icons\top_2.gif" />
+    <Content Include="SysFiles\Images\Icons\top_3.gif" />
+    <Content Include="SysFiles\Images\Icons\top_4.gif" />
+    <Content Include="SysFiles\Images\Icons\top_5.gif" />
+    <Content Include="SysFiles\Images\Icons\top_6.gif" />
+    <Content Include="SysFiles\Images\Icons\top_7.gif" />
+    <Content Include="SysFiles\Images\Icons\top_8.gif" />
+    <Content Include="SysFiles\Images\Icons\top_9.gif" />
+    <Content Include="SysFiles\Images\Icon_new.gif" />
+    <Content Include="SysFiles\Images\img.png" />
+    <Content Include="SysFiles\Images\Img_Frames\1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\10.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\10_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\1_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\2.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\2_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\3.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\3_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\4.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\4_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\5.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\5_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\6.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\6_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\7.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\7_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\8.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\8_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\9.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\9_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\left_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\left_2.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\left_3.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\left_4.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_01.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_03.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_05.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_07.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_09.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_11.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_13.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_15.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_17.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_18.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_21.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_25.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_27.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_29.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_30.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_30_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_32.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_36.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_38.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_40.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\main_43.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\mini_icons_046.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\right_03.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\right_06.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\right_061.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\right_09.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\right_10.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\right_12.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\syb.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\tab_bg.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_1.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_10.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_11.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_12.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_13.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_14.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_15.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_16.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_17.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_18.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_2.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_3.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_4.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_5.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_6.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_7.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_8.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\top_9.gif" />
+    <Content Include="SysFiles\Images\Img_Frames\xyb.gif" />
+    <Content Include="SysFiles\Images\LeftMarq_On.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\btn_back.png" />
+    <Content Include="SysFiles\Images\LinksButton\btn_detail.gif" />
+    <Content Include="SysFiles\Images\LinksButton\btn_excel.png" />
+    <Content Include="SysFiles\Images\LinksButton\btn_next.png" />
+    <Content Include="SysFiles\Images\LinksButton\btn_view.png" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_01.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_01_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_01_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_02.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_02_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_02_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_03.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_03_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_03_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_04.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_04_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_04_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_05.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_05_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_05_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_06.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_06_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_06_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_07.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_07_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_07_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_08.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_08_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_08_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_09.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_09_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_09_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_10.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_10_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_10_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_11.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_11_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_11_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_Left.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_Left_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_Left_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_Mid.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_Right.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_Right_no.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_Right_on.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Lb_Gcxm_Top.jpg" />
+    <Content Include="SysFiles\Images\LinksButton\Search_Button.png" />
+    <Content Include="SysFiles\Images\LinksButton\Search_Button3.png" />
+    <Content Include="SysFiles\Images\MENU_01.gif" />
+    <Content Include="SysFiles\Images\MENU_01_over.gif" />
+    <Content Include="SysFiles\Images\MENU_02.gif" />
+    <Content Include="SysFiles\Images\MENU_02_over.gif" />
+    <Content Include="SysFiles\Images\MENU_03.gif" />
+    <Content Include="SysFiles\Images\MENU_03_over.gif" />
+    <Content Include="SysFiles\Images\MENU_04.gif" />
+    <Content Include="SysFiles\Images\MENU_04_over.gif" />
+    <Content Include="SysFiles\Images\MENU_05.gif" />
+    <Content Include="SysFiles\Images\MENU_05_over.gif" />
+    <Content Include="SysFiles\Images\MENU_06.gif" />
+    <Content Include="SysFiles\Images\MENU_06_over.gif" />
+    <Content Include="SysFiles\Images\MENU_07.gif" />
+    <Content Include="SysFiles\Images\MENU_07_over.gif" />
+    <Content Include="SysFiles\Images\RightMarq_On.jpg" />
+    <Content Include="SysFiles\Images\Right_WorkArea_RBK_Bmld.gif" />
+    <Content Include="SysFiles\Images\Right_WorkArea_RBK_Gztx.gif" />
+    <Content Include="SysFiles\Images\Right_WorkArea_RBK_Jyzx.gif" />
+    <Content Include="SysFiles\Images\Right_WorkArea_RBK_Scjg.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Gcxx_Title.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_aqsgxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_aqyhjlxq.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_blxwjlxq.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_blxwms.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_cbfbfaxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_cfqk.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_dwgclb.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_fbxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_fjcllb.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_gcgk.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_gcjbxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_gcxmbgjl.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_gcxmbgxq.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jbqk.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jcjlxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jlbdlb.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jldwxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jlhtbaxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jsdwxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jsgclb.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jsgfztxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_jszzhy.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_kbxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_kcdwxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_kcsjdw.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_lhxwms.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_lwfbhtba.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_lxxmxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_ndxysc.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_pbjg.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_pwkhxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyblxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyglry.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyglryxq.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyglzs.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyglzsxq.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyhjqk.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyjbxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qylhxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qymlxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyndkp.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyryzk.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyzzlb.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qyzzxq.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_qzjxsbxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_ryblxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_ryjbxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_rylhxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_scjbxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_scjyxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_sgbdlb.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_sgdwxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_sghtbaxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_sgtscxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_sgxkblgc.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_sgxkff.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_sgxksbxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_sjdwxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_tbbmqk.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_xcjcqk.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_xmccxxqk.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_xmjlbgxq.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_xzcfxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_yxcbsyjgc.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zbba.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zbjg.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zbzzxs.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zdwxyxq.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zjbg.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zlbjxx.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zycbhtba.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zyfbhtba.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Title_zyxxlb.gif" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Jlqy.png" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Jzyqy.png" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Qytjbb.png" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Xmtjbb.png" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Xmtjtb.png" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Zbdljg.png" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Zbdlzyry.png" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Zcjls.png" />
+    <Content Include="SysFiles\Images\TitleImgs\Tj_Zcjzs.png" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Zdgz.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Zhjg.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_zhjg_aqbjxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_zhjg_htbaxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_zhjg_jgysbaxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_zhjg_sgtscxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_zhjg_sgxkxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_zhjg_xmjbxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_zhjg_zlbjxx.gif" />
+    <Content Include="SysFiles\Images\Title_BK.jpg" />
+    <Content Include="SysFiles\Images\Tjbb_line.jpg" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Fdcxm.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Jlgc.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Kcsjxm.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Lxxm.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Sggc.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Sgtscxm.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Sjgc.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Zdgc.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Gcxm_Zdgz.png" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jcfz.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jcfz_Gcxmtj.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jcfz_Jsqytj.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jcfz_Zyrstj.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Aqsg.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Aqyh.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Blxwqy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Dxjsqy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Gcbgxm.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Gzlmb.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Hygl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Jcccxm.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Jsczbj.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_qyblxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_qylhxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Qzjxsb.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_ryblxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_rylhxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Scgl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Tdxxm.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Xcgl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Xfxm.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Yqwbsgxk.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Zdwxy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_zhkp.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Zlsg.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jgys_Zlwt.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Jsgc.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Lxgz.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_fdcqy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_jcjg.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_jlqy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_jsdw.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_kcqy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_kcsjqy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_sgqy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_sjqy.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_yxcbs.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_zbdljg.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_qyxx_zjzxjg.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx_Aqscl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx_jjryl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx_Jll.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx_Kcsjl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx_Sgl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx_Zaojl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx_Zbdll.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Ryxx_Zjl.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Xyxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Xyxx_Blxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Xyxx_Lhxx.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Xyxx_Xypj.gif" />
+    <Content Include="SysFiles\Images\TreeIcon\TreeIcon_Zhjg_ztbxx.gif" />
+    <Content Include="SysFiles\Images\View_NoPhoto.jpg" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Aqbj_List.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Aqbj_View.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Htba_List.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Htba_View.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Jgba_List.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Jgba_View.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_Dxgc_View.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_List.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_Menu.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Lxxmdj_View.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Menu.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Sgtsc_List.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Sgtsc_View.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Sgxkz_List.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Sgxkz_View.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Zbtb_List.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Zbtb_View.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Zlbj_List.aspx" />
+    <Content Include="SysFiles\PagesZhjg\Zhjg_Zlbj_View.aspx" />
+    <Content Include="SysFiles\Pages\FrameView.aspx" />
+    <Content Include="SysFiles\Pages\Index_View.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SysFiles\Handler\Data.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="SysFiles\Excel\" />
+    <Folder Include="SysFiles\Reports\" />
+    <Folder Include="SysFiles\UploadPictures\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>1200</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

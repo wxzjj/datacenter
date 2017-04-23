@@ -1,0 +1,15 @@
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\SparkServiceDesk.dll
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\SparkServiceDesk.pdb
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\Bigdesk8.dll
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\Newtonsoft.Json.Net20.dll
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\AntiXssLibrary.dll
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\office.dll
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\Microsoft.Office.Interop.Excel.dll
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\Microsoft.Vbe.Interop.dll
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\Newtonsoft.Json.Net20.pdb
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\Newtonsoft.Json.Net20.xml
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\Bigdesk8.pdb
+E:\worknew\基础类库和组件\SparkServiceDesk\bin\Bigdesk8.xml
+E:\worknew\基础类库和组件\SparkServiceDesk\obj\Debug\ResolveAssemblyReference.cache
+E:\worknew\基础类库和组件\SparkServiceDesk\obj\Debug\SparkServiceDesk.dll
+E:\worknew\基础类库和组件\SparkServiceDesk\obj\Debug\SparkServiceDesk.pdb

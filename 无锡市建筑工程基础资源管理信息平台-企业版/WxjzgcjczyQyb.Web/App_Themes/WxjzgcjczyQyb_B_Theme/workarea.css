@@ -1,0 +1,30 @@
+﻿/* 欢迎页 - 带按钮的段落 */
+.wwithicon{ display:block; position:relative; margin-top:4px; margin-bottom:4px;}
+.wwithicon .icon{ position:absolute; left:7px; top:6px; width:20px; height:20px;}
+.wwithicon span{ line-height:32px;}
+.wwithicon img{width:20px; height:20px;}
+
+/* 欢迎页 - 内容 */
+.wcontent{ display:block; position:relative; margin-top:4px; margin-bottom:4px;}
+.wcontent span{ line-height:32px;}
+.wcontent img{width:25px; height:25px;}
+
+/* 欢迎页 - 导航条 */
+.wnavbar{line-height:33px;position:relative; width:100%; height:33px;text-align:left;border:1px solid #e0e0e0; background-color:#f5f5f5;}
+.wnavbar-icon{ position:absolute; left:7px; top:6px;}
+.wnavbar img{ width:20px; height:20px;}
+.wnavbar-inner{ margin-left:30px;}
+.wnavbar a{ color:#3186C8;}
+
+.wnavline{ height:1px; line-height:1px; width:100%;border-bottom:1px solid #cccccc;width:100%; }
+
+
+
+/* 欢迎页 - 快捷按钮 (图片+文字) */
+.wlinks{ display:block; position:relative; margin-top:4px; margin-bottom:4px;}
+.wlink{ float:left;position:relative; width:100px; height:70px; margin-left:10px; text-align:center;border:1px solid Transparent; cursor:pointer; }
+.wlink img{ display:block; margin:5px auto; width:32px; height:32px;}
+
+.wlinkover{ border:1px solid #ff9900; background:#f1f1f1;}
+
+.wl-clear{ clear:both;} 

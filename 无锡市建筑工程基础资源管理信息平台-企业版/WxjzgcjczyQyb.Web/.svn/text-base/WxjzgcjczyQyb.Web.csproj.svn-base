@@ -1,0 +1,1536 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{365139CC-D386-46C6-8209-852EFD17AF33}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WxjzgcjczyQyb.Web</RootNamespace>
+    <AssemblyName>WxjzgcjczyQyb.Web</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bigdesk8, Version=8.0.0.0, Culture=neutral, PublicKeyToken=3bb521609454f0e9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\基础类库和组件\Bigdesk8\bin\Debug\Bigdesk8.dll</HintPath>
+    </Reference>
+    <Reference Include="Majordomo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WxjzgcjczyQybPage\Common\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Common\BasePage2.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Common\WebCommon.cs" />
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\BottomFrame.aspx.cs">
+      <DependentUpon>BottomFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\BottomFrame.aspx.designer.cs">
+      <DependentUpon>BottomFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\LeftFrame.aspx.cs">
+      <DependentUpon>LeftFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\LeftFrame.aspx.designer.cs">
+      <DependentUpon>LeftFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\RightFrame.aspx.cs">
+      <DependentUpon>RightFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\RightFrame.aspx.designer.cs">
+      <DependentUpon>RightFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\TopFrame.aspx.cs">
+      <DependentUpon>TopFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\TopFrame.aspx.designer.cs">
+      <DependentUpon>TopFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\WorkArea.aspx.cs">
+      <DependentUpon>WorkArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceGlyh\WorkArea.aspx.designer.cs">
+      <DependentUpon>WorkArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\BottomFrame.aspx.cs">
+      <DependentUpon>BottomFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\BottomFrame.aspx.designer.cs">
+      <DependentUpon>BottomFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\LeftFrame.aspx.cs">
+      <DependentUpon>LeftFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\LeftFrame.aspx.designer.cs">
+      <DependentUpon>LeftFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\RightFrame.aspx.cs">
+      <DependentUpon>RightFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\RightFrame.aspx.designer.cs">
+      <DependentUpon>RightFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\TopFrame.aspx.cs">
+      <DependentUpon>TopFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\TopFrame.aspx.designer.cs">
+      <DependentUpon>TopFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\WorkArea.aspx.cs">
+      <DependentUpon>WorkArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceJsdw\WorkArea.aspx.designer.cs">
+      <DependentUpon>WorkArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\BottomFrame.aspx.cs">
+      <DependentUpon>BottomFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\BottomFrame.aspx.designer.cs">
+      <DependentUpon>BottomFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\LeftFrame.aspx.cs">
+      <DependentUpon>LeftFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\LeftFrame.aspx.designer.cs">
+      <DependentUpon>LeftFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\RightFrame.aspx.cs">
+      <DependentUpon>RightFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\RightFrame.aspx.designer.cs">
+      <DependentUpon>RightFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\TopFrame.aspx.cs">
+      <DependentUpon>TopFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\TopFrame.aspx.designer.cs">
+      <DependentUpon>TopFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\WorkArea.aspx.cs">
+      <DependentUpon>WorkArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\EntranceSgdw\WorkArea.aspx.designer.cs">
+      <DependentUpon>WorkArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Aqbj_List.aspx.cs">
+      <DependentUpon>Zhjg_Aqbj_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Aqbj_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Aqbj_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Aqbj_View.aspx.cs">
+      <DependentUpon>Zhjg_Aqbj_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Aqbj_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Aqbj_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Htba_List.aspx.cs">
+      <DependentUpon>Zhjg_Htba_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Htba_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Htba_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Htba_View.aspx.cs">
+      <DependentUpon>Zhjg_Htba_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Htba_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Htba_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Jgba_List.aspx.cs">
+      <DependentUpon>Zhjg_Jgba_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Jgba_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Jgba_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Jgba_View.aspx.cs">
+      <DependentUpon>Zhjg_Jgba_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Jgba_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Jgba_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_Dxgc_View.aspx.cs">
+      <DependentUpon>Zhjg_Lxxmdj_Dxgc_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_Dxgc_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Lxxmdj_Dxgc_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_List.aspx.cs">
+      <DependentUpon>Zhjg_Lxxmdj_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Lxxmdj_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_Menu.aspx.cs">
+      <DependentUpon>Zhjg_Lxxmdj_Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_Menu.aspx.designer.cs">
+      <DependentUpon>Zhjg_Lxxmdj_Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_View.aspx.cs">
+      <DependentUpon>Zhjg_Lxxmdj_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Lxxmdj_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgtsc_List.aspx.cs">
+      <DependentUpon>Zhjg_Sgtsc_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgtsc_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Sgtsc_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgtsc_View.aspx.cs">
+      <DependentUpon>Zhjg_Sgtsc_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgtsc_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Sgtsc_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgxkz_List.aspx.cs">
+      <DependentUpon>Zhjg_Sgxkz_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgxkz_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Sgxkz_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgxkz_View.aspx.cs">
+      <DependentUpon>Zhjg_Sgxkz_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgxkz_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Sgxkz_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zbtb_List.aspx.cs">
+      <DependentUpon>Zhjg_Zbtb_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zbtb_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Zbtb_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zbtb_View.aspx.cs">
+      <DependentUpon>Zhjg_Zbtb_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zbtb_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Zbtb_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zlbj_List.aspx.cs">
+      <DependentUpon>Zhjg_Zlbj_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zlbj_List.aspx.designer.cs">
+      <DependentUpon>Zhjg_Zlbj_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zlbj_View.aspx.cs">
+      <DependentUpon>Zhjg_Zlbj_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zlbj_View.aspx.designer.cs">
+      <DependentUpon>Zhjg_Zlbj_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Handler\TreeData.ashx.cs">
+      <DependentUpon>TreeData.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Msg.aspx.cs">
+      <DependentUpon>Msg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Msg.aspx.designer.cs">
+      <DependentUpon>Msg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Msg_Ryxx.aspx.cs">
+      <DependentUpon>Msg_Ryxx.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Msg_Ryxx.aspx.designer.cs">
+      <DependentUpon>Msg_Ryxx.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Page_End.aspx.cs">
+      <DependentUpon>Page_End.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Page_End.aspx.designer.cs">
+      <DependentUpon>Page_End.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Page_List.aspx.cs">
+      <DependentUpon>Page_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Page_List.aspx.designer.cs">
+      <DependentUpon>Page_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Page_top.aspx.cs">
+      <DependentUpon>Page_top.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Page_top.aspx.designer.cs">
+      <DependentUpon>Page_top.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Public\TitleFrame.aspx.cs">
+      <DependentUpon>TitleFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Public\TitleFrame.aspx.designer.cs">
+      <DependentUpon>TitleFrame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Public\TitleFrame2.aspx.cs">
+      <DependentUpon>TitleFrame2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Public\TitleFrame2.aspx.designer.cs">
+      <DependentUpon>TitleFrame2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Clgc.aspx.cs">
+      <DependentUpon>Clgc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Clgc.aspx.designer.cs">
+      <DependentUpon>Clgc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Jsdwssgc.aspx.cs">
+      <DependentUpon>Jsdwssgc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Jsdwssgc.aspx.designer.cs">
+      <DependentUpon>Jsdwssgc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\JsdwxxToolBar.aspx.cs">
+      <DependentUpon>JsdwxxToolBar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\JsdwxxToolBar.aspx.designer.cs">
+      <DependentUpon>JsdwxxToolBar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Jsdw_List.aspx.cs">
+      <DependentUpon>Jsdw_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Jsdw_List.aspx.designer.cs">
+      <DependentUpon>Jsdw_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Jsdw_View.aspx.cs">
+      <DependentUpon>Jsdw_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Jsdw_View.aspx.designer.cs">
+      <DependentUpon>Jsdw_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Jyzz.aspx.cs">
+      <DependentUpon>Jyzz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Jyzz.aspx.designer.cs">
+      <DependentUpon>Jyzz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Kcdw_List.aspx.cs">
+      <DependentUpon>Kcdw_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Kcdw_List.aspx.designer.cs">
+      <DependentUpon>Kcdw_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Qtdw_List.aspx.cs">
+      <DependentUpon>Qtdw_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Qtdw_List.aspx.designer.cs">
+      <DependentUpon>Qtdw_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\QyxxToolBar.aspx.cs">
+      <DependentUpon>QyxxToolBar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\QyxxToolBar.aspx.designer.cs">
+      <DependentUpon>QyxxToolBar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Qyxx_View.aspx.cs">
+      <DependentUpon>Qyxx_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Qyxx_View.aspx.designer.cs">
+      <DependentUpon>Qyxx_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Sgdw_List.aspx.cs">
+      <DependentUpon>Sgdw_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Sgdw_List.aspx.designer.cs">
+      <DependentUpon>Sgdw_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Sjdw_List.aspx.cs">
+      <DependentUpon>Sjdw_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Sjdw_List.aspx.designer.cs">
+      <DependentUpon>Sjdw_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Zjjg_List.aspx.cs">
+      <DependentUpon>Zjjg_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Zjjg_List.aspx.designer.cs">
+      <DependentUpon>Zjjg_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Zyry.aspx.cs">
+      <DependentUpon>Zyry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Zyry.aspx.designer.cs">
+      <DependentUpon>Zyry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Zzxx.aspx.cs">
+      <DependentUpon>Zzxx.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Sczt\Zzxx.aspx.designer.cs">
+      <DependentUpon>Zzxx.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Start.aspx.cs">
+      <DependentUpon>Start.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Start.aspx.designer.cs">
+      <DependentUpon>Start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\JbZxjk_List.aspx.cs">
+      <DependentUpon>JbZxjk_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\JbZxjk_List.aspx.designer.cs">
+      <DependentUpon>JbZxjk_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Jkcbxx_View.aspx.cs">
+      <DependentUpon>Jkcbxx_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Jkcbxx_View.aspx.designer.cs">
+      <DependentUpon>Jkcbxx_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Jkzbxx_View.aspx.cs">
+      <DependentUpon>Jkzbxx_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Jkzbxx_View.aspx.designer.cs">
+      <DependentUpon>Jkzbxx_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Jkztjk_List.aspx.cs">
+      <DependentUpon>Jkztjk_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Jkztjk_List.aspx.designer.cs">
+      <DependentUpon>Jkztjk_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Jkztjk_Menu.aspx.cs">
+      <DependentUpon>Jkztjk_Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Jkztjk_Menu.aspx.designer.cs">
+      <DependentUpon>Jkztjk_Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Sjjhzx_Menu.aspx.cs">
+      <DependentUpon>Sjjhzx_Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Sjjhzx_Menu.aspx.designer.cs">
+      <DependentUpon>Sjjhzx_Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzdx.aspx.cs">
+      <DependentUpon>Syzxspt_Bzdx.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzdx.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Bzdx.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzdxjtcy.aspx.cs">
+      <DependentUpon>Syzxspt_Bzdxjtcy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzdxjtcy.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Bzdxjtcy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzfy.aspx.cs">
+      <DependentUpon>Syzxspt_Bzfy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzfy.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Bzfy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Gcxm.aspx.cs">
+      <DependentUpon>Syzxspt_Gcxm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Gcxm.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Gcxm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Jgba.aspx.cs">
+      <DependentUpon>Syzxspt_Jgba.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Jgba.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Jgba.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Ryxx.aspx.cs">
+      <DependentUpon>Syzxspt_Ryxx.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Ryxx.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Ryxx.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Sgxk.aspx.cs">
+      <DependentUpon>Syzxspt_Sgxk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Sgxk.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Sgxk.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Wyglcyry.aspx.cs">
+      <DependentUpon>Syzxspt_Wyglcyry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Wyglcyry.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Wyglcyry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Zbzb.aspx.cs">
+      <DependentUpon>Syzxspt_Zbzb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Zbzb.aspx.designer.cs">
+      <DependentUpon>Syzxspt_Zbzb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xytx\Xykp_List.aspx.cs">
+      <DependentUpon>Xykp_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xytx\Xykp_List.aspx.designer.cs">
+      <DependentUpon>Xykp_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Aqscglry_List.aspx.cs">
+      <DependentUpon>Aqscglry_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Aqscglry_List.aspx.designer.cs">
+      <DependentUpon>Aqscglry_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Cjxm.aspx.cs">
+      <DependentUpon>Cjxm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Cjxm.aspx.designer.cs">
+      <DependentUpon>Cjxm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\ImageShow.aspx.cs">
+      <DependentUpon>ImageShow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\ImageShow.aspx.designer.cs">
+      <DependentUpon>ImageShow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Qyjjry_List.aspx.cs">
+      <DependentUpon>Qyjjry_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Qyjjry_List.aspx.designer.cs">
+      <DependentUpon>Qyjjry_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\RyxxToolBar.aspx.cs">
+      <DependentUpon>RyxxToolBar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\RyxxToolBar.aspx.designer.cs">
+      <DependentUpon>RyxxToolBar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Ryxx_View.aspx.cs">
+      <DependentUpon>Ryxx_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Ryxx_View.aspx.designer.cs">
+      <DependentUpon>Ryxx_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Zczyry_List.aspx.cs">
+      <DependentUpon>Zczyry_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Zczyry_List.aspx.designer.cs">
+      <DependentUpon>Zczyry_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Zygwglry_List.aspx.cs">
+      <DependentUpon>Zygwglry_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Zygwglry_List.aspx.designer.cs">
+      <DependentUpon>Zygwglry_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Zyzg.aspx.cs">
+      <DependentUpon>Zyzg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Zyry\Zyzg.aspx.designer.cs">
+      <DependentUpon>Zyzg.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SparkClient\control.js" />
+    <Content Include="SparkClient\BigFileUpload_SilverlightApp.xap" />
+    <Content Include="SparkClient\Calendar.js" />
+    <Content Include="SparkClient\EditButtom_Login.jpg" />
+    <Content Include="SparkClient\jquery-1.4.2.min.js" />
+    <Content Include="SparkClient\jquery.showrandom.js" />
+    <Content Include="SparkClient\jquery.Silverlight.bigfileupload.js" />
+    <Content Include="SparkClient\jquery.ui-1.8.2.css" />
+    <Content Include="SparkClient\jquery.ui-1.8.2.min.js" />
+    <Content Include="SparkClient\jquery.validate.min.js" />
+    <Content Include="SparkClient\ManageCenter.js" />
+    <Content Include="SparkClient\Micromedia.js" />
+    <Content Include="SparkClient\openwindow.js" />
+    <Content Include="SparkClient\PLogin_bk.jpg" />
+    <Content Include="SparkClient\PLogin_ca.jpg" />
+    <Content Include="SparkClient\PLogin_mima.jpg" />
+    <Content Include="SparkClient\PLogin_usb.jpg" />
+    <Content Include="SparkClient\PublicLogin_ca.jpg" />
+    <Content Include="SparkClient\PublicLogin_jmg.jpg" />
+    <Content Include="SparkClient\script.js" />
+    <Content Include="SparkClient\Silverlight.js" />
+    <Content Include="SparkClient\Style_Basic.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\base.css" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\frame.css" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\documenticons\doc.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\documenticons\downloadfiles.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\documenticons\pdf.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\documenticons\ppt.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\documenticons\xls.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\documenticons\zip.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\bottom_bk.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\btn_home.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\btn_logout.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\btn_quit.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\leftmenutitlebk.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\leftmenu_bk.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\mainbk.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\rightframe_titlebk.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\top_glb.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\top_glb_bk.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\top_qyb_bk.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\top_sgqy.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameimages\top_view.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\a.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\b.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\c.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\d.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\e.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\work1_01.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\work1_02.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\work1_03.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\work1_04.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\frameworkarea\work1_05.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\a.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\address.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\administrative_docs.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\advertising.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\alert.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\alterpwd.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\archives.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\arrow_right.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\arrow_up.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\attention.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\attibutes.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\b.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\bank.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\basket.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\bestseller.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\bestseller.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\billing.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\book.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\book.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\book2.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\bookmark.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\brainstorming.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\business_contact.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\busy.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\c.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\calendar.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\card1.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\card2.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\category.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\Caution.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\chart1.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\chat.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\check.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\clipboard.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\comment.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\comment2.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\comment_user_search.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\comment_user_warning_32.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\communication.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\computer_monitor.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\customers.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\date.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\delete.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\dhdown.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\dhhide.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\dhleft.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\dhshow.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\dhup.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\Document2.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\document_library.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\DoneSquare.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\edit.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\finished_work.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\flag_mark_red.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\folder.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\forward.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\future_projects.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\home.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\home_back.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\home_link.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\information.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\LightBulbOn.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\loading.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\logperson.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\mail.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\mail2.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\mailadd.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\mailforward.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\mailreceive.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\menuitem.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\menuitem.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\MinimizeSquare.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\nav.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\navback.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\navbar.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\note.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\note2.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\page_chart.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\pen.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\pencil.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\phone.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\project.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\quicklink.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\refresh.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\regist.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\safeout.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\searchtool.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\search_chart.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\search_warning.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\select.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\shield_protect_on.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\sign_in.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\star.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\Stop.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\Stop1.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\toggle.gif" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\toggle.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\tools.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\user.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\user2.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\warning.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\window_list.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\icons\workremind.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\images\pdg_bk.png" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\main.css" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\menu.css" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\workarea.css" />
+    <Content Include="App_Themes\WxjzgcjczyQyb_B_Theme\Skin1.skin" />
+    <Content Include="WxjzgcjczyQybPage\Common\css\login.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\css\login_new.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\css\Startcss_1.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\css\Startcss_2.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\area.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\body_bg.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\clipboard.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\communication.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\contact_bg.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\dhshow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\dot.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\flag.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\FlowCharts\FlowChart_Lypj.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\foot_bg.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\friendlink_01.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\gcxm.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Help_ErrorMsg.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Help_ScfjActivex.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\icbk.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\icons\delete.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\icons\dhshow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\icons\edit.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\icons\loading.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\icphoto.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\list-left.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\bg01s.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\bg02.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\bg03.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\btn_login.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\icon_pwd.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\icon_username.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\index_bk.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\index_bk.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\key.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\Login.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\loginbk.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\Login\loginwindow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\logo.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\more.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\navbar.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\pdf.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\qyxx.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\ryxx.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\shuming.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\sprite.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\submenu.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\warning.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\images\xyxx.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\changelog.txt" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\easyloader.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\jquery-1.8.0.min.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\jquery.easyui.min.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\jquery.min.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\licence_gpl.txt" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\license_commercial.txt" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-af.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-ar.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-bg.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-ca.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-cs.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-cz.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-da.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-de.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-el.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-en.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-es.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-fr.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-it.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-jp.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-nl.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-pl.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-pt_BR.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-ru.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-sv_SE.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-tr.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-zh_CN.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\locale\easyui-lang-zh_TW.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.accordion.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.calendar.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.combo.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.combobox.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.combogrid.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.combotree.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.datagrid.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.datebox.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.datetimebox.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.dialog.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.draggable.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.droppable.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.form.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.layout.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.linkbutton.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.menu.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.menubutton.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.messager.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.numberbox.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.numberspinner.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.pagination.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.panel.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.parser.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.progressbar.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.propertygrid.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.resizable.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.searchbox.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.slider.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.spinner.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.splitbutton.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.tabs.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.timespinner.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.tooltip.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.tree.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.treegrid.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.validatebox.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\plugins\jquery.window.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\readme.txt" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\easyloader.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.accordion.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.calendar.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.combobox.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.datebox.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.draggable.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.droppable.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.form.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.linkbutton.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.menu.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.parser.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.progressbar.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.propertygrid.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.resizable.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.slider.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.tabs.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\src\jquery.window.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\accordion.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\calendar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\combo.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\combobox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\datagrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\datebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\dialog.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\easyui.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\accordion_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\blank.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\calendar_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\combo_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\datagrid_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\datebox_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\layout_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\linkbutton_bg.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\loading.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\menu_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\messager_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\pagination_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\panel_tools.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\searchbox_button.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\slider_handle.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\spinner_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\tabs_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\tree_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\validatebox_warning.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\layout.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\linkbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\menu.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\menubutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\messager.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\pagination.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\panel.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\progressbar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\propertygrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\searchbox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\slider.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\spinner.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\splitbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\tabs.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\tooltip.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\tree.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\validatebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\window.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\accordion.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\calendar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\combo.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\combobox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\datagrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\datebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\dialog.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\easyui.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\accordion_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\blank.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\calendar_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\combo_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\datagrid_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\datebox_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\layout_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\linkbutton_bg.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\loading.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\menu_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\messager_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\pagination_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\panel_tools.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\searchbox_button.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\slider_handle.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\spinner_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\tabs_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\tree_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\validatebox_warning.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\layout.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\linkbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\menu.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\menubutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\messager.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\pagination.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\panel.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\progressbar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\propertygrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\searchbox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\slider.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\spinner.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\splitbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\tabs.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\tooltip.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\tree.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\validatebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\window.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\accordion.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\calendar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\combo.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\combobox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\datagrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\datebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\dialog.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\easyui.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\accordion_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\blank.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\calendar_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\combo_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\datagrid_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\datebox_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\layout_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\linkbutton_bg.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\loading.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\menu_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\messager_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\pagination_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\panel_tools.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\searchbox_button.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\slider_handle.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\spinner_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\tabs_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\tree_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\validatebox_warning.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\layout.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\linkbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\menu.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\menubutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\messager.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\pagination.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\panel.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\progressbar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\propertygrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\searchbox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\slider.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\spinner.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\splitbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\tabs.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\tooltip.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\tree.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\validatebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\window.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\accordion.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\calendar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\combo.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\combobox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\datagrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\datebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\dialog.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\easyui.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\accordion_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\blank.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\calendar_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\combo_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\datagrid_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\datebox_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\layout_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\linkbutton_bg.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\loading.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\menu_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\messager_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\pagination_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\panel_tools.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\searchbox_button.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\slider_handle.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\spinner_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\tabs_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\tree_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\validatebox_warning.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\layout.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\linkbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\menu.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\menubutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\messager.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\pagination.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\panel.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\progressbar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\propertygrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\searchbox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\slider.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\spinner.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\splitbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\tabs.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\tooltip.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\tree.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\validatebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\window.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icon.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\add.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\address.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\administrative_docs.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\advertising.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\archives.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\attibutes.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\back.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\back.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\bank.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\basket.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\bestseller.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\billing.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\blank.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\bluebook.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\book.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\book2.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\bookmark.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\bookpen.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\brainstorming.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\business_contact.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\busy.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\calendar.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\cancel.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\candle.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\category.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\check.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\clock.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\coffee.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\collaboration.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\comment.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\communication.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\config.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\consulting.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\contact.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\cost.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\credit.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\credit_card.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\current_work.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\customers.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\cut.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\cut.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\cv.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\database.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\date.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\delete.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\delicious.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\discuss.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\docsadd.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\document_library.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\donate.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\down.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\drawings.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\edit.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\edit_add.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\edit_remove.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\email.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\featured.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\feed%281%29.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\feed.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\filesave.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\finished_work.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\flag.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\folder.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\freelance.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\free_for_job.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\full_time.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\future_projects.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\graphic_design.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\graywarn.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\greenwarn.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\heart.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\help.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\help.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\hire_me.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\home.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\illustration.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\import.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\information.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\invoice.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\issue.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\lightbulb.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\limited_edition.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\link.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\lock.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\login.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\logout.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\mailbox.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\member.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\memeber.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\milestone.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\mini_add.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\mini_edit.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\mini_refresh.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\modify.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\msn.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\myaccount.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\my_account.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\networking.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\no.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\ok.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\ok.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\order.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\order_159.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\order_192.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\outbox.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\pager.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\payment_card.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\paypal.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\pen.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\pencil.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\pencil.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\phone.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\photograph.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\photography.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\plus.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\premium.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\prev.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\print.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\print.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\process.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\project.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\publish.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\qq.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\redo.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\refresh.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\reload.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\report.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\right.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\role.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\save-disabled.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\save.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\search.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\search.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\search2.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\searchtool.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\settings.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\setup.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\shipping.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\sign_in.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\sign_out.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\sign_up.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\sitemap.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\star.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\statistics.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\sum.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\tip.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\true.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\undo.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\up.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\user.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\world.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\icons\zoom.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\accordion.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\calendar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\combo.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\combobox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\datagrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\datebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\dialog.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\easyui.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\accordion_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\blank.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\calendar_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\combo_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\datagrid_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\datebox_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\layout_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\linkbutton_bg.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\loading.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\menu_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\messager_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\pagination_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\panel_tools.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\searchbox_button.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\slider_handle.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\spinner_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\tabs_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\tree_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\validatebox_warning.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\layout.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\linkbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\menu.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\menubutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\messager.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\pagination.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\panel.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\progressbar.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\propertygrid.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\searchbox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\slider.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\spinner.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\splitbutton.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\tabs.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\tooltip.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\tree.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\validatebox.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\window.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\easyui.css" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\accordion_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\blank.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\calendar_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\combo_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\datagrid_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\datebox_arrow.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\layout_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\linkbutton_bg.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\loading.gif" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\menu_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\messager_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\pagination_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\panel_tools.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\searchbox_button.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\slider_handle.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\spinner_arrows.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\tabs_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\tree_icons.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\validatebox_warning.png" />
+    <Content Include="WxjzgcjczyQybPage\Common\scripts\common.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\scripts\frame.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\scripts\jquery-1.7.1.min.js" />
+    <Content Include="WxjzgcjczyQybPage\Common\scripts\jquery-1.9.1.js" />
+    <Content Include="WxjzgcjczyQybPage\EntranceGlyh\BottomFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceGlyh\Index.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceGlyh\LeftFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceGlyh\RightFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceGlyh\TopFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceGlyh\WorkArea.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceJsdw\BottomFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceJsdw\Index.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceJsdw\LeftFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceJsdw\RightFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceJsdw\TopFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceJsdw\WorkArea.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceSgdw\BottomFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceSgdw\Index.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceSgdw\LeftFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceSgdw\RightFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceSgdw\TopFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\EntranceSgdw\WorkArea.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Aqbj_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Aqbj_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Htba_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Htba_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Jgba_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Jgba_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_Dxgc_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_Menu.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Lxxmdj_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgtsc_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgtsc_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgxkz_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Sgxkz_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zbtb_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zbtb_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zlbj_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Gcxm\Zhjg_Zlbj_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Index.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Login.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Msg.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Msg_Ryxx.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Page_End.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Page_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Page_top.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Public\TitleFrame.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Public\TitleFrame2.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Clgc.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Jsdwssgc.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\JsdwxxToolBar.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Jsdw_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Jsdw_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Jyzz.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Kcdw_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Qtdw_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\QyxxToolBar.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Qyxx_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Sgdw_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Sjdw_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Zjjg_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Zyry.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Sczt\Zzxx.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Start.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Styles\control.css" />
+    <Content Include="WxjzgcjczyQybPage\Styles\frame.css" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\back.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\MenuItem_4_OnClick.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\MenuItem_4_UnClick.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\MenuItem_6_OnClick.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\MenuItem_6_UnClick.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\MenuItem_8_OnClick.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\MenuItem_8_UnClick.jpg" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-anim_basic_16x16.gif" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="WxjzgcjczyQybPage\Styles\jquery.ui-1.8.2.css" />
+    <Content Include="WxjzgcjczyQybPage\Styles\Style.css" />
+    <Content Include="WxjzgcjczyQybPage\Styles\Style_Basic.css" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\black\images\Thumbs.db" />
+    <None Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\bootstrap\images\Thumbs.db" />
+    <None Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\default\images\Thumbs.db" />
+    <None Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\gray\images\Thumbs.db" />
+    <None Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro\images\Thumbs.db" />
+    <None Include="WxjzgcjczyQybPage\Common\jquery-easyui-1.3.3\themes\metro_sparkcn\images\Thumbs.db" />
+    <Content Include="WxjzgcjczyQybPage\Config\WxjzgcjczyQyb.config" />
+    <Content Include="WxjzgcjczyQybPage\Config\WxjzgcjczyQyb_MTreeView.config" />
+    <Content Include="WxjzgcjczyQybPage\Handler\TreeData.ashx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\JbZxjk_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Jkcbxx_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Jkzbxx_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Jkztjk_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Jkztjk_Menu.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Sjjhzx_Menu.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzdx.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzdxjtcy.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Bzfy.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Gcxm.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Jgba.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Ryxx.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Sgxk.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Wyglcyry.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\Syzxspt_Zbzb.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Xytx\Xykp_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\Aqscglry_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\Cjxm.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\ImageShow.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\Qyjjry_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\RyxxToolBar.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\Ryxx_View.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\Zczyry_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\Zygwglry_List.aspx" />
+    <Content Include="WxjzgcjczyQybPage\Zyry\Zyzg.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WxjzgcjczyQyb.BLL\WxjzgcjczyQyb.BLL.csproj">
+      <Project>{12E64D69-BD2D-4E38-A264-977B6B7F2617}</Project>
+      <Name>WxjzgcjczyQyb.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WxjzgcjczyQyb.Common\WxjzgcjczyQyb.Common.csproj">
+      <Project>{5C7EF07F-47BA-4CFC-8473-ED776F9723F7}</Project>
+      <Name>WxjzgcjczyQyb.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

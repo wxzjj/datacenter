@@ -1,0 +1,63 @@
+﻿
+<%--注册自定义类库--%>
+<%@ Register Assembly="Bigdesk8" Namespace="Bigdesk8.Web.Controls" TagPrefix="Bigdesk8" %>
+<%--默认皮肤外观--%>
+<Bigdesk8:DBText runat="server" CssClass="label" />
+<Bigdesk8:DBTextBox runat="server" CssClass="textbox" />
+<Bigdesk8:DBDropDownList runat="server" CssClass="textbox" />
+<Bigdesk8:DBDatePicker runat="server"  CssClass="textbox"/>
+<Bigdesk8:SubmitButton runat="server" CssClass="button button-s" />
+<Bigdesk8:DBMemoBox runat="server" CssClass="textbox memobox" />
+
+<Bigdesk8:PowerDataGrid runat="server"  AutoGenerateColumns="False" BackColor="White"
+   GridLines="Both"  Width="100%" BorderWidth="1px" BorderColor="#CCCCCC" CellPadding="2">
+<HeaderStyle Font-Bold="false" CssClass="pdg-title" HorizontalAlign="Center"/>
+<RowStyle BackColor="White" />
+<AlternatingRowStyle BackColor="#f7f7f7" />
+
+<EmptyDataTemplate>
+     <img src="../../App_Themes/WxjzgcjczyQyb_B_Theme/images/icons/warning.png" height="16" width="16" />&nbsp;没有符合条件的信息 
+</EmptyDataTemplate>
+<EmptyDataRowStyle Height="26px" ForeColor="Red"  HorizontalAlign="Center" />
+<PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" FirstPageText="[首页]" LastPageText="[尾页]" NextPageText="[下页]" PreviousPageText="[上页]" />
+<PagerStyle HorizontalAlign="NotSet" CssClass="pdg-pagerstyle"/>
+</Bigdesk8:PowerDataGrid>
+
+<%--特殊皮肤外观--%>
+<asp:Button runat="server" SkinID="btn_a"  ForeColor="White" BackColor="#3D6281" BorderStyle="Solid" BorderWidth="1px" BorderColor="#CCCCCC" Height="24px" Width="80px"/>
+<asp:Button runat="server" SkinID="btn_b"  ForeColor="White" BackColor="#3D6281" BorderStyle="Solid" BorderWidth="1px" BorderColor="#CCCCCC" Height="24px" Width="120px"/>
+<asp:Button runat="server" SkinID="btn_c"  ForeColor="White" BackColor="#3D6281" BorderStyle="Solid" BorderWidth="1px" BorderColor="#CCCCCC" Height="24px" Width="160px"/>
+<%--特殊皮肤外观:选择按钮--%>
+<asp:Button runat="server" SkinID="select_a"  ForeColor="#F97C10" BackColor="#F3F0E3" BorderStyle="Solid" BorderWidth="1px" BorderColor="#BDBDBD" Height="22px" Width="80px"/>
+<asp:Button runat="server" SkinID="select_b"  ForeColor="#F97C10" BackColor="#F3F0E3" BorderStyle="Solid" BorderWidth="1px" BorderColor="#BDBDBD" Height="22px" Width="120px"/>
+<asp:Button runat="server" SkinID="select_c"  ForeColor="#F97C10" BackColor="#F3F0E3" BorderStyle="Solid" BorderWidth="1px" BorderColor="#BDBDBD" Height="22px" Width="160px"/>
+
+
+<Bigdesk8:SubmitButton runat="server" SkinID="btn_a"  ForeColor="White" BackColor="#3D6281" BorderStyle="Solid" BorderWidth="1px" BorderColor="Gray" Height="24px" Width="80px"/>
+<Bigdesk8:SubmitButton runat="server" SkinID="btn_b"  ForeColor="White" BackColor="#3D6281" BorderStyle="Solid" BorderWidth="1px" BorderColor="Gray" Height="24px" Width="120px"/>
+<Bigdesk8:SubmitButton runat="server" SkinID="btn_c"  ForeColor="White" BackColor="#3D6281" BorderStyle="Solid" BorderWidth="1px" BorderColor="Gray" Height="24px" Width="160px"/>
+<%-- 灰色标题的GridView --%>
+<Bigdesk8:PowerDataGrid runat="server"  AutoGenerateColumns="False" SkinID="pdg_gray"
+   GridLines="Both"  Width="100%" BorderWidth="1px" BorderColor="Gray" CellPadding="1">
+<HeaderStyle Font-Bold="false" CssClass="pdg-title-gray" HorizontalAlign="Center"/>
+<RowStyle BackColor="White"/>
+<EmptyDataTemplate>
+    没有符合条件的信息 
+</EmptyDataTemplate>
+<EmptyDataRowStyle Height="25px" ForeColor="Red" />
+<PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" FirstPageText="[首页]" LastPageText="[尾页]" NextPageText="[下页]" PreviousPageText="[上页]" />
+<PagerStyle HorizontalAlign="NotSet" CssClass="pdg-pagerstyle"/>
+</Bigdesk8:PowerDataGrid>
+
+<Bigdesk8:DBTextBox runat="server" SkinID="ReadOnly" CssClass="textbox-focus" />
+<Bigdesk8:DBDatePicker runat="server" SkinID="ReadOnly" CssClass="textbox-focus"/>
+<Bigdesk8:DBTextBox runat="server" SkinID="ReadOnly_NoStyle" CssClass="textbox-nostyle" />
+<Bigdesk8:DBTextBox runat="server" SkinID="Hidden" CssClass="ctl-hidden" />
+<Bigdesk8:DBTextBox runat="server" SkinID="UnderLine" CssClass="ctl-underline" />
+
+<Bigdesk8:DBTextBox runat="server" SkinID="Nostyle" CssClass="textbox-nostyle" />
+
+<Bigdesk8:DBTextBox runat="server" SkinID="a" CssClass="textbox"/>
+<Bigdesk8:DBDropDownList runat="server" SkinID="b" CssClass="ddl-common" />
+<Bigdesk8:DBDatePicker runat="server" SkinID="c"  CssClass="textbox"/>
+<Bigdesk8:SubmitButton runat="server" SkinID="d" CssClass="btn-common" />

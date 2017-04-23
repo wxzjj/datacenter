@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 200
+/svn/WXProjects/!svn/ver/188/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common
+END
+Definitions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/Definitions.cs
+END
+FilterRule.cs
+K 25
+svn:wc:ra_dav:version-url
+V 213
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/FilterRule.cs
+END
+ContextExtension.cs
+K 25
+svn:wc:ra_dav:version-url
+V 219
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/ContextExtension.cs
+END
+SparkSoftDataBody.cs
+K 25
+svn:wc:ra_dav:version-url
+V 220
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/SparkSoftDataBody.cs
+END
+DataTableHelp.cs
+K 25
+svn:wc:ra_dav:version-url
+V 216
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/DataTableHelp.cs
+END
+Wxjzgcjczy.Common.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 225
+/svn/WXProjects/!svn/ver/211/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/Wxjzgcjczy.Common.csproj
+END
+FilterTranslator.cs
+K 25
+svn:wc:ra_dav:version-url
+V 219
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/FilterTranslator.cs
+END
+XmlHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 212
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/XmlHelper.cs
+END
+ConfigManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 216
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/ConfigManager.cs
+END
+FilterGroup.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/FilterGroup.cs
+END
+Base64EncodeHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 221
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/Base64EncodeHelper.cs
+END
+ModuleOperate.cs
+K 25
+svn:wc:ra_dav:version-url
+V 217
+/svn/WXProjects/!svn/ver/160/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/ModuleOperate.cs
+END
+FilterParam.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/FilterParam.cs
+END
+Moduels.cs
+K 25
+svn:wc:ra_dav:version-url
+V 210
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/Moduels.cs
+END
+JSONHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 213
+/svn/WXProjects/!svn/ver/25/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.Common/JSONHelper.cs
+END

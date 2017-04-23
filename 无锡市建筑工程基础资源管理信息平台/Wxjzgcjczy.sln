@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WxjzgcjczyTimerService", "WxjzgcjczyTimerService\WxjzgcjczyTimerService.csproj", "{771D2EE1-6D70-4CA3-B069-7EA2AF6BF1AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrativeShow2015", "IntegrativeShow2015\IntegrativeShow2015.csproj", "{4C4EC108-9F9A-484A-A3F0-59C8FBC72555}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWxsjzxTimerService", "SetupWxsjzxTimerService\SetupWxsjzxTimerService.vdproj", "{59D03E1E-4735-4ED3-957C-24D21E4FB722}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wxjzgcjczy.BLL", "Wxjzgcjczy.BLL\Wxjzgcjczy.BLL.csproj", "{DBB68EE7-46A8-40E7-AE8B-58C9C36E64DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wxjzgcjczy.Common", "Wxjzgcjczy.Common\Wxjzgcjczy.Common.csproj", "{52BC80DB-FE10-4A8C-BBF1-D6A5EF8FA582}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wxjzgcjczy.DAL.Sqlserver", "Wxjzgcjczy.DAL.Sqlserver\Wxjzgcjczy.DAL.Sqlserver.csproj", "{61B49C46-3A79-444B-A757-FB0016065152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wxjzgcjczy.Web", "Wxjzgcjczy.Web\Wxjzgcjczy.Web.csproj", "{E9BDD66F-FEC0-4057-8D7F-C22A967C2C71}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{771D2EE1-6D70-4CA3-B069-7EA2AF6BF1AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771D2EE1-6D70-4CA3-B069-7EA2AF6BF1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771D2EE1-6D70-4CA3-B069-7EA2AF6BF1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771D2EE1-6D70-4CA3-B069-7EA2AF6BF1AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C4EC108-9F9A-484A-A3F0-59C8FBC72555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4EC108-9F9A-484A-A3F0-59C8FBC72555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4EC108-9F9A-484A-A3F0-59C8FBC72555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4EC108-9F9A-484A-A3F0-59C8FBC72555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59D03E1E-4735-4ED3-957C-24D21E4FB722}.Debug|Any CPU.ActiveCfg = Debug
+		{59D03E1E-4735-4ED3-957C-24D21E4FB722}.Debug|Any CPU.Build.0 = Debug
+		{59D03E1E-4735-4ED3-957C-24D21E4FB722}.Release|Any CPU.ActiveCfg = Release
+		{59D03E1E-4735-4ED3-957C-24D21E4FB722}.Release|Any CPU.Build.0 = Release
+		{DBB68EE7-46A8-40E7-AE8B-58C9C36E64DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBB68EE7-46A8-40E7-AE8B-58C9C36E64DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBB68EE7-46A8-40E7-AE8B-58C9C36E64DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBB68EE7-46A8-40E7-AE8B-58C9C36E64DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52BC80DB-FE10-4A8C-BBF1-D6A5EF8FA582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52BC80DB-FE10-4A8C-BBF1-D6A5EF8FA582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52BC80DB-FE10-4A8C-BBF1-D6A5EF8FA582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52BC80DB-FE10-4A8C-BBF1-D6A5EF8FA582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61B49C46-3A79-444B-A757-FB0016065152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61B49C46-3A79-444B-A757-FB0016065152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61B49C46-3A79-444B-A757-FB0016065152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61B49C46-3A79-444B-A757-FB0016065152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9BDD66F-FEC0-4057-8D7F-C22A967C2C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9BDD66F-FEC0-4057-8D7F-C22A967C2C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9BDD66F-FEC0-4057-8D7F-C22A967C2C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9BDD66F-FEC0-4057-8D7F-C22A967C2C71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

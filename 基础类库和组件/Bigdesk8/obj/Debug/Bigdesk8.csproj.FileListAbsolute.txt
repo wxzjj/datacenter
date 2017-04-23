@@ -1,0 +1,15 @@
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\Bigdesk8.XML
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\Bigdesk8.dll
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\Bigdesk8.pdb
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\AntiXSSLibrary.dll
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\Microsoft.Office.Interop.Excel.dll
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\Newtonsoft.Json.Net20.dll
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\office.dll
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\Microsoft.Vbe.Interop.dll
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\Newtonsoft.Json.Net20.pdb
+E:\worknew\基础类库和组件\Bigdesk8\bin\Debug\Newtonsoft.Json.Net20.xml
+E:\worknew\基础类库和组件\Bigdesk8\obj\Debug\ResolveAssemblyReference.cache
+E:\worknew\基础类库和组件\Bigdesk8\obj\Debug\Bigdesk8.Windows.Controls.PowerDataGrid.resources
+E:\worknew\基础类库和组件\Bigdesk8\obj\Debug\Bigdesk8.csproj.GenerateResource.Cache
+E:\worknew\基础类库和组件\Bigdesk8\obj\Debug\Bigdesk8.dll
+E:\worknew\基础类库和组件\Bigdesk8\obj\Debug\Bigdesk8.pdb

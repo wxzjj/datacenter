@@ -1,0 +1,15 @@
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Wxjzgcjczy.Common.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Wxjzgcjczy.Common.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Bigdesk8.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Newtonsoft.Json.Net20.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Microsoft.Office.Interop.Excel.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\office.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\AntiXssLibrary.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Microsoft.Vbe.Interop.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Newtonsoft.Json.Net20.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Newtonsoft.Json.Net20.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Bigdesk8.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\bin\Debug\Bigdesk8.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\obj\Debug\ResolveAssemblyReference.cache
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\obj\Debug\Wxjzgcjczy.Common.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.Common\obj\Debug\Wxjzgcjczy.Common.pdb

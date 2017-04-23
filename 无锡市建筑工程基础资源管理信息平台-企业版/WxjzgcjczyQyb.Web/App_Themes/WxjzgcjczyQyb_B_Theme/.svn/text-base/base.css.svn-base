@@ -1,0 +1,75 @@
+﻿body{margin: 0;background-color:Transparent;}
+*{font-family: "微软雅黑" , "宋体" , Arial, sans-serif; font-size: 12px; margin: 0; font-weight:lighter;}
+a:link, a:visited{color: #266C79; text-decoration: none;}
+a:hover{color: #F97C10; text-decoration: none;}
+img{border-style: none; border-color: inherit; border-width: 0;}
+/*服务器端控件样式*/
+.td-text{text-align: center; background-color: #F1F1F1; padding-left: 5px; padding-right: 5px; color: #595857; height:26px;}
+.td-text-15{width: 15%; text-align: center; background-color: #F1F1F1; padding-left: 5px; padding-right: 5px; color: #595857; height:26px;}
+.td-text-13{width: 13%; text-align: center; background-color: #F1F1F1; padding-left: 5px; padding-right: 5px; color: #595857; height:26px;}
+.td-value-20{width: 20%; text-align: left; background-color: #FFFFFF; color: #767676; padding-left: 5px; height: 26px;}
+.td-text-h40{width: 15%; text-align: center; background-color: #F1F1F1; padding-left: 5px; padding-right: 5px; height: 40px; color: #333333;}
+.td-text-left{width: 15%; text-align: left; background-color: #F1F1F1; height: 26px; color: #595857;}
+.td-text-Submit{text-align: left; height: 26px; color: #595857;}
+.td-text-right{width: 15%; text-align: right; background-color: #F1F1F1; height: 26px; color: #595857;}
+.td-text-nowidth{text-align: center; background-color: #F1F1F1; padding-left: 5px; padding-right: 5px; color: #595857; height:26px;}
+.td-value-memobox{color: #333333; background-color: #FFFFFF; padding-left: 5px; height:80px; padding-top:2px; padding-bottom:2px;}
+.td-value-span{color: #333333; background-color: #FFFFFF; padding-left: 5px;}
+.td-value-white{text-align: left; background-color: #FFFFFF; color: #000000; padding-left: 5px; height: 26px;}
+.td-value{text-align: left; background-color: #FFFFFF; color: #00557D; padding-left: 5px; height:26px;}
+.td-value-35{width: 35%; text-align: left; background-color: #FFFFFF; color: #00557D; padding-left: 5px; height: 26px;}
+.td-text-rowspan2{width: 35%; text-align: center; background-color: #F1F1F1;}
+.td-value-rowspan2{width: 35%; text-align: left; background-color: #FFFFFF; color: #00557D; padding-left: 5px;}
+.td-value-center{width: 35%; text-align: center; background-color: #FFFFFF; color: #00557D; height: 26px;}
+.td-value-title{width: 35%; text-align: left; background-color: #FFFFFF; height: 26px;}
+.td-value-nowidth{text-align: left; background-color: #FFFFFF; color: #00557D; padding-left: 5px; height: 26px;}
+/*label信息显示控件样式*/
+.label{background-color:Transparent; padding: 2px; border-width: 0px; border-style: none; width: 70%; color: #00557D;}
+/*文本框*/
+.textbox{padding: 1px; border: #CCCCCC 1px solid; width: 70%; color: #00557D;}
+.memobox{padding: 1px; border: #CCCCCC 1px solid; width: 70%; color: #00557D; height:76px;}
+.textbox-focus{border: 1px solid #E6BF73; background-color: #f9f9f9;}
+.textbox-error{padding: 1px; border: Red 1px solid; width: 70%; color: red;}
+.multilinetextbox-w70{border: #7f9db9 1px solid; width: 70%; height: 80px;}
+.multilinetextbox-w70-error{border: #7f9db9 1px solid; width: 70%; height: 80px; background-color: Red; color: White;}
+.datetextbox-w100px{border: #7f9db9 1px solid; width: 85px;}
+.datetextbox-w100px-error{border: #7f9db9 1px solid; width: 85px; background-color: Red; color: White;}
+.timetextbox-w50px{border: #7f9db9 1px solid; vertical-align: middle; width: 50px;}
+.timetextbox-w50px-error{border: #7f9db9 1px solid; width: 50px; background-color: Red; color: White;}
+.datetimetextbox-w150px{border: #7f9db9 1px solid; width: 150px;}
+.datetimetextbox-w150px-error{border: #7f9db9 1px solid; width: 150px; background-color: Red; color: White;}
+.table-bk{background-color: #CCCCCC;}
+/*列表页面table布局样式*/
+.td-head{height: 26px; background-color: #6BA1D0; padding-left: 5px; border: solid 1px #CCCCCC;}
+.td-search{padding-top: 10px;}
+.td-data{padding-top: 10px;}
+.td-powergridview{background-color: White; width: 100%;}
+/*放控件*/
+.td-buttons{padding: 10px; text-align: center;}
+/*powerdatagrid样式*/
+/*pdg-title: color: #2C4D79*/
+.pdg-title{border: solid 1px #CCCCCC; line-height: 26px; background: #F1F1F1 url('images/pdg_bk.png') repeat-x top; text-align: center; text-decoration: none;}
+.pdg-title-gray{border: solid 1px Gray; line-height: 26px; background-color: #F1F1F1; color: #595857; text-align: center; text-decoration: none;}
+.pdg-itemstyle-center{border-style: solid; border-width: 1px; border-color: #CCCCCC; text-align: center; height: 26px; color: #595857;}
+.pdg-itemstyle-left{border-style: solid; border-width: 1px; border-color: #CCCCCC; text-align: left; height: 26px; color: #595857; padding-left: 5px;}
+.pdg-itemstyle-right{border-style: solid; border-width: 1px; border-color: #CCCCCC; text-align: right; height: 26px; color: #595857; padding-right: 5px;}
+.pdg-headerstyle-center{border-style: solid; border-width: 1px; border-color: #CCCCCC; text-align: center; height: 26px; font-weight: normal;}
+.pdg-linkheaderstyle-center{border-style: solid; border-width: 1px; border-color: #CCCCCC; text-align: center; height: 26px;}
+.pdg-headerstyle-left{border-style: solid; border-width: 1px; border-color: #CCCCCC; text-align: left; height: 26px; font-weight: normal;}
+.pdg-headerstyle-right{border-style: solid; border-width: 1px; border-color: #CCCCCC; text-align: right; height: 26px; font-weight: normal;}
+.pdg-pagerstyle{border: solid 1px #CCCCCC; background-color: #FFFFFF; line-height: 26px; padding:2px;}
+/*隐藏控件样式*/
+.ctl-hidden{visibility: hidden; width: 0px; height: 0px; background-color: Transparent;}
+/*只读控件样式*/
+.ctl-readonly{padding: 2px; background: #EAEAEA; color: Gray; width: 70%; border-color: #DADADA; color: #00557D;}
+/*无边框*/
+.textbox-nostyle{position: relative; background: #FFFFFF url('images/input.gif') repeat-x top; padding: 2px; border-width: 0px; border-style: none; width: 95%;}
+/*下划线*/
+.ctl-underline{background-color: Transparent; border-style: solid; border-bottom-color: Gray; border-bottom-width: 1px; border-top-width: 0px; border-left-width: 0px; border-right-width: 0px;}
+/*MemoBox控件样式*/
+.tdmem{width: 100%; height: 100px;}
+/*GridView交替样式
+.gridrow{color:#000000; background-color:#000000;}
+.gridactiverow{color:#0099cc; background-color:Red;}
+.gridalternatingrow{color:#0099cc; background-color:Red;}
+*/

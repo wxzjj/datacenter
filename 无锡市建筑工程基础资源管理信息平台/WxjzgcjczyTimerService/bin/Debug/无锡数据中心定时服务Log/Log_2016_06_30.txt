@@ -1,0 +1,9 @@
+﻿开始执行YourTask_PullDataFromSythpt任务:2016-06-30 10:43:05
+开始执行YourTask_PullDataFromSythpt任务:2016-06-30 10:44:32
+开始执行YourTask_PullDataFromSythpt任务:2016-06-30 10:48:01
+开始执行YourTask_PullDataFromSythpt任务:2016-06-30 10:49:04
+开始执行YourTask_PullDataFromSythpt任务:2016-06-30 12:03:50
+开始执行YourTask_PullDataFromSythpt任务:2016-06-30 14:13:44
+结束YourTask_PullDataFromSythpt任务:2016-06-30 14:16:37，历时：0时0分-7秒
+开始执行YourTask_PullDataFromSythpt任务:2016-06-30 14:45:29
+开始执行YourTask_PullDataFromSythpt任务:2016-06-30 17:35:56

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/scic/!svn/ver/38036/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/UserRightManager
+END
+IUserRightManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/scic/!svn/ver/16349/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/UserRightManager/IUserRightManager.cs
+END
+IUserRightInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/scic/!svn/ver/11101/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/UserRightManager/IUserRightInfo.cs
+END
+BusinessUserRight.sql
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/scic/!svn/ver/4647/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/UserRightManager/BusinessUserRight.sql
+END
+UserRightManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/scic/!svn/ver/38036/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/UserRightManager/UserRightManager.cs
+END
+UserRightInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/scic/!svn/ver/31574/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/UserRightManager/UserRightInfo.cs
+END

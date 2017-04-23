@@ -1,0 +1,418 @@
+﻿/*注意:样式表中的所有字符都要使用小写字母*/
+/*名称中的字符含义:b:border,w:width,h:height*/
+*
+{
+    font-family: "宋体" , Arial, sans-serif;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+
+
+body
+{
+	margin: 0px;
+	padding: 0px;
+	color: Black;
+	text-decoration: none;
+}
+.body_noBackImg
+{
+   background-image: url(center_bk.jpg);
+    background-repeat:repeat;
+    background-attachment: fixed;
+}
+.body_haveBackImg
+{
+    background-image: url(center_bk.jpg);
+    background-repeat:repeat;
+    background-attachment: fixed;
+}
+form
+{
+	margin: 0px;
+	padding: 0px;
+}
+img
+{
+	border: 0;
+	/*behavior:url(/SgxcAqjd/Images/iepngfix.htc); */
+}
+td
+{
+	text-decoration: none;
+}
+th
+{
+	font-weight: normal;
+}
+a:link, a:visited
+{
+	/*color:#03515d;*/
+	color:#1C5580;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #FF0000;
+	text-decoration: none;
+}
+/*asp.net控件的样式*/
+.notnull
+{
+	color: red;
+	font-family: "宋体";
+	font-size: 14px;
+}
+.td_text
+{
+	text-align:center;
+	background-color:#E4EFF0;
+	padding-left:5px;   /*2011-05-03*/
+    padding-right:5px;  /*2011-05-03*/
+    }
+.td_text_h40
+{
+	text-align:center;
+	background-color:#E4EFF0;
+	padding-left:5px;   /*2011-05-03*/
+    padding-right:5px;  /*2011-05-03*/
+    height:40px;
+}
+.td_text_left
+{
+	text-align:left;
+	background-color:#E4EFF0;
+	height:25px;
+}
+.td_text_right
+{
+	text-align:right;
+	background-color:#E4EFF0;
+	height:25px;
+}
+.td_value
+{
+	text-align:left;
+	background-color:#FFFFFF;
+	color:#006699;
+	padding-left:5px;
+	}
+ .td_text_rowspan2
+{
+	text-align:center;
+	background-color:#E4EFF0;
+}
+.td_value_rowspan2
+{
+	text-align:left;
+	background-color:#FFFFFF;
+	color:#006699;
+	padding-left:5px;
+	}
+.td_value_center
+{
+	text-align:center;
+	background-color:#FFFFFF;
+	color:#006699;
+	height:25px;
+}
+.td_value_title
+{
+	text-align:left;
+	background-color:#FFFFFF;
+	height:25px;
+}
+/*-----checkbox--------*/
+.td_chvalue
+{
+    text-align:left;
+	background-color:#FFFFFF;
+	padding-left:5px;
+	height:25px;
+}
+/*------gridview-------*/
+.td_gridviewvalue
+{
+    text-align:center;
+	background-color:#FFFFFF;
+	color:#006699;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+/*------powergridview-------*/
+.td_powerGridView
+{
+    text-align:center;
+	background-color:#FFFFFF;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+.button_w100px_h30px
+{
+	font-size:14px;
+	width: 100px;
+	height: 30px;
+}
+
+
+.textbox_w70
+{
+	color: Blue;
+	border: #7B7B7B 1px solid;
+	width: 80%; 
+}
+.textbox_w70_error
+{
+	border: #7B7B7B 1px solid;
+	width: 80%;
+	background-color: Red;
+	color: White;
+}
+.dropdownlist_w70
+{
+    color:Blue;
+	border: #7B7B7B 1px solid;
+	width: 80%;
+}
+.dropdownlist_w70_error
+{
+	border: #7B7B7B 1px solid;
+	width: 80%;
+	background-color: Red;
+	color: White;
+}
+.checkbox_1
+{
+}
+.label_1
+{
+	color:#1C5580;
+	line-height: 20px;
+	padding-left:5px;
+}
+.multilinetextbox_w70
+{
+	border: #7f9db9 1px solid;
+	width: 80%;
+	height: 80px;
+}
+.multilinetextbox_w70_error
+{
+	border: #7f9db9 1px solid;
+	width: 80%;
+	height: 80px;
+	background-color: Red;
+	color: White;
+}
+.datetextbox_w100px
+{
+	border: #7f9db9 1px solid;
+	width: 85px;
+}
+.datetextbox_w100px_error
+{
+	border: #7f9db9 1px solid;
+	width: 85px;
+	background-color: Red;
+	color: White;
+}
+.timetextbox_w50px
+{
+	border: #7f9db9 1px solid;
+	vertical-align: middle;
+	width: 50px;
+}
+.timetextbox_w50px_error
+{
+	border: #7f9db9 1px solid;
+	width: 50px;
+	background-color: Red;
+	color: White;
+}
+.datetimetextbox_w150px
+{
+	border: #7f9db9 1px solid;
+	width: 150px;
+}
+.datetimetextbox_w150px_error
+{
+	border: #7f9db9 1px solid;
+	width: 150px;
+	background-color: Red;
+	color: White;
+}
+
+/*其它样式*/
+.topframebackground
+{
+	background-image: url(top_r1_c1.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+.leftframebackground
+{
+	background-image: url(Wsjgzx_Back_r2_c1.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+.mainframebackground
+{
+	background-image: url(Wsjgzx_Back_r2_c2.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+/*Menu 背景样式*/
+.Menu_BK
+{
+	height: 25px;
+	background-image: url(MenuItem_BK.png);
+	background-repeat:repeat-x;
+}
+
+.Menu_DefaultStyle_4
+{
+	width: 70px;
+	height: 25px;
+	background-image: url(MenuItem_4_UnClick.png);
+	padding-top: 5px;
+	text-align: center;
+}
+.Menu_SelectedStyle_4
+{
+	width: 70px;
+	height: 25px;
+	background-image: url(MenuItem_4_OnClick.png);
+	padding-top: 5px;
+	text-align: center;
+}
+
+.Menu_DefaultStyle_6
+{
+	width: 90px;
+	height: 25px;
+	background-image: url(MenuItem_6_UnClick.jpg);
+	padding-top: 5px;
+	text-align: center;
+}
+.Menu_SelectedStyle_6
+{
+	width: 90px;
+	height: 25px;
+	background-image: url(MenuItem_6_OnClick.jpg);
+	padding-top: 5px;
+	text-align: center;
+}
+
+/*2011-1-27，李海波增加*/
+.table
+{
+	background-color: #077F90;
+}
+.powerGridViewHeader
+{
+    background-color:#339E9E;
+}
+.Title_SearchPostion
+{
+    background-color:#339E9E;
+    height:25px;
+}
+/*修复谷歌浏览器不兼容Menu控件????貌似不行*/
+.RepairMenu
+{
+    z-index:1;
+}
+
+/*2011-04-13------------new*/
+.New_ViewTitle_2{
+	color:#006699;
+	font-size:12px;
+	background-color: #FFFFFF;
+	margin: 0px;
+	line-height: 26px;
+	padding-right: 5px;
+	padding-left: 5px;
+	font-weight: bold;
+}
+.New_Title_blue{
+	color:#1c87be;
+	font-size:12px;
+	text-align: center;
+	background-color: #FFFFFF;
+	margin: 0px;
+	line-height: 26px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.New_Title_gary{
+	color:#5b5b5b;
+	font-size:12px;
+	background-color: #FFFFFF;
+	margin: 0px;
+	line-height: 26px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+ .New_ViewTitleTd
+        {
+            background-image: url(Gcxx_Title.gif);
+            background-repeat:no-repeat;
+            height: 25px;
+            font-size: 13px;
+            font-weight: bold;
+            color:#216357;
+            padding-top: 0px;
+            padding-left: 38px;
+            letter-spacing: 2px;
+            background-position: top;
+        }
+/*列表页面table中的样式*/
+.td_head
+{
+    padding-top:0px;
+    padding-left:10px;
+    padding-right:10px;
+}
+.td_search
+{
+    padding-top:10px;
+     padding-left:10px;
+    padding-right:10px;
+}
+.td_data
+{
+    padding:10px;
+}
+/*view*/
+.view_head
+{
+	padding-top:10px;
+	 padding-left:10px;
+    padding-right:10px;
+    padding-bottom:0px;
+}
+.view_center
+{
+    padding-top:0px;
+	 padding-left:10px;
+    padding-right:10px;
+}
+.view_center_gridview
+{
+    padding-top:0px;
+	 padding-left:10px;
+    padding-right:10px;
+    background-color:#FFFFFF;
+}
+/*menu下划线*/
+.menu_baseline
+{
+	margin-left: 5px; 
+	height: 2px; 
+	background: #339E9E
+}

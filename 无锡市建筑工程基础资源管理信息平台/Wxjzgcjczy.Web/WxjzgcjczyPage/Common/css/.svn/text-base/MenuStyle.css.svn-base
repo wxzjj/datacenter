@@ -1,0 +1,98 @@
+﻿a, img
+{
+	border: 0;
+}
+a
+{
+	color: #333;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #3366cc;
+	text-decoration: none;
+}
+.tabbox
+{
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	padding:0;
+}
+.tabbox .tabbtn
+{
+	height: 30px;
+	background: url(tabbg.gif) repeat-x;
+	/*border-left: solid 1px #d5d5d5;*/
+	border-right:0;
+}
+.content
+{
+	background-color: White;
+	border-left: solid 1px #d5d5d5;
+	border-right: solid 1px #d5d5d5;
+	width: 100%;
+	height: 100%;
+	padding-top: 4px;
+	margin-top: 0px;
+}
+.tabbox .tabbtn li
+{
+	float: left;
+	position: relative;
+	margin: 0 0 0 -1px;
+	width: 108px;
+	border-left: solid 1px #d5d5d5;
+	height: 30px;
+	background-color: #EEEEEE;
+}
+.tabbox .tabbtn li a
+{
+	display: block;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+	width: 100%;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+}
+.tabbox .tabbtn li.current
+{
+	border-top:solid 2px blue;/*ff6600*/
+	border-bottom: 0;
+	border-left:solid 2px blue;
+	border-right:solid 2px blue;
+	background-color:White;
+}other
+.tabbox .tabbtn li.current a
+{
+	height: 29px;
+	line-height: 29px;
+	background: #fff;
+	color: #3366cc;
+	font-weight:900;
+	font-size:13px;
+	border-bottom: 0;
+}
+
+.tabbox .tabbtn li.other
+{
+	border-top: solid 1px #d5d5d5;
+	border-bottom: solid 2px blue;
+	border-left: solid 1px #d5d5d5;
+}
+.tabbox .tabbtn li.other a
+{
+}
+.leftPad
+{
+	float: left;
+	position: relative;
+	margin: 0 0 0 -1px;
+	width: 50px;
+	border-bottom: solid 1px #d5d5d5;
+	height: 30px;
+	
+}

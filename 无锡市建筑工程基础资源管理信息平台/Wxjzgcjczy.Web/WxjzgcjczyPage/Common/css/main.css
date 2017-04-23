@@ -1,0 +1,65 @@
+﻿*{ margin:0; padding:0;font-family: "微软雅黑", "宋体", Arial, sans-serif; font-size: 12px; }
+a{ cursor:pointer;} 
+span.star{ color:Red; line-height:25px;}
+a:hover{text-decoration:underline;}
+p{ line-height:26px;}
+p,span,b,div{ text-align:left;}
+p.p1{line-height:32px;}
+ul,li{ list-style:none;} 
+
+/* 一条线 导航线 */
+.navline{ height:1px; line-height:1px; width:100%;border-bottom:1px solid #f5f5f5; background-color:#CCCCCC;width:99%; }
+/* 一条线 空白线 背景透明 */
+.navline-non{ height:5px; line-height:5px; width:100%;}
+
+/* 搜索框 */
+.searchradiobox{background-color:#F3F0E3; height:26px;}
+.searchradiobox ul{list-style:none; width:100%;}
+.searchradiobox .li-text{ float:left; width:13%; text-align:center; color:#444;}
+.searchradiobox .li-text-15{ float:left; width:15%; text-align:center;color:#444;}
+.searchradiobox .li-value{ float:left; width:130px; color:#F97C10; text-align:center;}
+
+
+
+.searchpanel{padding-left:5px; padding-right:5px; padding-top:5px;}
+.searchbox{ padding-left:5px; padding-right:5px;}
+.searchtitle{ padding-left:28px; position:relative;color:#3C3C3C;}
+.searchtitle img{ width:22px; height:22px; position:absolute; left:0; top:0;}
+.searchtitle span{ font-size:12px; font-weight:lighter;}
+.searchtitle .togglebtn{ position:absolute; top:6px; right:15px; background:url(../images/icons/toggle.gif) no-repeat 0px 0px; height:10px; width:9px; cursor:pointer;}
+
+.searchtitle .togglebtn-down{ background-position:0px -10px;}
+
+/* 搜索结果 */
+.maingrid{ padding:5px; padding-top:5px; color:#3C3C3C}
+
+/* 编辑页面-old */
+.editmain{ padding-left:5px; padding-bottom:5px; padding-right:5px;}
+.editbox-title{position: absolute; left: 7px; top: 6px; width: 20px; height: 20px;}
+
+
+
+/* 编辑页面 */
+.edit{height:22px; text-align:center; color:#2a83a2; letter-spacing:2px; font-size:14px;}
+.editpanel{padding-left:5px; padding-right:5px; padding-top:5px;color: #266C79;}
+.editbox{ padding-left:5px; padding-right:5px; }
+.edittitle{ padding-left:24px; position:relative;}
+.edittitle img{ width:20px; height:20px; position:absolute; left:0; top:0;}
+.edittitle span{ font-size:12px;}
+.edittitle .togglebtn{ position:absolute; top:6px; right:15px; background:url(../images/icons/toggle.gif) no-repeat 0px 0px; height:10px; width:9px; cursor:pointer;}
+
+.edittitle .togglebtn-down{ background-position:0px -10px;}
+
+.edit-select{ height:26px; padding-left:5px; background-color:White; text-align:left;}
+
+
+/* 导航条 */
+.navbar{line-height:26px;height:26px;width:100%; position:relative; font-weight:lighter;}
+.navbar-icon{ position:absolute; left:7px; top:5px;}
+.navbar img{ width:16px; height:16px;}
+.navbar-inner{ margin-left:30px; font-weight:lighter;} 
+.navbar-inner a:link{ color:White; font-weight:lighter;}
+
+
+/* 按钮框 */
+.buttonbox{height: 50px; vertical-align: bottom; text-align: center;}

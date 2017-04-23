@@ -1,0 +1,17 @@
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\obj\Debug\RdlCompile.cache
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\obj\Debug\RdlCompile.compiled
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\WxjzgcjczyBB.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\WxjzgcjczyBB.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\Bigdesk8.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\Microsoft.Office.Interop.Excel.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\Newtonsoft.Json.Net20.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\AntiXssLibrary.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\office.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\Microsoft.Vbe.Interop.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\Bigdesk8.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\Bigdesk8.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\Newtonsoft.Json.Net20.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\bin\Newtonsoft.Json.Net20.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\obj\Debug\WxjzgcjczyBB.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\obj\Debug\WxjzgcjczyBB.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台_报表\WxjzgcjczyBB\obj\Debug\WxjzgcjczyBB.csprojResolveAssemblyReference.cache

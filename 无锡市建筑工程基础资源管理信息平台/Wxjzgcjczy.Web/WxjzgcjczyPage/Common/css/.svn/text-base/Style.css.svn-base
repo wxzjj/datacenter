@@ -1,0 +1,421 @@
+﻿
+/*名称中的字符含义:b:border,w:width,h:height
+  修改这个定义要特别小心，可能会影响到所有的控件；
+  例如：height: 20px;在ie7下会影响所有的控件、及frame的高度
+*/
+*
+{
+	font-family: "微软雅黑";
+	font-size: 12px;
+	margin-bottom: 0px;
+}
+body
+{
+	margin: 0px;
+	padding: 0px;
+	color: Black;
+	text-decoration: none;
+}
+.body_bk
+{
+    background-image: url(ThemeImages/FrameImages/Frame_Main.jpg);
+    background-repeat:repeat;
+    background-attachment: fixed;
+}
+form
+{
+	margin: 0px;
+	padding: 0px;
+}
+img
+{
+	border: 0;
+	/*behavior:url(/SgxcAqjd/Images/iepngfix.htc); */
+}
+td
+{
+	text-decoration: none;
+}
+th
+{
+	font-weight: normal;
+}
+a:link, a:visited
+{
+	/*color:#03515d;*/
+	color:#1C5580;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #FF0000;
+	text-decoration: none;
+}
+/*asp.net控件的样式*/
+.notnull
+{
+	color: red;
+	font-family: "宋体";
+	font-size: 14px;
+}
+
+.td_text
+{
+	text-align:center;
+	background-color:#E4EFF0;
+	padding-left:5px;
+    padding-right:5px;
+    height:25px;
+    color:#333333;
+}
+.td_text_left
+{
+	text-align:left;
+	background-color:#E4EFF0;
+	height:25px;
+	color:#333333;
+}
+.td_text_right
+{
+	text-align:right;
+	background-color:#E4EFF0;
+	height:25px;
+	color:#333333;
+}
+.td_value
+{
+	text-align:left;
+	background-color:#FFFFFF;
+	color:#006699;
+	padding-left:5px;
+	height:25px;
+}
+ .td_text_rowspan
+{
+	text-align:center;
+	background-color:#E4EFF0;
+}
+.td_value_rowspan
+{
+	text-align:left;
+	background-color:#FFFFFF;
+	color:#006699;
+	padding-left:5px;
+}
+.td_value_center
+{
+	text-align:center;
+	background-color:#FFFFFF;
+	color:#006699;
+	height:25px;
+}
+.td_value_title
+{
+	text-align:left;
+	background-color:#FFFFFF;
+	height:25px;
+}
+/*------gridview-------*/
+.td_gridviewvalue
+{
+    text-align:center;
+	background-color:#FFFFFF;
+	color:#006699;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+/*------powergridview-------*/
+.td_powergridview
+{
+    text-align:center;
+	background-color:#FFFFFF;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+/*------button--------------*/
+.btn_short
+{
+	font-size:12px;
+	width: 80px;
+	height: 25px;
+}
+.btn_common
+{
+	font-size:12px;
+	width: 100px;
+	height: 25px;
+}
+.btn_long
+{
+	font-size:12px;
+	width: 120px;
+	height: 25px;
+}
+
+/*control.js（在jQuery的基础上）中提供的界面验证功能，表达验证效果时需要下面几个定义*/
+.textbox
+{
+    padding:2px;
+	color: Blue;
+	border: #7B7B7B 1px solid;
+	width: 70%; 
+}
+.textbox_long
+{
+    padding:2px;
+	color: Blue;
+	border: #7B7B7B 1px solid;
+	width: 90%; 
+}
+input.textbox_error, textarea.textbox_error, select.textbox_error
+{
+    color: #fff;
+    border-color: #000;
+    background-color: #cd0a0a;
+    width: 70%;
+}
+label.textbox_error
+{
+    color: #cd0a0a;
+    margin-left: 5px;
+}
+/*界面验证效果组定义完毕*/
+
+/*------控件：dropdownlist------------*/
+.ddl_short
+{
+    padding:2px;
+    color:Blue;
+	width: 50%;
+	border: #7B7B7B 1px solid;
+	
+}
+.ddl_common
+{
+    padding:2px;
+    color:Blue;
+	width: 70%;
+	border: #7B7B7B 1px solid;
+	
+}
+.ddl_long
+{
+    padding:2px;
+    color:Blue;
+	width: 90%;
+	border: #7B7B7B 1px solid;
+	
+}
+
+/*Menu 背景样式*/
+.menu
+{
+    padding-left:10px;
+    padding-right:10px;
+    height: 25px;
+	background-image: url('ThemeImages/MenuImages/MenuItem_BK.png');
+	background-repeat:repeat-x;
+}
+.menu_baseline
+{
+	margin-left: 5px; 
+	height: 2px; 
+	background: #008ed2;
+}
+.menu_defaultstyle_4
+{
+	width: 70px;
+	height: 25px;
+	background-image: url('ThemeImages/MenuImages/MenuItem_4_UnClick.jpg');
+	padding-top: 5px;
+	text-align: center;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color:Transparent;
+
+}
+.menu_selectedstyle_4
+{
+	width: 70px;
+	height: 25px;
+	background-image: url('ThemeImages/MenuImages/MenuItem_4_OnClick.jpg');
+	padding-top: 5px;
+	text-align: center;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color:Transparent;
+
+}
+.menu_defaultstyle_6
+{
+	width: 90px;
+	height: 25px;
+	background-image: url('ThemeImages/MenuImages/MenuItem_6_UnClick.jpg');
+	padding-top: 5px;
+	text-align: center;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color:Transparent;
+
+}
+.menu_selectedstyle_6
+{
+	width: 90px;
+	height: 25px;
+	background-image: url('ThemeImages/MenuImages/MenuItem_6_OnClick.jpg');
+	padding-top: 5px;
+	text-align: center;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-color:Transparent;
+
+}
+
+.table
+{
+	background-color: #077F90;
+}
+.powergridviewheader
+{
+    background-color:#339E9E;
+}
+.title_searchpostion
+{
+    background-color:#339E9E;
+    height:25px;
+}
+ 
+/*列表页面table中的样式*/
+.td_head
+{
+    padding-top:0px;
+    padding-left:10px;
+    padding-right:10px;
+}
+.td_search
+{
+    padding-top:10px;
+    padding-left:10px;
+    padding-right:10px;
+}
+.td_data
+{
+    padding:10px;
+}
+.td_button
+{
+    padding:10px;
+    text-align:center;
+}
+/*view*/
+.view_head
+{
+	padding-top:10px;
+	padding-left:10px;
+    padding-right:10px;
+    padding-bottom:0px;
+}
+.view_center
+{
+    padding-top:0px;
+	 padding-left:10px;
+    padding-right:10px;
+}
+.view_center_gridview
+{
+    padding-top:0px;
+	padding-left:10px;
+    padding-right:10px;
+    background-color:#FFFFFF;
+}
+
+
+/*下面三个样式定义标明table中行的交替显示效果，以及高亮显示鼠标所在行。
+在js函数DataGridUI中用到了这三个定义*/
+.gridrow
+{
+	background-color: white;
+}
+.gridalternatingrow
+{
+	background-color: #f0f0f0;
+}
+.gridactiverow
+{
+	background-color: #ffff55;
+}
+
+/*PowerDataGrid--ItemStyle*/
+.pdg_itemstyle_center
+{
+    border-style:solid;
+    border-width:1px;
+    border-color:#7B7B7B;
+    text-align:center;
+}
+.pdg_itemstyle_left
+{
+    border-style:solid;
+    border-width:1px;
+    border-color:#7B7B7B;
+    text-align:left;
+}
+.pdg_itemstyle_right
+{
+    border-style:solid;
+    border-width:1px;
+    border-color:#7B7B7B;
+    text-align:right;
+}
+/*PowerDataGrid--HeaderStyle*/
+.pdg_headerstyle_center
+{
+    border-style:solid;
+    border-width:1px;
+    border-color:#7B7B7B;
+    text-align:center;
+}
+.pdg_linkheaderstyle_center
+{
+    border-style:solid;
+    border-width:1px;
+    border-color:#7B7B7B;
+    text-align:center;
+    color:Yellow;
+}
+
+.pdg_headerstyle_Left
+{
+    border-style:solid;
+    border-width:1px;
+    border-color:#7B7B7B;
+    text-align:left;
+}
+.pdg_headerstyle_right
+{
+    border-style:solid;
+    border-width:1px;
+    border-color:#7B7B7B;
+    text-align:right;
+}
+/*隐藏控件样式*/
+.ctl_hidden
+{
+    visibility:hidden;
+    width:0px;
+    height:0px;
+    background-color:Transparent;
+}
+/*只读控件样式*/
+.ctl_readonly
+{
+    padding:2px;
+	color: Blue;
+	border: #7B7B7B 1px solid;
+	width: 70%;
+    background-color:#EEEEEE;
+}

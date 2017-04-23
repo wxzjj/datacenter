@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 208
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common
+END
+Definitions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 223
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/Definitions.cs
+END
+InterfaceBusiness.cs
+K 25
+svn:wc:ra_dav:version-url
+V 229
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/InterfaceBusiness.cs
+END
+SearchContrl.js
+K 25
+svn:wc:ra_dav:version-url
+V 224
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/SearchContrl.js
+END
+SystemBLL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 221
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/SystemBLL.cs
+END
+FusionCharts.js
+K 25
+svn:wc:ra_dav:version-url
+V 224
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/FusionCharts.js
+END
+DataDefine.cs
+K 25
+svn:wc:ra_dav:version-url
+V 222
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/DataDefine.cs
+END
+DataHandle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 222
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/DataHandle.cs
+END
+SystemDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 221
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/SystemDAL.cs
+END
+WebCommon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 221
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/WebCommon.cs
+END
+BasePage.cs
+K 25
+svn:wc:ra_dav:version-url
+V 220
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/BasePage.cs
+END
+HandleBusiness.cs
+K 25
+svn:wc:ra_dav:version-url
+V 226
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/HandleBusiness.cs
+END
+jquery-1.3.2.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 228
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/jquery-1.3.2.min.js
+END
+UserInfo.cs
+K 25
+svn:wc:ra_dav:version-url
+V 220
+/svn/WXProjects/!svn/ver/28/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/IntegrativeShow2015/Common/UserInfo.cs
+END

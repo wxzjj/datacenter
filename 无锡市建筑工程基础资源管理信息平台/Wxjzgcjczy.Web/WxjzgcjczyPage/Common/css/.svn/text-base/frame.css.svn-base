@@ -1,0 +1,14 @@
+﻿.top-bk{height:105px; background-image:url(../images/FrameImages/top_bk.png); background-repeat:repeat-x; }
+.top{background-image:url(../images/FrameImages/top.png); width:1024px; height:105px; background-repeat:no-repeat;}
+.top-title{background-image:url(../images/FrameImages/top_title.png); width:1024px; height:85px; background-repeat:no-repeat;}
+.top-qyb-bk{height:85px; background-image:url(../images/FrameImages/top_qyb_bk.png); background-repeat:repeat-x; }
+.top-qyb{background-image:url(../images/FrameImages/top_qyb.png); width:1024px; height:85px; background-repeat:no-repeat;}
+
+.bottom{height:31px; padding-top:6px; background-image:url(../images/FrameImages/bottom_bk.png); background-repeat:repeat-x;}
+
+.workarea-title{height:26px; background-image:url(../images/FrameImages/workareatitble_bk.png); background-repeat:repeat-x; font-weight:lighter;}
+
+.cursor{ cursor:pointer }
+
+
+

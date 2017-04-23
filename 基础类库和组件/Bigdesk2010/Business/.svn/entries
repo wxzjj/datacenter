@@ -1,0 +1,83 @@
+10
+
+dir
+44320
+https://10.1.1.3:8443/svn/scic/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk2010/Business
+https://10.1.1.3:8443/svn/scic
+
+
+
+2014-03-26T09:34:32.833809Z
+29276
+svnadmin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2d1067ad-e0e8-8a47-9b88-07ec6dab11bc
+
+Definitions.cs
+file
+
+
+
+
+2016-03-10T09:25:47.831702Z
+08c78a77c47ae9fea926702f5d02aae8
+2013-10-25T02:23:19.102500Z
+24822
+svnadmin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11122
+
+DebugManager
+dir
+
+WorkflowTemplateManager
+dir
+
+BizMsgManager
+dir
+
+UserRightManager
+dir
+
+FileManager
+dir
+
+StateManager
+dir
+
+LogManager
+dir
+

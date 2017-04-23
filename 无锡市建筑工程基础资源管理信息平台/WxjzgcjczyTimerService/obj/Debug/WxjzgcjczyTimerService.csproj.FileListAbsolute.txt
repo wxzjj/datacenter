@@ -1,0 +1,17 @@
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\WxjzgcjczyTimerService3.0.exe.config
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\WxjzgcjczyTimerService3.0.exe
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\WxjzgcjczyTimerService3.0.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\Bigdesk8.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\office.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\Microsoft.Vbe.Interop.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\AntiXssLibrary.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\Microsoft.Office.Interop.Excel.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\Bigdesk8.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\bin\Debug\Bigdesk8.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\obj\Debug\ResolveAssemblyReference.cache
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\obj\Debug\WxjzgcjczyTimerService.ProjectInstaller.resources
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\obj\Debug\WxjzgcjczyTimerService.Service1.resources
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\obj\Debug\WxjzgcjczyTimerService.Service2.resources
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\obj\Debug\WxjzgcjczyTimerService.csproj.GenerateResource.Cache
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\obj\Debug\WxjzgcjczyTimerService3.0.exe
+E:\worknew\无锡市建筑工程基础资源管理信息平台\WxjzgcjczyTimerService\obj\Debug\WxjzgcjczyTimerService3.0.pdb

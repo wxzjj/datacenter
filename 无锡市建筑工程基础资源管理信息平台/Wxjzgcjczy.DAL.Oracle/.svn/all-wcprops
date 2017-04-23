@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 203
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle
+END
+TjfxDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/TjfxDAL.cs
+END
+DataExchangeDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 222
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/DataExchangeDAL.cs
+END
+ZlctDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/ZlctDAL.cs
+END
+ZyryDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/ZyryDAL.cs
+END
+DALHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 216
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/DALHelper.cs
+END
+DatabaseOperator.cs
+K 25
+svn:wc:ra_dav:version-url
+V 223
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/DatabaseOperator.cs
+END
+FjxxDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/FjxxDAL.cs
+END
+GzyjDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/GzyjDAL.cs
+END
+YhglDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/YhglDAL.cs
+END
+SystemDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 216
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/SystemDAL.cs
+END
+UeppCodeDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 218
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/UeppCodeDAL.cs
+END
+SzgcDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/SzgcDAL.cs
+END
+SzqyDAL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 214
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/SzqyDAL.cs
+END
+Wxjzgcjczy.DAL.Oracle.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 232
+/svn/WXProjects/!svn/ver/23/%E6%97%A0%E9%94%A1%E5%B8%82%E5%BB%BA%E7%AD%91%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E4%BF%A1%E6%81%AF%E5%B9%B3%E5%8F%B0/Wxjzgcjczy.DAL.Oracle/Wxjzgcjczy.DAL.Oracle.csproj
+END

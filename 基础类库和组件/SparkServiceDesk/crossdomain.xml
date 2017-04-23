@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<cross-domain-policy>
+	<!--此文件最好放在站点的根目录下，以正常发挥作用。
+  最好不要采用允许任何域访问的策略，
+  以防止出现太仓的“上传页面”将文件上传到了常熟的“上传服务”的情况;
+  而在公司内部测试时可以完全放开。-->
+  <!--<allow-access-from domain="*" />-->
+  <!--太仓站点的域名和地址-->
+  <allow-access-from domain="*.tccin.net" />
+  <allow-access-from domain="218.4.137.163" />
+  <!--常熟站点的地址
+  <allow-access-from domain="222.92.204.76" />-->
+</cross-domain-policy>
+

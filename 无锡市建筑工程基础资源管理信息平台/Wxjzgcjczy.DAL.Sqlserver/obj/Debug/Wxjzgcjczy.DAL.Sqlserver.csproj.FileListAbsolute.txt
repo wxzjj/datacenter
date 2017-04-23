@@ -1,0 +1,17 @@
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Wxjzgcjczy.DAL.Sqlserver.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Wxjzgcjczy.DAL.Sqlserver.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Bigdesk8.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Wxjzgcjczy.Common.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Newtonsoft.Json.Net20.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Microsoft.Office.Interop.Excel.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\office.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\AntiXssLibrary.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Microsoft.Vbe.Interop.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Newtonsoft.Json.Net20.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Newtonsoft.Json.Net20.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Bigdesk8.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Bigdesk8.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\bin\Debug\Wxjzgcjczy.Common.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\obj\Debug\ResolveAssemblyReference.cache
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\obj\Debug\Wxjzgcjczy.DAL.Sqlserver.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.DAL.Sqlserver\obj\Debug\Wxjzgcjczy.DAL.Sqlserver.pdb

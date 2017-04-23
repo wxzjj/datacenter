@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* TOP */
+.body_bg{ background:url(../images/body_bg.png) top center repeat-x;}
+.w1002{ width:1002px; margin:0 auto}
+.top{ height:148px; float:left; overflow:hidden; line-height:148px; font-size:36px; color:#338bd9; padding-left:15px; font-weight:bold}
+.logo{background:url(../images/logo.png) no-repeat; float:left; height:80px; width:80px; overflow:hidden; margin-top:40px;}
+.nav{ height:42px; line-height:42px; width:100%; background:url(../images/sprite.png) 0 -396px repeat-x;}
+.nav a{ float:left; color:#fff; font-size:16px; border-left:1px solid #338bd9; border-right:1px solid #338bd9; padding:0 46px}
+.notice{ width:100%; height:45px; line-height:45px; border-bottom:1px solid #fff; background:#e8e8e8; font-size:14px}
+.notice a{background:url(../images/sprite.png) 0 0 no-repeat;height:24px; line-height:24px; float:left; padding-left:35px;overflow:hidden; color:#990000;  margin-top:12px}
+/* CONTENT */
+.content{ margin:0 0; float:left; overflow:hidden}
+.fc_pic{ border:1px solid #ddd; padding:5px; float:left; overflow:hidden; background:#fff}
+.news{ width:354px; height:306px;*height:303px; border:1px solid #ddd; margin:0 10px; float:left; _display:inline; overflow:hidden; background:#fff}
+.news h2,.news_right h2,.zhaobiao_right h2,.contact h2,.softdown h2{ font-size:14px; height:30px; line-height:30px; background:#fafafa; padding:0 0px; border-bottom:1px solid #ddd;overflow:hidden}
+.news h2 a,.zhaobiao_right h2 a{ float:left;padding:0 15px;}
+.news h2 a.current,.news_right h2,.zhaobiao_right h2 a.current,.contact h2,.softdown h2{ background:url(../images/sprite.png) 0 -42px repeat-x; color:#fff;}
+.news li,.news_right li{ line-height:20px; height:20px; padding:5px 20px}
+.news .title{ width:240px; overflow:hidden; float:left}
+.news span{ float:right; color:#aaa}
+.news_right{ width:256px; float:left; border:1px solid #ddd; background:#fff; height:306px;*height:303px;}
+.news_right li{ width:210px; overflow:hidden;}
+
+.box{ border:1px solid #ddd; margin-top:14px; width:1000px; float:left; overflow:hidden}
+.zhaobiao_left,.netforwork_left{ float:left; padding:15px 15px 0; overflow:hidden; border-right:1px solid #ddd}
+.zhaobiao_left a,.netforwork_left a,.netforwork_right a{ border-radius:2px; width:95px; padding:0 0 0 60px; height:56px; background: url(../images/sprite.png) #338bd9 no-repeat; display:block; color:#fff; line-height:56px; font-size:16px; margin-bottom:15px}
+.zhaobiao_left a.one{ background-position: 14px -81px}
+.zhaobiao_left a.two{ background-position: 14px -133px}
+.zhaobiao_left a.three{ background-position: 14px -194px}
+.zhaobiao_right{ float:left; overflow:hidden}
+.zhaobiao_right h2{ border-bottom:3px solid #338bd9}
+.zhaobiao_right li{ padding:5px 15px; line-height:20px; overflow:hidden}
+.zhaobiao_right li span.number{ float:left; margin-right:20px; width:145px}
+.zhaobiao_right li span.title{ width:513px; overflow:hidden; float:left;}
+.zhaobiao_right li span.date{ float:right; margin-right:10px; _display:inline; color:#aaa; width:80px}
+
+/*新增*/
+.sczt_right{ float:left; overflow:hidden}
+/*.sczt_right h2{ border-bottom:3px solid #338bd9}*/
+*/
+.sczt_right li{ padding:5px 15px; line-height:20px; overflow:hidden}
+.sczt_right li span.number{ float:left; margin-right:20px; width:145px}
+.sczt_right li span.title{ width:51px; overflow:hidden; float:left;}
+.sczt_right li span.date{ float:right; margin-right:10px; _display:inline; color:#aaa; width:80px}
+
+/*新增*/
+.zyry_right{ float:left; overflow:hidden}
+/*.zyry_right h2{ border-bottom:3px solid #338bd9}*/
+.zyry_right li{ padding:5px 15px; line-height:20px; overflow:hidden}
+.zyry_right li span.number{ float:left; margin-right:20px; width:145px}
+.zyry_right li span.title{ width:513px; overflow:hidden; float:left;}
+.zyry_right li span.date{ float:right; margin-right:10px; _display:inline; color:#aaa; width:80px}
+
+/*新增*/
+.xygs_right{ float:left; overflow:hidden}
+/*.xygs_right h2{ border-bottom:3px solid #338bd9}*/
+*/
+.xygs_right li{ padding:5px 15px; line-height:20px; overflow:hidden}
+.xygs_right li span.number{ float:left; margin-right:20px; width:145px}
+.xygs_right li span.title{ width:513px; overflow:hidden; float:left;}
+.xygs_right li span.date{ float:right; margin-right:10px; _display:inline; color:#aaa; width:80px}
+
+/*新增*/
+.sczt_right h2 a,.zyry_right h2 a,.xygs_right h2 a{ float:left;padding:0 22px; margin-top:10px; height:20px;}
+.sczt_right h2 a.current,.zyry_right h2 a.current,.xygs_right h2 a.current{ background:url(../images/sprite.png) 0 -42px repeat-x; color:#fff;margin-top:10px;height:20px;}
+
+
+
+
+
+
+
+
+.percent{ width:1000px}
+
+.netforwork_right{ float:left; padding:15px; width:1000px; text-align:center; font-size:20px;}
+
+.open_message{ width:748px}
+
+table{ width:100%}
+table td,table th{ border-right:1px solid #fff; text-align:center; line-height:24px}
+table th{ color:#0d76ca; font-weight:bold}
+.req{ padding-top:0}
+
+.contact{ width:330px; height:205px; background:url(../images/contact_bg.jpg); line-height:30px}
+.contact h2{ border-bottom:0}
+.contact li{ padding:5px 15px}
+
+.softdown{ width:408px; margin:14px 10px 0;float:left; _display:inline; height:205px}
+.softdown h2{ width:140px; text-align:center}
+.softdown a{ float:left; width:120px; height:40px; border:1px solid #ddd; margin:12px 0 0 10px;_display:inline; line-height:40px; text-align:center}
+.quicklink{ width:238px; margin:14px 0 0}
+.quicklink a{ width:102px}
+
+.friendlink a{ margin:15px 0 10px 35px; float:left}
+.friendlink h2{ background:#f9f9f9; padding-left:20px; color:#4c7eb1; font-size:14px; line-height:30px}
+
+
+/* COPYRIGHT */
+.copyright{ width:100%; height:96px; background:url(../images/foot_bg.jpg) repeat-x; line-height:26px; color:#fff; padding:20px 0 0; margin-top:20px}
+.copyright p{ width:1000px; margin:0 auto; text-align:center }
+
+
+
+/* LIST */
+.list-left{ width:240px; padding:4px 4px;border:1px solid #ddd; float:left; margin:10px 8px 0 0; background:url(../images/list-left.jpg) #fff 4px 4px no-repeat; overflow:hidden; min-height:520px;}
+.list-left-main{ padding-top:36px;}
+.list-left h2{position:absolute; margin-top:-28px; color:White; padding-left:80px; font-size:15px;}
+.list-left h2 span{ letter-spacing:2px;}
+.list-left li{ line-height:30px; height:30px; }
+.list-left .li-link{padding-left:54px; background:url(../images/dot.png) #f3f3f3 26px 6px no-repeat; border-top:2px solid #fff; letter-spacing:1px; font-size:13px;}
+.list-left .li-title{font-size:14px; color:#295985; padding-left:44px; background:url(../images/submenu.png) #daeff5 16px 5px no-repeat; border-top:2px solid #fff; letter-spacing:1px;}
+
+.list-right{ width:734px; border:1px solid #ddd; padding:0px; float:left; overflow:hidden; min-height:520px; background:#fff; margin-top:10px}
+.list-right-main{ width:734px; border:0px solid #ffffff; padding:0px; float:left; overflow:hidden; min-height:520px; background:#fff;}
+
+.list-right-main h3{ height:35px; line-height:35px; padding:0 15px; font-size:13px; font-weight:normal;}
+.list-right-main .line{width:734px; clear:both; float:left; height:1px; background-color:#ddd;}
+.list-right-main .searchbox{width:714px; padding:10px;}
+.list-right-main .gridbox{width:714px; padding:0px 10px 10px 10px;}
+.search{ float:right;padding:0 20px; _display:inline; overflow:hidden}
+.search input{ border:1px solid #ddd; background:#fff; padding-left:5px; height:22px; line-height:22px; margin:8px; float:left}
+.search a{ background:#19456c; color:#fff; padding:0 12px; line-height:24px; height:25px; float:left; margin:8px}
+.list-right-main .blue-title{background:#c5e8fc; overflow:hidden; width:734px; margin-top:10px}
+.list-right-main .title{	width: 530px;float: left;overflow: hidden;}
+.list-right-main .date{ width:124px; float:left; overflow:hidden;}
+.list-right-mian li{ height:30px; line-height:30px; padding:0 20px}
+
+
+.pdg-itemstyle-left{text-align: left;}

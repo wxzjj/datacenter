@@ -1,0 +1,18 @@
+﻿/* 通用 */
+.menutitlebk{background: url('images/frameImages/leftmenutitlebk.png') repeat-x;}
+.menutitleshow{height: 26px; color: #ffffff; text-align: center; font-weight: bold;}
+.menutitlehide{color: #2C4E70; text-align: center; padding-left: 6px; padding-top: 6px;}
+.menutitlehidefont{color: #2C4E70; text-align: center;}
+.menutitlehidefont span{cursor: pointer; font-weight: bold;}
+.menulist{ margin-left:1px; margin-right:2px;line-height:27px; margin-top:2px;color:#2C4E70;background:url('images/frameImages/rightframe_titlebk.png') repeat-x 0px 0px;}
+.menulist li{ height:24px; line-height:24px; padding-left:24px; display:block; position:relative; cursor:pointer; text-align:left; color:#3C3C3C;}
+.menulist li img{ position:absolute; left:4px; top:4px; width:16px; height:16px;}
+.menulist li.over{ background:url('images/icons/menuitem.png') repeat-x 0px 0px;color:#F97C10;}
+.menulist li.over .menuitem-l{background:url('images/icons/menuitem.png') repeat-x 0px -24px; width:2px; height:24px; position:absolute; left:0; top:0;}
+.menulist li.over .menuitem-r{background:url('images/icons/menuitem.png') repeat-x -1px -24px; width:2px; height:24px; position:absolute; right:0; top:0;}
+
+
+/* 展开/折叠 */
+.menulist{position:relative;}
+.menulist .togglebtn{ position:absolute; top:6px; right:10px; background:url(images/icons/dhup.png) no-repeat 0px 0px; height:16px; width:16px; cursor:pointer; border:solid 0;}
+.menulist .togglebtn-down{  position:absolute; top:6px; right:10px; background:url(images/icons/dhdown.png) no-repeat 0px 0px; height:16px; width:16px; cursor:pointer; border:solid 0;}

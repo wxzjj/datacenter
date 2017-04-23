@@ -1,0 +1,9 @@
+﻿body{width:100%;margin:0px;padding:0px;background:url(../images/Login_New/bg03.jpg);width:100%;height:100%;overflow:hidden;}
+*{padding:0px; margin:0px; list-style:none; font-family:微软雅黑;}
+a:link{ text-decoration:none;} a:visited{text-decoration:none;}
+.top{width:960px;height:336px;margin:0 auto; background:url(../images/Login_New/bg01s.jpg) no-repeat; position:relative}
+.bottom{width:960px;height:305px;margin:0 auto; background:url(../images/Login_New/bg02.jpg) no-repeat; position:relative}
+.bottom-copyright{margin:0 auto;position:absolute;top:220px;left:300px;width:300px;padding-top:5px; text-align:center;color:White; font-size:14px;}
+.login{width:960px;height:300px;margin:0 auto; background:url(../images/Login_New/loginbk.png) no-repeat; position:relative;top:-450px; left:560px;}
+.login1{width:960px;height:300px;margin:0 auto; background:url(../images/Login_New/loginbk1.png) no-repeat; position:relative;top:-450px; left:560px;}
+.login2{width:960px;height:300px;margin:0 auto; background:url(../images/Login_New/loginbk2.png) no-repeat; position:relative;top:-450px; left:560px;}

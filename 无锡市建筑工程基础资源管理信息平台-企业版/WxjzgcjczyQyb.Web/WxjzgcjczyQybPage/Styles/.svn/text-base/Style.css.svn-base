@@ -1,0 +1,511 @@
+﻿body, form, td, th, a, p
+{
+    margin: 0;
+    font-weight: normal;
+    font-family: "微软雅黑", "宋体", Arial, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+}
+/*body
+{
+    color: #000;
+    background-color: #fff;
+}*/
+.stylespan
+{
+    color: Red;
+    vertical-align: middle;
+}
+.style1
+{
+    height: 23px;
+}
+.style2
+{
+    width: 30%;
+    height: 40px;
+}
+.style3
+{
+    width: 40%;
+    height: 40px;
+}
+
+.style6
+{
+    width: 15%;
+    background-color: #B7CBEB;
+}
+.style7
+{
+    height: 30px;
+}
+.style8
+{
+    height: 20px;
+    text-align: center;
+    background-color: #F4F4F4;
+}
+.style9
+{
+    height: 20px;
+    background-color: #F4F4F4;
+}
+.style10
+{
+    background-color: #ffffff;
+    width: 35%;
+    height: 30px;
+    text-align: left;
+    color: Blue;
+}
+.style11
+{
+    width: 75%;
+    height: 20px;
+    background-color: #F4F4F4;
+}
+.style12
+{
+    text-align: center;
+    height: 30px;
+    background-color: #F4F4F4;
+}
+.style13
+{
+    text-align: center;
+    height: 30px;
+    background-color: #B7CBEB;
+}
+.style14
+{
+    height: 30px;
+    background-color: #FFFFFF;
+    text-align: left;
+}
+.style15
+{
+    height: 30px;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+.style16
+{
+    width: 10%;
+    height: 30px;
+    text-align: center;
+    background-color: #B7CBEB;
+}
+.tdlabel
+{
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    background-color: #F4F4F4;
+}
+.spancolor
+{
+    color: Blue;
+}
+.td_width
+{
+    width: 200px;
+    height: 25px;
+}
+.tablestyle
+{
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.td_width95
+{
+    width: 95%;
+}
+
+.td_width100
+{
+    width: 100px;
+}
+p.p0
+{
+    margin: 0pt;
+    margin-bottom: 0.0001pt;
+    margin-bottom: 0pt;
+    margin-top: 0pt;
+    font-size: 12.0000pt;
+    font-family: 'Calibri';
+}
+
+.td_df1
+{
+    width: 8%;
+    height: 30px;
+    text-align: center;
+    background-color: #B7CBEB;
+}
+.td_df2
+{
+    width: 12%;
+    height: 30px;
+    text-align: center;
+    background-color: #B7CBEB;
+}
+.dfinput
+{
+    height: 20px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.db_width
+{
+    width: 90%;
+}
+
+.tdtitle
+{
+    background-color: #C0C0C0;
+    color: #FFFF00;
+    font-weight: bold;
+}
+
+th
+{
+    text-align: center;
+    text-decoration: none;
+}
+img
+{
+    border: 0;
+}
+a:link, a:visited
+{
+    color: #000066;
+    text-decoration: none;
+}
+a:hover
+{
+    color: #0099ff;
+    text-decoration: none;
+}
+
+/*menu 背景样式.net2.0版*/
+.menu_defaultstyle_4
+{
+    width: 70px;
+    height: 25px;
+    background-image: url(images/MenuItem_4_UnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_selectedstyle_4
+{
+    width: 70px;
+    height: 25px;
+    background-image: url(images/MenuItem_4_OnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_DefaultStyle_6
+{
+    width: 90px;
+    height: 25px;
+    background-image: url(images/MenuItem_6_UnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_selectedstyle_6
+{
+    width: 90px;
+    height: 25px;
+    background-image: url(images/MenuItem_6_OnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_defaultstyle_8
+{
+    width: 120px;
+    height: 25px;
+    background-image: url(images/MenuItem_8_UnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_selectedstyle_8
+{
+    width: 120px;
+    height: 25px;
+    background-image: url(images/MenuItem_8_OnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+
+/*menu 背景样式.net4.0版*/
+.horizontalmenu4 a.level1
+{
+    width: 70px;
+    height: 25px;
+    background: url(images/MenuItem_4_UnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu4 a.selected
+{
+    width: 70px;
+    height: 25px;
+    background: url(images/MenuItem_4_OnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu6 a.level1
+{
+    width: 90px;
+    height: 25px;
+    background: url(images/MenuItem_6_UnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu6 a.selected
+{
+    width: 90px;
+    height: 25px;
+    background: url(images/MenuItem_6_OnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu8 a.level1
+{
+    width: 120px;
+    height: 25px;
+    background: url(images/MenuItem_8_UnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu8 a.selected
+{
+    width: 120px;
+    height: 25px;
+    background: url(images/MenuItem_8_OnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+
+.tdlabel, .tdlabelmust
+{
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    background-color: #B7CBEB;
+}
+.tdlabel1
+{
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.tdlabel2
+{
+    width: 70%;
+    height: 30px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.tdlabel3
+{
+    width: 40%;
+    height: 30px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.tdlabel4
+{
+    width: 10%;
+    height: 25px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.tdlabel5
+{
+    width: 40%;
+    height: 25px;
+    text-align: left;
+    background-color: #FFFFFF;
+}
+.tdlabel6
+{
+    width: 50%;
+    height: 25px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.td_label
+{
+    width: 34%;
+    height: 30px;
+    text-align: center;
+    background-color: #B7CBEB;
+}
+.tdlabelmust
+{
+    color: Red;
+}
+.tdinput
+{
+    background-color: #ffffff;
+    width: 35%;
+    height: 30px;
+    text-align: left;
+}
+.tdinput1
+{
+    background-color: #ffffff;
+    width: 50%;
+    height: 30px;
+    text-align: left;
+}
+
+.label
+{
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.lbview
+{
+    width: 15%;
+    height: 15px;
+}
+.tdmem
+{
+    width: 100%;
+    height: 100px;
+}
+.style_yq
+{
+    height: 20px;
+    background-color: #F4F4F4;
+    text-align: center;
+}
+
+
+/*所有控件样式*/
+
+button, input[type="button"], input[type="submit"], input[type="reset"], .button a
+{
+    width: 75px;
+    height: 25px; /* 	background: #ece9d8; 	border-top: solid 0.5px #000;     border-right: solid 1px #000;     border-bottom: solid 1.75px #000;     border-left: solid 0.5px #000;     font-weight: normal;     font-family: "宋体" ,tahoma;     font-size: 12px; */
+}
+/*
+.button a
+{
+    display: inline-block;
+    overflow: hidden;
+    height: 18px;
+    padding: 5px 0 0 0;
+    text-align: center;
+    cursor: default;
+    color: Black;
+    text-decoration: none;
+}
+*/
+input[type="text"], input[type="password"], input[type="file"], select, textarea
+{
+    padding: 3px 8px 0 3px;
+    height: 18px;
+    width: 190px;
+    border-width: 1px;
+    border-style: solid;
+}
+textarea
+{
+    padding: 0 0 0 3px;
+    width: 575px;
+    height: 75px;
+}
+input[type="file"]
+{
+    height: 22px;
+}
+select
+{
+    padding: 0;
+    width: 205px;
+    height: 21px;
+}
+input[type="checkbox"], input[type="radio"], select
+{
+    /*这三个控件设置样式无效*/
+}
+.date
+{
+    width: 75px;
+}
+.time
+{
+    width: 35px;
+}
+.textbox
+{
+    color: #000;
+    border-color: #7f9db9;
+    background-color: #fff;
+}
+input.textbox_error, textarea.textbox_error, select.textbox_error
+{
+    color: #fff;
+    border-color: #000;
+    background-color: #cd0a0a;
+}
+label.textbox_error
+{
+    color: #cd0a0a;
+    margin-left: 5px;
+}
+
+.textbox_focus
+{
+    color: #339966;
+    border-color: #ccc;
+    background-color: #ffffcc;
+}
+.textbox_hover
+{
+    color: #339966;
+    border-color: #999;
+    background-color: #ffffcc;
+}
+/*前台控件隐藏*/
+.hd_control
+{
+    visibility: hidden;
+    background-color: Transparent;
+    height: 0px;
+    width: 0px;
+}
+.body_bk
+{
+    background-image: url(Images/FrameImages/main.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+.Welcome_TitleText
+{
+    filter: DropShadow(Color=#000000, OffX=1, OffY=1, Positive=1);
+    font-weight: bold;
+    color: #FFFFFF;
+    font-family: Tahoma;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+.Welcome_Title2
+{
+    filter: Alpha(Opacity=100, FinishOpacity=0, Style=1, StartX=0, StartY=0, FinishX=100, FinishY=100);
+}

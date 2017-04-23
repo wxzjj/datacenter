@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/scic/!svn/ver/37054/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk2010/Data/DBOperator
+END
+SqlParameterCollection.cs
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/scic/!svn/ver/23661/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk2010/Data/DBOperator/SqlParameterCollection.cs
+END
+DBOperator.cs
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/scic/!svn/ver/37054/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk2010/Data/DBOperator/DBOperator.cs
+END
+DBOperatorFactory.cs
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/scic/!svn/ver/28641/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk2010/Data/DBOperator/DBOperatorFactory.cs
+END
+PagedData.cs
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/scic/!svn/ver/23661/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk2010/Data/DBOperator/PagedData.cs
+END

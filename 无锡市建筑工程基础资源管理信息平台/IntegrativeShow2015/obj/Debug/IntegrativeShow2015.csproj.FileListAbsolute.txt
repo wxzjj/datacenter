@@ -1,0 +1,16 @@
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\IntegrativeShow2.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\IntegrativeShow2.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\Bigdesk8.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\DataExport.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\Newtonsoft.Json.Net20.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\Microsoft.Office.Interop.Excel.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\office.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\AntiXssLibrary.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\Microsoft.Vbe.Interop.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\Newtonsoft.Json.Net20.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\Newtonsoft.Json.Net20.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\Bigdesk8.pdb
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\bin\Bigdesk8.xml
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\obj\Debug\ResolveAssemblyReference.cache
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\obj\Debug\IntegrativeShow2.dll
+E:\worknew\无锡市建筑工程基础资源管理信息平台\IntegrativeShow2015\obj\Debug\IntegrativeShow2.pdb

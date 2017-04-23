@@ -1,0 +1,103 @@
+﻿/*所有控件样式*/
+button, input[type="button"], input[type="submit"], input[type="reset"]
+{
+    width: 75px;
+    height: 25px;
+    border-top: solid 0.5px #000;
+    border-right: solid 1px #000;
+    border-bottom: solid 1.75px #000;
+    border-left: solid 0.5px #000;
+}
+input[type="text"], input[type="password"], input[type="file"], select, textarea
+{
+    padding: 3px 8px 0 3px;
+    height: 18px;
+    width: 190px;
+    border-width: 1px;
+    border-style: solid;
+}
+textarea
+{
+    padding: 0 0 0 3px;
+    width: 575px;
+    height: 75px;
+}
+input[type="file"]
+{
+    height: 22px;
+}
+select
+{
+    padding: 0;
+    width: 205px;
+    height: 21px;
+}
+input[type="checkbox"], input[type="radio"], select
+{
+    /*这三个控件设置样式无效*/
+}
+.date
+{
+    width: 75px;
+}
+.time
+{
+    width: 35px;
+}
+.textbox
+{
+    color: #000;
+    border-color: #7f9db9;
+    background-color: #fff;
+}
+input.textbox_error, textarea.textbox_error, select.textbox_error
+{
+    color: #fff;
+    border-color: #000;
+    background-color: #cd0a0a;
+}
+label.textbox_error
+{
+    color: #cd0a0a;
+    margin-left: 5px;
+}
+.textbox_ime_disabled
+{
+    ime-mode: disabled;
+}
+.textbox_focus
+{
+    color: #339966;
+    border-color: #ccc;
+    background-color: #ffffcc;
+}
+.textbox_hover
+{
+    color: #339966;
+    border-color: #999;
+    background-color: #ffffcc;
+}
+.grid
+{
+    border-collapse: collapse;
+    border: 1px solid #666;
+    width: 100%;
+}
+.grid td, .grid th
+{
+    text-decoration: none;
+    border-collapse: collapse;
+    border: 1px solid #666;
+    height: 20px;
+}
+.gridrow
+{
+    background-color: white;
+}
+.gridalternatingrow
+{
+    background-color: #f0f0f0;
+}
+.gridactiverow
+{
+    background-color: #ffff55;

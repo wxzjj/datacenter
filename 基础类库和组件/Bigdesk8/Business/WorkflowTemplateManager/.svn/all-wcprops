@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/scic/!svn/ver/457/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/WorkflowTemplateManager
+END
+BusinessWorkflowTemplate.sql
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/scic/!svn/ver/52/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/WorkflowTemplateManager/BusinessWorkflowTemplate.sql
+END
+WorkflowTemplateManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/scic/!svn/ver/457/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/WorkflowTemplateManager/WorkflowTemplateManager.cs
+END
+IWorkflowTemplateManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/scic/!svn/ver/457/%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%BA%93%E5%92%8C%E7%BB%84%E4%BB%B6/Bigdesk8/Business/WorkflowTemplateManager/IWorkflowTemplateManager.cs
+END

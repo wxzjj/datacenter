@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+      <section name="WxjzgcjczyTimerService.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    </sectionGroup>
+  </configSections>
+  <appSettings>
+    <!--设置超过多少小时为异常(单位:小时)-->
+    <add key="ConnectionString" value="data source=10.1.1.3;user id=sa;password=Morningstars_123;database=WXSJZX;MultipleActiveResultSets=true;" />
+    <!--<add key="ConnectionString" value="data source=192.168.153.189;Initial Catalog=WJSJZX;user id=sa;password=wxjsj^20150409;" />-->
+    <add key="db_adminexam_ConnString" value="data source=.;Initial Catalog=db_adminexam;user id=sa;password=111111;" />
+     <add key="Epoint_WXkcsjConnectionString" value="data source=192.168.153.189;Initial Catalog=Epoint_WXkcsj;user id=sa;password=wxjsj^20150409;" />
+    <add key="oracl_ConnString" value="User ID=SYSTEM;Password=oracle;Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.1.1.3)(PORT = 1521))(CONNECT_DATA = (SERVICE_NAME = orcl)))"/>
+    <add key="WXJGC_SSIP_ConnectionString" value="data source=192.168.150.51;Initial Catalog=WXJGC_SSIP;user id=WXJGC;password=f43a936e;" />
+    <add key="Epoint_Jskcsj_ConnectionString" value="data source=221.226.0.185;Initial Catalog=Epoint_Jskcsj;user id=sa;password=PasswordTangnan;" />
+  
+    <add key="SQLSERVER" value="SQLSERVER2008" />
+    <add key="ClientSettingsProvider.ServiceUri" value="" />
+    <add key="IsWriteLog" value="1"/>
+
+    <add key="timeout_Epoint_Jskcsj" value="3" />
+    <add key="timeSpan_ToWxsjzx" value="1" />
+    <add key="timeSpan_ToSythpt" value="1" />
+    <!--往市建设局推送数据的周期（天数）-->
+    <add key="timeSpan_ToSjsj" value="7" />
+    
+    <add key="setTime_ToWxsjzx" value="2000" />
+    <add key="setTime_ToSythpt" value="0900,1000,1100,1200,1300,1400,1500,1600,1700" />
+    <add key="setTime_ToSzxspt" value="0800,1300,1800" />
+    <!--往市建设局推送数据定时推送时间设置-->
+    <!--<add key="setTime_ToSjsj" value="0900,1000,1100,1200,1300,1400,1500,1600,1700" />-->
+    <add key="IsWriteLog_ToWxsjzx" value="1" />
+    <add key="IsWriteLog_ToSythpt" value="1" />
+    
+    <add key="flag" value="1" />
+    <add key="beginDate" value="2015-5-25" />
+    <add key="endDate" value="2015-6-2" />
+
+    <add key="ZczyrybeginDate" value="1900-01-01" />
+ 
+    
+    <add key="IsPush_TBProjectInfo" value="1"/>
+    <add key="IsPush_TBTenderInfo" value="1"/>
+    <add key="IsPush_aj_gcjbxx" value="1"/>
+    <add key="IsPush_zj_gcjbxx" value="1"/>
+    <add key="IsPush_zj_gcjbxx_zrdw" value="1"/>
+
+    <add key="IsPush_certifperson" value="1"/>
+    <add key="IsPush_completeacc" value="1"/>
+    <add key="IsPush_constrlicence" value="1"/>
+    <add key="IsPush_constrprojectinfo" value="1"/>
+    <add key="IsPush_engbidinfo" value="1"/>
+    <add key="IsPush_profadmper" value="1"/>
+    <add key="IsPush_safeprodadmper" value="1"/>
+    
+  </appSettings>
+  <system.serviceModel>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="ReceiveDataServiceHttpBinding" closeTimeout="00:05:00"
+          openTimeout="00:05:00" receiveTimeout="00:15:00" sendTimeout="00:05:00"
+          allowCookies="false" bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard"
+          maxBufferSize="65536" maxBufferPoolSize="524288" maxReceivedMessageSize="65536"
+          messageEncoding="Text" textEncoding="utf-8" transferMode="Buffered"
+          useDefaultWebProxy="true">
+          <readerQuotas maxDepth="32" maxStringContentLength="2147483647"
+            maxArrayLength="16384" maxBytesPerRead="4096" maxNameTableCharCount="16384" />
+          <security mode="None">
+            <transport clientCredentialType="None" proxyCredentialType="None"
+              realm="" />
+            <message clientCredentialType="UserName" algorithmSuite="Default" />
+          </security>
+        </binding>
+        <binding name="DataShareServiceSoap" closeTimeout="00:05:00"
+          openTimeout="00:05:00" receiveTimeout="00:10:00" sendTimeout="00:05:00"
+          allowCookies="false" bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard"
+          maxBufferSize="2147483647" maxBufferPoolSize="524288" maxReceivedMessageSize="2147483647"
+          messageEncoding="Text" textEncoding="utf-8" transferMode="Buffered"
+          useDefaultWebProxy="true">
+          <readerQuotas maxDepth="32" maxStringContentLength="2147483647"
+            maxArrayLength="16384" maxBytesPerRead="4096" maxNameTableCharCount="16384" />
+          <security mode="None">
+            <transport clientCredentialType="None" proxyCredentialType="None"
+              realm="" />
+            <message clientCredentialType="UserName" algorithmSuite="Default" />
+          </security>
+        </binding>
+      </basicHttpBinding>
+    </bindings>
+    <client>
+      <endpoint address="http://58.213.147.230:8000/tDataService/ReceiveDataService.ws"
+        binding="basicHttpBinding" bindingConfiguration="ReceiveDataServiceHttpBinding"
+        contract="ReceiveDataServiceSpace.ReceiveDataServicePortType"
+        name="ReceiveDataServiceHttpPort" />
+      <endpoint address="http://58.213.147.228/JSFront/SGXKDataExchange/DataShareService.asmx"
+        binding="basicHttpBinding" bindingConfiguration="DataShareServiceSoap"
+        contract="DataShareServiceSpace.DataShareServiceSoap" name="DataShareServiceSoap" />
+    </client>
+  </system.serviceModel>
+  <system.web>
+    <membership defaultProvider="ClientAuthenticationMembershipProvider">
+      <providers>
+        <add name="ClientAuthenticationMembershipProvider" type="System.Web.ClientServices.Providers.ClientFormsAuthenticationMembershipProvider, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" serviceUri="" />
+      </providers>
+    </membership>
+    <roleManager defaultProvider="ClientRoleProvider" enabled="true">
+      <providers>
+        <add name="ClientRoleProvider" type="System.Web.ClientServices.Providers.ClientRoleProvider, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" serviceUri="" cacheTimeout="86400" />
+      </providers>
+    </roleManager>
+  </system.web>
+  <applicationSettings>
+    <WxjzgcjczyTimerService.Properties.Settings>
+      <setting name="WxjzgcjczyTimerService3_0_DataDownService_dataDownService"
+        serializeAs="String">
+        <value>http://58.213.147.243:8080/jscedc/services/dataDownService.dataDownServiceHttpSoap11Endpoint/</value>
+      </setting>
+      <setting name="WxjzgcjczyTimerService3_0_WebServiceStxm_WebServiceStxm"
+        serializeAs="String">
+        <value>http://221.226.0.185/AppSgtSjsc/WebServiceStxm.asmx</value>
+      </setting>
+      <setting name="WxjzgcjczyTimerService3_0_NewDataService_NewDataService"
+        serializeAs="String">
+        <value>http://58.213.147.243:8080/jscedc/services/NewDataService.NewDataServiceHttpSoap11Endpoint/</value>
+      </setting>
+    </WxjzgcjczyTimerService.Properties.Settings>
+  </applicationSettings>
+</configuration>

@@ -1,0 +1,140 @@
+﻿body, form, td, th, a, p
+{
+    margin: 0;
+    font-weight: normal;
+    font-family: "宋体" ,tahoma;
+    font-size: 12px;
+}
+body
+{
+    color: #000;
+    background-color: #fff;
+}
+td
+{
+    word-break: break-all;
+}
+th
+{
+    text-align: center;
+}
+img
+{
+    border: 0;
+}
+a:link, a:visited
+{
+    color: #000066;
+    text-decoration: none;
+}
+a:hover
+{
+    color: #0099ff;
+    text-decoration: underline;
+}
+
+/*menu 背景样式.net2.0版*/
+.menu_defaultstyle_4
+{
+    width: 70px;
+    height: 25px;
+    background-image: url(images/MenuItem_4_UnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_selectedstyle_4
+{
+    width: 70px;
+    height: 25px;
+    background-image: url(images/MenuItem_4_OnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_defaultstyle_6
+{
+    width: 90px;
+    height: 25px;
+    background-image: url(images/MenuItem_6_UnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_selectedstyle_6
+{
+    width: 90px;
+    height: 25px;
+    background-image: url(images/MenuItem_6_OnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_defaultstyle_8
+{
+    width: 120px;
+    height: 25px;
+    background-image: url(images/MenuItem_8_UnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+.menu_selectedstyle_8
+{
+    width: 120px;
+    height: 25px;
+    background-image: url(images/MenuItem_8_OnClick.jpg);
+    padding-top: 5px;
+    text-align: center;
+}
+
+/*menu 背景样式.net4.0版*/
+.horizontalmenu4 a.level1
+{
+    width: 70px;
+    height: 25px;
+    background: url(images/MenuItem_4_UnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu4 a.selected
+{
+    width: 70px;
+    height: 25px;
+    background: url(images/MenuItem_4_OnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu6 a.level1
+{
+    width: 90px;
+    height: 25px;
+    background: url(images/MenuItem_6_UnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu6 a.selected
+{
+    width: 90px;
+    height: 25px;
+    background: url(images/MenuItem_6_OnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu8 a.level1
+{
+    width: 120px;
+    height: 25px;
+    background: url(images/MenuItem_8_UnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}
+.horizontalmenu8 a.selected
+{
+    width: 120px;
+    height: 25px;
+    background: url(images/MenuItem_8_OnClick.jpg) no-repeat;
+    padding: 5px 0 0 0;
+    margin: 0 3px 0 0;
+    text-align: center;
+}

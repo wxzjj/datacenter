@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A8C4CE0A-F121-47C0-AA6D-7CA06FE2D339}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bigdesk8</RootNamespace>
+    <AssemblyName>Bigdesk8</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Bigdesk8.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Bigdesk8.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AntiXSSLibrary, Version=4.2.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json.Net20, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="office, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExtensionAttribute.cs" />
+    <Compile Include="FunctionResult.cs" />
+    <Compile Include="Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Bigdesk8.snk" />
+    <None Include="Business\UserRightManager\BusinessUserRight.sql" />
+    <None Include="Business\WorkflowTemplateManager\BusinessWorkflowTemplate.sql" />
+    <None Include="Document\FAQ.doc" />
+    <None Include="Document\NET命名规范约定参考大全.doc" />
+    <None Include="Document\sql2008清除日志的块语句.sql" />
+    <None Include="Document\促进个人全面发展与加强公司项目执行能力.doc" />
+    <None Include="Document\关于三层程序开发模式.doc" />
+    <None Include="Document\几种报表实现办法的总结.doc" />
+    <None Include="Document\如何稳定数据结构设计.doc" />
+    <None Include="Document\想法的流水帐.doc" />
+    <None Include="Document\群耀建设信息平台示意图.ppt" />
+    <None Include="Document\群耀软件开发学习提要.doc" />
+    <None Include="Document\群耀软件技术发展纲要.doc" />
+    <None Include="Document\群耀软件技术学习方向参考.doc" />
+    <None Include="Document\群耀软件的生存与发展.doc" />
+    <None Include="Document\群耀软件项目开发要点参考.doc" />
+    <Compile Include="Business\StateManager\StateManager.cs" />
+    <Compile Include="Business\StateManager\IStateManager.cs" />
+    <Compile Include="Business\DebugManager\DebugManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\DebugManager\IDebugManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\Definitions.cs" />
+    <Compile Include="Business\FileManager\FileManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\FileManager\IFileManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\LogManager\ILogManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\LogManager\LogManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\UserRightManager\IUserRightInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\UserRightManager\IUserRightManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\UserRightManager\UserRightInfo.cs" />
+    <Compile Include="Business\UserRightManager\UserRightManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\WorkflowTemplateManager\IWorkflowTemplateManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\WorkflowTemplateManager\WorkflowTemplateManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\BizMsgManager\IBizMsgManager.cs" />
+    <Compile Include="Business\BizMsgManager\BizMsgManager.cs" />
+    <Compile Include="Data\DBOperator\OracleDB\OracleOperator.cs" />
+    <Compile Include="Data\DBOperator\OracleDB\OracleDbParameterCollection.cs" />
+    <Compile Include="Ext\ExcelHelper.cs" />
+    <Compile Include="Ext\FilterGroup.cs" />
+    <Compile Include="Ext\FilterHelper.cs" />
+    <Compile Include="Ext\FilterParam.cs" />
+    <Compile Include="Ext\FilterRule.cs" />
+    <Compile Include="Ext\FilterTranslator.cs" />
+    <Compile Include="MobileServiceChannel\ILiteMobileService.cs" />
+    <Compile Include="MobileServiceChannel\JassonMAS\JassonMASChannel.cs" />
+    <Compile Include="MsReporting\WebAssistant.cs" />
+    <Compile Include="ObjectManager.cs" />
+    <Compile Include="Data\DataItem\DataRelation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DataItem\DataType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DataItem\DataUtility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DataItem\IDataItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\DBOperator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\DBOperatorFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\OleDB\OleDbOperator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\OleDB\OleDbParameterCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\PagedData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\SqlParameterCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\SqlServerDB\SqlServerDbOperator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\SqlServerDB\SqlServerDbParameterCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\DBOperator\SqlServerDB\SqlServer2005DbOperator.cs" />
+    <Compile Include="Drawing\ImageWaterMark.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NukeString.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AntiSqlInjection.cs" />
+    <Compile Include="Security\Griddle.cs" />
+    <Compile Include="Security\SecurityUtility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SerializationUtility.cs" />
+    <Compile Include="Singleton.cs" />
+    <Compile Include="Web\Controls\BigFileUpload.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBBigFileUpload.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBCheckBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBCheckBoxList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBDatePicker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBDateTimePicker.cs" />
+    <Compile Include="Web\Controls\DBDropDownList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBHtml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBImage.cs" />
+    <Compile Include="Web\Controls\DBMemo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBMemoBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBPasswordBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBRadioButtonList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBTextBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBTextList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\DBTimePicker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\HttpUploadHandler.cs" />
+    <Compile Include="Web\Controls\IUploadFileService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\PagerSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\PowerDataGrid.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\PowerDataGrid2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\PowerDataPager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\SubmitButton.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\TextControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Controls\UIUtility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\CookieManager.cs" />
+    <Compile Include="Web\DefaultCacheStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\ICacheStrategy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\ImageExHandle.cs" />
+    <Compile Include="Web\JavaScriptManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\ReportAssistant.cs" />
+    <Compile Include="Web\TreeViewGenerator.cs" />
+    <Compile Include="Web\LoginManager.cs" />
+    <Compile Include="Web\Waiter.cs" />
+    <Compile Include="Windows\Controls\DBCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\DBComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\DBDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\DBMemoBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\DBTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\PowerDataGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Controls\PowerDataGrid.Designer.cs">
+      <DependentUpon>PowerDataGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Controls\SomeClasses.cs" />
+    <Compile Include="Windows\Controls\UIUtility.cs" />
+    <Compile Include="Xml\XmlDataSet.cs" />
+    <Compile Include="Xml\XmlDataTable.cs" />
+    <Compile Include="Xml\XmlOperator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MobileServiceChannel\这里收集了各种移动%28Mobile%29服务%28Service%29%28访问%29通道%28Channel%29.txt" />
+    <Content Include="ref\AntiXSSLibrary.dll" />
+    <Content Include="ref\DataExport.dll" />
+    <Content Include="ref\Microsoft.Office.Interop.Excel.dll" />
+    <Content Include="ref\Newtonsoft.Json.Net20.dll" />
+    <Content Include="ref\Newtonsoft.Json.Net20.pdb" />
+    <Content Include="ref\Newtonsoft.Json.Net20.xml" />
+    <Content Include="ref\office.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Windows\Controls\PowerDataGrid.resx">
+      <DependentUpon>PowerDataGrid.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

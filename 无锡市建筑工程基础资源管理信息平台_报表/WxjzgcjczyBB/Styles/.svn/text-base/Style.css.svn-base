@@ -1,0 +1,135 @@
+﻿
+/*服务器端控件样式*/
+.td-text { text-align:center; background-color:#EAF2FF; padding-left:5px; padding-right:5px; color:#333333; height:25px; } /*rgb(224,237,253)#E4EFF0*/
+.td-text-h40 { text-align:center; background-color:#EAF2FD; padding-left:5px; padding-right:5px; height:40px; color:#333333; }
+.td-text-left { text-align:left; background-color:#EAF2FD; height:25px; color:#333333; }
+.td-text-right { text-align:right; background-color:#EAF2FD; height:25px; color:#333333; }
+
+.td-value-span{color:#333333;background-color:#FFFFFF;padding-left:5px;word-break: break-all;  }
+
+.td-value { text-align:left; background-color:#FFFFFF; color:#333333; padding-left:5px;  height:25px;word-break: break-all; }
+.td-text-rowspan2 { text-align:center; background-color:#EAF2FD;word-break: break-all;  }
+.td-value-rowspan2 { text-align:left; background-color:#FFFFFF; color:#767676; padding-left:5px;word-break: break-all;  }
+.td-value-center { text-align:center; background-color:#FFFFFF; color:#767676; height:25px;word-break: break-all;  }
+.td-value-title { text-align:left; background-color:#FFFFFF; height:25px;word-break: break-all;  }
+
+/*文本框*/
+.textbox{ position:relative; background:#FFFFFF url('images/input.gif') repeat-x top; padding:2px; border: #CAD4E0 1px solid;width: 70%; color:#262E4F}
+.textbox-focus{border: 1px solid #E6BF73;}
+.textbox-error{padding:2px;border: Red 1px solid;width: 70%;color: red;}
+.divTitle
+{
+	text-align:left; background-color:#FFFFFF; color:#333333; padding-left:5px;  height:25px;word-break: break-all;
+	border:solid 1px rgb(163,192,232);
+	vertical-align:middle;
+	padding-top:0;
+	padding-bottom:0;
+	margin:0;
+}
+
+.label-1
+{
+	color:#1C5580;
+	line-height: 20px;
+	padding-left:5px;
+}
+.multilinetextbox-w70
+{
+	border: #7f9db9 1px solid;
+	width: 70%;
+	height: 80px;
+}
+.multilinetextbox-w70-error
+{
+	border: #7f9db9 1px solid;
+	width: 70%;
+	height: 80px;
+	background-color: Red;
+	color: White;
+}
+.datetextbox-w100px
+{
+	border: #7f9db9 1px solid;
+	width: 85px;
+}
+.datetextbox-w100px-error
+{
+	border: #7f9db9 1px solid;
+	width: 85px;
+	background-color: Red;
+	color: White;
+}
+.timetextbox-w50px
+{
+	border: #7f9db9 1px solid;
+	vertical-align: middle;
+	width: 50px;
+}
+.timetextbox-w50px-error
+{
+	border: #7f9db9 1px solid;
+	width: 50px;
+	background-color: Red;
+	color: White;
+}
+.datetimetextbox-w150px
+{
+	border: #7f9db9 1px solid;
+	width: 150px;
+}
+.datetimetextbox-w150px-error
+{
+	border: #7f9db9 1px solid;
+	width: 150px;
+	background-color: Red;
+	color: White;
+}
+.table-bk  
+{
+	background-color: rgb(163,192,232);      /*#CAD4E0#077F90; */
+	height: 97%;
+}
+/*列表页面table布局样式*/
+.td-head { padding-top:0px; }
+.td-search { padding-top:10px;}
+.td-data { padding-top:10px; }
+.td-powergridview{ background-color:White; width:100%;}
+/*放控件*/
+.td-buttons{ padding:10px; text-align:center;}
+/*************************  仿ligerUI样式 ****************************/
+/*powerdatagrid样式*/
+/*pdg-title: color: #2C4D79;border: solid 1px #A3C0E8; line-height: 25px; background: #E0EDFF url(../../../LigerUI/ligerUI/skins/Aqua/images/controls/button-bg.gif) repeat-x center;*/
+.pdg-title { text-align: center; text-decoration: none; }
+.pdg-itemstyle-center{border-style:solid;border-width:1px;border-color:#A3C0E8;text-align:center; height:25px;color:#333333;}
+.pdg-itemstyle-left{ border-style:solid; border-width:1px; border-color:#A3C0E8; text-align:left; height:25px;color:#333333; padding-left:5px;}
+.pdg-itemstyle-right{ border-style:solid; border-width:1px; border-color:#A3C0E8; text-align:right;  height:25px;color:#333333; padding-right:5px;}
+
+.pdg-linkheaderstyle-center { border-style:solid; border-width:1px; border-color:#A3C0E8; text-align:center; height:25px; }
+.pdg-headerstyle-center { border-style:solid; border-width:1px; border-color:#A3C0E8; text-align:center;  height:25px; background-color:rgb(202,228,254)}
+.pdg-headerstyle-left { border-style:solid; border-width:1px; border-color:#A3C0E8; text-align:left; height:25px; }
+.pdg-headerstyle-right { border-style:solid; border-width:1px; border-color:#A3C0E8; text-align:right; height:25px;}
+
+.pdg-pagerstyle{ border: solid 1px #A3C0E8; background-color:#E0EDFF; line-height: 25px;}
+
+/*隐藏控件样式*/
+.ctl-hidden { visibility:hidden; width:0px; height:0px; background-color:Transparent; }
+/*只读控件样式*/
+.ctl-readonly {position:relative; background-color:#EBEBEB; padding:2px; border: #CAD4E0 1px solid;width: 70%; color:#444444; }
+
+/*无边框*/
+.textbox-nostyle-hide {background-color:Transparent; border-width:0px; height:0px; width:0px;}
+.textbox-nostyle { background-color:Transparent; padding:2px; border-width:0px; border-style:none;width: 95%;}
+/*下划线*/
+.ctl-underline { background-color:Transparent; border-style:solid;border-bottom-color:Gray; border-bottom-width:1px; border-top-width:0px; border-left-width:0px; border-right-width:0px;}
+
+.s-text
+{
+	background-color:White;
+	border:solid 1px #aecaf0;
+	height:20px;
+	line-height:20px;
+	position:relative;
+	border-top-width:1px;
+	width:200px;
+	
+}

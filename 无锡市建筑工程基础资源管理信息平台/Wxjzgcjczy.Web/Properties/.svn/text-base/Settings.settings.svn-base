@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Wxjzgcjczy.Web.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MunSupervisionProject_Web_WebReferenceSendMSG_WebServiceSendMSG" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://221.224.147.148/ZJGSMGService/WebServiceSendMSG.asmx</Value>
+    </Setting>
+    <Setting Name="Wxjzgcjczy_Web_ShiGongXuKeService_ShiGongXuKe" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://58.213.147.228/JSFront/SGXKDataExchange/ShiGongXuKe.asmx</Value>
+    </Setting>
+    <Setting Name="Wxjzgcjczy_Web_DataShareService_DataShareService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://58.213.147.228/JSFront/SGXKDataExchange/DataShareService.asmx</Value>
+    </Setting>
+    <Setting Name="Wxjzgcjczy_Web_ReceiveDataService_ReceiveDataService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://58.213.147.230:8000/tDataService/ReceiveDataService.ws</Value>
+    </Setting>
+    <Setting Name="Wxjzgcjczy_Web_DataDownService_dataDownService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://58.213.147.243:8080/jscedc/services/dataDownService.dataDownServiceHttpSoap11Endpoint/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
