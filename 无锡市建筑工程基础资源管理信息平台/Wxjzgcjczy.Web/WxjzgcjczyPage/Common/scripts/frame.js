@@ -34,56 +34,56 @@ function Loading(nodeID, id, tdid) {
     switch (nodeID) {
         case "00000000":
             //            top.MainIf.location = "MainPage_GLB3.aspx";
-            top.MainIf.location = "Index_Gcxm.aspx"
+            document.getElementById('MainIf').src = "Index_Gcxm.aspx"
             break;
-        //工程项目                       
+        //工程项目                         
         case "10000000":
-            top.MainIf.location = "Index_Gcxm.aspx"
+            document.getElementById('MainIf').src = "Index_Gcxm.aspx"
             break;
-        //市场主体                       
+        //市场主体                         
         case "20000000":
-            top.MainIf.location = "Index_Szqy.aspx";
+            document.getElementById('MainIf').src = "Index_Szqy.aspx";
             break;
-        //执业人员                       
+        //执业人员                         
         case "30000000":
-            top.MainIf.location = "Index_Zyry.aspx";
+            document.getElementById('MainIf').src = "Index_Zyry.aspx";
             break;
-        //信用体系
+        //信用体系  
         case "xytx":
-            top.MainIf.location = "Index_Xytx.aspx";
+            document.getElementById('MainIf').src = "Index_Xytx.aspx";
             //window.open("http://218.90.162.101:8088/EpointFrameZS_WXSZJS/WuxiCenter/Login.aspx?LoginGuid=e344a77c-a55a-4713-8266-3ffb97a2fc91");
             break;
         case "tdt":
-            top.MainIf.location = "Index_tdt.aspx";
-            break;   
-            
-        //跟踪预警                       
+            document.getElementById('MainIf').src = "Index_tdt.aspx";
+            break;
+
+        //跟踪预警                         
         case "40000000":
-            top.MainIf.location = "Index_Gzyj.aspx";
+            document.getElementById('MainIf').src = "Index_Gzyj.aspx";
             break;
-        //统计分析                      
+        //统计分析                        
         case "50000000":
-            top.MainIf.location = "Index_Tjfx.aspx";
+            document.getElementById('MainIf').src = "Index_Tjfx.aspx";
             break;
-        //决策辅助                        
+        //决策辅助                          
         case "60000000":
-            top.MainIf.location = "Index_Jcfz.aspx";
+            document.getElementById('MainIf').src = "Index_Jcfz.aspx";
             break;
-        //政令畅通                      
+        //政令畅通                        
         case "70000000":
-            top.MainIf.location = "Index_Zlct.aspx";
+            document.getElementById('MainIf').src = "Index_Zlct.aspx";
             break;
         case "xxgx":
-            top.MainIf.location = "Index_xxgx.aspx";
-            break;     
+            document.getElementById('MainIf').src = "Index_xxgx.aspx";
+            break;
         case "yhgl":
-            top.MainIf.location = "Index_yhgl.aspx";
+            document.getElementById('MainIf').src = "Index_yhgl.aspx";
             break;
         case "xxcj":
-            top.MainIf.location = "Index_xxcj.aspx";
-            break;   
+            document.getElementById('MainIf').src = "Index_xxcj.aspx";
+            break;
         default:
-            top.MainIf.location = "test3.html";
+            document.getElementById('MainIf').src = "test3.html";
             break;
     }
     if (nodeID != "00000000")
@@ -139,7 +139,7 @@ function leftout(id) {
     }
 }
 function leftmenuClick(id) {
-    
+
     var _id = "#" + id;
     var a = document.getElementById("hd2").value;
     var _a = "#" + a;
@@ -190,204 +190,204 @@ function leftclick(nodeID, id, type) {
     switch (nodeID) {
 
 
-//        //工程项目                  
-//        case "01010000":
-//            ItemIf.location = "../Szgc/Aqjd_List.aspx";
-//            break;
-//        case "01020000":
-//            ItemIf.location = "../Szgc/Zljd_List.aspx";
-//            break;
-//        case "01030000":
-//            ItemIf.location = "../Szgc/Sgxk_List.aspx";
-//            break;
-//        case "01040000":
-//            ItemIf.location = "../Szgc/Gcxm_List.aspx";
-//            break;
-//        case "01050000":
-//            ItemIf.location = "../Szgc/Lxxm_List.aspx";
-//            break;
-//        case "01060000":
-//            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Menu.aspx";
-//            break;
+        //        //工程项目                    
+        //        case "01010000":  
+        //            document.getElementById('ItemIf').src = "../Szgc/Aqjd_List.aspx";  
+        //            break;  
+        //        case "01020000":  
+        //            document.getElementById('ItemIf').src = "../Szgc/Zljd_List.aspx";  
+        //            break;  
+        //        case "01030000":  
+        //            document.getElementById('ItemIf').src = "../Szgc/Sgxk_List.aspx";  
+        //            break;  
+        //        case "01040000":  
+        //            document.getElementById('ItemIf').src = "../Szgc/Gcxm_List.aspx";  
+        //            break;  
+        //        case "01050000":  
+        //            document.getElementById('ItemIf').src = "../Szgc/Lxxm_List.aspx";  
+        //            break;  
+        //        case "01060000":  
+        //            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Menu.aspx";  
+        //            break;  
 
 
-//        case "gcxm_zbtb":
-//            ItemIf.location = "../Gcxm/Zbtb_Menu.aspx?menu=0";
-//            break;
+        //        case "gcxm_zbtb":  
+        //            document.getElementById('ItemIf').src = "../Gcxm/Zbtb_Menu.aspx?menu=0";  
+        //            break;  
 
-        //工程项目  
+        //工程项目    
 
         case "01010000":
-            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Lxxmdj_List.aspx";
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Lxxmdj_List.aspx";
             break;
         case "01020000":
-            ItemIf.location = "../Gcxm/Kcsjht_List.aspx";
+            document.getElementById('ItemIf').src = "../Gcxm/Kcsjht_List.aspx";
             break;
         case "01030000":
-            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Sgtsc_List.aspx?BeFrom=Zhjg_Menu";
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Sgtsc_List.aspx?BeFrom=Zhjg_Menu";
             break;
         case "01040000":
-            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Zbtb_List.aspx?BeFrom=Zhjg_Menu";
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Zbtb_List.aspx?BeFrom=Zhjg_Menu";
             break;
         case "01050000":
-            //ItemIf.location = "../Gcxm/Sgjlht_List.aspx";
-            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Htba_List.aspx?BeFrom=Zhjg_Menu";
+            //document.getElementById('ItemIf').src = "../Gcxm/Sgjlht_List.aspx";
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Htba_List.aspx?BeFrom=Zhjg_Menu";
             break;
         case "01060000":
-            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Aqbj_List.aspx?BeFrom=Zhjg_Menu";
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Aqbj_List.aspx?BeFrom=Zhjg_Menu";
             break;
         case "01070000":
-            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Zlbj_List.aspx?BeFrom=Zhjg_Menu";
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Zlbj_List.aspx?BeFrom=Zhjg_Menu";
             break;
         case "01080000":
-            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Sgxkz_List.aspx?BeFrom=Zhjg_Menu";
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Sgxkz_List.aspx?BeFrom=Zhjg_Menu";
             break;
         case "01090000":
-            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Jgba_List.aspx?BeFrom=Zhjg_Menu";
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Jgba_List.aspx?BeFrom=Zhjg_Menu";
             break;
-            
 
-        //市场主体          
+
+        //市场主体            
         case "02010000":
-            ItemIf.location = "../Szqy/Jsdw_List.aspx";
+            document.getElementById('ItemIf').src = "../Szqy/Jsdw_List.aspx";
             break;
         case "02020000":
-            ItemIf.location = "../Szqy/Kcdw_List.aspx";
+            document.getElementById('ItemIf').src = "../Szqy/Kcdw_List.aspx";
             break;
         case "02030000":
-            ItemIf.location = "../Szqy/Sgdw_List.aspx";
+            document.getElementById('ItemIf').src = "../Szqy/Sgdw_List.aspx";
             break;
         case "02040000":
-            ItemIf.location = "../Szqy/Zjjg_List.aspx";
+            document.getElementById('ItemIf').src = "../Szqy/Zjjg_List.aspx";
             break;
         case "02050000":
-            ItemIf.location = "../Szqy/Qtdw_List.aspx";
+            document.getElementById('ItemIf').src = "../Szqy/Qtdw_List.aspx";
             break;
-   case "02060000":
-            ItemIf.location = "../Szqy/Sjdw_List.aspx";
+        case "02060000":
+            document.getElementById('ItemIf').src = "../Szqy/Sjdw_List.aspx";
             break;
 
-        //执业人员                    
+        //执业人员                      
         case "03010000":
-            ItemIf.location = "../Zyry/Zczyry_List.aspx";
+            document.getElementById('ItemIf').src = "../Zyry/Zczyry_List.aspx";
             break;
         case "03020000":
-            ItemIf.location = "../Zyry/Aqscglry_List.aspx";
+            document.getElementById('ItemIf').src = "../Zyry/Aqscglry_List.aspx";
             break;
         case "03030000":
-            ItemIf.location = "../Zyry/Qyjjry_List.aspx";
+            document.getElementById('ItemIf').src = "../Zyry/Qyjjry_List.aspx";
             break;
         case "03040000":
-            ItemIf.location = "../Zyry/Zygwglry_List.aspx";
+            document.getElementById('ItemIf').src = "../Zyry/Zygwglry_List.aspx";
             break;
-            
-        //信用体系 
+
+        //信用体系   
         case "xytx_xykp":
-            ItemIf.location = "../Xytx/Xykp_Toolbar.aspx";
+            document.getElementById('ItemIf').src = "../Xytx/Xykp_Toolbar.aspx";
             break;
         case "xytx_xzcf":
-            ItemIf.location = "../Xytx/Xzcf_List.aspx";
+            document.getElementById('ItemIf').src = "../Xytx/Xzcf_List.aspx";
             break;
         case "xytx_pypj":
-            ItemIf.location = "../Xytx/Pypj_List.aspx";
+            document.getElementById('ItemIf').src = "../Xytx/Pypj_List.aspx";
             break;
-            
-        //天地图
+
+        //天地图  
         case "tdt_1":
-            ItemIf.location = "../Tdt/LocationView.aspx";
+            document.getElementById('ItemIf').src = "../Tdt/LocationView.aspx";
             break;
         case "tdt_2":
-            ItemIf.location = "../Tdt/XmLocation_List.aspx";
+            document.getElementById('ItemIf').src = "../Tdt/XmLocation_List.aspx";
             break;
 
-        //跟踪预警                     
+        //跟踪预警                       
         case "04010000":
-            ItemIf.location = "../Gzyj/Qyzsgq_List.aspx";
+            document.getElementById('ItemIf').src = "../Gzyj/Qyzsgq_List.aspx";
             break;
         case "04020000":
-            ItemIf.location = "../Gzyj/Ryzsgq_List.aspx";
+            document.getElementById('ItemIf').src = "../Gzyj/Ryzsgq_List.aspx";
             break;
         case "04030000":
-            ItemIf.location = "../Gzyj/Zjgyxm_List.aspx";
+            document.getElementById('ItemIf').src = "../Gzyj/Zjgyxm_List.aspx";
             break;
         case "04040000":
-            ItemIf.location = "../Gzyj/Wbsgxkz_List.aspx";
+            document.getElementById('ItemIf').src = "../Gzyj/Wbsgxkz_List.aspx";
             break;
         case "04050000":
-            ItemIf.location = "../Gzyj/Gcxmbg_List.aspx";
+            document.getElementById('ItemIf').src = "../Gzyj/Gcxmbg_List.aspx";
             break;
         case "04060000":
-            ItemIf.location = "../Gzyj/Wbzljd_List.aspx";
+            document.getElementById('ItemIf').src = "../Gzyj/Wbzljd_List.aspx";
             break;
         case "04070000":
-            ItemIf.location = "../Gzyj/Wbaj_List.aspx";
+            document.getElementById('ItemIf').src = "../Gzyj/Wbaj_List.aspx";
             break;
         case "04080000":
-            ItemIf.location = "../Gzyj/JgbaLcyj_List.aspx";
+            document.getElementById('ItemIf').src = "../Gzyj/JgbaLcyj_List.aspx";
             break;
-            
+
         case "gzyj":
-            ItemIf.location = "../MainPage/MainPage_Gzyj.aspx";
+            document.getElementById('ItemIf').src = "../MainPage/MainPage_Gzyj.aspx";
             break;
 
-        //统计分析              
-               case "tjfx_1":
-                   ItemIf.location = "../Tjfx/Tjfx_Toolbar.aspx";
-                   break;
-               case "tjfx_2":
-                   ItemIf.location = "../Report/Htba_Toolbar.aspx";
-                   break;
-               case "tjfx":
-                   ItemIf.location = "../MainPage/MainPage_Tjfx.aspx";
-                   break;                
+        //统计分析                
+        case "tjfx_1":
+            document.getElementById('ItemIf').src = "../Tjfx/Tjfx_Toolbar.aspx";
+            break;
+        case "tjfx_2":
+            document.getElementById('ItemIf').src = "../Report/Htba_Toolbar.aspx";
+            break;
+        case "tjfx":
+            document.getElementById('ItemIf').src = "../MainPage/MainPage_Tjfx.aspx";
+            break;
 
-        //决策辅助                    
+        //决策辅助                      
         case "06010000":
-            ItemIf.location = "../Jcfz/ToolBar_Jctz.aspx";
+            document.getElementById('ItemIf').src = "../Jcfz/ToolBar_Jctz.aspx";
             break;
         case "06020000":
-            ItemIf.location = "../Jcfz/ToolBar_Tjfx.aspx";
+            document.getElementById('ItemIf').src = "../Jcfz/ToolBar_Tjfx.aspx";
             break;
         case "06030000":
-            ItemIf.location = "../Jcfz/Yjjc_List.aspx";
+            document.getElementById('ItemIf').src = "../Jcfz/Yjjc_List.aspx";
             break;
 
-        //政令畅通                        
+        //政令畅通                          
         case "07010000":
-            ItemIf.location = "../Zlct/Gzzs_Toolbar.aspx";
+            document.getElementById('ItemIf').src = "../Zlct/Gzzs_Toolbar.aspx";
             break;
         case "07020000":
-            ItemIf.location = "../../../MajordomoMVC/OnlineOffice/Index";
+            document.getElementById('ItemIf').src = "../../../MajordomoMVC/OnlineOffice/Index";
             break;
         case "07030000":
-            ItemIf.location = "../Zlct/Dxjb_Toolbar.aspx";
+            document.getElementById('ItemIf').src = "../Zlct/Dxjb_Toolbar.aspx";
             break;
 
         case "08010000":
-            ItemIf.location = "../Szyh/Yhgc_List.aspx";
+            document.getElementById('ItemIf').src = "../Szyh/Yhgc_List.aspx";
             break;
         case "08020000":
-            ItemIf.location = "../Szyh/Yhjl_List.aspx";
+            document.getElementById('ItemIf').src = "../Szyh/Yhjl_List.aspx";
             break;
-        case "yhgl_1"://用户信息
-            ItemIf.location = "../Yhgl/Yhxx_List.aspx";
+        case "yhgl_1": //用户信息
+            document.getElementById('ItemIf').src = "../Yhgl/Yhxx_List.aspx";
             break;
         case "xxcj_ajxx": //信息采集-安监信息 
-            ItemIf.location = "../Xxcj/Ajxx_List.aspx";
+            document.getElementById('ItemIf').src = "../Xxcj/Ajxx_List.aspx";
             break;
         case "xxcj_zjxx": //信息采集-质监信息 
-            ItemIf.location = "../Xxcj/Zjxx_List.aspx";
+            document.getElementById('ItemIf').src = "../Xxcj/Zjxx_List.aspx";
             break;
 
-        //信息共享
-//        case "xxgx_csjk":
-//            ItemIf.location = "../Xxgx/DataTransmissionMonitor.aspx";
-//            break; 
+        //信息共享  
+        //        case "xxgx_csjk":  
+        //            document.getElementById('ItemIf').src = "../Xxgx/DataTransmissionMonitor.aspx";  
+        //            break;   
         default:
-            top.MainIf.location = "";
+            document.getElementById('MainIf').src = "";
             break;
     }
-    if (id!=undefined && id!= "") {
+    if (id != undefined && id != "") {
         leftmenuClick(id);
     }
     $(document).scrollTop(0);
@@ -400,25 +400,25 @@ function leftclick(nodeID, id, type) {
 
 //        //工程项目           
 //        case "01010000":
-//            ItemIf.location = "../Szgc/Aqjd_List.aspx?state=" + state + "&ssdq=" + ssdq;
+//            document.getElementById('ItemIf').src = "../Szgc/Aqjd_List.aspx?state=" + state + "&ssdq=" + ssdq;
 //            break;
 //        case "01020000":
-//            ItemIf.location = "../Szgc/Zljd_List.aspx";
+//            document.getElementById('ItemIf').src = "../Szgc/Zljd_List.aspx";
 //            break;
 //        case "01030000":
-//            ItemIf.location = "../Szgc/Sgxk_List.aspx";
+//            document.getElementById('ItemIf').src = "../Szgc/Sgxk_List.aspx";
 //            break;
 //        case "01040000":
-//            ItemIf.location = "../Szgc/Gcxm_List.aspx";
+//            document.getElementById('ItemIf').src = "../Szgc/Gcxm_List.aspx";
 //            break;
 //        case "01050000":
-//            ItemIf.location = "../Szgc/Lxxm_List.aspx";
+//            document.getElementById('ItemIf').src = "../Szgc/Lxxm_List.aspx";
 //            break;
 //        case "01060000":
-//            ItemIf.location = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Menu.aspx";
+//            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Menu.aspx";
 //            break;
 //        default:
-//            top.MainIf.location = "";
+//            document.getElementById('MainIf').src = "";
 //            break;
 //    }
 
@@ -431,25 +431,25 @@ function leftclick(nodeID, id, type) {
 function leftclick3(nodeID, id, dwlx, type) {
     switch (nodeID) {
 
-        //市场主体        
+        //市场主体          
         case "02010000":
-            ItemIf.location = "../Szqy/Jsdw_List.aspx?dwlx=" + dwlx;
+            document.getElementById('ItemIf').src = "../Szqy/Jsdw_List.aspx?dwlx=" + dwlx;
             break;
         case "02020000":
-            ItemIf.location = "../Szqy/Sjdw_List.aspx?dwlx=" + dwlx;
+            document.getElementById('ItemIf').src = "../Szqy/Sjdw_List.aspx?dwlx=" + dwlx;
             break;
         case "02030000":
-            ItemIf.location = "../Szqy/Sgdw_List.aspx?dwlx=" + dwlx;
+            document.getElementById('ItemIf').src = "../Szqy/Sgdw_List.aspx?dwlx=" + dwlx;
             break;
         case "02040000":
-            ItemIf.location = "../Szqy/Zjjg_List.aspx?dwlx=" + dwlx;
+            document.getElementById('ItemIf').src = "../Szqy/Zjjg_List.aspx?dwlx=" + dwlx;
             break;
         case "02050000":
-            ItemIf.location = "../Szqy/Qtdw_List.aspx?dwlx=" + dwlx;
+            document.getElementById('ItemIf').src = "../Szqy/Qtdw_List.aspx?dwlx=" + dwlx;
             break;
 
         default:
-            top.MainIf.location = "";
+            document.getElementById('MainIf').src = "";
             break;
     }
     leftmenuClick(id);
@@ -460,22 +460,22 @@ function leftclick3(nodeID, id, dwlx, type) {
 function leftclick4(nodeID, id, zyry, rylx, type) {
     switch (nodeID) {
 
-        //执业人员  
+        //执业人员    
         case "03010000":
-            ItemIf.location = "../Zyry/Zczyry_List.aspx?zyry=" + zyry + "&rylx=" + rylx;
+            document.getElementById('ItemIf').src = "../Zyry/Zczyry_List.aspx?zyry=" + zyry + "&rylx=" + rylx;
             break;
         case "03020000":
-            ItemIf.location = "../Zyry/Aqscglry_List.aspx?zyry=" + zyry + "&rylx=" + rylx;
+            document.getElementById('ItemIf').src = "../Zyry/Aqscglry_List.aspx?zyry=" + zyry + "&rylx=" + rylx;
             break;
         case "03030000":
-            ItemIf.location = "../Zyry/Qyjjry_List.aspx?zyry=" + zyry + "&rylx=" + rylx;
+            document.getElementById('ItemIf').src = "../Zyry/Qyjjry_List.aspx?zyry=" + zyry + "&rylx=" + rylx;
             break;
         case "03040000":
-            ItemIf.location = "../Zyry/Zygwglry_List.aspx?zyry=" + zyry + "&rylx=" + rylx;
+            document.getElementById('ItemIf').src = "../Zyry/Zygwglry_List.aspx?zyry=" + zyry + "&rylx=" + rylx;
             break;
 
         default:
-            top.MainIf.location = "";
+            document.getElementById('MainIf').src = "";
             break;
     }
     leftmenuClick(id);
@@ -484,8 +484,8 @@ function leftclick4(nodeID, id, zyry, rylx, type) {
 }
 
 
-$(document).ready(function() {
-    $(window).scroll(function() {
+$(document).ready(function () {
+    $(window).scroll(function () {
         nowtop = parseInt($(document).scrollTop());
         if (nowtop >= 0) {
             $('#leftmenu').css('top', nowtop + 'px');
@@ -496,7 +496,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#toTop').click(function() {
+    $('#toTop').click(function () {
         $(document).scrollTop(0);
     });
 

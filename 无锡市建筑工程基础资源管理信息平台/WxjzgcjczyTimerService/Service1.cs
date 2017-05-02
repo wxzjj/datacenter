@@ -14468,7 +14468,7 @@ namespace WxjzgcjczyTimerService
                             string returnMsg = "";
                             try
                             {
-                                returnMsg = client.saveZcjzs(str.ToString(), row["ryID"].ToString2(), bytes, "bmp", userName_qyry, password_qyry);
+                                //returnMsg = client.saveZcjzs(str.ToString(), row["ryID"].ToString2(), bytes, "bmp", userName_qyry, password_qyry);
                             }
                             catch (Exception ex)
                             {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://Server.WebService" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" targetNamespace="http://Server.WebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xmlns:tns="http://Server.WebService" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" targetNamespace="http://Server.WebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://Server.WebService">
       <xsd:element name="getGdxyf">
@@ -52,14 +52,16 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="getXyptPjf">
+      <xsd:element name="DataFromQlygPt">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="getXyptPjfResponse">
+      <xsd:element name="DataFromQlygPtResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -180,22 +182,6 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="XyInnerptPjf">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="XyInnerptPjfResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
       <xsd:element name="TBProjectInfoTime">
         <xsd:complexType>
           <xsd:sequence>
@@ -267,6 +253,23 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="RetrieveJlData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RetrieveJlDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="Huoqu">
         <xsd:complexType>
           <xsd:sequence>
@@ -275,6 +278,25 @@
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="HuoquResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RetrieveHtData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in4" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in5" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RetrieveHtDataResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -315,22 +337,6 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="getXyptPjfmx">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="getXyptPjfmxResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
       <xsd:element name="HTBA">
         <xsd:complexType>
           <xsd:sequence>
@@ -341,40 +347,6 @@
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="HTBAResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="saveZcjzs">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:base64Binary" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in4" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in5" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="saveZcjzsResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="JyPrjnum">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="JyPrjnumResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -400,16 +372,15 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="getQsXyptPjf">
+      <xsd:element name="JyPrjnum">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="getQsXyptPjfResponse">
+      <xsd:element name="JyPrjnumResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -535,6 +506,24 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="UpdateData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in4" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="SaveDataToStRequest">
@@ -543,26 +532,23 @@
   <wsdl:message name="RetrieveDataRequest">
     <wsdl:part name="parameters" element="tns:RetrieveData" />
   </wsdl:message>
-  <wsdl:message name="getQsXyptPjfResponse">
-    <wsdl:part name="parameters" element="tns:getQsXyptPjfResponse" />
-  </wsdl:message>
   <wsdl:message name="TBContractRecordManageResponse">
     <wsdl:part name="parameters" element="tns:TBContractRecordManageResponse" />
   </wsdl:message>
   <wsdl:message name="TjxtFromQyDataRequest">
     <wsdl:part name="parameters" element="tns:TjxtFromQyData" />
   </wsdl:message>
-  <wsdl:message name="getXyptPjfmxRequest">
-    <wsdl:part name="parameters" element="tns:getXyptPjfmx" />
-  </wsdl:message>
   <wsdl:message name="SendBeginRequest">
     <wsdl:part name="parameters" element="tns:SendBegin" />
   </wsdl:message>
-  <wsdl:message name="PxRyRequest">
-    <wsdl:part name="parameters" element="tns:PxRy" />
+  <wsdl:message name="RetrieveJlDataRequest">
+    <wsdl:part name="parameters" element="tns:RetrieveJlData" />
   </wsdl:message>
   <wsdl:message name="TBProjectInfoRequest">
     <wsdl:part name="parameters" element="tns:TBProjectInfo" />
+  </wsdl:message>
+  <wsdl:message name="PxRyRequest">
+    <wsdl:part name="parameters" element="tns:PxRy" />
   </wsdl:message>
   <wsdl:message name="SnapFileByInternetResponse">
     <wsdl:part name="parameters" element="tns:SnapFileByInternetResponse" />
@@ -575,9 +561,6 @@
   </wsdl:message>
   <wsdl:message name="HuoquRequest">
     <wsdl:part name="parameters" element="tns:Huoqu" />
-  </wsdl:message>
-  <wsdl:message name="getQsXyptPjfRequest">
-    <wsdl:part name="parameters" element="tns:getQsXyptPjf" />
   </wsdl:message>
   <wsdl:message name="TBContractRecordManageTimeRequest">
     <wsdl:part name="parameters" element="tns:TBContractRecordManageTime" />
@@ -597,26 +580,26 @@
   <wsdl:message name="ValidationInformationRequest">
     <wsdl:part name="parameters" element="tns:ValidationInformation" />
   </wsdl:message>
-  <wsdl:message name="getXyptPjfResponse">
-    <wsdl:part name="parameters" element="tns:getXyptPjfResponse" />
-  </wsdl:message>
-  <wsdl:message name="XyInnerptPjfResponse">
-    <wsdl:part name="parameters" element="tns:XyInnerptPjfResponse" />
-  </wsdl:message>
   <wsdl:message name="SaveTBDataToStResponse">
     <wsdl:part name="parameters" element="tns:SaveTBDataToStResponse" />
   </wsdl:message>
-  <wsdl:message name="TBProjectInfoResponse">
-    <wsdl:part name="parameters" element="tns:TBProjectInfoResponse" />
-  </wsdl:message>
   <wsdl:message name="getGdxyfResponse">
     <wsdl:part name="parameters" element="tns:getGdxyfResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataFromQlygPtRequest">
+    <wsdl:part name="parameters" element="tns:DataFromQlygPt" />
+  </wsdl:message>
+  <wsdl:message name="TBProjectInfoResponse">
+    <wsdl:part name="parameters" element="tns:TBProjectInfoResponse" />
   </wsdl:message>
   <wsdl:message name="ValidationPhotoResponse">
     <wsdl:part name="parameters" element="tns:ValidationPhotoResponse" />
   </wsdl:message>
   <wsdl:message name="TjRetrieveByUpdateResponse">
     <wsdl:part name="parameters" element="tns:TjRetrieveByUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDataRequest">
+    <wsdl:part name="parameters" element="tns:UpdateData" />
   </wsdl:message>
   <wsdl:message name="HTBAResponse">
     <wsdl:part name="parameters" element="tns:HTBAResponse" />
@@ -626,9 +609,6 @@
   </wsdl:message>
   <wsdl:message name="SendBeginResponse">
     <wsdl:part name="parameters" element="tns:SendBeginResponse" />
-  </wsdl:message>
-  <wsdl:message name="getXyptPjfmxResponse">
-    <wsdl:part name="parameters" element="tns:getXyptPjfmxResponse" />
   </wsdl:message>
   <wsdl:message name="JyPrjnumResponse">
     <wsdl:part name="parameters" element="tns:JyPrjnumResponse" />
@@ -642,6 +622,9 @@
   <wsdl:message name="ValidationInformationResponse">
     <wsdl:part name="parameters" element="tns:ValidationInformationResponse" />
   </wsdl:message>
+  <wsdl:message name="DataFromQlygPtResponse">
+    <wsdl:part name="parameters" element="tns:DataFromQlygPtResponse" />
+  </wsdl:message>
   <wsdl:message name="TjxtFromXmDataResponse">
     <wsdl:part name="parameters" element="tns:TjxtFromXmDataResponse" />
   </wsdl:message>
@@ -654,11 +637,14 @@
   <wsdl:message name="SnapDataByInternetRequest">
     <wsdl:part name="parameters" element="tns:SnapDataByInternet" />
   </wsdl:message>
-  <wsdl:message name="saveZcjzsResponse">
-    <wsdl:part name="parameters" element="tns:saveZcjzsResponse" />
-  </wsdl:message>
   <wsdl:message name="ToCityPlatformRequest">
     <wsdl:part name="parameters" element="tns:ToCityPlatform" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveHtDataRequest">
+    <wsdl:part name="parameters" element="tns:RetrieveHtData" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveJlDataResponse">
+    <wsdl:part name="parameters" element="tns:RetrieveJlDataResponse" />
   </wsdl:message>
   <wsdl:message name="SaveTBDataToStRequest">
     <wsdl:part name="parameters" element="tns:SaveTBDataToSt" />
@@ -669,11 +655,11 @@
   <wsdl:message name="getGdxyfRequest">
     <wsdl:part name="parameters" element="tns:getGdxyf" />
   </wsdl:message>
-  <wsdl:message name="TBProjectInfoTimeResponse">
-    <wsdl:part name="parameters" element="tns:TBProjectInfoTimeResponse" />
-  </wsdl:message>
   <wsdl:message name="RetrieveDataResponse">
     <wsdl:part name="parameters" element="tns:RetrieveDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="TBProjectInfoTimeResponse">
+    <wsdl:part name="parameters" element="tns:TBProjectInfoTimeResponse" />
   </wsdl:message>
   <wsdl:message name="TBContractRecordManageTimeResponse">
     <wsdl:part name="parameters" element="tns:TBContractRecordManageTimeResponse" />
@@ -681,11 +667,11 @@
   <wsdl:message name="ToCityPlatformResponse">
     <wsdl:part name="parameters" element="tns:ToCityPlatformResponse" />
   </wsdl:message>
-  <wsdl:message name="TjxtFromXmDataRequest">
-    <wsdl:part name="parameters" element="tns:TjxtFromXmData" />
-  </wsdl:message>
   <wsdl:message name="CheckPeopleRequest">
     <wsdl:part name="parameters" element="tns:CheckPeople" />
+  </wsdl:message>
+  <wsdl:message name="TjxtFromXmDataRequest">
+    <wsdl:part name="parameters" element="tns:TjxtFromXmData" />
   </wsdl:message>
   <wsdl:message name="SnapDataByInternetResponse">
     <wsdl:part name="parameters" element="tns:SnapDataByInternetResponse" />
@@ -696,11 +682,14 @@
   <wsdl:message name="TjRetrieveByUpdateRequest">
     <wsdl:part name="parameters" element="tns:TjRetrieveByUpdate" />
   </wsdl:message>
-  <wsdl:message name="getXyptPjfRequest">
-    <wsdl:part name="parameters" element="tns:getXyptPjf" />
+  <wsdl:message name="RetrieveHtDataResponse">
+    <wsdl:part name="parameters" element="tns:RetrieveHtDataResponse" />
   </wsdl:message>
   <wsdl:message name="getXyptRsRequest">
     <wsdl:part name="parameters" element="tns:getXyptRs" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDataResponse">
+    <wsdl:part name="parameters" element="tns:UpdateDataResponse" />
   </wsdl:message>
   <wsdl:message name="ReceiveDataRequest">
     <wsdl:part name="parameters" element="tns:ReceiveData" />
@@ -711,17 +700,11 @@
   <wsdl:message name="PxRyResponse">
     <wsdl:part name="parameters" element="tns:PxRyResponse" />
   </wsdl:message>
-  <wsdl:message name="saveZcjzsRequest">
-    <wsdl:part name="parameters" element="tns:saveZcjzs" />
-  </wsdl:message>
   <wsdl:message name="TBContractRecordManageRequest">
     <wsdl:part name="parameters" element="tns:TBContractRecordManage" />
   </wsdl:message>
   <wsdl:message name="SaveDataToStResponse">
     <wsdl:part name="parameters" element="tns:SaveDataToStResponse" />
-  </wsdl:message>
-  <wsdl:message name="XyInnerptPjfRequest">
-    <wsdl:part name="parameters" element="tns:XyInnerptPjf" />
   </wsdl:message>
   <wsdl:portType name="ReceiveDataServicePortType">
     <wsdl:operation name="getGdxyf">
@@ -736,9 +719,9 @@
       <wsdl:input name="TBContractRecordManageRequest" message="tns:TBContractRecordManageRequest" />
       <wsdl:output name="TBContractRecordManageResponse" message="tns:TBContractRecordManageResponse" />
     </wsdl:operation>
-    <wsdl:operation name="getXyptPjf">
-      <wsdl:input name="getXyptPjfRequest" message="tns:getXyptPjfRequest" />
-      <wsdl:output name="getXyptPjfResponse" message="tns:getXyptPjfResponse" />
+    <wsdl:operation name="DataFromQlygPt">
+      <wsdl:input name="DataFromQlygPtRequest" message="tns:DataFromQlygPtRequest" />
+      <wsdl:output name="DataFromQlygPtResponse" message="tns:DataFromQlygPtResponse" />
     </wsdl:operation>
     <wsdl:operation name="SendBegin">
       <wsdl:input name="SendBeginRequest" message="tns:SendBeginRequest" />
@@ -764,10 +747,6 @@
       <wsdl:input name="TjRetrieveByUpdateRequest" message="tns:TjRetrieveByUpdateRequest" />
       <wsdl:output name="TjRetrieveByUpdateResponse" message="tns:TjRetrieveByUpdateResponse" />
     </wsdl:operation>
-    <wsdl:operation name="XyInnerptPjf">
-      <wsdl:input name="XyInnerptPjfRequest" message="tns:XyInnerptPjfRequest" />
-      <wsdl:output name="XyInnerptPjfResponse" message="tns:XyInnerptPjfResponse" />
-    </wsdl:operation>
     <wsdl:operation name="TBProjectInfoTime">
       <wsdl:input name="TBProjectInfoTimeRequest" message="tns:TBProjectInfoTimeRequest" />
       <wsdl:output name="TBProjectInfoTimeResponse" message="tns:TBProjectInfoTimeResponse" />
@@ -784,9 +763,17 @@
       <wsdl:input name="SnapDataByInternetRequest" message="tns:SnapDataByInternetRequest" />
       <wsdl:output name="SnapDataByInternetResponse" message="tns:SnapDataByInternetResponse" />
     </wsdl:operation>
+    <wsdl:operation name="RetrieveJlData">
+      <wsdl:input name="RetrieveJlDataRequest" message="tns:RetrieveJlDataRequest" />
+      <wsdl:output name="RetrieveJlDataResponse" message="tns:RetrieveJlDataResponse" />
+    </wsdl:operation>
     <wsdl:operation name="Huoqu">
       <wsdl:input name="HuoquRequest" message="tns:HuoquRequest" />
       <wsdl:output name="HuoquResponse" message="tns:HuoquResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveHtData">
+      <wsdl:input name="RetrieveHtDataRequest" message="tns:RetrieveHtDataRequest" />
+      <wsdl:output name="RetrieveHtDataResponse" message="tns:RetrieveHtDataResponse" />
     </wsdl:operation>
     <wsdl:operation name="SaveTBDataToSt">
       <wsdl:input name="SaveTBDataToStRequest" message="tns:SaveTBDataToStRequest" />
@@ -796,29 +783,17 @@
       <wsdl:input name="CheckPeopleRequest" message="tns:CheckPeopleRequest" />
       <wsdl:output name="CheckPeopleResponse" message="tns:CheckPeopleResponse" />
     </wsdl:operation>
-    <wsdl:operation name="getXyptPjfmx">
-      <wsdl:input name="getXyptPjfmxRequest" message="tns:getXyptPjfmxRequest" />
-      <wsdl:output name="getXyptPjfmxResponse" message="tns:getXyptPjfmxResponse" />
-    </wsdl:operation>
     <wsdl:operation name="HTBA">
       <wsdl:input name="HTBARequest" message="tns:HTBARequest" />
       <wsdl:output name="HTBAResponse" message="tns:HTBAResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="saveZcjzs">
-      <wsdl:input name="saveZcjzsRequest" message="tns:saveZcjzsRequest" />
-      <wsdl:output name="saveZcjzsResponse" message="tns:saveZcjzsResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="JyPrjnum">
-      <wsdl:input name="JyPrjnumRequest" message="tns:JyPrjnumRequest" />
-      <wsdl:output name="JyPrjnumResponse" message="tns:JyPrjnumResponse" />
     </wsdl:operation>
     <wsdl:operation name="ValidationInformation">
       <wsdl:input name="ValidationInformationRequest" message="tns:ValidationInformationRequest" />
       <wsdl:output name="ValidationInformationResponse" message="tns:ValidationInformationResponse" />
     </wsdl:operation>
-    <wsdl:operation name="getQsXyptPjf">
-      <wsdl:input name="getQsXyptPjfRequest" message="tns:getQsXyptPjfRequest" />
-      <wsdl:output name="getQsXyptPjfResponse" message="tns:getQsXyptPjfResponse" />
+    <wsdl:operation name="JyPrjnum">
+      <wsdl:input name="JyPrjnumRequest" message="tns:JyPrjnumRequest" />
+      <wsdl:output name="JyPrjnumResponse" message="tns:JyPrjnumResponse" />
     </wsdl:operation>
     <wsdl:operation name="TBProjectInfo">
       <wsdl:input name="TBProjectInfoRequest" message="tns:TBProjectInfoRequest" />
@@ -847,6 +822,10 @@
     <wsdl:operation name="ToCityPlatform">
       <wsdl:input name="ToCityPlatformRequest" message="tns:ToCityPlatformRequest" />
       <wsdl:output name="ToCityPlatformResponse" message="tns:ToCityPlatformResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateData">
+      <wsdl:input name="UpdateDataRequest" message="tns:UpdateDataRequest" />
+      <wsdl:output name="UpdateDataResponse" message="tns:UpdateDataResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ReceiveDataServiceHttpBinding" type="tns:ReceiveDataServicePortType">
@@ -878,12 +857,12 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getXyptPjf">
+    <wsdl:operation name="DataFromQlygPt">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="getXyptPjfRequest">
+      <wsdl:input name="DataFromQlygPtRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="getXyptPjfResponse">
+      <wsdl:output name="DataFromQlygPtResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -941,15 +920,6 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="XyInnerptPjf">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="XyInnerptPjfRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="XyInnerptPjfResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="TBProjectInfoTime">
       <wsdlsoap:operation soapAction="" />
       <wsdl:input name="TBProjectInfoTimeRequest">
@@ -986,12 +956,30 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RetrieveJlData">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RetrieveJlDataRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RetrieveJlDataResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Huoqu">
       <wsdlsoap:operation soapAction="" />
       <wsdl:input name="HuoquRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="HuoquResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveHtData">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RetrieveHtDataRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RetrieveHtDataResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1013,39 +1001,12 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getXyptPjfmx">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="getXyptPjfmxRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="getXyptPjfmxResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="HTBA">
       <wsdlsoap:operation soapAction="" />
       <wsdl:input name="HTBARequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="HTBAResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="saveZcjzs">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="saveZcjzsRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="saveZcjzsResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="JyPrjnum">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="JyPrjnumRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="JyPrjnumResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1058,12 +1019,12 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getQsXyptPjf">
+    <wsdl:operation name="JyPrjnum">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="getQsXyptPjfRequest">
+      <wsdl:input name="JyPrjnumRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="getQsXyptPjfResponse">
+      <wsdl:output name="JyPrjnumResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1127,6 +1088,15 @@
         <wsdlsoap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="ToCityPlatformResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateData">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="UpdateDataRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateDataResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

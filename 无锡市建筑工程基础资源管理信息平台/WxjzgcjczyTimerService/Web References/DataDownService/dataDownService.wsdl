@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://webservice.datecenter.jscedc" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax21="http://data.datecenter.jscedc/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://webservice.datecenter.jscedc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ax21="http://data.datecenter.jscedc/xsd" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://webservice.datecenter.jscedc" xmlns:ns1="http://org.apache.axis2/xsd" targetNamespace="http://webservice.datecenter.jscedc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:documentation>
         This service is to process the datainterface
     </wsdl:documentation>
@@ -325,6 +325,70 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="getOutCorpInfoStream_Single">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfoStream_SingleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfoStream_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfoStream_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfoStream_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfoStream_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfoStream">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfoStreamResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="getDataUser">
         <xs:complexType>
           <xs:sequence>
@@ -437,14 +501,20 @@
       </xs:element>
     </xs:schema>
   </wsdl:types>
+  <wsdl:message name="getOutCorpInfoStream_SingleRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoStream_Single" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfoStream_SingleResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoStream_SingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="parameters" element="ns:Exception" />
+  </wsdl:message>
   <wsdl:message name="getPersonInfoStreamRequest">
     <wsdl:part name="parameters" element="ns:getPersonInfoStream" />
   </wsdl:message>
   <wsdl:message name="getPersonInfoStreamResponse">
     <wsdl:part name="parameters" element="ns:getPersonInfoStreamResponse" />
-  </wsdl:message>
-  <wsdl:message name="Exception">
-    <wsdl:part name="parameters" element="ns:Exception" />
   </wsdl:message>
   <wsdl:message name="getPersonRegCertStream_PacketRequest">
     <wsdl:part name="parameters" element="ns:getPersonRegCertStream_Packet" />
@@ -469,6 +539,12 @@
   </wsdl:message>
   <wsdl:message name="getPersonRegMajorStream_IncResponse">
     <wsdl:part name="parameters" element="ns:getPersonRegMajorStream_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfoStream_IncRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoStream_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfoStream_IncResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoStream_IncResponse" />
   </wsdl:message>
   <wsdl:message name="getPersonRegCertStreamRequest">
     <wsdl:part name="parameters" element="ns:getPersonRegCertStream" />
@@ -540,11 +616,23 @@
   <wsdl:message name="getCorpStatRptStreamResponse">
     <wsdl:part name="parameters" element="ns:getCorpStatRptStreamResponse" />
   </wsdl:message>
+  <wsdl:message name="getOutCorpInfoStream_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoStream_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfoStream_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoStream_PacketResponse" />
+  </wsdl:message>
   <wsdl:message name="getPersonJobCertStreamRequest">
     <wsdl:part name="parameters" element="ns:getPersonJobCertStream" />
   </wsdl:message>
   <wsdl:message name="getPersonJobCertStreamResponse">
     <wsdl:part name="parameters" element="ns:getPersonJobCertStreamResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfoStreamRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoStream" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfoStreamResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoStreamResponse" />
   </wsdl:message>
   <wsdl:message name="getCorpInfoStream_SingleRequest">
     <wsdl:part name="parameters" element="ns:getCorpInfoStream_Single" />
@@ -577,6 +665,11 @@
     <wsdl:part name="parameters" element="ns:getPersonJobCertStream_SingleResponse" />
   </wsdl:message>
   <wsdl:portType name="dataDownServicePortType">
+    <wsdl:operation name="getOutCorpInfoStream_Single">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfoStream_Single" message="ns:getOutCorpInfoStream_SingleRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfoStream_SingleResponse" message="ns:getOutCorpInfoStream_SingleResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfoStream_SingleException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
     <wsdl:operation name="getPersonInfoStream">
       <wsdl:input wsaw:Action="urn:getPersonInfoStream" message="ns:getPersonInfoStreamRequest" />
       <wsdl:output wsaw:Action="urn:getPersonInfoStreamResponse" message="ns:getPersonInfoStreamResponse" />
@@ -601,6 +694,11 @@
       <wsdl:input wsaw:Action="urn:getPersonRegMajorStream_Inc" message="ns:getPersonRegMajorStream_IncRequest" />
       <wsdl:output wsaw:Action="urn:getPersonRegMajorStream_IncResponse" message="ns:getPersonRegMajorStream_IncResponse" />
       <wsdl:fault wsaw:Action="urn:getPersonRegMajorStream_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream_Inc">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfoStream_Inc" message="ns:getOutCorpInfoStream_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfoStream_IncResponse" message="ns:getOutCorpInfoStream_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfoStream_IncException" name="Exception" message="ns:Exception" />
     </wsdl:operation>
     <wsdl:operation name="getPersonRegCertStream">
       <wsdl:input wsaw:Action="urn:getPersonRegCertStream" message="ns:getPersonRegCertStreamRequest" />
@@ -661,10 +759,20 @@
       <wsdl:output wsaw:Action="urn:getCorpStatRptStreamResponse" message="ns:getCorpStatRptStreamResponse" />
       <wsdl:fault wsaw:Action="urn:getCorpStatRptStreamException" name="Exception" message="ns:Exception" />
     </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream_Packet">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfoStream_Packet" message="ns:getOutCorpInfoStream_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfoStream_PacketResponse" message="ns:getOutCorpInfoStream_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfoStream_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
     <wsdl:operation name="getPersonJobCertStream">
       <wsdl:input wsaw:Action="urn:getPersonJobCertStream" message="ns:getPersonJobCertStreamRequest" />
       <wsdl:output wsaw:Action="urn:getPersonJobCertStreamResponse" message="ns:getPersonJobCertStreamResponse" />
       <wsdl:fault wsaw:Action="urn:getPersonJobCertStreamException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfoStream" message="ns:getOutCorpInfoStreamRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfoStreamResponse" message="ns:getOutCorpInfoStreamResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfoStreamException" name="Exception" message="ns:Exception" />
     </wsdl:operation>
     <wsdl:operation name="getCorpInfoStream_Single">
       <wsdl:input wsaw:Action="urn:getCorpInfoStream_Single" message="ns:getCorpInfoStream_SingleRequest" />
@@ -694,6 +802,18 @@
   </wsdl:portType>
   <wsdl:binding name="dataDownServiceSoap11Binding" type="ns:dataDownServicePortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getOutCorpInfoStream_Single">
+      <soap:operation soapAction="urn:getOutCorpInfoStream_Single" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="getPersonInfoStream">
       <soap:operation soapAction="urn:getPersonInfoStream" style="document" />
       <wsdl:input>
@@ -744,6 +864,18 @@
     </wsdl:operation>
     <wsdl:operation name="getPersonRegMajorStream_Inc">
       <soap:operation soapAction="urn:getPersonRegMajorStream_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream_Inc">
+      <soap:operation soapAction="urn:getOutCorpInfoStream_Inc" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -895,8 +1027,32 @@
         <soap:fault use="literal" name="Exception" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream_Packet">
+      <soap:operation soapAction="urn:getOutCorpInfoStream_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="getCorpStatRptStream">
       <soap:operation soapAction="urn:getCorpStatRptStream" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream">
+      <soap:operation soapAction="urn:getOutCorpInfoStream" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -970,6 +1126,18 @@
   </wsdl:binding>
   <wsdl:binding name="dataDownServiceSoap12Binding" type="ns:dataDownServicePortType">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getOutCorpInfoStream_Single">
+      <soap12:operation soapAction="urn:getOutCorpInfoStream_Single" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="getPersonInfoStream">
       <soap12:operation soapAction="urn:getPersonInfoStream" style="document" />
       <wsdl:input>
@@ -1020,6 +1188,18 @@
     </wsdl:operation>
     <wsdl:operation name="getPersonRegMajorStream_Inc">
       <soap12:operation soapAction="urn:getPersonRegMajorStream_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream_Inc">
+      <soap12:operation soapAction="urn:getOutCorpInfoStream_Inc" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1171,8 +1351,32 @@
         <soap12:fault use="literal" name="Exception" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream_Packet">
+      <soap12:operation soapAction="urn:getOutCorpInfoStream_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="getCorpStatRptStream">
       <soap12:operation soapAction="urn:getCorpStatRptStream" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream">
+      <soap12:operation soapAction="urn:getOutCorpInfoStream" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1246,6 +1450,15 @@
   </wsdl:binding>
   <wsdl:binding name="dataDownServiceHttpBinding" type="ns:dataDownServicePortType">
     <http:binding verb="POST" />
+    <wsdl:operation name="getOutCorpInfoStream_Single">
+      <http:operation location="dataDownService/getOutCorpInfoStream_Single" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfoStream_Single" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfoStream_Single" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getPersonInfoStream">
       <http:operation location="dataDownService/getPersonInfoStream" />
       <wsdl:input>
@@ -1289,6 +1502,15 @@
       </wsdl:input>
       <wsdl:output>
         <mime:content part="getPersonRegMajorStream_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream_Inc">
+      <http:operation location="dataDownService/getOutCorpInfoStream_Inc" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfoStream_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfoStream_Inc" type="text/xml" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getPersonRegCertStream">
@@ -1399,6 +1621,15 @@
         <mime:content part="getPersonJobCertStream" type="text/xml" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream_Packet">
+      <http:operation location="dataDownService/getOutCorpInfoStream_Packet" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfoStream_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfoStream_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getCorpStatRptStream">
       <http:operation location="dataDownService/getCorpStatRptStream" />
       <wsdl:input>
@@ -1406,6 +1637,15 @@
       </wsdl:input>
       <wsdl:output>
         <mime:content part="getCorpStatRptStream" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfoStream">
+      <http:operation location="dataDownService/getOutCorpInfoStream" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfoStream" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfoStream" type="text/xml" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getPersonRegCertStream_Single">

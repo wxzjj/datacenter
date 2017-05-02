@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Wxjzgcjczy">
+</Property><Property Name="解决方案文件" Value="E:\2017\codes\datacenter\无锡市建筑工程基础资源管理信息平台\Wxjzgcjczy.sln">
+</Property><Property Name="Date" Value="2017年5月1日">
+</Property><Property Name="Time" Value="21:35">
+</Property></Properties><Event ErrorLevel="0" Project="WxjzgcjczyTimerService" Source="WxjzgcjczyTimerService\WxjzgcjczyTimerService.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="WxjzgcjczyTimerService" Source="WxjzgcjczyTimerService\WxjzgcjczyTimerService.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="IntegrativeShow2015" Source="IntegrativeShow2015\IntegrativeShow2015.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="IntegrativeShow2015" Source="IntegrativeShow2015\IntegrativeShow2015.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Wxjzgcjczy.BLL" Source="Wxjzgcjczy.BLL\Wxjzgcjczy.BLL.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="Wxjzgcjczy.BLL" Source="Wxjzgcjczy.BLL\Wxjzgcjczy.BLL.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Wxjzgcjczy.Common" Source="Wxjzgcjczy.Common\Wxjzgcjczy.Common.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="Wxjzgcjczy.Common" Source="Wxjzgcjczy.Common\Wxjzgcjczy.Common.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Wxjzgcjczy.DAL.Sqlserver" Source="Wxjzgcjczy.DAL.Sqlserver\Wxjzgcjczy.DAL.Sqlserver.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="Wxjzgcjczy.DAL.Sqlserver" Source="Wxjzgcjczy.DAL.Sqlserver\Wxjzgcjczy.DAL.Sqlserver.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Wxjzgcjczy.Web" Source="Wxjzgcjczy.Web\Wxjzgcjczy.Web.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="Wxjzgcjczy.Web" Source="Wxjzgcjczy.Web\Wxjzgcjczy.Web.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Wxjzgcjczy.sln" Description="成功转换解决方案">
+</Event><Event ErrorLevel="3" Project="" Source="Wxjzgcjczy.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WxjzgcjczyTimerService" Source="WxjzgcjczyTimerService\WxjzgcjczyTimerService.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event><Event ErrorLevel="0" Project="IntegrativeShow2015" Source="IntegrativeShow2015\IntegrativeShow2015.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event><Event ErrorLevel="0" Project="Wxjzgcjczy.BLL" Source="Wxjzgcjczy.BLL\Wxjzgcjczy.BLL.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event><Event ErrorLevel="0" Project="Wxjzgcjczy.Common" Source="Wxjzgcjczy.Common\Wxjzgcjczy.Common.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event><Event ErrorLevel="0" Project="Wxjzgcjczy.DAL.Sqlserver" Source="Wxjzgcjczy.DAL.Sqlserver\Wxjzgcjczy.DAL.Sqlserver.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event><Event ErrorLevel="0" Project="Wxjzgcjczy.Web" Source="Wxjzgcjczy.Web\Wxjzgcjczy.Web.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event></UpgradeLog>
