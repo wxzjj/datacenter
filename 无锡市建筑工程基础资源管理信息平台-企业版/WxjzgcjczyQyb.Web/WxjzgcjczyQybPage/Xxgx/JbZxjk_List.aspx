@@ -63,7 +63,7 @@
                         <td class="td-value" width="35%">
                             <Bigdesk8:DBDropDownList ID="DropScsfcg" runat="server" Width="100px">
                                 <asp:ListItem></asp:ListItem>
-                                <asp:ListItem>否</asp:ListItem>
+                                <asp:ListItem Selected="True">否</asp:ListItem>
                                 <asp:ListItem>是</asp:ListItem>
                             </Bigdesk8:DBDropDownList>
                         </td>
@@ -92,7 +92,9 @@
         <tr>
             <td class="maingrid">
                 <Bigdesk8:PowerDataGrid ID="gridView" runat="server" AutoGenerateColumns="False"
-                    Width="100%" AllowPaging="true" PageSize="20" OnPageIndexChanging="gridView_PageIndexChanging">
+                    Width="100%" AllowPaging="True" PageSize="20" 
+                    OnPageIndexChanging="gridView_PageIndexChanging" EnableModelValidation="True" 
+                    RecordCount="0">
                     <Columns>
                         <asp:TemplateField>
                             <HeaderTemplate>
@@ -120,6 +122,13 @@
                             <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
                             <ItemStyle CssClass="pdg-itemstyle-left" Width="5%"></ItemStyle>
                         </asp:BoundField>
+                        <asp:HyperLinkField DataTextField="msgLink" HeaderText="记录信息" 
+                            
+                            DataTextFormatString="&lt;a href=&quot;{0}&quot; target=&quot;_blank&quot;&gt;查看细节&lt;/a&gt;" 
+                            Target="_blank">
+                            <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
+                            <ItemStyle CssClass="pdg-itemstyle-left" Width="2%"></ItemStyle>
+                        </asp:HyperLinkField>
                         <asp:BoundField HeaderText="创建日期" DataField="CreateDate" DataFormatString="{0:yyyy-MM-dd}">
                             <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
                             <ItemStyle CssClass="pdg-itemstyle-center" Width="2%"></ItemStyle>
