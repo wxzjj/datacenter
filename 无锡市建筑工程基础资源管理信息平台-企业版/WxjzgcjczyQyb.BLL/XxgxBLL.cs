@@ -45,6 +45,10 @@ namespace WxjzgcjczyQyb.BLL
             return xxgxDal.GetStLog(condition, pageSize, pageIndex, out   allRecordCount, sfsccg, " UpdateDate desc");
         }
 
+        public DataTable GetRecordItem(string tableName, string pkid)
+        {
+            return xxgxDal.GetRecordItem(tableName, pkid);
+        }
 
         public DataTable GetSyzxspt(List<IDataItem> condition, int pageSize, int pageIndex, out int allRecordCount, string tableName)
         {

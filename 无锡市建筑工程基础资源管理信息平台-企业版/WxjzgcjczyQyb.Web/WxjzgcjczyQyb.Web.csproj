@@ -513,6 +513,13 @@
     <Compile Include="WxjzgcjczyQybPage\Start.aspx.designer.cs">
       <DependentUpon>Start.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\JbZxjk_Detail.aspx.cs">
+      <DependentUpon>JbZxjk_Detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxjzgcjczyQybPage\Xxgx\JbZxjk_Detail.aspx.designer.cs">
+      <DependentUpon>JbZxjk_Detail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WxjzgcjczyQybPage\Xxgx\JbZxjk_List.aspx.cs">
       <DependentUpon>JbZxjk_List.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1488,6 +1495,7 @@
     <Content Include="WxjzgcjczyQybPage\Config\WxjzgcjczyQyb.config" />
     <Content Include="WxjzgcjczyQybPage\Config\WxjzgcjczyQyb_MTreeView.config" />
     <Content Include="WxjzgcjczyQybPage\Handler\TreeData.ashx" />
+    <Content Include="WxjzgcjczyQybPage\Xxgx\JbZxjk_Detail.aspx" />
     <Content Include="WxjzgcjczyQybPage\Xxgx\JbZxjk_List.aspx" />
     <Content Include="WxjzgcjczyQybPage\Xxgx\Jkcbxx_View.aspx" />
     <Content Include="WxjzgcjczyQybPage\Xxgx\Jkzbxx_View.aspx" />

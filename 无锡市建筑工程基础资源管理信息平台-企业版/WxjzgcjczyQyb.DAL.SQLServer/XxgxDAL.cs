@@ -66,7 +66,21 @@ namespace WxjzgcjczyQyb.DAL
             }
 
             condition.GetSearchClause(sp, ref sql);
-            return DB.ExeSqlForDataTable(sql, sp, "t", orderby, pageSize, pageIndex, out allRecordCount);
+            DataTable dataTable = DB.ExeSqlForDataTable(sql, sp, "t", orderby, pageSize, pageIndex, out allRecordCount);
+
+            dataTable.Columns.Add("msgLink", typeof(System.String));
+
+            //fill detail message to column msgDetail
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                string tableName = (string)dr["tableName"];
+                string pkid = (string)dr["PKID"];
+                string msg = (string)dr["Msg"];
+                string keyFields = this.GetKeyFields(tableName, msg);
+                dr["msgLink"] = "JbZxjk_Detail.aspx?tableName=" + tableName + "&pkid=" + pkid + "&keyFields=" + keyFields;
+            }
+
+            return dataTable;
         }
 
 
@@ -76,6 +90,35 @@ namespace WxjzgcjczyQyb.DAL
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             condition.GetSearchClause(sp, ref sql);
             return DB.ExeSqlForDataTable(sql, sp, "t", orderby, pageSize, pageIndex, out allRecordCount);
+        }
+
+        //获取需要置顶显示的字段
+        private string GetKeyFields(string tableName, string msg)
+        {
+            string rst = "";
+            if (string.Equals(msg, "未找到该项目编码的项目登记信息"))
+            {
+                rst = "zljdbm";
+            }
+            else if (string.Equals(msg, "未找到该项目编码的项目登记数据"))
+            {
+                rst = "prjnum";
+            }
+            else if (string.Equals(msg, "BuildCorpCode--建设单位组织机构代码不正确"))
+            {
+                rst = "BuildCorpCode";
+            }
+            return rst;
+        }
+
+        //获取记录
+        public DataTable GetRecordItem(string tableName, string pkid)
+        {
+            string sql = "select * from " + tableName +" where pkid=@pkid";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@pkid", pkid);
+            DataTable dataTable = DB.ExeSqlForDataTable(sql, sp, "t");
+            return dataTable;
         }
     }
 }
