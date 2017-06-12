@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8">
-    <title>无锡市住房和城乡建设局公共信息服务平台</title>
+    <title>无锡市住建局政务服务网</title>
     <meta name="keywords" content="abc" />
     <meta name="description" content="abc" />
     <link href="Common/css/Startcss_1.css" rel="stylesheet" type="text/css" />
@@ -319,15 +319,117 @@
             </div>
         </div>
         <div class="box friendlink">
-            <h2>
-                查询快捷链接</h2>
-            <a href="Page_List.aspx?menuno=01" target="_top">
-                <img src="Common/images/gcxm.jpg" width="200" height="80"></a> <a href="Page_List.aspx?menuno=02">
+            <h2>业务系统</h2>
+           <!-- <a href="Page_List.aspx?menuno=01" target="_top">
+                <img src="Common/images/gcxm.jpg" width="200" height="80"></a> 
+                <a href="Page_List.aspx?menuno=02">
                     <img src="Common/images/qyxx.jpg" width="200" height="80"></a> <a href="Page_List.aspx?menuno=03"
                         target="_top">
                         <img src="Common/images/ryxx.jpg" width="200" height="80"></a> <a href="Page_List.aspx?menuno=04"
                             target="_top">
-                            <img src="Common/images/xyxx.jpg" width="200" height="80"></a>
+                            <img src="Common/images/xyxx.jpg" width="200" height="80"></a>-->
+            <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>项目登记</div>
+                </a> 
+            </div>
+
+            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="3e1c0306-64ca-4a60-8187-6cf4009c3d05" system=""><img height="54" src="Common/images/gcztb.png" border="0">              
+                    <div>招投标</div>
+                </a>
+            </div>
+
+            <div align="center" style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                        <a href="javascript:" url="http://221.226.0.185/AppSgtSjsc/Content/Login.aspx" columns="" uuid="949de2e5-e576-40fa-9c0f-a029d84d6191" system=""><img height="54" src="Common/images/sgtsc.png" border="0">              
+                        <div>施工图审查</div>
+                        </a> 
+                       </div>
+
+            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                        <a href="javascript:" url="" columns="" uuid="811d3387-4d4c-41c2-b8e9-570102f263b9" system=""><img height="45" src="Common/images/htba.png" border="0">              
+                        <div>合同备案</div>
+                        </a> 
+                       </div>
+
+            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                        <a href="javascript:" url="" columns="" uuid="74249764-5c5c-4259-a8b5-c226b638e73d" system=""><img height="54" src="Common/images/sgxk.png" border="0">              
+                        <div>施工许可证</div>
+                        </a> 
+                       </div>
+
+            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                        <a href="javascript:" url="" columns="5" uuid="aqjd" system=""><img height="54" src="Common/images/safe.jpg" border="0">              
+                        <div>安全监督</div>
+                        </a> 
+                       </div>
+
+            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                        <a href="javascript:" url="" columns="5" uuid="zljd" system=""><img height="54" src="Common/images/zljd.jpg" border="0">              
+                        <div>质量监督</div>
+                        </a> 
+                       </div>
+
+            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                        <a href="javascript:" url="" columns="" uuid="5670c80e-6b26-4b97-afac-d16c0ca5589d" system=""><img height="54" src="Common/images/building.png" border="0">              
+                        <div>竣工备案</div>
+                        </a> 
+                       </div>
+
+            <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>档案接收</div>
+                </a> 
+            </div>
+
+            <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>白蚁防治</div>
+                </a> 
+            </div>
+
+             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>房屋安全管理</div>
+                </a> 
+            </div>
+
+             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>住房保障</div>
+                </a> 
+            </div>
+
+             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>物业管理</div>
+                </a> 
+            </div>
+
+             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>维修资金管理</div>
+                </a> 
+            </div>
+
+             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>公房管理</div>
+                </a> 
+            </div>
+
+             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>商品房备案</div>
+                </a> 
+            </div>
+
+             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
+                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
+                   <div>存量房备案</div>
+                </a> 
+            </div>
+
         </div>
         <div class="box">
             <div class="zhaobiao_right percent">

@@ -21,11 +21,13 @@
         <div class="logo">
         </div>
         <div class="top">
-            无锡市住房和城乡建设局公共信息服务平台</div>
+            无锡市住建局政务服务网</div>
     </div>
     <nav class="nav clearfix">
 <div class="w1002">
-<a href="Start.aspx" target="_top">首 页</a><a href="Page_List.aspx?menuno=01" target="_top">工程项目</a><a  href="Page_List.aspx?menuno=02" target="_top">市场主体</a><a  href="Page_List.aspx?menuno=03" target="_top">执业人员</a><a href="Page_List.aspx?menuno=04" target="_top">信用体系</a><a href="Login.aspx" target="_blank">信息共享</a></div>
+<a href="Start.aspx" target="_top">首 页</a><a href="Page_List.aspx?menuno=01" target="_top">工程项目</a><a  href="Page_List.aspx?menuno=02" target="_top">市场主体</a><a  href="Page_List.aspx?menuno=03" target="_top">执业人员</a><a href="Page_List.aspx?menuno=04" target="_top">信用体系</a>
+<a href="Start.aspx" target="_top">登录</a><a href="Page_List.aspx?menuno=04" target="_top">注册</a>
+</div>
 </nav>
 </body>
 </html>
