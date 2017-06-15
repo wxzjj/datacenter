@@ -1,0 +1,16 @@
+USE [WJSJZX]
+GO
+
+INSERT INTO [dbo].[tbXzqdmDic]
+           ([Id]
+           ,[Code]
+           ,[CodeInfo]
+           ,[parentCode]
+           ,[sortOrder])
+     VALUES
+           (13
+           ,320213
+           ,'ÁºÏªÇø'
+           ,320200
+           ,12)
+GO
