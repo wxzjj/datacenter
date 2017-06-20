@@ -134,7 +134,7 @@
 //                { display: '联系人', name: 'lxr', align: 'center', type: 'text', width: "10%" },
                 { display: '联系电话', name: 'lxdh', align: 'center', type: 'text', width: "12%" },
                 { display: '单位类型', name: 'csywlx', align: 'center', type: 'text', width: "8%" },
-                { display: '属地', name: 'county', align: 'center', type: 'text', width: "7%" }
+                { display: '属地', name: 'pcc', align: 'center', type: 'text', width: "7%" }
                 ], width: '99.8%', pageSizeOptions: [5, 10, 15, 20], isScroll: getGridIsScroll(),
                 url: 'List.ashx?fromwhere=Qyxx&qylx=sjdw',
                 dataAction: 'server', //服务器排序

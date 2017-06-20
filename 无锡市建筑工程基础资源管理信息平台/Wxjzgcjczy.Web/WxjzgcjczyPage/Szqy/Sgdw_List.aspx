@@ -223,7 +223,7 @@
             //                { display: '联系人', name: 'lxr', al   ign: 'center', type: 'text', width: "10%" },
             //                { display: '联系电话', name: 'lxdh', align: 'center', type: 'text', width: "10%" },
                 {display: '单位类型', name: 'csywlx', align: 'center', type: 'text', width: "7%" },
-                { display: '属地', name: 'county', align: 'center', type: 'text', width: "6%" }
+                { display: '属地', name: 'pcc', align: 'center', type: 'text', width: "6%" }
 //                { display: '上报状态', name: 'SbState', align: 'center', type: 'text', width: "6%" }
                 ], width: '99.8%', pageSizeOptions: [5, 10, 15, 20], isScroll: getGridIsScroll(),
             url: 'List.ashx?fromwhere=Qyxx&qylx=sgdw',

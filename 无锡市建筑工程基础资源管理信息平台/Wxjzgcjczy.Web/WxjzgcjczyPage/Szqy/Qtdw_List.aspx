@@ -131,7 +131,7 @@
                 //                { display: '联系人', name: 'lxr', align: 'center', type: 'text', width: "10%" },
                 //                { display: '联系电话', name: 'lxdh', align: 'center', type: 'text', width: "15%" },
 
-                { display: '属地', name: 'county', align: 'center', type: 'text', width: "7%" }
+                { display: '属地', name: 'pcc', align: 'center', type: 'text', width: "7%" }
                 ], width: '99.8%', pageSizeOptions: [5, 10, 15, 20], isScroll: getGridIsScroll(),
                 url: 'List.ashx?fromwhere=Qyxx&qylx=qtdw',
                 dataAction: 'server', //服务器排序
