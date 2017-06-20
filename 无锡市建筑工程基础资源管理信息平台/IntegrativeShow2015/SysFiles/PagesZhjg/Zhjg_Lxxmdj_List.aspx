@@ -279,7 +279,11 @@
                     <columns>
                         <asp:TemplateField HeaderText="报省状态">
                             <ItemTemplate>
-                                <%# Int32.Parse(Eval("OperateState").ToString())==0?"已上报":(Int32.Parse(Eval("OperateState").ToString())==2?"来自省一体化平台":"未上报")%>
+
+                                <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%# Int32.Parse(Eval("OperateState").ToString())==0?"已上报":(Int32.Parse(Eval("OperateState").ToString())==2?"来自省一体化平台":"未上报")%>' 
+                                NavigateUrl='<%#string.Format("/WxjzgcjczyQybPage/Xxgx/JbZxjk_FailureList.aspx?pkid={0}",Eval("PKID")) %>'
+                                    Target="_blank" />
+
                             </ItemTemplate>
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="70px" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />

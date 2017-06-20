@@ -10,10 +10,13 @@ using System.Data;
 using Bigdesk8.Web.Controls;
 using IntegrativeShow2;
 
+using IntegrativeShow2.Common;
+
 namespace IntegrativeShow2.SysFiles.PagesZhjg
 {
     public partial class Zhjg_Lxxmdj_List : BasePageGuanli
     {
+
         #region 基本配置
         // 常量   
         protected const string InstanceHead = "Instance_";
@@ -27,7 +30,8 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
 
         #region 控件相关方法
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {   
+
             //实例化
             ihb = new HandleBusinessBase();
             if (!IsPostBack)
@@ -52,7 +56,15 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
             foreach (ListItem item in this.cbl_ssdq.Items)
             {
                 if (item.Selected)
-                    ssdq +=item.Value + ",";
+                {
+                    ssdq += item.Value + ",";
+
+                    if (string.Equals(item.Value, "320213"))
+                    {
+                        ssdq += "320202,320203,320204,";
+                    }
+                }
+                    
             }
 
             //Gdv_LxxmInfo.DataSource = ihb.SearchInfo(InstanceHead + this
