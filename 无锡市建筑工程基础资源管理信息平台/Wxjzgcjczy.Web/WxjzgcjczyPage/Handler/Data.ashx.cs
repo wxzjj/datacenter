@@ -222,41 +222,23 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                 str.AppendFormat("<option value='{0}'>{1}</option>", row["Code"], row["CodeInfo"]);
             }
 
+            str.AppendFormat("<option value='{0}'>{1}</option>", "省内企业", "省内企业");
+            str.AppendFormat("<option value='{0}'>{1}</option>", "省外企业", "省外企业");
+
 
             return str.ToString();
 
         }
         public string GetQySsdq(HttpContext context)
         {
-            XmxxBLL BLL = new XmxxBLL(WorkUser);
-            DataTable dt = BLL.GettbXzqdmDic();//GetQySsdq()
-            StringBuilder str = new StringBuilder();
-            str.AppendFormat("<option  value='{0}' selected=\"selected\">{1}</option>", "", "请选择所属区域");
-            foreach (DataRow row in dt.Rows)
-            {
-                str.AppendFormat("<option value='{0}'>{1}</option>", row["CodeInfo"], row["CodeInfo"]);
-            }
-            str.AppendFormat("<option value='{0}'>{1}</option>", "省内企业", "省内企业");
-            str.AppendFormat("<option value='{0}'>{1}</option>", "省外企业", "省外企业");
-
-            return str.ToString();
+            return this.GetSsdq(context);
 
         }
 
 
         public string GetRysd(HttpContext context)
         {
-            XmxxBLL BLL = new XmxxBLL(WorkUser);
-            DataTable dt = BLL.GetRysd();
-            StringBuilder str = new StringBuilder();
-            str.AppendFormat("<option  value='{0}' selected=\"selected\">{1}</option>", "", "请选择所属区域");
-            foreach (DataRow row in dt.Rows)
-            {
-                str.AppendFormat("<option value='{0}'>{1}</option>", row["County"], row["County"]);
-            }
-
-
-            return str.ToString();
+            return this.GetSsdq(context);
 
         }
 
