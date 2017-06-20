@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<style type="text/css">
+		body, html {width: 100%;height: 80%;margin:0 auto;font-family:"微软雅黑";}
+		#allmap{width: 83%;height:100%;margin:0 auto;font-family:"微软雅黑";}
+		/*主体*/
+		.body_main{ width:100%; height:auto; overflow:hidden; position:absolute; top:80px; bottom:0px; z-index:1;}
+		/*地图主体*/
+		.map_main{ width:100%; height:auto; overflow:hidden; position:absolute; top:0px; bottom:0px; z-index:1;}
+	</style>
+    <title>无锡市住建局政务服务网</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="Common/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="Common/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="Common/css/home.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+	<script src="Common/js/jquery.1.12.4.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=dotnWwG9x6CrK0rNPAiUm2uI2jwbh0YX"></script> 
+  </head>
+
+  <body>
+  <div class="container" >
+    <nav class="navbar" style="border-bottom: 4px solid #4178be; margin-bottom: 5px;">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="top_logo">
+            <a class="top_logo_a" href="#">
+              <img src="Common/images/logo.png" style="height: 60px;"> <span>无锡市住建局政务服务网</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="top_main">
+          <div class="top_nav">
+            <a class="top_nav_sub" href="Start.html">首页</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=01">工程项目</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=02">市场主体</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=03">执业人员</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=04">诚信信息</a>
+            <a class="top_nav_sub top_nav_subOn" href="Map.html">地图服务</a>
+          </div>
+
+          <span id="top1"><a href="Login.aspx" class="js_denglu">你好，请登录</a><a href="#" class="js_zhuce">马上注册</a></span>
+        </div>
+
+    </nav>
+    </div>
+ <div id="allmap"></div>
+
+ 
+    <div class="container">
+      <hr>
+
+      <footer>
+	    <center>
+          <p >无锡市住房和城乡建设局版权所有</p>
+		  <p >技术支持：无锡市建设信息中心</p>
+		</center>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="Common/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="Common/js/ie10-viewport-bug-workaround.js"></script>
+	<script type="text/javascript">
+/**
+ var map = new BMap.Map("allmap");
+  map.centerAndZoom(new BMap.Point(116.403765, 39.914850), 5);
+  map.enableScrollWheelZoom();
+  */
+  var map = new BMap.Map("allmap");  // 创建Map实例
+	map.centerAndZoom("无锡",12);
+	map.enableScrollWheelZoom();
+	</script>
+  </body>
+</html>
