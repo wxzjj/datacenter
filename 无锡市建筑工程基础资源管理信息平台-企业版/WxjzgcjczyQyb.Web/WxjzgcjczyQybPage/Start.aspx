@@ -1,1037 +1,353 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Start.aspx.cs" Inherits="WxjzgcjczyQyb.Web.WxjzgcjczyQybPage.Start" %>
 
-<%@ Register Assembly="Bigdesk8" Namespace="Bigdesk8.Web.Controls" TagPrefix="Bigdesk8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>无锡市住建局政务服务网</title>
-    <meta name="keywords" content="abc" />
-    <meta name="description" content="abc" />
-    <link href="Common/css/Startcss_1.css" rel="stylesheet" type="text/css" />
-    <link href="Common/css/Startcss_2.css" rel="stylesheet" type="text/css" />
 
-    <script src="Common/scripts/jquery-1.9.1.js" type="text/javascript"></script>
-    <!--[if IE]>
-  <script src="js/html5.js"></script>
-<![endif]-->
-</head>
-<body class="body_bg">
-    <form id="form1" runat="server">
-    <p>
-        <!-- Page_Top:begin -->
-        <iframe width="100%" height="190px" frameborder="0" scrolling="no" src="Page_top.aspx"></iframe>
-        <!-- Page_Top:end -->
-    </p>
-    <div class="w1002 clearfix">
-        <div class="content">
-            <div class="box">
-                <div class="zhaobiao_left">
-                    <a class="one" href="http://js.wuxi.gov.cn/" target="_blank">住建局网站</a> <a class="two"
-                        href="http://218.90.162.110:8889/WxjzgcjczyPage/Login.htm" target="_blank">一体化平台</a>
-                    <a class="three" href="Login.aspx" target="_blank">后台管理</a>
-                </div>
-                <div class="zhaobiao_right">
-                    <h2 style="width: 810px">
-                        <a class="current">项目信息</a><a>施工图审查</a><a>招标投标</a><a>合同备案</a><a>安全监督</a><a>质量报监</a><a>施工许可</a><a>竣工备案</a></h2>
-                    <ul class="mt" style="width: 810px">
-                        <!--项目信息-->
-                        <Bigdesk8:PowerDataGrid ID="gridView_xmxx" runat="server" AutoGenerateColumns="False"
-                            CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" PageSize="6">
-                            <Columns>
-                                <asp:TemplateField HeaderText="项目编号">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[项目编号]" ID="lbl_xmbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%# Eval("PrjNum") %>' ID="lb_xmbh" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="项目名称">
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("PrjName") %>' NavigateUrl='<%#string.Format("Gcxm/Zhjg_Lxxmdj_Menu.aspx?PrjNum={0}",Eval("PrjNum")) %>'
-                                            Target="_blank" />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-left" Width="50%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="开工日期">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[开工日期]" ID="lblkgrq" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%#Eval("BDate") %>' ID="lb_kgrq" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                            </Columns>
-                        </Bigdesk8:PowerDataGrid>
-                        <li style="width: 780px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=01&itemno=01"
-                            target="_blank">
-                            <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                    </ul>
-                    <ul class="mt hide" style="width: 810px">
-                        <!--施工图审查-->
-                        <Bigdesk8:PowerDataGrid ID="gridView_sgtsc" runat="server" AutoGenerateColumns="False"
-                            CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" PageSize="6">
-                            <Columns>
-                                <asp:TemplateField HeaderText="项目编号">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[项目编号]" ID="lbl_xmbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%# Eval("PrjNum") %>' ID="lb_xmbh" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="项目名称">
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("PrjName") %>' NavigateUrl='<%#string.Format("Gcxm/Zhjg_Lxxmdj_Menu.aspx?PrjNum={0}",Eval("PrjNum")) %>'
-                                            Target="_blank" />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                                    <ItemStyle CssClass="pdg-itemstyle-left" Width="50%"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="审查完成日期">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[审查完成日期]" ID="lblkgrq" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%#Eval("CensorEDate") %>' ID="lb_kgrq" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                            </Columns>
-                        </Bigdesk8:PowerDataGrid>
-                        <li style="width: 780px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=01&itemno=02"
-                            target="_blank">
-                            <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                    </ul>
-                    <ul class="mt hide" style="width: 810px">
-                        <!--招标投标-->
-                        <Bigdesk8:PowerDataGrid ID="gridView_zbtb" runat="server" AutoGenerateColumns="False"
-                            CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" PageSize="6">
-                            <Columns>
-                                <asp:TemplateField HeaderText="项目编号">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[项目编号]" ID="lbl_xmbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%# Eval("PrjNum") %>' ID="lb_xmbh" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="项目名称">
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("PrjName") %>' NavigateUrl='<%#string.Format("Gcxm/Zhjg_Lxxmdj_Menu.aspx?PrjNum={0}",Eval("PrjNum")) %>'
-                                            Target="_blank" />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                                    <ItemStyle CssClass="pdg-itemstyle-left" Width="50%"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="中标日期">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[中标日期]" ID="lblkgrq" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%#Eval("TenderResultDate") %>' ID="lb_kgrq"
-                                            ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                            </Columns>
-                        </Bigdesk8:PowerDataGrid>
-                        <li style="width: 780px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=01&itemno=03"
-                            target="_blank">
-                            <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                    </ul>
-                    <ul class="mt hide" style="width: 810px">
-                        <!--合同备案-->
-                        <Bigdesk8:PowerDataGrid ID="gridView_htba" runat="server" AutoGenerateColumns="False"
-                            CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" PageSize="6">
-                            <Columns>
-                                <asp:TemplateField HeaderText="项目编号">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[项目编号]" ID="lbl_xmbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%# Eval("PrjNum") %>' ID="lb_xmbh" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="项目名称">
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("PrjName") %>' NavigateUrl='<%#string.Format("Gcxm/Zhjg_Lxxmdj_Menu.aspx?PrjNum={0}",Eval("PrjNum")) %>'
-                                            Target="_blank" />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                                    <ItemStyle CssClass="pdg-itemstyle-left" Width="50%"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="合同签订日期">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[合同签订日期]" ID="lblkgrq" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%#Eval("ContractDate") %>' ID="lb_kgrq" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                            </Columns>
-                        </Bigdesk8:PowerDataGrid>
-                        <li style="width: 780px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=01&itemno=04"
-                            target="_blank">
-                            <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                    </ul>
-                    <ul class="mt hide" style="width: 810px">
-                        <!--安全监督-->
-                        <Bigdesk8:PowerDataGrid ID="gridView_aqjd" runat="server" AutoGenerateColumns="False"
-                            CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" PageSize="6">
-                            <Columns>
-                                <asp:TemplateField HeaderText="项目编号">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[项目编号]" ID="lbl_xmbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%# Eval("xmbm") %>' ID="lb_xmbh" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="项目名称">
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("PrjName") %>' NavigateUrl='<%#string.Format("Gcxm/Zhjg_Lxxmdj_Menu.aspx?PrjNum={0}",Eval("xmbm")) %>'
-                                            Target="_blank" />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                                    <ItemStyle CssClass="pdg-itemstyle-left" Width="50%"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="报监日期">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[报监日期]" ID="lblkgrq" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%#Eval("bjrq") %>' ID="lb_kgrq" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                            </Columns>
-                        </Bigdesk8:PowerDataGrid>
-                        <li style="width: 780px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=01&itemno=05"
-                            target="_blank">
-                            <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                    </ul>
-                    <ul class="mt hide" style="width: 810px">
-                        <!--质量报监-->
-                        <Bigdesk8:PowerDataGrid ID="gridView_zljd" runat="server" AutoGenerateColumns="False"
-                            CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" PageSize="6">
-                            <Columns>
-                                <asp:TemplateField HeaderText="项目编号">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[项目编号]" ID="lbl_xmbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%# Eval("PrjNum") %>' ID="lb_xmbh" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="项目名称">
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("PrjName") %>' NavigateUrl='<%#string.Format("Gcxm/Zhjg_Lxxmdj_Menu.aspx?PrjNum={0}",Eval("PrjNum")) %>'
-                                            Target="_blank" />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                                    <ItemStyle CssClass="pdg-itemstyle-left" Width="50%"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="报监日期">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[报监日期]" ID="lblkgrq" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%#Eval("sbrq") %>' ID="lb_kgrq" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                            </Columns>
-                        </Bigdesk8:PowerDataGrid>
-                        <li style="width: 780px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=01&itemno=06"
-                            target="_blank">
-                            <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                    </ul>
-                    <ul class="mt hide" style="width: 810px">
-                        <!--施工许可-->
-                        <Bigdesk8:PowerDataGrid ID="gridView_sgxk" runat="server" AutoGenerateColumns="False"
-                            CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" PageSize="6">
-                            <Columns>
-                                <asp:TemplateField HeaderText="项目编号">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[项目编号]" ID="lbl_xmbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%# Eval("PrjNum") %>' ID="lb_xmbh" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="项目名称">
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("PrjName") %>' NavigateUrl='<%#string.Format("Gcxm/Zhjg_Lxxmdj_Menu.aspx?PrjNum={0}",Eval("PrjNum")) %>'
-                                            Target="_blank" />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                                    <ItemStyle CssClass="pdg-itemstyle-left" Width="50%"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="发证日期">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[发证日期]" ID="lblkgrq" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%#Eval("IssueCertDate") %>' ID="lb_kgrq" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                            </Columns>
-                        </Bigdesk8:PowerDataGrid>
-                        <li style="width: 780px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=01&itemno=07"
-                            target="_blank">
-                            <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                    </ul>
-                    <ul class="mt hide" style="width: 810px">
-                        <!--竣工备案-->
-                        <Bigdesk8:PowerDataGrid ID="gridView_jgba" runat="server" AutoGenerateColumns="False"
-                            CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" PageSize="6">
-                            <Columns>
-                                <asp:TemplateField HeaderText="项目编号">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[项目编号]" ID="lbl_xmbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%# Eval("PrjNum") %>' ID="lb_xmbh" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="项目名称">
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("PrjName") %>' NavigateUrl='<%#string.Format("Gcxm/Zhjg_Lxxmdj_Menu.aspx?PrjNum={0}",Eval("PrjNum")) %>'
-                                            Target="_blank" />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                                    <ItemStyle CssClass="pdg-itemstyle-left" Width="50%"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="实际竣工日期">
-                                    <ItemTemplate>
-                                        <Bigdesk8:DBText runat="server" Text="[实际竣工日期]" ID="lblkgrq" ForeColor="Gray"></Bigdesk8:DBText>
-                                        <Bigdesk8:DBText runat="server" Text='<%#Eval("EDate") %>' ID="lb_kgrq" ForeColor="Black"></Bigdesk8:DBText>
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                    <ItemStyle CssClass="pdg-itemstyle-center" Width="25%" />
-                                </asp:TemplateField>
-                            </Columns>
-                        </Bigdesk8:PowerDataGrid>
-                        <li style="width: 780px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=01&itemno=08"
-                            target="_blank">
-                            <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Bootstrap core CSS -->
+    <link href="Common/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="Common/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="Common/css/home.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  <div class="container" >
+    <nav class="navbar" style="border-bottom: 4px solid #4178be; margin-bottom: 5px;">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="top_logo">
+            <a class="top_logo_a" href="#">
+              <img src="Common/images/logo.png" style="height: 60px;"> <span>无锡市住建局政务服务网</span>
+            </a>
+          </div>
         </div>
-        <div class="box friendlink">
-            <h2>业务系统</h2>
-           <!-- <a href="Page_List.aspx?menuno=01" target="_top">
-                <img src="Common/images/gcxm.jpg" width="200" height="80"></a> 
-                <a href="Page_List.aspx?menuno=02">
-                    <img src="Common/images/qyxx.jpg" width="200" height="80"></a> <a href="Page_List.aspx?menuno=03"
-                        target="_top">
-                        <img src="Common/images/ryxx.jpg" width="200" height="80"></a> <a href="Page_List.aspx?menuno=04"
-                            target="_top">
-                            <img src="Common/images/xyxx.jpg" width="200" height="80"></a>-->
-            <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>项目登记</div>
-                </a> 
-            </div>
 
-            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="3e1c0306-64ca-4a60-8187-6cf4009c3d05" system=""><img height="54" src="Common/images/gcztb.png" border="0">              
-                    <div>招投标</div>
-                </a>
-            </div>
+        <div class="top_main">
+          <div class="top_nav">
+            <a class="top_nav_sub top_nav_subOn" href="#">首页</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=01">工程项目</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=02">市场主体</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=03">执业人员</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=04">诚信信息</a>
+            <a class="top_nav_sub" href="Map.html">地图服务</a>
+          </div>
 
-            <div align="center" style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                        <a href="javascript:" url="http://221.226.0.185/AppSgtSjsc/Content/Login.aspx" columns="" uuid="949de2e5-e576-40fa-9c0f-a029d84d6191" system=""><img height="54" src="Common/images/sgtsc.png" border="0">              
-                        <div>施工图审查</div>
-                        </a> 
-                       </div>
-
-            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                        <a href="javascript:" url="" columns="" uuid="811d3387-4d4c-41c2-b8e9-570102f263b9" system=""><img height="45" src="Common/images/htba.png" border="0">              
-                        <div>合同备案</div>
-                        </a> 
-                       </div>
-
-            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                        <a href="javascript:" url="" columns="" uuid="74249764-5c5c-4259-a8b5-c226b638e73d" system=""><img height="54" src="Common/images/sgxk.png" border="0">              
-                        <div>施工许可证</div>
-                        </a> 
-                       </div>
-
-            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                        <a href="javascript:" url="" columns="5" uuid="aqjd" system=""><img height="54" src="Common/images/safe.jpg" border="0">              
-                        <div>安全监督</div>
-                        </a> 
-                       </div>
-
-            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                        <a href="javascript:" url="" columns="5" uuid="zljd" system=""><img height="54" src="Common/images/zljd.jpg" border="0">              
-                        <div>质量监督</div>
-                        </a> 
-                       </div>
-
-            <div style="float:left;text-align:center;paddin:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                        <a href="javascript:" url="" columns="" uuid="5670c80e-6b26-4b97-afac-d16c0ca5589d" system=""><img height="54" src="Common/images/building.png" border="0">              
-                        <div>竣工备案</div>
-                        </a> 
-                       </div>
-
-            <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>档案接收</div>
-                </a> 
-            </div>
-
-            <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>白蚁防治</div>
-                </a> 
-            </div>
-
-             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>房屋安全管理</div>
-                </a> 
-            </div>
-
-             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>住房保障</div>
-                </a> 
-            </div>
-
-             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>物业管理</div>
-                </a> 
-            </div>
-
-             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>维修资金管理</div>
-                </a> 
-            </div>
-
-             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>公房管理</div>
-                </a> 
-            </div>
-
-             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>商品房备案</div>
-                </a> 
-            </div>
-
-             <div style="float:left;text-align:center;padding:5;height:87px;width:127px;margin-left:10px;margin-top:10px;background-image:url(Common/images/system-bg.jpg);border:1 solid width:100px;font-size:10pt;border:1 solid #C3DCE0;padding-top:5;">
-                <a href="javascript:" url="" columns="5" uuid="14220ec3-a95b-4946-b74f-0ce9799df336" system=""><img height="54" src="Common/images/xmdj.png" border="0">              
-                   <div>存量房备案</div>
-                </a> 
-            </div>
-
+          <span id="top1"><a href="Login.aspx" class="js_denglu">你好，请登录</a><a href="#" class="js_zhuce">马上注册</a></span>
         </div>
-        <div class="box">
-            <div class="zhaobiao_right percent">
-                <h2>
-                    <a class="current">市场主体</a></h2>
+
+        <!--
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
             </div>
-            <div class="sczt_right">
-                <h2>
-                    <a class="current">建设单位</a><a>勘察单位</a><a>设计单位</a><a>施工单位</a><a>中介机构</a></h2>
-                <ul class="mt">
-                    <!--建设单位-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_jsdw" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false">
-                        <Columns>
-                            <asp:TemplateField HeaderText="组织机构代码">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[组织机构代码]" ID="lbl_zzjgdm" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zzjgdm") %>' ID="lbzzjgdm" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("jsdw") %>' NavigateUrl='<%#string.Format("Sczt/JsdwxxToolBar.aspx?jsdwid={0}",Eval("jsdwid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位地址">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[单位地址]" ID="lbl_dwdz" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("dwdz") %>' ID="lbdwdz" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="5%" />
-                            </asp:TemplateField>
-                            <%--  <asp:TemplateField HeaderText="联系人">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[联系人]" ID="lbl_lxr" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("lxr") %>' ID="lblxr" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>--%>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=02&itemno=01"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-                <ul class="mt hide">
-                    <!--勘察单位-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_kcdw" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false">
-                        <Columns>
-                            <asp:TemplateField HeaderText="组织机构代码">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[组织机构代码]" ID="lbl_zzjgdm" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zzjgdm") %>' ID="lbzzjgdm" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位地址">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[单位地址]" ID="lbl_dwdz" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("xxdd") %>' ID="lbdwdz" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="5%" />
-                            </asp:TemplateField>
-                            <%--<asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>--%>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=02&itemno=02"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-                <ul class="mt hide">
-                    <!--设计单位-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_sjdw" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false">
-                        <Columns>
-                            <asp:TemplateField HeaderText="组织机构代码">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[组织机构代码]" ID="lbl_zzjgdm" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zzjgdm") %>' ID="lbzzjgdm" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位地址">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[单位地址]" ID="lbl_dwdz" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("xxdd") %>' ID="lbdwdz" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="5%" />
-                            </asp:TemplateField>
-                            <%-- <asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>--%>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=02&itemno=03"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-                <ul class="mt hide">
-                    <!--施工单位-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_sgdw" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false">
-                        <Columns>
-                            <asp:TemplateField HeaderText="组织机构代码">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[组织机构代码]" ID="lbl_zzjgdm" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zzjgdm") %>' ID="lbzzjgdm" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位地址">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[单位地址]" ID="lbl_dwdz" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zcdd") %>' ID="lbdwdz" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="5%" />
-                            </asp:TemplateField>
-                            <%--<asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>--%>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=02&itemno=04"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-                <ul class="mt hide">
-                    <!--中介机构-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_zjjg" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false">
-                        <Columns>
-                            <asp:TemplateField HeaderText="组织机构代码">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[组织机构代码]" ID="lbl_zzjgdm" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zzjgdm") %>' ID="lbzzjgdm" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位地址">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[单位地址]" ID="lbl_dwdz" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("xxdd") %>' ID="lbdwdz" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="5%" />
-                            </asp:TemplateField>
-                            <%--  <asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>--%>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=02&itemno=05"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-                <%--    <ul class="mt hide">
-                    <!--其他-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_qt" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false">
-                        <Columns>
-                            <asp:TemplateField HeaderText="组织机构代码">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[组织机构代码]" ID="lbl_zzjgdm" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zzjgdm") %>' ID="lbzzjgdm" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-center" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位地址">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[单位地址]" ID="lbl_dwdz" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("xxdd") %>' ID="lbdwdz" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="5%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=02&itemno=06"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>--%>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
             </div>
-        </div>
-        <div class="box">
-            <div class="zhaobiao_right percent">
-                <h2>
-                    <a class="current">执业人员</a></h2>
-            </div>
-            <div class="zyry_right">
-                <h2>
-                    <a class="current">注册执业人员</a><a>安全生产管理人员</a><a>企业技经人员</a><a>专业岗位管理人员</a></h2>
-                <ul class="mt">
-                    <!--注册执业人员-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_zczyry" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false" OnRowDataBound="gridView_RowDataBound">
-                        <Columns>
-                            <asp:TemplateField HeaderText="执业资格类型">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[执业资格类型]" ID="lbl_ryzyzglx" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("ryzyzglx") %>' ID="lbryzyzglx" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="姓名">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_Viewxm" runat="server" Text='<%#Eval("xm") %>' NavigateUrl='<%#string.Format("Zyry/RyxxToolBar.aspx?ryid={0}&rylx=zczyry",Eval("ryid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-left"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="证书编号">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[证书编号]" ID="lbl_zsbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zsbh") %>' ID="lbzsbh" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_Viewqymc" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-left"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="2%" />
-                            </asp:TemplateField>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=03&itemno=01"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-                <ul class="mt hide">
-                    <!--安全生产管理人员-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_aqscglry" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false" OnRowDataBound="gridView_RowDataBound">
-                        <Columns>
-                            <asp:TemplateField HeaderText="执业资格类型">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[执业资格类型]" ID="lbl_ryzyzglx" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("ryzyzglx") %>' ID="lbryzyzglx" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="姓名">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_Viewxm" runat="server" Text='<%#Eval("xm") %>' NavigateUrl='<%#string.Format("Zyry/RyxxToolBar.aspx?ryid={0}&rylx=aqscglry",Eval("ryid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="证书编号">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[证书编号]" ID="lbl_zsbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zsbh") %>' ID="lbzsbh" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_Viewqymc" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="2%" />
-                            </asp:TemplateField>
-                            <%--  <asp:BoundField HeaderText="是否安监实名认证" DataField="sfsmrz">
-                                <ItemStyle CssClass="pdg-itemstyle-center" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:BoundField>--%>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=03&itemno=02"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-                <ul class="mt hide">
-                    <!--企业技经人员-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_qyjjry" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false" OnRowDataBound="gridView_RowDataBound">
-                        <Columns>
-                            <asp:TemplateField HeaderText="执业资格类型">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[执业资格类型]" ID="lbl_ryzyzglx" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("ryzyzglx") %>' ID="lbryzyzglx" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="姓名">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_Viewxm" runat="server" Text='<%#Eval("xm") %>' NavigateUrl='<%#string.Format("Zyry/RyxxToolBar.aspx?ryid={0}&rylx=qyjjry",Eval("ryid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="证书编号">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[证书编号]" ID="lbl_zsbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zsbh") %>' ID="lbzsbh" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="所属企业">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_Viewqymc" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="2%" />
-                            </asp:TemplateField>
-                            <%--  <asp:BoundField HeaderText="是否安监实名认证" DataField="sfsmrz">
-                                <ItemStyle CssClass="pdg-itemstyle-center" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:BoundField>--%>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=03&itemno=03"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-                <ul class="mt hide">
-                    <!--专业岗位管理人员-->
-                    <Bigdesk8:PowerDataGrid ID="gridView_zygwglry" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="798px" AllowPaging="false" ShowHeader="false" OnRowDataBound="gridView_RowDataBound">
-                        <Columns>
-                            <asp:TemplateField HeaderText="执业资格类型">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[执业资格类型]" ID="lbl_ryzyzglx" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("ryzyzglx") %>' ID="lbryzyzglx" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="姓名">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_Viewxm" runat="server" Text='<%#Eval("xm") %>' NavigateUrl='<%#string.Format("Zyry/RyxxToolBar.aspx?ryid={0}&rylx=zygwglry",Eval("ryid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="证书编号">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[证书编号]" ID="lbl_zsbh" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zsbh") %>' ID="lbzsbh" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="单位名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_Viewqymc" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyid")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_county" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("county") %>' ID="lbcounty" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="2%" />
-                            </asp:TemplateField>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=03&itemno=04"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="box">
-            <div class="zhaobiao_right percent">
-                <h2>
-                    <a class="current">信用公示</a></h2>
-            </div>
-            <div class="xygs_right">
-                <h2>
-                    <a class="current">施工企业</a></h2>
-                <ul class="mt">
-                    <Bigdesk8:PowerDataGrid ID="gridView_xytx" runat="server" AutoGenerateColumns="False"
-                        CellPadding="1" Width="1000px" AllowPaging="false" ShowHeader="false">
-                        <Columns>
-                            <asp:TemplateField HeaderText="企业组织机构代码">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[企业组织机构代码]" ID="lbl_zzjgdm" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zzjgdm") %>' ID="lbzzjgdm" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="企业名称">
-                                <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("qymc") %>' NavigateUrl='<%#string.Format("Sczt/QyxxToolBar.aspx?qyid={0}",Eval("qyID")) %>'
-                                        Target="_blank" />
-                                </ItemTemplate>
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="4%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="企业资质类型">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[资质类型]" ID="lbl_zzlb" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("zzlb") %>' ID="lbzzlb" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="考评年度">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[考评年度]" ID="lbl_kpnd" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("kpnd") %>' ID="lbkpnd" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="属地">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[属地]" ID="lbl_qysd" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("qysd") %>' ID="lbqysd" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                            <%--<asp:BoundField HeaderText="基本分" DataField="jbf">
-                                <ItemStyle CssClass="pdg-itemstyle-center" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:BoundField>
-                            <asp:BoundField HeaderText="综合大检查得分" DataField="zhdjcdf">
-                                <ItemStyle CssClass="pdg-itemstyle-center" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:BoundField>
-                            <asp:BoundField HeaderText="日常考核扣分" DataField="rckhkf">
-                                <ItemStyle CssClass="pdg-itemstyle-center" Width="2%"></ItemStyle>
-                                <HeaderStyle CssClass="pdg-headerstyle-center"></HeaderStyle>
-                            </asp:BoundField>--%>
-                            <asp:TemplateField HeaderText="信用分">
-                                <ItemTemplate>
-                                    <Bigdesk8:DBText runat="server" Text="[信用分]" ID="lbl_xyf" ForeColor="Gray"></Bigdesk8:DBText>
-                                    <Bigdesk8:DBText runat="server" Text='<%# Eval("xyf") %>' ID="lbxyf" ForeColor="Black"></Bigdesk8:DBText>
-                                </ItemTemplate>
-                                <HeaderStyle CssClass="pdg-headerstyle-center" />
-                                <ItemStyle CssClass="pdg-itemstyle-left" Width="3%" />
-                            </asp:TemplateField>
-                        </Columns>
-                    </Bigdesk8:PowerDataGrid>
-                    <li style="width: 970px; text-align: right; margin-top: 2px;"><a href="Page_List.aspx?menuno=04&itemno=01"
-                        target="_blank">
-                        <img src="Common/images/more.png" align="absmiddle" /></a></li>
-                </ul>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div>--> <!--/.navbar-collapse -->
+
+    </nav>
     </div>
-    </form>
-    <p>
-        <iframe width="100%" frameborder="0" height="96" scrolling="no" src="Page_End.aspx">
-        </iframe>
-    </p>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.news a').click(function() {
-                $(this).addClass("current").siblings().removeClass("current");
-                $(".news ul").eq($(".news a").index(this)).show().siblings('ul').hide();
-            });
+    <div class="container" style="margin-bottom: 2px;">
 
-            $('.zhaobiao_right a').click(function() {
-                $(this).addClass("current").siblings().removeClass("current");
-                $(".zhaobiao_right ul").eq($(".zhaobiao_right a").index(this)).show().siblings('ul').hide();
-            });
+      <div class="row">
+        <div class="col-md-2"><span class="js_search_01">办件进度查询：</span> </div>
+        <div class="col-md-8">
+          <input type="text" name="q" autocomplete="off" class="js_search_02" value="请输入 经办人/申请人、单位" onclick="if(this.value==&quot;请输入 经办人/申请人、单位&quot;){this.value=&quot;&quot;;this.focus();}" onblur="if(this.value==&quot;&quot;){this.value=&quot;请输入 经办人/申请人、单位&quot;}">
 
-            $('.sczt_right a').click(function() {
-                $(this).addClass("current").siblings().removeClass("current");
-                $(".sczt_right ul").eq($(".sczt_right a").index(this)).show().siblings('ul').hide();
-            });
+        </div>
+        <div class="col-md-2">
+          <input type="submit" class="js_search_03" value="查询">
+        </div>
+      </div>
 
-            $('.zyry_right a').click(function() {
-                $(this).addClass("current").siblings().removeClass("current");
-                $(".zyry_right ul").eq($(".zyry_right a").index(this)).show().siblings('ul').hide();
-            });
+      <!--
+      <div class="left_tit_search">
+        <span class="js_search_01">办件进度查询：</span>
+        <input type="text" name="q" autocomplete="off" class="js_search_02" value="请输入 经办人/申请人、单位" onclick="if(this.value==&quot;请输入 经办人/申请人、单位&quot;){this.value=&quot;&quot;;this.focus();}" onblur="if(this.value==&quot;&quot;){this.value=&quot;请输入 经办人/申请人、单位&quot;}">
+        <input type="submit" class="js_search_03" value="查询">
+      </div> -->
 
-        });
-    </script>
+    </div>
 
-</body>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+    <div class="container" style="">
+
+        <div class="left_tit_main">服务事项</div>
+        <div class="left_list_main">
+          <div class="scp2_rmfw_main">
+
+            <a class="scp2_rmfw_sub" href="Detail.html" title="项目登记" target="_blank" style="background-image:url(Common/images/1.png);"><span>项目登记</span></a>
+            <a class="scp2_rmfw_sub" href="Detail.html" title="招投标" target="_blank" style="background-image:url(Common/images/2.png);"><span>招投标</span></a>
+            <a class="scp2_rmfw_sub" href="Detail.html" title="施工图审查" target="_blank" style="background-image:url(Common/images/3.png);"><span>施工图审查</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="勘察设计合同备案" target="_blank" style="background-image:url(Common/images/4.png);"><span>勘察设计合同备案</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="施工监理合同备案" target="_blank" style="background-image:url(Common/images/5.png);"><span>施工监理合同备案</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="造价咨询合同备案" target="_blank" style="background-image:url(Common/images/6.png);"><span>造价咨询合同备案</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="施工许可证" target="_blank" style="background-image:url(Common/images/7.png);"><span>施工许可证</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="安全监督" target="_blank" style="background-image:url(Common/images/8.png);"><span>安全监督</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="质量监督" target="_blank" style="background-image:url(Common/images/9.png);"><span>质量监督</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="竣工备案" target="_blank" style="background-image:url(Common/images/10.png);"><span>竣工备案</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="档案接收" target="_blank" style="background-image:url(Common/images/1.png);"><span>档案接收</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="白蚁防治" target="_blank" style="background-image:url(Common/images/2.png);"><span>白蚁防治</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="房屋安全管理" target="_blank" style="background-image:url(Common/images/3.png);"><span>房屋安全管理</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="住房保障" target="_blank" style="background-image:url(Common/images/4.png);"><span>住房保障</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="物业管理" target="_blank" style="background-image:url(Common/images/5.png);"><span>物业管理</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="维修资金管理" target="_blank" style="background-image:url(Common/images/6.png);"><span>维修资金管理</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="公房管理" target="_blank" style="background-image:url(Common/images/7.png);"><span>公房管理</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="商品房备案" target="_blank" style="background-image:url(Common/images/8.png);"><span>商品房备案</span></a>
+            <a class="scp2_rmfw_sub" href="#" title="存量房备案" target="_blank" style="background-image:url(Common/images/9.png);"><span>存量房备案</span></a>
+
+          </div></div>
+
+    </div>
+
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="news_title">最新资讯</div>
+
+      <div class="row">
+        <div class="col-md-7 news_area">
+          <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+            <ul id="myTabs" class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#policy" id="policy-tab" role="tab" data-toggle="tab" aria-controls="policy" aria-expanded="true">政策法规</a></li>
+              <li role="presentation"><a href="#notification" role="tab" id="notification-tab" data-toggle="tab" aria-controls="notification">文件通知</a></li>
+              <li role="presentation"><a href="#announcement" role="tab" id="announcement-tab" data-toggle="tab" aria-controls="announcement">公示公告</a></li>
+              <div class="news_more">
+                <a href="#">
+                  <span class="glyphicon-class">更多</span>
+                  <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                </a>
+              </div>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="policy" aria-labelledby="policy-tab">
+                <div class="activeTinyTabContent" item_code="jsbpp_news_tzgg" id="latestnews_tab1">
+                  <ul class="news_ul">
+
+                    <li><i class="dota_ranking">1</i> <span>2017-06-07</span>
+                      <a class="formsubmit" target="_blank" >
+                        关于征求《施工总承包企业特级资质标准》（征求意见稿）意见的函
+                      </a></li>
+
+                    <li><i class="dota_ranking">2</i> <span>2017-06-01</span>
+                      <a class="formsubmit" target="_blank">
+                        住房城乡建设部办公厅关于定期报送加强建筑设计管理等有关工作进...
+                      </a></li>
+
+                    <li><i class="dota_ranking">3</i> <span>2017-05-25</span>
+                      <a class="formsubmit" target="_blank" >
+                        住房城乡建设部办公厅关于2017年一季度建筑工程施工转包违法...
+                      </a></li>
+
+                    <li><i class="dota_ranking">4</i> <span>2017-05-08</span>
+                      <a class="formsubmit" target="_blank">
+                        住房城乡建设部关于开展全过程工程咨询试点工作的通知
+                      </a></li>
+
+                    <li><i class="dota_ranking">5</i> <span>2017-05-08</span>
+                      <a class="formsubmit" target="_blank" >
+                        住房城乡建设部关于印发工程勘察设计行业发展“十三五”规划的通...
+                      </a></li>
+
+                    <li><i class="dota_ranking">6</i> <span>2017-05-04</span>
+                      <a class="formsubmit" target="_blank" >
+                        住房城乡建设部关于印发建筑业发展“十三五”规划的通知
+                      </a></li>
+
+                    <li><i class="dota_ranking">7</i> <span>2017-04-28</span>
+                      <a class="formsubmit" target="_blank">
+                        住房城乡建设部办公厅关于江西众森建筑发展有限公司等9家企业资...
+                      </a></li>
+
+                    <li><i class="dota_ranking">8</i> <span>2017-04-26</span>
+                      <a class="formsubmit" target="_blank" >
+                        住房城乡建设部办公厅关于黄崇顺申报一级建造师注册弄虚作假行为...
+                      </a></li>
+
+                  </ul>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="notification" aria-labelledby="notification-tab">
+                <ul class="news_ul">
+
+                  <li><i class="dota_ranking">1</i> <span>2017-06-07</span>
+                    <a class="formsubmit" target="_blank" >
+                      关于征求《施工总承包企业特级资质标准》（征求意见稿）意见的函
+                    </a></li>
+
+                  <li><i class="dota_ranking">2</i> <span>2017-06-01</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部办公厅关于定期报送加强建筑设计管理等有关工作进...
+                    </a></li>
+
+                  <li><i class="dota_ranking">3</i> <span>2017-05-25</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部办公厅关于2017年一季度建筑工程施工转包违法...
+                    </a></li>
+
+                  <li><i class="dota_ranking">4</i> <span>2017-05-08</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部关于开展全过程工程咨询试点工作的通知
+                    </a></li>
+
+                  <li><i class="dota_ranking">5</i> <span>2017-05-08</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部关于印发工程勘察设计行业发展“十三五”规划的通...
+                    </a></li>
+
+                  <li><i class="dota_ranking">6</i> <span>2017-05-04</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部关于印发建筑业发展“十三五”规划的通知
+                    </a></li>
+
+                  <li><i class="dota_ranking">7</i> <span>2017-04-28</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部办公厅关于江西众森建筑发展有限公司等9家企业资...
+                    </a></li>
+
+                  <li><i class="dota_ranking">8</i> <span>2017-04-26</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部办公厅关于黄崇顺申报一级建造师注册弄虚作假行为...
+                    </a></li>
+
+                </ul>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="announcement" aria-labelledby="announcement-tab">
+                <ul class="news_ul">
+
+                  <li><i class="dota_ranking">1</i> <span>2017-06-07</span>
+                    <a class="formsubmit" target="_blank" >
+                      关于征求《施工总承包企业特级资质标准》（征求意见稿）意见的函
+                    </a></li>
+
+                  <li><i class="dota_ranking">2</i> <span>2017-06-01</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部办公厅关于定期报送加强建筑设计管理等有关工作进...
+                    </a></li>
+
+                  <li><i class="dota_ranking">3</i> <span>2017-05-25</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部办公厅关于2017年一季度建筑工程施工转包违法...
+                    </a></li>
+
+                  <li><i class="dota_ranking">4</i> <span>2017-05-08</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部关于开展全过程工程咨询试点工作的通知
+                    </a></li>
+
+                  <li><i class="dota_ranking">5</i> <span>2017-05-08</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部关于印发工程勘察设计行业发展“十三五”规划的通...
+                    </a></li>
+
+                  <li><i class="dota_ranking">6</i> <span>2017-05-04</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部关于印发建筑业发展“十三五”规划的通知
+                    </a></li>
+
+                  <li><i class="dota_ranking">7</i> <span>2017-04-28</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部办公厅关于江西众森建筑发展有限公司等9家企业资...
+                    </a></li>
+
+                  <li><i class="dota_ranking">8</i> <span>2017-04-26</span>
+                    <a class="formsubmit" target="_blank" >
+                      住房城乡建设部办公厅关于黄崇顺申报一级建造师注册弄虚作假行为...
+                    </a></li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 news_area">
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="Common/images/news1.jpg" alt="..." style="width: 100%; height: 360px;">
+                <div class="carousel-caption">
+                  陈政高在全国装配式建筑工作现场会上要求 大力...
+                </div>
+              </div>
+              <div class="item">
+                <img src="Common/images/news2.jpg" alt="..." style="width: 100%; height: 360px;">
+                <div class="carousel-caption">
+                  国务院安委会召开全国安全生产电视电话会议
+                </div>
+              </div>
+              ...
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <footer>
+	    <center>
+          <p >无锡市住房和城乡建设局版权所有</p>
+		  <p >技术支持：无锡市建设信息中心</p>
+		</center>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="Common/js/jquery.1.12.4.min.js"></script>
+    <script src="Common/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="Common/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

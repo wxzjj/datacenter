@@ -1,0 +1,141 @@
+@charset "utf-8";
+/*=========================Reset_start==========================*/
+body,h1,h2,h3,h4,h5,h6,div,p,dl,dt,dd,ol,ul,li,form,table,th,td,a,img,span,strong,var,em,input,textarea,select,option{margin: 0; padding: 0;}
+html,body{font-family:microsoft yahei;text-align: left;background: #fff;}
+ul,ol{list-style: none;}
+img{border: 0;}
+input,select,textarea{outline:0;}
+textarea{resize:none; overflow: auto;}
+table{border-collapse: collapse; border-spacing: 0;}
+th,strong,var,em{font-weight: normal; font-style: normal;}
+a{text-decoration: none;color: #333;}
+.clearfloat:after{content:"";display: block;clear: both;visibility:hidden;height:0;}
+.clearfloat{zoom:1;}
+/*==========================Reset_End===========================*/
+
+/*主题效果css*/
+.section-content{width: 890px; float: left;}
+.nav-height{ position:relative; height: 51px;}
+.nav-wrap { width: 1170px;height: 51px;background: #fff;margin: 0 auto;padding-left: 15px;padding-right: 15px;}
+.nav-wrap.navFix{position: fixed;top: 0;left: 50%; z-index: 999;margin-left: -600px;}
+.nav-wrap ul {padding: 0;width: 890px; display: block;background: #f2f2f2;border: 1px solid #ccc;}
+.nav-wrap ul.show{border: 1px solid #ccc;}
+
+.nav-wrap li { display: inline-block; text-align: left;height: 50px; line-height: 50px; float: left;background: url(../images/js_wzy_01.png) right center no-repeat;}
+.nav-wrap li a {display: block;padding: 0 28px;font-size:17px; color: #333; text-decoration: none;text-align: center;}
+.nav-wrap li a:hover{color: #4680d1;}
+.nav-wrap li a.active {color: #fff;background: #4178be;}
+.nav-mobile {display: none;font-weight: bold;width: 100%;}
+.click-me {width: 150px;height: 30px; background: #4680d1;color: white; text-align: center;line-height: 30px;}
+.click-me a {display: block;color: white;}
+
+
+/*当前位置 开始*/
+.bt-position{width: 1170px;height: 40px;line-height: 40px;background: none; padding-left: 15px;padding-right: 15px;}
+.bt-position span{line-height: 40px;padding: 0px;font-size:15px;color: #999;}
+.bt-position table td{line-height: 40px;}
+.bt-position a{line-height: 40px;color: #666;font-size:15px;}
+.bt-position a:hover{color: #408ed6;}
+/*当前位置 结束*/
+
+/*办理事件名称序号机构 开始*/
+.blsj{width: 100%;background: #408ed6;margin-bottom: 20px;}
+.blsj_01{width: 1170px;margin: 0 auto;min-height: 102px;}
+.blsj_11{float: left;margin-top: 12px;line-height: 35px;color: #fff;width: 1170px;font-size:21px;padding-left: 15px;padding-right: 15px;}
+.blsj_12{float: left;padding-right: 25px;margin-bottom: 10px;margin-top: 5px;padding-left: 15px;padding-right: 15px;}
+.blsj_12 span{float: left;line-height: 36px;color: #fff;font-size:17px;}
+.blsj_12 p{float: left;line-height: 36px;color: #fff;font-size:17px;padding-right: 25px;}
+/*办理事件名称序号机构 结束*/
+
+/*基本信息 开始*/
+.section_01{width: 890px;}
+.section_01 section{width: 890px;}
+.section_11{float: left;width: 100%;line-height: 57px;background: url(../images/js_wzy_09.png) left center no-repeat;border-bottom: 1px solid #e4e6eb;color: #4178be;font-size:21px;padding-left: 13px;}
+.section_12{width: 100%;height: 60px;float: left;background: #f2f2f2;}
+.section_12 span{height: 40px;line-height: 40px;width: 258px;background-image: url(../images/js_wzy_02.png);padding-left: 28px;cursor:pointer;margin: 0 auto;display: block;border: 1px solid #c10d0c;color: #c10d0c;font-size:13px;background-position: 216px top;background-repeat: repeat-y;}
+.section_13{float: left;width: 890px;padding-top: 20px;padding-left: 20px;background: #f2f2f2;}
+.section_13 li{float: left;width: 850px;margin-bottom: 20px;margin-right: 20px;background: #fff;line-height: 45px;font-size:15px;color: #333;padding-left: 10px;font-weight: bold;}
+
+.section_13 li span{line-height: 45px;font-size:15px;color: #333;font-weight: normal;}
+/*基本信息 结束*/
+
+/*流程图 开始*/
+.section_02{width: 890px;}
+.section_02 section{width: 890px;}
+.section_21{float: left;width: 100%;line-height: 57px;background: url(../images/js_wzy_09.png) left center no-repeat;border-bottom: 1px solid #e4e6eb;color: #4178be;font-size:21px;padding-left: 13px;margin-bottom: 20px;}
+.section_22_01{width: 100%;line-height: 33px;float: left;cursor:pointer;font-size:17px;color: #4178be;text-decoration: underline;margin-bottom: 20px;}
+.section_22_01 span{float: left;width: 358px;height: 54px;background: #edf7ff url(../images/js_wzy_16.png) left center;border: 1px solid #9cf;line-height: 54px;text-align: center;font-size:17px;color: #333;transition:background-color 0.5s;}
+.section_22_01 span:hover{background-color: #def0ff;}
+/*详图弹出*/
+.cover{position: absolute;top: 0;left: 0;background: url(../images/js_wzy_31.png) center center repeat;z-index:1000;}
+.xiangtu{position: fixed;width: 840px;height: 560px;top: 50%;left: 50%;margin-left: -420px;margin-top: -280px;background: #fff;z-index:100001;padding: 40px 20px 20px 20px;display: none;}
+.xiangtu_01{z-index:1001;position: absolute;top: 0;right: 0;width: 30px;height: 30px;background: url(js_wzy_33.png) center center no-repeat;cursor:pointer;}
+.xiangtu_01:hover{background: url(../images/js_wzy_34.png) center center no-repeat;}
+.xiangtu_02{width: 772px;border: 1px solid #cacaca;}
+#demo{ width: 800px; height: 500px;overflow: hidden;}
+.box{width:770px;line-height: 500px;text-align: center;}
+.zUIpanelScrollBox{width:6px;top:4px;right:7px;border-radius:5px;background: #e8e8e8;}
+.zUIpanelScrollBar{width:16px;top:4px;left:782px;border-radius:5px;background:#b5b5b5;}
+
+/*流程图 结束*/
+
+/*常见问题 开始*/
+.section_03{width: 890px;}
+.section_03 section{width: 890px;}
+.section_31{float: left;width: 100%;line-height: 57px;background: url(../images/js_wzy_09.png) left center no-repeat;border-bottom: 1px solid #e4e6eb;color: #4178be;font-size:21px;padding-left: 13px;margin-bottom: 20px;}
+.section_32{}
+.section_32_01{float: left;width: 888px;border: 1px solid #e9e9e9;padding-top: 10px;padding-bottom: 10px;}
+.section_32_01 img{float: left;padding-left: 18px;padding-right: 17px;}
+.section_32_01 span{line-height: 28px;padding-left: 20px;font-size:15px;color: #333;border-left: 1px solid #e4e6eb;float: left;width: 820px;}
+.section_32_02{float: left;width: 100%;height: 30px;padding-left: 175px;padding-top: 21px;}
+.section_32_03{float: right;border: 1px solid #e9e9e9;margin-bottom: 20px;}
+.section_32_03 img{float: left;margin-top: 11px;margin-left: 17px;margin-right: 15px;}
+.section_32_03 span{float: right;width: 790px;line-height: 32px;padding: 10px 20px;background: #f1eff0;font-size:15px;color: #333;}
+/*常见问题 结束*/
+
+/*办理材料目录 开始*/
+.section_04{width: 890px;}
+.section_04 section{width: 890px;}
+.section_41{float: left;width: 100%;line-height: 57px;background: url(../images/js_wzy_09.png) left center no-repeat;border-bottom: 1px solid #e4e6eb;color: #4178be;font-size:21px;padding-left: 13px;margin-bottom: 20px;}
+.section_42{float: left;border-top: 1px solid #99ccff;border-left: 1px solid #99ccff;}
+.section_42 tr:first-child td{background: #edf7ff;font-size:17px;}
+.section_42 td{border-right: 1px solid #9cf;border-bottom: 1px solid #9cf;line-height: 28px;padding: 10px 5px;text-align: center;font-size:15px;color: #333;}
+/*办理材料目录 结束*/
+
+/*设定依据 办理条件 收费标准  表格下载服务 办理结果形式 委托书 开始*/
+.section_05,.section_06,.section_07,.section_08,.section_09,.section_10{width: 890px;}
+.section_05 section{width: 890px;}
+.section_51{float: left;width: 100%;line-height: 57px;background: url(../images/js_wzy_09.png) left center no-repeat;border-bottom: 1px solid #e4e6eb;color: #4178be;font-size:21px;padding-left: 13px;}
+.section_52{float: left;width: 100%;padding: 10px;line-height: 30px;color: #323232;font-size:15px;position: relative;}
+.section_52_01{position: absolute;right: 0;bottom: 10px;}
+/*设定依据 办理条件 收费标准 表格下载服务 办理结果形式 委托书  结束*/
+
+/*收费标准 开始*/
+.section_71{float: left;width: 100%;line-height: 57px;background: url(../images/js_wzy_09.png) left center no-repeat;border-bottom: 1px solid #e4e6eb;color: #4178be;font-size:21px;padding-left: 13px;}
+.section_72{float: left;border-top: 1px solid #99ccff;border-left: 1px solid #99ccff;margin-top: 20px;}
+.section_72 td{border-right: 1px solid #9cf;border-bottom: 1px solid #9cf;line-height: 32px;padding: 10px 5px;text-align: center;font-size:15px;color: #333;}
+.section_72 tr:first-child{border-right: 1px solid #9cf;border-bottom: 1px solid #9cf;line-height: 32px;padding: 10px 5px;text-align: center;font-size:17px;color: #333;background: #edf7ff;}
+.section_72 tr:first-child td{font-size:17px;}
+/*收费标准 结束*/
+
+/*右侧 开始*/
+.main_right{width: 280px;float: right;padding: 5px 20px 20px;margin-bottom: 20px;background: #f2f2f2;position: absolute;right: 0;top:-51px;}
+.main_rightfix{position: fixed;top: 0px;right: 50%;margin-right: -600px;z-index:1000;}
+.main_right_01{float: left;width: 100%;}
+.main_right_11{float: left;width: 100%;height: 45px;line-height: 45px;color: #628fc9;font-size:17px;font-weight: bold;background-image: url(../images/js_wzy_09.png);background-position: 0 center;background-repeat: no-repeat;padding-left: 10px;cursor:pointer;border-bottom: 1px dashed #ccc;height: 45px;line-height: 45px;color: #628fc9;font-size:17px;font-weight: bold;}
+.main_right_12{float: left;width: 100%;line-height: 26px;color: #333;font-size:13px;padding-top: 5px;max-height:300px;word-wrap:break-word; word-break:normal;word-break:break-all;}
+.main_right_02{float: left;width: 100%;}
+.main_right_02 a{float: left;width: 100%;width: 238px;height: 50px;line-height: 50px;background-color: #edf7ff;color: #333;padding-left: 92px;font-size:17px;margin-top: 10px;transition: background-color 0.5s;background-image: url(../images/js_wzy_03.png);}
+.main_right_02 a:hover{background-color: #e1f1fe;}
+.main_right_21{background-position: 0 0;}
+.main_right_22{background-position: 0 342px;}
+.main_right_23{background-position: 0 269px;}
+.main_right_24{background-position: 0 196px;}
+.main_right_25{background-position: 0 123px;}
+.main_right_26{background-position: 0 50px;}
+/*右侧 结束*/
+
+.fixWidth {
+    width: 1170px;
+    margin: 0 auto;
+}
