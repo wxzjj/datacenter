@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<style type="text/css">
+		body, html {width: 100%;height: 80%;margin:0 auto;font-family:"微软雅黑";}
+		#allmap{width: 83%;height:100%;margin:0 auto;font-family:"微软雅黑";}
+		/*主体*/
+		.body_main{ width:100%; height:auto; overflow:hidden; position:absolute; top:80px; bottom:0px; z-index:1;}
+		/*地图主体*/
+		.map_main{ width:100%; height:auto; overflow:hidden; position:absolute; top:0px; bottom:0px; z-index:1;}
+	</style>
+    <title>无锡市住建局政务服务网</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="Common/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="Common/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="Common/css/home.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+	<script src="Common/js/jquery.1.12.4.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=dotnWwG9x6CrK0rNPAiUm2uI2jwbh0YX"></script> 
+  </head>
+
+  <body>
+  <div class="container" >
+    <nav class="navbar" style="border-bottom: 4px solid #4178be; margin-bottom: 5px;">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="top_logo">
+            <a class="top_logo_a" href="#">
+              <img src="Common/images/logo.png" style="height: 60px;"> <span>无锡市住建局政务服务网</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="top_main">
+          <div class="top_nav">
+            <a class="top_nav_sub" href="Start.aspx">首页</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=01">工程项目</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=02">市场主体</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=03">执业人员</a>
+            <a class="top_nav_sub" href="Page_List.aspx?menuno=04">诚信信息</a>
+            <a class="top_nav_sub top_nav_subOn" href="Map.html">地图服务</a>
+          </div>
+
+          <span id="top1"><a href="Login.aspx" class="js_denglu">你好，请登录</a><a href="#" class="js_zhuce">马上注册</a></span>
+        </div>
+
+    </nav>
+    </div>
+    <div class="container" style="margin-bottom: 2px;">
+
+      <div class="row">
+        <div class="col-md-2"><span class="js_search_01">地址查询：</span> </div>
+        <div class="col-md-4">
+          <input type="text" name="suggestId" id="suggestId" autocomplete="off" class="js_search_02" value="请输入 地点" onclick="if(this.value==&quot;请输入 地点&quot;){this.value=&quot;&quot;;this.focus();}" onblur="if(this.value==&quot;&quot;){this.value=&quot;请输入 地点&quot;}">
+          <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+        </div>
+        <div class="col-md-1">
+          <input type="submit" id="searchBtn" class="js_search_03" value="查询">
+        </div>
+      </div>
+
+      <!--
+      <div class="left_tit_search">
+        <span class="js_search_01">办件进度查询：</span>
+        <input type="text" name="q" autocomplete="off" class="js_search_02" value="请输入 经办人/申请人、单位" onclick="if(this.value==&quot;请输入 经办人/申请人、单位&quot;){this.value=&quot;&quot;;this.focus();}" onblur="if(this.value==&quot;&quot;){this.value=&quot;请输入 经办人/申请人、单位&quot;}">
+        <input type="submit" class="js_search_03" value="查询">
+      </div> -->
+
+    </div>
+ <div id="allmap"></div>
+
+ 
+    <div class="container">
+      <hr>
+
+      <footer>
+	    <center>
+          <p >无锡市住房和城乡建设局版权所有</p>
+		  <p >技术支持：无锡市建设信息中心</p>
+		</center>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="Common/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="Common/js/ie10-viewport-bug-workaround.js"></script>
+	<script type="text/javascript">
+/**
+ var map = new BMap.Map("allmap");
+  map.centerAndZoom(new BMap.Point(116.403765, 39.914850), 5);
+  map.enableScrollWheelZoom();
+  */
+  var map = new BMap.Map("allmap");  // 创建Map实例
+	map.centerAndZoom("无锡",12);
+	map.enableScrollWheelZoom();
+	$(".anchorBL").remove();
+
+	// 百度地图API功能
+	function G(id) {
+	    return document.getElementById(id);
+	}
+
+	var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+		{"input": "suggestId"
+		, "location": map
+});
+
+	ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+	    var str = "";
+	    var _value = e.fromitem.value;
+	    var value = "";
+	    if (e.fromitem.index > -1) {
+	        value = _value.province + _value.city + _value.district + _value.street + _value.business;
+	    }
+	    str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+	    value = "";
+	    if (e.toitem.index > -1) {
+	        _value = e.toitem.value;
+	        value = _value.province + _value.city + _value.district + _value.street + _value.business;
+	    }
+	    str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+	    G("searchResultPanel").innerHTML = str;
+	});
+
+	var myValue;
+	ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+	    var _value = e.item.value;
+	    myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+	    G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+	    setPlace();
+	});
+
+	function setPlace() {
+	    map.clearOverlays();    //清除地图上所有覆盖物
+	    function myFun() {
+	        var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+	        map.centerAndZoom(pp, 18);
+	        map.addOverlay(new BMap.Marker(pp));    //添加标注
+	    }
+	    var local = new BMap.LocalSearch(map, { //智能搜索
+	        onSearchComplete: myFun
+	    });
+	    local.search(myValue);
+	}
+
+
+	$(function () {
+	    $('#searchBtn').click(function () {
+	        var keyVal = $('#suggestId').val();
+	        var local = new BMap.LocalSearch(map, {
+	            renderOptions: { map: map }
+	        });
+	        local.search(keyVal);
+	    });
+	});
+
+	</script>
+  </body>
+</html>

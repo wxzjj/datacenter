@@ -1005,7 +1005,9 @@ namespace Wxjzgcjczy.BLL
                 return result;
             }
 
-            string[] fields = new string[] { "TenderName", "TenderInnerNum", "TenderResultDate", "TenderMoney", "Area", "AgencyCorpName", "TenderCorpName", "shypbf" };
+            string[] fields = new string[] { "TenderName", "TenderInnerNum", "TenderResultDate", "TenderMoney", "Area", "TenderCorpName", "shypbf" };
+            string[] agencyCorpName = new string[] { "AgencyCorpName" };
+            string[] agencyCorpCode = new string[] { "AgencyCorpCode" };
             string msg = String.Empty;
 
             List<string> novalidates = new List<string>();
@@ -1048,36 +1050,33 @@ namespace Wxjzgcjczy.BLL
                 }
 
                 //if (!reg.IsMatch(item["AgencyCorpCode"].ToString2()))
-                if ((item["AgencyCorpCode"].ToString2().Length != 10 || item["AgencyCorpCode"].ToString2().IndexOf('-') != 8) && item["AgencyCorpCode"].ToString2().Length != 18)
+                //对于直接发包（TenderTypeNum=003）的招投标，AgencyCorpCode,AgencyCorpName, 可以为空
+
+                //BLLCommon.WriteLog("AgencyCorpCode:" + item["AgencyCorpCode"].ToString2() + ", AgencyCorpName:" + item["AgencyCorpName"].ToString2());
+                if (!(item["TenderTypeNum"].ToString2() == "003" && BLL.BLLCommon.DataFieldIsNullOrEmpty(novalidates, agencyCorpCode, item, out msg)))
                 {
-                    if (item["AgencyCorpCode"].ToString2().Length == 9)
+                    if ((item["AgencyCorpCode"].ToString2().Length != 10 || item["AgencyCorpCode"].ToString2().IndexOf('-') != 8) && item["AgencyCorpCode"].ToString2().Length != 18)
                     {
-                        item["AgencyCorpCode"] = item["AgencyCorpCode"].ToString2().Substring(0, 8) + "-" + item["AgencyCorpCode"].ToString2().Substring(8, 1);
+                        if (item["AgencyCorpCode"].ToString2().Length == 9)
+                        {
+                            item["AgencyCorpCode"] = item["AgencyCorpCode"].ToString2().Substring(0, 8) + "-" + item["AgencyCorpCode"].ToString2().Substring(8, 1);
+                        }
+                        else
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "AgencyCorpCode不合法,格式不正确，应该为“XXXXXXXX-X”格式！";
+                            return result;
+                        }
                     }
-                    else
+                    msg = String.Empty;
+                    if (BLL.BLLCommon.DataFieldIsNullOrEmpty(novalidates, agencyCorpName, item, out msg))
                     {
                         result.code = ProcessResult.保存失败和失败原因;
-                        result.message = "AgencyCorpCode不合法,格式不正确，应该为“XXXXXXXX-X”格式！";
-                        return result;
-                    }
-
-
-                }
-                //if (!reg.IsMatch(item["TenderCorpCode"].ToString2()))
-                if ((item["TenderCorpCode"].ToString2().Length != 10 || item["TenderCorpCode"].ToString2().IndexOf('-') != 8) && item["TenderCorpCode"].ToString2().Length != 18)
-                {
-                    if (item["TenderCorpCode"].ToString2().Length == 9)
-                    {
-                        item["TenderCorpCode"] = item["TenderCorpCode"].ToString2().Substring(0, 8) + "-" + item["TenderCorpCode"].ToString2().Substring(8, 1);
-                    }
-                    else
-                    {
-                        result.code = ProcessResult.保存失败和失败原因;
-                        result.message = "TenderCorpCode不合法,格式不正确，应该为“XXXXXXXX-X”格式！";
+                        result.message = msg + "不能为空！";
                         return result;
                     }
                 }
-
+                msg = String.Empty;
                 if (BLL.BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
                 {
                     result.code = ProcessResult.保存失败和失败原因;
