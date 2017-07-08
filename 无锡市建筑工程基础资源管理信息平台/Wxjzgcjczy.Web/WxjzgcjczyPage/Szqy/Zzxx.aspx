@@ -67,16 +67,47 @@
 --%>
     <script type="text/javascript">
 
-        $(function() {
+        jQuery.fn.rowspan = function (colname, tableObj) {
+            var colIdx;
+            for (var i = 0, n = tableObj.columns.length; i < n; i++) {
+                if (tableObj.columns[i]["columnname"] == colname) {
+                    colIdx = i - 1 < 1 ? 0 : i - 1;
+                    colIdx = colIdx + 1;
+                    break;
+                }
+            }
+            return this.each(function () {
+                var that;
+                $('tr', this).each(function (row) {
+                    $('td:eq(' + colIdx + ')', this).filter(':visible').each(function (col) {
+                        if (that != null && $(this).html() == $(that).html()) {
+                            rowspan = $(that).attr("rowSpan");
+                            if (rowspan == undefined) {
+                                $(that).attr("rowSpan", 1);
+                                rowspan = $(that).attr("rowSpan");
+                            }
+                            rowspan = Number(rowspan) + 1;
+                            $(that).attr("rowSpan", rowspan);
+                            $(this).hide();
+                        } else {
+                            that = this;
+                        }
+                    });
+                });
+            });
+        }
+
+        $(function () {
             var manager;
             manager = $("#maingrid").ligerGrid({
                 columns: [
-//                { display: '序号', name: 'ROWNUM', align: 'center', type: "text", width: "10%" },
-                { display: '主项/增项', name: 'zzbz', align: 'center', type: "text", width: "12%" },
-                { display: '资质名称', name: 'zzlb', align: 'center', type: 'text', width: "30%" },
-                { display: '资质等级', name: 'zzdj', align: 'center', type: 'text', width: "13%" },
-                { display: '数据来源', name: 'tag', align: 'center', type: 'text', width: "23%" },
-                 { display: '更新时间', name: 'xgrqsj', align: 'center', type: 'text', width: "20%" }
+                { display: '序号', name: 'rowno', align: 'center', type: "text", width: "5%" },
+                { display: '资质类别', name: 'zzlb', align: 'center', type: "text", width: "15%" },
+                { display: '资质证书号', name: 'zsbh', align: 'center', type: 'text', width: "20%" },
+                { display: '资质名称', name: 'zzmc', align: 'center', type: 'text', width: "15%" },
+                { display: '发证日期', name: 'fzrq', align: 'center', type: 'text', width: "15%" },
+                { display: '证书有效期', name: 'yxq', align: 'center', type: 'text', width: "15%" },
+                { display: '发证机关', name: 'fzdw', align: 'center', type: 'text', width: "15%" }
                 ], width: '99.8%', pageSizeOptions: [5, 10, 15, 20], isScroll: true,
                 url: 'List.ashx?fromwhere=QyxxView&qyid=<%=qyID %>',
                 dataAction: 'server', //服务器排序
@@ -85,7 +116,16 @@
                 rownumbers: false,
                 alternatingRow: true,
                 checkbox: false,
-                height: 'auto'//getGridHeight()
+                height: 'auto', //getGridHeight()
+                onAfterShowData: function (s) {
+                    setTimeout(function () {
+                        $('#maingrid .l-grid-body-table tbody').rowspan('zzlb', manager);
+                        $('#maingrid .l-grid-body-table tbody').rowspan('zsbh', manager);
+                        $('#maingrid .l-grid-body-table tbody').rowspan('fzrq', manager);
+                        $('#maingrid .l-grid-body-table tbody').rowspan('yxq', manager);
+                        $('#maingrid .l-grid-body-table tbody').rowspan('fzdw', manager);
+                    }, 0)
+                }
             });
         })
 

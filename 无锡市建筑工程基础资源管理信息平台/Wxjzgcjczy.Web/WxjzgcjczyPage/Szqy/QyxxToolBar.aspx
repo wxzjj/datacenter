@@ -173,11 +173,11 @@
                             </td>
                             <td class="td_space">
                             </td>
-                            <td class="td_other">
+                            <%--  <td class="td_other">
                                 <a link='Jyzz.aspx?qyid=<%=qyID %>&befrom=<%=befrom %>'>经营证照</a>
                             </td>
                             <td class="td_space">
-                            </td>
+                            </td>--%>
                             <%--  <td class="td_other">
                                 <a link='Xysc.aspx?rowid=<%=rowID %>&befrom=toolbar'>信用手册</a>
                             </td>
