@@ -288,8 +288,8 @@ from uepp_qyzs where qyID=@qyID and DataState<>-1 ";
                 // select a.rowid row_id,a.qyid,a.qymc,a.xxdd,ISNULL(a.lxdh,'0') lxdh,ISNULL(a.lxr,'无') lxr,a.sylxid,a.sylx,ISNULL(a.county,'无') county,a.datastate,b.csywlxid,b.csywlx 
                 //from uepp_qyjbxx a inner join uepp_qycsyw b on a.qyid=b.qyid and b.csywlxid in(" + csywlxID + ")";
 
-                sql = @"  select *,(case when SbToStState=0 then '已上报' when SbToStState=-1 then '未上报' when SbToStState=2 then '未更新'  else '上报出错' end) as SbState from (
- select a.qyid,a.zzjgdm,a.yyzzzch,a.qymc,a.zcdd,a.xxdd,a.lxdh lxdh,a.lxr lxr,a.sylxid,a.sylx,a.county ,a.datastate,a.tag,a.CountyID,CONVERT(varchar(10),xgrqsj,120) xgrqsj 
+                sql = @"  select *,(province+','+city+','+county) as pcc,(case when SbToStState=0 then '已上报' when SbToStState=-1 then '未上报' when SbToStState=2 then '未更新'  else '上报出错' end) as SbState from (
+ select a.qyid,a.zzjgdm,a.yyzzzch,a.qymc,a.zcdd,a.xxdd,a.lxdh lxdh,a.lxr lxr,a.sylxid,a.sylx,a.province, a.city, a.county ,a.datastate,a.tag,a.CountyID,CONVERT(varchar(10),xgrqsj,120) xgrqsj 
 ,ISNULL((select  SbToStState from SaveToStLog2 where TableName='uepp_qyjbxx' and PKID=a.qyid ),-1) as SbToStState
 ,(select  SbToStMsg from SaveToStLog2 where TableName='uepp_qyjbxx' and PKID=a.qyid ) as SbToStMsg
 from uepp_qyjbxx a  where a.qyid in (select qyid from uepp_qycsyw where csywlxid in(" + csywlxID + ") ";
@@ -323,6 +323,49 @@ from uepp_qyjbxx a  where a.qyid in (select qyid from uepp_qycsyw where csywlxid
                     ft.Remove("zengxzz");
                     //ft.Translate();
                 }
+
+                string countyID = ft.GetValue("CountyID");
+                if (!string.IsNullOrEmpty(countyID))
+                {
+                    if (string.Equals(countyID, "320213"))
+                    {
+                        sql += " CountyID in (320202, 320203, 320204, 320213) and ";
+                    }
+                    else if (string.Equals(countyID, "省内企业"))
+                    {
+                        sql += " province='江苏省' and city!='无锡市' and";
+                    }
+                    else if (string.Equals(countyID, "省外企业"))
+                    {
+                        sql += " province!='江苏省' and ";
+                    }
+                    else
+                    {
+                        sql += " CountyID =@countyID and ";
+                        sp.Add("@countyID", countyID);
+                    }
+                    ft.Remove("CountyID");
+                }
+
+                string county = ft.GetValue("county");
+                if (!string.IsNullOrEmpty(county))
+                {
+                    if (string.Equals(county, "省内企业"))
+                    {
+                        sql += " province='江苏省' and city!='无锡市' and";
+                    }
+                    else if (string.Equals(county, "省外企业"))
+                    {
+                        sql += " province!='江苏省' and ";
+                    }
+                    else
+                    {
+                        sql += " county =@county and ";
+                        sp.Add("@county", county);
+                    }
+                    ft.Remove("county");
+                }
+
 
                 //if (!string.IsNullOrEmpty(zhuxzz) || !string.IsNullOrEmpty(zengxzz))
                 //    ft.Translate();
@@ -362,6 +405,7 @@ from uepp_qyjbxx a  where a.qyid in (select qyid from uepp_qycsyw where csywlxid
             //    orderby = " zzbz  ";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
+            /*2017-07-08 guliqiang
             string sql = @" select qyid,zzbz,zzlb,zzdj,sortid,tag,xgrqsj from (
 select qyid,zzbz,zzlb,zzdjid,zzdj,tag,convert(varchar(19),xgrqsj,120) xgrqsj,(case when zzdj=@zzdj1 then 1 when zzdj=@zzdj5 then 1 when zzdj=@zzdj2 then 2 when zzdj=@zzdj6 then 2 when zzdj=@zzdj3 then 3 when zzdj=@zzdj7 then 3 when zzdj=@zzdj4 then 4 when zzdj=@zzdj8 then 4 else 5 end) sortid
 from UEPP_Qyzzmx where qyid=@pQyID and DataState<>-1) zz where 1=1 order by  zzbz desc ,sortid  ";
@@ -375,6 +419,24 @@ from UEPP_Qyzzmx where qyid=@pQyID and DataState<>-1) zz where 1=1 order by  zzb
             sp.Add("@zzdj6", "贰级");
             sp.Add("@zzdj7", "叁级");
             sp.Add("@zzdj8", "肆级");
+            */
+            //2017-07-08 guliqiang
+            string sql = @"select 
+ROW_NUMBER() over(order by zzmx.csywlx, zs.zsbh) as rowno, 
+zzmx.csywlx zzlb, 
+zs.zsbh, 
+(zzmx.zzlb+zzmx.zzxl+zzmx.zzdj) zzmc, 
+CONVERT(varchar(12) , zs.zsyxqrq, 23 ) as fzrq, 
+CONVERT(varchar(12) , zs.zsyxzrq, 23 ) as yxq, 
+zs.fzdw
+from UEPP_Qyzzmx zzmx
+left join UEPP_Qyzs zs on zzmx.zsbh=zs.zsbh
+left join Uepp_Qyjbxx jbxx on zzmx.qyID=jbxx.qyID
+where zsyxzrq>GETDATE() 
+and zzmx.qyID=@pQyID
+order by zzmx.csywlx, zs.zsbh";
+            sp.Add("@pQyID", qyid);
+
             return DB.ExeSqlForDataTable(sql, sp, "t");
         }
 
