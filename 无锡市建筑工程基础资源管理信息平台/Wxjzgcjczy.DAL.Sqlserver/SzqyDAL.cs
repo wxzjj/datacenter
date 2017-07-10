@@ -78,6 +78,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             //from uepp_qyjbxx a inner join UEPP_QyRy b on a.qyid=b.qyid inner join uepp_ryjbxx c on b.ryid=c.ryid
             //left join uepp_ryzs d on b.ryid=d.ryid and b.ryzyzglxID=d.ryzyzglxID 
             //where a.rowid=:pRowID";
+            /*
             string sql = @"select qymc,qyid,ryid,xm,zjhm,lxdh,ryzyzglxid,ryzyzglx,zsjlId,ryzslxid,ryzslx,zsbh,zsyxqrq,zsyxzrq,zsmx from(
 select distinct a.qymc,b.qyid,b.ryid,c.xm,c.zjhm,ISNULL(c.lxdh,c.yddh) lxdh,b.ryzyzglxid,b.ryzyzglx,d.zsjlId,d.ryzslxid,d.ryzslx,d.zsbh,  
 CONVERT(varchar(10),d.zsyxqrq,120) zsyxqrq,CONVERT(varchar(10),d.zsyxzrq,120) zsyxzrq,'查看明细' zsmx
@@ -86,6 +87,21 @@ inner join UEPP_QyRy b on a.qyid=b.qyid and b.DataState<>-1
 inner join uepp_ryjbxx c on b.ryid=c.ryid and c.DataState<>-1
 left join uepp_ryzs d on c.ryid=d.ryid and d.DataState<>-1 and b.ryzyzglxID=d.ryzyzglxID  where a.qyID=@qyID 
 ) ryxx where 1=1 and ";
+             */
+
+            string sql = @"select 
+ROW_NUMBER() over(order by ryid,zsbh) as rowno, 
+qymc,qyid,ryid,xm,zjhm,lxdh,ryzyzglxid,ryzyzglx,zsjlId,ryzslxid,ryzslx,zsbh,zsyxqrq,zsyxzrq,zsmx from(
+select distinct a.qymc,b.qyid,b.ryid,c.xm,c.zjhm,ISNULL(c.lxdh,c.yddh) lxdh,b.ryzyzglxid,b.ryzyzglx,d.zsjlId,d.ryzslxid,d.ryzslx,d.zsbh,  
+CONVERT(varchar(10),d.zsyxqrq,120) zsyxqrq,CONVERT(varchar(10),d.zsyxzrq,120) zsyxzrq,'查看明细' zsmx
+from uepp_qyjbxx a 
+inner join UEPP_QyRy b on a.qyid=b.qyid and b.DataState<>-1
+inner join uepp_ryjbxx c on b.ryid=c.ryid and c.DataState<>-1
+left join uepp_ryzs d on c.ryid=d.ryid and d.DataState<>-1 and b.ryzyzglxID=d.ryzyzglxID  
+where d.zsyxzrq>GETDATE()
+and a.qyID=@qyID
+) ryxx where 1=1 and ";
+
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@qyID", qyID);
 
