@@ -88,12 +88,43 @@
     </table>--%>
 
     <script type="text/javascript">
+
+        jQuery.fn.rowspan = function (colname, tableObj) {
+            var colIdx;
+            for (var i = 0, n = tableObj.columns.length; i < n; i++) {
+                if (tableObj.columns[i]["columnname"] == colname) {
+                    colIdx = i - 1 < 1 ? 0 : i - 1;
+                    colIdx = colIdx + 1;
+                    break;
+                }
+            }
+            return this.each(function () {
+                var that;
+                $('tr', this).each(function (row) {
+                    $('td:eq(' + colIdx + ')', this).filter(':visible').each(function (col) {
+                        if (that != null && $(this).html() == $(that).html()) {
+                            rowspan = $(that).attr("rowSpan");
+                            if (rowspan == undefined) {
+                                $(that).attr("rowSpan", 1);
+                                rowspan = $(that).attr("rowSpan");
+                            }
+                            rowspan = Number(rowspan) + 1;
+                            $(that).attr("rowSpan", rowspan);
+                            $(this).hide();
+                        } else {
+                            that = this;
+                        }
+                    });
+                });
+            });
+        }
+
         var manager;
         $(function() {
 
             manager = $("#maingrid").ligerGrid({
                 columns: [
-//                { display: '序号', name: 'ROWNUM', align: 'center', type: "text", width: "5%" },
+                {display: '序号', name: 'rowno', align: 'center', type: "text", width: "5%" },
                 { display: '姓名', name: 'xm', align: 'center', type: "text", width: "8%" ,
                     render: function(item) {
                     if (item.xm != null && item.xm != "") {
@@ -102,7 +133,7 @@
                     }
                 },
                 { display: '身份证号', name: 'zjhm', align: 'center', type: 'text', width: "15%" },
-                { display: '联系电话', name: 'lxdh', align: 'center', type: 'text', width: "12%" },
+                //{ display: '联系电话', name: 'lxdh', align: 'center', type: 'text', width: "12%" },
                 { display: '执业资格类型', name: 'ryzyzglx', align: 'center', type: 'text', width: "12%" },
                 { display: '人员证书类型', name: 'ryzslx', align: 'center', type: 'text', width: "15%" },
                 { display: '证书编号', name: 'zsbh', align: 'center', type: 'text', width: "16%" },
@@ -123,7 +154,13 @@
                 rownumbers: false,
                 alternatingRow: true,
                 checkbox: false,
-                height: getGridHeight()
+                height: getGridHeight(),
+                onAfterShowData: function (s) {
+                    setTimeout(function () {
+                        $('#maingrid .l-grid-body-table tbody').rowspan('xm', manager);
+                        $('#maingrid .l-grid-body-table tbody').rowspan('zjhm', manager);
+                    }, 0)
+                }
             });
 
             //增加搜索按钮,并创建事件
