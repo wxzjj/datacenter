@@ -116,7 +116,7 @@ namespace Wxjzgcjczy.BLL
 
         public FunctionResult<DataTable> RetrieveZyry(string qyID, FilterTranslator ft, int pagesize, int page, string orderby, out int allRecordCount)
         {
-            orderby = " zsjlId ";
+            orderby = " ryid,zsbh ";
 
             DataTable dt = DAL.RetrieveZyry(qyID, ft, pagesize, page, orderby, out  allRecordCount);
             //dt.Columns.Add("ROWID", typeof(string));
