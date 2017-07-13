@@ -14,3 +14,8 @@ INSERT INTO [dbo].[tbXzqdmDic]
            ,320200
            ,12)
 GO
+
+/*为企业资质明细表增加证书标号，便于与企业证书相关联 */
+ALTER TABLE [dbo].[UEPP_Qyzzmx] ADD zsbh VARCHAR(40) NULL;
+/*为企业证书表增加证书正本流水号， 证书正本流水号为空的资质不用显示，跟住建部、省厅保持一致*/
+ALTER TABLE [dbo].[UEPP_Qyzs] ADD PrintNo VARCHAR(20) NULL;
