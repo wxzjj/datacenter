@@ -23,8 +23,11 @@ using WxjzgcjczyTimerService.model;
 
 namespace WxjzgcjczyTimerService
 {
+    
     public partial class Service1 : ServiceBase
     {
+        //private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         int timeSpan = 1;
         DataService dataService = new DataService();
         XmlHelper xmlHelper = new XmlHelper();
@@ -72,6 +75,7 @@ namespace WxjzgcjczyTimerService
             {
                 List<string> setTimes = ConfigurationManager.AppSettings["setTime_ToWxsjzx"].ToString().Split(',').ToList();
                 int f = 0;
+                
                 for (int i = 0; i < setTimes.Count; i++)
                 {
                     int hour = setTimes[i].Substring(0, 2).ToInt32();
@@ -98,7 +102,6 @@ namespace WxjzgcjczyTimerService
                 if (f == 1)
                 {
                     Public.WriteLog("开始记录日志:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-
                     #region 拉取数据
                     // 从省一体化平台获取数据（江阴立项项目，合同备案）到无锡数据中心
                     YourTask_PullDataFromSythpt();
@@ -5271,6 +5274,8 @@ namespace WxjzgcjczyTimerService
 
 
                                 row["zzdj"] = corpCertQual.TitleLevel;
+                                //新增证书跟资质的一对多关联关系
+                                row["zsbh"] = corpCertQual.CertCode;
 
                                 if (!string.IsNullOrEmpty(corpCertQual.TitleLevel))
                                 {
@@ -6837,6 +6842,8 @@ namespace WxjzgcjczyTimerService
 
 
                                     row["zzdj"] = corpCertQual.TitleLevel;
+                                    //新增证书跟资质的一对多关联关系
+                                    row["zsbh"] = corpCertQual.CertCode;
 
                                     if (!string.IsNullOrEmpty(corpCertQual.TitleLevel))
                                     {
@@ -6997,14 +7004,21 @@ namespace WxjzgcjczyTimerService
                                     {
                                         //if (dt_jsdw_zzzs.Rows[i].RowState == DataRowState.Deleted)
                                         //    continue;
-
+                                        //转换过的从事业务类型（企业资质类别）比较
+                                        if (csywlx == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
+                                            && dt_qy_zzzs.Rows[i]["zsbh"].ToString2() == corpCertInfo.CertCode)
+                                        {
+                                            rowIndex = i;
+                                            break;
+                                        }
+                                        /**
                                         if (corpCertInfo.CertType == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
                                             && dt_qy_zzzs.Rows[i]["zsbh"].ToString2() == corpCertInfo.CertCode
                                             && dt_qy_zzzs.Rows[i]["csywlx"].ToString2() == corpCertInfo.CertType)
                                         {
                                             rowIndex = i;
                                             break;
-                                        }
+                                        }*/
                                     }
 
                                     if (rowIndex < 0)
@@ -7026,6 +7040,8 @@ namespace WxjzgcjczyTimerService
 
                                     row["csywlx"] = csywlx;
                                     row["csywlxID"] = csywlxID;
+                                    //增加证书正本流水号， 证书正本流水号为空的资质不用显示，跟住建部、省厅保持一致
+                                    row["PrintNo"] = corpCertInfo.PrintNo;
 
                                     //if (!string.IsNullOrEmpty(corpCertInfo.CertType))
                                     //{
