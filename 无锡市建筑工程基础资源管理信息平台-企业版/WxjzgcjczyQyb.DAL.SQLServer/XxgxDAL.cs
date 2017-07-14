@@ -83,6 +83,33 @@ namespace WxjzgcjczyQyb.DAL
             return dataTable;
         }
 
+        public DataTable GetFailureStLog(List<IDataItem> condition, int pageSize, int pageIndex, out int allRecordCount, string orderby)
+        {
+            string sql = @"select * from (  select *,case when OperateState='0' then '是' else '否' end as OperateStateMsg from SaveToStLog 
+                           where     1=1) as a where 1=1 and  Msg!='007'";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            sp.Add("@OperateStateMsg", "否");
+            sql = sql + " and OperateStateMsg=@OperateStateMsg ";
+
+            condition.GetSearchClause(sp, ref sql);
+            DataTable dataTable = DB.ExeSqlForDataTable(sql, sp, "t", orderby, pageSize, pageIndex, out allRecordCount);
+
+            dataTable.Columns.Add("msgLink", typeof(System.String));
+
+            //fill detail message to column msgDetail
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                string tableName = (string)dr["tableName"];
+                string pkid = (string)dr["PKID"];
+                string msg = (string)dr["Msg"];
+                string keyFields = this.GetKeyFields(tableName, msg);
+                dr["msgLink"] = "JbZxjk_Detail.aspx?tableName=" + tableName + "&pkid=" + pkid + "&keyFields=" + keyFields;
+            }
+
+            return dataTable;
+        }
+
 
         public DataTable GetSyzxspt(List<IDataItem> condition, int pageSize, int pageIndex, out int allRecordCount, string orderby, string tableName)
         {
