@@ -7,6 +7,20 @@
 <head id="Head1" runat="server">
     <title></title>
     <link href="../../App_Themes/Themes_Standard/Stylesheet1.css" rel="Stylesheet" type="text/css" />
+
+    <script src="../../Common/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="../../MyDatePicker/WdatePicker.js" type="text/javascript"></script>
+       
+    <script type="text/javascript">
+         $(function () {
+
+             $("input[FieldType='Date']").click(function () {
+                 WdatePicker({ isShowClear: true, readOnly: true });
+             });
+
+         });
+    </script>
+
 </head>
 <body class="body_haveBackImg">
     <form id="form1" runat="server">
@@ -319,6 +333,7 @@
                         </asp:BoundField>--%>
                         <asp:TemplateField HeaderText="建设单位名称">
                             <ItemTemplate>
+                     
                                 <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("BuildCorpName") %>'
                                     NavigateUrl='<%#string.Format("/WxjzgcjczyPage/Szqy/JsdwxxToolBar.aspx?jsdwid={0}",Eval("jsdwID")) %>'
                                     Target="_blank" Enabled='<%# Eval("jsdwID")!=DBNull.Value %>'/>
@@ -337,6 +352,10 @@
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="竣工日期" DataField="EDate">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="70px" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="创建日期" DataField="CreateDate">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="70px" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>

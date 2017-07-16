@@ -52,6 +52,7 @@ SELECT
 a.PKID,
 a.PrjNum,a.PrjInnerNum,
 a.PrjName,
+a.PrjPropertyNum,
 a.PrjApprovalNum,
 a.BuildCorpName,
 convert(varchar(10),a.BDate,20) as BDate,
@@ -100,6 +101,7 @@ where a.UpdateFlag='U' ) as aaa WHERE 1=1 ";
 select * from (
 SELECT 
 a.PKID,a.PrjNum,a.PrjInnerNum,a.PrjName,
+a.PrjPropertyNum,
 a.PrjApprovalNum,a.PrjApprovalLevelNum,(select top 1 codeinfo from tbLxjbDic where code=a.PrjApprovalLevelNum) as PrjApprovalLevel,
 a.BuildCorpName,
 convert(varchar(10),a.BDate,20) as BDate,
