@@ -147,7 +147,7 @@
                      <asp:TemplateField HeaderText="报省状态">
                             <ItemTemplate>
                                 <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%# Int32.Parse(Eval("OperateState").ToString())>0?"已上报":"未上报"%>' 
-                                NavigateUrl='<%#string.Format("/WxjzgcjczyQybPage/Xxgx/JbZxjk_FailureList.aspx?pkid={0}",Eval("PKID")) %>'
+                                NavigateUrl='<%#string.Format("/WxjzgcjczyQyb/WxjzgcjczyQybPage/Xxgx/JbZxjk_FailureList.aspx?pkid={0}",Eval("PKID")) %>'
                                     Target="_blank" />
                             </ItemTemplate>
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />

@@ -33,6 +33,8 @@ body {
 	      
 	      $("#T1").height(maxHeight);
 	      $("#tr1").height(maxHeight);
+          //修复在chrome/ff等浏览器中，td中的iframe显示高度太小的问题
+	      $("#tr1").children("td").height(maxHeight);
 	    }
 	</script>
 	</td>
