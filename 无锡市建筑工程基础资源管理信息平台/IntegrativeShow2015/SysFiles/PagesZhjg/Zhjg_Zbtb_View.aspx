@@ -14,7 +14,7 @@
         <!-- 招标投标基本信息 -->
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
-                <img src="../Images/TitleImgs/Title_gcjbxx.gif" height="25px" alt="" />
+                <img src="../Images/TitleImgs/Title_zbtbxx.gif" height="25px" alt="" />
             </td>
         </tr>        
         <tr>
