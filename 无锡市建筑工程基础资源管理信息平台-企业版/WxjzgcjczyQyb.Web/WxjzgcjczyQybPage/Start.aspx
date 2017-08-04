@@ -297,7 +297,7 @@
             <ol class="carousel-indicators">
               <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
               <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+              <!--<li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
             </ol>
 
             <!-- Wrapper for slides -->
@@ -305,7 +305,7 @@
               <div class="item active">
                 <img src="Common/images/news1.jpg" alt="..." style="width: 100%; height: 360px;">
                 <div class="carousel-caption">
-                  陈政高在全国装配式建筑工作现场会上要求 大力...
+                  李克强在全国深化简政放权放管结合优化服务改革电视电话会议上发表重要讲话
                 </div>
               </div>
               <div class="item">
