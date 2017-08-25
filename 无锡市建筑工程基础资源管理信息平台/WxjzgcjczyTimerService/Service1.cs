@@ -882,17 +882,19 @@ namespace WxjzgcjczyTimerService
                     string webServiceMsg = "";
 
                     WebServiceStxm.WebServiceStxm client;
-                    string resultString = "";
+                    string resultString = "", resultStringRaw = "";
                     try
                     {
                         client = new WxjzgcjczyTimerService.WebServiceStxm.WebServiceStxm();
-                        resultString = client.ReadStxmByStStandard(sstxmUserName, sstxmPwd, "", "", "320200");
-
+                        resultStringRaw = client.ReadStxmByStStandard(sstxmUserName, sstxmPwd, "", "", "320200");
+                        resultString = xmlHelper.ConvertSpecialLetter(resultStringRaw);
+                        //Public.WriteLog(resultString);
                         is_OK = 1;
                     }
                     catch (Exception ex)
                     {
                         webServiceMsg = ex.Message;
+                        Public.WriteLog(webServiceMsg);
                         //methodMessage += "ReadStxmByStStandard:" + ex.Message + ";";
 
                     }
@@ -1005,6 +1007,7 @@ namespace WxjzgcjczyTimerService
                         string tBProjectDesignEconUserInfoString = resultString.Substring(index_TBProjectDesignEconUserInfo, resultString.IndexOf("</TBProjectDesignEconUserInfo>") - index_TBProjectDesignEconUserInfo + 30);
                         if (!tBProjectDesignEconUserInfoString.Equals("<TBProjectDesignEconUserInfo></TBProjectDesignEconUserInfo>", StringComparison.CurrentCultureIgnoreCase))
                         {
+
                             string msg = String.Empty;
 
                             DataTable dt = xmlHelper.ConvertXMLToDataTable(tBProjectDesignEconUserInfoString, out msg);
@@ -1030,7 +1033,13 @@ namespace WxjzgcjczyTimerService
                                         {
                                             dt_TBProjectDesignEconUserInfo.Rows.Add(dt_TBProjectDesignEconUserInfo.NewRow());
                                         }
+
                                         DataTableHelp.DataRow2DataRow(item, dt_TBProjectDesignEconUserInfo.Rows[0]);
+                                        if (string.IsNullOrEmpty(dt_TBProjectDesignEconUserInfo.Rows[0]["DataState"].ToString2()))
+                                        {
+                                            dt_TBProjectDesignEconUserInfo.Rows[0]["DataState"] = 0;
+                                        }
+
                                         if (!dataService.SaveTBData_TBProjectDesignEconUserInfo(dt_TBProjectDesignEconUserInfo))
                                         {
                                             row_SaveDataLog["SaveState"] = 0;

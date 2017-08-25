@@ -53,7 +53,7 @@ a.scp2_rmfw_sub:hover span{ color:#4178be;}
 /*资讯中心*/
 .news_area{ padding: 5px 20px;}
 .news_ul, .news_infoul {padding: 10px 0px 0px; display: block; width: 100%;}
-.news_ul li, .news_infoul li {height: 40px; line-height: 40px; position:relative; padding-left:5px;   border-bottom: 1px solid #f5f5f5;}
+.news_ul li, .news_infoul li {height: 40px; line-height: 40px; position:relative; padding-left:5px;   border-bottom: 1px solid #f5f5f5;list-style: none;}
 .news_ul_two li {height:34px; line-height:34px;}
 .news_infoul li {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal;}
 .news_ul li a {display:block; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal; padding-right: 20px;}

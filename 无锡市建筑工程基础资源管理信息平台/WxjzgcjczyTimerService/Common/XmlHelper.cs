@@ -308,5 +308,20 @@ namespace WxsjzxTimerService.Common
         }
 
 
+        /// <summary>
+        /// 传给后台组xml节点中特殊字符的转换
+        /// </summary>
+        /// <param name="objString">The obj string.</param>
+        public string ConvertSpecialLetter(string objString)
+        {
+            objString = objString.Replace("&", "&amp;");
+            //objString = objString.Replace("<", "&lt;");
+            //objString = objString.Replace(">", "&gt;");
+            //objString = objString.Replace("\"", "&quot;");
+            //objString = objString.Replace("\'", "&apos;");
+            return objString;
+        }
+
+
     }
 }
