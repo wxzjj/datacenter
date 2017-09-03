@@ -49,6 +49,7 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                     //dtPageData.Rows[0].SetControlValue(this);
                     this.SetControlValue(dtPageData.Rows[0].ToDataItem());
 
+                    
                     hlk_Jsdw.Text=dtPageData.Rows[0]["BuildCorpName"].ToString2();
                     if (!string.IsNullOrEmpty(dtPageData.Rows[0]["jsdwID"].ToString2()))
                     {

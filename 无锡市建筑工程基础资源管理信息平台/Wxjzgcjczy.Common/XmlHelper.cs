@@ -241,6 +241,118 @@ namespace Wxjzgcjczy.Common
             }
         }
 
+        /// <summary>
+        /// 将一个DataRow里的数据集里，字段名在includeColumns中的字段转化成XML格式 , 
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <param name="includeColumns"></param>
+        /// <returns></returns>
+        public string ConvertDataRowToXMLWithBase64EncodingIncludeForAddPrj(DataRow dr, string[] includeColumns)
+        {
+            if (dr == null || dr.Table == null)
+            {
+                return String.Empty;
+            }
+            StringBuilder str = new StringBuilder();
+            str.Append("<data><result>");
+            try
+            {
+                foreach (DataColumn col in dr.Table.Columns)
+                {
+                    foreach (string includeCol in includeColumns)
+                    {
+                        if (string.Equals(includeCol, col.ColumnName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            //暂时不需要base64编码，以后需要编码时再做更改
+                            //str.AppendFormat("<{0}>{1}</{2}>", col.ColumnName, (dr[col.ColumnName] == DBNull.Value) ? String.Empty : base64EncodeHelper.Base64Encode(dr[col.ColumnName].ToString()), col.ColumnName);
+                            str.AppendFormat("<{0}>{1}</{2}>", col.ColumnName, (dr[col.ColumnName] == DBNull.Value) ? String.Empty : dr[col.ColumnName].ToString(), col.ColumnName);
+                        }
+                    }
+
+                }
+                str.Append("</result></data>");
+                return str.ToString();
+
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 将一个DataRow里的数据集里，字段名在includeColumns中的字段转化成XML格式 , 
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <param name="includeColumns"></param>
+        /// <returns></returns>
+        public string ConvertDataRowToXMLWithBase64EncodingInclude(DataRow dr, string[] includeColumns)
+        {
+            if (dr == null || dr.Table == null)
+            {
+                return String.Empty;
+            }
+            StringBuilder str = new StringBuilder();
+            try
+            {
+                foreach (DataColumn col in dr.Table.Columns)
+                {
+                    foreach (string includeCol in includeColumns)
+                    {
+                        if(string.Equals(includeCol , col.ColumnName , StringComparison.OrdinalIgnoreCase))
+                        {
+                            str.AppendFormat("<{0}>{1}</{2}>", col.ColumnName, (dr[col.ColumnName] == DBNull.Value) ? String.Empty : base64EncodeHelper.Base64Encode(dr[col.ColumnName].ToString()), col.ColumnName);
+                        }
+                    }
+                    
+                }
+
+                return str.ToString();
+
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+
+        /// <summary>
+        /// 将一个DataRow里的数据集里，字段名不在excludeColumns中的所有字段转化成XML格式 , 
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <param name="includeColumns"></param>
+        /// <returns></returns>
+        public string ConvertDataRowToXMLWithBase64EncodingExclude(DataRow dr, string[] excludeColumns)
+        {
+            if (dr == null || dr.Table == null)
+            {
+                return String.Empty;
+            }
+            StringBuilder str = new StringBuilder();
+            try
+            {
+                foreach (DataColumn col in dr.Table.Columns)
+                {
+                    foreach (string excludeCol in excludeColumns)
+                    {
+                        if (!string.Equals(excludeCol, col.ColumnName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            str.AppendFormat("<{0}>{1}</{2}>", col.ColumnName, (dr[col.ColumnName] == DBNull.Value) ? String.Empty : base64EncodeHelper.Base64Encode(dr[col.ColumnName].ToString()), col.ColumnName);
+                        }
+                    }
+
+                }
+
+                return str.ToString();
+
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
         public string ConvertDataRowToXML(DataRow dr)
         {
             if (dr == null || dr.Table == null)

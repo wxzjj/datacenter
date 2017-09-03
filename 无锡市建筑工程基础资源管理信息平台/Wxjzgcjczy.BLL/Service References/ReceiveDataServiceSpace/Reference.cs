@@ -96,19 +96,7 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string getGdxyf(string in0, string in1, string in2);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string TBContractRecordManage(string in0, string in1, string in2, string in3);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string GetDataFromSxypt(string in0, string in1, string in2, string in3);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string getXyptPjf(string in0);
+        string JLBMData(string in0, string in1);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
@@ -128,11 +116,15 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string TjRetrieveByUpdate(string in0, string in1);
+        string pushAJTZS(string in0, string in1, string in2);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string XyInnerptPjf(string in0, string in1, string in2);
+        string getSGXKZByZjbm(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string TjRetrieveByUpdate(string in0, string in1);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
@@ -140,7 +132,7 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string RetrieveData(string in0, string in1, string in2, string in3, string in4, string in5, string in6);
+        string RetrieveData(string in0, string in1, string in2, string in3, string in4, string in5);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
@@ -148,11 +140,19 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string TBContractRecordManageForU(string in0, string in1, string in2, string in3);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string pushAJZZGZ(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
         string SnapDataByInternet(string in0, string in1, string in2, string in3);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string Huoqu(string in0);
+        string getZJSBBByUuid(string in0, string in1, string in2);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
@@ -160,31 +160,43 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string HTBA(string in0, string in1, string in2);
+        string getAJSBBByDate(string in0, string in1, string in2);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string getXyptPjfmx(string in0, string in1, string in2);
+        string CheckPeople(string in0, string in1, string in2, string in3);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string saveZcjzs(string in0, string in1, byte[] in2, string in3, string in4, string in5);
+        string JyPrjnum(string in0, string in1);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string TBProjectInfo(string in0, string in1, string in2, string in3, string in4);
+        string ValidationInformation(string in0, string in1, string in2, string in3, string in4, string in5);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string getQsXyptPjf(string in0, string in1, string in2);
+        string ReceiveKSData(string in0, string in1, string in2);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string TjxtFromXmData(string in0, string in1, string in2, string in3);
+        string PxRy(string in0, string in1, string in2);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
-        string SaveDataToSt(string in0, string in1, string in2, string in3, string in4);
+        string pushZJTZS(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string getProjectAdd(string in0, string in1, string in2, string in3);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string getSGXKSQByDate(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string pushZJSBJG(string in0, string in1, string in2);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
@@ -196,7 +208,87 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string pushSGXKSQJG(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string getGdxyf(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string TBContractRecordManage(string in0, string in1, string in2, string in3);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string GetDataFromSxypt(string in0, string in1, string in2, string in3);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string DataFromQlygPt(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string pushAJSBJG(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string Huoqu(string in0);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string RetrieveJlData(string in0, string in1, string in2, string in3);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string getSGXKZByAjbm(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string RetrieveHtData(string in0, string in1, string in2, string in3, string in4, string in5);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string getAJSBBByUuid(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string getZJSBBByDate(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string HTBA(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string TBProjectInfo(string in0, string in1, string in2, string in3, string in4);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string getSGXKSQByUuid(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string pushZJJDBG(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string TjxtFromXmData(string in0, string in1, string in2, string in3);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string SaveDataToSt(string in0, string in1, string in2, string in3, string in4);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
         string ToCityPlatform(string in0, string in1, string in2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string UpdateData(string in0, string in1, string in2, string in3, string in4);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="out")]
+        string getZAJSLQKByUuid(string in0, string in1, string in2);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -226,20 +318,8 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
                 base(binding, remoteAddress) {
         }
         
-        public string getGdxyf(string in0, string in1, string in2) {
-            return base.Channel.getGdxyf(in0, in1, in2);
-        }
-        
-        public string TBContractRecordManage(string in0, string in1, string in2, string in3) {
-            return base.Channel.TBContractRecordManage(in0, in1, in2, in3);
-        }
-        
-        public string GetDataFromSxypt(string in0, string in1, string in2, string in3) {
-            return base.Channel.GetDataFromSxypt(in0, in1, in2, in3);
-        }
-        
-        public string getXyptPjf(string in0) {
-            return base.Channel.getXyptPjf(in0);
+        public string JLBMData(string in0, string in1) {
+            return base.Channel.JLBMData(in0, in1);
         }
         
         public Wxjzgcjczy.BLL.ReceiveDataServiceSpace.ArrayOfAnyType2anyTypeMap SendBegin(string in0) {
@@ -258,64 +338,88 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
             return base.Channel.getXyptRs(in0, in1);
         }
         
-        public string TjRetrieveByUpdate(string in0, string in1) {
-            return base.Channel.TjRetrieveByUpdate(in0, in1);
+        public string pushAJTZS(string in0, string in1, string in2) {
+            return base.Channel.pushAJTZS(in0, in1, in2);
         }
         
-        public string XyInnerptPjf(string in0, string in1, string in2) {
-            return base.Channel.XyInnerptPjf(in0, in1, in2);
+        public string getSGXKZByZjbm(string in0, string in1, string in2) {
+            return base.Channel.getSGXKZByZjbm(in0, in1, in2);
+        }
+        
+        public string TjRetrieveByUpdate(string in0, string in1) {
+            return base.Channel.TjRetrieveByUpdate(in0, in1);
         }
         
         public string TBProjectInfoTime(string in0, string in1, string in2, string in3) {
             return base.Channel.TBProjectInfoTime(in0, in1, in2, in3);
         }
         
-        public string RetrieveData(string in0, string in1, string in2, string in3, string in4, string in5, string in6) {
-            return base.Channel.RetrieveData(in0, in1, in2, in3, in4, in5, in6);
+        public string RetrieveData(string in0, string in1, string in2, string in3, string in4, string in5) {
+            return base.Channel.RetrieveData(in0, in1, in2, in3, in4, in5);
         }
         
         public string TBContractRecordManageTime(string in0, string in1, string in2, string in3, string in4) {
             return base.Channel.TBContractRecordManageTime(in0, in1, in2, in3, in4);
         }
         
+        public string TBContractRecordManageForU(string in0, string in1, string in2, string in3) {
+            return base.Channel.TBContractRecordManageForU(in0, in1, in2, in3);
+        }
+        
+        public string pushAJZZGZ(string in0, string in1, string in2) {
+            return base.Channel.pushAJZZGZ(in0, in1, in2);
+        }
+        
         public string SnapDataByInternet(string in0, string in1, string in2, string in3) {
             return base.Channel.SnapDataByInternet(in0, in1, in2, in3);
         }
         
-        public string Huoqu(string in0) {
-            return base.Channel.Huoqu(in0);
+        public string getZJSBBByUuid(string in0, string in1, string in2) {
+            return base.Channel.getZJSBBByUuid(in0, in1, in2);
         }
         
         public string SaveTBDataToSt(string in0, string in1, string in2, string in3) {
             return base.Channel.SaveTBDataToSt(in0, in1, in2, in3);
         }
         
-        public string HTBA(string in0, string in1, string in2) {
-            return base.Channel.HTBA(in0, in1, in2);
+        public string getAJSBBByDate(string in0, string in1, string in2) {
+            return base.Channel.getAJSBBByDate(in0, in1, in2);
         }
         
-        public string getXyptPjfmx(string in0, string in1, string in2) {
-            return base.Channel.getXyptPjfmx(in0, in1, in2);
+        public string CheckPeople(string in0, string in1, string in2, string in3) {
+            return base.Channel.CheckPeople(in0, in1, in2, in3);
         }
         
-        public string saveZcjzs(string in0, string in1, byte[] in2, string in3, string in4, string in5) {
-            return base.Channel.saveZcjzs(in0, in1, in2, in3, in4, in5);
+        public string JyPrjnum(string in0, string in1) {
+            return base.Channel.JyPrjnum(in0, in1);
         }
         
-        public string TBProjectInfo(string in0, string in1, string in2, string in3, string in4) {
-            return base.Channel.TBProjectInfo(in0, in1, in2, in3, in4);
+        public string ValidationInformation(string in0, string in1, string in2, string in3, string in4, string in5) {
+            return base.Channel.ValidationInformation(in0, in1, in2, in3, in4, in5);
         }
         
-        public string getQsXyptPjf(string in0, string in1, string in2) {
-            return base.Channel.getQsXyptPjf(in0, in1, in2);
+        public string ReceiveKSData(string in0, string in1, string in2) {
+            return base.Channel.ReceiveKSData(in0, in1, in2);
         }
         
-        public string TjxtFromXmData(string in0, string in1, string in2, string in3) {
-            return base.Channel.TjxtFromXmData(in0, in1, in2, in3);
+        public string PxRy(string in0, string in1, string in2) {
+            return base.Channel.PxRy(in0, in1, in2);
         }
         
-        public string SaveDataToSt(string in0, string in1, string in2, string in3, string in4) {
-            return base.Channel.SaveDataToSt(in0, in1, in2, in3, in4);
+        public string pushZJTZS(string in0, string in1, string in2) {
+            return base.Channel.pushZJTZS(in0, in1, in2);
+        }
+        
+        public string getProjectAdd(string in0, string in1, string in2, string in3) {
+            return base.Channel.getProjectAdd(in0, in1, in2, in3);
+        }
+        
+        public string getSGXKSQByDate(string in0, string in1, string in2) {
+            return base.Channel.getSGXKSQByDate(in0, in1, in2);
+        }
+        
+        public string pushZJSBJG(string in0, string in1, string in2) {
+            return base.Channel.pushZJSBJG(in0, in1, in2);
         }
         
         public string SaveStData(string in0, string in1, string in2, string in3, string in4) {
@@ -326,8 +430,88 @@ namespace Wxjzgcjczy.BLL.ReceiveDataServiceSpace {
             return base.Channel.TjxtFromQyData(in0, in1, in2);
         }
         
+        public string pushSGXKSQJG(string in0, string in1, string in2) {
+            return base.Channel.pushSGXKSQJG(in0, in1, in2);
+        }
+        
+        public string getGdxyf(string in0, string in1, string in2) {
+            return base.Channel.getGdxyf(in0, in1, in2);
+        }
+        
+        public string TBContractRecordManage(string in0, string in1, string in2, string in3) {
+            return base.Channel.TBContractRecordManage(in0, in1, in2, in3);
+        }
+        
+        public string GetDataFromSxypt(string in0, string in1, string in2, string in3) {
+            return base.Channel.GetDataFromSxypt(in0, in1, in2, in3);
+        }
+        
+        public string DataFromQlygPt(string in0, string in1, string in2) {
+            return base.Channel.DataFromQlygPt(in0, in1, in2);
+        }
+        
+        public string pushAJSBJG(string in0, string in1, string in2) {
+            return base.Channel.pushAJSBJG(in0, in1, in2);
+        }
+        
+        public string Huoqu(string in0) {
+            return base.Channel.Huoqu(in0);
+        }
+        
+        public string RetrieveJlData(string in0, string in1, string in2, string in3) {
+            return base.Channel.RetrieveJlData(in0, in1, in2, in3);
+        }
+        
+        public string getSGXKZByAjbm(string in0, string in1, string in2) {
+            return base.Channel.getSGXKZByAjbm(in0, in1, in2);
+        }
+        
+        public string RetrieveHtData(string in0, string in1, string in2, string in3, string in4, string in5) {
+            return base.Channel.RetrieveHtData(in0, in1, in2, in3, in4, in5);
+        }
+        
+        public string getAJSBBByUuid(string in0, string in1, string in2) {
+            return base.Channel.getAJSBBByUuid(in0, in1, in2);
+        }
+        
+        public string getZJSBBByDate(string in0, string in1, string in2) {
+            return base.Channel.getZJSBBByDate(in0, in1, in2);
+        }
+        
+        public string HTBA(string in0, string in1, string in2) {
+            return base.Channel.HTBA(in0, in1, in2);
+        }
+        
+        public string TBProjectInfo(string in0, string in1, string in2, string in3, string in4) {
+            return base.Channel.TBProjectInfo(in0, in1, in2, in3, in4);
+        }
+        
+        public string getSGXKSQByUuid(string in0, string in1, string in2) {
+            return base.Channel.getSGXKSQByUuid(in0, in1, in2);
+        }
+        
+        public string pushZJJDBG(string in0, string in1, string in2) {
+            return base.Channel.pushZJJDBG(in0, in1, in2);
+        }
+        
+        public string TjxtFromXmData(string in0, string in1, string in2, string in3) {
+            return base.Channel.TjxtFromXmData(in0, in1, in2, in3);
+        }
+        
+        public string SaveDataToSt(string in0, string in1, string in2, string in3, string in4) {
+            return base.Channel.SaveDataToSt(in0, in1, in2, in3, in4);
+        }
+        
         public string ToCityPlatform(string in0, string in1, string in2) {
             return base.Channel.ToCityPlatform(in0, in1, in2);
+        }
+        
+        public string UpdateData(string in0, string in1, string in2, string in3, string in4) {
+            return base.Channel.UpdateData(in0, in1, in2, in3, in4);
+        }
+        
+        public string getZAJSLQKByUuid(string in0, string in1, string in2) {
+            return base.Channel.getZAJSLQKByUuid(in0, in1, in2);
         }
     }
 }

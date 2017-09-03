@@ -107,11 +107,12 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
 
             string sql = @"select * from (
-                            select PKID   ,PrjNum ,PrjInnerNum ,PrjName ,PrjTypeNum ,
-            	            BuildCorpName ,BuildCorpCode ,ProvinceNum ,CityNum ,CountyNum ,PrjApprovalNum ,PrjApprovalLevelNum ,BuldPlanNum,ProjectPlanNum 
-                            ,AllInvest ,AllArea  ,PrjSize ,PrjPropertyNum ,PrjFunctionNum , SUBSTRING(convert(varchar(30),BDate,120),1,10) BDate 
-                            ,SUBSTRING(convert(varchar(30),EDate,120),1,10) EDate ,SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CREATEDATE ,UpdateFlag ,sbdqbm 
-                            from TBProjectInfo ) aaa where 1=1 ";
+                            select p.PKID   ,p.PrjNum ,p.PrjInnerNum ,p.PrjName ,p.PrjTypeNum ,
+            	            p.BuildCorpName ,p.BuildCorpCode ,p.ProvinceNum ,p.CityNum ,p.CountyNum ,p.PrjApprovalNum ,p.PrjApprovalLevelNum ,p.BuldPlanNum,p.ProjectPlanNum 
+                            ,p.AllInvest ,p.AllArea  ,p.PrjSize ,p.PrjPropertyNum ,p.PrjFunctionNum , SUBSTRING(convert(varchar(30),p.BDate,120),1,10) BDate 
+                            ,SUBSTRING(convert(varchar(30),p.EDate,120),1,10) EDate ,SUBSTRING(convert(varchar(30),p.CREATEDATE,120),1,10) CREATEDATE ,p.UpdateFlag ,p.sbdqbm
+                            , pa.prjpassword,pa.gyzzpl,pa.dzyx,pa.lxr,pa.yddh,pa.xmtz ,pa.gytze ,pa.gytzbl ,pa.lxtzze, pa.programme_address
+                            from TBProjectInfo p LEFT JOIN TBProjectAdditionalInfo pa ON p.PrjNum = pa.prjnum ) aaa where 1=1 ";
 
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
@@ -756,6 +757,17 @@ where 1=1 ";
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
+        /// <summary>
+        /// 根据项目编号获取项目等级补充信息
+        /// </summary>
+        /// <patenderInnerNumram name="projNum"></param>
+        /// <returns></returns>
+        public DataTable GetTBData_TBProjectAdditionalInfo(string prjNum)
+        {
+            string sql = "select * from TBProjectAdditionalInfo where prjnum  ='" + prjNum + "' ";
+            return DB.ExeSqlForDataTable(sql, null, "dt");
+        }
+
 
         public DataTable GetTBData_xm_gcdjb_dtxm(string fxnbbm)
         {
@@ -1085,6 +1097,12 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         public bool SaveTBData_TBProjectInfo(DataTable dt)
         {
             string sql = "select PKID, PrjNum, PrjInnerNum, PrjName, PrjTypeNum, BuildCorpName, BuildCorpCode, ProvinceNum, CityNum, CountyNum, PrjApprovalNum, PrjApprovalLevelNum, BuldPlanNum, ProjectPlanNum, AllInvest, AllArea, PrjSize, PrjPropertyNum, PrjFunctionNum, BDate, EDate, CreateDate, UpdateFlag, sbdqbm  from TBProjectInfo where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
+        public bool SaveTBData_TBProjectAddInfo(DataTable dt)
+        {
+            string sql = "select *  from TBProjectAdditionalInfo where 1=2";
             return DB.Update(sql, null, dt);
         }
 

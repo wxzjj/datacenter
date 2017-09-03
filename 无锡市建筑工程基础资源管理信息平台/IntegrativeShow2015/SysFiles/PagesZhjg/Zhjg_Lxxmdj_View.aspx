@@ -258,6 +258,80 @@
             </td>
         </tr>
     </table>
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <!-- 项目补充信息 -->
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <img src="../Images/TitleImgs/Title_tjxx.gif" height="25px" alt="" />
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table">
+                    <tr>
+                        <td class="td_text" style="width: 15%;">
+                            <span>建设规预制装配率</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="gyzzpl" ItemName="gyzzpl" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" style="width: 15%;">
+                            <span>电子邮箱</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="dzyx" ItemName="dzyx" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" style="width: 15%;">
+                            <span>联系人</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="lxr" ItemName="lxr" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" style="width: 15%;">
+                            <span>移动电话</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="yddh" ItemName="yddh" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" style="width: 15%;">
+                            <span>项目投资总额</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="xmtz" ItemName="xmtz" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" style="width: 15%;">
+                            <span>国有投资额</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="gytze" ItemName="gytze" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" style="width: 15%;">
+                            <span>国有投资占比</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="gytzbl" ItemName="gytzbl" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" style="width: 15%;">
+                            <span>立项批准项目投资总额</span>
+                        </td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="lxtzze" ItemName="lxtzze" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" style="width: 15%;">
+                            <span>项目地址</span></td>
+                        <td class="td_value" style="width: 35%;" colspan="3">
+                            <Bigdesk8:DBText ID="programme_address" ItemName="programme_address" runat="server"></Bigdesk8:DBText>
+                        </td>
+                       
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <!-- 招标投标基本信息 -->
         <tr>
@@ -328,6 +402,7 @@
             </td>
         </tr>
     </table>
+    
     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
             <td>

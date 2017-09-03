@@ -702,7 +702,8 @@ namespace Wxjzgcjczy.BLL
                 }
 
                 //if (!reg_zzjgdm.IsMatch(item["BuildCorpCode"].ToString2()))
-                if (item["BuildCorpCode"].ToString2().Length != 10 && item["BuildCorpCode"].ToString2().Length != 18)
+                //if (item["BuildCorpCode"].ToString2().Length != 10 && item["BuildCorpCode"].ToString2().Length != 18)
+                if (!Validator.IsUnifiedSocialCreditCodeOrOrgCode(item["BuildCorpCode"].ToString2()))
                 {
                     result.code = ProcessResult.保存失败和失败原因;
                     result.message = "BuildCorpCode不合法,格式不正确，应该为“XXXXXXXX-X”格式！";
@@ -819,6 +820,150 @@ namespace Wxjzgcjczy.BLL
                             {
                                 DAL.SaveTBData_SaveToStLog(dt);
                             }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            BLLCommon.WriteLog(ex.Message);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
+                    result.code = ProcessResult.数据保存成功;
+                    result.message = "数据保存成功！";
+                }
+                else
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "网络故障，数据保存失败！";
+                }
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "非法格式的数据！";
+            }
+            return result;
+        }
+
+
+        /// <summary>
+        /// 向无锡数据中心传送项目登记补充数据(TBProjectInfoAddtional)
+        /// </summary>
+        /// <param name="xmlData">XML内容</param>
+        /// <returns>处理结果信息</returns>
+        public ProcessResultData SaveTBData_TBProjectAdditionalInfo(string user, DataTable dt_Data)
+        {
+            ProcessResultData result = new ProcessResultData();
+            StringBuilder prjInnerNumSb = new StringBuilder();
+
+            string msg = String.Empty;
+            string[] fields = new string[] { "prjnum", "prjpassword", "gyzzpl", "dzyx", "lxr", "yddh", "xmtz", "gytze", "gytzbl", "lxtzze", "sbdqbm" };
+
+            List<string> districts = this.Get_tbXzqdmDic();
+
+            //一次传送一条项目登记补充数据
+            DataRow item = dt_Data.Rows[0];
+            List<string> novalidates = new List<string>();
+            novalidates.Add(String.Empty);
+            novalidates.Add(" ");
+            novalidates.Add("无");
+            novalidates.Add("无数据");
+            novalidates.Add("/");
+
+            if (BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = msg + "不能为空！";
+                return result;
+            }
+            if (!Validator.IsProjectNum(item["prjnum"].ToString2()))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "prjnum格式不正确，必须是由数字组成的16位编码！";
+                return result;
+            }
+
+            if (!districts.Exists(p => p.Equals(item["sbdqbm"].ToString2(), StringComparison.CurrentCultureIgnoreCase)))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "sbdqbm不合法，引用自tbXzqdmDic表！";
+                return result;
+            }
+
+            DataTable dt_TBProjectAddInfo = DAL.GetTBData_TBProjectAdditionalInfo(item["prjnum"].ToString2());
+            DataRow row;
+
+            if (dt_TBProjectAddInfo != null && dt_TBProjectAddInfo.Rows.Count > 0)
+            {
+                row = dt_TBProjectAddInfo.Rows[0];
+                DataTableHelp.DataRow2DataRow(item, row, new List<string>() { "PKID", "prjnum" });
+                row["updatetime"] = row["createtime"];
+            }
+            else
+            {
+                row = dt_TBProjectAddInfo.NewRow();
+                DataTableHelp.DataRow2DataRow(item, row);
+                row["PKID"] = Guid.NewGuid();
+                row["createtime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                row["updatetime"] = row["createtime"];
+                dt_TBProjectAddInfo.Rows.Add(row);
+            }
+            row["updateuser"] = user;
+
+            if (dt_TBProjectAddInfo.Rows.Count > 0)
+            {
+                if (DAL.SaveTBData_TBProjectAddInfo(dt_TBProjectAddInfo))
+                {
+                    try
+                    {
+                        BLLCommon.WriteLog("获取了 " + dt_TBProjectAddInfo.Rows.Count + " 条TBProjectAddInfo数据！");
+                        string xmlData = ""; 
+                        
+                        DataRow dataRow = dt_TBProjectAddInfo.Rows[0];
+                        dataRow["sbdqbm"] = "320200";//设置上报地区编码为无锡市
+                        
+                        //向省一体化平台传送项目登记补充数据
+                        xmlData = xmlHelper.ConvertDataRowToXMLWithBase64EncodingIncludeForAddPrj(dataRow, fields);
+                        string addResultSt = client.getProjectAdd(dataRow["prjnum"].ToString(), xmlData, userName, password);
+                        BLLCommon.WriteLog("向省一体化平台传送项目登记补充数据:" + xmlData + "\n结果：" + addResultSt);
+
+                        DataTable dt = DAL.GetTBData_SaveToStLog("TBAdditionalProjectInfo", dataRow["PKID"].ToString());
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            row = dt.Rows[0];
+                            row["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            row["TableName"] = "TBProjectAdditionalInfo";
+                        }
+                        else
+                        {
+                            row = dt.NewRow();
+                            row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            row["UpdateDate"] = row["CreateDate"];
+                            row["TableName"] = "TBProjectInfoAdditional";
+                            row["PKID"] = dataRow["PKID"];
+                            dt.Rows.Add(row);
+                        }
+                        if (addResultSt != "OK")
+                        {
+                            row["OperateState"] = 1;
+                            row["Msg"] = addResultSt;
+                        }
+                        else
+                        {
+                            row["OperateState"] = 0;
+                            row["Msg"] = "上传成功";
+                        }
+                        if (dt.Rows.Count > 0)
+                        {
+                            DAL.SaveTBData_SaveToStLog(dt);
                         }
 
                     }
@@ -1005,9 +1150,9 @@ namespace Wxjzgcjczy.BLL
                 return result;
             }
 
-            string[] fields = new string[] { "TenderName", "TenderInnerNum", "TenderResultDate", "TenderMoney", "Area", "TenderCorpName", "shypbf" };
+            string[] fields = new string[] { "TenderName", "TenderInnerNum", "TenderResultDate", "TenderMoney", "Area", "TenderCorpName", "shypbf", "TenderCorpCode" };
             string[] agencyCorpName = new string[] { "AgencyCorpName" };
-            string[] agencyCorpCode = new string[] { "AgencyCorpCode" };
+            string[] agencyCorpCode = new string[] { "AgencyCorpCode"};
             string msg = String.Empty;
 
             List<string> novalidates = new List<string>();
@@ -1083,6 +1228,16 @@ namespace Wxjzgcjczy.BLL
                     result.message = msg + "不能为空！";
                     return result;
                 }
+
+                //校验中标单位组织机构代码
+                if (!Validator.IsUnifiedSocialCreditCodeOrOrgCode(item["TenderCorpCode"].ToString2()))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "TenderCorpCode不合法,格式不正确，应该为“XXXXXXXX-X”格式或者18位统一社会信用代码！";
+                    return result;
+                }
+
+
             }
 
             DataRow row;
