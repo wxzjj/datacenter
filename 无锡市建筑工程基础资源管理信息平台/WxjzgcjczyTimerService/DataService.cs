@@ -229,6 +229,19 @@ namespace WxsjzxTimerService
             return DB.ExeSqlForDataTable(sql, null, "dt");
         }
 
+        /// <summary>
+        /// 获取无锡数据中心需要上传至省厅的项目补充数据
+        /// </summary>
+        /// <returns>返回立项项目补充数据集</returns>
+        public DataTable GetTBData_TBProjectAdditionalInfo()
+        {
+            string sql = @"SELECT PKID,prjnum,prjpassword,gyzzpl,dzyx,lxr,yddh, xmtz, gytze, gytzbl, lxtzze, sbdqbm
+                            FROM TBProjectAdditionalInfo
+                            WHERE PKID IN ( SELECT PKID FROM SaveToStLog WHERE TableName = 'TBProjectAdditionalInfo' AND OperateState NOT IN (0 ,2 ) )";
+
+            return DB.ExeSqlForDataTable(sql, null, "dt");
+        }
+
         public DataTable GetTBData_TBProjectInfo(string PKID)
         {
             string sql = @"select * from TBProjectInfo where PKID='" + PKID + "' ";
@@ -1592,7 +1605,9 @@ select PKID, RecordName, RecordNum, RecordInnerNum, PrjNum, ContractNum, Contrac
 
         public DataTable Get_uepp_Ryzymx(string ryID)
         {
-            string sql = @" select * from UEPP_Ryzymx where ryID=@ryID and ryzyzglxID in ('1','2')  ";
+            //为避免重复人员数据
+            //string sql = @" select * from UEPP_Ryzymx where ryID=@ryID and ryzyzglxID in ('1','2')  ";
+            string sql = @" select * from UEPP_Ryzymx where ryID=@ryID";
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
             sp.Add("@ryID", ryID);
             return DB.ExeSqlForDataTable(sql, sp, "dt");

@@ -7257,8 +7257,15 @@ namespace WxjzgcjczyTimerService
                             int index = -1;
 
                             #region 获取注册执业人员信息
-                            Public.WriteLog("获取" + tag + "注册执业人员信息：");
-                            bytes = newdataService.getPersonRegCert_Inc(userID, "320200", xzqdm, regType[retp], ConfigurationManager.AppSettings["ZczyrybeginDate"].ToString(), DateTime.Now.ToString("yyyy-MM-dd"), "0");
+                            Public.WriteLog("获取" + tag + "注册执业人员信息：" + regType[retp] + ",xzqdm:" + xzqdm);
+
+                            //默认每次获取7天前到今天这段时间段更新的人员数据，如需要全量更新，请将App.config中的ZczyrybeginDate更改为其他值即可
+                            string grobleStartDate = ConfigurationManager.AppSettings["ZczyrybeginDate"].ToString();
+                            if("1900-01-01".Equals(grobleStartDate)){
+                                grobleStartDate = DateTime.Now.AddDays(-14).ToString("yyyy-MM-dd");
+                            }
+
+                            bytes = newdataService.getPersonRegCert_Inc(userID, "320200", xzqdm, regType[retp], grobleStartDate, DateTime.Now.ToString("yyyy-MM-dd"), "0");
                             result = System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
                             #endregion
 
@@ -7293,6 +7300,7 @@ namespace WxjzgcjczyTimerService
                                 #region 人员（基本信息+执业资格信息+证书+企业与人员及其执业资格对应关系）
                                 if (personRegCertBody != null)
                                 {
+                                    Public.WriteLog("获取注册执业人员数目：" + personRegCertBody.array.Count);
                                     foreach (PersonRegCert personRegCert in personRegCertBody.array)
                                     {
                                         string ryzyzglxID = String.Empty;
@@ -7370,6 +7378,7 @@ namespace WxjzgcjczyTimerService
                                             row["sfzsmj"] = base64EncodeHelper.Base64DecodeToBytes(personRegCert.PhotoBase64);
                                             row["AJ_EXISTINIDCARDS"] = "2";
                                             row["AJ_IsRefuse"] = "0";
+                                            row["UpdateTime"] = DateTime.Now;
                                             allCount_ryxx++;
                                             if (!dataService.Submit_uepp_ryjbxx(dt_ryxx))
                                             {
@@ -7626,6 +7635,7 @@ namespace WxjzgcjczyTimerService
                                                 row["tag"] = tag;
                                                 row["xgr"] = "定时服务";
                                                 row["xgrqsj"] = personRegCert.UpdateDate;
+                                                row["UpdateTime"] = DateTime.Now;
                                                 dataService.Submit_uepp_Ryzyzg(dt_ryzyzg);
                                             }
 
@@ -7682,6 +7692,7 @@ namespace WxjzgcjczyTimerService
                                             row["tag"] = tag;
                                             row["xgr"] = "定时服务";
                                             row["xgrqsj"] = personRegCert.UpdateDate;
+                                            row["UpdateTime"] = DateTime.Now;
                                             dataService.Submit_uepp_Ryzs(dt_ryzs);
 
                                             #endregion
@@ -7743,6 +7754,7 @@ namespace WxjzgcjczyTimerService
                                 PersonRegMajorBody personRegMajorBody = helper.DeserializeXML<PersonRegMajorBody>("<PersonRegMajorBody><PersonRegMajorArray>" + personRegMajorString + "</PersonRegMajorArray></PersonRegMajorBody>");
                                 if (personRegMajorBody != null)
                                 {
+                                    Public.WriteLog("人员专业明细size:" + personRegMajorBody.array.Count);
                                     foreach (PersonRegMajor personRegMajor in personRegMajorBody.array)
                                     {
                                         string ryzyzglxID = String.Empty;
@@ -7764,233 +7776,269 @@ namespace WxjzgcjczyTimerService
 
                                         try
                                         {
+                                            #region 人员专业类型及等级DRegType
+                                            switch (personRegMajor.RegType)
+                                            {
+                                                //case "1001":
+                                                case "一级注册建筑师":
+                                                    ryzclb = "一级注册建筑师";
+                                                    ryzyzglxID = "51";
+                                                    ryzyzglx = "注册建筑师";
+                                                    ryzslxID = "151";
+                                                    ryzslx = "注册建筑师资格证";
+
+                                                    zyzgdjID = "21";
+                                                    zyzgdj = "壹级";
+                                                    break;
+                                                //case "1002":
+                                                case "二级注册建筑师":
+                                                    ryzclb = "二级注册建筑师";
+                                                    ryzyzglxID = "51";
+                                                    ryzyzglx = "注册建筑师";
+
+                                                    ryzslxID = "151";
+                                                    ryzslx = "注册建筑师资格证";
+                                                    zyzgdjID = "22";
+                                                    zyzgdj = "贰级";
+                                                    break;
+                                                //case "1101":
+                                                case "一级注册结构工程师":
+                                                    ryzclb = "一级注册结构工程师";
+                                                    ryzyzglxID = "61";
+                                                    ryzyzglx = "注册结构师";
+                                                    ryzslxID = "161";
+                                                    ryzslx = "注册结构师资格证";
+
+                                                    zyzgdjID = "26";
+                                                    zyzgdj = "壹级";
+                                                    break;
+                                                //case "1102":
+                                                case "二级注册结构工程师":
+                                                    ryzclb = "二级注册结构工程师";
+                                                    ryzyzglxID = "61";
+                                                    ryzyzglx = "注册结构师";
+                                                    ryzslxID = "161";
+                                                    ryzslx = "注册结构师资格证";
+                                                    zyzgdjID = "27";
+                                                    zyzgdj = "贰级";
+                                                    break;
+                                                //case "1210":
+                                                case "注册土木工程师（岩土）":
+                                                    ryzclb = "注册土木工程师（岩土）";
+                                                    ryzyzglxID = "73";
+
+                                                    ryzyzglx = "注册土木工程师（岩土）";
+                                                    ryzslxID = "731";
+                                                    ryzslx = "注册土木工程师（岩土）资格证";
+
+                                                    break;
+                                                //case "1220":
+                                                case "注册土木工程师（港口与航道工程）":
+                                                    ryzclb = "注册土木工程师（港口与航道工程）";
+                                                    ryzyzglxID = "84";
+
+                                                    ryzyzglx = "注册土木工程师（港口与航道工程）";
+                                                    ryzslxID = "841";
+                                                    ryzslx = "注册土木工程师（港口与航道工程）资格证";
+
+                                                    break;
+                                                //case "1310":
+                                                case "注册公用设备工程师（暖通空调）":
+                                                    ryzclb = "注册公用设备工程师（暖通空调）";
+                                                    ryzyzglxID = "74";
+
+                                                    ryzyzglx = "注册公用设备工程师（暖通空调）";
+                                                    ryzslxID = "741";
+                                                    ryzslx = "注册公用设备工程师（暖通空调）资格证";
+                                                    break;
+                                                //case "1320":
+                                                case "注册公用设备工程师（给水排水）":
+                                                    ryzclb = "注册公用设备工程师（给水排水）";
+                                                    ryzyzglxID = "75";
+                                                    ryzyzglx = "注册公用设备工程师（给水排水）";
+                                                    ryzslxID = "751";
+                                                    ryzslx = "注册公用设备工程师（给水排水）资格证";
+                                                    break;
+                                                //case "1330":
+                                                case "注册公用设备工程师（动力）":
+                                                    ryzclb = "注册公用设备工程师（动力）";
+                                                    ryzyzglxID = "76";
+
+                                                    ryzyzglx = "注册公用设备工程师（动力）";
+                                                    ryzslxID = "761";
+                                                    ryzslx = "注册公用设备工程师（动力）资格证";
+                                                    break;
+                                                //case "1410":
+                                                case "注册电气工程师（发输变电）":
+                                                    ryzclb = "注册电气工程师（发输变电）";
+                                                    ryzyzglxID = "77";
+
+                                                    ryzyzglx = "注册电气工程师（发输变电）";
+                                                    ryzslxID = "771";
+                                                    ryzslx = "注册电气工程师（发输变电）资格证";
+                                                    break;
+                                                //case "1420":
+                                                case "注册电气工程师（供配电）":
+                                                    ryzclb = "注册电气工程师（供配电）";
+                                                    ryzyzglxID = "78";
+                                                    ryzyzglx = "注册电气工程师（供配电）";
+                                                    ryzslxID = "781";
+                                                    ryzslx = "注册电气工程师（供配电）资格证";
+                                                    break;
+                                                //case "1511":
+                                                case "一级注册建造师":
+                                                    ryzclb = "一级注册建造师";
+                                                    ryzyzglxID = "1";
+                                                    ryzyzglx = "注册建造师";
+                                                    ryzslxID = "11";
+                                                    ryzslx = "注册建造师资格证";
+
+                                                    zyzgdjID = "1";
+                                                    zyzgdj = "壹级";
+
+                                                    break;
+                                                //case "1512":
+                                                case "二级注册建造师":
+                                                    ryzclb = "二级注册建造师";
+                                                    ryzyzglxID = "1";
+                                                    ryzyzglx = "注册建造师";
+                                                    ryzslxID = "11";
+                                                    ryzslx = "注册建造师资格证";
+
+                                                    zyzgdjID = "2";
+                                                    zyzgdj = "贰级";
+
+                                                    break;
+                                                //case "1521":
+                                                case "注册建造师（一级临时）":
+                                                    ryzclb = "注册建造师（一级临时）";
+                                                    ryzyzglxID = "1";
+                                                    ryzyzglx = "注册建造师";
+                                                    ryzslxID = "11";
+                                                    ryzslx = "注册建造师资格证";
+
+                                                    zyzgdjID = "3";
+                                                    zyzgdj = "壹级临时";
+                                                    break;
+                                                //case "1522":
+                                                case "（二级临时）":
+                                                    ryzclb = "注册建造师（二级临时）";
+                                                    ryzyzglxID = "1";
+
+                                                    ryzyzglx = "注册建造师";
+                                                    ryzslxID = "11";
+                                                    ryzslx = "注册建造师资格证";
+
+                                                    zyzgdjID = "4";
+                                                    zyzgdj = "贰级临时";
+
+                                                    break;
+                                                //case "1530":
+                                                case "小型项目管理师":
+                                                    ryzclb = "小型项目管理师";
+                                                    ryzyzglxID = "2";
+
+                                                    ryzyzglx = "小型项目管理师";
+                                                    ryzslxID = "21";
+                                                    ryzslx = "小型项目管理师资格证";
+
+                                                    zyzgdjID = "2";
+                                                    zyzgdj = "小型";
+                                                    break;
+                                                //case "1600":
+                                                case "注册造价工程师":
+                                                    ryzclb = "注册造价工程师";
+                                                    ryzyzglxID = "41";
+
+                                                    ryzyzglx = "注册造价工程师";
+                                                    ryzslxID = "131";
+                                                    ryzslx = "注册造价师资格证";
+                                                    break;
+                                                //case "1700":
+                                                case "注册监理工程师":
+                                                    ryzclb = "注册监理工程师";
+                                                    ryzyzglxID = "21";
+                                                    ryzyzglx = "注册监理工程师";
+                                                    ryzslxID = "91";
+                                                    ryzslx = "注册监理师资格证";
+                                                    break;
+                                                //case "1800":
+                                                case "注册城市规划师":
+                                                    ryzclb = "注册城市规划师";
+                                                    ryzyzglxID = "79";
+
+                                                    ryzyzglx = "注册城市规划师";
+                                                    ryzslxID = "791";
+                                                    ryzslx = "注册城市规划师资格证";
+                                                    break;
+                                                //case "1900":
+                                                case "注册化工工程师":
+                                                    ryzclb = "注册化工工程师";
+                                                    ryzyzglxID = "80";
+                                                    ryzyzglxID = "注册化工工程师";
+                                                    ryzslxID = "801";
+                                                    ryzslx = "注册化工工程师资格证";
+                                                    break;
+                                                //case "2000":
+                                                case "注册房地产估价师":
+                                                    ryzclb = "注册房地产估价师";
+                                                    ryzyzglxID = "81";
+                                                    ryzyzglx = "注册房地产估价师";
+                                                    ryzslxID = "811";
+                                                    ryzslx = "注册房地产估价师资格证";
+                                                    break;
+                                                //case "2100":
+                                                case "注册房地产经纪人":
+                                                    ryzclb = "注册房地产经纪人";
+                                                    ryzyzglxID = "82";
+                                                    ryzyzglx = "注册房地产经纪人";
+                                                    ryzslxID = "821";
+                                                    ryzslx = "注册房地产经纪人资格证";
+                                                    break;
+                                                //case "2200":
+                                                case "物业管理师":
+                                                    ryzclb = "物业管理师";
+                                                    ryzyzglxID = "83";
+
+                                                    ryzyzglx = "物业管理师";
+                                                    ryzslxID = "831";
+                                                    ryzslx = "物业管理师资格证";
+                                                    break;
+
+
+                                            }
+                                            #endregion
+
                                             #region 人员专业明细
 
                                             DataTable dt_ryzymx = dataService.Get_uepp_Ryzymx(personRegMajor.IDCardNo);
                                             int rowIndex = -1;
+                                            bool needUpdateFlag = false;
                                             for (int i = 0; i < dt_ryzymx.Rows.Count; i++)
                                             {
-                                                if (dt_ryzymx.Rows[i]["ryzyzglxID"].ToString2() == ryzyzglxID)
+                                                if (dt_ryzymx.Rows[i]["ryzyzglxID"].ToString2() == ryzyzglxID
+                                                    && dt_ryzymx.Rows[i]["ryzslxID"].ToString2() == ryzslxID)
                                                 {
                                                     rowIndex = i;
                                                     break;
                                                 }
                                             }
+                                            //Public.WriteLog("人员专业明细详细:" + personRegMajor.IDCardNo + "," + personRegMajor.RegType + ",rowIndex:" + rowIndex);
+                                                
                                             if (rowIndex < 0)
                                             {
                                                 row = dt_ryzymx.NewRow();
                                                 dt_ryzymx.Rows.Add(row);
+                                            }else{
+                                                row = dt_ryzymx.Rows[rowIndex];
+                                                if(!string.IsNullOrEmpty(personRegMajor.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString()) &&
+                                                    DateTime.Parse(personRegMajor.UpdateDate).CompareTo(DateTime.Parse(row["xgrqsj"].ToString())) > 0){
+                                                    needUpdateFlag = true;
+                                                } 
+                                            }
 
-                                                #region 人员专业类型及等级DRegType
-                                                switch (personRegMajor.RegType)
-                                                {
-                                                    case "1001":
-                                                        ryzclb = "一级注册建筑师";
-                                                        ryzyzglxID = "51";
-                                                        ryzyzglx = "注册建筑师";
-                                                        ryzslxID = "151";
-                                                        ryzslx = "注册建筑师资格证";
-
-                                                        zyzgdjID = "21";
-                                                        zyzgdj = "壹级";
-                                                        break;
-                                                    case "1002":
-                                                        ryzclb = "二级注册建筑师";
-                                                        ryzyzglxID = "51";
-                                                        ryzyzglx = "注册建筑师";
-
-                                                        ryzslxID = "151";
-                                                        ryzslx = "注册建筑师资格证";
-                                                        zyzgdjID = "22";
-                                                        zyzgdj = "贰级";
-                                                        break;
-                                                    case "1101":
-                                                        ryzclb = "一级注册结构工程师";
-                                                        ryzyzglxID = "61";
-                                                        ryzyzglx = "注册结构师";
-                                                        ryzslxID = "161";
-                                                        ryzslx = "注册结构师资格证";
-
-                                                        zyzgdjID = "26";
-                                                        zyzgdj = "壹级";
-                                                        break;
-                                                    case "1102":
-                                                        ryzclb = "二级注册结构工程师";
-                                                        ryzyzglxID = "61";
-                                                        ryzyzglx = "注册结构师";
-                                                        ryzslxID = "161";
-                                                        ryzslx = "注册结构师资格证";
-                                                        zyzgdjID = "27";
-                                                        zyzgdj = "贰级";
-                                                        break;
-                                                    case "1210":
-                                                        ryzclb = "注册土木工程师（岩土）";
-                                                        ryzyzglxID = "73";
-
-                                                        ryzyzglx = "注册土木工程师（岩土）";
-                                                        ryzslxID = "731";
-                                                        ryzslx = "注册土木工程师（岩土）资格证";
-
-                                                        break;
-                                                    case "1220":
-                                                        ryzclb = "注册土木工程师（港口与航道工程）";
-                                                        ryzyzglxID = "84";
-
-                                                        ryzyzglx = "注册土木工程师（港口与航道工程）";
-                                                        ryzslxID = "841";
-                                                        ryzslx = "注册土木工程师（港口与航道工程）资格证";
-
-                                                        break;
-                                                    case "1310":
-                                                        ryzclb = "注册公用设备工程师（暖通空调）";
-                                                        ryzyzglxID = "74";
-
-                                                        ryzyzglx = "注册公用设备工程师（暖通空调）";
-                                                        ryzslxID = "741";
-                                                        ryzslx = "注册公用设备工程师（暖通空调）资格证";
-                                                        break;
-                                                    case "1320":
-                                                        ryzclb = "注册公用设备工程师（给水排水）";
-                                                        ryzyzglxID = "75";
-                                                        ryzyzglx = "注册公用设备工程师（给水排水）";
-                                                        ryzslxID = "751";
-                                                        ryzslx = "注册公用设备工程师（给水排水）资格证";
-                                                        break;
-                                                    case "1330":
-                                                        ryzclb = "注册公用设备工程师（动力）";
-                                                        ryzyzglxID = "76";
-
-                                                        ryzyzglx = "注册公用设备工程师（动力）";
-                                                        ryzslxID = "761";
-                                                        ryzslx = "注册公用设备工程师（动力）资格证";
-                                                        break;
-                                                    case "1410":
-                                                        ryzclb = "注册电气工程师（发输变电）";
-                                                        ryzyzglxID = "77";
-
-                                                        ryzyzglx = "注册电气工程师（发输变电）";
-                                                        ryzslxID = "771";
-                                                        ryzslx = "注册电气工程师（发输变电）资格证";
-                                                        break;
-                                                    case "1420":
-                                                        ryzclb = "注册电气工程师（供配电）";
-                                                        ryzyzglxID = "78";
-                                                        ryzyzglx = "注册电气工程师（供配电）";
-                                                        ryzslxID = "781";
-                                                        ryzslx = "注册电气工程师（供配电）资格证";
-                                                        break;
-                                                    case "1511":
-                                                        ryzclb = "一级注册建造师";
-                                                        ryzyzglxID = "1";
-                                                        ryzyzglx = "注册建造师";
-                                                        ryzslxID = "11";
-                                                        ryzslx = "注册建造师资格证";
-
-                                                        zyzgdjID = "1";
-                                                        zyzgdj = "壹级";
-
-                                                        break;
-                                                    case "1512":
-                                                        ryzclb = "二级注册建造师";
-                                                        ryzyzglxID = "1";
-                                                        ryzyzglx = "注册建造师";
-                                                        ryzslxID = "11";
-                                                        ryzslx = "注册建造师资格证";
-
-                                                        zyzgdjID = "2";
-                                                        zyzgdj = "贰级";
-
-                                                        break;
-                                                    case "1521":
-                                                        ryzclb = "注册建造师（一级临时）";
-                                                        ryzyzglxID = "1";
-                                                        ryzyzglx = "注册建造师";
-                                                        ryzslxID = "11";
-                                                        ryzslx = "注册建造师资格证";
-
-                                                        zyzgdjID = "3";
-                                                        zyzgdj = "壹级临时";
-                                                        break;
-                                                    case "1522":
-                                                        ryzclb = "注册建造师（二级临时）";
-                                                        ryzyzglxID = "1";
-
-                                                        ryzyzglx = "注册建造师";
-                                                        ryzslxID = "11";
-                                                        ryzslx = "注册建造师资格证";
-
-                                                        zyzgdjID = "4";
-                                                        zyzgdj = "贰级临时";
-
-                                                        break;
-                                                    case "1530":
-                                                        ryzclb = "小型项目管理师";
-                                                        ryzyzglxID = "2";
-
-                                                        ryzyzglx = "小型项目管理师";
-                                                        ryzslxID = "21";
-                                                        ryzslx = "小型项目管理师资格证";
-
-                                                        zyzgdjID = "2";
-                                                        zyzgdj = "小型";
-                                                        break;
-                                                    case "1600":
-                                                        ryzclb = "注册造价工程师";
-                                                        ryzyzglxID = "41";
-
-                                                        ryzyzglx = "注册造价工程师";
-                                                        ryzslxID = "131";
-                                                        ryzslx = "注册造价师资格证";
-                                                        break;
-                                                    case "1700":
-                                                        ryzclb = "注册监理工程师";
-                                                        ryzyzglxID = "21";
-                                                        ryzyzglx = "注册监理工程师";
-                                                        ryzslxID = "91";
-                                                        ryzslx = "注册监理师资格证";
-                                                        break;
-                                                    case "1800":
-                                                        ryzclb = "注册城市规划师";
-                                                        ryzyzglxID = "79";
-
-                                                        ryzyzglx = "注册城市规划师";
-                                                        ryzslxID = "791";
-                                                        ryzslx = "注册城市规划师资格证";
-                                                        break;
-                                                    case "1900":
-                                                        ryzclb = "注册化工工程师";
-                                                        ryzyzglxID = "80";
-                                                        ryzyzglxID = "注册化工工程师";
-                                                        ryzslxID = "801";
-                                                        ryzslx = "注册化工工程师资格证";
-                                                        break;
-                                                    case "2000":
-                                                        ryzclb = "注册房地产估价师";
-                                                        ryzyzglxID = "81";
-                                                        ryzyzglx = "注册房地产估价师";
-                                                        ryzslxID = "811";
-                                                        ryzslx = "注册房地产估价师资格证";
-                                                        break;
-                                                    case "2100":
-                                                        ryzclb = "注册房地产经纪人";
-                                                        ryzyzglxID = "82";
-                                                        ryzyzglx = "注册房地产经纪人";
-                                                        ryzslxID = "821";
-                                                        ryzslx = "注册房地产经纪人资格证";
-                                                        break;
-                                                    case "2200":
-                                                        ryzclb = "物业管理师";
-                                                        ryzyzglxID = "83";
-
-                                                        ryzyzglx = "物业管理师";
-                                                        ryzslxID = "831";
-                                                        ryzslx = "物业管理师资格证";
-                                                        break;
-
-
-                                                }
-                                                #endregion
-
+                                            if (rowIndex < 0 || needUpdateFlag)
+                                            {
                                                 row["ryID"] = personRegMajor.IDCardNo;
                                                 row["ryzyzglxID"] = ryzyzglxID;
                                                 row["ryzyzglx"] = ryzyzglx;
@@ -8004,13 +8052,14 @@ namespace WxjzgcjczyTimerService
                                                 row["tag"] = tag;
                                                 row["xgr"] = "定时服务";
                                                 row["xgrqsj"] = personRegMajor.UpdateDate;
+                                                row["UpdateTime"] = DateTime.Now;
                                                 if (personRegMajor.IsMaster == "主项" || personRegMajor.IsMaster == "1")
                                                     row["zzbz"] = "主项";
                                                 else
                                                     row["zzbz"] = "增项";
-
                                                 dataService.Submit_uepp_Ryzymx(dt_ryzymx);
                                             }
+
                                             #endregion
                                         }
                                         catch (Exception ex)
@@ -8053,7 +8102,7 @@ namespace WxjzgcjczyTimerService
                     row_DataJkDataDetail_ryxx["successCount"] = success_count_ryxx;
                     row_DataJkDataDetail_ryxx["IsOk"] = 0;
                     row_DataJkDataDetail_ryxx["ErrorMsg"] = ex.Message;
-
+                    Public.WriteLog("ex.Message:" + ex.Message);
                     if (dt_DataJkDataDetail_ryxx.Rows.Count > 0)
                         dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail_ryxx);
 
