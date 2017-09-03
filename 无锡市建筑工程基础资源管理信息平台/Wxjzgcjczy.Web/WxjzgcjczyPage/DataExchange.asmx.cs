@@ -2951,6 +2951,22 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         result = BLL.SaveTBData_TBProjectInfo(user, dt_Data);
 
                         break;
+                    case "tbprojectadditionalinfo"://TBProjectAdditionalInfo 
+                        if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "该用户不允许保存" + tableName + "表数据！";
+                            return result.ResultMessage;
+                        }
+                        else if (dt_Data.Rows == null || dt_Data.Rows.Count != 1)
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "一次请传入一条项目登记补充数据";
+                            return result.ResultMessage;
+                        }
+                        result = BLL.SaveTBData_TBProjectAdditionalInfo(user, dt_Data);
+
+                        break;
 
                     case "xm_gcdjb_dtxm":
                         if (dt_user.Rows[0]["Has_xm_gcdjb_dtxm_Write"].ToString2() == "0")
@@ -3419,6 +3435,95 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         }
 
 
+        /// <summary>
+        /// 功能：向无锡数据中心传送项目登记补充数据
+        /// 作者：huangzhengyu
+        /// 时间：2017-08-28
+        /// </summary>
+        /// <param name="prjnum">16位纯数字编码</param>
+        /// <param name="xmlData">XML内容</param>
+        /// <param name="user">用户名称</param>
+        /// <param name="password">用户密码</param>
+        /// <returns></returns>
+        /**
+        [WebMethod]
+        public string getProjectAdd(string prjnum, string xmlData, string user, string password)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                //验证Prjnum必须为16位纯数字编码
+                if (string.IsNullOrEmpty(prjnum))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "Prjnum为空！";
+                    return result.ResultMessage;
+                }
+                else if (!Validator.IsProjectNum(prjnum))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "Prjnum必须为16位纯数字编码！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(xmlData))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                else if (dt_Data.Rows == null || dt_Data.Rows.Count != 1)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "一次请传入一条项目登记补充数据";
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入项目登记补充数据：" + ",DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+                //bool isSdSx = dt_user.Rows[0]["Flag"].ToString2() == "1";
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存项目登记补充数据表数据！";
+                    return result.ResultMessage;
+                }
+                result = BLL.SaveTBData_TBProjectAdditionalInfo(user, dt_Data);
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+
+        }
+         */
 
 
     }
