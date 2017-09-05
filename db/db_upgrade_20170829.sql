@@ -11,7 +11,7 @@ ALTER TABLE [dbo].[UEPP_Ryzyzg] ADD UpdateTime datetime NULL;
 CREATE TABLE [dbo].[TBProjectAdditionalInfo](
 	[PKID] [varchar](50) NOT NULL,
 	[prjnum] [varchar](20) NOT NULL,
-	[prjpassword] [varchar](8) NULL,
+	[prjpassword] [varchar](10) NULL,
 	[gyzzpl] [decimal](15, 4) NULL,
 	[dzyx] [varchar](50) NULL,
 	[lxr] [varchar](50) NULL,
