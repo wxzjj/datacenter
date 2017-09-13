@@ -20,6 +20,7 @@ using WxsjzxTimerService.Common;
 using WxsjzxTimerService.model;
 using System.Transactions;
 using WxjzgcjczyTimerService.model;
+using WxjzgcjczyTimerService.YiZhanShiShenBao;
 
 namespace WxjzgcjczyTimerService
 {
@@ -35,6 +36,7 @@ namespace WxjzgcjczyTimerService
         string userName = "320200", password = "we&gjh45H";
         string userName_qyry = "320200", password_qyry = "W123YheAge";
         public bool isRunning;
+        public bool sbIsRunning;
         public object obj = "111";
         System.Timers.Timer myTimer;
         public Service1()
@@ -53,6 +55,7 @@ namespace WxjzgcjczyTimerService
             }
 
             isRunning = false;
+            sbIsRunning = false;
 
             System.Timers.Timer myTimer = new System.Timers.Timer(1000 * 60 * timeSpan);
             myTimer.Elapsed += new ElapsedEventHandler(myTimer_Elapsed);
@@ -103,6 +106,7 @@ namespace WxjzgcjczyTimerService
                 {
                     Public.WriteLog("开始记录日志:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     #region 拉取数据
+
                     // 从省一体化平台获取数据（江阴立项项目，合同备案）到无锡数据中心
                     YourTask_PullDataFromSythpt();
                     Public.WriteLog("\r\n");
@@ -193,12 +197,59 @@ namespace WxjzgcjczyTimerService
                     Public.WriteLog("结束记录日志:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 }
 
+
+                #region 从一站式申报上获取申报数据
+                List<string> setTimesSB = ConfigurationManager.AppSettings["setTime_ToWxsjzx_SB"].ToString().Split(',').ToList();
+                int fsb = 0;
+                for (int i = 0; i < setTimesSB.Count; i++)
+                {
+                    int hour = setTimesSB[i].Substring(0, 2).ToInt32();
+                    int minute = setTimesSB[i].Substring(2, 2).ToInt32();
+
+                    if (DateTime.Now.Hour == hour && DateTime.Now.Minute < minute + timeSpan && DateTime.Now.Minute >= minute)
+                    {
+                        if (sbIsRunning)
+                        {
+                            Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "上一次获取申报数据服务正在运行中。。。");
+                            Public.WriteLog("获取申报数据服务-结束记录日志:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            return;
+                        }
+                        
+                        lock (obj)
+                        {
+                            sbIsRunning = true;
+                        }
+
+                        fsb = 1;
+                        break;
+                    }
+                   
+                }
+
+                if (fsb == 1)
+                {
+                    DateTime now = DateTime.Now;
+                    Public.WriteLog("获取申报数据服务-开始记录日志:" + now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    DataFetchOfAJSB dataFetchOfAJSB = DataFetchOfAJSB.GetInstance();
+                    dataFetchOfAJSB.YourTask_PullSBDataFromSythpt(); 
+
+                    lock (obj)
+                    {
+                        sbIsRunning = false;
+                    }
+                    Public.WriteLog("获取申报数据服务-结束记录日志:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                }
+                 
+                
+                #endregion
+
             }
             catch (Exception ex)
             {
                 lock (obj)
                 {
                     isRunning = false;
+                    sbIsRunning = false;
                 }
                 Public.WriteLog(ex.Message);
             }
@@ -14585,6 +14636,8 @@ namespace WxjzgcjczyTimerService
         }
 
         #endregion
+
+
 
     }
 

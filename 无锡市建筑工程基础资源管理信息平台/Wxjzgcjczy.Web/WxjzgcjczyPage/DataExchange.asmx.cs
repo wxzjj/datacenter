@@ -2880,6 +2880,247 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         }
         #endregion
 
+        /// <summary>
+        /// 获取无锡市某区质监机构某一日的申报数据
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="date"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getAJSBBByDate(string user, string password, string date, string countryCode)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty; 
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+                string countryCodes = string.Empty;
+                if ("320200".Equals(countryCode) || "320201".Equals(countryCode) || string.IsNullOrEmpty(countryCode))
+                {
+                    List<string> countryList = BLL.Get_tbXzqdmDic();
+                    if(!countryList.Contains("320201")){
+                        countryList.Add("320201");
+                    }
+                    countryCodes = string.Join(",", countryList.ToArray());
+                }
+               
+
+                DataTable mainDt = SBBLL.GetAp_ajsbb(date, countryCodes);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    DataTable tempDt;
+
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "data");
+
+                        str.AppendFormat("<{0}>", "mainList"); 
+                        str.AppendFormat("<{0}>", "main"); 
+                        mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "main");
+                        str.AppendFormat("</{0}>", "mainList");
+
+                        tempDt = SBBLL.GetAp_ajsbb_ht(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_dwry(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_clqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_hjssjd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "hjssjdList", "hjssjdcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_wxyjdgcqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "wxygcList", "wxygccontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_cgmgcqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "cgmgcList", "cgmgccontent"));
+
+
+                        str.AppendFormat("</{0}>", "data");
+
+                    }
+                   
+                     
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "getAJSBBByDate";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="date"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getZJSBBByDate(string user, string password, string date, string countryCode)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+                string countryCodes = string.Empty;
+                if ("320200".Equals(countryCode) || "320201".Equals(countryCode) || string.IsNullOrEmpty(countryCode))
+                {
+                    List<string> countryList = BLL.Get_tbXzqdmDic();
+                    if (!countryList.Contains("320201"))
+                    {
+                        countryList.Add("320201");
+                    }
+                    countryCodes = string.Join(",", countryList.ToArray());
+                }
+
+
+                DataTable mainDt = SBBLL.GetAp_zjsbb(date, countryCodes);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    DataTable tempDt;
+
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "data");
+
+                        str.AppendFormat("<{0}>", "mainList");
+                        str.AppendFormat("<{0}>", "main");
+                        mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "main");
+                        str.AppendFormat("</{0}>", "mainList");
+
+                        tempDt = SBBLL.GetAp_zjsbb_ht(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_dwry(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_schgs(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "sgtscList", "sgtsccontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_dwgc(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwgcList", "dwgccontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_clqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
+
+                        str.AppendFormat("</{0}>", "data");
+
+                    }
+
+
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "getAJSBBByDate";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
         #region 保存数据
 
         /// <summary>

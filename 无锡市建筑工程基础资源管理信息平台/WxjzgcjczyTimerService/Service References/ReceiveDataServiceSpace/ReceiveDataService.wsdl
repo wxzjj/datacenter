@@ -2,66 +2,15 @@
 <wsdl:definitions xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xmlns:tns="http://Server.WebService" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" targetNamespace="http://Server.WebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://Server.WebService">
-      <xsd:element name="getGdxyf">
+      <xsd:element name="JLBMData">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="getGdxyfResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="GetDataFromSxypt">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="GetDataFromSxyptResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="TBContractRecordManage">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="TBContractRecordManageResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="DataFromQlygPt">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="DataFromQlygPtResponse">
+      <xsd:element name="JLBMDataResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -147,20 +96,32 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="ValidationPhoto">
+      <xsd:element name="pushAJTZS">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in4" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in5" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in6" nillable="true" type="xsd:string" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="ValidationPhotoResponse">
+      <xsd:element name="pushAJTZSResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSGXKZByZjbm">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSGXKZByZjbmResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -236,6 +197,39 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="TBContractRecordManageForU">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TBContractRecordManageForUResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushAJZZGZ">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushAJZZGZResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="SnapDataByInternet">
         <xsd:complexType>
           <xsd:sequence>
@@ -253,50 +247,16 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="RetrieveJlData">
+      <xsd:element name="getZJSBBByUuid">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="RetrieveJlDataResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="Huoqu">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="HuoquResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="RetrieveHtData">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in4" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in5" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="RetrieveHtDataResponse">
+      <xsd:element name="getZJSBBByUuidResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -320,6 +280,22 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="getAJSBBByDate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAJSBBByDateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="CheckPeople">
         <xsd:complexType>
           <xsd:sequence>
@@ -337,16 +313,15 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="HTBA">
+      <xsd:element name="JyPrjnum">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="HTBAResponse">
+      <xsd:element name="JyPrjnumResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -372,15 +347,343 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="JyPrjnum">
+      <xsd:element name="ReceiveKSData">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="JyPrjnumResponse">
+      <xsd:element name="ReceiveKSDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PxRy">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PxRyResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushZJTZS">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushZJTZSResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectAdd">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectAddResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSGXKSQByDate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSGXKSQByDateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushZJSBJG">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushZJSBJGResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveStData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in4" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveStDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TjxtFromQyData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TjxtFromQyDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushSGXKSQJG">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushSGXKSQJGResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getGdxyf">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getGdxyfResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TBContractRecordManage">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TBContractRecordManageResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetDataFromSxypt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetDataFromSxyptResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DataFromQlygPt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DataFromQlygPtResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushAJSBJG">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushAJSBJGResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Huoqu">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="HuoquResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RetrieveJlData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RetrieveJlDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSGXKZByAjbm">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSGXKZByAjbmResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RetrieveHtData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in4" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in5" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RetrieveHtDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAJSBBByUuid">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAJSBBByUuidResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getZJSBBByDate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getZJSBBByDateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="HTBA">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="HTBAResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -405,7 +708,7 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="PxRy">
+      <xsd:element name="getSGXKSQByUuid">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
@@ -414,7 +717,23 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="PxRyResponse">
+      <xsd:element name="getSGXKSQByUuidResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushZJJDBG">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pushZJJDBGResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
@@ -456,40 +775,6 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="SaveStData">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in3" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in4" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="SaveStDataResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="TjxtFromQyData">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="TjxtFromQyDataResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
       <xsd:element name="ToCityPlatform">
         <xsd:complexType>
           <xsd:sequence>
@@ -524,19 +809,29 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="getZAJSLQKByUuid">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="in0" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in1" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="in2" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getZAJSLQKByUuidResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="SaveDataToStRequest">
     <wsdl:part name="parameters" element="tns:SaveDataToSt" />
   </wsdl:message>
-  <wsdl:message name="RetrieveDataRequest">
-    <wsdl:part name="parameters" element="tns:RetrieveData" />
-  </wsdl:message>
   <wsdl:message name="TBContractRecordManageResponse">
     <wsdl:part name="parameters" element="tns:TBContractRecordManageResponse" />
-  </wsdl:message>
-  <wsdl:message name="TjxtFromQyDataRequest">
-    <wsdl:part name="parameters" element="tns:TjxtFromQyData" />
   </wsdl:message>
   <wsdl:message name="SendBeginRequest">
     <wsdl:part name="parameters" element="tns:SendBegin" />
@@ -544,17 +839,14 @@
   <wsdl:message name="RetrieveJlDataRequest">
     <wsdl:part name="parameters" element="tns:RetrieveJlData" />
   </wsdl:message>
-  <wsdl:message name="TBProjectInfoRequest">
-    <wsdl:part name="parameters" element="tns:TBProjectInfo" />
-  </wsdl:message>
-  <wsdl:message name="PxRyRequest">
-    <wsdl:part name="parameters" element="tns:PxRy" />
-  </wsdl:message>
   <wsdl:message name="SnapFileByInternetResponse">
     <wsdl:part name="parameters" element="tns:SnapFileByInternetResponse" />
   </wsdl:message>
   <wsdl:message name="GetDataFromSxyptRequest">
     <wsdl:part name="parameters" element="tns:GetDataFromSxypt" />
+  </wsdl:message>
+  <wsdl:message name="getSGXKSQByDateResponse">
+    <wsdl:part name="parameters" element="tns:getSGXKSQByDateResponse" />
   </wsdl:message>
   <wsdl:message name="SaveStDataResponse">
     <wsdl:part name="parameters" element="tns:SaveStDataResponse" />
@@ -562,26 +854,29 @@
   <wsdl:message name="HuoquRequest">
     <wsdl:part name="parameters" element="tns:Huoqu" />
   </wsdl:message>
+  <wsdl:message name="pushAJSBJGRequest">
+    <wsdl:part name="parameters" element="tns:pushAJSBJG" />
+  </wsdl:message>
   <wsdl:message name="TBContractRecordManageTimeRequest">
     <wsdl:part name="parameters" element="tns:TBContractRecordManageTime" />
   </wsdl:message>
-  <wsdl:message name="TjxtFromQyDataResponse">
-    <wsdl:part name="parameters" element="tns:TjxtFromQyDataResponse" />
-  </wsdl:message>
-  <wsdl:message name="TBProjectInfoTimeRequest">
-    <wsdl:part name="parameters" element="tns:TBProjectInfoTime" />
+  <wsdl:message name="pushAJZZGZRequest">
+    <wsdl:part name="parameters" element="tns:pushAJZZGZ" />
   </wsdl:message>
   <wsdl:message name="getXyptRsResponse">
     <wsdl:part name="parameters" element="tns:getXyptRsResponse" />
   </wsdl:message>
-  <wsdl:message name="JyPrjnumRequest">
-    <wsdl:part name="parameters" element="tns:JyPrjnum" />
+  <wsdl:message name="JLBMDataRequest">
+    <wsdl:part name="parameters" element="tns:JLBMData" />
   </wsdl:message>
-  <wsdl:message name="ValidationInformationRequest">
-    <wsdl:part name="parameters" element="tns:ValidationInformation" />
+  <wsdl:message name="getZAJSLQKByUuidResponse">
+    <wsdl:part name="parameters" element="tns:getZAJSLQKByUuidResponse" />
   </wsdl:message>
   <wsdl:message name="SaveTBDataToStResponse">
     <wsdl:part name="parameters" element="tns:SaveTBDataToStResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSGXKZByAjbmResponse">
+    <wsdl:part name="parameters" element="tns:getSGXKZByAjbmResponse" />
   </wsdl:message>
   <wsdl:message name="getGdxyfResponse">
     <wsdl:part name="parameters" element="tns:getGdxyfResponse" />
@@ -592,65 +887,53 @@
   <wsdl:message name="TBProjectInfoResponse">
     <wsdl:part name="parameters" element="tns:TBProjectInfoResponse" />
   </wsdl:message>
-  <wsdl:message name="ValidationPhotoResponse">
-    <wsdl:part name="parameters" element="tns:ValidationPhotoResponse" />
-  </wsdl:message>
-  <wsdl:message name="TjRetrieveByUpdateResponse">
-    <wsdl:part name="parameters" element="tns:TjRetrieveByUpdateResponse" />
+  <wsdl:message name="getSGXKSQByUuidResponse">
+    <wsdl:part name="parameters" element="tns:getSGXKSQByUuidResponse" />
   </wsdl:message>
   <wsdl:message name="UpdateDataRequest">
     <wsdl:part name="parameters" element="tns:UpdateData" />
   </wsdl:message>
-  <wsdl:message name="HTBAResponse">
-    <wsdl:part name="parameters" element="tns:HTBAResponse" />
+  <wsdl:message name="TBContractRecordManageForUResponse">
+    <wsdl:part name="parameters" element="tns:TBContractRecordManageForUResponse" />
   </wsdl:message>
-  <wsdl:message name="ReceiveDataResponse">
-    <wsdl:part name="parameters" element="tns:ReceiveDataResponse" />
+  <wsdl:message name="pushZJTZSRequest">
+    <wsdl:part name="parameters" element="tns:pushZJTZS" />
   </wsdl:message>
-  <wsdl:message name="SendBeginResponse">
-    <wsdl:part name="parameters" element="tns:SendBeginResponse" />
+  <wsdl:message name="getZJSBBByDateResponse">
+    <wsdl:part name="parameters" element="tns:getZJSBBByDateResponse" />
   </wsdl:message>
-  <wsdl:message name="JyPrjnumResponse">
-    <wsdl:part name="parameters" element="tns:JyPrjnumResponse" />
+  <wsdl:message name="JLBMDataResponse">
+    <wsdl:part name="parameters" element="tns:JLBMDataResponse" />
   </wsdl:message>
   <wsdl:message name="CheckPeopleResponse">
     <wsdl:part name="parameters" element="tns:CheckPeopleResponse" />
   </wsdl:message>
-  <wsdl:message name="SaveStDataRequest">
-    <wsdl:part name="parameters" element="tns:SaveStData" />
+  <wsdl:message name="pushSGXKSQJGRequest">
+    <wsdl:part name="parameters" element="tns:pushSGXKSQJG" />
   </wsdl:message>
-  <wsdl:message name="ValidationInformationResponse">
-    <wsdl:part name="parameters" element="tns:ValidationInformationResponse" />
+  <wsdl:message name="getSGXKSQByUuidRequest">
+    <wsdl:part name="parameters" element="tns:getSGXKSQByUuid" />
+  </wsdl:message>
+  <wsdl:message name="pushZJTZSResponse">
+    <wsdl:part name="parameters" element="tns:pushZJTZSResponse" />
   </wsdl:message>
   <wsdl:message name="DataFromQlygPtResponse">
     <wsdl:part name="parameters" element="tns:DataFromQlygPtResponse" />
   </wsdl:message>
-  <wsdl:message name="TjxtFromXmDataResponse">
-    <wsdl:part name="parameters" element="tns:TjxtFromXmDataResponse" />
+  <wsdl:message name="getSGXKZByAjbmRequest">
+    <wsdl:part name="parameters" element="tns:getSGXKZByAjbm" />
   </wsdl:message>
-  <wsdl:message name="HTBARequest">
-    <wsdl:part name="parameters" element="tns:HTBA" />
-  </wsdl:message>
-  <wsdl:message name="SnapFileByInternetRequest">
-    <wsdl:part name="parameters" element="tns:SnapFileByInternet" />
+  <wsdl:message name="getSGXKSQByDateRequest">
+    <wsdl:part name="parameters" element="tns:getSGXKSQByDate" />
   </wsdl:message>
   <wsdl:message name="SnapDataByInternetRequest">
     <wsdl:part name="parameters" element="tns:SnapDataByInternet" />
   </wsdl:message>
-  <wsdl:message name="ToCityPlatformRequest">
-    <wsdl:part name="parameters" element="tns:ToCityPlatform" />
-  </wsdl:message>
-  <wsdl:message name="RetrieveHtDataRequest">
-    <wsdl:part name="parameters" element="tns:RetrieveHtData" />
-  </wsdl:message>
-  <wsdl:message name="RetrieveJlDataResponse">
-    <wsdl:part name="parameters" element="tns:RetrieveJlDataResponse" />
-  </wsdl:message>
   <wsdl:message name="SaveTBDataToStRequest">
     <wsdl:part name="parameters" element="tns:SaveTBDataToSt" />
   </wsdl:message>
-  <wsdl:message name="ValidationPhotoRequest">
-    <wsdl:part name="parameters" element="tns:ValidationPhoto" />
+  <wsdl:message name="pushAJTZSRequest">
+    <wsdl:part name="parameters" element="tns:pushAJTZS" />
   </wsdl:message>
   <wsdl:message name="getGdxyfRequest">
     <wsdl:part name="parameters" element="tns:getGdxyf" />
@@ -658,26 +941,20 @@
   <wsdl:message name="RetrieveDataResponse">
     <wsdl:part name="parameters" element="tns:RetrieveDataResponse" />
   </wsdl:message>
-  <wsdl:message name="TBProjectInfoTimeResponse">
-    <wsdl:part name="parameters" element="tns:TBProjectInfoTimeResponse" />
-  </wsdl:message>
-  <wsdl:message name="TBContractRecordManageTimeResponse">
-    <wsdl:part name="parameters" element="tns:TBContractRecordManageTimeResponse" />
-  </wsdl:message>
   <wsdl:message name="ToCityPlatformResponse">
     <wsdl:part name="parameters" element="tns:ToCityPlatformResponse" />
   </wsdl:message>
-  <wsdl:message name="CheckPeopleRequest">
-    <wsdl:part name="parameters" element="tns:CheckPeople" />
+  <wsdl:message name="getProjectAddResponse">
+    <wsdl:part name="parameters" element="tns:getProjectAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAJSBBByDateRequest">
+    <wsdl:part name="parameters" element="tns:getAJSBBByDate" />
   </wsdl:message>
   <wsdl:message name="TjxtFromXmDataRequest">
     <wsdl:part name="parameters" element="tns:TjxtFromXmData" />
   </wsdl:message>
   <wsdl:message name="SnapDataByInternetResponse">
     <wsdl:part name="parameters" element="tns:SnapDataByInternetResponse" />
-  </wsdl:message>
-  <wsdl:message name="GetDataFromSxyptResponse">
-    <wsdl:part name="parameters" element="tns:GetDataFromSxyptResponse" />
   </wsdl:message>
   <wsdl:message name="TjRetrieveByUpdateRequest">
     <wsdl:part name="parameters" element="tns:TjRetrieveByUpdate" />
@@ -688,40 +965,166 @@
   <wsdl:message name="getXyptRsRequest">
     <wsdl:part name="parameters" element="tns:getXyptRs" />
   </wsdl:message>
-  <wsdl:message name="UpdateDataResponse">
-    <wsdl:part name="parameters" element="tns:UpdateDataResponse" />
-  </wsdl:message>
   <wsdl:message name="ReceiveDataRequest">
     <wsdl:part name="parameters" element="tns:ReceiveData" />
   </wsdl:message>
   <wsdl:message name="HuoquResponse">
     <wsdl:part name="parameters" element="tns:HuoquResponse" />
   </wsdl:message>
-  <wsdl:message name="PxRyResponse">
-    <wsdl:part name="parameters" element="tns:PxRyResponse" />
+  <wsdl:message name="UpdateDataResponse">
+    <wsdl:part name="parameters" element="tns:UpdateDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSGXKZByZjbmRequest">
+    <wsdl:part name="parameters" element="tns:getSGXKZByZjbm" />
   </wsdl:message>
   <wsdl:message name="TBContractRecordManageRequest">
     <wsdl:part name="parameters" element="tns:TBContractRecordManage" />
   </wsdl:message>
+  <wsdl:message name="pushZJJDBGResponse">
+    <wsdl:part name="parameters" element="tns:pushZJJDBGResponse" />
+  </wsdl:message>
+  <wsdl:message name="TBContractRecordManageForURequest">
+    <wsdl:part name="parameters" element="tns:TBContractRecordManageForU" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveDataRequest">
+    <wsdl:part name="parameters" element="tns:RetrieveData" />
+  </wsdl:message>
+  <wsdl:message name="getAJSBBByUuidResponse">
+    <wsdl:part name="parameters" element="tns:getAJSBBByUuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="TjxtFromQyDataRequest">
+    <wsdl:part name="parameters" element="tns:TjxtFromQyData" />
+  </wsdl:message>
+  <wsdl:message name="PxRyRequest">
+    <wsdl:part name="parameters" element="tns:PxRy" />
+  </wsdl:message>
+  <wsdl:message name="getAJSBBByDateResponse">
+    <wsdl:part name="parameters" element="tns:getAJSBBByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="TBProjectInfoRequest">
+    <wsdl:part name="parameters" element="tns:TBProjectInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReceiveKSDataRequest">
+    <wsdl:part name="parameters" element="tns:ReceiveKSData" />
+  </wsdl:message>
+  <wsdl:message name="getSGXKZByZjbmResponse">
+    <wsdl:part name="parameters" element="tns:getSGXKZByZjbmResponse" />
+  </wsdl:message>
+  <wsdl:message name="getZJSBBByUuidResponse">
+    <wsdl:part name="parameters" element="tns:getZJSBBByUuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="JyPrjnumRequest">
+    <wsdl:part name="parameters" element="tns:JyPrjnum" />
+  </wsdl:message>
+  <wsdl:message name="TBProjectInfoTimeRequest">
+    <wsdl:part name="parameters" element="tns:TBProjectInfoTime" />
+  </wsdl:message>
+  <wsdl:message name="TjxtFromQyDataResponse">
+    <wsdl:part name="parameters" element="tns:TjxtFromQyDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidationInformationRequest">
+    <wsdl:part name="parameters" element="tns:ValidationInformation" />
+  </wsdl:message>
+  <wsdl:message name="pushAJZZGZResponse">
+    <wsdl:part name="parameters" element="tns:pushAJZZGZResponse" />
+  </wsdl:message>
+  <wsdl:message name="pushZJSBJGRequest">
+    <wsdl:part name="parameters" element="tns:pushZJSBJG" />
+  </wsdl:message>
+  <wsdl:message name="pushAJSBJGResponse">
+    <wsdl:part name="parameters" element="tns:pushAJSBJGResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReceiveKSDataResponse">
+    <wsdl:part name="parameters" element="tns:ReceiveKSDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="TjRetrieveByUpdateResponse">
+    <wsdl:part name="parameters" element="tns:TjRetrieveByUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="pushSGXKSQJGResponse">
+    <wsdl:part name="parameters" element="tns:pushSGXKSQJGResponse" />
+  </wsdl:message>
+  <wsdl:message name="getZAJSLQKByUuidRequest">
+    <wsdl:part name="parameters" element="tns:getZAJSLQKByUuid" />
+  </wsdl:message>
+  <wsdl:message name="getZJSBBByUuidRequest">
+    <wsdl:part name="parameters" element="tns:getZJSBBByUuid" />
+  </wsdl:message>
+  <wsdl:message name="HTBAResponse">
+    <wsdl:part name="parameters" element="tns:HTBAResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReceiveDataResponse">
+    <wsdl:part name="parameters" element="tns:ReceiveDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="pushZJJDBGRequest">
+    <wsdl:part name="parameters" element="tns:pushZJJDBG" />
+  </wsdl:message>
+  <wsdl:message name="SendBeginResponse">
+    <wsdl:part name="parameters" element="tns:SendBeginResponse" />
+  </wsdl:message>
+  <wsdl:message name="JyPrjnumResponse">
+    <wsdl:part name="parameters" element="tns:JyPrjnumResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveStDataRequest">
+    <wsdl:part name="parameters" element="tns:SaveStData" />
+  </wsdl:message>
+  <wsdl:message name="ValidationInformationResponse">
+    <wsdl:part name="parameters" element="tns:ValidationInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="TjxtFromXmDataResponse">
+    <wsdl:part name="parameters" element="tns:TjxtFromXmDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProjectAddRequest">
+    <wsdl:part name="parameters" element="tns:getProjectAdd" />
+  </wsdl:message>
+  <wsdl:message name="HTBARequest">
+    <wsdl:part name="parameters" element="tns:HTBA" />
+  </wsdl:message>
+  <wsdl:message name="SnapFileByInternetRequest">
+    <wsdl:part name="parameters" element="tns:SnapFileByInternet" />
+  </wsdl:message>
+  <wsdl:message name="getAJSBBByUuidRequest">
+    <wsdl:part name="parameters" element="tns:getAJSBBByUuid" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveHtDataRequest">
+    <wsdl:part name="parameters" element="tns:RetrieveHtData" />
+  </wsdl:message>
+  <wsdl:message name="ToCityPlatformRequest">
+    <wsdl:part name="parameters" element="tns:ToCityPlatform" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveJlDataResponse">
+    <wsdl:part name="parameters" element="tns:RetrieveJlDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="getZJSBBByDateRequest">
+    <wsdl:part name="parameters" element="tns:getZJSBBByDate" />
+  </wsdl:message>
+  <wsdl:message name="TBProjectInfoTimeResponse">
+    <wsdl:part name="parameters" element="tns:TBProjectInfoTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="TBContractRecordManageTimeResponse">
+    <wsdl:part name="parameters" element="tns:TBContractRecordManageTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckPeopleRequest">
+    <wsdl:part name="parameters" element="tns:CheckPeople" />
+  </wsdl:message>
+  <wsdl:message name="GetDataFromSxyptResponse">
+    <wsdl:part name="parameters" element="tns:GetDataFromSxyptResponse" />
+  </wsdl:message>
+  <wsdl:message name="PxRyResponse">
+    <wsdl:part name="parameters" element="tns:PxRyResponse" />
+  </wsdl:message>
+  <wsdl:message name="pushAJTZSResponse">
+    <wsdl:part name="parameters" element="tns:pushAJTZSResponse" />
+  </wsdl:message>
   <wsdl:message name="SaveDataToStResponse">
     <wsdl:part name="parameters" element="tns:SaveDataToStResponse" />
   </wsdl:message>
+  <wsdl:message name="pushZJSBJGResponse">
+    <wsdl:part name="parameters" element="tns:pushZJSBJGResponse" />
+  </wsdl:message>
   <wsdl:portType name="ReceiveDataServicePortType">
-    <wsdl:operation name="getGdxyf">
-      <wsdl:input name="getGdxyfRequest" message="tns:getGdxyfRequest" />
-      <wsdl:output name="getGdxyfResponse" message="tns:getGdxyfResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="GetDataFromSxypt">
-      <wsdl:input name="GetDataFromSxyptRequest" message="tns:GetDataFromSxyptRequest" />
-      <wsdl:output name="GetDataFromSxyptResponse" message="tns:GetDataFromSxyptResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="TBContractRecordManage">
-      <wsdl:input name="TBContractRecordManageRequest" message="tns:TBContractRecordManageRequest" />
-      <wsdl:output name="TBContractRecordManageResponse" message="tns:TBContractRecordManageResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="DataFromQlygPt">
-      <wsdl:input name="DataFromQlygPtRequest" message="tns:DataFromQlygPtRequest" />
-      <wsdl:output name="DataFromQlygPtResponse" message="tns:DataFromQlygPtResponse" />
+    <wsdl:operation name="JLBMData">
+      <wsdl:input name="JLBMDataRequest" message="tns:JLBMDataRequest" />
+      <wsdl:output name="JLBMDataResponse" message="tns:JLBMDataResponse" />
     </wsdl:operation>
     <wsdl:operation name="SendBegin">
       <wsdl:input name="SendBeginRequest" message="tns:SendBeginRequest" />
@@ -739,9 +1142,13 @@
       <wsdl:input name="getXyptRsRequest" message="tns:getXyptRsRequest" />
       <wsdl:output name="getXyptRsResponse" message="tns:getXyptRsResponse" />
     </wsdl:operation>
-    <wsdl:operation name="ValidationPhoto">
-      <wsdl:input name="ValidationPhotoRequest" message="tns:ValidationPhotoRequest" />
-      <wsdl:output name="ValidationPhotoResponse" message="tns:ValidationPhotoResponse" />
+    <wsdl:operation name="pushAJTZS">
+      <wsdl:input name="pushAJTZSRequest" message="tns:pushAJTZSRequest" />
+      <wsdl:output name="pushAJTZSResponse" message="tns:pushAJTZSResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSGXKZByZjbm">
+      <wsdl:input name="getSGXKZByZjbmRequest" message="tns:getSGXKZByZjbmRequest" />
+      <wsdl:output name="getSGXKZByZjbmResponse" message="tns:getSGXKZByZjbmResponse" />
     </wsdl:operation>
     <wsdl:operation name="TjRetrieveByUpdate">
       <wsdl:input name="TjRetrieveByUpdateRequest" message="tns:TjRetrieveByUpdateRequest" />
@@ -759,57 +1166,65 @@
       <wsdl:input name="TBContractRecordManageTimeRequest" message="tns:TBContractRecordManageTimeRequest" />
       <wsdl:output name="TBContractRecordManageTimeResponse" message="tns:TBContractRecordManageTimeResponse" />
     </wsdl:operation>
+    <wsdl:operation name="TBContractRecordManageForU">
+      <wsdl:input name="TBContractRecordManageForURequest" message="tns:TBContractRecordManageForURequest" />
+      <wsdl:output name="TBContractRecordManageForUResponse" message="tns:TBContractRecordManageForUResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="pushAJZZGZ">
+      <wsdl:input name="pushAJZZGZRequest" message="tns:pushAJZZGZRequest" />
+      <wsdl:output name="pushAJZZGZResponse" message="tns:pushAJZZGZResponse" />
+    </wsdl:operation>
     <wsdl:operation name="SnapDataByInternet">
       <wsdl:input name="SnapDataByInternetRequest" message="tns:SnapDataByInternetRequest" />
       <wsdl:output name="SnapDataByInternetResponse" message="tns:SnapDataByInternetResponse" />
     </wsdl:operation>
-    <wsdl:operation name="RetrieveJlData">
-      <wsdl:input name="RetrieveJlDataRequest" message="tns:RetrieveJlDataRequest" />
-      <wsdl:output name="RetrieveJlDataResponse" message="tns:RetrieveJlDataResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="Huoqu">
-      <wsdl:input name="HuoquRequest" message="tns:HuoquRequest" />
-      <wsdl:output name="HuoquResponse" message="tns:HuoquResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="RetrieveHtData">
-      <wsdl:input name="RetrieveHtDataRequest" message="tns:RetrieveHtDataRequest" />
-      <wsdl:output name="RetrieveHtDataResponse" message="tns:RetrieveHtDataResponse" />
+    <wsdl:operation name="getZJSBBByUuid">
+      <wsdl:input name="getZJSBBByUuidRequest" message="tns:getZJSBBByUuidRequest" />
+      <wsdl:output name="getZJSBBByUuidResponse" message="tns:getZJSBBByUuidResponse" />
     </wsdl:operation>
     <wsdl:operation name="SaveTBDataToSt">
       <wsdl:input name="SaveTBDataToStRequest" message="tns:SaveTBDataToStRequest" />
       <wsdl:output name="SaveTBDataToStResponse" message="tns:SaveTBDataToStResponse" />
     </wsdl:operation>
+    <wsdl:operation name="getAJSBBByDate">
+      <wsdl:input name="getAJSBBByDateRequest" message="tns:getAJSBBByDateRequest" />
+      <wsdl:output name="getAJSBBByDateResponse" message="tns:getAJSBBByDateResponse" />
+    </wsdl:operation>
     <wsdl:operation name="CheckPeople">
       <wsdl:input name="CheckPeopleRequest" message="tns:CheckPeopleRequest" />
       <wsdl:output name="CheckPeopleResponse" message="tns:CheckPeopleResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="HTBA">
-      <wsdl:input name="HTBARequest" message="tns:HTBARequest" />
-      <wsdl:output name="HTBAResponse" message="tns:HTBAResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="ValidationInformation">
-      <wsdl:input name="ValidationInformationRequest" message="tns:ValidationInformationRequest" />
-      <wsdl:output name="ValidationInformationResponse" message="tns:ValidationInformationResponse" />
     </wsdl:operation>
     <wsdl:operation name="JyPrjnum">
       <wsdl:input name="JyPrjnumRequest" message="tns:JyPrjnumRequest" />
       <wsdl:output name="JyPrjnumResponse" message="tns:JyPrjnumResponse" />
     </wsdl:operation>
-    <wsdl:operation name="TBProjectInfo">
-      <wsdl:input name="TBProjectInfoRequest" message="tns:TBProjectInfoRequest" />
-      <wsdl:output name="TBProjectInfoResponse" message="tns:TBProjectInfoResponse" />
+    <wsdl:operation name="ValidationInformation">
+      <wsdl:input name="ValidationInformationRequest" message="tns:ValidationInformationRequest" />
+      <wsdl:output name="ValidationInformationResponse" message="tns:ValidationInformationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveKSData">
+      <wsdl:input name="ReceiveKSDataRequest" message="tns:ReceiveKSDataRequest" />
+      <wsdl:output name="ReceiveKSDataResponse" message="tns:ReceiveKSDataResponse" />
     </wsdl:operation>
     <wsdl:operation name="PxRy">
       <wsdl:input name="PxRyRequest" message="tns:PxRyRequest" />
       <wsdl:output name="PxRyResponse" message="tns:PxRyResponse" />
     </wsdl:operation>
-    <wsdl:operation name="TjxtFromXmData">
-      <wsdl:input name="TjxtFromXmDataRequest" message="tns:TjxtFromXmDataRequest" />
-      <wsdl:output name="TjxtFromXmDataResponse" message="tns:TjxtFromXmDataResponse" />
+    <wsdl:operation name="pushZJTZS">
+      <wsdl:input name="pushZJTZSRequest" message="tns:pushZJTZSRequest" />
+      <wsdl:output name="pushZJTZSResponse" message="tns:pushZJTZSResponse" />
     </wsdl:operation>
-    <wsdl:operation name="SaveDataToSt">
-      <wsdl:input name="SaveDataToStRequest" message="tns:SaveDataToStRequest" />
-      <wsdl:output name="SaveDataToStResponse" message="tns:SaveDataToStResponse" />
+    <wsdl:operation name="getProjectAdd">
+      <wsdl:input name="getProjectAddRequest" message="tns:getProjectAddRequest" />
+      <wsdl:output name="getProjectAddResponse" message="tns:getProjectAddResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSGXKSQByDate">
+      <wsdl:input name="getSGXKSQByDateRequest" message="tns:getSGXKSQByDateRequest" />
+      <wsdl:output name="getSGXKSQByDateResponse" message="tns:getSGXKSQByDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="pushZJSBJG">
+      <wsdl:input name="pushZJSBJGRequest" message="tns:pushZJSBJGRequest" />
+      <wsdl:output name="pushZJSBJGResponse" message="tns:pushZJSBJGResponse" />
     </wsdl:operation>
     <wsdl:operation name="SaveStData">
       <wsdl:input name="SaveStDataRequest" message="tns:SaveStDataRequest" />
@@ -819,6 +1234,78 @@
       <wsdl:input name="TjxtFromQyDataRequest" message="tns:TjxtFromQyDataRequest" />
       <wsdl:output name="TjxtFromQyDataResponse" message="tns:TjxtFromQyDataResponse" />
     </wsdl:operation>
+    <wsdl:operation name="pushSGXKSQJG">
+      <wsdl:input name="pushSGXKSQJGRequest" message="tns:pushSGXKSQJGRequest" />
+      <wsdl:output name="pushSGXKSQJGResponse" message="tns:pushSGXKSQJGResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getGdxyf">
+      <wsdl:input name="getGdxyfRequest" message="tns:getGdxyfRequest" />
+      <wsdl:output name="getGdxyfResponse" message="tns:getGdxyfResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TBContractRecordManage">
+      <wsdl:input name="TBContractRecordManageRequest" message="tns:TBContractRecordManageRequest" />
+      <wsdl:output name="TBContractRecordManageResponse" message="tns:TBContractRecordManageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromSxypt">
+      <wsdl:input name="GetDataFromSxyptRequest" message="tns:GetDataFromSxyptRequest" />
+      <wsdl:output name="GetDataFromSxyptResponse" message="tns:GetDataFromSxyptResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DataFromQlygPt">
+      <wsdl:input name="DataFromQlygPtRequest" message="tns:DataFromQlygPtRequest" />
+      <wsdl:output name="DataFromQlygPtResponse" message="tns:DataFromQlygPtResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="pushAJSBJG">
+      <wsdl:input name="pushAJSBJGRequest" message="tns:pushAJSBJGRequest" />
+      <wsdl:output name="pushAJSBJGResponse" message="tns:pushAJSBJGResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Huoqu">
+      <wsdl:input name="HuoquRequest" message="tns:HuoquRequest" />
+      <wsdl:output name="HuoquResponse" message="tns:HuoquResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveJlData">
+      <wsdl:input name="RetrieveJlDataRequest" message="tns:RetrieveJlDataRequest" />
+      <wsdl:output name="RetrieveJlDataResponse" message="tns:RetrieveJlDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSGXKZByAjbm">
+      <wsdl:input name="getSGXKZByAjbmRequest" message="tns:getSGXKZByAjbmRequest" />
+      <wsdl:output name="getSGXKZByAjbmResponse" message="tns:getSGXKZByAjbmResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveHtData">
+      <wsdl:input name="RetrieveHtDataRequest" message="tns:RetrieveHtDataRequest" />
+      <wsdl:output name="RetrieveHtDataResponse" message="tns:RetrieveHtDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAJSBBByUuid">
+      <wsdl:input name="getAJSBBByUuidRequest" message="tns:getAJSBBByUuidRequest" />
+      <wsdl:output name="getAJSBBByUuidResponse" message="tns:getAJSBBByUuidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getZJSBBByDate">
+      <wsdl:input name="getZJSBBByDateRequest" message="tns:getZJSBBByDateRequest" />
+      <wsdl:output name="getZJSBBByDateResponse" message="tns:getZJSBBByDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="HTBA">
+      <wsdl:input name="HTBARequest" message="tns:HTBARequest" />
+      <wsdl:output name="HTBAResponse" message="tns:HTBAResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TBProjectInfo">
+      <wsdl:input name="TBProjectInfoRequest" message="tns:TBProjectInfoRequest" />
+      <wsdl:output name="TBProjectInfoResponse" message="tns:TBProjectInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSGXKSQByUuid">
+      <wsdl:input name="getSGXKSQByUuidRequest" message="tns:getSGXKSQByUuidRequest" />
+      <wsdl:output name="getSGXKSQByUuidResponse" message="tns:getSGXKSQByUuidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="pushZJJDBG">
+      <wsdl:input name="pushZJJDBGRequest" message="tns:pushZJJDBGRequest" />
+      <wsdl:output name="pushZJJDBGResponse" message="tns:pushZJJDBGResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TjxtFromXmData">
+      <wsdl:input name="TjxtFromXmDataRequest" message="tns:TjxtFromXmDataRequest" />
+      <wsdl:output name="TjxtFromXmDataResponse" message="tns:TjxtFromXmDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveDataToSt">
+      <wsdl:input name="SaveDataToStRequest" message="tns:SaveDataToStRequest" />
+      <wsdl:output name="SaveDataToStResponse" message="tns:SaveDataToStResponse" />
+    </wsdl:operation>
     <wsdl:operation name="ToCityPlatform">
       <wsdl:input name="ToCityPlatformRequest" message="tns:ToCityPlatformRequest" />
       <wsdl:output name="ToCityPlatformResponse" message="tns:ToCityPlatformResponse" />
@@ -827,42 +1314,19 @@
       <wsdl:input name="UpdateDataRequest" message="tns:UpdateDataRequest" />
       <wsdl:output name="UpdateDataResponse" message="tns:UpdateDataResponse" />
     </wsdl:operation>
+    <wsdl:operation name="getZAJSLQKByUuid">
+      <wsdl:input name="getZAJSLQKByUuidRequest" message="tns:getZAJSLQKByUuidRequest" />
+      <wsdl:output name="getZAJSLQKByUuidResponse" message="tns:getZAJSLQKByUuidResponse" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ReceiveDataServiceHttpBinding" type="tns:ReceiveDataServicePortType">
     <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="getGdxyf">
+    <wsdl:operation name="JLBMData">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="getGdxyfRequest">
+      <wsdl:input name="JLBMDataRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="getGdxyfResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetDataFromSxypt">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="GetDataFromSxyptRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="GetDataFromSxyptResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="TBContractRecordManage">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="TBContractRecordManageRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="TBContractRecordManageResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DataFromQlygPt">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="DataFromQlygPtRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="DataFromQlygPtResponse">
+      <wsdl:output name="JLBMDataResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -902,12 +1366,21 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ValidationPhoto">
+    <wsdl:operation name="pushAJTZS">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="ValidationPhotoRequest">
+      <wsdl:input name="pushAJTZSRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="ValidationPhotoResponse">
+      <wsdl:output name="pushAJTZSResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSGXKZByZjbm">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSGXKZByZjbmRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSGXKZByZjbmResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -947,6 +1420,24 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="TBContractRecordManageForU">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="TBContractRecordManageForURequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="TBContractRecordManageForUResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pushAJZZGZ">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="pushAJZZGZRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pushAJZZGZResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SnapDataByInternet">
       <wsdlsoap:operation soapAction="" />
       <wsdl:input name="SnapDataByInternetRequest">
@@ -956,30 +1447,12 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RetrieveJlData">
+    <wsdl:operation name="getZJSBBByUuid">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="RetrieveJlDataRequest">
+      <wsdl:input name="getZJSBBByUuidRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="RetrieveJlDataResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Huoqu">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="HuoquRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="HuoquResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="RetrieveHtData">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="RetrieveHtDataRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="RetrieveHtDataResponse">
+      <wsdl:output name="getZJSBBByUuidResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -992,30 +1465,21 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getAJSBBByDate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAJSBBByDateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAJSBBByDateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckPeople">
       <wsdlsoap:operation soapAction="" />
       <wsdl:input name="CheckPeopleRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="CheckPeopleResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HTBA">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="HTBARequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="HTBAResponse">
-        <wsdlsoap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ValidationInformation">
-      <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="ValidationInformationRequest">
-        <wsdlsoap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="ValidationInformationResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1028,12 +1492,21 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TBProjectInfo">
+    <wsdl:operation name="ValidationInformation">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="TBProjectInfoRequest">
+      <wsdl:input name="ValidationInformationRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="TBProjectInfoResponse">
+      <wsdl:output name="ValidationInformationResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveKSData">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="ReceiveKSDataRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ReceiveKSDataResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1046,21 +1519,39 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TjxtFromXmData">
+    <wsdl:operation name="pushZJTZS">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="TjxtFromXmDataRequest">
+      <wsdl:input name="pushZJTZSRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="TjxtFromXmDataResponse">
+      <wsdl:output name="pushZJTZSResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveDataToSt">
+    <wsdl:operation name="getProjectAdd">
       <wsdlsoap:operation soapAction="" />
-      <wsdl:input name="SaveDataToStRequest">
+      <wsdl:input name="getProjectAddRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="SaveDataToStResponse">
+      <wsdl:output name="getProjectAddResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSGXKSQByDate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSGXKSQByDateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSGXKSQByDateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pushZJSBJG">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="pushZJSBJGRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pushZJSBJGResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1082,6 +1573,168 @@
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="pushSGXKSQJG">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="pushSGXKSQJGRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pushSGXKSQJGResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGdxyf">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getGdxyfRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getGdxyfResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TBContractRecordManage">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="TBContractRecordManageRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="TBContractRecordManageResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataFromSxypt">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetDataFromSxyptRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDataFromSxyptResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataFromQlygPt">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="DataFromQlygPtRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DataFromQlygPtResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pushAJSBJG">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="pushAJSBJGRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pushAJSBJGResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Huoqu">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="HuoquRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="HuoquResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveJlData">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RetrieveJlDataRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RetrieveJlDataResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSGXKZByAjbm">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSGXKZByAjbmRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSGXKZByAjbmResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveHtData">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RetrieveHtDataRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RetrieveHtDataResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAJSBBByUuid">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAJSBBByUuidRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAJSBBByUuidResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZJSBBByDate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getZJSBBByDateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getZJSBBByDateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HTBA">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="HTBARequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="HTBAResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TBProjectInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="TBProjectInfoRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="TBProjectInfoResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSGXKSQByUuid">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSGXKSQByUuidRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSGXKSQByUuidResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pushZJJDBG">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="pushZJJDBGRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pushZJJDBGResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TjxtFromXmData">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="TjxtFromXmDataRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="TjxtFromXmDataResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveDataToSt">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="SaveDataToStRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SaveDataToStResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ToCityPlatform">
       <wsdlsoap:operation soapAction="" />
       <wsdl:input name="ToCityPlatformRequest">
@@ -1097,6 +1750,15 @@
         <wsdlsoap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="UpdateDataResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZAJSLQKByUuid">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getZAJSLQKByUuidRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getZAJSLQKByUuidResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

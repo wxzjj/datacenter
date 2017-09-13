@@ -12,8 +12,6 @@ using Bigdesk8;
 namespace WxsjzxTimerService
 {
 
-  
-
     public class DataService
     {
         /// <summary>
@@ -47,7 +45,6 @@ namespace WxsjzxTimerService
         /// </summary>
         public DBOperator DB_Epoint_Jskcsj = DBOperatorFactory.GetDBOperator(ConfigurationManager.AppSettings["Epoint_Jskcsj_ConnectionString"],
         ConfigurationManager.AppSettings["SQLSERVER"], ConfigurationManager.AppSettings["timeout_Epoint_Jskcsj"].ToInt32(1)*1000*60);
-
 
 
         public SqlParameterCollection CreateSqlParameterCollection()
@@ -2035,6 +2032,8 @@ where a.qyID in (select qyID from uepp_qycsyw where csywlxid in ('5','6')) ";
             sp.Add("@apiFlow", apiFlow);
             return this.DB.ExeSqlForDataTable(sql, sp,"dt");
         }
+
+       
 
         //public DataTable Get_UEPP_SaveToStLog(string PKID)
         //{
