@@ -166,8 +166,9 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                             foreach (DataRow row in dt.Rows)
                             {
                                 //根据uuid获取安监申报详细数据
-                                Public.WriteLog("根据uuid获取安监申报详细数据：" + row["primarykey"].ToString());
-                                getDetailDataXml = client.getAJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row["primarykey"].ToString());
+                             
+                                Public.WriteLog("根据uuid获取安监申报详细数据：" + row[0].ToString());
+                                getDetailDataXml = client.getAJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row[0].ToString());
                                 Public.WriteLog("结果：" + getDetailDataXml);
                                 if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
                                 {
@@ -691,8 +692,8 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                             foreach (DataRow row in dt.Rows)
                             {
                                 //根据uuid获取质监申报详细数据
-                                Public.WriteLog("根据uuid获取质监申报详细数据：" + row["primarykey"].ToString());
-                                getDetailDataXml = client.getZJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row["primarykey"].ToString());
+                                Public.WriteLog("根据uuid获取质监申报详细数据：" + row[0].ToString());
+                                getDetailDataXml = client.getZJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row[0].ToString());
                                 Public.WriteLog("getZJSBBByUuid结果：" + getDetailDataXml);
                                 if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
                                 {

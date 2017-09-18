@@ -2880,6 +2880,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         }
         #endregion
 
+        #region 关于一站式申报对接接口
         /// <summary>
         /// 获取无锡市某区质监机构某一日的申报数据
         /// </summary>
@@ -3120,6 +3121,143 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             return result;
 
         }
+
+        [WebMethod]
+        public string pushAJSBJG(string user, string password, String deptcode, String sbPassword, String resultXml)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                DataExchangeBLLForYZSSB YZSSBBLL = new DataExchangeBLLForYZSSB();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(resultXml))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTable(resultXml, out message);
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+
+                /** TODO：用户写操作权限待添加
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存" + tableName + "表数据！";
+                    return result.ResultMessage;
+                }*/
+
+                result = YZSSBBLL.pushAJSBJG(user,deptcode, sbPassword, dt_Data);
+                
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+        }
+
+        [WebMethod]
+        public string pushZJSBJG(string user, string password, String deptcode, String sbPassword, String resultXml)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                DataExchangeBLLForYZSSB YZSSBBLL = new DataExchangeBLLForYZSSB();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(resultXml))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTable(resultXml, out message);
+                DataTable dwgcDtData = null;
+                //单位工程列表
+                int dwgcIndex = resultXml.IndexOf("<dwgcList>");
+                string dwgcList = string.Empty;
+                if (dwgcIndex >= 0)
+                {
+                    dwgcList = resultXml.Substring(dwgcIndex, resultXml.LastIndexOf("</dwgcList>") - dwgcIndex + "</dwgcList>".Length);
+                    dwgcDtData = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(dwgcList, out message);
+                    //dwgcDtData = xmlHelper.ConvertXMLToDataTable(dwgcList, out message);
+                }
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+
+                /** TODO：用户写操作权限待添加
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存" + tableName + "表数据！";
+                    return result.ResultMessage;
+                }*/
+
+                result = YZSSBBLL.pushZJSBJG(user, deptcode, sbPassword, dt_Data, dwgcDtData);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+        }
+
+
+        #endregion
 
         #region 保存数据
 

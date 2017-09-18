@@ -124,6 +124,43 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             return DB.ExeSqlForDataTable(sql, sp, "ajsbb_cgmgcqd");
         }
 
+        public DataTable GetAp_ajsbjg()
+        {
+            string sql = "select * from Ap_ajsbjg where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
+        }
+
+        public bool SaveAp_ajsbjg(DataTable dt)
+        {
+            string sql = "select *  from Ap_ajsbjg where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
+
+        public DataTable GetAp_zjsbjg()
+        {
+            string sql = "select * from Ap_zjsbjg where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
+        }
+
+        public bool SaveAp_zjsbjg(DataTable dt)
+        {
+            string sql = "select *  from Ap_zjsbjg where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
+        public DataTable GetAp_zjsbjg_dwgc()
+        {
+            string sql = "select * from Ap_zjsbjg_dwgc where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
+        }
+
+        public bool SaveAp_zjsbjg_dwgc(DataTable dt)
+        {
+            string sql = "select *  from Ap_zjsbjg_dwgc where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
         #endregion
 
 
@@ -211,6 +248,27 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             string sql = @"select * from dbo.Ap_zjsbb_clqd where uuid=@uuid";
             sp.Add("@uuid", uuid);
             return DB.ExeSqlForDataTable(sql, sp, "zjsbb_clqd");
+        }
+
+        #endregion
+
+        #region 日志表操作
+
+        public DataTable GetTBData_SaveToStLog(string tableName, string PKID)
+        {
+            string sql = "select * from SaveToStLog where TableName=@TableName and PKID =@PKID  ";
+
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            sp.Add("@TableName", tableName);
+            sp.Add("@PKID", PKID);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        public bool SaveTBData_SaveToStLog(DataTable dt)
+        {
+            string sql = "select * from SaveToStLog where 1=2";
+            return DB.Update(sql, null, dt);
         }
 
         #endregion
