@@ -282,10 +282,13 @@ namespace WxjzgcjczyTimerService
 
                 row_DataJkLog["csTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
+                Int64 id = dataService.Get_DataJkDataDetailNewID().ToInt64();
+
                 dataService.Submit_DataJkLog(dt_DataJkLog);
 
                 ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient client = new ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient();
-                #region  从省一体化平台获取江阴地区的立项项目信息
+                #region  从省一体化平台获取江阴地区的立项项目信息 项目信息都走一号通获取，所以这部分删除
+                /**
                 string userName_jyxm = "320281", password_jyxm = "RTn&53o";
 
                 string beginDate = DateTime.Now.AddDays(-10).ToString("yyyy/MM/dd 00:00:00");//"2015/01/01 00:00:00";
@@ -514,7 +517,7 @@ namespace WxjzgcjczyTimerService
 
                 dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
 
-
+                */
                 #endregion
 
                 #region 获取省一体化平台合同备案信息数据处理
