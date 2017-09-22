@@ -103,12 +103,13 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return DB.Update(sql, null, dt);
         }
 
-        public DataTable Get_Ap_ajsbb_clqd(string uuid, string xh)
+        public DataTable Get_Ap_ajsbb_clqd(string uuid, string xh, string sbzl)
         {
-            string sql = @"  select * from Ap_ajsbb_clqd where uuid=@uuid and xh=@xh";
+            string sql = @"  select * from Ap_ajsbb_clqd where uuid=@uuid and xh=@xh and sbzl=@sbzl";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@uuid", uuid);
             sp.Add("@xh", xh);
+            sp.Add("@sbzl", sbzl);
             return this.DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
@@ -217,12 +218,13 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return this.DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
-        public DataTable Get_Ap_zjsbb_clqd(string uuid, string xh)
+        public DataTable Get_Ap_zjsbb_clqd(string uuid, string xh, string sbzl)
         {
-            string sql = @"  select * from Ap_zjsbb_clqd where uuid=@uuid and xh=@xh";
+            string sql = @"  select * from Ap_zjsbb_clqd where uuid=@uuid and xh=@xh and sbzl=@sbzl";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@uuid", uuid);
             sp.Add("@xh", xh);
+            sp.Add("@sbzl", sbzl);
             return this.DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 

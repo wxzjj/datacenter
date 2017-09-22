@@ -923,7 +923,7 @@ namespace Wxjzgcjczy.BLL
                 {
                     try
                     {
-                        BLLCommon.WriteLog("获取了 " + dt_TBProjectAddInfo.Rows.Count + " 条TBProjectAddInfo数据！");
+                        BLLCommon.WriteLog("获取了 " + dt_TBProjectAddInfo.Rows.Count + " 条TBProjectAdditionalInfo数据！");
                         string xmlData = ""; 
                         
                         DataRow dataRow = dt_TBProjectAddInfo.Rows[0];
@@ -934,7 +934,7 @@ namespace Wxjzgcjczy.BLL
                         string addResultSt = client.getProjectAdd(dataRow["prjnum"].ToString(), xmlData, userName, password);
                         BLLCommon.WriteLog("向省一体化平台传送项目登记补充数据:" + xmlData + "\n结果：" + addResultSt);
 
-                        DataTable dt = DAL.GetTBData_SaveToStLog("TBAdditionalProjectInfo", dataRow["PKID"].ToString());
+                        DataTable dt = DAL.GetTBData_SaveToStLog("TBProjectAdditionalInfo", dataRow["PKID"].ToString());
 
                         if (dt.Rows.Count > 0)
                         {
@@ -947,7 +947,7 @@ namespace Wxjzgcjczy.BLL
                             row = dt.NewRow();
                             row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                             row["UpdateDate"] = row["CreateDate"];
-                            row["TableName"] = "TBProjectInfoAdditional";
+                            row["TableName"] = "TBProjectAdditionalInfo";
                             row["PKID"] = dataRow["PKID"];
                             dt.Rows.Add(row);
                         }
