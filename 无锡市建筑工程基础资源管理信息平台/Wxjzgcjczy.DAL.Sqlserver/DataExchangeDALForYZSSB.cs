@@ -68,7 +68,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 	  ,u.countryCode
     FROM dbo.Ap_ajsbb b 
     LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
-    WHERE SUBSTRING(convert(VARCHAR(30), b.FetchDate, 120), 1, 10)=@date
+    WHERE SUBSTRING(convert(VARCHAR(30), b.updateDate, 120), 1, 10)=@date
     AND countryCode in (" + AntiSqlInjection.ParameterizeInClause(countryCodes, "@para", ref sp) + ")";
 
             sp.Add("@date", date);
@@ -202,7 +202,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 	  ,u.countryCode
     FROM dbo.Ap_zjsbb b 
     LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
-    WHERE SUBSTRING(convert(VARCHAR(30), b.FetchDate, 120), 1, 10)=@date
+    WHERE SUBSTRING(convert(VARCHAR(30), b.updateDate, 120), 1, 10)=@date
     AND countryCode in (" + AntiSqlInjection.ParameterizeInClause(countryCodes, "@para", ref sp) + ")";
 
             sp.Add("@date", date);
