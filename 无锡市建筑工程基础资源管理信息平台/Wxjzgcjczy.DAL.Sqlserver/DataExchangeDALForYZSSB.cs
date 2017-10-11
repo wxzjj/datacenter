@@ -65,6 +65,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
       ,b.UpdateFlag
       ,b.UpdateTime
       ,b.UpdateUser
+      ,b.updateDate
 	  ,u.countryCode
     FROM dbo.Ap_ajsbb b 
     LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
@@ -72,6 +73,53 @@ namespace Wxjzgcjczy.DAL.Sqlserver
     AND countryCode in (" + AntiSqlInjection.ParameterizeInClause(countryCodes, "@para", ref sp) + ")";
 
             sp.Add("@date", date);
+            return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_ajsbb");
+
+        }
+
+        public DataTable GetAp_ajsbb_byuuid(string uuid)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT  b.uuid,b.xmmc
+                        ,b.PrjNum
+                        ,b.PrjName
+                        ,b.Ajjgmc
+                        ,b.AjCorpCode
+                        ,b.PrjSize
+                        ,b.EconCorpName
+                        ,b.EconCorpCode
+                        ,b.PrjApprovalNum
+                        ,b.BuldPlanNum
+      ,b.ProjectPlanNum
+      ,b.CityNum
+      ,b.CountyNum
+      ,b.PrjTypeNum
+      ,b.sPrjTypeNum
+      ,b.PrjFunctionNum
+      ,b.sbr
+      ,b.sbryddh
+      ,b.CreateDate
+      ,b.sfzps
+      ,b.sfbz
+      ,b.jdz
+      ,b.wdz
+      ,b.mj
+      ,b.zj
+      ,b.jgcc
+      ,b.sbmb
+      ,b.sfjk
+      ,b.sgxkz
+      ,b.UpdateFlag
+      ,b.UpdateTime
+      ,b.UpdateUser
+      ,b.updateDate
+	  ,u.countryCode
+    FROM dbo.Ap_ajsbb b 
+    LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
+    WHERE b.uuid=@uuid";
+
+            sp.Add("@uuid", uuid);
             return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_ajsbb");
 
         }
@@ -136,6 +184,23 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             return DB.Update(sql, null, dt);
         }
 
+        #region 推送安监通知书
+
+        public bool SaveAp_ajtzs(DataTable dt)
+        {
+            string sql = "select *  from Ap_ajtzs where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
+
+        public bool SaveAp_ajtzs_jdry(DataTable dt)
+        {
+            string sql = "select *  from Ap_ajtzs_jdry where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
+        #endregion
+
 
         public DataTable GetAp_zjsbjg()
         {
@@ -199,6 +264,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
       ,b.UpdateFlag
       ,b.UpdateTime
       ,b.UpdateUser
+      ,b.UpdateDate
 	  ,u.countryCode
     FROM dbo.Ap_zjsbb b 
     LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
@@ -206,6 +272,43 @@ namespace Wxjzgcjczy.DAL.Sqlserver
     AND countryCode in (" + AntiSqlInjection.ParameterizeInClause(countryCodes, "@para", ref sp) + ")";
 
             sp.Add("@date", date);
+            return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_zjsbb");
+
+        }
+
+        public DataTable GetAp_zjsbb_byuuid(string uuid)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT  b.uuid,b.xmmc
+                        ,b.PrjNum
+                        ,b.PrjName
+                        ,b.gcdz
+                        ,b.zjjgmc
+                        ,b.zjCorpCode
+                        ,b.PrjSize
+                        ,b.EconCorpName
+                        ,b.EconCorpCode
+                        ,b.PrjApprovalNum
+                        ,b.BuldPlanNum
+      ,b.ProjectPlanNum
+      ,b.CityNum
+      ,b.CountyNum
+      ,b.PrjTypeNum
+      ,b.PrjFunctionNum
+      ,b.sbr
+      ,b.sbryddh
+      ,b.CreateDate
+      ,b.sfzps
+      ,b.UpdateFlag
+      ,b.UpdateTime
+      ,b.UpdateUser
+      ,b.UpdateDate
+	  ,u.countryCode
+    FROM dbo.Ap_zjsbb b 
+    LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
+    WHERE b.uuid=@uuid";
+            sp.Add("@uuid", uuid);
             return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_zjsbb");
 
         }
@@ -271,6 +374,23 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             return DB.Update(sql, null, dt);
         }
 
+        #endregion
+
+
+        #region 通用表查询
+        public DataTable GetApTable(string tableName)
+        {
+            string sql = "select * from " + tableName + " where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
+        }
+        #endregion
+
+        #region 通用表保存
+        public bool SaveApTable(string tableName , DataTable dt)
+        {
+            string sql = "select *  from " + tableName + " where 1=2";
+            return DB.Update(sql, null, dt);
+        }
         #endregion
 
     }

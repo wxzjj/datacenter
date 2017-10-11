@@ -984,6 +984,13 @@ where 1=1 ";
             string sql = " select Code,CodeInfo from 	tbXzqdmDic where parentCode='320200' ";
             return DB.ExeSqlForDataTable(sql, null, "dt");
         }
+        public DataTable GetCountryCodes(string deptType)
+        {
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            string sql = " select countryCode from Ap_api_user where deptType=@deptType";
+            sp.Add("@deptType", deptType);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");  
+        }
         public bool IsExistsSgxkxx(string builderLicenceNum)
         {
             string sql = "select count(*) from TBBuilderLicenceManage where BuilderLicenceNum=@BuilderLicenceNum  ";
