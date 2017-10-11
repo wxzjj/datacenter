@@ -19,6 +19,10 @@ namespace Wxjzgcjczy.BLL
     /// </summary>
     public class DataExchangeBLLForYZSSB
     {
+        //安监
+        public const string AP_AJZZGZ = "Ap_ajzzgz";
+
+
         private readonly Wxjzgcjczy.DAL.Sqlserver.DataExchangeDALForYZSSB DAL = new Wxjzgcjczy.DAL.Sqlserver.DataExchangeDALForYZSSB();
 
         XmlHelper xmlHelper = new XmlHelper();
@@ -43,6 +47,12 @@ namespace Wxjzgcjczy.BLL
         public DataTable GetAp_ajsbb(string date, string countryCodes)
         {
             DataTable dt = DAL.GetAp_ajsbb(date, countryCodes);
+            return dt;
+        }
+
+        public DataTable GetAp_ajsbb_byuuid(string uuid)
+        {
+            DataTable dt = DAL.GetAp_ajsbb_byuuid(uuid);
             return dt;
         }
 
@@ -89,6 +99,11 @@ namespace Wxjzgcjczy.BLL
         public DataTable GetAp_zjsbb(string date, string countryCodes)
         {
             DataTable dt = DAL.GetAp_zjsbb(date, countryCodes);
+            return dt;
+        }
+        public DataTable GetAp_zjsbb_byuuid(string uuid)
+        {
+            DataTable dt = DAL.GetAp_zjsbb_byuuid(uuid);
             return dt;
         }
 
@@ -258,6 +273,310 @@ namespace Wxjzgcjczy.BLL
 
         #endregion
 
+
+        #region 推送安监通知书
+        /// <summary>
+        /// 推送安监通知书
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="deptcode"></param>
+        /// <param name="sbPassword"></param>
+        /// <param name="dt_Data"></param>
+        /// <returns></returns>
+        public ProcessResultData pushAJTZS(string user, string deptcode, string sbPassword, DataTable dt_Data, DataTable jdryDtData)
+        {
+            ProcessResultData result = new ProcessResultData();
+            StringBuilder prjInnerNumSb = new StringBuilder();
+
+            string msg = String.Empty;
+            string[] fields = new string[] { "uuid", "tzrq", "tzdw" };
+
+            DataRow item = dt_Data.Rows[0];
+            List<string> novalidates = new List<string>();
+            novalidates.Add(String.Empty);
+            novalidates.Add(" ");
+            novalidates.Add("无");
+            novalidates.Add("无数据");
+            novalidates.Add("/");
+
+            if (BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = msg + "不能为空！";
+                return result;
+            }
+
+            DataTable dt_ajtzs = DAL.GetApTable("Ap_ajtzs");
+            DataRow row = dt_ajtzs.NewRow();
+            DataTableHelp.DataRow2DataRow(item, row);
+
+            row["id"] = Guid.NewGuid();
+            row["UpdateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            dt_ajtzs.Rows.Add(row);
+            row["deptcode"] = deptcode;
+            row["sbPassword"] = sbPassword;
+            row["UpdateUser"] = user;
+
+            //保存监督人员列表
+            DataTable dt_ajtzs_jdry = null;
+            if (jdryDtData != null && jdryDtData.Rows.Count > 0)
+            {
+                dt_ajtzs_jdry = DAL.GetApTable("Ap_ajtzs_jdry");
+
+                foreach (DataRow jdryItem in jdryDtData.Rows)
+                {
+                    DataRow jdryRow = dt_ajtzs_jdry.NewRow();
+                    DataTableHelp.DataRow2DataRow(jdryItem, jdryRow);
+                    jdryRow["id"] = Guid.NewGuid();
+                    jdryRow["uuid"] = row["uuid"];
+                    dt_ajtzs_jdry.Rows.Add(jdryRow);
+                } 
+            }
+
+            if (dt_ajtzs.Rows.Count > 0)
+            {
+                if (DAL.SaveAp_ajtzs(dt_ajtzs) && DAL.SaveAp_ajtzs_jdry(dt_ajtzs_jdry))
+                {
+                    try
+                    {
+                        StringBuilder str = new StringBuilder();
+                        string xmlData = string.Empty;
+                        string jdryXmlData = string.Empty;
+                        DataRow dataRow = dt_ajtzs.Rows[0];
+
+                        //向省一站式申报平台推送安监通知书
+                        List<string> excludeColumns = new List<string>();
+                        excludeColumns.Add("id");
+                        excludeColumns.Add("deptcode");
+                        excludeColumns.Add("sbPassword");
+                        excludeColumns.Add("UpdateTime");
+                        excludeColumns.Add("UpdateUser");
+                        xmlData = xmlHelper.ConvertDataRowToXML(dataRow, excludeColumns);
+                        
+
+                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                        str.AppendFormat("<{0}>", "data");
+                        str.AppendFormat("<{0}>", "result");
+                        str.Append(xmlData);
+                       
+                        foreach (DataRow jdryItem in jdryDtData.Rows)
+                        {
+                            str.AppendFormat("<{0}>", "jdryList");
+                            DataRow jdryRow = dt_ajtzs_jdry.NewRow();
+                            jdryXmlData = xmlHelper.ConvertDataRowToXML(jdryItem);
+                            str.Append(jdryXmlData);
+                            str.AppendFormat("</{0}>", "jdryList");
+                        }
+                        
+                        str.AppendFormat("</{0}>", "result");
+                        str.AppendFormat("</{0}>", "data");
+
+                        string addResultSt = client.pushAJTZS(deptcode, sbPassword, str.ToString());
+                        BLLCommon.WriteLog("deptcode:" + deptcode);
+                        BLLCommon.WriteLog("向省一站式申报平台推送安监监督通知书:" + str.ToString() + "\n结果：" + addResultSt);
+
+                        DataTable dt = DAL.GetTBData_SaveToStLog("Ap_ajtzs", dataRow["id"].ToString());
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            row = dt.Rows[0];
+                            row["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            row["TableName"] = "Ap_ajtzs";
+                        }
+                        else
+                        {
+                            row = dt.NewRow();
+                            row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            row["UpdateDate"] = row["CreateDate"];
+                            row["TableName"] = "Ap_ajtzs";
+                            row["PKID"] = dataRow["id"];
+                            dt.Rows.Add(row);
+                        }
+                        if (addResultSt != "OK")
+                        {
+                            row["OperateState"] = 1;
+                            row["Msg"] = addResultSt;
+                        }
+                        else
+                        {
+                            row["OperateState"] = 0;
+                            row["Msg"] = "上传成功";
+                        }
+                        if (dt.Rows.Count > 0)
+                        {
+                            DAL.SaveTBData_SaveToStLog(dt);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            BLLCommon.WriteLog(ex.Message);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
+                    result.code = ProcessResult.数据保存成功;
+                    result.message = "数据保存成功！";
+                }
+                else
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "网络故障，数据保存失败！";
+                }
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "非法格式的数据！";
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region 推送终止施工安全监督告知书
+
+        /// <summary>
+        /// 向省一站式申报平台推送终止施工安全监督告知书
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="deptcode"></param>
+        /// <param name="sbPassword"></param>
+        /// <param name="dt_Data"></param>
+        /// <returns></returns>
+        public ProcessResultData pushAJZZGZ(string user, string deptcode, string sbPassword, DataTable dt_Data)
+        {
+            ProcessResultData result = new ProcessResultData();
+            StringBuilder prjInnerNumSb = new StringBuilder();
+
+            string msg = String.Empty;
+            string[] fields = new string[] { "uuid", "zzyy", "zzrq" };
+
+            DataRow item = dt_Data.Rows[0];
+            List<string> novalidates = new List<string>();
+            novalidates.Add(String.Empty);
+            novalidates.Add(" ");
+            novalidates.Add("无");
+            novalidates.Add("无数据");
+            novalidates.Add("/");
+
+            if (BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = msg + "不能为空！";
+                return result;
+            }
+
+            DataTable dt_ajzzgz = DAL.GetApTable(AP_AJZZGZ);
+            DataRow row = dt_ajzzgz.NewRow();
+            DataTableHelp.DataRow2DataRow(item, row);
+
+            row["id"] = Guid.NewGuid();
+            row["UpdateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            dt_ajzzgz.Rows.Add(row);
+            row["deptcode"] = deptcode;
+            row["sbPassword"] = sbPassword;
+            row["UpdateUser"] = user;
+
+            if (dt_ajzzgz.Rows.Count > 0)
+            {
+                if (DAL.SaveApTable(AP_AJZZGZ, dt_ajzzgz))
+                {
+                    try
+                    {
+                        StringBuilder str = new StringBuilder();
+                        string xmlData = "";
+                        DataRow dataRow = dt_ajzzgz.Rows[0];
+
+                        //向省一站式申报平台推送安监申报结果
+                        List<string> excludeColumns = new List<string>();
+                        excludeColumns.Add("id");
+                        excludeColumns.Add("deptcode");
+                        excludeColumns.Add("sbPassword");
+                        excludeColumns.Add("UpdateTime");
+                        excludeColumns.Add("UpdateUser");
+                        xmlData = xmlHelper.ConvertDataRowToXML(dataRow, excludeColumns);
+
+                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                        str.AppendFormat("<{0}>", "data");
+                        str.AppendFormat("<{0}>", "result");
+                        str.Append(xmlData);
+                        str.AppendFormat("</{0}>", "result");
+                        str.AppendFormat("</{0}>", "data");
+
+                        string addResultSt = client.pushAJZZGZ(deptcode, sbPassword, str.ToString());
+                        BLLCommon.WriteLog("deptcode:" + deptcode);
+                        BLLCommon.WriteLog("向省一站式申报平台推送终止施工安全监督告知书:" + str.ToString() + "\n结果：" + addResultSt);
+
+                        DataTable dt = DAL.GetTBData_SaveToStLog(AP_AJZZGZ, dataRow["id"].ToString());
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            row = dt.Rows[0];
+                            row["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            row["TableName"] = AP_AJZZGZ;
+                        }
+                        else
+                        {
+                            row = dt.NewRow();
+                            row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            row["UpdateDate"] = row["CreateDate"];
+                            row["TableName"] = AP_AJZZGZ;
+                            row["PKID"] = dataRow["id"];
+                            dt.Rows.Add(row);
+                        }
+                        if (addResultSt != "OK")
+                        {
+                            row["OperateState"] = 1;
+                            row["Msg"] = addResultSt;
+                        }
+                        else
+                        {
+                            row["OperateState"] = 0;
+                            row["Msg"] = "上传成功";
+                        }
+                        if (dt.Rows.Count > 0)
+                        {
+                            DAL.SaveTBData_SaveToStLog(dt);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            BLLCommon.WriteLog(ex.Message);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
+                    result.code = ProcessResult.数据保存成功;
+                    result.message = "数据保存成功！";
+                }
+                else
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "网络故障，数据保存失败！";
+                }
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "非法格式的数据！";
+            }
+            return result;
+        }
+
+        #endregion
+
         #region 推送质监申报结果
 
         /// <summary>
@@ -351,8 +670,9 @@ namespace Wxjzgcjczy.BLL
                         str.AppendFormat("</{0}>", "data");
 
                         string addResultSt = client.pushZJSBJG(deptcode, sbPassword, str.ToString());
+                        //string addResultSt = string.Empty;
                         BLLCommon.WriteLog("deptcode:" + deptcode);
-                        BLLCommon.WriteLog("向省一站式申报平台推送安监申报结果:" + str.ToString() + "\n结果：" + addResultSt);
+                        BLLCommon.WriteLog("向省一站式申报平台推送质监申报结果:" + str.ToString() + "\n结果：" + addResultSt);
                         BLLCommon.WriteLog("id" + dataRow["id"].ToString());
                         DataTable dt = DAL.GetTBData_SaveToStLog("Ap_zjsbjg", dataRow["id"].ToString());
 
@@ -418,6 +738,171 @@ namespace Wxjzgcjczy.BLL
 
         #endregion
 
+
+        #region 推送质监通知书
+        /// <summary>
+        /// 推送质监通知书
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="deptcode"></param>
+        /// <param name="sbPassword"></param>
+        /// <param name="dt_Data"></param>
+        /// <returns></returns>
+        public ProcessResultData pushZJTZS(string user, string deptcode, string sbPassword, DataTable dt_Data, DataTable jdryDtData)
+        {
+            ProcessResultData result = new ProcessResultData();
+            StringBuilder prjInnerNumSb = new StringBuilder();
+
+            string msg = String.Empty;
+            string[] fields = new string[] { "uuid", "tzrq", "tzdw" };
+
+            DataRow item = dt_Data.Rows[0];
+            List<string> novalidates = new List<string>();
+            novalidates.Add(String.Empty);
+            novalidates.Add(" ");
+            novalidates.Add("无");
+            novalidates.Add("无数据");
+            novalidates.Add("/");
+
+            if (BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = msg + "不能为空！";
+                return result;
+            }
+
+            DataTable dt_ajtzs = DAL.GetApTable("Ap_zjtzs");
+            DataRow row = dt_ajtzs.NewRow();
+            DataTableHelp.DataRow2DataRow(item, row);
+
+            row["id"] = Guid.NewGuid();
+            row["UpdateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            dt_ajtzs.Rows.Add(row);
+            row["deptcode"] = deptcode;
+            row["sbPassword"] = sbPassword;
+            row["UpdateUser"] = user;
+
+            //保存监督人员列表
+            DataTable dt_tzs_jdry = null;
+            if (jdryDtData != null && jdryDtData.Rows.Count > 0)
+            {
+                dt_tzs_jdry = DAL.GetApTable("Ap_zjtzs_jdry");
+
+                foreach (DataRow jdryItem in jdryDtData.Rows)
+                {
+                    DataRow jdryRow = dt_tzs_jdry.NewRow();
+                    DataTableHelp.DataRow2DataRow(jdryItem, jdryRow);
+                    jdryRow["id"] = row["id"];
+                    jdryRow["uuid"] = row["uuid"];
+                    dt_tzs_jdry.Rows.Add(jdryRow);
+                }
+            }
+
+            if (dt_ajtzs.Rows.Count > 0)
+            {
+                if (DAL.SaveApTable("Ap_zjtzs", dt_ajtzs) && DAL.SaveApTable("Ap_zjtzs_jdry", dt_tzs_jdry))
+                {
+                    try
+                    {
+                        StringBuilder str = new StringBuilder();
+                        string xmlData = string.Empty;
+                        string jdryXmlData = string.Empty;
+                        DataRow dataRow = dt_ajtzs.Rows[0];
+
+                        //向省一站式申报平台推送质监通知书
+                        List<string> excludeColumns = new List<string>();
+                        excludeColumns.Add("id");
+                        excludeColumns.Add("deptcode");
+                        excludeColumns.Add("sbPassword");
+                        excludeColumns.Add("UpdateTime");
+                        excludeColumns.Add("UpdateUser");
+                        xmlData = xmlHelper.ConvertDataRowToXML(dataRow, excludeColumns);
+
+
+                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                        str.AppendFormat("<{0}>", "data");
+                        str.AppendFormat("<{0}>", "result");
+                        str.Append(xmlData);
+
+                        foreach (DataRow jdryItem in jdryDtData.Rows)
+                        {
+                            str.AppendFormat("<{0}>", "jdryList");
+                            DataRow jdryRow = dt_tzs_jdry.NewRow();
+                            jdryXmlData = xmlHelper.ConvertDataRowToXML(jdryItem);
+                            str.Append(jdryXmlData);
+                            str.AppendFormat("</{0}>", "jdryList");
+                        }
+
+                        str.AppendFormat("</{0}>", "result");
+                        str.AppendFormat("</{0}>", "data");
+
+                        string addResultSt = client.pushZJTZS(deptcode, sbPassword, str.ToString());
+                        BLLCommon.WriteLog("deptcode:" + deptcode);
+                        BLLCommon.WriteLog("向省一站式申报平台推送质监监督通知书:" + str.ToString() + "\n结果：" + addResultSt);
+
+                        DataTable dt = DAL.GetTBData_SaveToStLog("Ap_zjtzs", dataRow["id"].ToString());
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            row = dt.Rows[0];
+                            row["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            row["TableName"] = "Ap_zjtzs";
+                        }
+                        else
+                        {
+                            row = dt.NewRow();
+                            row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            row["UpdateDate"] = row["CreateDate"];
+                            row["TableName"] = "Ap_zjtzs";
+                            row["PKID"] = dataRow["id"];
+                            dt.Rows.Add(row);
+                        }
+                        if (addResultSt != "OK")
+                        {
+                            row["OperateState"] = 1;
+                            row["Msg"] = addResultSt;
+                        }
+                        else
+                        {
+                            row["OperateState"] = 0;
+                            row["Msg"] = "上传成功";
+                        }
+                        if (dt.Rows.Count > 0)
+                        {
+                            DAL.SaveTBData_SaveToStLog(dt);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            BLLCommon.WriteLog(ex.Message);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
+                    result.code = ProcessResult.数据保存成功;
+                    result.message = "数据保存成功！";
+                }
+                else
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "网络故障，数据保存失败！";
+                }
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "非法格式的数据！";
+            }
+            return result;
+        }
+
+        #endregion
 
     }
 }

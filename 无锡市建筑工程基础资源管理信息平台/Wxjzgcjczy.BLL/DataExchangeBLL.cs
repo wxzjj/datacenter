@@ -344,6 +344,18 @@ namespace Wxjzgcjczy.BLL
             return list;
 
         }
+
+        public List<string> Get_tbXzqdmDicForShenBao(string deptType)
+        {
+            List<string> list = new List<string>();
+            DataTable dt = DAL.GetCountryCodes(deptType);
+            foreach (DataRow row in dt.Rows)
+            {
+                list.Add(row["countryCode"].ToString2());
+            }
+            return list;
+
+        }
         /// <summary>
         /// 获取接口用户信息
         /// </summary>
@@ -849,6 +861,7 @@ namespace Wxjzgcjczy.BLL
                 result.code = ProcessResult.保存失败和失败原因;
                 result.message = "非法格式的数据！";
             }
+            BLLCommon.WriteLog("SaveTBData_TBProjectInfo结果：" + result.message);
             return result;
         }
 
@@ -867,6 +880,8 @@ namespace Wxjzgcjczy.BLL
             string[] fields = new string[] { "prjnum", "prjpassword", "gyzzpl", "dzyx", "lxr", "yddh", "xmtz", "gytze", "gytzbl", "lxtzze", "sbdqbm" };
 
             List<string> districts = this.Get_tbXzqdmDic();
+            //以前有些项目使用320200区划编码的问题
+            districts.Add("320200");
 
             //一次传送一条项目登记补充数据
             DataRow item = dt_Data.Rows[0];
@@ -955,6 +970,17 @@ namespace Wxjzgcjczy.BLL
                         {
                             row["OperateState"] = 1;
                             row["Msg"] = addResultSt;
+
+                            //1分钟后重新上报一次
+                            System.Timers.Timer timer = new System.Timers.Timer(60*1000);
+                            timer.Elapsed += delegate(object sender, System.Timers.ElapsedEventArgs e)
+                            {
+                                timer.Enabled = false;
+                                client.getProjectAdd(dataRow["prjnum"].ToString(), xmlData, userName, password);
+                                BLLCommon.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "再次向省一体化平台传送项目登记补充数据:" + xmlData + "\n结果：" + addResultSt);
+                            };
+                            timer.Enabled = true; 
+
                         }
                         else
                         {
@@ -993,6 +1019,7 @@ namespace Wxjzgcjczy.BLL
                 result.code = ProcessResult.保存失败和失败原因;
                 result.message = "非法格式的数据！";
             }
+            BLLCommon.WriteLog("SaveTBData_TBProjectAdditionalInfo结果：" + result.message);
             return result;
         }
 
@@ -3211,6 +3238,8 @@ namespace Wxjzgcjczy.BLL
         {
             return DAL.Submit_API_cb(dt);
         }
+
+
 
     }
 }
