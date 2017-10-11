@@ -376,6 +376,32 @@ namespace Wxjzgcjczy.Common
             }
         }
 
+        public string ConvertDataRowToXML(DataRow dr, List<string> excludeColumns)
+        {
+            if (dr == null || dr.Table == null)
+            {
+                return String.Empty;
+            }
+            StringBuilder str = new StringBuilder();
+            try
+            {
+                foreach (DataColumn col in dr.Table.Columns)
+                {
+                    if (!excludeColumns.Exists(p => p.Equals(col.ColumnName, StringComparison.CurrentCultureIgnoreCase)))
+                    {
+                        str.AppendFormat("<{0}>{1}</{2}>", col.ColumnName, (dr[col.ColumnName] == DBNull.Value) ? String.Empty : dr[col.ColumnName].ToString(), col.ColumnName);
+                    }
+                }
+
+                return str.ToString();
+
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
         /// <summary>  
         /// 反序列化XML为类实例  
         /// </summary>  
