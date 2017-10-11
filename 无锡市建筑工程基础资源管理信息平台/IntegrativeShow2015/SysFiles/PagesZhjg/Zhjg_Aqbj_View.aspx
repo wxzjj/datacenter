@@ -16,6 +16,7 @@
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
                 <img src="../Images/TitleImgs/Title_gcjbxx.gif" height="25px" alt="" />
+                <div style="width:200px;height:25px; background:url('../Images/TitleImgs/Title_back.jpg');">&nbsp;&nbsp;&nbsp;安全监督信息</div>
             </td>
         </tr>
         <tr>
