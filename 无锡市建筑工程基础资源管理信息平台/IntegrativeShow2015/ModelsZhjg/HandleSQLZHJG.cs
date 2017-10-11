@@ -264,8 +264,8 @@ WHERE c.PKID = @PKID and a.UpdateFlag='U'
                         b.PrjName,b.PKID as LxPKID,c.qyID as kcqyID,d.qyID as sjqyID
                         from TBProjectCensorInfo as a
                         left join TBProjectInfo as b on a.PrjNum = b.PrjNum 
-						left join UEPP_Qyjbxx c on a.EconCorpCode like c.zzjgdm+'%'
-                        left join UEPP_Qyjbxx d on a.DesignCorpCode like d.zzjgdm+'%'
+                        left join UEPP_Qyjbxx c on (REPLACE(REPLACE(a.EconCorpCode,'-',''),';','')=REPLACE(REPLACE(c.zzjgdm,'-',''),';','') OR (a.EconCorpCode is NULL AND a.EconCorpName=c.qymc))
+                        left join UEPP_Qyjbxx d on (REPLACE(REPLACE(a.DesignCorpCode,'-',''),';','')=REPLACE(REPLACE(d.zzjgdm,'-',''),';','') OR (a.DesignCorpCode is NULL AND a.DesignCorpName=d.qymc))
 						where a.UpdateFlag='U'
                         ) AS TEMP WHERE 1=1 ";
             //此处用于自动生成页面查询条件合并入strSQL
@@ -298,8 +298,8 @@ WHERE c.PKID = @PKID and a.UpdateFlag='U'
                 b.PrjName,b.PKID as LxPKID,c.qyID as kcqyID,d.qyID as sjqyID
                 from TBProjectCensorInfo as a
                 left join TBProjectInfo as b on a.PrjNum = b.PrjNum 
-				left join UEPP_Qyjbxx c on a.EconCorpCode like c.zzjgdm+'%'
-                left join UEPP_Qyjbxx d on a.DesignCorpCode like d.zzjgdm+'%'
+                left join UEPP_Qyjbxx c on (REPLACE(REPLACE(a.EconCorpCode,'-',''),';','')=REPLACE(REPLACE(c.zzjgdm,'-',''),';','') OR (a.EconCorpCode is NULL AND a.EconCorpName=c.qymc))
+                left join UEPP_Qyjbxx d on (REPLACE(REPLACE(a.DesignCorpCode,'-',''),';','')=REPLACE(REPLACE(d.zzjgdm,'-',''),';','') OR (a.DesignCorpCode is NULL AND a.DesignCorpName=d.qymc))
 				where a.UpdateFlag='U'
             ) AS TEMP WHERE PrjNum=@PrjNum ";
             //此处用于自动生成页面查询条件合并入strSQL
