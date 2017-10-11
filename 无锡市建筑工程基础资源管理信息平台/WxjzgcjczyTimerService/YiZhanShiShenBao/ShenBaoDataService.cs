@@ -41,6 +41,29 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
         }
 
         /// <summary>
+        /// 获取需要重新抓取的uuid列表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAp_need_refetch_uuids(string deptType)
+        {
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            string sql = @"select * from dbo.Ap_need_refetch_uuid where deptType=@deptType ";
+            sp.Add("@deptType", deptType);
+            return DB.ExeSqlForDataTable(sql, sp, "Ap_need_refetch_uuid_dt");
+
+        }
+
+        public bool Delete_Ap_need_refetch_uuid(string uuid , string deptType)
+        {
+            string sql = "delete from dbo.Ap_need_refetch_uuid where uuid=@uuid and deptType=@deptType  ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@uuid", uuid);
+            sp.Add("@deptType", deptType); 
+            return DB.ExecuteNonQuerySql(sql, sp) > 0;
+        }
+
+
+        /// <summary>
         /// 根据apiFlow获取Api详细信息
         /// </summary>
         /// <param name="qyZzjgdm"></param>
@@ -73,6 +96,12 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return DB.Update(sql, null, dt);
         }
 
+        public DataTable Get_Ap_ajsbb_ht()
+        {
+            string sql = "select * from Ap_ajsbb_ht where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
+        }
+
         public DataTable Get_Ap_ajsbb_ht(string uuid, string recordNum)
         {
             string sql = @"  select * from Ap_ajsbb_ht where uuid=@uuid and RecordNum=@recordNum";
@@ -88,12 +117,15 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return DB.Update(sql, null, dt);
         }
 
-        public DataTable Get_Ap_ajsbb_dwry(string uuid, string idCard)
+
+        public DataTable Get_Ap_ajsbb_dwry(string uuid, string idCard, string corpCode, string gw)
         {
-            string sql = @"  select * from Ap_ajsbb_dwry where uuid=@uuid and idCard=@idCard";
+            string sql = @"  select * from Ap_ajsbb_dwry where uuid=@uuid and idCard=@idCard and CorpCode=@corpCode and gw=@gw";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@uuid", uuid);
             sp.Add("@idCard", idCard);
+            sp.Add("@corpCode", corpCode);
+            sp.Add("@gw", gw);
             return this.DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
@@ -101,6 +133,22 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
         {
             string sql = "select *  from Ap_ajsbb_dwry where 1=2";
             return DB.Update(sql, null, dt);
+        }
+
+        /**
+        public bool Delete_Ap_ajsbb_dwry(string uuid)
+        {
+            string sql = "delete from dbo.Ap_ajsbb_dwry where uuid=@uuid  ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@uuid", uuid); 
+            return DB.ExecuteNonQuerySql(sql, sp) > 0;
+        }
+         */
+
+        public DataTable Get_Ap_ajsbb_clqd()
+        {
+            string sql = "select * from Ap_ajsbb_clqd where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
         }
 
         public DataTable Get_Ap_ajsbb_clqd(string uuid, string xh, string sbzl)
@@ -119,6 +167,12 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return DB.Update(sql, null, dt);
         }
 
+        public DataTable Get_Ap_ajsbb_hjssjd()
+        {
+            string sql = "select * from Ap_ajsbb_hjssjd where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
+        }
+
         public DataTable Get_Ap_ajsbb_hjssjd(string uuid, string xh)
         {
             string sql = @"  select * from Ap_ajsbb_hjssjd where uuid=@uuid and xh=@xh";
@@ -134,6 +188,12 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return DB.Update(sql, null, dt);
         }
 
+
+        public DataTable Get_Ap_ajsbb_wxyjdgcqd()
+        {
+            string sql = "select * from Ap_ajsbb_wxyjdgcqd where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
+        }
         public DataTable Get_Ap_ajsbb_wxyjdgcqd(string uuid, string fbfxgc)
         {
             string sql = @"  select * from Ap_ajsbb_wxyjdgcqd where uuid=@uuid and fbfxgc=@fbfxgc";
@@ -149,6 +209,11 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return DB.Update(sql, null, dt);
         }
 
+        public DataTable Get_Ap_ajsbb_cgmgcqd()
+        {
+            string sql = "select * from Ap_ajsbb_cgmgcqd where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t");
+        }
         public DataTable Get_Ap_ajsbb_cgmgcqd(string uuid, string fbfxgc)
         {
             string sql = @"  select * from Ap_ajsbb_cgmgcqd where uuid=@uuid and fbfxgc=@fbfxgc";
@@ -191,12 +256,14 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return this.DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
-        public DataTable Get_Ap_zjsbb_dwry(string uuid, string idCard)
+        public DataTable Get_Ap_zjsbb_dwry(string uuid, string idCard, string corpCode, string gw)
         {
-            string sql = @"  select * from Ap_zjsbb_dwry where uuid=@uuid and idCard=@idCard";
+            string sql = @"  select * from Ap_zjsbb_dwry where uuid=@uuid and idCard=@idCard and CorpCode=@corpCode and gw=@gw";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@uuid", uuid);
             sp.Add("@idCard", idCard);
+            sp.Add("@corpCode", corpCode);
+            sp.Add("@gw", gw);
             return this.DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
@@ -229,6 +296,26 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
         }
 
         #endregion
+
+
+        #region 通用查询记录
+        public DataTable Get_ApTable(string tableName)
+        {
+            string sql = "select * from " + tableName + " where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "t_" + tableName);
+        }
+        #endregion
+
+        #region 删除记录
+        public bool Delete_ApTable(string tableName , string uuid)
+        {
+            string sql = "delete from dbo." + tableName + " where uuid=@uuid  ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@uuid", uuid);
+            return DB.ExecuteNonQuerySql(sql, sp) > 0;
+        }
+        #endregion
+
 
     }
 }

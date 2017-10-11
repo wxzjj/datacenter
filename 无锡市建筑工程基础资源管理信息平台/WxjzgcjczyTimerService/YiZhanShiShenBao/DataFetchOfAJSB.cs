@@ -18,6 +18,15 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
         public const string AP_ZJSBB_DWGC = "Ap_zjsbb_dwgc";
         public const string AP_ZJSBB_CLQD = "Ap_zjsbb_clqd";
 
+        //安监
+        public const string AP_AJSBB = "Ap_ajsbb";
+        public const string AP_AJSBB_HT = "Ap_ajsbb_ht";
+        public const string AP_AJSBB_DWRY = "Ap_ajsbb_dwry";
+        public const string AP_AJSBB_CLQD = "Ap_ajsbb_clqd";
+        public const string AP_AJSBB_HJSSJD = "Ap_ajsbb_hjssjd";
+        public const string AP_AJSBB_WXYJDGCQD = "Ap_ajsbb_wxyjdgcqd";
+        public const string AP_AJSBB_CGMGCQD = "Ap_ajsbb_cgmgcqd";
+
 
 
         // 定义一个静态变量来保存类的实例
@@ -84,6 +93,29 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
 
             dataService.Submit_Ap_need_refetch(refetchDt);
+
+
+            //处理需要重新下行数据的安监uuid列表
+            DataTable ajUuidDt = dataService.GetAp_need_refetch_uuids("AJ");
+            foreach (DataRow row in ajUuidDt.Rows)
+            {
+                Public.WriteLog("fetch aj uuid: " + row["uuid"].ToString());
+                ajResult = YourTask_PullAJSBDataFromSythptByUUID(row["deptCode"].ToString(), row["password"].ToString(), row["uuid"].ToString()); 
+                if(ajResult.Equals("success")){
+                    dataService.Delete_Ap_need_refetch_uuid(row["uuid"].ToString(), "AJ");
+                }  
+            }
+            //处理需要重新下行数据的质监uuid列表
+            DataTable zjUuidDt = dataService.GetAp_need_refetch_uuids("ZJ");
+            foreach (DataRow row in zjUuidDt.Rows)
+            {
+                Public.WriteLog("fetch zj uuid: " + row["uuid"].ToString());
+                ajResult = YourTask_PullZJSBDataFromSythptByUUID(row["deptCode"].ToString(), row["password"].ToString(), row["uuid"].ToString());
+                if (ajResult.Equals("success"))
+                {
+                    dataService.Delete_Ap_need_refetch_uuid(row["uuid"].ToString(), "ZJ");
+                }
+            }
         }
 
         #region 拉取安监数据
@@ -174,11 +206,11 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
 
                                     Public.WriteLog("根据uuid获取安监申报详细数据：" + row[0].ToString());
                                     getDetailDataXml = client.getAJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row[0].ToString());
-                                    Public.WriteLog("结果：" + getDetailDataXml);
+                                    //Public.WriteLog("结果：" + getDetailDataXml);
                                     if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
                                     {
                                         getDetailDataXml = getDetailDataXml.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
-                                        saveAJSBXmlDataToDb(rowUser["deptCode"].ToString2(), getDetailDataXml, pullDate);
+                                        saveAJSBXmlDataToDb(row[0].ToString(), rowUser["deptCode"].ToString2(), getDetailDataXml, pullDate);
 
                                     }
                                     else
@@ -233,7 +265,44 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return apiMessage;
         }
 
-        public string saveAJSBXmlDataToDb(string user, string xmlData, DateTime pullDate)
+        /// <summary>
+        /// 从省一体化平台按uuid获取数据安监申报数据到无锡数据中心
+        /// </summary>
+        public string YourTask_PullAJSBDataFromSythptByUUID(string deptCode , string password, string uuid)
+        {
+            string apiMessage = string.Empty;
+ 
+            DataTable dtapizb = dataService.Get_API_zb_apiFlowDetail("0");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                try
+                {
+                    ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient client = new ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient();
+                    //根据uuid获取安监申报详细数据
+                    string getDetailDataXml = String.Empty;
+
+                    Public.WriteLog("YourTask_PullAJSBDataFromSythptByUUID：" + uuid);
+                    getDetailDataXml = client.getAJSBBByUuid(deptCode, password, uuid);
+                    //Public.WriteLog("结果：" + getDetailDataXml);
+                    if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
+                    {
+                        apiMessage = "success";
+                        getDetailDataXml = getDetailDataXml.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
+                        saveAJSBXmlDataToDb(uuid, deptCode, getDetailDataXml, DateTime.Now);
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Public.WriteLog("执行YourTask_PullAJSBDataFromSythpt方法出现异常:" + ex.Message);
+                    apiMessage += ex.Message;
+                } 
+            }
+            return apiMessage;
+        }
+
+        public string saveAJSBXmlDataToDb(string uuid ,string user, string xmlData, DateTime pullDate)
         {
             string message = string.Empty;
             int index = -1;
@@ -257,7 +326,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             if (index >= 0)
             {
                 htList = xmlData.Substring(index, xmlData.LastIndexOf("</htList>") - index + "</htList>".Length);
-                saveHtListXmlDataToDb(htList);
+                saveHtListXmlDataToDb(uuid, htList);
             }
 
             //责任单位及人员列表
@@ -265,7 +334,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             if (index >= 0)
             {
                 dwryList = xmlData.Substring(index, xmlData.LastIndexOf("</dwryList>") - index + "</dwryList>".Length);
-                saveDwryListXmlDataToDb(dwryList);
+                saveDwryListXmlDataToDb(uuid, dwryList);
             }
 
             //材料清单
@@ -273,28 +342,28 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             if (index >= 0)
             {
                 clList = xmlData.Substring(index, xmlData.LastIndexOf("</clList>") - index + "</clList>".Length);
-                saveClListXmlDataToDb(clList);
+                saveClListXmlDataToDb(uuid, clList);
             }
             //施工现场周边环境和地下设施情况交底表
             index = xmlData.IndexOf("<hjssjdList>");
             if (index >= 0)
             {
                 hjssjdList = xmlData.Substring(index, xmlData.LastIndexOf("</hjssjdList>") - index + "</hjssjdList>".Length);
-                saveHjssjdListXmlDataToDb(hjssjdList);
+                saveHjssjdListXmlDataToDb(uuid, hjssjdList);
             }
             //危险源较大分项工程清单
             index = xmlData.IndexOf("<wxygcList>");
             if (index >= 0)
             {
                 wxygcList = xmlData.Substring(index, xmlData.LastIndexOf("</wxygcList>") - index + "</wxygcList>".Length);
-                saveWxygcListXmlDataToDb(wxygcList);
+                saveWxygcListXmlDataToDb(uuid, wxygcList);
             }
             //超规模危险源分项工程清单
             index = xmlData.IndexOf("<cgmgcList>");
             if (index >= 0)
             {
                 cgmgcList = xmlData.Substring(index, xmlData.LastIndexOf("</cgmgcList>") - index + "</cgmgcList>".Length);
-                saveCgmgcListXmlDataToDb(cgmgcList);
+                saveCgmgcListXmlDataToDb(uuid, cgmgcList);
             }
             return "success";
         }
@@ -348,7 +417,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
         }
 
-        public string saveHtListXmlDataToDb(string xmlData)
+        public string saveHtListXmlDataToDb(string uuid, string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -358,23 +427,14 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                dataService.Delete_ApTable(AP_AJSBB_HT,uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_AJSBB_HT);
+
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_ajsbb_ht(item["uuid"].ToString2(), item["RecordNum"].ToString2());
-                    DataRow toSaveRow;
-
-                    if (existDt != null && existDt.Rows.Count > 0)
-                    {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "RecordNum" });
-
-                    }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
 
                     //由于文档跟实际获取的xml不一致，特殊处理字段
                     //toSaveRow["CorpCode"] = item["contractorCorpCode"];
@@ -383,24 +443,21 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                     //toSaveRow["xmfzrsfzh"] = item["iDCard"];
                     //toSaveRow["xmfzr"] = item["prjHead"];
 
-                    //Public.WriteLog("====" + toSaveRow["uuid"] + toSaveRow["RecordNum"]);
-
-                    if (existDt.Rows.Count > 0)
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    if (!dataService.Save_Ap_ajsbb_ht(existDt))
                     {
-                        if (!dataService.Save_Ap_ajsbb_ht(existDt))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-
                 }
                 return "success";
 
             }
         }
 
-        public string saveDwryListXmlDataToDb(string xmlData)
+        public string saveDwryListXmlDataToDb(string uuid ,string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -410,41 +467,31 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                //插入数据前删除列表记录
+                dataService.Delete_ApTable(AP_AJSBB_DWRY, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_AJSBB_DWRY);
+
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_ajsbb_dwry(item["uuid"].ToString2(), item["idCard"].ToString2());
-                    DataRow toSaveRow;
-
-                    if (existDt != null && existDt.Rows.Count > 0)
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    //TODO, 循环保存单条数据，有待重构
+                    if (!dataService.Save_Ap_ajsbb_dwry(existDt))
                     {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "idCard" });
-
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_ajsbb_dwry(existDt))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
-
                 }
                 return "success";
 
             }
         }
 
-        public string saveClListXmlDataToDb(string xmlData)
+        public string saveClListXmlDataToDb(string uuid , string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -454,41 +501,31 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                //插入数据前删除列表记录
+                dataService.Delete_ApTable(AP_AJSBB_CLQD, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_AJSBB_CLQD);
+
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_ajsbb_clqd(item["uuid"].ToString2(), item["xh"].ToString2(), item["sbzl"].ToString2());
-                    DataRow toSaveRow;
-
-                    if (existDt != null && existDt.Rows.Count > 0)
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    //TODO, 循环保存单条数据，有待重构
+                    if (!dataService.Save_Ap_ajsbb_clqd(existDt))
                     {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "xh", "sbzl" });
-
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_ajsbb_clqd(existDt))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
-
                 }
                 return "success";
 
             }
         }
 
-        public string saveHjssjdListXmlDataToDb(string xmlData)
+        public string saveHjssjdListXmlDataToDb(string uuid , string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -498,41 +535,32 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                //插入数据前删除列表记录
+                dataService.Delete_ApTable(AP_AJSBB_HJSSJD, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_AJSBB_HJSSJD);
+
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_ajsbb_hjssjd(item["uuid"].ToString2(), item["xh"].ToString2());
-                    DataRow toSaveRow;
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
 
-                    if (existDt != null && existDt.Rows.Count > 0)
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    //TODO, 循环保存单条数据，有待重构
+                    if (!dataService.Save_Ap_ajsbb_hjssjd(existDt))
                     {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "xh" });
-
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_ajsbb_hjssjd(existDt))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
-
                 }
                 return "success";
 
             }
         }
 
-        public string saveWxygcListXmlDataToDb(string xmlData)
+        public string saveWxygcListXmlDataToDb(string uuid , string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -542,41 +570,32 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                //插入数据前删除列表记录
+                dataService.Delete_ApTable(AP_AJSBB_WXYJDGCQD, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_AJSBB_WXYJDGCQD);
+
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_ajsbb_wxyjdgcqd(item["uuid"].ToString2(), item["fbfxgc"].ToString2());
-                    DataRow toSaveRow;
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
 
-                    if (existDt != null && existDt.Rows.Count > 0)
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    //TODO, 循环保存单条数据，有待重构
+                    if (!dataService.Save_Ap_ajsbb_wxyjdgcqd(existDt))
                     {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "fbfxgc" });
-
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_ajsbb_wxyjdgcqd(existDt))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
-
                 }
                 return "success";
 
             }
         }
 
-        public string saveCgmgcListXmlDataToDb(string xmlData)
+        public string saveCgmgcListXmlDataToDb(string uuid , string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -586,34 +605,24 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                //插入数据前删除列表记录
+                dataService.Delete_ApTable(AP_AJSBB_CGMGCQD, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_AJSBB_CGMGCQD);
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_ajsbb_cgmgcqd(item["uuid"].ToString2(), item["fbfxgc"].ToString2());
-                    DataRow toSaveRow;
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
 
-                    if (existDt != null && existDt.Rows.Count > 0)
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    //TODO, 循环保存单条数据，有待重构
+                    if (!dataService.Save_Ap_ajsbb_cgmgcqd(existDt))
                     {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "fbfxgc" });
-
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_ajsbb_cgmgcqd(existDt))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
-
                 }
                 return "success";
 
@@ -674,10 +683,11 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                             Public.WriteLog("获取质监申报数据,机构：" + rowUser["deptCode"].ToString2() + ",日期：" + pullDateStr);
                             getUUIDXml = client.getZJSBBByDate(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), pullDateStr);
 
-                            Public.WriteLog("获取质监申报数据结果：" + getUUIDXml);
+                            //Public.WriteLog("获取质监申报数据结果：" + getUUIDXml);
 
                             if (getUUIDXml.Contains("<?xml version=\"1.0\" encoding=\"GB2312\"?>"))
                             {
+                                apiMessage = "success";
                                 getUUIDXml = getUUIDXml.Replace("<?xml version=\"1.0\" encoding=\"GB2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
                             }
                             else
@@ -708,12 +718,12 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                                     //根据uuid获取质监申报详细数据
                                     Public.WriteLog("根据uuid获取质监申报详细数据：" + row[0].ToString());
                                     getDetailDataXml = client.getZJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row[0].ToString());
-                                    Public.WriteLog("getZJSBBByUuid结果：" + getDetailDataXml);
+                                    //Public.WriteLog("getZJSBBByUuid结果：" + getDetailDataXml);
                                     if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
                                     {
                                         getDetailDataXml = getDetailDataXml.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
 
-                                        saveZJSBXmlDataToDb(rowUser["deptCode"].ToString2(), getDetailDataXml, pullDate);
+                                        saveZJSBXmlDataToDb( row[0].ToString(), rowUser["deptCode"].ToString2(), getDetailDataXml, pullDate);
 
                                     }
                                     else
@@ -768,7 +778,47 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             return apiMessage;
         }
 
-        public string saveZJSBXmlDataToDb(string user, string xmlData, DateTime pullDate)
+
+        /// <summary>
+        /// 从省一体化平台按uuid获取质监申报数据到无锡数据中心
+        /// </summary>
+        public string YourTask_PullZJSBDataFromSythptByUUID(string deptCode, string password, string uuid)
+        {
+            string apiMessage = string.Empty;
+
+            DataTable dtapizb = dataService.Get_API_zb_apiFlowDetail("0");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                try
+                {
+                    ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient client = new ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient();
+                    //根据uuid获取安监申报详细数据
+                    string getDetailDataXml = String.Empty;
+
+                    Public.WriteLog("YourTask_PullZJSBDataFromSythptByUUID：" + uuid);
+                    //根据uuid获取质监申报详细数据
+
+                    getDetailDataXml = client.getZJSBBByUuid(deptCode, password, uuid);
+                    //Public.WriteLog("getZJSBBByUuid结果：" + getDetailDataXml);
+                    if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
+                    {
+                        apiMessage = "success";
+                        getDetailDataXml = getDetailDataXml.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
+                        saveZJSBXmlDataToDb(uuid , deptCode, getDetailDataXml, DateTime.Now);
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Public.WriteLog("执行YourTask_PullZJSBDataFromSythptByUUID方法出现异常:" + ex.Message);
+                    apiMessage += ex.Message;
+                }
+            }
+            return apiMessage;
+        }
+
+        public string saveZJSBXmlDataToDb(string uuid , string user, string xmlData, DateTime pullDate)
         {
             string message = string.Empty;
             int index = -1;
@@ -792,7 +842,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             if (index >= 0)
             {
                 htList = xmlData.Substring(index, xmlData.LastIndexOf("</htList>") - index + "</htList>".Length);
-                saveZJHtListXmlDataToDb(htList);
+                saveZJHtListXmlDataToDb(uuid, htList);
             }
 
             //责任单位及人员列表
@@ -800,7 +850,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             if (index >= 0)
             {
                 dwryList = xmlData.Substring(index, xmlData.LastIndexOf("</dwryList>") - index + "</dwryList>".Length);
-                saveZJDwryListXmlDataToDb(dwryList);
+                saveZJDwryListXmlDataToDb(uuid, dwryList);
             }
 
             //施工图审核合格书列表
@@ -808,14 +858,14 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             if (index >= 0)
             {
                 sgtscList = xmlData.Substring(index, xmlData.LastIndexOf("</sgtscList>") - index + "</sgtscList>".Length);
-                saveZJSgtscListXmlDataToDb(sgtscList);
+                saveZJSgtscListXmlDataToDb(uuid, sgtscList);
             }
             //单位工程列表
             index = xmlData.IndexOf("<dwgcList>");
             if (index >= 0)
             {
                 dwgcList = xmlData.Substring(index, xmlData.LastIndexOf("</dwgcList>") - index + "</dwgcList>".Length);
-                saveZJDwgcListXmlDataToDb(dwgcList);
+                saveZJDwgcListXmlDataToDb(uuid, dwgcList);
             }
 
             //材料清单
@@ -823,7 +873,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             if (index >= 0)
             {
                 clList = xmlData.Substring(index, xmlData.LastIndexOf("</clList>") - index + "</clList>".Length);
-                saveZJClListXmlDataToDb(clList);
+                saveZJClListXmlDataToDb(uuid, clList);
             }
 
             return "success";
@@ -879,7 +929,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
         }
 
-        public string saveZJHtListXmlDataToDb(string xmlData)
+        public string saveZJHtListXmlDataToDb(string uuid, string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -889,23 +939,14 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                dataService.Delete_ApTable(AP_ZJSBB_HT, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_ZJSBB_HT);
+
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_zjsbb_ht(item["uuid"].ToString2(), item["RecordNum"].ToString2());
-                    DataRow toSaveRow;
-
-                    if (existDt != null && existDt.Rows.Count > 0)
-                    {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "RecordNum" });
-
-                    }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
 
                     //由于文档跟实际获取的xml不一致，特殊处理字段
                     //toSaveRow["CorpCode"] = item["contractorCorpCode"];
@@ -916,22 +957,21 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
 
                     //Public.WriteLog("====" + toSaveRow["uuid"] + toSaveRow["RecordNum"]);
 
-                    if (existDt.Rows.Count > 0)
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_HT))
                     {
-                        if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_HT))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-
                 }
                 return "success";
 
             }
         }
 
-        public string saveZJDwryListXmlDataToDb(string xmlData)
+        public string saveZJDwryListXmlDataToDb(string uuid, string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -941,41 +981,30 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                dataService.Delete_ApTable(AP_ZJSBB_DWRY, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_ZJSBB_DWRY);
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_zjsbb_dwry(item["uuid"].ToString2(), item["idCard"].ToString2());
-                    DataRow toSaveRow;
-
-                    if (existDt != null && existDt.Rows.Count > 0)
-                    {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "idCard" });
-
-                    }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_DWRY))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
+                    DataRow  toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
 
                 }
-                return "success";
+                if (existDt.Rows.Count > 0)
+                {
+                    if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_DWRY))
+                    {
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
+                    }
+                }
+                message = "success";
 
             }
+            return message;
         }
 
-        public string saveZJSgtscListXmlDataToDb(string xmlData)
+        public string saveZJSgtscListXmlDataToDb(string uuid, string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -985,41 +1014,28 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                dataService.Delete_ApTable(AP_ZJSBB_SCHGS, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_ZJSBB_SCHGS);
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_zjsbb_schgs(item["uuid"].ToString2(), item["CensorNum"].ToString2());
-                    DataRow toSaveRow;
-
-                    if (existDt != null && existDt.Rows.Count > 0)
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_SCHGS))
                     {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "xh" });
-
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_SCHGS))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
-
                 }
                 return "success";
 
             }
         }
 
-        public string saveZJDwgcListXmlDataToDb(string xmlData)
+        public string saveZJDwgcListXmlDataToDb(string uuid , string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -1029,41 +1045,29 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                dataService.Delete_ApTable(AP_ZJSBB_DWGC, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_ZJSBB_DWGC);
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_zjsbb_dwgc(item["uuid"].ToString2(), item["dwgcbm"].ToString2());
-                    DataRow toSaveRow;
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
 
-                    if (existDt != null && existDt.Rows.Count > 0)
+                }
+                if (existDt.Rows.Count > 0)
+                {
+                    if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_DWGC))
                     {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "dwgcbm" });
-
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
                     }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_DWGC))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
-
                 }
                 return "success";
 
             }
         }
 
-        public string saveZJClListXmlDataToDb(string xmlData)
+        public string saveZJClListXmlDataToDb(string uuid , string xmlData)
         {
             string message = string.Empty;
             DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
@@ -1073,35 +1077,23 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             }
             else
             {
+                dataService.Delete_ApTable(AP_ZJSBB_CLQD, uuid);
+                DataTable existDt = dataService.Get_ApTable(AP_ZJSBB_CLQD);
                 foreach (DataRow item in dt.Rows)
                 {
-                    DataTable existDt = dataService.Get_Ap_zjsbb_clqd(item["uuid"].ToString2(), item["xh"].ToString2(), item["sbzl"].ToString2());
-                    DataRow toSaveRow;
-
-                    if (existDt != null && existDt.Rows.Count > 0)
-                    {
-                        toSaveRow = existDt.Rows[0];
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid", "xh", "sbzl" });
-
-                    }
-                    else
-                    {
-                        toSaveRow = existDt.NewRow();
-                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
-                    }
-
-                    if (existDt.Rows.Count > 0)
-                    {
-                        //TODO, 循环保存单条数据，有待重构
-                        if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_CLQD))
-                        {
-                            //保存失败的错误处理
-                            Public.WriteLog("Save_Ap_ajsbb:fail");
-                        }
-                    }
-
+                    DataRow toSaveRow = existDt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    existDt.Rows.Add(toSaveRow);
                 }
+                if (existDt.Rows.Count > 0)
+                {
+                    if (!dataService.Save_Ap_sbb(existDt, AP_ZJSBB_CLQD))
+                    {
+                        //保存失败的错误处理
+                        Public.WriteLog("Save_Ap_ajsbb:fail");
+                    }
+                }
+
                 return "success";
 
             }
@@ -1110,9 +1102,8 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
         #endregion
 
 
-
         /// <summary>
-        /// 根据uuid获取安监申报详细数据
+        /// 生成日志
         /// </summary>
         /// <param name="uuid"></param>
         public void createMonitorLog(ShenBaoDataService dataService, DataTable dt_DataJkDataDetail, string dataJkLogId,
