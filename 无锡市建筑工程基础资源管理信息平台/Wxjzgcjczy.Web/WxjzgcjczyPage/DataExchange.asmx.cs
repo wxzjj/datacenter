@@ -2880,6 +2880,1024 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         }
         #endregion
 
+        #region 关于一站式申报对接接口
+        /// <summary>
+        /// 获取无锡市某区质监机构某一日的申报数据
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="date"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getAJSBBByDate(string user, string password, string date, string countryCode)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty; 
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+                string countryCodes = getCountryCodes(countryCode,"AJ", BLL);
+               
+                DataTable mainDt = SBBLL.GetAp_ajsbb(date, countryCodes);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    DataTable tempDt;
+
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "data");
+
+                        str.AppendFormat("<{0}>", "mainList"); 
+                        str.AppendFormat("<{0}>", "main"); 
+                        mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "main");
+                        str.AppendFormat("</{0}>", "mainList");
+
+                        tempDt = SBBLL.GetAp_ajsbb_ht(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_dwry(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_clqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_hjssjd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "hjssjdList", "hjssjdcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_wxyjdgcqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "wxygcList", "wxygccontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_cgmgcqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "cgmgcList", "cgmgccontent"));
+
+
+                        str.AppendFormat("</{0}>", "data");
+
+                    }
+                   
+                     
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "getAJSBBByDate";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+
+        /// <summary>
+        /// 按日期获取当日安监申报的uuid列表
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="date"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getAJSBUuidsByDate(string user, string password, string date, string countryCode)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+                string countryCodes = getCountryCodes(countryCode, "AJ", BLL);
+
+                DataTable mainDt = SBBLL.GetAp_ajsbb(date, countryCodes);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                    str.AppendFormat("<{0}>", "body");
+                    str.AppendFormat("<{0}>", "uuidList");
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "primarykey");
+                        mainXml = xmlHelper.EncodeString(dataRow["uuid"].ToString());
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "primarykey");
+                    }
+                    str.AppendFormat("</{0}>", "uuidList");
+                    str.AppendFormat("</{0}>", "body");
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                createApiLog("29", "getAJSBUuidsByDate", apiMessage, BLL);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+
+        /// <summary>
+        /// 按uuid获取安监申报数据
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="uuid"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getAJSBBByUuid(string user, string password, string uuid)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+
+                DataTable mainDt = SBBLL.GetAp_ajsbb_byuuid(uuid);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    DataTable tempDt;
+
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "data");
+
+                        str.AppendFormat("<{0}>", "mainList");
+                        str.AppendFormat("<{0}>", "main");
+                        mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "main");
+                        str.AppendFormat("</{0}>", "mainList");
+
+                        tempDt = SBBLL.GetAp_ajsbb_ht(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_dwry(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_clqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_hjssjd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "hjssjdList", "hjssjdcontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_wxyjdgcqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "wxygcList", "wxygccontent"));
+
+                        tempDt = SBBLL.GetAp_ajsbb_cgmgcqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "cgmgcList", "cgmgccontent"));
+
+                        str.AppendFormat("</{0}>", "data");
+                    }
+
+
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "getAJSBBByUuid";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="date"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getZJSBBByDate(string user, string password, string date, string countryCode)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+                string countryCodes = getCountryCodes(countryCode, "ZJ", BLL);
+
+                DataTable mainDt = SBBLL.GetAp_zjsbb(date, countryCodes);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    DataTable tempDt;
+
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "data");
+
+                        str.AppendFormat("<{0}>", "mainList");
+                        str.AppendFormat("<{0}>", "main");
+                        mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "main");
+                        str.AppendFormat("</{0}>", "mainList");
+
+                        tempDt = SBBLL.GetAp_zjsbb_ht(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_dwry(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_schgs(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "sgtscList", "sgtsccontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_dwgc(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwgcList", "dwgccontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_clqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
+
+                        str.AppendFormat("</{0}>", "data");
+
+                    }
+
+
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "getAJSBBByDate";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+        /// <summary>
+        /// 按日期获取当日质监申报的uuid列表
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="date"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getZJSBUuidsByDate(string user, string password, string date, string countryCode)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+                string countryCodes = getCountryCodes(countryCode, "ZJ", BLL);
+
+                DataTable mainDt = SBBLL.GetAp_zjsbb(date, countryCodes);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    str.AppendFormat("<{0}>", "body");
+                    str.AppendFormat("<{0}>", "uuidList");
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        
+                        str.AppendFormat("<{0}>", "primarykey");
+                        mainXml = xmlHelper.EncodeString(dataRow["uuid"].ToString());
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "primarykey");
+                        
+                    }
+                    str.AppendFormat("</{0}>", "uuidList");
+                    str.AppendFormat("</{0}>", "body");
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                createApiLog("29", "getZJSBUuidsByDate", apiMessage, BLL);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+
+        /// <summary>
+        /// 按uuid获取质监申报数据
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="uuid"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getZJSBBByUuid(string user, string password, string uuid)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                } 
+
+                DataTable mainDt = SBBLL.GetAp_zjsbb_byuuid(uuid);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    DataTable tempDt;
+
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "data");
+
+                        str.AppendFormat("<{0}>", "mainList");
+                        str.AppendFormat("<{0}>", "main");
+                        mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "main");
+                        str.AppendFormat("</{0}>", "mainList");
+
+                        tempDt = SBBLL.GetAp_zjsbb_ht(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_dwry(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_schgs(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "sgtscList", "sgtsccontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_dwgc(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwgcList", "dwgccontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_clqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
+
+                        str.AppendFormat("</{0}>", "data");
+
+                    }
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "getAJSBBByDate";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+
+        [WebMethod]
+        public string pushAJSBJG(string user, string password, String deptcode, String sbPassword, String resultXml)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                DataExchangeBLLForYZSSB YZSSBBLL = new DataExchangeBLLForYZSSB();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(resultXml))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTable(resultXml, out message);
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+
+                /** TODO：用户写操作权限待添加
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存" + tableName + "表数据！";
+                    return result.ResultMessage;
+                }*/
+
+                result = YZSSBBLL.pushAJSBJG(user,deptcode, sbPassword, dt_Data);
+                
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+        }
+
+        /// <summary>
+        /// 推送监督通知书
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="deptcode"></param>
+        /// <param name="sbPassword"></param>
+        /// <param name="resultXml"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string pushAJTZS(string user, string password, String deptcode, String sbPassword, String resultXml)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                DataExchangeBLLForYZSSB YZSSBBLL = new DataExchangeBLLForYZSSB();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(resultXml))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                string tzsXml = string.Empty;
+                
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTable(resultXml, out message);
+                DataTable dt_Data = null;
+
+                DataTable jdryDtData = null;
+                //监督人员列表
+                int dwgcIndex = resultXml.IndexOf("<jdryList>");
+                string jdryListXml = string.Empty;
+
+                //tzsXml = resultXml.Substring(0, dwgcIndex);
+
+                if (dwgcIndex >= 0)
+                {
+                    tzsXml = resultXml.Substring(0, dwgcIndex) + resultXml.Substring(resultXml.LastIndexOf("</jdryList>") + "</jdryList>".Length);
+                    WebCommon.WriteLog("tzsXml:" + tzsXml);
+                    dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(tzsXml, out message);
+
+                    jdryListXml = resultXml.Substring(dwgcIndex, resultXml.LastIndexOf("</jdryList>") - dwgcIndex + "</jdryList>".Length);
+                    jdryListXml = "<root>" + jdryListXml + "</root>";
+                    jdryDtData = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(jdryListXml, out message);
+                    //jdryDtData = xmlHelper.ConvertXMLToDataTable(dwgcList, out message);
+                }
+                else
+                {
+                    dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                }
+
+
+                if ((dt_Data == null) || (jdryDtData == null))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+                string jdryXml = xmlHelper.ConvertDataTableToXML(jdryDtData, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + jdryXml + "\r\n");
+
+                /** TODO：用户写操作权限待添加
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存" + tableName + "表数据！";
+                    return result.ResultMessage;
+                }*/
+
+                result = YZSSBBLL.pushAJTZS(user, deptcode, sbPassword, dt_Data, jdryDtData);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+                WebCommon.WriteLog("ex.Message:" + ex.Message);
+            
+            }
+
+            return result.ResultMessage;
+        }
+
+        /// <summary>
+        /// 推送终止施工安全监督告知书
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="deptcode"></param>
+        /// <param name="sbPassword"></param>
+        /// <param name="resultXml"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string pushAJZZGZ(string user, string password, String deptcode, String sbPassword, String resultXml)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                DataExchangeBLLForYZSSB YZSSBBLL = new DataExchangeBLLForYZSSB();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(resultXml))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTable(resultXml, out message);
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+
+                /** TODO：用户写操作权限待添加
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存" + tableName + "表数据！";
+                    return result.ResultMessage;
+                }*/
+
+                result = YZSSBBLL.pushAJZZGZ(user, deptcode, sbPassword, dt_Data);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+        }
+
+
+        [WebMethod]
+        public string pushZJSBJG(string user, string password, String deptcode, String sbPassword, String resultXml)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                DataExchangeBLLForYZSSB YZSSBBLL = new DataExchangeBLLForYZSSB();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(resultXml))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = null;
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTable(resultXml, out message);
+                DataTable dwgcDtData = null;
+                //单位工程列表
+                int dwgcIndex = resultXml.IndexOf("<dwgcList>");
+                string dwgcList = string.Empty;
+                string sbjgXml = string.Empty;
+
+                if (dwgcIndex >= 0)
+                {
+                    sbjgXml = resultXml.Substring(0, dwgcIndex) + resultXml.Substring(resultXml.LastIndexOf("</dwgcList>") + "</dwgcList>".Length);
+                    WebCommon.WriteLog("sbjgXml:" + sbjgXml);
+                    dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(sbjgXml, out message);
+
+                    dwgcList = resultXml.Substring(dwgcIndex, resultXml.LastIndexOf("</dwgcList>") - dwgcIndex + "</dwgcList>".Length);
+                    dwgcDtData = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(dwgcList, out message);
+                    //dwgcDtData = xmlHelper.ConvertXMLToDataTable(dwgcList, out message);
+                }
+                else
+                {
+                    dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                }
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+
+                /** TODO：用户写操作权限待添加
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存" + tableName + "表数据！";
+                    return result.ResultMessage;
+                }*/
+
+                result = YZSSBBLL.pushZJSBJG(user, deptcode, sbPassword, dt_Data, dwgcDtData);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+        }
+
+        /// <summary>
+        /// 推送质量监督通知书
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="deptcode"></param>
+        /// <param name="sbPassword"></param>
+        /// <param name="resultXml"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string pushZJTZS(string user, string password, String deptcode, String sbPassword, String resultXml)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                DataExchangeBLLForYZSSB YZSSBBLL = new DataExchangeBLLForYZSSB();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(resultXml))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                string tzsXml = string.Empty;
+
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                //DataTable dt_Data = xmlHelper.ConvertXMLToDataTable(resultXml, out message);
+                DataTable dt_Data = null;
+
+                DataTable jdryDtData = null;
+                //监督人员列表
+                int dwgcIndex = resultXml.IndexOf("<jdryList>");
+                string jdryListXml = string.Empty;
+
+                tzsXml = resultXml.Substring(0, dwgcIndex);
+
+                if (dwgcIndex >= 0)
+                {
+                    tzsXml = resultXml.Substring(0, dwgcIndex) + resultXml.Substring(resultXml.LastIndexOf("</jdryList>") + "</jdryList>".Length);
+                    WebCommon.WriteLog("tzsXml:" + tzsXml);
+                    dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(tzsXml, out message);
+
+                    jdryListXml = resultXml.Substring(dwgcIndex, resultXml.LastIndexOf("</jdryList>") - dwgcIndex + "</jdryList>".Length);
+                    jdryListXml = "<root>" + jdryListXml + "</root>";
+                    jdryDtData = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(jdryListXml, out message);
+                    //jdryDtData = xmlHelper.ConvertXMLToDataTable(dwgcList, out message);
+                }
+                else
+                {
+                    dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(resultXml, out message);
+                }
+
+
+                if ((dt_Data == null) || (jdryDtData == null))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+                string jdryXml = xmlHelper.ConvertDataTableToXML(jdryDtData, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + jdryXml + "\r\n");
+
+                /** TODO：用户写操作权限待添加
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存" + tableName + "表数据！";
+                    return result.ResultMessage;
+                }*/
+
+                result = YZSSBBLL.pushZJTZS(user, deptcode, sbPassword, dt_Data, jdryDtData);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+                WebCommon.WriteLog("ex.Message:" + ex.Message);
+
+            }
+
+            return result.ResultMessage;
+        }
+
+
+        #endregion
+
         #region 保存数据
 
         /// <summary>
@@ -2949,6 +3967,22 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                             return result.ResultMessage;
                         }
                         result = BLL.SaveTBData_TBProjectInfo(user, dt_Data);
+
+                        break;
+                    case "tbprojectadditionalinfo"://TBProjectAdditionalInfo 
+                        if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "该用户不允许保存" + tableName + "表数据！";
+                            return result.ResultMessage;
+                        }
+                        else if (dt_Data.Rows == null || dt_Data.Rows.Count != 1)
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "一次请传入一条项目登记补充数据";
+                            return result.ResultMessage;
+                        }
+                        result = BLL.SaveTBData_TBProjectAdditionalInfo(user, dt_Data);
 
                         break;
 
@@ -3419,6 +4453,124 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         }
 
 
+        /// <summary>
+        /// 功能：向无锡数据中心传送项目登记补充数据
+        /// 作者：huangzhengyu
+        /// 时间：2017-08-28
+        /// </summary>
+        /// <param name="prjnum">16位纯数字编码</param>
+        /// <param name="xmlData">XML内容</param>
+        /// <param name="user">用户名称</param>
+        /// <param name="password">用户密码</param>
+        /// <returns></returns>
+        /**
+        [WebMethod]
+        public string getProjectAdd(string prjnum, string xmlData, string user, string password)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                //验证Prjnum必须为16位纯数字编码
+                if (string.IsNullOrEmpty(prjnum))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "Prjnum为空！";
+                    return result.ResultMessage;
+                }
+                else if (!Validator.IsProjectNum(prjnum))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "Prjnum必须为16位纯数字编码！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(xmlData))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                else if (dt_Data.Rows == null || dt_Data.Rows.Count != 1)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "一次请传入一条项目登记补充数据";
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入项目登记补充数据：" + ",DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+                //bool isSdSx = dt_user.Rows[0]["Flag"].ToString2() == "1";
+                if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存项目登记补充数据表数据！";
+                    return result.ResultMessage;
+                }
+                result = BLL.SaveTBData_TBProjectAdditionalInfo(user, dt_Data);
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+
+        }
+         */
+
+
+        #region  公共代码区域
+        private static string getCountryCodes(string countryCode, string deptType, DataExchangeBLL BLL)
+        {
+            string countryCodes = string.Empty;
+            if ("320200".Equals(countryCode) || "320201".Equals(countryCode) || string.IsNullOrEmpty(countryCode))
+            {
+                List<string> countryList = BLL.Get_tbXzqdmDicForShenBao(deptType);
+                countryCodes = string.Join(",", countryList.ToArray());
+            }
+            return countryCodes;
+        }
+
+        private static void createApiLog(string apiFlow, string apiMethod, string apiMessage, DataExchangeBLL BLL)
+        {
+            DataTable dtapicb = BLL.GetSchema_API_cb();
+            DataRow row_apicb = dtapicb.NewRow();
+            dtapicb.Rows.Add(row_apicb);
+            row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+            row_apicb["apiFlow"] = apiFlow;
+            row_apicb["apiMethod"] = apiMethod;
+            row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+            row_apicb["apiDyMessage"] = apiMessage;
+            row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            BLL.Submit_API_cb(dtapicb);
+            BLL.UpdateZbJkzt(apiFlow, string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+        }
+        #endregion
 
 
     }

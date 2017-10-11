@@ -93,7 +93,8 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                         json = SetLxxmGIS(context);
                         break;
                     case "rysd":
-                        json = GetRysd(context);
+                        json = this.GetQySsdq(context);
+                        //json = GetRysd(context);
                         break;
                     case "roleRights":
                         json = GetRoleRights(context);

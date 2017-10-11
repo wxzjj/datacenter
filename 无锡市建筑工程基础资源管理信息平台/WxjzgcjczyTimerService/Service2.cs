@@ -146,7 +146,13 @@ namespace WxjzgcjczyTimerService
                     DateTime beginTime = DateTime.Now;
                     WriteLog("开始执行YourTask_PushDataToSxxzx_Xmhjxx任务:" + beginTime.ToString("yyyy-MM-dd HH:mm:ss"));
                     if (ConfigurationManager.AppSettings["IsPush_TBProjectInfo"].ToString2() == "1")
+                    {
                         UploadToSt_TBProjectInfo(dt_DataJkDataDetail, row_DataJkLog["ID"].ToString2(), Id_DataJkDataDetail++);
+                    }
+                    if (ConfigurationManager.AppSettings["IsPush_TBAdditionalProjectInfo"].ToString2() == "1")
+                    {
+                        UploadToSt_TBProjectAdditionalInfo(dt_DataJkDataDetail, row_DataJkLog["ID"].ToString2(), Id_DataJkDataDetail++);
+                    }
                     if (ConfigurationManager.AppSettings["IsPush_TBTenderInfo"].ToString2() == "1")
                         UploadToSt_TBTenderInfo(dt_DataJkDataDetail, row_DataJkLog["ID"].ToString2(), Id_DataJkDataDetail++);
 
@@ -228,9 +234,11 @@ namespace WxjzgcjczyTimerService
                     row_DataJkLog["csTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                     dataService.Submit_DataJkLog(dt_DataJkLog);
+                    Int64 id = dataService.Get_DataJkDataDetailNewID().ToInt64();
 
                     ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient client = new ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient();
-                    #region  从省一体化平台获取江阴地区的立项项目信息
+                    #region  从省一体化平台获取江阴地区的立项项目信息,项目信息都走一号通获取，所以这部分删除
+                    /**
                     string userName_jyxm = "320281", password_jyxm = "RTn&53o";
 
                     string beginDate = DateTime.Now.AddDays(-10).ToString("yyyy/MM/dd 00:00:00");//"2015/01/01 00:00:00";
@@ -460,7 +468,7 @@ namespace WxjzgcjczyTimerService
 
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
 
-
+                    **/
                     #endregion
 
                     #region 获取省一体化平台合同备案信息数据处理
@@ -935,6 +943,93 @@ namespace WxjzgcjczyTimerService
                     if (dt_log_TBProjectInfo.Rows.Count > 0)
                     {
                         dataService.SaveTBData_SaveToStLog(dt_log_TBProjectInfo);
+                    }
+                }
+                row_DataJkDataDetail["allCount"] = all_count;
+                row_DataJkDataDetail["successCount"] = success_count;
+                row_DataJkDataDetail["IsOk"] = 1;
+                row_DataJkDataDetail["ErrorMsg"] = "";
+
+            }
+            catch (Exception ex)
+            {
+                row_DataJkDataDetail["allCount"] = all_count;
+                row_DataJkDataDetail["successCount"] = success_count;
+                row_DataJkDataDetail["IsOk"] = 0;
+                row_DataJkDataDetail["ErrorMsg"] = ex.Message;
+            }
+
+            #endregion
+
+        }
+
+        //上传未上传成功的项目补充数据
+        public void UploadToSt_TBProjectAdditionalInfo(DataTable dt_DataJkDataDetail, string Id_DataJkLog, long Id_DataJkDataDetail)
+        {
+            DataRow row_DataJkDataDetail = dt_DataJkDataDetail.NewRow();
+            dt_DataJkDataDetail.Rows.Add(row_DataJkDataDetail);
+
+            row_DataJkDataDetail["ID"] = Id_DataJkDataDetail;
+            row_DataJkDataDetail["DataJkLogID"] = Id_DataJkLog;
+            row_DataJkDataDetail["tableName"] = "TBProjectAdditionalInfo";
+            row_DataJkDataDetail["MethodName"] = "UploadToSt_TBProjectAdditionalInfo";
+            row_DataJkDataDetail["bz"] = "往省一体化平台推送立项项目补充数据";
+            int all_count = 0, success_count = 0;
+
+            DataTable dt = dataService.GetTBData_TBProjectAdditionalInfo();
+
+            WriteLog("获取了 " + dt.Rows.Count + " 条TBProjectAdditionalInfo数据！");
+
+            if (dt.Rows.Count == 0)
+            {
+                return;
+            }
+
+            #region 保存至省厅（TBProjectAdditionalInfo）
+            try
+            {
+                string xmlData = "";
+                string[] fields = new string[] { "prjnum", "prjpassword", "gyzzpl", "dzyx", "lxr", "yddh", "xmtz", "gytze", "gytzbl", "lxtzze", "sbdqbm" };
+
+                DataRow row;
+                foreach (DataRow dataRow in dt.Rows)
+                {
+                    dataRow["sbdqbm"] = "320200";
+                    xmlData = xmlHelper.ConvertDataRowToXMLWithBase64EncodingIncludeForAddPrj(dataRow, fields);
+                    string resultSt = client.getProjectAdd(dataRow["prjnum"].ToString(), xmlData, userName, password);
+
+                    DataTable dt_log_TBProjectAddInfo = dataService.GetTBData_SaveToStLog("TBProjectAdditionalInfo", dataRow["PKID"].ToString());
+
+                    if (dt_log_TBProjectAddInfo.Rows.Count > 0)
+                    {
+                        row = dt_log_TBProjectAddInfo.Rows[0];
+                        row["TableName"] = "TBProjectAdditionalInfo";
+                        row["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    }
+                    else
+                    {
+                        row = dt_log_TBProjectAddInfo.NewRow();
+                        dt_log_TBProjectAddInfo.Rows.Add(row);
+                        row["PKID"] = dataRow["PKID"];
+                        row["TableName"] = "TBProjectAdditionalInfo";
+                        row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        row["UpdateDate"] = row["CreateDate"];
+                    }
+                    all_count++;
+                    if (resultSt != "OK")
+                    {
+                        row["OperateState"] = 1;
+                        row["Msg"] = resultSt;
+                    }
+                    else
+                    {
+                        success_count++;
+                        row["OperateState"] = 0;
+                        row["Msg"] = resultSt;
+                    }
+                    if (dt_log_TBProjectAddInfo.Rows.Count > 0)
+                    {
+                        dataService.SaveTBData_SaveToStLog(dt_log_TBProjectAddInfo);
                     }
                 }
                 row_DataJkDataDetail["allCount"] = all_count;

@@ -1338,8 +1338,8 @@ WHERE PKID = @PKID
         {
             //获取安全监督详细信息
             dh.strSQL = @"select  
-PKID,		/*业务编码 guid值*/ 
-PrjNum,		/*项目编号 按住建部编码规则统一编号*/
+a.PKID,		/*业务编码 guid值*/ 
+a.PrjNum,		/*项目编号 按住建部编码规则统一编号*/
 PrjInnerNum,		/*原业务系统的内部编号*/
 PrjName,		/*项目名称*/
 PrjTypeNum,		/*项目分类 见代码表*/
@@ -1376,6 +1376,15 @@ EDate,		/*实际竣工日期*/
 (select count(*) from xm_gcdjb_dtxm where PrjNum=a.PrjNum) as DxgcCount
 ,a.jd,a.wd,a.isSgbz
 ,c.jsdwID 
+,ai.gyzzpl
+,ai.dzyx
+,ai.lxr
+,ai.yddh
+,ai.xmtz
+,ai.gytze
+,ai.gytzbl
+,ai.lxtzze
+,ai.programme_address
 from TBProjectInfo as a
 LEFT JOIN tbPrjTypeDic AS b1 ON a.PrjTypeNum = b1.Code 
 LEFT JOIN tbXzqdmDic AS b2 ON a.ProvinceNum = b2.Code 
@@ -1385,7 +1394,8 @@ LEFT JOIN tbPrjPropertyDic AS b5 ON a.PrjPropertyNum = b5.Code
 LEFT JOIN tbPrjFunctionDic AS b6 ON a.PrjFunctionNum = b6.Code 
 LEFT JOIN tbLxjbDic AS b7 ON a.PrjApprovalLevelNum = b7.Code 
 left join uepp_Jsdw c on a.BuildCorpCode=c.zzjgdm 
-where PKID = @PKID ";
+LEFT JOIN TBProjectAdditionalInfo ai ON a.PrjNum=ai.prjnum 
+where a.PKID = @PKID ";
             dh.spc.Add("@PKID",strParas[0]);
 
         }

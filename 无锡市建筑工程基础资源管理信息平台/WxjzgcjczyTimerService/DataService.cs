@@ -12,8 +12,6 @@ using Bigdesk8;
 namespace WxsjzxTimerService
 {
 
-  
-
     public class DataService
     {
         /// <summary>
@@ -47,7 +45,6 @@ namespace WxsjzxTimerService
         /// </summary>
         public DBOperator DB_Epoint_Jskcsj = DBOperatorFactory.GetDBOperator(ConfigurationManager.AppSettings["Epoint_Jskcsj_ConnectionString"],
         ConfigurationManager.AppSettings["SQLSERVER"], ConfigurationManager.AppSettings["timeout_Epoint_Jskcsj"].ToInt32(1)*1000*60);
-
 
 
         public SqlParameterCollection CreateSqlParameterCollection()
@@ -225,6 +222,19 @@ namespace WxsjzxTimerService
                             from TBProjectInfo ) aaa where 1=1  and PKID not in (
 							  select  PKID from SaveToStLog where TableName='TBProjectInfo' and  OperateState in (0,2)
 							)  ";
+
+            return DB.ExeSqlForDataTable(sql, null, "dt");
+        }
+
+        /// <summary>
+        /// 获取无锡数据中心需要上传至省厅的项目补充数据
+        /// </summary>
+        /// <returns>返回立项项目补充数据集</returns>
+        public DataTable GetTBData_TBProjectAdditionalInfo()
+        {
+            string sql = @"SELECT PKID,prjnum,prjpassword,gyzzpl,dzyx,lxr,yddh, xmtz, gytze, gytzbl, lxtzze, sbdqbm
+                            FROM TBProjectAdditionalInfo
+                            WHERE PKID IN ( SELECT PKID FROM SaveToStLog WHERE TableName = 'TBProjectAdditionalInfo' AND OperateState NOT IN (0 ,2 ) )";
 
             return DB.ExeSqlForDataTable(sql, null, "dt");
         }
@@ -1592,7 +1602,9 @@ select PKID, RecordName, RecordNum, RecordInnerNum, PrjNum, ContractNum, Contrac
 
         public DataTable Get_uepp_Ryzymx(string ryID)
         {
-            string sql = @" select * from UEPP_Ryzymx where ryID=@ryID and ryzyzglxID in ('1','2')  ";
+            //为避免重复人员数据
+            //string sql = @" select * from UEPP_Ryzymx where ryID=@ryID and ryzyzglxID in ('1','2')  ";
+            string sql = @" select * from UEPP_Ryzymx where ryID=@ryID";
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
             sp.Add("@ryID", ryID);
             return DB.ExeSqlForDataTable(sql, sp, "dt");
@@ -2020,6 +2032,8 @@ where a.qyID in (select qyID from uepp_qycsyw where csywlxid in ('5','6')) ";
             sp.Add("@apiFlow", apiFlow);
             return this.DB.ExeSqlForDataTable(sql, sp,"dt");
         }
+
+       
 
         //public DataTable Get_UEPP_SaveToStLog(string PKID)
         //{

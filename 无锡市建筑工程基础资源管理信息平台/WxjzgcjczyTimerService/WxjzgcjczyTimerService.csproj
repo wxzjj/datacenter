@@ -95,6 +95,9 @@
     <Compile Include="Common\DataTableHelp.cs" />
     <Compile Include="Common\Public.cs" />
     <Compile Include="Common\XmlHelper.cs" />
+    <Compile Include="model\AJShenBaoData.cs" />
+    <Compile Include="model\AJShenBaoUUID.cs" />
+    <Compile Include="YiZhanShiShenBao\DataFetchOfAJSB.cs" />
     <Compile Include="DataService.cs" />
     <Compile Include="model\DataBody.cs" />
     <Compile Include="model\DataDownService_DataBody.cs" />
@@ -165,6 +168,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="YiZhanShiShenBao\ShenBaoDataService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
@@ -178,7 +182,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
@@ -325,9 +331,7 @@
     <None Include="Web References\WebServiceStxm\WebServiceStxm.disco" />
     <None Include="Web References\WebServiceStxm\WebServiceStxm.wsdl" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Common\TextFile1.txt" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

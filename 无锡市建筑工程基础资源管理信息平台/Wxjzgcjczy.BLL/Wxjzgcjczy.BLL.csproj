@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLCommon.cs" />
+    <Compile Include="DataExchangeBLLForYZSSB.cs" />
     <Compile Include="DataExchangeBLL.cs" />
     <Compile Include="EnumerableExtension.cs" />
     <Compile Include="GcxmBLL.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="UeppCodeBLL.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Validator.cs" />
     <Compile Include="Web References\WebReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
