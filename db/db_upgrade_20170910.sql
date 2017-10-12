@@ -44,7 +44,7 @@ INSERT INTO [dbo].[Ap_api_user]
 		   ,(N'AJ320202-1', N'4C8C371E-98D9-4B46-ABF9-05F494F23C47',N'无锡市崇安区建筑工程安全监督站',N'320202',N'AJ')
 		   ,(N'AJ320206-1', N'09F8F79C-93D2-4BD8-825F-70C4130E261E',N'无锡市惠山区建筑工程安全监督站',N'320206',N'AJ')
 		   ,(N'AJ320201-1', N'0DB725E6-9D50-4C05-B2A9-944E903FB3B0',N'无锡市建设工程安全监督站',N'320201',N'AJ')
-		   ,(N'AJ320281-1', N'F1FFAA5D-F915-4328-BADC-CE1EF800CA69',N'无锡市江阴市建筑工程安全监督站',N'320281',N'AJ')
+		   ,(N'AJ320281-1', N'C477562D-34F8-4A0A-9F4A-D04F04C18B1B',N'无锡市江阴市建筑工程安全监督站',N'320281',N'AJ')
 		   ,(N'AJ320208-1', N'A5567E3C-831E-4797-B5B0-72D2A500578D',N'无锡市梁溪区建筑管理站',N'320213',N'AJ')
 		   ,(N'AJ320203-1', N'4F414446-35E7-4FE2-90DC-1AAF83B4416D',N'无锡市南长区建筑工程安全监督站',N'320203',N'AJ')
 		   ,(N'AJ320205-1', N'56559114-68E9-4AF2-B5F9-A7B4BDF6FBD4',N'无锡市锡山区建筑工程安全监督站',N'320205',N'AJ')
@@ -62,11 +62,20 @@ CREATE TABLE [dbo].[Ap_need_refetch](
 	[status] [int] NOT NULL,
 	Primary key(id)
 )
-		   
+/* 申报数据需要重新抓取的uuid : 用于重新获取抓取失败的申报数据 */
+CREATE TABLE [dbo].[Ap_need_refetch_uuid](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[uuid] [varchar](50) NOT NULL,
+	[deptCode] [varchar](50) NOT NULL,
+	[password] [varchar](50) NOT NULL,
+	[deptType] [varchar](50) NULL,
+	Primary key(id)
+)
+
 /* 安监申报表*/
 CREATE TABLE [dbo].[Ap_ajsbb](
 	[uuid] [varchar](50) NOT NULL,/*安监申报表编号,由一站式申报系统自动产生*/
-	[xmmc] [varchar](100) NOT NULL,/*安监项目名称 */
+	[xmmc] [varchar](500) NOT NULL,/*安监项目名称 */
 	[PrjNum] [varchar](20) NOT NULL, /* 项目编号 */
 	[PrjName] [varchar](500) NOT NULL,
 	[Ajjgmc] [varchar](200) NOT NULL,
@@ -107,10 +116,50 @@ CREATE TABLE [dbo].[Ap_ajsbjg](
 	[id] [varchar](50) NOT NULL,
 	[uuid] [varchar](50) NOT NULL,/*安监申报表编号,由一站式申报系统自动产生*/
 	[success] [varchar](10) NULL, /* Yes:受理成功标记,No:退回标志 */
-	[jdzch] [varchar](10) NULL, /* 监督注册号（如果有）*/
+	[jdzch] [varchar](100) NULL, /* 监督注册号（如果有）*/
 	[slry] [varchar](50) NULL, /* 受理人员 */
 	[slrq] [varchar](50) NULL, /* 受理日期 */
-	[thyy] [varchar](50) NULL, /* 退回原因 */
+	[thyy] [varchar](500) NULL, /* 退回原因 */
+	[deptcode] [varchar](32) NULL, /* 安监机构组织机构代码，10位组织机构代码或18位信用码 */
+	[sbPassword] [varchar](50) NULL, 
+	[UpdateTime] [datetime] NULL,
+	[UpdateUser] [varchar](50) NULL,
+	Primary key(id)
+)
+
+/* 安监申报推送监督通知书表*/
+CREATE TABLE [dbo].[Ap_ajtzs](
+	[id] [varchar](50) NOT NULL,
+	[uuid] [varchar](50) NOT NULL,/*安监申报表编号,由一站式申报系统自动产生*/
+	[jdzch] [varchar](100) NULL, /* 监督注册号*/
+	[tzrq] [varchar](50) NULL, /* 通知日期 */
+	[tzdw] [varchar](100) NULL, /* 通知单位 */
+	[deptcode] [varchar](32) NULL, /* 安监机构组织机构代码，10位组织机构代码或18位信用码 */
+	[sbPassword] [varchar](50) NULL, 
+	[UpdateTime] [datetime] NULL,
+	[UpdateUser] [varchar](50) NULL,
+	Primary key(id)
+)
+/* 安监申报推送监督通知书之监督人员表*/
+CREATE TABLE [dbo].[Ap_ajtzs_jdry](
+	[id] [varchar](50) NOT NULL,
+	[uuid] [varchar](50) NOT NULL,/*安监申报表编号,由一站式申报系统自动产生*/
+	[xm] [varchar](50) NULL, /* 姓名 */
+	[sfzh] [varchar](50) NULL, /* 身份证号（如果有） */
+	[zy] [varchar](50) NULL, /* 专业（如果有） */
+	[yddh] [varchar](100) NULL, /* 移动电话 */
+	[bz] [varchar](100) NULL, /* 是否主监人（是、否） */
+	[jdks] [varchar](100) NULL, /* 监督科室名称 */
+	Primary key(id)
+)
+
+/* 安监申报推送终止施工安全监督告知书*/
+CREATE TABLE [dbo].[Ap_ajzzgz](
+	[id] [varchar](50) NOT NULL,
+	[uuid] [varchar](50) NOT NULL,/*安监申报表编号,由一站式申报系统自动产生*/
+	[jdzch] [varchar](100) NULL, /* 监督注册号*/
+	[zzyy] [varchar](255) NULL, /* 终止原因，包括项目完工，项目停工 */
+	[zzrq] [varchar](100) NULL, /* 终止日期 */
 	[deptcode] [varchar](32) NULL, /* 安监机构组织机构代码，10位组织机构代码或18位信用码 */
 	[sbPassword] [varchar](50) NULL, 
 	[UpdateTime] [datetime] NULL,
@@ -147,11 +196,12 @@ CREATE TABLE [dbo].[Ap_ajsbb_dwry](
 	[gw] [varchar](50) NOT NULL, /* 岗位 */
 	[mp] [varchar](50) NULL, /* 手机号码 */
 	[zgzh] [varchar](50) NULL, /* 资格类型及证号 */
+	[zyzgzsh] [varchar](50) NULL, /* 职业资格证号: 单位类别为施工单位、法人或委托负责人、企业技术负责人、企业分管安全负责人、项目经理、安全考核证号字段为 zgzh ，其他单位人员  资格证号为zyzgzsh */
 	[zy] [varchar](50) NULL, /* 专业 */
 	[jhjcsj] [datetime] NULL, /* 计划进场时间 */
 	[jhccsj] [datetime] NULL, /* 计划出场时间 */
 	[lhtsx] [varchar](1) NULL, /* 联合体属性, 0非联合体, 1联合体主体单位, 2联合体合作单位 */
-    Primary key(uuid, idCard)
+    Primary key(uuid, idCard,dwlx,CorpCode,gw)
 )
 
 /* 安监申报表_材料清单 */
@@ -163,7 +213,7 @@ CREATE TABLE [dbo].[Ap_ajsbb_clqd](
 	[blrq] [varchar](50) NOT NULL, /* 办理日期 */
 	[smjdz] [varchar](255) NULL, /* 扫描件服务器地址 */
 	[smjmc] [varchar](100) NULL, /* 扫描件文件名称 */
-    Primary key(uuid, xh)
+    Primary key(uuid, xh,sbzl)
 )
 
 /* 安监申报表_环境及地下设施交底项目 */
@@ -180,7 +230,7 @@ CREATE TABLE [dbo].[Ap_ajsbb_wxyjdgcqd](
 	[uuid] [varchar](50) NOT NULL, /* 安监申报表编号 */
 	[fbfxgc] [varchar](50) NOT NULL, /* 分部分项工程 */
 	[gcnr] [varchar](255) NOT NULL, /* 工程内容 */
-	[yjsssj] [datetime] NULL, /* 预计实施时间 */
+	[yjsssj] [varchar](50) NULL, /* 预计实施时间 */
     Primary key(uuid, fbfxgc)
 )
 
@@ -189,7 +239,7 @@ CREATE TABLE [dbo].[Ap_ajsbb_cgmgcqd](
 	[uuid] [varchar](50) NOT NULL, /* 安监申报表编号 */
 	[fbfxgc] [varchar](50) NOT NULL, /* 分部分项工程 */
 	[gcnr] [varchar](255) NOT NULL, /* 工程内容 */
-	[yjsssj] [datetime] NULL, /* 预计实施时间 */
+	[yjsssj] [varchar](50) NULL, /* 预计实施时间 */
     Primary key(uuid, fbfxgc)
 )
 
@@ -197,7 +247,7 @@ CREATE TABLE [dbo].[Ap_ajsbb_cgmgcqd](
 /* 质监申报表*/
 CREATE TABLE [dbo].[Ap_zjsbb](
 	[uuid] [varchar](50) NOT NULL,/*质监申报表编号,由一站式申报系统自动产生*/
-	[xmmc] [varchar](100) NOT NULL,/*质监项目名称 */
+	[xmmc] [varchar](500) NOT NULL,/*质监项目名称 */
 	[PrjNum] [varchar](20) NOT NULL, /* 项目编号 */
 	[PrjName] [varchar](500) NOT NULL, /* 立项项目名称 */
 	[gcdz] [varchar](255) NULL, /* 工程地址 */
@@ -229,10 +279,10 @@ CREATE TABLE [dbo].[Ap_zjsbjg](
 	[id] [varchar](50) NOT NULL,
 	[uuid] [varchar](50) NOT NULL,/*质监申报表编号,由一站式申报系统自动产生*/
 	[success] [varchar](10) NULL, /* Yes:受理成功标记,No:退回标志 */
-	[jdzch] [varchar](10) NULL, /* 监督注册号（如果有）*/
+	[jdzch] [varchar](100) NULL, /* 监督注册号（如果有）*/
 	[slry] [varchar](50) NULL, /* 受理人员 */
 	[slrq] [varchar](50) NULL, /* 受理日期 */
-	[thyy] [varchar](50) NULL, /* 退回原因 */
+	[thyy] [varchar](500) NULL, /* 退回原因 */
 	[deptcode] [varchar](32) NULL, /* 安监机构组织机构代码，10位组织机构代码或18位信用码 */
 	[sbPassword] [varchar](50) NULL, 
 	[UpdateTime] [datetime] NULL,
@@ -243,8 +293,8 @@ CREATE TABLE [dbo].[Ap_zjsbjg](
 CREATE TABLE [dbo].[Ap_zjsbjg_dwgc](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[uuid] [varchar](50) NOT NULL,/*质监申报表编号,由一站式申报系统自动产生*/
-	[dwgcbm] [varchar](10) NULL, /* 单位工程编码 */
-	[dwjdzch] [varchar](10) NULL, /* 单位工程监督注册号*/
+	[dwgcbm] [varchar](100) NULL, /* 单位工程编码 */
+	[dwjdzch] [varchar](100) NULL, /* 单位工程监督注册号*/
 	Primary key(id)
 )
 
@@ -286,7 +336,7 @@ CREATE TABLE [dbo].[Ap_zjsbb_dwry](
 	[jhjcsj] [datetime] NULL, /* 计划进场时间 */
 	[jhccsj] [datetime] NULL, /* 计划出场时间 */
 	[lhtsx] [varchar](1) NULL, /* 联合体属性, 0非联合体, 1联合体主体单位, 2联合体合作单位 */
-    Primary key(uuid, idCard)
+    Primary key(uuid, idCard,dwlx,CorpCode,gw)
 )
 
 /* 质监申报表_施工图审查合格书 */
@@ -345,7 +395,33 @@ CREATE TABLE [dbo].[Ap_zjsbb_clqd](
 	[blrq] [varchar](50) NOT NULL, /* 办理日期 */
 	[smjdz] [varchar](255) NULL, /* 扫描件服务器地址 */
 	[smjmc] [varchar](100) NULL, /* 扫描件文件名称 */
-    Primary key(uuid, xh)
+    Primary key(uuid, xh,sbzl)
+)
+
+/* 安监申报推送监督通知书表*/
+CREATE TABLE [dbo].[Ap_zjtzs](
+	[id] [varchar](50) NOT NULL,
+	[uuid] [varchar](50) NOT NULL,/*安监申报表编号,由一站式申报系统自动产生*/
+	[jdzch] [varchar](100) NULL, /* 监督注册号*/
+	[tzrq] [varchar](50) NULL, /* 通知日期 */
+	[tzdw] [varchar](100) NULL, /* 通知单位 */
+	[deptcode] [varchar](32) NULL, /* 安监机构组织机构代码，10位组织机构代码或18位信用码 */
+	[sbPassword] [varchar](50) NULL, 
+	[UpdateTime] [datetime] NULL,
+	[UpdateUser] [varchar](50) NULL,
+	Primary key(id)
+)
+/* 安监申报推送监督通知书之监督人员表*/
+CREATE TABLE [dbo].[Ap_zjtzs_jdry](
+	[id] [varchar](50) NOT NULL,
+	[uuid] [varchar](50) NOT NULL,/*安监申报表编号,由一站式申报系统自动产生*/
+	[xm] [varchar](50) NULL, /* 姓名 */
+	[sfzh] [varchar](50) NULL, /* 身份证号（如果有） */
+	[zy] [varchar](50) NULL, /* 专业（如果有） */
+	[yddh] [varchar](100) NULL, /* 移动电话 */
+	[bz] [varchar](100) NULL, /* 是否主监人（是、否） */
+	[jdks] [varchar](100) NULL, /* 监督科室名称 */
+	Primary key(id)
 )
 
 
