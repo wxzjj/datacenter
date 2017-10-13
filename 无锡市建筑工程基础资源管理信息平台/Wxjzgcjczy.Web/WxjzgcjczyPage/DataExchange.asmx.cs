@@ -3895,6 +3895,171 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             return result.ResultMessage;
         }
 
+        /// <summary>
+        /// 查询项目列表
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="prjNum"></param>
+        /// <param name="prjName"></param>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string queryProjectList(string user, string password, string prjNum, string prjName, string location)
+        {
+            string apiFlowId = "30";
+
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+
+            string apiMessage = string.Empty;
+            if (isApiOpen(apiFlowId, BLL))
+            {
+                if (!accessValidate(user, password, BLL))
+                {
+                    return result;
+                }
+
+                DataTable mainDt = SBBLL.GetProject(prjNum, prjName, location);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(mainDt, "dataTable", "row"));
+
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = apiFlowId;
+                row_apicb["apiMethod"] = "queryProjectList";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt(apiFlowId, string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 查询项目信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="prjNum"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string queryProjectInfo(string user, string password, string prjNum)
+        {
+            string apiFlowId = "30";
+
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+
+            string apiMessage = string.Empty;
+            if (isApiOpen(apiFlowId, BLL))
+            {
+                if (!accessValidate(user, password, BLL))
+                {
+                    return result;
+                }
+
+                DataTable mainDt = SBBLL.GetProject(prjNum);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    DataTable tempDt;
+
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "data");
+
+                        str.AppendFormat("<{0}>", "projet");
+                        mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "projet");
+
+                        tempDt = SBBLL.GetSubProject(prjNum);
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "subProjectList", "subProject"));
+
+                        tempDt = SBBLL.GetBuildingLicense(prjNum);
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "buildingLicenseList", "buildingLicense"));
+
+                        tempDt = SBBLL.GetProjectFinish(prjNum);
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "projectFinishList", "projectFinish"));
+
+                        str.AppendFormat("</{0}>", "data");
+
+                    }
+
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = apiFlowId;
+                row_apicb["apiMethod"] = "queryProjectInfo";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt(apiFlowId, string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+        }
+                   
+
 
         #endregion
 
@@ -4570,6 +4735,36 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             BLL.Submit_API_cb(dtapicb);
             BLL.UpdateZbJkzt(apiFlow, string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
         }
+
+        private static bool isApiOpen(string id, DataExchangeBLL BLL)
+        {
+            bool flag = false;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow(id);
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                flag = true;
+            }
+            return flag;
+        }
+
+        private static bool accessValidate(string user, string password, DataExchangeBLL BLL)
+        {
+            bool flag = true;
+
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+            {
+                flag = false;
+            }
+
+            DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+            if (dt_user.Rows.Count == 0)
+            {
+                flag = false;
+            }
+
+            return flag;
+        }
+
         #endregion
 
 

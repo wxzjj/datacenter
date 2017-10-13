@@ -1,0 +1,59 @@
+USE [WJSJZX]
+GO
+
+/****** Object:  Table [dbo].[xm_gcdjb_dtxm_doc]    Script Date: 2017-10-12 21:28:11 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[xm_gcdjb_dtxm_doc](
+	[PKID] [varchar](50) NOT NULL,
+	[fxbm] [varchar](25) NOT NULL,
+	[docNum] [varchar](100) NOT NULL,
+	[CreateDate] [date] NOT NULL,
+	[UpdateDate] [date] NOT NULL,
+	[sbdqbm] [varchar](6) NULL
+)
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+USE [WJSJZX]
+GO
+
+INSERT INTO [dbo].[API_zb]
+           ([apiID]
+           ,[apiFlow]
+           ,[apiName]
+           ,[apiFromSys]
+           ,[apiUrl]
+           ,[apiDescript]
+           ,[apiControl]
+           ,[apiRunState]
+           ,[apiRunMessage]
+           ,[apiCjTime])
+     VALUES
+           (31
+           ,30
+           ,'GIS基础数据应用所服务'
+           ,NULL
+           ,NULL
+           ,NULL
+           ,1
+           ,1
+           ,NULL
+           ,SYSDATETIME())
+GO
+
+
+
+
+
