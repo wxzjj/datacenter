@@ -41,15 +41,33 @@ namespace Wxjzgcjczy.BLL
 
         #region 获取项目信息
 
+        public DataTable GetProjectInfo(string countyNum, string beginDate, string endDate)
+        {
+            DataTable dt = DAL.GetProject(null, null, null, countyNum, beginDate, endDate);
+            return dt;
+        }
+
+        public DataTable GetBuilderLicenceManage(string sbdqbm, string beginDate, string endDate)
+        {
+            DataTable dt = DAL.GetBuildingLicense(null, sbdqbm, beginDate, endDate);
+            return dt;
+        }
+
+        public DataTable GetProjectFinishManage(string sbdqbm, string beginDate, string endDate)
+        {
+            DataTable dt = DAL.GetProjectFinish(null, sbdqbm, beginDate, endDate);
+            return dt;
+        }
+
         public DataTable GetProject(string prjNum, string prjName, string location)
         {
-            DataTable dt = DAL.GetProject(prjNum, prjName, location);
+            DataTable dt = DAL.GetProject(prjNum, prjName, location, null, null, null);
             return dt;
         }
 
         public DataTable GetProject(string prjNum)
         {
-            DataTable dt = DAL.GetProject(prjNum, null, null);
+            DataTable dt = DAL.GetProject(prjNum, null, null, null, null, null);
             return dt;
         }
 
@@ -61,13 +79,13 @@ namespace Wxjzgcjczy.BLL
 
         public DataTable GetBuildingLicense(string prjNum)
         {
-            DataTable dt = DAL.GetBuildingLicense(prjNum);
+            DataTable dt = DAL.GetBuildingLicense(prjNum, null, null, null);
             return dt;
         }
 
         public DataTable GetProjectFinish(string prjNum)
         {
-            DataTable dt = DAL.GetProjectFinish(prjNum);
+            DataTable dt = DAL.GetProjectFinish(prjNum, null, null, null);
             return dt;
         }
 

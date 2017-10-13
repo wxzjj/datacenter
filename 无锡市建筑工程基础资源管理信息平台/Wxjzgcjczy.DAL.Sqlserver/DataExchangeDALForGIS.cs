@@ -29,14 +29,18 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         /// <param name="prjNum">项目编号</param>
         /// <param name="prjName">项目名称</param>
         /// <param name="location">项目地点</param>
+        /// <param name="countyNum">地区码</param>
+        /// <param name="beginDate">起始日期</param>
+        /// <param name="endDate">结束日期</param>
         /// <returns></returns>
-        public DataTable GetProject(string prjNum, string prjName, string location)
+        public DataTable GetProject(string prjNum, string prjName, string location, string countyNum, string beginDate, string endDate)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select *");
+            sb.Append(" select a.*,b.programme_address");
             sb.Append(" from TBProjectInfo a");
+            sb.Append(" left join TBProjectAdditionalInfo b on b.PrjNum=a.PrjNum");
             sb.Append(" where 1=1");
             if (!string.IsNullOrEmpty(prjNum))
             {
@@ -53,7 +57,25 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             if (!string.IsNullOrEmpty(location))
             {
                 sp.Add("@location", location);
-                //sb.Append(" and a.PrjName=@location");
+                sb.Append(" and b.programme_address like CONCAT('%',@location,'%')");
+            }
+
+            if (!string.IsNullOrEmpty(countyNum))
+            {
+                sp.Add("@countyNum", countyNum);
+                sb.Append(" and a.CountyNum=@countyNum");
+            }
+
+            if (!string.IsNullOrEmpty(beginDate))
+            {
+                sp.Add("@beginDate", beginDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)>=@beginDate");
+            }
+
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                sp.Add("@endDate", endDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)<=@endDate");
             }
             
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectInfo");
@@ -85,8 +107,11 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         /// 获取施工许可证
         /// </summary>
         /// <param name="prjNum">项目编号</param>
+        /// <param name="sbdqbm">上报地区码</param>
+        /// <param name="beginDate">起始日期</param>
+        /// <param name="endDate">结束日期</param>
         /// <returns></returns>
-        public DataTable GetBuildingLicense(string prjNum)
+        public DataTable GetBuildingLicense(string prjNum, string sbdqbm, string beginDate, string endDate)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
@@ -95,8 +120,29 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sb.Append(" from TBBuilderLicenceManage a");
             sb.Append(" where 1=1");
 
-            sp.Add("@prjNum", prjNum);
-            sb.Append(" and a.PrjNum=@prjNum");
+            if (!string.IsNullOrEmpty(prjNum))
+            {
+                sp.Add("@prjNum", prjNum);
+                sb.Append(" and a.PrjNum=@prjNum");
+            }
+
+            if (!string.IsNullOrEmpty(sbdqbm))
+            {
+                sp.Add("@sbdqbm", sbdqbm);
+                sb.Append(" and a.sbdqbm=@sbdqbm");
+            }
+
+            if (!string.IsNullOrEmpty(beginDate))
+            {
+                sp.Add("@beginDate", beginDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)>=@beginDate");
+            }
+
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                sp.Add("@endDate", endDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)<=@endDate");
+            }
 
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBBuilderLicenceManage");
 
@@ -107,8 +153,11 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         /// 获取竣工备案
         /// </summary>
         /// <param name="prjNum">项目编号</param>
+        /// <param name="sbdqbm">上报地区码</param>
+        /// <param name="beginDate">起始日期</param>
+        /// <param name="endDate">结束日期</param>
         /// <returns></returns>
-        public DataTable GetProjectFinish(string prjNum)
+        public DataTable GetProjectFinish(string prjNum, string sbdqbm, string beginDate, string endDate)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
@@ -117,8 +166,29 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sb.Append(" from TBProjectFinishManage a");
             sb.Append(" where 1=1");
 
-            sp.Add("@prjNum", prjNum);
-            sb.Append(" and a.PrjNum=@prjNum");
+            if (!string.IsNullOrEmpty(prjNum))
+            {
+                sp.Add("@prjNum", prjNum);
+                sb.Append(" and a.PrjNum=@prjNum");
+            }
+
+            if (!string.IsNullOrEmpty(sbdqbm))
+            {
+                sp.Add("@sbdqbm", sbdqbm);
+                sb.Append(" and a.sbdqbm=@sbdqbm");
+            }
+
+            if (!string.IsNullOrEmpty(beginDate))
+            {
+                sp.Add("@beginDate", beginDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)>=@beginDate");
+            }
+
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                sp.Add("@endDate", endDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)<=@endDate");
+            }
 
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectFinishManage");
 

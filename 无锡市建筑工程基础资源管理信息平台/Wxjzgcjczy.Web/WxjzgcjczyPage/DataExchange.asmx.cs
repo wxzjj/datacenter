@@ -3896,6 +3896,234 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         }
 
         /// <summary>
+        /// 获取项目信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="countyNum"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string GetProjectInfo(string user, string password, string countyNum, string beginDate, string endDate)
+        {
+            string apiFlowId = "30";
+
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+
+            ProcessResultData result = new ProcessResultData();
+
+            string apiMessage = string.Empty;
+            if (isApiOpen(apiFlowId, BLL))
+            {
+                if (!accessValidate(user, password, BLL))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    return result.ResultMessage;
+                }
+
+                DataTable mainDt = SBBLL.GetProjectInfo(countyNum, beginDate, endDate);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.未找到对应项目;
+                    return result.ResultMessage;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(mainDt, "dataTable", "row"));
+
+                    return str.ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    result.code = ProcessResult.内部错误;
+                    result.message = ex.Message;
+                    return result.ResultMessage;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = apiFlowId;
+                row_apicb["apiMethod"] = "getProjectInfo";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt(apiFlowId, string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                result.code = ProcessResult.接口关闭;
+            }
+
+            return result.ResultMessage;
+        }
+
+        /// <summary>
+        /// 获取项目施工许可证
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="sbdqbm"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string GetBuilderLicenceManage(string user, string password, string sbdqbm, string beginDate, string endDate)
+        {
+            string apiFlowId = "30";
+
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+
+            ProcessResultData result = new ProcessResultData();
+
+            string apiMessage = string.Empty;
+            if (isApiOpen(apiFlowId, BLL))
+            {
+                if (!accessValidate(user, password, BLL))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    return result.ResultMessage;
+                }
+
+                DataTable mainDt = SBBLL.GetBuilderLicenceManage(sbdqbm, beginDate, endDate);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.未找到对应项目;
+                    return result.ResultMessage;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(mainDt, "dataTable", "row"));
+
+                    return str.ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    result.code = ProcessResult.内部错误;
+                    result.message = ex.Message;
+                    return result.ResultMessage;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = apiFlowId;
+                row_apicb["apiMethod"] = "GetBuilderLicenceManage";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt(apiFlowId, string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                result.code = ProcessResult.接口关闭;
+            }
+
+            return result.ResultMessage;
+        }
+
+        /// <summary>
+        /// 获取项目竣工备案信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="sbdqbm"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string GetProjectFinishManage(string user, string password, string sbdqbm, string beginDate, string endDate)
+        {
+            string apiFlowId = "30";
+
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+
+            ProcessResultData result = new ProcessResultData();
+
+            string apiMessage = string.Empty;
+            if (isApiOpen(apiFlowId, BLL))
+            {
+                if (!accessValidate(user, password, BLL))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    return result.ResultMessage;
+                }
+
+                DataTable mainDt = SBBLL.GetProjectFinishManage(sbdqbm, beginDate, endDate);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.未找到对应项目;
+                    return result.ResultMessage;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(mainDt, "dataTable", "row"));
+
+                    return str.ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    result.code = ProcessResult.内部错误;
+                    result.message = ex.Message;
+                    return result.ResultMessage;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = apiFlowId;
+                row_apicb["apiMethod"] = "GetProjectFinishManage";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt(apiFlowId, string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                result.code = ProcessResult.接口关闭;
+            }
+
+            return result.ResultMessage;
+        }
+
+        /// <summary>
         /// 查询项目列表
         /// </summary>
         /// <param name="user"></param>
@@ -3909,24 +4137,27 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         {
             string apiFlowId = "30";
 
-            string result = String.Empty;
             string mainXml = string.Empty;
             DataExchangeBLL BLL = new DataExchangeBLL();
             DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+
+            ProcessResultData result = new ProcessResultData();
 
             string apiMessage = string.Empty;
             if (isApiOpen(apiFlowId, BLL))
             {
                 if (!accessValidate(user, password, BLL))
                 {
-                    return result;
+                    result.code = ProcessResult.用户名或密码错误;
+                    return result.ResultMessage;
                 }
 
                 DataTable mainDt = SBBLL.GetProject(prjNum, prjName, location);
 
                 if (mainDt == null || mainDt.Rows.Count == 0)
                 {
-                    return String.Empty;
+                    result.code = ProcessResult.未找到对应项目;
+                    return result.ResultMessage;
                 }
 
                 StringBuilder str = new StringBuilder();
@@ -3939,9 +4170,11 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return str.ToString();
 
                 }
-                catch
+                catch(Exception ex)
                 {
-                    return string.Empty;
+                    result.code = ProcessResult.内部错误;
+                    result.message = ex.Message;
+                    return result.ResultMessage;
                 }
 
                 DataTable dtapicb = BLL.GetSchema_API_cb();
@@ -3960,11 +4193,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             }
             else
             {
-                DataTable dt = BLL.GetAPIUnable();
-                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                result.code = ProcessResult.接口关闭;
             }
 
-            return result;
+            return result.ResultMessage;
         }
 
         /// <summary>
@@ -3979,24 +4211,27 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         {
             string apiFlowId = "30";
 
-            string result = String.Empty;
             string mainXml = string.Empty;
             DataExchangeBLL BLL = new DataExchangeBLL();
             DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+
+            ProcessResultData result = new ProcessResultData();
 
             string apiMessage = string.Empty;
             if (isApiOpen(apiFlowId, BLL))
             {
                 if (!accessValidate(user, password, BLL))
                 {
-                    return result;
+                    result.code = ProcessResult.用户名或密码错误;
+                    return result.ResultMessage;
                 }
 
                 DataTable mainDt = SBBLL.GetProject(prjNum);
 
                 if (mainDt == null || mainDt.Rows.Count == 0)
                 {
-                    return String.Empty;
+                    result.code = ProcessResult.未找到对应项目;
+                    return result.ResultMessage;
                 }
 
                 StringBuilder str = new StringBuilder();
@@ -4031,9 +4266,11 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return str.ToString();
 
                 }
-                catch
+                catch (Exception ex)
                 {
-                    return string.Empty;
+                    result.code = ProcessResult.内部错误;
+                    result.message = ex.Message;
+                    return result.ResultMessage;
                 }
 
                 DataTable dtapicb = BLL.GetSchema_API_cb();
@@ -4052,11 +4289,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             }
             else
             {
-                DataTable dt = BLL.GetAPIUnable();
-                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                result.code = ProcessResult.接口关闭;
             }
 
-            return result;
+            return result.ResultMessage;
         }
                    
 
