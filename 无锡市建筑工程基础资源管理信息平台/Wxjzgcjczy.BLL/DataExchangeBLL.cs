@@ -972,6 +972,7 @@ namespace Wxjzgcjczy.BLL
                             row["Msg"] = addResultSt;
 
                             //1分钟后重新上报一次
+                            /**
                             System.Timers.Timer timer = new System.Timers.Timer(60*1000);
                             timer.Elapsed += delegate(object sender, System.Timers.ElapsedEventArgs e)
                             {
@@ -980,7 +981,7 @@ namespace Wxjzgcjczy.BLL
                                 BLLCommon.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "再次向省一体化平台传送项目登记补充数据:" + xmlData + "\n结果：" + addResultSt);
                             };
                             timer.Enabled = true; 
-
+                            */
                         }
                         else
                         {
