@@ -777,6 +777,7 @@ namespace Wxjzgcjczy.BLL
                 }
 
                 row["updateUser"] = user;
+                row["xgrqsj"] = DateTime.Now;
 
             }
             if (dt_TBProjectInfo.Rows.Count > 0)
