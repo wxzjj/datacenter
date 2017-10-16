@@ -4954,6 +4954,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 List<string> countryList = BLL.Get_tbXzqdmDicForShenBao(deptType);
                 countryCodes = string.Join(",", countryList.ToArray());
             }
+            else
+            {
+                countryCodes = countryCode;
+            }
             return countryCodes;
         }
 
