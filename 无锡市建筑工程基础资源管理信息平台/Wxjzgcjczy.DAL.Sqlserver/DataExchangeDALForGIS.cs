@@ -63,21 +63,105 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             if (!string.IsNullOrEmpty(countyNum))
             {
                 sp.Add("@countyNum", countyNum);
-                sb.Append(" and a.CountyNum=@countyNum");
+                if ("320000".Equals(countyNum))
+                {
+                    sb.Append(" and a.ProvinceNum=@countyNum");
+                }
+                else
+                if ("320200".Equals(countyNum))
+                {
+                    sb.Append(" and a.CityNum=@countyNum");
+                }
+                else
+                {
+                    sb.Append(" and a.CountyNum=@countyNum");
+                }
+                
             }
 
             if (!string.IsNullOrEmpty(beginDate))
             {
                 sp.Add("@beginDate", beginDate);
-                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)>=@beginDate");
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)>=@beginDate");
             }
 
             if (!string.IsNullOrEmpty(endDate))
             {
                 sp.Add("@endDate", endDate);
-                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)<=@endDate");
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)<=@endDate");
             }
             
+            return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectInfo");
+
+        }
+
+        /// <summary>
+        /// 获取项目
+        /// </summary>
+        /// <param name="range">经纬度范围</range>
+        /// <returns></returns>
+        public DataTable GetProjectByRange(string range)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            //parse range
+            double jd1, jd2, wd1, wd2;
+
+            int indexOfSep = range.IndexOf(";");
+            string part1 = range.Substring(0, indexOfSep);
+            string part2 = range.Substring(indexOfSep + 1);
+
+            indexOfSep = part1.IndexOf(":");
+            string part11 = part1.Substring(0, indexOfSep);
+            string part12 = part1.Substring(indexOfSep + 1);
+
+            indexOfSep = part2.IndexOf(":");
+            string part21 = part2.Substring(0, indexOfSep);
+            string part22 = part2.Substring(indexOfSep + 1);
+
+            if (double.Parse(part11) < double.Parse(part21))
+            {
+                jd1 = double.Parse(part11);
+                jd2 = double.Parse(part21);
+            }
+            else
+            {
+                jd2 = double.Parse(part11);
+                jd1 = double.Parse(part21);
+            }
+
+            if (double.Parse(part12) < double.Parse(part22))
+            {
+                wd1 = double.Parse(part12);
+                wd2 = double.Parse(part22);
+            }
+            else
+            {
+                wd2 = double.Parse(part12);
+                wd1 = double.Parse(part22);
+            }
+
+            //parse range finish
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select a.*,b.programme_address");
+            sb.Append(" from TBProjectInfo a");
+            sb.Append(" left join TBProjectAdditionalInfo b on b.PrjNum=a.PrjNum");
+            sb.Append(" where 1=1");
+
+            sp.Add("@jd1", jd1);
+            sb.Append(" and a.jd>=@jd1");
+
+            sp.Add("@jd2", jd2);
+            sb.Append(" and a.jd<=@jd2");
+
+            sp.Add("@wd1", wd1);
+            sb.Append(" and a.wd>=@wd1");
+
+            sp.Add("@wd2", wd2);
+            sb.Append(" and a.wd<=@wd2");
+
+
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectInfo");
 
         }
@@ -135,13 +219,13 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             if (!string.IsNullOrEmpty(beginDate))
             {
                 sp.Add("@beginDate", beginDate);
-                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)>=@beginDate");
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)>=@beginDate");
             }
 
             if (!string.IsNullOrEmpty(endDate))
             {
                 sp.Add("@endDate", endDate);
-                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)<=@endDate");
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)<=@endDate");
             }
 
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBBuilderLicenceManage");
@@ -181,13 +265,13 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             if (!string.IsNullOrEmpty(beginDate))
             {
                 sp.Add("@beginDate", beginDate);
-                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)>=@beginDate");
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)>=@beginDate");
             }
 
             if (!string.IsNullOrEmpty(endDate))
             {
                 sp.Add("@endDate", endDate);
-                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)<=@endDate");
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)<=@endDate");
             }
 
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectFinishManage");

@@ -65,6 +65,12 @@ namespace Wxjzgcjczy.BLL
             return dt;
         }
 
+        public DataTable GetProjectByRange(string range)
+        {
+            DataTable dt = DAL.GetProjectByRange(range);
+            return dt;
+        }
+
         public DataTable GetProject(string prjNum)
         {
             DataTable dt = DAL.GetProject(prjNum, null, null, null, null, null);
