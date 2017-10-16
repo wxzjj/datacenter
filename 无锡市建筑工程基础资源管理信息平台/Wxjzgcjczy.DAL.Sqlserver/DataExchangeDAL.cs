@@ -752,7 +752,7 @@ where 1=1 ";
         {
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
-            string sql = "select PKID, PrjNum, PrjInnerNum, PrjName, PrjTypeNum, BuildCorpName, BuildCorpCode, ProvinceNum, CityNum, CountyNum, PrjApprovalNum, PrjApprovalLevelNum, BuldPlanNum, ProjectPlanNum, AllInvest, AllArea, PrjSize, PrjPropertyNum, PrjFunctionNum, BDate, EDate, CreateDate, UpdateFlag, sbdqbm,updateUser from TBProjectInfo where PrjInnerNum in (" + AntiSqlInjection.ParameterizeInClause(prjInnerNum, "@para", ref sp) + ") ";
+            string sql = "select PKID, PrjNum, PrjInnerNum, PrjName, PrjTypeNum, BuildCorpName, BuildCorpCode, ProvinceNum, CityNum, CountyNum, PrjApprovalNum, PrjApprovalLevelNum, BuldPlanNum, ProjectPlanNum, AllInvest, AllArea, PrjSize, PrjPropertyNum, PrjFunctionNum, BDate, EDate, CreateDate, UpdateFlag, sbdqbm,xgrqsj ,updateUser from TBProjectInfo where PrjInnerNum in (" + AntiSqlInjection.ParameterizeInClause(prjInnerNum, "@para", ref sp) + ") ";
 
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
