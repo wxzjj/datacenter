@@ -421,36 +421,37 @@ from uepp_qyjbxx a  where a.qyid in (select qyid from uepp_qycsyw where csywlxid
             //    orderby = " zzbz  ";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
-            /*2017-07-08 guliqiang
-            string sql = @" select qyid,zzbz,zzlb,zzdj,sortid,tag,xgrqsj from (
-select qyid,zzbz,zzlb,zzdjid,zzdj,tag,convert(varchar(19),xgrqsj,120) xgrqsj,(case when zzdj=@zzdj1 then 1 when zzdj=@zzdj5 then 1 when zzdj=@zzdj2 then 2 when zzdj=@zzdj6 then 2 when zzdj=@zzdj3 then 3 when zzdj=@zzdj7 then 3 when zzdj=@zzdj4 then 4 when zzdj=@zzdj8 then 4 else 5 end) sortid
-from UEPP_Qyzzmx where qyid=@pQyID and DataState<>-1) zz where 1=1 order by  zzbz desc ,sortid  ";
-
-            sp.Add("@pQyID", qyid);
-            sp.Add("@zzdj1", "一级");
-            sp.Add("@zzdj2", "二级");
-            sp.Add("@zzdj3", "三级");
-            sp.Add("@zzdj4", "四级");
-            sp.Add("@zzdj5", "壹级");
-            sp.Add("@zzdj6", "贰级");
-            sp.Add("@zzdj7", "叁级");
-            sp.Add("@zzdj8", "肆级");
-            */
-            //2017-07-08 guliqiang
-            string sql = @"select 
-ROW_NUMBER() over(order by zzmx.csywlx, zs.zsbh) as rowno, 
-zzmx.csywlx zzlb, 
-zs.zsbh, 
-(zzmx.zzlb+zzmx.zzxl+zzmx.zzdj) zzmc, 
-CONVERT(varchar(12) , zs.zsyxqrq, 23 ) as fzrq, 
-CONVERT(varchar(12) , zs.zsyxzrq, 23 ) as yxq, 
-zs.fzdw
-from UEPP_Qyzzmx zzmx
-left join UEPP_Qyzs zs on zzmx.zsbh=zs.zsbh
-left join Uepp_Qyjbxx jbxx on zzmx.qyID=jbxx.qyID
-where zsyxzrq>GETDATE() 
-and zzmx.qyID=@pQyID
-order by zzmx.csywlx, zs.zsbh";
+            string sql = @"SELECT ROW_NUMBER() OVER (
+		ORDER BY zzlb
+			,zsbh
+		) AS rowno
+	,*
+FROM (
+	SELECT zzmx.csywlx zzlb
+		,zs.zsbh
+		,(zzmx.zzlb + zzmx.zzxl + zzmx.zzdj) zzmc
+		,CONVERT(VARCHAR(12), zs.zsyxqrq, 23) AS fzrq
+		,CONVERT(VARCHAR(12), zs.zsyxzrq, 23) AS yxq
+		,zs.fzdw
+	FROM UEPP_Qyzzmx zzmx
+	LEFT JOIN UEPP_Qyzs zs ON zzmx.zsbh = zs.zsbh
+	LEFT JOIN Uepp_Qyjbxx jbxx ON zzmx.qyID = jbxx.qyID
+	WHERE zsyxzrq > GETDATE()
+		AND zzmx.qyID=@pQyID
+	UNION ALL
+	SELECT qyzs.csywlx
+		,qyzs.zsbh
+		,qyzs.zslx
+		,CONVERT(VARCHAR(12), qyzs.zsyxqrq, 23) AS fzrq
+		,CONVERT(VARCHAR(12), qyzs.zsyxzrq, 23) AS yxq
+		,qyzs.fzdw
+	FROM UEPP_Qyzs qyzs
+	WHERE qyzs.zsyxzrq > GETDATE()
+		AND qyID=@pQyID
+		AND zslxID = 140
+	) t
+ORDER BY zzlb
+	,zsbh";
             sp.Add("@pQyID", qyid);
 
             return DB.ExeSqlForDataTable(sql, sp, "t");
