@@ -176,8 +176,9 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select *");
+            sb.Append(" select a.*, b.docNum");
             sb.Append(" from xm_gcdjb_dtxm a");
+            sb.Append(" left join xm_gcdjb_dtxm_doc b on b.fxbm=a.fxbm");
             sb.Append(" where 1=1");
 
             sp.Add("@prjNum", prjNum);
@@ -285,7 +286,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         public int SaveProjectDoc(string fxbm, string docNum)
         {
             int effects = this.UpdateProjectDoc(fxbm, docNum);
-            if (effects < 1)
+            if (effects == 0)
             {
                 effects = this.InsertProjectDoc(fxbm, docNum);
             }
@@ -295,7 +296,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
         public int UpdateProjectDoc(string fxbm, string docNum)
         {
-            string sql = "update xm_gcdjb_dtxm_doc set docNum=@fxbm where fxbm=@docNum";
+            string sql = "update xm_gcdjb_dtxm_doc set docNum=@docNum where fxbm=@fxbm";
 
             SqlParameterCollection paramCol = DB.CreateSqlParameterCollection();
 

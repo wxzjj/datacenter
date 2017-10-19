@@ -106,9 +106,21 @@ namespace Wxjzgcjczy.BLL
         /// <param name="password"></param>
         /// <param name="xmlData"></param>
         /// <returns></returns>
-        public ProcessResultData postProjectDocInfo(string fxbm, string docNum)
+        public ProcessResultData saveProjectDocInfo(string fxbm, string docNum)
         {
             ProcessResultData result = new ProcessResultData();
+
+            int effects = DAL.SaveProjectDoc(fxbm, docNum);
+
+            if (effects > 0)
+            {
+                result.code = ProcessResult.数据保存成功;
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+            }
+
             return result;
         }
 
