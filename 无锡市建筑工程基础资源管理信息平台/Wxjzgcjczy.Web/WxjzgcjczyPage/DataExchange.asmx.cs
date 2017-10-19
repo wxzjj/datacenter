@@ -3928,6 +3928,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(sbjgXml, out message);
 
                     dwgcList = resultXml.Substring(dwgcIndex, resultXml.LastIndexOf("</dwgcList>") - dwgcIndex + "</dwgcList>".Length);
+                    dwgcList = "<root>" + dwgcList + "</root>";
                     dwgcDtData = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(dwgcList, out message);
                     //dwgcDtData = xmlHelper.ConvertXMLToDataTable(dwgcList, out message);
                 }
@@ -3944,7 +3945,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 }
                 string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
                 WebCommon.WriteLog("\r\n传入数据：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
-
+                if (dwgcDtData != null)
+                {
+                    WebCommon.WriteLog("\r\n" + xmlHelper.ConvertDataTableToXML(dwgcDtData, "dataTable", "row"));
+                }
                 /** TODO：用户写操作权限待添加
                 if (dt_user.Rows[0]["Has_TBProjectInfo_Write"].ToString2() == "0")
                 {

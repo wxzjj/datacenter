@@ -655,14 +655,17 @@ namespace Wxjzgcjczy.BLL
                         StringBuilder str = new StringBuilder();
                         string xmlData = "";
                         string dwgcXmlData = string.Empty;
+                        //向省一站式申报平台推送质监申报结果
                         DataRow dataRow = dt_zjsbjg.Rows[0]; 
 
-                        //向省一站式申报平台推送安监申报结果
                         //string[] excludeColumns = new string[] { "id", "deptcode", "sbPassword", "UpdateTime", "UpdateUser" };
                         xmlData = xmlHelper.ConvertDataRowToXML(dataRow);
 
                         //string[] dwgcExcludeCols = new string[] { "id", "uuid" };
-                        dwgcXmlData = xmlHelper.ConvertDataTableToXML(dwgcDt, "dwgcList", "dwgccontent");
+                        List<string> dwgcExcludeCols = new List<string>();
+                        dwgcExcludeCols.Add("id");
+                        dwgcExcludeCols.Add("uuid");
+                        //dwgcXmlData = xmlHelper.ConvertDataTableToXML(dwgcDt, "dwgcList", "dwgccontent");
 
                         str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
                         str.AppendFormat("<{0}>", "data");
@@ -671,7 +674,17 @@ namespace Wxjzgcjczy.BLL
                         //单位工程列表
                         if (row["success"].ToString().Equals("Yes"))
                         {
-                            str.Append(dwgcXmlData);
+                            if (dwgcDt != null && dwgcDt.Rows.Count > 0)
+                            {
+                                foreach (DataRow dwgcItem in dwgcDt.Rows)
+                                {
+                                    str.AppendFormat("<{0}>", "dwgcList");
+                                    dwgcXmlData = xmlHelper.ConvertDataRowToXML(dwgcItem, dwgcExcludeCols);
+                                    str.Append(dwgcXmlData);
+                                    str.AppendFormat("</{0}>", "dwgcList");
+                                }
+                                str.Append(dwgcXmlData);
+                            }
                         }
                         str.AppendFormat("</{0}>", "result");
                         str.AppendFormat("</{0}>", "data");
