@@ -101,6 +101,13 @@ namespace Wxjzgcjczy.BLL
             DataTable dt = DAL.GetAp_zjsbb(date, countryCodes);
             return dt;
         }
+
+        public DataTable GetAp_zjsbb_byDeptCode(string date, string deptCode)
+        {
+            DataTable dt = DAL.GetAp_zjsbb_byDeptCode(date, deptCode);
+            return dt;
+        }
+
         public DataTable GetAp_zjsbb_byuuid(string uuid)
         {
             DataTable dt = DAL.GetAp_zjsbb_byuuid(uuid);

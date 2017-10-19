@@ -3289,6 +3289,108 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
         }
 
+        [WebMethod]
+        public string getZJSBBByDateAndDeptCode(string user, string password, string date, string deptCode)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+
+
+                DataTable mainDt = SBBLL.GetAp_zjsbb_byDeptCode(date, deptCode);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    DataTable tempDt;
+
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+                        str.AppendFormat("<{0}>", "data");
+
+                        str.AppendFormat("<{0}>", "mainList");
+                        str.AppendFormat("<{0}>", "main");
+                        mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "main");
+                        str.AppendFormat("</{0}>", "mainList");
+
+                        tempDt = SBBLL.GetAp_zjsbb_ht(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_dwry(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_schgs(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "sgtscList", "sgtsccontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_dwgc(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwgcList", "dwgccontent"));
+
+                        tempDt = SBBLL.GetAp_zjsbb_clqd(dataRow["uuid"].ToString());
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
+
+                        str.AppendFormat("</{0}>", "data");
+
+                    }
+
+
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "getZJSBBByDateAndDeptCode";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+
         /// <summary>
         /// 按日期获取当日质监申报的uuid列表
         /// </summary>
@@ -3355,6 +3457,76 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 }
 
                 createApiLog("29", "getZJSBUuidsByDate", apiMessage, BLL);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+        [WebMethod]
+        public string getZJSBUuidsByDateAndDeptCode(string user, string password, string date, string deptCode)
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+
+
+                DataTable mainDt = SBBLL.GetAp_zjsbb_byDeptCode(date, deptCode);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                StringBuilder str = new StringBuilder();
+                try
+                {
+                    str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                    str.AppendFormat("<{0}>", "body");
+                    str.AppendFormat("<{0}>", "uuidList");
+                    foreach (DataRow dataRow in mainDt.Rows)
+                    {
+
+                        str.AppendFormat("<{0}>", "primarykey");
+                        mainXml = xmlHelper.EncodeString(dataRow["uuid"].ToString());
+                        str.Append(mainXml);
+                        str.AppendFormat("</{0}>", "primarykey");
+
+                    }
+                    str.AppendFormat("</{0}>", "uuidList");
+                    str.AppendFormat("</{0}>", "body");
+                    return str.ToString();
+
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+
+                createApiLog("29", "getZJSBUuidsByDateAndDeptCode", apiMessage, BLL);
 
             }
             else

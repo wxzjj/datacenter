@@ -276,6 +276,19 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
         }
 
+        public DataTable GetAp_zjsbb_byDeptCode(string date, string deptCode)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT * FROM dbo.Ap_zjsbb b 
+                            WHERE SUBSTRING(convert(VARCHAR(30), updateDate, 120), 1, 10)=@date
+                            AND UpdateUser in (" + AntiSqlInjection.ParameterizeInClause(deptCode, "@para", ref sp) + ")";
+
+            sp.Add("@date", date);
+            return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_zjsbb");
+
+        }
+
         public DataTable GetAp_zjsbb_byuuid(string uuid)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
