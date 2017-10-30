@@ -47,6 +47,12 @@ namespace Wxjzgcjczy.BLL
             return dt;
         }
 
+        public DataTable GetSubProjectInfo(string sbdqbm, string beginDate, string endDate)
+        {
+            DataTable dt = DAL.GetSubProject(null, sbdqbm, beginDate, endDate);
+            return dt;
+        }
+
         public DataTable GetBuilderLicenceManage(string sbdqbm, string beginDate, string endDate)
         {
             DataTable dt = DAL.GetBuildingLicense(null, sbdqbm, beginDate, endDate);
@@ -56,6 +62,12 @@ namespace Wxjzgcjczy.BLL
         public DataTable GetProjectFinishManage(string sbdqbm, string beginDate, string endDate)
         {
             DataTable dt = DAL.GetProjectFinish(null, sbdqbm, beginDate, endDate);
+            return dt;
+        }
+
+        public DataTable GetProjectCensorInfo(string sbdqbm, string beginDate, string endDate)
+        {
+            DataTable dt = DAL.GetProjectCensorInfo(null, sbdqbm, beginDate, endDate);
             return dt;
         }
 
@@ -79,7 +91,7 @@ namespace Wxjzgcjczy.BLL
 
         public DataTable GetSubProject(string prjNum)
         {
-            DataTable dt = DAL.GetSubProject(prjNum);
+            DataTable dt = DAL.GetSubProject(prjNum, null, null, null);
             return dt;
         }
 
@@ -92,6 +104,12 @@ namespace Wxjzgcjczy.BLL
         public DataTable GetProjectFinish(string prjNum)
         {
             DataTable dt = DAL.GetProjectFinish(prjNum, null, null, null);
+            return dt;
+        }
+
+        public DataTable GetProjectCensor(string prjNum)
+        {
+            DataTable dt = DAL.GetProjectCensorInfo(prjNum, null, null, null);
             return dt;
         }
 

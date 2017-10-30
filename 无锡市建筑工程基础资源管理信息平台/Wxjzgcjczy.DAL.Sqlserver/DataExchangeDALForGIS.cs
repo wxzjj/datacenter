@@ -19,6 +19,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
     {
         public DBOperator DB { get; set; }
 
+        public static string PROJECTINFO_FIELDS = "a.PrjNum,a.PrjName,a.PrjTypeNum,a.BuildCorpName,a.BuildCorpCode,a.ProvinceNum,a.CityNum,a.CountyNum,a.BDate,a.EDate,a.jd,a.wd,b.programme_address";
      
 
         #region 获取项目数据
@@ -38,7 +39,8 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select a.*,b.programme_address");
+            sb.Append(" select ");
+            sb.Append(PROJECTINFO_FIELDS);
             sb.Append(" from TBProjectInfo a");
             sb.Append(" left join TBProjectAdditionalInfo b on b.PrjNum=a.PrjNum");
             sb.Append(" where 1=1");
@@ -144,7 +146,8 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             //parse range finish
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select a.*,b.programme_address");
+            sb.Append(" select ");
+            sb.Append(PROJECTINFO_FIELDS);
             sb.Append(" from TBProjectInfo a");
             sb.Append(" left join TBProjectAdditionalInfo b on b.PrjNum=a.PrjNum");
             sb.Append(" where 1=1");
@@ -170,19 +173,43 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         /// 获取子项目
         /// </summary>
         /// <param name="prjNum">项目编号</param>
+        /// <param name="sbdqbm">上报地区码</param>
+        /// <param name="beginDate">起始日期</param>
+        /// <param name="endDate">结束日期</param>
         /// <returns></returns>
-        public DataTable GetSubProject(string prjNum)
+        public DataTable GetSubProject(string prjNum, string sbdqbm, string beginDate, string endDate)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select a.*, b.docNum");
+            sb.Append(" select a.PrjNum,a.fxbm,a.xmmc,a.sbdqbm, b.docNum");
             sb.Append(" from xm_gcdjb_dtxm a");
             sb.Append(" left join xm_gcdjb_dtxm_doc b on b.fxbm=a.fxbm");
             sb.Append(" where 1=1");
 
-            sp.Add("@prjNum", prjNum);
-            sb.Append(" and a.PrjNum=@prjNum");
+            if (!string.IsNullOrEmpty(prjNum))
+            {
+                sp.Add("@prjNum", prjNum);
+                sb.Append(" and a.PrjNum=@prjNum");
+            }
+
+            if (!string.IsNullOrEmpty(sbdqbm))
+            {
+                sp.Add("@sbdqbm", sbdqbm);
+                sb.Append(" and a.sbdqbm=@sbdqbm");
+            }
+
+            if (!string.IsNullOrEmpty(beginDate))
+            {
+                sp.Add("@beginDate", beginDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)>=@beginDate");
+            }
+
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                sp.Add("@endDate", endDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)<=@endDate");
+            }
 
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "xm_gcdjb_dtxm");
         }
@@ -201,7 +228,9 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select *");
+            sb.Append(" select BuilderLicenceName,BuilderLicenceNum,PrjNum,CensorNum,EconCorpName,EconCorpCode,");
+            sb.Append(" DesignCorpName,DesignCorpCode,ConsCorpName,ConsCorpCode,SuperCorpName,SuperCorpCode,ConstructorName,");
+            sb.Append(" CIDCardTypeNum,ConstructorIDCard,ConstructorPhone,sbdqbm");
             sb.Append(" from TBBuilderLicenceManage a");
             sb.Append(" where 1=1");
 
@@ -247,7 +276,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select *");
+            sb.Append(" select PrjFinishName,PrjFinishNum,PrjNum,BuilderLicenceNum,BDate,EDate,sbdqbm");
             sb.Append(" from TBProjectFinishManage a");
             sb.Append(" where 1=1");
 
@@ -276,6 +305,52 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             }
 
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectFinishManage");
+
+        }
+
+        /// <summary>
+        /// 获取施工图审查信息
+        /// </summary>
+        /// <param name="prjNum">项目编号</param>
+        /// <param name="sbdqbm">上报地区码</param>
+        /// <param name="beginDate">起始日期</param>
+        /// <param name="endDate">结束日期</param>
+        /// <returns></returns>
+        public DataTable GetProjectCensorInfo(string prjNum, string sbdqbm, string beginDate, string endDate)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select CensorNum,CensorInnerNum,PrjNum,CensorCorpName,CensorCorpCode,CensorEDate,EconCorpName,");
+            sb.Append(" EconCorpCode,DesignCorpName,DesignCorpCode,EconCorpNum,DesignCorpNum,sbdqbm");
+            sb.Append(" from TBProjectCensorInfo a");
+            sb.Append(" where 1=1");
+
+            if (!string.IsNullOrEmpty(prjNum))
+            {
+                sp.Add("@prjNum", prjNum);
+                sb.Append(" and a.PrjNum=@prjNum");
+            }
+
+            if (!string.IsNullOrEmpty(sbdqbm))
+            {
+                sp.Add("@sbdqbm", sbdqbm);
+                sb.Append(" and a.sbdqbm=@sbdqbm");
+            }
+
+            if (!string.IsNullOrEmpty(beginDate))
+            {
+                sp.Add("@beginDate", beginDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)>=@beginDate");
+            }
+
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                sp.Add("@endDate", endDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)<=@endDate");
+            }
+
+            return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectCensorInfo");
 
         }
 
