@@ -1250,7 +1250,7 @@ namespace WxjzgcjczyTimerService
                         return;
                     }
 
-                    //Public.WriteLog("获取了共 " + pageCount + " 页施工许可数据：");
+                    Public.WriteLog("获取了共 " + pageCount + " 页施工许可数据：");
 
                     int allCount_xm = 0, success_xm = 0;
                     bool is_Ok = false;
@@ -1263,11 +1263,15 @@ namespace WxjzgcjczyTimerService
                     row_DataJkDataDetail["tableName"] = "TBBuilderLicenceManage";
                     row_DataJkDataDetail["MethodName"] = "ShareDataXML2";
 
+                    string resultStringRaw = string.Empty;
+                    string resultXmlString = string.Empty;
+
                     try
                     {
                         for (int pageNum = 1; pageNum <= pageCount; pageNum++)
                         {
-                            string resultXmlString = dataShareService.ShareDataXML2("3202000", "p3202000", beginDate, endDate, 9, pageNum);
+                            resultStringRaw = dataShareService.ShareDataXML2("3202000", "p3202000", beginDate, endDate, 9, pageNum);
+                            resultXmlString = xmlHelper.ConvertSpecialLetter(resultStringRaw);
                             is_Ok = true;
 
                             DataBody dataBody = xmlHelper.DeserializeXML<DataBody>("<DataBody>" + resultXmlString + "</DataBody>");
@@ -1285,11 +1289,11 @@ namespace WxjzgcjczyTimerService
                             //List<Xkxm> toSaveXkxm = dataBody.xkxms.Where(p => (!string.IsNullOrEmpty(p.projectInfo.XiangMuBeiAnNum) && !string.IsNullOrEmpty(p.gcxx.applyConstInfo.XuKeZhengNum) && p.projectInfo.CodeNum.IndexOf("3202") >= 0)).ToList<Xkxm>();
 
                             List<Xkxm> toSaveXkxm = dataBody.xkxms.Where(p => (
-                               p.projectInfo.CodeNum.IndexOf("3202") >= 0
+                               p.projectInfo.XMSuoZaiDi.IndexOf("3202") >= 0
                                && !string.IsNullOrEmpty(p.projectInfo.XiangMuBeiAnNum)
-                               && !string.IsNullOrEmpty(p.gcxx.applyConstInfo.BuilderLicenceNum))).ToList<Xkxm>();
+                               && !string.IsNullOrEmpty(p.gcxx.applyConstInfo.XuKeZhengNum))).ToList<Xkxm>();
 
-                            //Public.WriteLog("第" + pageNum + "页，获取了" + toSaveXkxm.Count + "条施工许可数据！");
+                            Public.WriteLog("第" + pageNum + "页，获取了" + toSaveXkxm.Count + "条施工许可数据！");
                             if (toSaveXkxm.Count == 0)
                             {
                                 row_DataJkDataDetail["ErrorMsg"] = "无数据";
@@ -1316,12 +1320,12 @@ namespace WxjzgcjczyTimerService
                                     {
                                         row_SaveDataLog["SaveState"] = 0;
                                         row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                        row_SaveDataLog["Msg"] = "项目“" + xkxm.gcxx.applyConstInfo.GongChengName + "”的PrjNum不能为空，施工许可证编号为" + xkxm.gcxx.applyConstInfo.BuilderLicenceNum + "！";
+                                        row_SaveDataLog["Msg"] = "项目“" + xkxm.gcxx.applyConstInfo.GongChengName + "”的PrjNum不能为空，施工许可证编号为" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "！";
 
                                         continue;
                                     }
 
-                                    if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.BuilderLicenceNum))
+                                    if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.XuKeZhengNum))
                                     {
                                         row_SaveDataLog["SaveState"] = 0;
                                         row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
@@ -1352,7 +1356,7 @@ namespace WxjzgcjczyTimerService
                                     {
                                         row_SaveDataLog["SaveState"] = 0;
                                         row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                        row_SaveDataLog["Msg"] = "项目编号“" + xkxm.projectInfo.XiangMuBeiAnNum + "”不存在，施工许可证编号为" + xkxm.gcxx.applyConstInfo.BuilderLicenceNum + "的施工许可添加失败！";
+                                        row_SaveDataLog["Msg"] = "项目编号“" + xkxm.projectInfo.XiangMuBeiAnNum + "”不存在，施工许可证编号为" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "的施工许可添加失败！";
                                         continue;
                                     }
 
@@ -1380,7 +1384,7 @@ namespace WxjzgcjczyTimerService
                                     else
                                         dataRow["BuilderLicenceInnerNum"] = xkxm.gcxx.applyConstInfo.XuKeZhengNum;
 
-                                    dataRow["BuilderLicenceNum"] = xkxm.gcxx.applyConstInfo.BuilderLicenceNum;
+                                    dataRow["BuilderLicenceNum"] = xkxm.gcxx.applyConstInfo.XuKeZhengNum;
                                     dataRow["BuilderLicenceName"] = xkxm.gcxx.applyConstInfo.GongChengName;
                                     dataRow["RecordInnerNum"] = xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum;
 
@@ -1544,7 +1548,7 @@ namespace WxjzgcjczyTimerService
                                         //dataRow["ConsCorpName"] = "/";
                                         row_SaveDataLog["SaveState"] = 0;
                                         row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                        row_SaveDataLog["Msg"] = "施工许可证编号为“" + xkxm.gcxx.applyConstInfo.BuilderLicenceNum + "”的项目施工单位不能为空！";
+                                        row_SaveDataLog["Msg"] = "施工许可证编号为“" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "”的项目施工单位不能为空！";
                                         continue;
                                     }
                                     else
@@ -1610,7 +1614,7 @@ namespace WxjzgcjczyTimerService
                                     dataRow["SafetyCerID"] = "";
                                     dataRow["CreateDate"] = xkxm.gcxx.applyConstInfo.TiaoBaoDate;
                                     dataRow["UpdateFlag"] = "U";
-                                    dataRow["sbdqbm"] = xkxm.projectInfo.CodeNum.Substring(0, 6);
+                                    dataRow["sbdqbm"] = xkxm.projectInfo.XMSuoZaiDi.Substring(0, 6);
 
                                     if (dt.Rows.Count > 0)
                                     {
@@ -1650,12 +1654,15 @@ namespace WxjzgcjczyTimerService
                                         }
                                         catch (Exception ex)
                                         {
+                                            Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常1:" + ex.Message);
                                         }
                                     }
                                 }
                                 catch (Exception ex)
                                 {
                                     Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常:" + ex.Message);
+                                    Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常:BuilderLicenceInnerNum:" + xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum + ",XuKeZhengNum" + xkxm.gcxx.applyConstInfo.XuKeZhengNum);
+                                 
                                     row_SaveDataLog["SaveState"] = 0;
                                     row_SaveDataLog["Msg"] = ex.Message;
                                 }
@@ -5797,7 +5804,7 @@ namespace WxjzgcjczyTimerService
                                 string ryzclbNo = String.Empty, ryzclb = String.Empty, ryzyzglxID = String.Empty, ryzyzglx = String.Empty;
                                 string ryzslxID = String.Empty, ryzslx = String.Empty, zyzgdjID = String.Empty, zyzgdj = String.Empty;
 
-                                ryzclbNo = outConsInfo.RegLevel;
+                                ryzclbNo = outConsInfo.RegType;
 
                                 switch (ryzclbNo)
                                 {

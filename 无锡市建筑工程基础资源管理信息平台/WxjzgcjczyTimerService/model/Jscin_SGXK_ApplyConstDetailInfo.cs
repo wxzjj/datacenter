@@ -23,6 +23,10 @@ namespace WxsjzxTimerService.model
         public string DiShangChangDu;
         public string DiXiaChangDu;
         public string OrderNumber;
+
+        public string Height;
+        public string Width;
+
         public Jscin_SGXK_ApplyConstDetailInfo()
         {
             RowGuid = String.Empty;
@@ -40,6 +44,9 @@ namespace WxsjzxTimerService.model
             DiShangChangDu = String.Empty;
             DiXiaChangDu = String.Empty;
             OrderNumber = String.Empty;
+
+            Height = String.Empty;
+            Width = String.Empty;
 
         }
     }

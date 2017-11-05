@@ -23,6 +23,9 @@ namespace WxsjzxTimerService.model
         public string FZManZhenshu;
         public string ZiGeXuKeJG;
         public string OrderNumber;
+
+        public string JSGuid;
+
         public Jscin_SGXK_CanJianDanW()
         {
             RowGuid = String.Empty;
@@ -40,6 +43,8 @@ namespace WxsjzxTimerService.model
             FZManZhenshu = String.Empty;
             ZiGeXuKeJG = String.Empty;
             OrderNumber = String.Empty;
+
+            JSGuid = String.Empty;
 
         }
     }

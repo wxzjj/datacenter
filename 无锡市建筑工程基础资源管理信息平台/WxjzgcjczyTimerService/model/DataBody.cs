@@ -88,7 +88,7 @@ namespace WxsjzxTimerService.model
         public Jscin_Fund_AttachInfo attachInfo;
         [XmlArray("Attach")]
         [XmlArrayItem("DataList")]
-        public List<Frame_AttachInfo> frame_AttachInfo;
+        public List<Ap_sgxksqb_clqd> frame_AttachInfo;
         public Zmwj()
         {
             //attachInfo = new Jscin_Fund_AttachInfo();

@@ -8681,7 +8681,7 @@ namespace WxjzgcjczyTimerService
                                 string ryzclbNo = String.Empty, ryzclb = String.Empty, ryzyzglxID = String.Empty, ryzyzglx = String.Empty;
                                 string ryzslxID = String.Empty, ryzslx = String.Empty, zyzgdjID = String.Empty, zyzgdj = String.Empty;
 
-                                ryzclbNo = outConsInfo.RegLevel;
+                                ryzclbNo = outConsInfo.RegType;
 
                                 switch (ryzclbNo)
                                 {

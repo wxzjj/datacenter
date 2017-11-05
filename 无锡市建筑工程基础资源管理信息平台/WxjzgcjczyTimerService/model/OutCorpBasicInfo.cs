@@ -39,6 +39,7 @@ namespace WxjzgcjczyTimerService.model
         public string FoundDate { get; set; }
         public string Fax { get; set; }
         public string LinkPhone { get; set; }
+        public string Status { get; set; }
         public string UpdateDate { get; set; }
 
     }

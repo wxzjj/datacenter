@@ -10,7 +10,7 @@ namespace WxsjzxTimerService.model
     {
         public string RowGuid;
         public string JSGuid;
-        public string BuilderLicenceNum;
+        //public string BuilderLicenceNum;
         public string BuilderLicenceInnerNum;
         public string GongChengName;
         public string JIanSheGuiMo;
@@ -35,11 +35,13 @@ namespace WxsjzxTimerService.model
         public string AgreeDate;
         public string ApplyZSDate;
 
+        public string TotalLen;
+
         public Jscin_SGXK_ApplyConstInfo()
         {
             RowGuid = String.Empty;
             JSGuid = String.Empty;
-            BuilderLicenceNum = String.Empty;
+            //BuilderLicenceNum = String.Empty;
             BuilderLicenceInnerNum = String.Empty;
             GongChengName = String.Empty;
             JIanSheGuiMo = String.Empty;
@@ -64,6 +66,7 @@ namespace WxsjzxTimerService.model
             AgreeDate = String.Empty;
             ApplyZSDate = String.Empty;
 
+            TotalLen = String.Empty;
         }
 
     }

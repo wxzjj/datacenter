@@ -43,11 +43,12 @@ namespace WxjzgcjczyTimerService.model
         public string IDCardNo { get; set; }
         public string PersonName { get; set; }
         public string RegNo { get; set; }
-        public string RegLevel { get; set; }
+        public string RegType { get; set; }
         public string RegMajor { get; set; }
         public string IssueDate { get; set; }
         public string ValidDate { get; set; }
         public string SBCertCode { get; set; }
         public string SBValidDate { get; set; }
+        public string Status { get; set; }
     }
 }

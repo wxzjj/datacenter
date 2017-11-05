@@ -21,7 +21,8 @@ namespace WxsjzxTimerService.model
         public string JHJunGongDate;
         public string Longitude;
         public string Latitude;
-        public string CodeNum;
+        //新接口中无此项
+        //public string CodeNum;
         public string LXXiangMuCode;
         public string HeZhunDep;
         public string HeZhunNum;
@@ -53,6 +54,10 @@ namespace WxsjzxTimerService.model
         public string AddUserGuid;
         public string XiangMuBeiAnNum;
 
+
+        public string JianSheGuoMo;//新增，建设规模
+        public string IdendityNum;//新增，项目经理证件号码
+
         public Jscin_SGXK_ProjectInfo()
         {
             RowGuid = String.Empty;
@@ -68,7 +73,7 @@ namespace WxsjzxTimerService.model
             JHJunGongDate = String.Empty;
             Longitude = String.Empty;
             Latitude = String.Empty;
-            CodeNum = String.Empty;
+            //CodeNum = String.Empty;
             LXXiangMuCode = String.Empty;
             HeZhunDep = String.Empty;
             HeZhunNum = String.Empty;
@@ -99,6 +104,9 @@ namespace WxsjzxTimerService.model
             FZREmail = String.Empty; ;
             AddUserGuid = String.Empty;
             XiangMuBeiAnNum = String.Empty;
+
+            JianSheGuoMo = String.Empty;
+            IdendityNum = String.Empty;
         }
     }
 }
