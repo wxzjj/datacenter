@@ -5801,6 +5801,10 @@ namespace WxjzgcjczyTimerService
                                 #endregion
 
                                 dt_SaveDataLog.Rows.Add(row_SaveDataLog);
+
+
+                                #region 人员执业资格
+
                                 string ryzclbNo = String.Empty, ryzclb = String.Empty, ryzyzglxID = String.Empty, ryzyzglx = String.Empty;
                                 string ryzslxID = String.Empty, ryzslx = String.Empty, zyzgdjID = String.Empty, zyzgdj = String.Empty;
 
@@ -6012,7 +6016,6 @@ namespace WxjzgcjczyTimerService
                                         break;
                                 }
 
-                                #region 人员执业资格
 
                                 DataTable dt_ryzyzg = dataService.Get_uepp_Ryzyzg(outConsInfo.IDCardNo);
                                 rowIndex = -1;
@@ -6096,6 +6099,55 @@ namespace WxjzgcjczyTimerService
                                     row["xgrqsj"] = string.IsNullOrEmpty(outConsInfo.ValidDate) ? DateTime.Now.ToString("yyyy-MM-dd") : outConsInfo.ValidDate;
                                     dataService.Submit_uepp_Ryzymx(dt_ryzymx);
                                 }
+                                #endregion
+
+                                #region 人员证书基本信息
+                                DataTable dt_ryzs = dataService.Get_uepp_Ryzs(outConsInfo.IDCardNo);
+                                rowIndex = -1;
+                                for (int i = 0; i < dt_ryzs.Rows.Count; i++)
+                                {
+                                    if (dt_ryzs.Rows[i]["ryzyzglxid"].ToString2() == ryzyzglxID)
+                                    {
+                                        rowIndex = i;
+                                        break;
+                                    }
+                                }
+                                if (rowIndex < 0)
+                                {
+                                    row = dt_ryzs.NewRow();
+                                    dt_ryzs.Rows.Add(row);
+                                    row["zsjlId"] = dataService.Get_uepp_RyzsNewID();
+                                    row["ryID"] = outConsInfo.IDCardNo;
+                                    row["ryzyzglxID"] = ryzyzglxID;
+                                    row["ryzyzglx"] = ryzyzglx;
+                                    row["ryzslxID"] = ryzslxID;
+                                    row["ryzslx"] = ryzslx;
+                                }
+                                else
+                                {
+                                    row = dt_ryzs.Rows[rowIndex];
+                                }
+                                row["sfzzz"] = 1;
+                                if (!string.IsNullOrEmpty(outConsInfo.IssueDate))
+                                {
+                                    row["fzrq"] = outConsInfo.IssueDate;
+                                    row["zsyxqrq"] = outConsInfo.IssueDate;
+                                }
+                                if (!string.IsNullOrEmpty(outConsInfo.ValidDate))
+                                    row["zsyxzrq"] = outConsInfo.ValidDate;
+
+                                row["zsbh"] = outConsInfo.RegNo;
+                                row["Status"] = outConsInfo.Status;
+                                row["StampNo"] = outConsInfo.RegNo;
+                                row["RegNo"] = outConsInfo.RegNo;
+
+                                row["DataState"] = 0;
+                                row["tag"] = tag;
+                                row["xgr"] = "定时服务";
+                                row["xgrqsj"] = DateTime.Now;
+                                row["UpdateTime"] = DateTime.Now;
+                                dataService.Submit_uepp_Ryzs(dt_ryzs);
+
                                 #endregion
 
                                 #region 企业与人员及其执业资格对应关系
