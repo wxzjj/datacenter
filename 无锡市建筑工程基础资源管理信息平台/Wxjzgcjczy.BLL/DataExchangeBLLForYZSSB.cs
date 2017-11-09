@@ -259,6 +259,9 @@ namespace Wxjzgcjczy.BLL
                         {
 
                         }
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = ex.Message;
+                        return result;
                     }
 
                     result.code = ProcessResult.数据保存成功;
@@ -279,7 +282,6 @@ namespace Wxjzgcjczy.BLL
         }
 
         #endregion
-
 
         #region 推送安监通知书
         /// <summary>
@@ -425,6 +427,9 @@ namespace Wxjzgcjczy.BLL
                         {
 
                         }
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = ex.Message;
+                        return result;
                     }
 
                     result.code = ProcessResult.数据保存成功;
@@ -563,6 +568,9 @@ namespace Wxjzgcjczy.BLL
                         {
 
                         }
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = ex.Message;
+                        return result;
                     }
 
                     result.code = ProcessResult.数据保存成功;
@@ -695,31 +703,41 @@ namespace Wxjzgcjczy.BLL
                         BLLCommon.WriteLog("向省一站式申报平台推送质监申报结果:" + str.ToString() + "\n结果：" + addResultSt);
                         BLLCommon.WriteLog("id" + dataRow["id"].ToString());
                         DataTable dt = DAL.GetTBData_SaveToStLog("Ap_zjsbjg", dataRow["id"].ToString());
-
+                        DataRow logRow = null;
                         if (dt.Rows.Count > 0)
                         {
-                            row = dt.Rows[0];
-                            row["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            row["TableName"] = "Ap_zjsbjg";
+                            logRow = dt.Rows[0];
+                            logRow["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            logRow["TableName"] = "Ap_zjsbjg";
                         }
                         else
                         {
-                            row = dt.NewRow();
-                            row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            row["UpdateDate"] = row["CreateDate"];
-                            row["TableName"] = "Ap_zjsbjg";
-                            row["PKID"] = dataRow["id"];
-                            dt.Rows.Add(row);
+                            logRow = dt.NewRow();
+                            logRow["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            logRow["UpdateDate"] = logRow["CreateDate"];
+                            logRow["TableName"] = "Ap_zjsbjg";
+                            logRow["PKID"] = dataRow["id"];
+                            dt.Rows.Add(logRow);
                         }
                         if (addResultSt != "OK")
                         {
-                            row["OperateState"] = 1;
-                            row["Msg"] = addResultSt;
+                            logRow["OperateState"] = 1;
+                            logRow["Msg"] = addResultSt;
                         }
                         else
                         {
-                            row["OperateState"] = 0;
-                            row["Msg"] = "上传成功";
+                            //跟新质监申报结果审批状态
+                            if (row["success"].ToString().Equals("Yes"))
+                            {
+                                updateSBStatus(row["uuid"].ToString2(), 2);
+                            }
+                            else
+                            {
+                                updateSBStatus(row["uuid"].ToString2(), 1);
+                            }
+
+                            logRow["OperateState"] = 0;
+                            logRow["Msg"] = "上传成功";
                         }
                         if (dt.Rows.Count > 0)
                         {
@@ -737,6 +755,9 @@ namespace Wxjzgcjczy.BLL
                         {
 
                         }
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = ex.Message;
+                        return result;
                     }
 
                     result.code = ProcessResult.数据保存成功;
@@ -757,7 +778,6 @@ namespace Wxjzgcjczy.BLL
         }
 
         #endregion
-
 
         #region 推送质监通知书
         /// <summary>
@@ -903,6 +923,9 @@ namespace Wxjzgcjczy.BLL
                         {
 
                         }
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = ex.Message;
+                        return result;
                     }
 
                     result.code = ProcessResult.数据保存成功;
@@ -923,6 +946,17 @@ namespace Wxjzgcjczy.BLL
         }
 
         #endregion
+
+
+        public void updateSBStatus(string uuid , int status)
+        {
+            DataTable dt = DAL.GetAp_zjsbb_single_byuuid(uuid);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                dt.Rows[0]["Status"] = status;
+                DAL.SaveAp_zjsbb(dt);
+            }
+        }
 
     }
 }

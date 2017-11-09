@@ -269,6 +269,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
     FROM dbo.Ap_zjsbb b 
     LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
     WHERE SUBSTRING(convert(VARCHAR(30), b.updateDate, 120), 1, 10)=@date
+    AND Status != 1
     AND countryCode in (" + AntiSqlInjection.ParameterizeInClause(countryCodes, "@para", ref sp) + ")";
 
             sp.Add("@date", date);
@@ -282,6 +283,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
             string sql = @"SELECT * FROM dbo.Ap_zjsbb b 
                             WHERE SUBSTRING(convert(VARCHAR(30), updateDate, 120), 1, 10)=@date
+                            AND Status != 1
                             AND UpdateUser in (" + AntiSqlInjection.ParameterizeInClause(deptCode, "@para", ref sp) + ")";
 
             sp.Add("@date", date);
@@ -324,6 +326,22 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sp.Add("@uuid", uuid);
             return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_zjsbb");
 
+        }
+
+        public DataTable GetAp_zjsbb_single_byuuid(string uuid)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT  * FROM dbo.Ap_zjsbb b WHERE b.uuid=@uuid";
+            sp.Add("@uuid", uuid);
+            return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_zjsbb");
+
+        }
+
+        public bool SaveAp_zjsbb(DataTable dt)
+        {
+            string sql = "select *  from Ap_zjsbb where 1=2";
+            return DB.Update(sql, null, dt);
         }
 
         public DataTable GetAp_zjsbb_ht(string uuid)
