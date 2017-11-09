@@ -89,6 +89,8 @@ left join uepp_ryzs d on c.ryid=d.ryid and d.DataState<>-1 and b.ryzyzglxID=d.ry
 ) ryxx where 1=1 and ";
              */
 
+            //and d.zsyxzrq>GETDATE() 20171109 从SQL移除
+
             string sql = @"select 
 ROW_NUMBER() over(order by ryid,zsbh) as rowno, 
 qymc,qyid,ryid,xm,zjhm,lxdh,ryzyzglxid,ryzyzglx,zsjlId,ryzslxid,ryzslx,zsbh,zsyxqrq,zsyxzrq,zsmx from(
@@ -98,7 +100,7 @@ from uepp_qyjbxx a
 inner join UEPP_QyRy b on a.qyid=b.qyid and b.DataState<>-1
 inner join uepp_ryjbxx c on b.ryid=c.ryid and c.DataState<>-1
 left join uepp_ryzs d on c.ryid=d.ryid and d.DataState<>-1 and b.ryzyzglxID=d.ryzyzglxID  
-where d.zsyxzrq>GETDATE()
+where 1=1
 and a.qyID=@qyID
 ) ryxx where 1=1 and ";
 

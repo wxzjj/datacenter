@@ -231,17 +231,18 @@
                 { display: '身份证号', name: 'zjhm', align: 'center', type: "text", width: "16%" },
 //                { display: '职称级别', name: 'zcjb', align: 'center', type: 'text', width: "8%" },
              
-                { display: '执业资格类型', name: 'ryzyzglx', align: 'center', type: 'text', width: "11%" },
+                { display: '执业资格类型', name: 'ryzyzglx', align: 'center', type: 'text', width: "8%" },
                 { display: '证书编号', name: 'zsbh', align: 'center', type: 'text', width: "14%" },
-                { display: '单位名称', name: 'qymc', align: 'left', type: "text", width: "26%",
+                { display: '单位名称', name: 'qymc', align: 'left', type: "text", width: "25%",
                     render: function(item) {
                         if (item.qymc != null && item.qymc != "") {
                             return "<a target='_blank' href='../Szqy/QyxxToolBar.aspx?qyid=" + item.qyid + "' style='color:#000066;text-decoration: none;' >" + item.qymc + "</a>";
                         }
                     }
                 },
-                { display: '属地', name: 'county', align: 'center', type: 'text', width: "9%" },
-                   { display: '联系电话', name: 'lxdh', align: 'center', type: 'text', width: "11%" }
+                { display: '属地', name: 'county', align: 'center', type: 'text', width: "8%" },
+                   { display: '联系电话', name: 'lxdh', align: 'center', type: 'text', width: "9%" },
+                   { display: '证书有效止日期', name: 'zsyxzrq', align: 'center', type: 'text', width: "8%" }
 //                { display: '是否安监实名认证', name: 'sfsmrz', align: 'center', type: 'text', width: "9%" }
 
 //                { display: '上报状态', name: 'SbState', align: 'center', type: 'text', width: "7%" }
