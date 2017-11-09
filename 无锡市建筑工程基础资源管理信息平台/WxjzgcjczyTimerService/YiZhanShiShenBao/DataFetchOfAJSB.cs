@@ -898,6 +898,17 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                 if (dt_Ap_zjsbb != null && dt_Ap_zjsbb.Rows.Count > 0)
                 {
                     toSaveRow = dt_Ap_zjsbb.Rows[0];
+                    //Public.WriteLog("====" + toSaveRow["uuid"] + "|" +  toSaveRow["Status"]);
+
+                    int cmpFlag = DateTime.Compare(item["updateDate"].ToDateTime() , toSaveRow["updateDate"].ToDateTime());
+                    //Public.WriteLog("====" + toSaveRow["Status"] + "|cmpFlag:" + cmpFlag);
+
+                    if ((toSaveRow["Status"] != null && toSaveRow["Status"].ToInt32() != 0) && cmpFlag > 0)
+                    {
+                        //重新提交,审批状态清零
+                        toSaveRow["Status"] = 0;
+                    }
+
                     DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid" });
 
                 }
@@ -905,6 +916,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                 {
                     toSaveRow = dt_Ap_zjsbb.NewRow();
                     DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                    toSaveRow["Status"] = 0;
                     dt_Ap_zjsbb.Rows.Add(toSaveRow);
                 }
                 //只有申报表有UpdateTime跟UpdateUser

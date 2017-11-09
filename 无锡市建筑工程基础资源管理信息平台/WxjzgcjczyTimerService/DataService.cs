@@ -188,6 +188,20 @@ namespace WxsjzxTimerService
             return DB.ExeSqlForDataTable(sql, null, "dt");
         }
 
+        public DataTable Get_tbXzqdmDic_AllCityExceptWuxi()
+        {
+            string sql = " select Code,CodeInfo from tbXzqdmDicNew where parentCode='320000' and Code !='320200'";
+            return DB.ExeSqlForDataTable(sql, null, "dt");
+        }
+
+        public DataTable Get_tbXzqdmDic_Country(string cityCode)
+        {
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@cityCode", cityCode);
+            string sql = " select Code,CodeInfo from tbXzqdmDicNew where parentCode=@cityCode  ";
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         public DataTable Get_uepp_qycsyw_kcsj(string qyID)
         {
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
