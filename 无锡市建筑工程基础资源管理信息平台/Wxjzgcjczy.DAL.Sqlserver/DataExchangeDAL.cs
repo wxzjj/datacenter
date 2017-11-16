@@ -1218,6 +1218,12 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
             return DB.Update(sql, null, dt);
         }
 
+        public bool SaveJsdw(DataTable dt)
+        {
+            string sql = "select * from UEPP_Jsdw where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
         #endregion
 
 
@@ -1503,7 +1509,34 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
 
         #endregion
 
+        #region 政务服务网相关
+        /// <summary>
+        /// 获取建设单位信息
+        /// </summary>
+        /// <param name="jsdwID"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_jsdw(string jsdwID)
+        {
+            string sql = "";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            if (jsdwID.Length == 9)
+            {
+                sql = @"select top 1 * from uepp_jsdw  where jsdwID=@jsdwID or substring(jsdwID,1,8)+substring(jsdwID,10,1)=@jsdwID or (substring(jsdwID,9,9))=@jsdwID order by len(jsdwID) desc ";
+            }
+            else
+                if (jsdwID.Length == 10)
+                {
+                    sql = @"select top 1 * from uepp_jsdw  where jsdwID=@jsdwID or substring(jsdwID,1,8)+'-'+substring(jsdwID,9,1)=@jsdwID or substring(jsdwID,9,8)+'-'+substring(jsdwID,17,1) =@jsdwID  order by len(jsdwID) desc  ";
+                }
+                else
+                {
+                    sql = @"select top 1  * from uepp_jsdw  where jsdwID=@jsdwID  order by len(jsdwID) desc  ";
+                }
 
+            sp.Add("@jsdwID", jsdwID);
+            return DB.ExeSqlForDataTable(sql, sp, "uepp_jsdw");
+        }
+        #endregion
 
         /// <summary>
         /// 根据apiFlow获取Api信息
