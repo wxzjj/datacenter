@@ -5310,11 +5310,11 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 WebCommon.WriteLog("\r\nSaveJsdwxx传入数据：" + ",DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
                 if (dt_user.Rows[0]["Has_platform_write"].ToString2() == "0")
                 {
-                            result.code = ProcessResult.保存失败和失败原因;
-                            result.message = "该用户不允许保存SaveJsdwxx表数据！";
-                            return result.ResultXmlMessage;
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存SaveJsdwxx表数据！";
+                    return result.ResultXmlMessage;
                  }
-                result = BLL.SaveTBData_TBProjectInfo(user, dt_Data);
+                result = BLL.SaveJsdw(user, dt_Data);
                 
             }
             catch (Exception ex)
@@ -5326,6 +5326,67 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             return result.ResultXmlMessage;
 
         }
+        [WebMethod]
+        public string SaveQyjbxx(string user, string password, string operate, string xmlData)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    //return result.ResultXmlMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    //return result.ResultXmlMessage;
+                }
+
+                if (string.IsNullOrEmpty(xmlData))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    //return result.ResultXmlMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultXmlMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\nSaveJsdwxx传入数据：" + ",DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+                if (dt_user.Rows[0]["Has_platform_write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存SaveJsdwxx表数据！";
+                    return result.ResultXmlMessage;
+                }
+
+                result = BLL.SaveQyjbxx(user,operate,dt_Data);
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultXmlMessage;
+
+        }
+        
+
         #endregion
 
 
