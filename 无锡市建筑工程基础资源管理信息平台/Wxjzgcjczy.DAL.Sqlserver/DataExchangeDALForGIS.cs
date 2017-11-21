@@ -356,7 +356,57 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
         #endregion
 
+        #region 保存项目位置相关信息
+        public int SaveProjectPosition(DataRow row)
+        {
+
+            SqlParameterCollection paramCol = DB.CreateSqlParameterCollection();
+
+            paramCol.Add("@prjNum", row["PrjNum"].ToString2());
+            paramCol.Add("@wd", row["Wd"].ToString2());
+            paramCol.Add("@jd", row["Jd"].ToString2());
+
+            int effects = this.UpdateProjectPosition(paramCol);
+            if (effects == 0)
+            {
+                Guid id = Guid.NewGuid();
+                paramCol.Add("@id", id);
+                effects = this.InsertProjectPosition(paramCol);
+            }
+
+            return effects;
+        }
+
+        public int UpdateProjectPosition(SqlParameterCollection paramCol)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" update TBProjectInfoDoc");
+            sb.Append(" set wd=@wd,jd=@jd,");
+            sb.Append(" UpdateDate=SYSDATETIME()");
+            sb.Append(" where prjNum=@prjNum");
+
+            return DB.ExecuteNonQuerySql(sb.ToString(), paramCol);
+        }
+
+        public int InsertProjectPosition(SqlParameterCollection paramCol)
+        {
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" insert into TBProjectInfoDoc(PKID, prjNum, ");
+            sb.Append(" wd, jd,");
+            sb.Append(" CreateDate, UpdateDate)");
+            sb.Append(" values(@id, @prjNum, ");
+            sb.Append(" @wd, @jd,");
+            sb.Append(" SYSDATETIME(), SYSDATETIME())");
+
+            return DB.ExecuteNonQuerySql(sb.ToString(), paramCol);
+        }
+
+        #endregion
+
         #region 保存项目档案相关信息
+
+
 
         public int SaveProjectDoc(DataRow row)
         {

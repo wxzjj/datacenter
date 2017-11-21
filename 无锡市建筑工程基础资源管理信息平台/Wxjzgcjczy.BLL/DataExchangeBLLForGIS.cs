@@ -142,6 +142,31 @@ namespace Wxjzgcjczy.BLL
         }
 
         /// <summary>
+        /// 接收项目位置相关信息
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public ProcessResultData saveProjectPositionInfo(DataRow row)
+        {
+            ProcessResultData result = new ProcessResultData();
+
+            int effects = DAL.SaveProjectPosition(row);
+
+            if (effects > 0)
+            {
+                result.code = ProcessResult.数据保存成功;
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+            }
+
+            return result;
+        }
+
+        
+
+        /// <summary>
         /// 接收单体项目档案相关信息
         /// </summary>
         /// <param name="row"></param>
