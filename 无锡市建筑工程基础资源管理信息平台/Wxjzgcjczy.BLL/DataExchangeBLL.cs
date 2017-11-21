@@ -3292,6 +3292,158 @@ namespace Wxjzgcjczy.BLL
             return result;
         }
 
+        public ProcessResultData SaveQyjbxx(string user, string operate, DataTable dt_Data )
+        {
+            ProcessResultData result = new ProcessResultData();
+            string msg = String.Empty;
+            string[] fields = new string[] { "qyID", "qymc", "fddbr" };
+
+            DataRow item = dt_Data.Rows[0];
+            List<string> novalidates = new List<string>();
+            novalidates.Add(String.Empty);
+            novalidates.Add(" ");
+            novalidates.Add("无");
+            novalidates.Add("无数据");
+            novalidates.Add("/");
+
+            if (BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = msg + "不能为空！";
+                return result;
+            }
+
+            if (!Validator.IsUnifiedSocialCreditCodeOrOrgCode(item["qyID"].ToString2()))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "qyID不合法,格式不正确，应该为18位统一社会信用代码或者10位组织机构代码“XXXXXXXX-X”格式！";
+                return result;
+            }
+            string qyID = item["qyID"].ToString();
+
+            if ("save".Equals(operate))
+            {
+                //保存企业基本信息接口：建设单位、非建设单位分开保存在不同的表里
+                if (item["sfjsdw"].ToInt32() == 1)
+                {
+                    //建设单位
+                    DataTable dt_uepp_jsdw = DAL.Get_uepp_jsdw(qyID);
+                    DataRow row = null;
+                    if (dt_uepp_jsdw.Rows.Count > 0)
+                    {
+                        row = dt_uepp_jsdw.Rows[0];
+                        row["jsdw"] = item["qymc"].ToString();
+                        row["fddbr"] = item["fddbr"].ToString();
+                        row["fddbr_ryid"] = item["fddbrID"].ToString();
+                    }
+                    else
+                    {
+                        row = dt_uepp_jsdw.NewRow();
+                        row["jsdwID"] = item["qyID"].ToString();
+                        row["jsdw"] = item["qymc"].ToString();
+                        row["fddbr"] = item["fddbr"].ToString();
+                        row["fddbr_ryid"] = item["fddbrID"].ToString();
+
+                        row["dwflid"] = 3;//单位分类ID
+                        row["dwfl"] = "其它";//单位分类ID
+
+                        row["xgrqsj"] = DateTime.Now;
+                        dt_uepp_jsdw.Rows.Add(row);
+                    }
+                    row["xgr"] = user;
+                    row["tag"] = Tag.住建局政务服务网;
+
+                    try
+                    {
+                        if (!DAL.SaveJsdw(dt_uepp_jsdw))
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "数据保存失败!";
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = "数据保存失败:" + e.Message;
+                        BLLCommon.WriteLog("SaveJsdw：" + e.Message);
+                    }
+
+                }
+                else
+                {
+                    //非建设单位
+                    DataTable dt_qy = DAL.Get_uepp_qyjbxx(qyID);
+                    DataRow row = null;
+                    if (dt_qy.Rows.Count > 0)
+                    {
+                        row = dt_qy.Rows[0];
+                        row["qymc"] = item["qymc"].ToString();
+                        row["fddbr"] = item["fddbr"].ToString();
+                        row["fddbr_ryid"] = item["fddbrID"].ToString();
+                    }
+                    else
+                    {
+                        row = dt_qy.NewRow();
+                        row["qyID"] = item["qyID"].ToString(); 
+                        row["qymc"] = item["qymc"].ToString();
+                        row["fddbr"] = item["fddbr"].ToString();
+                        row["fddbr_ryid"] = item["fddbrID"].ToString();
+                        if (item["qyID"].ToString().Length == 18)
+                        {
+                            row["tyshxydm"] = item["qyID"].ToString();
+                        }
+                        row["xgrqsj"] = DateTime.Now;
+                        row["xgrqsj"] = DateTime.Now;
+                        
+                        dt_qy.Rows.Add(row);
+                    }
+                    row["xgr"] = user;
+                    row["tag"] = Tag.住建局政务服务网;
+
+                    try
+                    {
+                        if (!DAL.SaveQyjbxx(dt_qy))
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "数据保存失败!";
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = "数据保存失败:" + e.Message;
+                        BLLCommon.WriteLog("SaveJsdw：" + e.Message);
+                    }
+                }
+            }
+            else
+            {
+                //校验企业是否存在接口
+                if (item["sfjsdw"].ToInt32() == 1)
+                {
+                    DataTable dt_uepp_jsdw = DAL.Get_uepp_jsdw(qyID);
+                    if (dt_uepp_jsdw.Rows.Count > 0)
+                    {
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = "企业重复";
+                    }
+                }
+                else
+                {
+                    DataTable dt_qy = DAL.Get_uepp_qyjbxx(qyID);
+                    if (dt_qy.Rows.Count > 0)
+                    {
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = "企业重复";
+                    }
+                }
+
+            }
+
+            BLLCommon.WriteLog("SaveJsdw结果：" + result.ResultMessage);
+            return result;
+        }
+
         #endregion
 
         public DataTable Get_API_zb_apiFlow(string apiFlow)

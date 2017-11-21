@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLCommon.cs" />
+    <Compile Include="DataExchangeBLLForGIS.cs" />
     <Compile Include="DataExchangeBLLForYZSSB.cs" />
     <Compile Include="DataExchangeBLL.cs" />
     <Compile Include="EnumerableExtension.cs" />
