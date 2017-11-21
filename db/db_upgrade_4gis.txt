@@ -11,13 +11,32 @@ GO
 SET ANSI_PADDING ON
 GO
 
+CREATE TABLE [dbo].[TBProjectInfoDoc](
+	[PKID] [varchar](50) NOT NULL,
+	[PrjNum] [varchar](25) NOT NULL,
+	[PrjName] [varchar](100) NOT NULL,
+	[PrjAddress] [varchar](100) NOT NULL,
+	[Lxpzwh] [varchar](100) NOT NULL,
+	[Ydghxkzh] [varchar](100) NOT NULL,
+	[Ghxkzh] [varchar](100) NOT NULL,
+	[Gytdsyzh] [varchar](100) NOT NULL,
+	[CreateDate] [date] NOT NULL,
+	[UpdateDate] [date] NOT NULL
+)
+
 CREATE TABLE [dbo].[xm_gcdjb_dtxm_doc](
 	[PKID] [varchar](50) NOT NULL,
 	[fxbm] [varchar](25) NOT NULL,
 	[docNum] [varchar](100) NOT NULL,
+	[gd] [varchar](25) NOT NULL,
+	[dscs] [varchar](25) NOT NULL,
+	[dxcs] [varchar](25) NOT NULL,
+	[jglx] [varchar](25) NOT NULL,
+	[jclx] [varchar](25) NOT NULL,
+	[jzmj] [varchar](25) NOT NULL,
+	[ydmj] [varchar](25) NOT NULL,
 	[CreateDate] [date] NOT NULL,
-	[UpdateDate] [date] NOT NULL,
-	[sbdqbm] [varchar](6) NULL
+	[UpdateDate] [date] NOT NULL
 )
 
 GO
