@@ -117,18 +117,40 @@ namespace Wxjzgcjczy.BLL
 
 
         #region 接收档案相关信息
+
         /// <summary>
-        /// 接收档案相关信息
+        /// 接收项目档案相关信息
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="password"></param>
-        /// <param name="xmlData"></param>
+        /// <param name="row"></param>
         /// <returns></returns>
-        public ProcessResultData saveProjectDocInfo(string fxbm, string docNum)
+        public ProcessResultData saveProjectDocInfo(DataRow row)
         {
             ProcessResultData result = new ProcessResultData();
 
-            int effects = DAL.SaveProjectDoc(fxbm, docNum);
+            int effects = DAL.SaveProjectDoc(row);
+
+            if (effects > 0)
+            {
+                result.code = ProcessResult.数据保存成功;
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 接收单体项目档案相关信息
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public ProcessResultData saveSubProjectDocInfo(DataRow row)
+        {
+            ProcessResultData result = new ProcessResultData();
+
+            int effects = DAL.SaveSubProjectDoc(row);
 
             if (effects > 0)
             {

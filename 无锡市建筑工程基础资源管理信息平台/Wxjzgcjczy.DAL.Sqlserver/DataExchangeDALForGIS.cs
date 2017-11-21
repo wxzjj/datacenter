@@ -358,41 +358,122 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
         #region 保存项目档案相关信息
 
-        public int SaveProjectDoc(string fxbm, string docNum)
+        public int SaveProjectDoc(DataRow row)
         {
-            int effects = this.UpdateProjectDoc(fxbm, docNum);
+
+            SqlParameterCollection paramCol = DB.CreateSqlParameterCollection();
+
+            paramCol.Add("@prjNum", row["PrjNum"].ToString2());
+            paramCol.Add("@prjName", row["PrjName"].ToString2());
+            paramCol.Add("@prjAddress", row["PrjAddress"].ToString2());
+            paramCol.Add("@lxpzwh", row["Lxpzwh"].ToString2());
+            paramCol.Add("@ydghxkzh", row["Ydghxkzh"].ToString2());
+            paramCol.Add("@ghxkzh", row["Ghxkzh"].ToString2());
+            paramCol.Add("@gytdsyzh", row["Gytdsyzh"].ToString2());
+
+            int effects = this.UpdateProjectDoc(paramCol);
             if (effects == 0)
             {
-                effects = this.InsertProjectDoc(fxbm, docNum);
+                Guid id = Guid.NewGuid();
+                paramCol.Add("@id", id);
+                effects = this.InsertProjectDoc(paramCol);
             }
 
             return effects;
         }
 
-        public int UpdateProjectDoc(string fxbm, string docNum)
+        public int UpdateProjectDoc(SqlParameterCollection paramCol)
         {
-            string sql = "update xm_gcdjb_dtxm_doc set docNum=@docNum where fxbm=@fxbm";
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" update TBProjectInfoDoc");
+            sb.Append(" set prjName=@prjName,prjAddress=@prjAddress,lxpzwh=@lxpzwh,");
+            sb.Append(" ydghxkzh=@ydghxkzh,ghxkzh=@ghxkzh,gytdsyzh=@gytdsyzh,");
+            sb.Append(" UpdateDate=SYSDATETIME()");
+            sb.Append(" where prjNum=@prjNum");
 
-            SqlParameterCollection paramCol = DB.CreateSqlParameterCollection();
-
-            paramCol.Add("@fxbm", fxbm);
-            paramCol.Add("@docNum", docNum);
-
-            return DB.ExecuteNonQuerySql(sql, paramCol);
+            return DB.ExecuteNonQuerySql(sb.ToString(), paramCol);
         }
 
-        public int InsertProjectDoc(string fxbm, string docNum)
+        public int InsertProjectDoc(SqlParameterCollection paramCol)
         {
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" insert into xm_gcdjb_dtxm_doc(PKID, fxbm, docNum, CreateDate, UpdateDate)");
-            sb.Append(" values(@id, @fxbm, @docNum, SYSDATETIME(), SYSDATETIME())");
+            sb.Append(" insert into TBProjectInfoDoc(PKID, prjNum, ");
+            sb.Append(" prjName, prjAddress, lxpzwh, ydghxkzh, ghxkzh, gytdsyzh,");
+            sb.Append(" CreateDate, UpdateDate)");
+            sb.Append(" values(@id, @prjNum, ");
+            sb.Append(" @prjName, @prjAddress, @lxpzwh, @ydghxkzh, @ghxkzh, @gytdsyzh,");
+            sb.Append(" SYSDATETIME(), SYSDATETIME())");
+
+            return DB.ExecuteNonQuerySql(sb.ToString(), paramCol);
+        }
+
+        public int SaveSubProjectDoc(DataRow row)
+        {
 
             SqlParameterCollection paramCol = DB.CreateSqlParameterCollection();
-            Guid id = Guid.NewGuid();
-            paramCol.Add("@id", id);
+
+            string fxbm = row["Fxbm"].ToString2();
+            string docNum = row["DocNum"].ToString2();
+            string gd = row["Gd"].ToString2();
+            string dscs = row["Dscs"].ToString2();
+            string dxcs = row["Dxcs"].ToString2();
+            string jclx = row["Jclx"].ToString2();
+            string jzmj = row["Jzmj"].ToString2();
+            string ydmj = row["Ydmj"].ToString2();
+            string jglx = row["Jglx"].ToString2();
+
             paramCol.Add("@fxbm", fxbm);
             paramCol.Add("@docNum", docNum);
+            paramCol.Add("@gd", gd);
+            paramCol.Add("@dscs", dscs);
+            paramCol.Add("@dxcs", dxcs);
+            paramCol.Add("@jclx", jclx);
+            paramCol.Add("@jzmj", jzmj);
+            paramCol.Add("@ydmj", ydmj);
+            paramCol.Add("@jglx", jglx);
+
+            int effects = this.UpdateSubProjectDoc(paramCol);
+            if (effects == 0)
+            {
+                Guid id = Guid.NewGuid();
+                paramCol.Add("@id", id);
+                effects = this.InsertSubProjectDoc(paramCol);
+            }
+
+            return effects;
+        }
+
+        public int UpdateSubProjectDoc(SqlParameterCollection paramCol)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" update xm_gcdjb_dtxm_doc");
+            sb.Append(" set docNum=@docNum,");
+            sb.Append(" gd=@gd,");
+            sb.Append(" dscs=@dscs,");
+            sb.Append(" dxcs=@dxcs,");
+            sb.Append(" jclx=@jclx,");
+            sb.Append(" jzmj=@jzmj,");
+            sb.Append(" ydmj=@ydmj,");
+            sb.Append(" jglx=@jglx,");
+            sb.Append(" UpdateDate=SYSDATETIME()");
+            sb.Append(" where fxbm=@fxbm");
+
+            return DB.ExecuteNonQuerySql(sb.ToString(), paramCol);
+        }
+
+        public int InsertSubProjectDoc(SqlParameterCollection paramCol)
+        {
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" insert into xm_gcdjb_dtxm_doc(PKID, fxbm, docNum, ");
+            sb.Append(" gd, dscs,dxcs, jclx,");
+            sb.Append(" jzmj, ydmj,jglx,");
+            sb.Append(" CreateDate, UpdateDate)");
+            sb.Append(" values(@id, @fxbm, @docNum,");
+            sb.Append(" @gd, @dscs, @dxcs, @jclx,");
+            sb.Append(" @jzmj, @ydmj, @jglx,");
+            sb.Append(" SYSDATETIME(), SYSDATETIME())");
 
             return DB.ExecuteNonQuerySql(sb.ToString(), paramCol);
         }
