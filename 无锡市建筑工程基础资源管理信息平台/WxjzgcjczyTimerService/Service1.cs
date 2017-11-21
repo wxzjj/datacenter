@@ -534,11 +534,12 @@ namespace WxjzgcjczyTimerService
 
                 string userName_htba = "320200", password_htba = "we&gjh45H";
 
-                DataTable dt_TBProjectInfo_all = dataService.GetTBData_AllTBProjectInfo();
-
-                //List<string> list_htlb = new List<string>() { "100", "200", "301", "302", "304", "400" };
-
+                //DataTable dt_TBProjectInfo_all = dataService.GetTBData_AllTBProjectInfo();
                 DataTable dt_DataJkDataDetail2 = dataService.GetSchema_DataJkDataDetail();
+
+                //DateTime beginDate = DateTime.Today.AddDays(-730);
+                DateTime beginDate = DateTime.Today.AddDays(-5);
+                DateTime endDate = DateTime.Today;
 
 
                 //往数据监控日志表项添加一条记录
@@ -547,8 +548,8 @@ namespace WxjzgcjczyTimerService
 
                 row_DataJkDataDetail2["ID"] = ++id;
                 row_DataJkDataDetail2["DataJkLogID"] = row_DataJkLog["ID"];
-                row_DataJkDataDetail2["tableName"] = "TBContractRecordManage";
-                row_DataJkDataDetail2["MethodName"] = "TBContractRecordManage";
+                row_DataJkDataDetail2["tableName"] = "TBContractRecordManageTime";
+                row_DataJkDataDetail2["MethodName"] = "TBContractRecordManageTime";
 
                 string msg_htba = "";
                 int allCount = 0, successCount = 0;
@@ -557,13 +558,15 @@ namespace WxjzgcjczyTimerService
                 {
                     DataTable dt_SaveDataLog2 = dataService.GetSchema_SaveDataLog();
 
-                    foreach (DataRow row in dt_TBProjectInfo_all.Rows)
+                    //Public.WriteLog("all:" + dt_TBProjectInfo_all.Rows.Count);
+
+                    string xmlData = String.Empty;
+
+                    #region 一次服务调用
+
+                    try
                     {
-                        string xmlData = String.Empty;
-
-                        #region 一次服务调用
-
-                        xmlData = client.TBContractRecordManage(row["PrjNum"].ToString(), "", userName_htba, password_htba);
+                        xmlData = client.TBContractRecordManageTime("", beginDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"), userName_htba, password_htba);
 
                         is_OK = 1;
                         xmlData = xmlData.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<ResultSet>", "").Replace("</ResultSet>", "");
@@ -580,113 +583,118 @@ namespace WxjzgcjczyTimerService
                             throw new Exception("解析xml出现错误：" + message_htba);
 
                         }
-                        if (dt == null || dt.Rows.Count == 0)
+                        if (dt != null || dt.Rows.Count > 0)
                         {
-                            continue;
-                        }
-
-                        foreach (DataRow row2 in dt.Rows)
-                        {
-                            //if (!list_htlb.Exists(p => p.Equals(row2["ContractTypeNum"].ToString2(), StringComparison.CurrentCultureIgnoreCase)))
-                            //{
-                            //    continue;
-                            //}
-                            allCount++;
-
-                            //具体的数据记录状态记录日志
-                            DataRow row_SaveDataLog2 = dt_SaveDataLog2.NewRow();
-                            dt_SaveDataLog2.Rows.Add(row_SaveDataLog2);
-
-                            row_SaveDataLog2["DataJkDataDetailID"] = row_DataJkDataDetail2["ID"];
-
-                            row_SaveDataLog2["DataXml"] = xmlHelper.ConvertDataRowToXML(row2);
-                            try
+                            allCount = dt.Rows.Count;
+                            foreach (DataRow row2 in dt.Rows)
                             {
-                                DataTable dt_TBContractRecordManage;
-                                dt_TBContractRecordManage = dataService.GetTBData_TBContractRecordManage(row2["PKID"].ToString());
-                                DataRow row3;
-                                if (dt_TBContractRecordManage.Rows.Count == 0)
+                                //具体的数据记录状态记录日志
+                                DataRow row_SaveDataLog2 = dt_SaveDataLog2.NewRow();
+                                dt_SaveDataLog2.Rows.Add(row_SaveDataLog2);
+
+                                row_SaveDataLog2["DataJkDataDetailID"] = row_DataJkDataDetail2["ID"];
+
+                                row_SaveDataLog2["DataXml"] = xmlHelper.ConvertDataRowToXML(row2);
+                                try
                                 {
-                                    row3 = dt_TBContractRecordManage.NewRow();
-                                    dt_TBContractRecordManage.Rows.Add(row3);
-                                    DataTableHelp.DataRow2DataRow(row2, row3);
-                                }
-                                else
-                                {
-                                    row3 = dt_TBContractRecordManage.Rows[0];
-                                    DataTableHelp.DataRow2DataRow(row2, row3, new List<string>() { "PKID" });
-                                }
-                                string propietorCorpCode = row3["PropietorCorpCode"].ToString2();
-                                //检查建设单位是否存在社会信用代码，若存在，则转化为社会信用代码
-                                if (propietorCorpCode.Length != 18)
-                                {
-                                    string jsdwShxydm = dataService.Get_UEPP_Jsdw_Shxydm(propietorCorpCode);
-                                    if (!string.IsNullOrEmpty(jsdwShxydm))
+                                    DataTable dt_TBContractRecordManage;
+                                    dt_TBContractRecordManage = dataService.GetTBData_TBContractRecordManage(row2["PKID"].ToString());
+                                    DataRow row3;
+                                    if (dt_TBContractRecordManage.Rows.Count == 0)
                                     {
-                                        row3["PropietorCorpCode"] = jsdwShxydm;
+                                        row3 = dt_TBContractRecordManage.NewRow();
+                                        dt_TBContractRecordManage.Rows.Add(row3);
+                                        DataTableHelp.DataRow2DataRow(row2, row3);
+                                        row3["cjrqsj"] = DateTime.Now;
+                                        row3["xgrqsj"] = DateTime.Now;  
+                                    }
+                                    else
+                                    {
+                                        row3 = dt_TBContractRecordManage.Rows[0];
+                                        DataTableHelp.DataRow2DataRow(row2, row3, new List<string>() { "PKID" });
+                                        row3["xgrqsj"] = DateTime.Now;  
+                                    }
+                                    string propietorCorpCode = row3["PropietorCorpCode"].ToString2();
+                                    //检查建设单位是否存在社会信用代码，若存在，则转化为社会信用代码
+                                    if (propietorCorpCode.Length != 18)
+                                    {
+                                        string jsdwShxydm = dataService.Get_UEPP_Jsdw_Shxydm(propietorCorpCode);
+                                        if (!string.IsNullOrEmpty(jsdwShxydm))
+                                        {
+                                            row3["PropietorCorpCode"] = jsdwShxydm;
+                                        }
+                                        else
+                                        {
+                                            row3["PropietorCorpCode"] = propietorCorpCode;
+                                        }
                                     }
                                     else
                                     {
                                         row3["PropietorCorpCode"] = propietorCorpCode;
                                     }
-                                }
-                                else
-                                {
-                                    row3["PropietorCorpCode"] = propietorCorpCode;
-                                }
 
-                                string contractorCorpCode = row3["ContractorCorpCode"].ToString2();
-                                //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
-                                if (contractorCorpCode.Length != 18)
-                                {
-                                    string qyShxydm = dataService.Get_UEPP_Qyjbxx_Shxydm(contractorCorpCode);
-                                    if (!string.IsNullOrEmpty(qyShxydm))
+                                    string contractorCorpCode = row3["ContractorCorpCode"].ToString2();
+                                    //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
+                                    if (contractorCorpCode.Length != 18)
                                     {
-                                        row3["ContractorCorpCode"] = qyShxydm;
+                                        string qyShxydm = dataService.Get_UEPP_Qyjbxx_Shxydm(contractorCorpCode);
+                                        if (!string.IsNullOrEmpty(qyShxydm))
+                                        {
+                                            row3["ContractorCorpCode"] = qyShxydm;
+                                        }
+                                        else
+                                        {
+                                            row3["ContractorCorpCode"] = contractorCorpCode;
+                                        }
                                     }
                                     else
                                     {
                                         row3["ContractorCorpCode"] = contractorCorpCode;
                                     }
-                                }
-                                else
-                                {
-                                    row3["ContractorCorpCode"] = contractorCorpCode;
-                                }
 
-                                row3["PrjNum"] = row["PrjNum"];
-                                row3["Tag"] = Tag.省一体化平台.ToString();
+                                    //row3["PrjNum"] = row2["PrjNum"];
+                                    row3["Tag"] = Tag.省一体化平台.ToString();
+                                    row3["updateUser"] = userName_htba;
 
-                                if (!dataService.Submit_TBContractRecordManage(dt_TBContractRecordManage))
+                                    if (!dataService.Submit_TBContractRecordManage(dt_TBContractRecordManage))
+                                    {
+                                        row_SaveDataLog2["SaveState"] = 0;
+                                        row_SaveDataLog2["Msg"] = "保存TBContractRecordManage数据失败：PKID:" + dt_TBContractRecordManage.Rows[0]["PKID"] + ",RecordNum:" + dt_TBContractRecordManage.Rows[0]["RecordNum"];
+
+                                    }
+                                    else
+                                    {
+                                        row_SaveDataLog2["Msg"] = "";
+                                        row_SaveDataLog2["SaveState"] = 1;
+                                        successCount++;
+                                    }
+                                    row_SaveDataLog2["PKID"] = row3["PKID"];
+
+                                }
+                                catch (Exception ex2)
                                 {
                                     row_SaveDataLog2["SaveState"] = 0;
-                                    row_SaveDataLog2["Msg"] = "保存TBContractRecordManage数据失败：PKID:" + dt_TBContractRecordManage.Rows[0]["PKID"] + ",RecordNum:" + dt_TBContractRecordManage.Rows[0]["RecordNum"];
+                                    row_SaveDataLog2["Msg"] = ex2.Message;
+                                }
 
-                                }
-                                else
-                                {
-                                    row_SaveDataLog2["Msg"] = "";
-                                    row_SaveDataLog2["SaveState"] = 1;
-                                    successCount++;
-                                }
-                                row_SaveDataLog2["PKID"] = row3["PKID"];
+                                row_SaveDataLog2["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                             }
-                            catch (Exception ex2)
-                            {
-                                row_SaveDataLog2["SaveState"] = 0;
-                                row_SaveDataLog2["Msg"] = ex2.Message;
-                            }
-
-                            row_SaveDataLog2["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                         }
 
-
-
-                        #endregion
-
                     }
+                    catch (Exception ex)
+                    {
+                        /**
+                        row_DataJkDataDetail2["IsOk"] = 0;
+                        row_DataJkDataDetail2["allCount"] = allCount;
+                        row_DataJkDataDetail2["successCount"] = successCount;
+                        row_DataJkDataDetail2["ErrorMsg"] = ex.Message;*/
+                        Public.WriteLog("获取:" + beginDate.ToString("yyyy-MM-dd") + "-" + endDate.ToString("yyyy-MM-dd") + "合同备案信息失败:" + ex.Message);
+                    }
+
+                    #endregion
 
                     if (dt_SaveDataLog2.Rows.Count > 0)
                     {
@@ -713,6 +721,8 @@ namespace WxjzgcjczyTimerService
                     row_DataJkDataDetail2["allCount"] = allCount;
                     row_DataJkDataDetail2["successCount"] = successCount;
                     row_DataJkDataDetail2["ErrorMsg"] = ex.Message;
+
+                    Public.WriteLog("out ex:" + ex.Message);
                 }
 
                 if (dt_DataJkDataDetail2.Rows.Count > 0)
@@ -739,6 +749,9 @@ namespace WxjzgcjczyTimerService
                 allCount = 0;
                 successCount = 0;
                 is_OK = 0;
+
+                DateTime jgBeginDate = DateTime.Today.AddDays(-5);
+
                 try
                 {
                     DataTable dt_SaveDataLog3 = dataService.GetSchema_SaveDataLog();
@@ -748,7 +761,7 @@ namespace WxjzgcjczyTimerService
 
                     #region 竣工备案
 
-                    xmlData = client.RetrieveData("TBProjectFinishManage", "", "2016-01-01", DateTime.Now.Date.ToString(), userName_jgba, password_jgba);
+                    xmlData = client.RetrieveData("TBProjectFinishManage", "", jgBeginDate.ToString(), DateTime.Now.Date.ToString(), userName_jgba, password_jgba);
 
                     is_OK = 1;
                     xmlData = xmlData.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<ResultSet>", "").Replace("</ResultSet>", "");
@@ -881,8 +894,8 @@ namespace WxjzgcjczyTimerService
                 #endregion
 
                 DateTime endTime = DateTime.Now;
-                TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
+                TimeSpan span1 = new TimeSpan(beginTime.Hour, beginTime.Minute, beginTime.Second);
+                TimeSpan span2 = new TimeSpan(endTime.Hour, endTime.Minute, endTime.Second);
                 TimeSpan span = span2 - span1;
                 Public.WriteLog(string.Format("结束YourTask_PullDataFromSythpt任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
             }
