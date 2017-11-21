@@ -5245,13 +5245,86 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return result.ResultMessage;
                 }
                 */
-                if(dt_Data != null && dt_Data.Rows.Count > 0)
+                if (dt_Data != null && dt_Data.Rows.Count > 0)
                 {
                     foreach (DataRow row in dt_Data.Rows)
                     {
-                        string fxbm = row["fxbm"].ToString2();
-                        string docNum = row["docNum"].ToString2();
-                        result = BLLGIS.saveProjectDocInfo(fxbm, docNum);
+                        result = BLLGIS.saveProjectDocInfo(row);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+
+        }
+
+        /// <summary>
+        /// 保存单体项目档案信息接口
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="xmlData"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string SaveSubProjectDocInfo(string user, string password, string xmlData)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                DataExchangeBLLForGIS BLLGIS = new DataExchangeBLLForGIS();
+
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(xmlData))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\n传入项目档案数据：" + ",DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+
+                /*
+                if (dt_user.Rows[0]["Has_Xzcf_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存行政处罚数据！";
+                    return result.ResultMessage;
+                }
+                */
+                if (dt_Data != null && dt_Data.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt_Data.Rows)
+                    {
+                        result = BLLGIS.saveSubProjectDocInfo(row);
                     }
                 }
             }
