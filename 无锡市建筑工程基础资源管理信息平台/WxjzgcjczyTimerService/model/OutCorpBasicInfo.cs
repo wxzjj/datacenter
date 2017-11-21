@@ -52,6 +52,14 @@ namespace WxjzgcjczyTimerService.model
 
     }
 
+    public class OutCorpCertInfoBody
+    {
+        [XmlArray("OutCorpCertInfoArray")]
+        [XmlArrayItem("OutCorpCertInfo")]
+        public List<OutCorpCertInfo> certArray = new List<OutCorpCertInfo>();
+
+    }
+
     /// <summary>
     /// 企业资质(TCorpCertQual)
     /// </summary>
@@ -78,6 +86,24 @@ namespace WxjzgcjczyTimerService.model
 
     }
 
+    /// <summary>
+    /// 企业证书(OutCorpCertInfo)
+    /// </summary>
+    [Serializable]
+    public class OutCorpCertInfo
+    {
+        public string CertCode { get; set; }
+        public string CertType { get; set; }
+        public string CorpCode { get; set; }
+        public string OrganID { get; set; }
+        public string IssueOrgan { get; set; }
+        public string IssueLevel { get; set; }
+        public string IssueDate { get; set; }
+        public string ValidDate { get; set; }
+        public string Status { get; set; }
+        public string UpdateDate { get; set; }
+
+    }
 
 }
 

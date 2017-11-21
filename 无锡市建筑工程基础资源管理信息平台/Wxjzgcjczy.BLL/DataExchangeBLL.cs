@@ -937,36 +937,35 @@ namespace Wxjzgcjczy.BLL
             {
                 if (DAL.SaveTBData_TBProjectAddInfo(dt_TBProjectAddInfo))
                 {
+                    BLLCommon.WriteLog("获取了 " + dt_TBProjectAddInfo.Rows.Count + " 条TBProjectAdditionalInfo数据！");
+                    string xmlData = "";
+
+                    DataRow dataRow = dt_TBProjectAddInfo.Rows[0];
+                    dataRow["sbdqbm"] = "320200";//设置上报地区编码为无锡市
+
+                    DataTable dt = DAL.GetTBData_SaveToStLog("TBProjectAdditionalInfo", dataRow["PKID"].ToString());
+                    if (dt.Rows.Count > 0)
+                    {
+                        row = dt.Rows[0];
+                        row["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        row["TableName"] = "TBProjectAdditionalInfo";
+                    }
+                    else
+                    {
+                        row = dt.NewRow();
+                        row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        row["UpdateDate"] = row["CreateDate"];
+                        row["TableName"] = "TBProjectAdditionalInfo";
+                        row["PKID"] = dataRow["PKID"];
+                        dt.Rows.Add(row);
+                    }
                     try
                     {
-                        BLLCommon.WriteLog("获取了 " + dt_TBProjectAddInfo.Rows.Count + " 条TBProjectAdditionalInfo数据！");
-                        string xmlData = ""; 
-                        
-                        DataRow dataRow = dt_TBProjectAddInfo.Rows[0];
-                        dataRow["sbdqbm"] = "320200";//设置上报地区编码为无锡市
-                        
                         //向省一体化平台传送项目登记补充数据
                         xmlData = xmlHelper.ConvertDataRowToXMLWithBase64EncodingIncludeForAddPrj(dataRow, fields);
                         string addResultSt = client.getProjectAdd(dataRow["prjnum"].ToString(), xmlData, userName, password);
                         BLLCommon.WriteLog("向省一体化平台传送项目登记补充数据:" + xmlData + "\n结果：" + addResultSt);
 
-                        DataTable dt = DAL.GetTBData_SaveToStLog("TBProjectAdditionalInfo", dataRow["PKID"].ToString());
-
-                        if (dt.Rows.Count > 0)
-                        {
-                            row = dt.Rows[0];
-                            row["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            row["TableName"] = "TBProjectAdditionalInfo";
-                        }
-                        else
-                        {
-                            row = dt.NewRow();
-                            row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            row["UpdateDate"] = row["CreateDate"];
-                            row["TableName"] = "TBProjectAdditionalInfo";
-                            row["PKID"] = dataRow["PKID"];
-                            dt.Rows.Add(row);
-                        }
                         if (addResultSt != "OK")
                         {
                             row["OperateState"] = 1;
@@ -989,10 +988,7 @@ namespace Wxjzgcjczy.BLL
                             row["OperateState"] = 0;
                             row["Msg"] = "上传成功";
                         }
-                        if (dt.Rows.Count > 0)
-                        {
-                            DAL.SaveTBData_SaveToStLog(dt);
-                        }
+
 
                     }
                     catch (Exception ex)
@@ -1000,10 +996,16 @@ namespace Wxjzgcjczy.BLL
                         try
                         {
                             BLLCommon.WriteLog(ex.Message);
+                            row["OperateState"] = 1;
+                            row["Msg"] = ex.Message;
                         }
-                        catch
+                        catch { }
+                    }
+                    finally
+                    {
+                        if (dt.Rows.Count > 0)
                         {
-
+                            DAL.SaveTBData_SaveToStLog(dt);
                         }
                     }
 
@@ -3205,6 +3207,92 @@ namespace Wxjzgcjczy.BLL
         #endregion
 
 
+        #region 政务服务网相关接口
+        public ProcessResultData SaveJsdw(string user, DataTable dt_Data)
+        {
+            ProcessResultData result = new ProcessResultData();
+            string msg = String.Empty;
+            string[] fields = new string[] { "jsdwID", "jsdw", "zzjgdm"};
+
+            DataRow item = dt_Data.Rows[0];
+            List<string> novalidates = new List<string>();
+            novalidates.Add(String.Empty);
+            novalidates.Add(" ");
+            novalidates.Add("无");
+            novalidates.Add("无数据");
+            novalidates.Add("/");
+
+            if (BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = msg + "不能为空！";
+                return result;
+            }
+
+            if (!Validator.IsUnifiedSocialCreditCodeOrOrgCode(item["jsdwID"].ToString2()))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "jsdwID不合法,格式不正确，应该为“XXXXXXXX-X”格式！";
+                return result;
+            }
+            string jsdwID = item["jsdwID"].ToString();
+            if (jsdwID.Length == 9)
+            {
+                item["jsdwID"] = jsdwID.Substring(0, 8) + "-" + jsdwID.Substring(8, 1);
+            }
+            DataTable dt_uepp_jsdw = DAL.Get_uepp_jsdw(jsdwID);
+            DataRow row = null ;
+            
+            if (dt_uepp_jsdw.Rows.Count > 0)
+            {
+                //从江苏建设公共基础数据平台下行下来的数据不需要更新，原一号通或者现在住建局政府服务网上添加的建设单位才需要更新
+                if(dt_uepp_jsdw.Rows[0]["tag"].ToString2().IndexOf(Tag.江苏建设公共基础数据平台.ToString()) < 0)
+                {
+                    int cmpFlag = DateTime.Compare(dt_uepp_jsdw.Rows[0]["xgrqsj"].ToDateTime() , item["xgrqsj"].ToDateTime());
+                    if(cmpFlag < 0 )
+                    {
+                        row = dt_uepp_jsdw.Rows[0];
+                        DataTableHelp.DataRow2DataRow(item, row, new List<string>() { "jsdwID" });
+                        row["tag"] = Tag.住建局政务服务网;
+                    }
+                }            
+            }
+            else
+            {
+                row = dt_uepp_jsdw.NewRow();
+                DataTableHelp.DataRow2DataRow(item, row);
+                row["jsdwID"] = jsdwID;
+                row["tag"] = Tag.住建局政务服务网;
+                row["dwflid"] = 3;//单位分类ID
+                row["dwfl"] = "其它";//单位分类ID
+                dt_uepp_jsdw.Rows.Add(row);
+            }
+            if (row != null)
+            {
+                row["OperateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                row["xgr"] = "";
+                row["DataState"] = 0;
+                try
+                {
+                    if (!DAL.SaveJsdw(dt_uepp_jsdw))
+                    {
+                        result.code = ProcessResult.保存失败和失败原因;
+                        result.message = "数据保存失败!";
+                    }
+                }
+                catch (Exception e)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "数据保存失败:" + e.Message;
+                    BLLCommon.WriteLog("SaveJsdw：" + e.Message);
+                }
+                
+            }
+            BLLCommon.WriteLog("SaveJsdw结果：" + result.message);
+            return result;
+        }
+
+        #endregion
 
         public DataTable Get_API_zb_apiFlow(string apiFlow)
         {
@@ -3240,7 +3328,6 @@ namespace Wxjzgcjczy.BLL
         {
             return DAL.Submit_API_cb(dt);
         }
-
 
 
     }

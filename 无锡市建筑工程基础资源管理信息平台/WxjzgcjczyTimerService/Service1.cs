@@ -5047,6 +5047,7 @@ namespace WxjzgcjczyTimerService
                     }
                 }
 
+                #region 更新企业资质(TCorpCertQual)
                 index = result.IndexOf("<OutCorpCertQual>");
                 if (index >= 0)
                 {
@@ -5057,7 +5058,7 @@ namespace WxjzgcjczyTimerService
                     }
                     OutCorpCertQualBody outCorpCertQualBody = helper.DeserializeXML<OutCorpCertQualBody>("<OutCorpCertQualBody><OutCorpCertQualArray>" + returnResult + "</OutCorpCertQualArray></OutCorpCertQualBody>");
 
-                    #region 更新企业资质(TCorpCertQual)
+                    
                     if (outCorpCertQualBody != null)
                     {
                         foreach (OutCorpCertQual corpCertQual in outCorpCertQualBody.array)
@@ -5084,87 +5085,14 @@ namespace WxjzgcjczyTimerService
                                     }
                                 }
 
-                                string csywlxID = "", csywlx = "";
-                                switch (corpCertQual.CertType)
-                                {
-                                    //施工
-                                    case "建筑业":
-                                        csywlxID = "1";
-                                        csywlx = "建筑施工";
-                                        break;
-                                    case "城市园林绿化":
-                                        csywlxID = "3";
-                                        csywlx = "园林绿化";
-                                        break;
-                                    case "设计与施工一体化":
-                                        csywlxID = "2";
-                                        csywlx = "设计施工一体化";
-                                        break;
-                                    case "房屋拆迁":
-                                        csywlxID = "13";
-                                        csywlx = "房屋拆迁";
-                                        break;
-                                    case "安全生产许可证":
-                                        csywlxID = "14";
-                                        csywlx = "安全生产许可证";
-                                        break;
-                                    //勘察
-                                    case "工程勘察":
-                                        csywlxID = "5";
-                                        csywlx = "工程勘察";
-                                        break;
-                                    //设计
-                                    case "工程设计":
-                                        csywlxID = "6";
-                                        csywlx = "工程设计";
-                                        break;
-                                    case "城市规划":
-                                        csywlxID = "18";
-                                        csywlx = "城市规划";
-                                        break;
-                                    case "外商城市规划":
-                                        csywlxID = "19";
-                                        csywlx = "外商城市规划";
-                                        break;
-
-                                    //中介机构
-                                    case "工程招标代理":
-                                        csywlxID = "7";
-                                        csywlx = "招标代理";
-                                        break;
-                                    case "工程监理":
-                                        csywlxID = "4";
-                                        csywlx = "工程监理";
-                                        break;
-                                    case "工程造价咨询":
-                                        csywlxID = "8";
-                                        csywlx = "造价咨询";
-                                        break;
-                                    case "工程质量检测":
-                                        csywlxID = "9";
-                                        csywlx = "工程检测";
-                                        break;
-                                    case "施工图审查":
-                                        csywlxID = "15";
-                                        csywlx = "施工图审查";
-                                        break;
-                                    case "房地产估价":
-                                        csywlxID = "16";
-                                        csywlx = "房地产估价";
-                                        break;
-                                    case "物业服务":
-                                        csywlxID = "17";
-                                        csywlx = "物业服务";
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                if (string.IsNullOrEmpty(csywlxID))
+                                //string csywlxID = "", csywlx = "";
+                                Qyxx qycsywlx = getCsywlx(corpCertQual.CertType);
+                                if (string.IsNullOrEmpty(qycsywlx.csywlxID))
                                     continue;
 
                                 #region 企业从事业务类型
 
-                                DataTable dt_qycsyw = dataService.Get_uepp_Qycsyw_sjsgyth(corpCertQual.CorpCode, csywlxID);
+                                DataTable dt_qycsyw = dataService.Get_uepp_Qycsyw_sjsgyth(corpCertQual.CorpCode, qycsywlx.csywlxID);
 
                                 DataRow tempRow_qycsyw;
 
@@ -5179,8 +5107,8 @@ namespace WxjzgcjczyTimerService
                                     tempRow_qycsyw = dt_qycsyw.Rows[0];
                                 }
 
-                                tempRow_qycsyw["csywlxID"] = csywlxID;
-                                tempRow_qycsyw["csywlx"] = csywlx;
+                                tempRow_qycsyw["csywlxID"] = qycsywlx.csywlxID;
+                                tempRow_qycsyw["csywlx"] = qycsywlx.csywlx;
 
                                 tempRow_qycsyw["balxID"] = "1";
                                 tempRow_qycsyw["balx"] = "长期备案";
@@ -5198,7 +5126,7 @@ namespace WxjzgcjczyTimerService
                                 }
                                 #endregion
 
-                                DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx(corpCertQual.CorpCode, csywlxID);
+                                DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx(corpCertQual.CorpCode, qycsywlx.csywlxID);
 
                                 int rowIndex = -1;
 
@@ -5207,7 +5135,7 @@ namespace WxjzgcjczyTimerService
                                     //if (dt_jsdw_zzmx.Rows[i].RowState == DataRowState.Deleted)
                                     //    continue;
 
-                                    if (csywlxID == dt_jsdw_zzmx.Rows[i]["csywlxID"].ToString2()
+                                    if (qycsywlx.csywlxID == dt_jsdw_zzmx.Rows[i]["csywlxID"].ToString2()
                                         && (
                                          corpCertQual.TradeType == "工程勘察综合类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "综合类"
                                          || corpCertQual.TradeType == "工程勘察专业类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "专业类"
@@ -5237,8 +5165,8 @@ namespace WxjzgcjczyTimerService
                                     dt_jsdw_zzmx.Rows.Add(row);
                                     row["ID"] = dataService.Get_uepp_qyxxmx_NewID();
                                     row["qyID"] = corpCertQual.CorpCode;
-                                    row["csywlx"] = csywlx;
-                                    row["csywlxID"] = csywlxID;
+                                    row["csywlx"] = qycsywlx.csywlx;
+                                    row["csywlxID"] = qycsywlx.csywlxID;
                                 }
                                 else
                                 {
@@ -5280,13 +5208,13 @@ namespace WxjzgcjczyTimerService
                                             else
                                             {
                                                 row["zzxl"] = corpCertQual.TradeType;
-                                                if (!string.IsNullOrEmpty(csywlxID))
+                                                if (!string.IsNullOrEmpty(qycsywlx.csywlxID))
                                                 {
                                                     string sql = @"select Code from UEPP_Code where  CodeType='企业资质序列' and ParentCodeType='企业从事业务类型'
  and ParentCode=@parentCode and CodeInfo=@CodeInfo ";
                                                     SqlParameterCollection sp = dataService.CreateSqlParameterCollection();
                                                     sp.Add("@CodeInfo", corpCertQual.TradeType);
-                                                    sp.Add("@parentCode", csywlxID);
+                                                    sp.Add("@parentCode", qycsywlx.csywlxID);
                                                     string zzxlID = dataService.ExecuteSql(sql, sp);
                                                     if (!string.IsNullOrEmpty(zzxlID))
                                                         row["zzxlID"] = zzxlID;
@@ -5395,265 +5323,131 @@ namespace WxjzgcjczyTimerService
                             }
                         }
                     }
-                    #endregion
+
                 }
-
-                #region 更新企业资质证书信息(TCorpCertInfo)
-                //if (corpCertInfoArr != null)
-                //{
-                //    foreach (CorpCertInfo corpCertInfo in corpCertInfoArr.array)
-                //    {
-                //        try
-                //        {
-                //            if (corpCertInfo.CorpCode.Length == 9)
-                //            {
-                //                corpCertInfo.CorpCode = corpCertInfo.CorpCode.Substring(0, 8) + '-' + corpCertInfo.CorpCode.Substring(8, 1);
-                //            }
-                //            //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
-                //            if (corpCertInfo.CorpCode.Length == 10)
-                //            {
-                //                string qyShxydm = dataService.Get_UEPP_Qyjbxx_Shxydm(corpCertInfo.CorpCode);
-                //                if (!string.IsNullOrEmpty(qyShxydm))
-                //                {
-                //                    corpCertInfo.CorpCode = qyShxydm;
-                //                }
-                //            }
-
-                //            int rowIndex = -1;
-                //            string csywlxID = "", csywlx = "";
-                //            switch (corpCertInfo.CertType)
-                //            {
-                //                //施工
-                //                case "建筑业":
-                //                    csywlxID = "1";
-                //                    csywlx = "建筑施工";
-                //                    break;
-                //                case "城市园林绿化":
-                //                    csywlxID = "3";
-                //                    csywlx = "园林绿化";
-                //                    break;
-                //                case "设计与施工一体化":
-                //                    csywlxID = "2";
-                //                    csywlx = "设计施工一体化";
-                //                    break;
-                //                case "房屋拆迁":
-                //                    csywlxID = "13";
-                //                    csywlx = "房屋拆迁";
-                //                    break;
-                //                case "安全生产许可证":
-                //                    csywlxID = "14";
-                //                    csywlx = "安全生产许可证";
-                //                    break;
-                //                //勘察
-                //                case "工程勘察":
-                //                    csywlxID = "5";
-                //                    csywlx = "工程勘察";
-                //                    break;
-                //                //设计
-                //                case "工程设计":
-                //                    csywlxID = "6";
-                //                    csywlx = "工程设计";
-                //                    break;
-                //                case "城市规划":
-                //                    csywlxID = "18";
-                //                    csywlx = "城市规划";
-                //                    break;
-                //                case "外商城市规划":
-                //                    csywlxID = "19";
-                //                    csywlx = "外商城市规划";
-                //                    break;
-
-                //                //中介机构
-                //                case "工程招标代理":
-                //                    csywlxID = "7";
-                //                    csywlx = "招标代理";
-                //                    break;
-                //                case "工程监理":
-                //                    csywlxID = "4";
-                //                    csywlx = "工程监理";
-                //                    break;
-                //                case "工程造价咨询":
-                //                    csywlxID = "8";
-                //                    csywlx = "造价咨询";
-                //                    break;
-                //                case "工程质量检测":
-                //                    csywlxID = "9";
-                //                    csywlx = "工程检测";
-                //                    break;
-                //                case "施工图审查":
-                //                    csywlxID = "15";
-                //                    csywlx = "施工图审查";
-                //                    break;
-                //                case "房地产估价":
-                //                    csywlxID = "16";
-                //                    csywlx = "房地产估价";
-                //                    break;
-                //                case "物业服务":
-                //                    csywlxID = "17";
-                //                    csywlx = "物业服务";
-                //                    break;
-                //                default:
-                //                    break;
-                //            }
-                //            if (string.IsNullOrEmpty(csywlxID))
-                //                continue;
-
-                //            DataTable dt_qy_zzzs = dataService.Get_uepp_zzzsxx_qyxx(corpCertInfo.CorpCode);
-
-                //            for (int i = 0; i < dt_qy_zzzs.Rows.Count; i++)
-                //            {
-                //                //if (dt_jsdw_zzzs.Rows[i].RowState == DataRowState.Deleted)
-                //                //    continue;
-
-                //                if (corpCertInfo.CertType == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
-                //                    && dt_qy_zzzs.Rows[i]["zsbh"].ToString2() == corpCertInfo.CertCode
-                //                    && dt_qy_zzzs.Rows[i]["csywlx"].ToString2() == corpCertInfo.CertType)
-                //                {
-                //                    rowIndex = i;
-                //                    break;
-                //                }
-                //            }
-
-                //            if (rowIndex < 0)
-                //            {
-                //                row = dt_qy_zzzs.NewRow();
-                //                dt_qy_zzzs.Rows.Add(row);
-                //                row["zsjlId"] = dataService.Get_uepp_qyQyzs_NewID();
-                //            }
-                //            else
-                //            {
-                //                row = dt_qy_zzzs.Rows[rowIndex];
-                //                if (!string.IsNullOrEmpty(corpCertInfo.UpdateDate))
-                //                    if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertInfo.UpdateDate).ToString("yyyy-MM-dd"))
-                //                    {
-                //                        continue;
-                //                    }
-                //            }
-                //            row["qyID"] = corpCertInfo.CorpCode;
-                //            row["csywlx"] = csywlx;
-                //            row["csywlxID"] = csywlxID;
-
-                //            //if (!string.IsNullOrEmpty(corpCertInfo.CertType))
-                //            //{
-                //            //    SqlParameterCollection sp = dataService.CreateSqlParameterCollection();
-                //            //    sp.Add("@parentCode", csywlxID);
-                //            //    sp.Add("@CodeInfo", corpCertInfo.CertType);
-
-                //            //    string sql = @"select * from UEPP_Code  where  CodeType ='企业证书类型' and ParentCodeType='企业从事业务类型' and ParentCode=@parentCode and CodeInfo=@CodeInfo ";
-                //            //    string zslxID = dataService.ExecuteSql(sql, sp);
-                //            //    if (!string.IsNullOrEmpty(zslxID))
-                //            //    {
-                //            //        row["zslxID"] = zslxID;
-                //            //    }
-                //            //}
-                //            //row["zslx"] = "开发企业资质证书";
-
-                //            row["sfzzz"] = "1";
-                //            string zslx = "", zslxID = "";
-                //            switch (corpCertInfo.CertType)
-                //            {
-                //                //施工
-                //                case "建筑业":
-                //                    zslxID = "10";
-                //                    zslx = "建筑业资质证";
-                //                    break;
-                //                case "城市园林绿化":
-                //                    zslxID = "30";
-                //                    zslx = "园林绿化资质证";
-                //                    break;
-                //                case "设计与施工一体化":
-                //                    zslxID = "20";
-                //                    zslx = "设计施工一体化资质证";
-                //                    break;
-                //                case "房屋拆迁":
-                //                    zslxID = "130";
-                //                    zslx = "房屋拆迁资质证";
-                //                    break;
-                //                case "安全生产许可证":
-                //                    zslxID = "140";
-                //                    zslx = "安全生产许可证";
-                //                    break;
-                //                //勘察
-                //                case "工程勘察":
-                //                    zslxID = "51";
-                //                    csywlx = "省工程勘察资质证";
-                //                    break;
-                //                //设计
-                //                case "工程设计":
-                //                    zslxID = "61";
-                //                    zslx = "省工程设计资质证";
-                //                    break;
-                //                case "城市规划":
-                //                    zslxID = "18";
-                //                    zslx = "城市规划资质证";
-                //                    break;
-                //                case "外商城市规划":
-                //                    zslxID = "19";
-                //                    zslx = "外商城市规划资质证";
-                //                    break;
-
-                //                //中介机构
-                //                case "工程招标代理":
-                //                    zslxID = "70";
-                //                    zslx = "招标代理资质证";
-                //                    break;
-                //                case "工程监理":
-                //                    zslxID = "40";
-                //                    zslx = "工程监理资质证";
-                //                    break;
-                //                case "工程造价咨询":
-                //                    zslxID = "80";
-                //                    csywlx = "造价咨询资质证";
-                //                    break;
-                //                case "工程质量检测":
-                //                    zslxID = "90";
-                //                    zslx = "工程检测资质证";
-                //                    break;
-                //                case "施工图审查":
-                //                    zslxID = "150";
-                //                    csywlx = "施工图审查资质证";
-                //                    break;
-                //                case "房地产估价":
-                //                    zslxID = "160";
-                //                    zslx = "房地产估价资质证";
-                //                    break;
-                //                case "物业服务":
-                //                    zslxID = "170";
-                //                    zslx = "物业服务资质证";
-                //                    break;
-                //                default:
-                //                    break;
-                //            }
-                //            row["zslxID"] = zslxID;
-                //            row["zslx"] = zslx;
-                //            row["zsbh"] = corpCertInfo.CertCode;
-                //            if (!string.IsNullOrEmpty(corpCertInfo.ValidDate.Trim()))
-                //                row["zsyxzrq"] = corpCertInfo.ValidDate;
-                //            if (!string.IsNullOrEmpty(corpCertInfo.IssueDate.Trim()))
-                //            {
-                //                row["fzrq"] = corpCertInfo.IssueDate;
-                //                row["zsyxqrq"] = corpCertInfo.IssueDate;
-                //            }
-
-                //            row["fzdw"] = corpCertInfo.IssueOrgan;
-                //            row["xgrqsj"] = corpCertInfo.UpdateDate;
-                //            row["xgr"] = "定时服务";
-                //            row["tag"] = tag;
-                //            row["DataState"] = 0;
-
-                //            if (!dataService.Submit_uepp_qyzzzs(dt_qy_zzzs))
-                //            {
-                //                Public.WriteLog("单位ID：" + corpCertInfo.CorpCode + "，企业资质证书信息保存失败！");
-                //            }
-
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //            Public.WriteLog("保存企业资质证书信息时出现异常：" + ex.Message);
-                //        }
-                //    }
-                //}
                 #endregion
+
+                #region 更新企业资质证书信息(OutCorpCertInfo)
+
+                index = result.IndexOf("<OutCorpCertInfo>");
+                if (index >= 0)
+                {
+                    string outCorpCertInfoResult = result.Substring(index, result.LastIndexOf("</OutCorpCertInfo>") - index + 18);
+                    if (string.IsNullOrEmpty(outCorpCertInfoResult))
+                    {
+                        return;
+                    }
+                    OutCorpCertInfoBody outCorpCertInfoBody = helper.DeserializeXML<OutCorpCertInfoBody>("<OutCorpCertInfoBody><OutCorpCertInfoArray>" + outCorpCertInfoResult + "</OutCorpCertInfoArray></OutCorpCertInfoBody>");
+                    if (outCorpCertInfoBody != null)
+                    {
+                        foreach (OutCorpCertInfo corpCertInfo in outCorpCertInfoBody.certArray)
+                        {
+                            try
+                            {
+                                if (corpCertInfo.CorpCode.Length == 9)
+                                {
+                                    corpCertInfo.CorpCode = corpCertInfo.CorpCode.Substring(0, 8) + '-' + corpCertInfo.CorpCode.Substring(8, 1);
+                                }
+                                //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
+                                if (corpCertInfo.CorpCode.Length == 10)
+                                {
+                                    string qyShxydm = dataService.Get_UEPP_Qyjbxx_Shxydm(corpCertInfo.CorpCode);
+                                    if (!string.IsNullOrEmpty(qyShxydm))
+                                    {
+                                        corpCertInfo.CorpCode = qyShxydm;
+                                    }
+                                }
+
+                                int rowIndex = -1;
+                                //string csywlxID = "", csywlx = "";
+                                Qyxx qyxx = getCsywlx(corpCertInfo.CertType);
+                                if (string.IsNullOrEmpty(qyxx.csywlxID))
+                                    continue;
+
+                                DataTable dt_qy_zzzs = dataService.Get_uepp_zzzsxx_qyxx(corpCertInfo.CorpCode);
+
+                                for (int i = 0; i < dt_qy_zzzs.Rows.Count; i++)
+                                {
+                                    //if (dt_jsdw_zzzs.Rows[i].RowState == DataRowState.Deleted)
+                                    //    continue;
+
+                                    if (corpCertInfo.CertType == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
+                                        && dt_qy_zzzs.Rows[i]["zsbh"].ToString2() == corpCertInfo.CertCode
+                                        && dt_qy_zzzs.Rows[i]["csywlx"].ToString2() == corpCertInfo.CertType)
+                                    {
+                                        rowIndex = i;
+                                        break;
+                                    }
+                                }
+
+                                if (rowIndex < 0)
+                                {
+                                    row = dt_qy_zzzs.NewRow();
+                                    dt_qy_zzzs.Rows.Add(row);
+                                    row["zsjlId"] = dataService.Get_uepp_qyQyzs_NewID();
+                                }
+                                else
+                                {
+                                    row = dt_qy_zzzs.Rows[rowIndex];
+                                    if (!string.IsNullOrEmpty(corpCertInfo.UpdateDate))
+                                        if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertInfo.UpdateDate).ToString("yyyy-MM-dd"))
+                                        {
+                                            continue;
+                                        }
+                                }
+                                row["qyID"] = corpCertInfo.CorpCode;
+                                row["csywlx"] = qyxx.csywlx;
+                                row["csywlxID"] = qyxx.csywlxID;
+
+                                //if (!string.IsNullOrEmpty(corpCertInfo.CertType))
+                                //{
+                                //    SqlParameterCollection sp = dataService.CreateSqlParameterCollection();
+                                //    sp.Add("@parentCode", csywlxID);
+                                //    sp.Add("@CodeInfo", corpCertInfo.CertType);
+
+                                //    string sql = @"select * from UEPP_Code  where  CodeType ='企业证书类型' and ParentCodeType='企业从事业务类型' and ParentCode=@parentCode and CodeInfo=@CodeInfo ";
+                                //    string zslxID = dataService.ExecuteSql(sql, sp);
+                                //    if (!string.IsNullOrEmpty(zslxID))
+                                //    {
+                                //        row["zslxID"] = zslxID;
+                                //    }
+                                //}
+                                //row["zslx"] = "开发企业资质证书";
+
+                                row["sfzzz"] = "1";
+                                //string zslx = "", zslxID = "";
+                                Qyxx qyzslx = getZslx(corpCertInfo.CertType);
+                                row["zslxID"] = qyzslx.zslxID;
+                                row["zslx"] = qyzslx.zslx;
+                                row["zsbh"] = corpCertInfo.CertCode;
+                                if (!string.IsNullOrEmpty(corpCertInfo.ValidDate.Trim()))
+                                    row["zsyxzrq"] = corpCertInfo.ValidDate;
+                                if (!string.IsNullOrEmpty(corpCertInfo.IssueDate.Trim()))
+                                {
+                                    row["fzrq"] = corpCertInfo.IssueDate;
+                                    row["zsyxqrq"] = corpCertInfo.IssueDate;
+                                }
+
+                                row["fzdw"] = corpCertInfo.IssueOrgan;
+                                row["xgrqsj"] = corpCertInfo.UpdateDate;
+                                row["xgr"] = "定时服务";
+                                row["tag"] = tag;
+                                row["DataState"] = 0;
+
+                                if (!dataService.Submit_uepp_qyzzzs(dt_qy_zzzs))
+                                {
+                                    Public.WriteLog("单位ID：" + corpCertInfo.CorpCode + "，企业资质证书信息保存失败！");
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog("保存企业资质证书信息时出现异常：" + corpCertInfo.CorpCode + ex.Message);
+                            }
+                        }
+                    }
+                }
+                
                 #endregion
 
                 DateTime endTime = DateTime.Now;
@@ -5673,6 +5467,9 @@ namespace WxjzgcjczyTimerService
 
                 if (dt_DataJkDataDetail_qyxx.Rows.Count > 0)
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail_qyxx);
+
+                #endregion
+
             }
             catch (Exception ex)
             {
@@ -5686,7 +5483,7 @@ namespace WxjzgcjczyTimerService
             }
 
         }
-
+   
 
         /// <summary>
         /// 省外人员信息
@@ -5716,7 +5513,7 @@ namespace WxjzgcjczyTimerService
             row_DataJkDataDetail_ryxx["DataJkLogID"] = DataJkLogID;
             row_DataJkDataDetail_ryxx["tableName"] = "UEPP_Ryjbxx";
             row_DataJkDataDetail_ryxx["MethodName"] = "getOutPersonCert";
-            row_DataJkDataDetail_ryxx["bz"] = "从江苏建设公共基础数据平台拉取省外企业信息";
+            row_DataJkDataDetail_ryxx["bz"] = "从江苏建设公共基础数据平台拉取省外人员信息";
 
             try
             {
@@ -6427,7 +6224,7 @@ namespace WxjzgcjczyTimerService
             lxRow["Code"] = "320207";
             dt_xzqhdm.Rows.Add(lxRow);
             DataRow xwRow = dt_xzqhdm.NewRow();
-            xwRow["Code"] = "320200";
+            xwRow["Code"] = "320208";
             dt_xzqhdm.Rows.Add(xwRow);
 
             XmlHelper helper = new XmlHelper();
@@ -6713,87 +6510,14 @@ namespace WxjzgcjczyTimerService
                                         }
                                     }
 
-                                    string csywlxID = "", csywlx = "";
-                                    switch (corpCertQual.CertType)
-                                    {
-                                        //施工
-                                        case "建筑业":
-                                            csywlxID = "1";
-                                            csywlx = "建筑施工";
-                                            break;
-                                        case "城市园林绿化":
-                                            csywlxID = "3";
-                                            csywlx = "园林绿化";
-                                            break;
-                                        case "设计与施工一体化":
-                                            csywlxID = "2";
-                                            csywlx = "设计施工一体化";
-                                            break;
-                                        case "房屋拆迁":
-                                            csywlxID = "13";
-                                            csywlx = "房屋拆迁";
-                                            break;
-                                        case "安全生产许可证":
-                                            csywlxID = "14";
-                                            csywlx = "安全生产许可证";
-                                            break;
-                                        //勘察
-                                        case "工程勘察":
-                                            csywlxID = "5";
-                                            csywlx = "工程勘察";
-                                            break;
-                                        //设计
-                                        case "工程设计":
-                                            csywlxID = "6";
-                                            csywlx = "工程设计";
-                                            break;
-                                        case "城市规划":
-                                            csywlxID = "18";
-                                            csywlx = "城市规划";
-                                            break;
-                                        case "外商城市规划":
-                                            csywlxID = "19";
-                                            csywlx = "外商城市规划";
-                                            break;
-
-                                        //中介机构
-                                        case "工程招标代理":
-                                            csywlxID = "7";
-                                            csywlx = "招标代理";
-                                            break;
-                                        case "工程监理":
-                                            csywlxID = "4";
-                                            csywlx = "工程监理";
-                                            break;
-                                        case "工程造价咨询":
-                                            csywlxID = "8";
-                                            csywlx = "造价咨询";
-                                            break;
-                                        case "工程质量检测":
-                                            csywlxID = "9";
-                                            csywlx = "工程检测";
-                                            break;
-                                        case "施工图审查":
-                                            csywlxID = "15";
-                                            csywlx = "施工图审查";
-                                            break;
-                                        case "房地产估价":
-                                            csywlxID = "16";
-                                            csywlx = "房地产估价";
-                                            break;
-                                        case "物业服务":
-                                            csywlxID = "17";
-                                            csywlx = "物业服务";
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    if (string.IsNullOrEmpty(csywlxID))
+                                    //string csywlxID = "", csywlx = "";
+                                    Qyxx qycsywlx = getCsywlx(corpCertQual.CertType);
+                                    if (string.IsNullOrEmpty(qycsywlx.csywlxID))
                                         continue;
 
                                     #region 企业从事业务类型
 
-                                    DataTable dt_qycsyw = dataService.Get_uepp_Qycsyw_sjsgyth(corpCertQual.CorpCode, csywlxID);
+                                    DataTable dt_qycsyw = dataService.Get_uepp_Qycsyw_sjsgyth(corpCertQual.CorpCode, qycsywlx.csywlxID);
 
                                     DataRow tempRow_qycsyw;
 
@@ -6808,8 +6532,8 @@ namespace WxjzgcjczyTimerService
                                         tempRow_qycsyw = dt_qycsyw.Rows[0];
                                     }
 
-                                    tempRow_qycsyw["csywlxID"] = csywlxID;
-                                    tempRow_qycsyw["csywlx"] = csywlx;
+                                    tempRow_qycsyw["csywlxID"] = qycsywlx.csywlxID;
+                                    tempRow_qycsyw["csywlx"] = qycsywlx.csywlx;
 
                                     tempRow_qycsyw["balxID"] = "1";
                                     tempRow_qycsyw["balx"] = "长期备案";
@@ -6829,7 +6553,7 @@ namespace WxjzgcjczyTimerService
                                     }
                                     #endregion
 
-                                    DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx(corpCertQual.CorpCode, csywlxID);
+                                    DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx(corpCertQual.CorpCode, qycsywlx.csywlxID);
 
                                     int rowIndex = -1;
 
@@ -6838,7 +6562,7 @@ namespace WxjzgcjczyTimerService
                                         //if (dt_jsdw_zzmx.Rows[i].RowState == DataRowState.Deleted)
                                         //    continue;
 
-                                        if (csywlxID == dt_jsdw_zzmx.Rows[i]["csywlxID"].ToString2()
+                                        if (qycsywlx.csywlxID == dt_jsdw_zzmx.Rows[i]["csywlxID"].ToString2()
                                             && (
                                              corpCertQual.TradeType == "工程勘察综合类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "综合类"
                                              || corpCertQual.TradeType == "工程勘察专业类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "专业类"
@@ -6868,8 +6592,8 @@ namespace WxjzgcjczyTimerService
                                         dt_jsdw_zzmx.Rows.Add(row);
                                         row["ID"] = dataService.Get_uepp_qyxxmx_NewID();
                                         row["qyID"] = corpCertQual.CorpCode;
-                                        row["csywlx"] = csywlx;
-                                        row["csywlxID"] = csywlxID;
+                                        row["csywlx"] = qycsywlx.csywlx;
+                                        row["csywlxID"] = qycsywlx.csywlxID;
                                     }
                                     else
                                     {
@@ -6911,13 +6635,13 @@ namespace WxjzgcjczyTimerService
                                                 else
                                                 {
                                                     row["zzxl"] = corpCertQual.TradeType;
-                                                    if (!string.IsNullOrEmpty(csywlxID))
+                                                    if (!string.IsNullOrEmpty(qycsywlx.csywlxID))
                                                     {
                                                         string sql = @"select Code from UEPP_Code where  CodeType='企业资质序列' and ParentCodeType='企业从事业务类型'
  and ParentCode=@parentCode and CodeInfo=@CodeInfo ";
                                                         SqlParameterCollection sp = dataService.CreateSqlParameterCollection();
                                                         sp.Add("@CodeInfo", corpCertQual.TradeType);
-                                                        sp.Add("@parentCode", csywlxID);
+                                                        sp.Add("@parentCode", qycsywlx.csywlxID);
                                                         string zzxlID = dataService.ExecuteSql(sql, sp);
                                                         if (!string.IsNullOrEmpty(zzxlID))
                                                             row["zzxlID"] = zzxlID;
@@ -7063,82 +6787,9 @@ namespace WxjzgcjczyTimerService
                                     }
 
                                     int rowIndex = -1;
-                                    string csywlxID = "", csywlx = "";
-                                    switch (corpCertInfo.CertType)
-                                    {
-                                        //施工
-                                        case "建筑业":
-                                            csywlxID = "1";
-                                            csywlx = "建筑施工";
-                                            break;
-                                        case "城市园林绿化":
-                                            csywlxID = "3";
-                                            csywlx = "园林绿化";
-                                            break;
-                                        case "设计与施工一体化":
-                                            csywlxID = "2";
-                                            csywlx = "设计施工一体化";
-                                            break;
-                                        case "房屋拆迁":
-                                            csywlxID = "13";
-                                            csywlx = "房屋拆迁";
-                                            break;
-                                        case "安全生产许可证":
-                                            csywlxID = "14";
-                                            csywlx = "安全生产许可证";
-                                            break;
-                                        //勘察
-                                        case "工程勘察":
-                                            csywlxID = "5";
-                                            csywlx = "工程勘察";
-                                            break;
-                                        //设计
-                                        case "工程设计":
-                                            csywlxID = "6";
-                                            csywlx = "工程设计";
-                                            break;
-                                        case "城市规划":
-                                            csywlxID = "18";
-                                            csywlx = "城市规划";
-                                            break;
-                                        case "外商城市规划":
-                                            csywlxID = "19";
-                                            csywlx = "外商城市规划";
-                                            break;
-
-                                        //中介机构
-                                        case "工程招标代理":
-                                            csywlxID = "7";
-                                            csywlx = "招标代理";
-                                            break;
-                                        case "工程监理":
-                                            csywlxID = "4";
-                                            csywlx = "工程监理";
-                                            break;
-                                        case "工程造价咨询":
-                                            csywlxID = "8";
-                                            csywlx = "造价咨询";
-                                            break;
-                                        case "工程质量检测":
-                                            csywlxID = "9";
-                                            csywlx = "工程检测";
-                                            break;
-                                        case "施工图审查":
-                                            csywlxID = "15";
-                                            csywlx = "施工图审查";
-                                            break;
-                                        case "房地产估价":
-                                            csywlxID = "16";
-                                            csywlx = "房地产估价";
-                                            break;
-                                        case "物业服务":
-                                            csywlxID = "17";
-                                            csywlx = "物业服务";
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    if (string.IsNullOrEmpty(csywlxID))
+                                    //string csywlxID = "", csywlx = "";
+                                    Qyxx qycsywlx = getCsywlx(corpCertInfo.CertType);
+                                    if (string.IsNullOrEmpty(qycsywlx.csywlxID))
                                         continue;
 
                                     DataTable dt_qy_zzzs = dataService.Get_uepp_zzzsxx_qyxx(corpCertInfo.CorpCode);
@@ -7148,7 +6799,7 @@ namespace WxjzgcjczyTimerService
                                         //if (dt_jsdw_zzzs.Rows[i].RowState == DataRowState.Deleted)
                                         //    continue;
                                         //转换过的从事业务类型（企业资质类别）比较
-                                        if (csywlx == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
+                                        if (qycsywlx.csywlx == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
                                             && dt_qy_zzzs.Rows[i]["zsbh"].ToString2() == corpCertInfo.CertCode)
                                         {
                                             rowIndex = i;
@@ -7181,8 +6832,8 @@ namespace WxjzgcjczyTimerService
                                             }
                                     }
 
-                                    row["csywlx"] = csywlx;
-                                    row["csywlxID"] = csywlxID;
+                                    row["csywlx"] = qycsywlx.csywlx;
+                                    row["csywlxID"] = qycsywlx.csywlxID;
                                     //增加证书正本流水号， 证书正本流水号为空的资质不用显示，跟住建部、省厅保持一致
                                     row["PrintNo"] = corpCertInfo.PrintNo;
 
@@ -7202,83 +6853,10 @@ namespace WxjzgcjczyTimerService
                                     //row["zslx"] = "开发企业资质证书";
 
                                     row["sfzzz"] = "1";
-                                    string zslx = "", zslxID = "";
-                                    switch (corpCertInfo.CertType)
-                                    {
-                                        //施工
-                                        case "建筑业":
-                                            zslxID = "10";
-                                            zslx = "建筑业资质证";
-                                            break;
-                                        case "城市园林绿化":
-                                            zslxID = "30";
-                                            zslx = "园林绿化资质证";
-                                            break;
-                                        case "设计与施工一体化":
-                                            zslxID = "20";
-                                            zslx = "设计施工一体化资质证";
-                                            break;
-                                        case "房屋拆迁":
-                                            zslxID = "130";
-                                            zslx = "房屋拆迁资质证";
-                                            break;
-                                        case "安全生产许可证":
-                                            zslxID = "140";
-                                            zslx = "安全生产许可证";
-                                            break;
-                                        //勘察
-                                        case "工程勘察":
-                                            zslxID = "51";
-                                            csywlx = "省工程勘察资质证";
-                                            break;
-                                        //设计
-                                        case "工程设计":
-                                            zslxID = "61";
-                                            zslx = "省工程设计资质证";
-                                            break;
-                                        case "城市规划":
-                                            zslxID = "18";
-                                            zslx = "城市规划资质证";
-                                            break;
-                                        case "外商城市规划":
-                                            zslxID = "19";
-                                            zslx = "外商城市规划资质证";
-                                            break;
-
-                                        //中介机构
-                                        case "工程招标代理":
-                                            zslxID = "70";
-                                            zslx = "招标代理资质证";
-                                            break;
-                                        case "工程监理":
-                                            zslxID = "40";
-                                            zslx = "工程监理资质证";
-                                            break;
-                                        case "工程造价咨询":
-                                            zslxID = "80";
-                                            csywlx = "造价咨询资质证";
-                                            break;
-                                        case "工程质量检测":
-                                            zslxID = "90";
-                                            zslx = "工程检测资质证";
-                                            break;
-                                        case "施工图审查":
-                                            zslxID = "150";
-                                            csywlx = "施工图审查资质证";
-                                            break;
-                                        case "房地产估价":
-                                            zslxID = "160";
-                                            zslx = "房地产估价资质证";
-                                            break;
-                                        case "物业服务":
-                                            zslxID = "170";
-                                            zslx = "物业服务资质证";
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    row["zslxID"] = zslxID;
-                                    row["zslx"] = zslx;
+                                    //string zslx = "", zslxID = "";
+                                    Qyxx qyzslx = getZslx(corpCertInfo.CertType);
+                                    row["zslxID"] = qyzslx.zslxID;
+                                    row["zslx"] = qyzslx.zslx;
                                     row["zsbh"] = corpCertInfo.CertCode;
                                     if (!string.IsNullOrEmpty(corpCertInfo.ValidDate.Trim()))
                                         row["zsyxzrq"] = corpCertInfo.ValidDate;
@@ -7302,7 +6880,7 @@ namespace WxjzgcjczyTimerService
                                 }
                                 catch (Exception ex)
                                 {
-                                    Public.WriteLog("保存企业资质证书信息时出现异常：" + ex.Message);
+                                    Public.WriteLog("保存企业资质证书信息时出现异常：" + corpCertInfo.CorpCode + ex.Message);
                                 }
                             }
                         }
@@ -7340,7 +6918,6 @@ namespace WxjzgcjczyTimerService
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail_qyxx);
             }
         }
-
 
         /// <summary>
         /// 从江苏建设公共基础数据平台拉取省内市外企业（建设单位除外）信息
@@ -8226,7 +7803,7 @@ namespace WxjzgcjczyTimerService
                                 }
                                 catch (Exception ex)
                                 {
-                                    Public.WriteLog("保存企业资质证书信息时出现异常：" + ex.Message);
+                                    Public.WriteLog("保存企业资质证书信息时出现异常：" + corpCertInfo.CorpCode + ex.Message);
                                 }
                             }
                         }
@@ -9171,7 +8748,6 @@ namespace WxjzgcjczyTimerService
                 Public.WriteLog("Exception:" + ex.Message);
             }
         }
-
 
 
         /// <summary>
@@ -15644,7 +15220,174 @@ namespace WxjzgcjczyTimerService
 
         #endregion
 
+        #region 公共方法
+        private Qyxx getCsywlx(string certType)
+        {
+            Qyxx result = new Qyxx();
+            string csywlxID = string.Empty, csywlx = string.Empty;
+            switch (certType)
+            {
+                //施工
+                case "建筑业":
+                    csywlxID = "1";
+                    csywlx = "建筑施工";
+                    break;
+                case "城市园林绿化":
+                    csywlxID = "3";
+                    csywlx = "园林绿化";
+                    break;
+                case "设计与施工一体化":
+                    csywlxID = "2";
+                    csywlx = "设计施工一体化";
+                    break;
+                case "房屋拆迁":
+                    csywlxID = "13";
+                    csywlx = "房屋拆迁";
+                    break;
+                case "安全生产许可证":
+                    csywlxID = "14";
+                    csywlx = "安全生产许可证";
+                    break;
+                //勘察
+                case "工程勘察":
+                    csywlxID = "5";
+                    csywlx = "工程勘察";
+                    break;
+                //设计
+                case "工程设计":
+                    csywlxID = "6";
+                    csywlx = "工程设计";
+                    break;
+                case "城市规划":
+                    csywlxID = "18";
+                    csywlx = "城市规划";
+                    break;
+                case "外商城市规划":
+                    csywlxID = "19";
+                    csywlx = "外商城市规划";
+                    break;
 
+                //中介机构
+                case "工程招标代理":
+                    csywlxID = "7";
+                    csywlx = "招标代理";
+                    break;
+                case "工程监理":
+                    csywlxID = "4";
+                    csywlx = "工程监理";
+                    break;
+                case "工程造价咨询":
+                    csywlxID = "8";
+                    csywlx = "造价咨询";
+                    break;
+                case "工程质量检测":
+                    csywlxID = "9";
+                    csywlx = "工程检测";
+                    break;
+                case "施工图审查":
+                    csywlxID = "15";
+                    csywlx = "施工图审查";
+                    break;
+                case "房地产估价":
+                    csywlxID = "16";
+                    csywlx = "房地产估价";
+                    break;
+                case "物业服务":
+                    csywlxID = "17";
+                    csywlx = "物业服务";
+                    break;
+                default:
+                    break;
+            }
+            result.csywlx = csywlx;
+            result.csywlxID = csywlxID;
+            return result;
+        }
+
+        private Qyxx getZslx(string certType)
+        {
+            Qyxx result = new Qyxx();
+            switch (certType)
+            {
+                //施工
+                case "建筑业":
+                    result.zslxID = "10";
+                    result.zslx = "建筑业资质证";
+                    break;
+                case "城市园林绿化":
+                    result.zslxID = "30";
+                    result.zslx = "园林绿化资质证";
+                    break;
+                case "设计与施工一体化":
+                    result.zslxID = "20";
+                    result.zslx = "设计施工一体化资质证";
+                    break;
+                case "房屋拆迁":
+                    result.zslxID = "130";
+                    result.zslx = "房屋拆迁资质证";
+                    break;
+                case "安全生产许可证":
+                    result.zslxID = "140";
+                    result.zslx = "安全生产许可证";
+                    break;
+                //勘察
+                case "工程勘察":
+                    result.zslxID = "51";
+                    result.zslx = "省工程勘察资质证";
+                    break;
+                //设计
+                case "工程设计":
+                    result.zslxID = "61";
+                    result.zslx = "省工程设计资质证";
+                    break;
+                case "城市规划":
+                    result.zslxID = "18";
+                    result.zslx = "城市规划资质证";
+                    break;
+                case "外商城市规划":
+                    result.zslxID = "19";
+                    result.zslx = "外商城市规划资质证";
+                    break;
+
+                //中介机构
+                case "工程招标代理":
+                    result.zslxID = "70";
+                    result.zslx = "招标代理资质证";
+                    break;
+                case "工程监理":
+                    result.zslxID = "40";
+                    result.zslx = "工程监理资质证";
+                    break;
+                case "工程造价咨询":
+                    result.zslxID = "80";
+                    result.zslx = "造价咨询资质证";
+                    //result.csywlx = "造价咨询资质证";
+                    break;
+                case "工程质量检测":
+                    result.zslxID = "90";
+                    result.zslx = "工程检测资质证";
+                    break;
+                case "施工图审查":
+                    result.zslxID = "150";
+                    result.zslx = "施工图审查资质证";
+                    //result.csywlx = "施工图审查资质证";
+                    break;
+                case "房地产估价":
+                    result.zslxID = "160";
+                    result.zslx = "房地产估价资质证";
+                    break;
+                case "物业服务":
+                    result.zslxID = "170";
+                    result.zslx = "物业服务资质证";
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+
+        #endregion
+        
 
     }
 

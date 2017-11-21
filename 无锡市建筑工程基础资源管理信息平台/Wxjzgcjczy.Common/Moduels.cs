@@ -55,5 +55,18 @@ namespace Wxjzgcjczy.Common
                 return string.Format("{0} {1}",this.code.ToInt32().ToString().PadLeft(3, '0'),messagePlus);
             }
         }
+        public string ResultXmlMessage
+        {
+            get
+            {
+                StringBuilder str = new StringBuilder();
+                str.Append("<ReturnInfo>");
+                str.Append("<Status>" + this.code.ToInt32().ToString() + "</Status>");
+                str.Append("<Description>" + this.message + "</Description>");
+                str.Append("</ReturnInfo>");
+                return str.ToString();
+
+            }
+        }
     }
 }

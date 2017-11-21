@@ -237,11 +237,15 @@ namespace Wxjzgcjczy.BLL
                         {
                             row["OperateState"] = 1;
                             row["Msg"] = addResultSt;
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message ="上传到省厅失败：" +  addResultSt;
                         }
                         else
                         {
                             row["OperateState"] = 0;
                             row["Msg"] = "上传成功";
+                            result.code = ProcessResult.数据保存成功;
+                            result.message = "数据保存成功！";
                         }
                         if (dt.Rows.Count > 0)
                         {
@@ -263,9 +267,6 @@ namespace Wxjzgcjczy.BLL
                         result.message = ex.Message;
                         return result;
                     }
-
-                    result.code = ProcessResult.数据保存成功;
-                    result.message = "数据保存成功！";
                 }
                 else
                 {
@@ -405,11 +406,15 @@ namespace Wxjzgcjczy.BLL
                         {
                             row["OperateState"] = 1;
                             row["Msg"] = addResultSt;
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "数据上传省厅失败：" + addResultSt;
                         }
                         else
                         {
                             row["OperateState"] = 0;
                             row["Msg"] = "上传成功";
+                            result.code = ProcessResult.数据保存成功;
+                            result.message = "数据保存成功！";
                         }
                         if (dt.Rows.Count > 0)
                         {
@@ -432,8 +437,6 @@ namespace Wxjzgcjczy.BLL
                         return result;
                     }
 
-                    result.code = ProcessResult.数据保存成功;
-                    result.message = "数据保存成功！";
                 }
                 else
                 {
@@ -546,11 +549,15 @@ namespace Wxjzgcjczy.BLL
                         {
                             row["OperateState"] = 1;
                             row["Msg"] = addResultSt;
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "数据上传省厅失败：" + addResultSt;
                         }
                         else
                         {
                             row["OperateState"] = 0;
                             row["Msg"] = "上传成功";
+                            result.code = ProcessResult.数据保存成功;
+                            result.message = "数据保存成功！";
                         }
                         if (dt.Rows.Count > 0)
                         {
@@ -573,8 +580,6 @@ namespace Wxjzgcjczy.BLL
                         return result;
                     }
 
-                    result.code = ProcessResult.数据保存成功;
-                    result.message = "数据保存成功！";
                 }
                 else
                 {
@@ -723,6 +728,8 @@ namespace Wxjzgcjczy.BLL
                         {
                             logRow["OperateState"] = 1;
                             logRow["Msg"] = addResultSt;
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "数据上传省厅失败：" + addResultSt;
                         }
                         else
                         {
@@ -738,6 +745,8 @@ namespace Wxjzgcjczy.BLL
 
                             logRow["OperateState"] = 0;
                             logRow["Msg"] = "上传成功";
+                            result.code = ProcessResult.数据保存成功;
+                            result.message = "数据保存成功！";
                         }
                         if (dt.Rows.Count > 0)
                         {
@@ -760,8 +769,6 @@ namespace Wxjzgcjczy.BLL
                         return result;
                     }
 
-                    result.code = ProcessResult.数据保存成功;
-                    result.message = "数据保存成功！";
                 }
                 else
                 {
@@ -901,11 +908,15 @@ namespace Wxjzgcjczy.BLL
                         {
                             row["OperateState"] = 1;
                             row["Msg"] = addResultSt;
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "数据上传省厅失败：" + addResultSt;
                         }
                         else
                         {
                             row["OperateState"] = 0;
                             row["Msg"] = "上传成功";
+                            result.code = ProcessResult.数据保存成功;
+                            result.message = "数据保存成功！";
                         }
                         if (dt.Rows.Count > 0)
                         {
@@ -927,9 +938,6 @@ namespace Wxjzgcjczy.BLL
                         result.message = ex.Message;
                         return result;
                     }
-
-                    result.code = ProcessResult.数据保存成功;
-                    result.message = "数据保存成功！";
                 }
                 else
                 {
