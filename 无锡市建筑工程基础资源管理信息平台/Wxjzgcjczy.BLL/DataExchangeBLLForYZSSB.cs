@@ -21,6 +21,7 @@ namespace Wxjzgcjczy.BLL
     {
         //安监
         public const string AP_AJZZGZ = "Ap_ajzzgz";
+        public const string AP_AJSBB = "Ap_ajsbb";
 
 
         private readonly Wxjzgcjczy.DAL.Sqlserver.DataExchangeDALForYZSSB DAL = new Wxjzgcjczy.DAL.Sqlserver.DataExchangeDALForYZSSB();
@@ -233,6 +234,12 @@ namespace Wxjzgcjczy.BLL
                             row["PKID"] = dataRow["id"];
                             dt.Rows.Add(row);
                         }
+                        if (addResultSt == "未找到申报流水号")
+                        {
+                            //此申报流水号已删除，标记为已删除
+                            deleteAjsbbByUuid(dataRow["uuid"].ToString());
+                        }
+
                         if (addResultSt != "OK")
                         {
                             row["OperateState"] = 1;
@@ -955,6 +962,16 @@ namespace Wxjzgcjczy.BLL
 
         #endregion
 
+
+        public void deleteAjsbbByUuid(string uuid)
+        {
+            DataTable dt = DAL.GetAp_ajsbb_byuuid(uuid);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                dt.Rows[0]["UpdateFlag"] = "D";
+                DAL.SaveApTable(AP_AJSBB,dt);
+            }
+        }
 
         public void updateSBStatus(string uuid , int status)
         {
