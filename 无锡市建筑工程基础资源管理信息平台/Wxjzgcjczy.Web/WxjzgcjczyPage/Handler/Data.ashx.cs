@@ -88,7 +88,9 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                         //File.AppendAllText("E:\\test.txt", "111");
                         json = GetXmxx(context);
                         break;
-
+                    case "QueryProjectList":
+                        json = QueryProjectList(context);
+                        break;
                     case "SetLxxmGIS":
                         json = SetLxxmGIS(context);
                         break;
@@ -255,6 +257,47 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             {
                 str.Append("[");
                 DataTable dt = BLL.GetXmxx(ssdq, xmdjrq, xmmc);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    str.Append("{");
+                    str.AppendFormat("\"title\":\"{0}\",\"point\":\"{1}|{2}\",\"xmmc\":\"{3}\",\"jsdw\":\"{4}\",\"sgdw\":\"{5}\",\"jldw\":\"{6}\",\"kcdw\":\"{7}\",\"sjdw\":\"{8}\",\"kgrq\":\"{9}\",\"jsgm\":\"{10}\",\"xmztz\":\"{11}万元\",\"prjNum\":\"{12}\",\"isSgbz\":{13},\"PKID\":\"{14}\"",
+                        "工程项目概要信息", row["jd"], row["wd"], row["PrjName"].ToString().Replace("\"", ""), row["BuildCorpName"]
+                        , row["SgzcbCorpNames"] == DBNull.Value ? "" : row["SgzcbCorpNames"].ToString2().Trim(';')
+                        , row["JLCorpNames"] == DBNull.Value ? "" : row["JLCorpNames"].ToString2().Trim(';')
+                        , row["EconCorpNames"] == DBNull.Value ? "" : row["EconCorpNames"].ToString2().Trim(';')
+                        , row["DesignCorpNames"] == DBNull.Value ? "" : row["DesignCorpNames"].ToString2().Trim(';')
+                        , row["BDate"] == DBNull.Value ? "" : row["BDate"].ToDateTime().ToString("yyyy-MM-dd")
+                        , row["PrjSize"], row["AllInvest"] == DBNull.Value ? "0" : row["AllInvest"].ToString2()
+                        , row["PrjNum"], row["isSgbz"].ToInt32(0), row["PKID"]);
+                    str.Append("},");
+                }
+
+                return str.ToString().TrimEnd(',') + "]";
+
+            }
+            catch (Exception ex)
+            {
+                str.Append(ex.Message);
+
+            }
+            return str.ToString();
+
+        }
+
+
+        public string QueryProjectList(HttpContext context)
+        {
+            DataExchangeBLLForGIS BLL = new DataExchangeBLLForGIS();
+
+            string prjNum = context.Request.Params["prjNum"];
+            string prjName = context.Request.Params["prjName"];
+            string prjAddress = context.Request.Params["prjAddress"];
+            StringBuilder str = new StringBuilder();
+            try
+            {
+                str.Append("[");
+                DataTable dt = BLL.GetProject(prjNum, prjName, prjAddress);
 
                 foreach (DataRow row in dt.Rows)
                 {
