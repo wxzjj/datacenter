@@ -4647,10 +4647,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     {
                         str.AppendFormat("<{0}>", "data");
 
-                        str.AppendFormat("<{0}>", "projet");
+                        str.AppendFormat("<{0}>", "project");
                         mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
                         str.Append(mainXml);
-                        str.AppendFormat("</{0}>", "projet");
+                        str.AppendFormat("</{0}>", "project");
 
                         tempDt = SBBLL.GetSubProject(prjNum);
                         str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "subProjectList", "subProject"));
