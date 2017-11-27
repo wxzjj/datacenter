@@ -846,7 +846,7 @@ namespace Wxjzgcjczy.BLL
                 {
                     DataRow jdryRow = dt_tzs_jdry.NewRow();
                     DataTableHelp.DataRow2DataRow(jdryItem, jdryRow);
-                    jdryRow["id"] = row["id"];
+                    jdryRow["id"] = Guid.NewGuid();
                     jdryRow["uuid"] = row["uuid"];
                     dt_tzs_jdry.Rows.Add(jdryRow);
                 }
