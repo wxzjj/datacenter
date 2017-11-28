@@ -95,6 +95,8 @@
     <Compile Include="Common\DataTableHelp.cs" />
     <Compile Include="Common\Public.cs" />
     <Compile Include="Common\XmlHelper.cs" />
+    <Compile Include="model\Ap_sgxksqb_clqd.cs" />
+    <Compile Include="model\Qyxx.cs" />
     <Compile Include="YiZhanShiShenBao\DataFetchOfAJSB.cs" />
     <Compile Include="DataService.cs" />
     <Compile Include="model\DataBody.cs" />
