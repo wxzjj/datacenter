@@ -179,6 +179,100 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         /// <returns></returns>
         public DataTable GetSubProject(string prjNum, string sbdqbm, string beginDate, string endDate)
         {
+            //获取档案馆数据
+            DataTable rst = this.GetSubProjectFromXm_gcdjb_dtxm_doc(prjNum, sbdqbm, beginDate, endDate);
+
+            DataTable dt = null;
+
+            //获取四库旧数据
+            dt = this.GetSubProjectFromXm_gcdjb_dtxm(prjNum, sbdqbm, beginDate, endDate);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if(!this.exists(rst, dr))
+                    {
+                        rst.Rows.Add(dr.ItemArray);
+                    }
+                }
+            }
+
+            //获取四库新数据
+            dt = this.GetSubProjectFromAp_zjsbb(prjNum, sbdqbm, beginDate, endDate);
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (!this.exists(rst, dr))
+                    {
+                        rst.Rows.Add(dr.ItemArray);
+                    }
+                }
+            }
+
+
+            return rst;
+        }
+
+        /// <summary>
+        /// 从档案馆上传的表中获取
+        /// </summary>
+        /// <param name="prjNum"></param>
+        /// <param name="sbdqbm"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        private DataTable GetSubProjectFromXm_gcdjb_dtxm_doc(string prjNum, string sbdqbm, string beginDate, string endDate)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select a.PrjNum,a.fxbm,a.xmmc,'' AS sbdqbm, a.docNum");
+            sb.Append(" from xm_gcdjb_dtxm_doc a");
+            sb.Append(" where 1=1");
+
+            if (!string.IsNullOrEmpty(prjNum))
+            {
+                sp.Add("@prjNum", prjNum);
+                sb.Append(" and a.PrjNum=@prjNum");
+            }
+
+            /*
+            if (!string.IsNullOrEmpty(sbdqbm))
+            {
+                sp.Add("@sbdqbm", sbdqbm);
+                sb.Append(" and a.sbdqbm=@sbdqbm");
+            }
+             * */
+
+            if (!string.IsNullOrEmpty(beginDate))
+            {
+                sp.Add("@beginDate", beginDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)>=@beginDate");
+            }
+
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                sp.Add("@endDate", endDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.CreateDate, 120), 1, 10)<=@endDate");
+            }
+
+            return DB.ExeSqlForDataTable(sb.ToString(), sp, "xm_gcdjb_dtxm");
+        }
+
+        /// <summary>
+        /// 从四库旧的的表中获取
+        /// </summary>
+        /// <param name="prjNum"></param>
+        /// <param name="sbdqbm"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+
+        private DataTable GetSubProjectFromXm_gcdjb_dtxm(string prjNum, string sbdqbm, string beginDate, string endDate)
+        {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
             StringBuilder sb = new StringBuilder();
@@ -212,6 +306,71 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             }
 
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "xm_gcdjb_dtxm");
+        }
+
+        /// <summary>
+        /// 从四库新的表中获取
+        /// </summary>
+        /// <param name="prjNum"></param>
+        /// <param name="sbdqbm"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        private DataTable GetSubProjectFromAp_zjsbb(string prjNum, string sbdqbm, string beginDate, string endDate)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(" select b.PrjNum,a.dwgcbm AS fxbm, a.dwgcmc AS xmmc, '' AS sbdqbm,c.docNum");
+            sb.Append(" from Ap_zjsbb_dwgc a");
+            sb.Append(" left join Ap_zjsbb b on b.uuid=a.uuid");
+            sb.Append(" left join xm_gcdjb_dtxm_doc c on c.fxbm=a.dwgcbm");
+            sb.Append(" where 1=1");
+
+            if (!string.IsNullOrEmpty(prjNum))
+            {
+                sp.Add("@prjNum", prjNum);
+                sb.Append(" and b.PrjNum=@prjNum");
+            }
+
+            /*
+            if (!string.IsNullOrEmpty(sbdqbm))
+            {
+                sp.Add("@sbdqbm", sbdqbm);
+                sb.Append(" and a.sbdqbm=@sbdqbm");
+            }
+             */
+
+            if (!string.IsNullOrEmpty(beginDate))
+            {
+                sp.Add("@beginDate", beginDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), b.CreateDate, 120), 1, 10)>=@beginDate");
+            }
+
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                sp.Add("@endDate", endDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), b.CreateDate, 120), 1, 10)<=@endDate");
+            }
+
+            return DB.ExeSqlForDataTable(sb.ToString(), sp, "xm_gcdjb_dtxm");
+        }
+
+        private bool exists(DataTable dt, DataRow dr)
+        {
+            bool flag = false;
+
+            foreach (DataRow item in dt.Rows)
+            {
+                if (dr["fxbm"].Equals(item["fxbm"]))
+                {
+                    flag = true;
+                    break;
+                }
+            }
+
+            return flag;
         }
 
 

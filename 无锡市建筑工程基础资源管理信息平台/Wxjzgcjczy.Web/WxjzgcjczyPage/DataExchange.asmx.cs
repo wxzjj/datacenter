@@ -4152,12 +4152,11 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         /// </summary>
         /// <param name="user"></param>
         /// <param name="password"></param>
-        /// <param name="sbdqbm"></param>
         /// <param name="beginDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
         [WebMethod]
-        public string GetSubProjectInfo(string user, string password, string sbdqbm, string beginDate, string endDate)
+        public string GetSubProjectInfo(string user, string password, string beginDate, string endDate)
         {
             string apiFlowId = "30";
 
@@ -4176,7 +4175,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return result.ResultMessage;
                 }
 
-                DataTable mainDt = SBBLL.GetSubProjectInfo(sbdqbm, beginDate, endDate);
+                DataTable mainDt = SBBLL.GetSubProjectInfo("", beginDate, endDate);
 
                 if (mainDt == null || mainDt.Rows.Count == 0)
                 {
