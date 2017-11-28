@@ -28,7 +28,9 @@ CREATE TABLE [dbo].[TBProjectInfoDoc](
 
 CREATE TABLE [dbo].[xm_gcdjb_dtxm_doc](
 	[PKID] [varchar](50) NOT NULL,
+	[prjNum] [varchar](25) NOT NULL,
 	[fxbm] [varchar](25) NOT NULL,
+	[xmmc] [varchar](100) NOT NULL,
 	[docNum] [varchar](100) NOT NULL,
 	[gd] [varchar](25) NULL,
 	[dscs] [varchar](25) NULL,
