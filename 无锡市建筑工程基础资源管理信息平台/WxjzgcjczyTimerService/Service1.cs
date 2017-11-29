@@ -1235,12 +1235,8 @@ namespace WxjzgcjczyTimerService
                     DataRow row_DataJkDataDetail;
                     long Id_DataJkDataDetail = dataService.Get_DataJkDataDetailNewID().ToInt64();
 
-                    #region 数据处理
 
-                    DataShareServiceSpace.DataShareServiceSoapClient dataShareService = new DataShareServiceSpace.DataShareServiceSoapClient();
-                    DataTable dt_TBProjectInfo = dataService.GetTBData_AllTBProjectInfo();
                     DateTime beginDate, endDate;
-
                     if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["flag"]) && ConfigurationManager.AppSettings["flag"].Equals("1"))
                     {
                         beginDate = DateTime.Parse(ConfigurationManager.AppSettings["beginDate"]);
@@ -1252,470 +1248,18 @@ namespace WxjzgcjczyTimerService
                         endDate = DateTime.Today;
                     }
 
-                    int pageCount = 0;
-                    try
-                    {
-                        pageCount = dataShareService.GetTatalPageNum("3202000", "p3202000", beginDate, endDate, 9);
-                    }
-                    catch (Exception ex)
-                    {
-                        row_DataJkDataDetail = dt_DataJkDataDetail.NewRow();
-                        dt_DataJkDataDetail.Rows.Add(row_DataJkDataDetail);
+                    DataTable dt_TBProjectInfo = dataService.GetTBData_AllTBProjectInfo();
 
-                        row_DataJkDataDetail["ID"] = Id_DataJkDataDetail++;
-                        row_DataJkDataDetail["tableName"] = "TBBuilderLicenceManage";
-                        row_DataJkDataDetail["MethodName"] = "GetTatalPageNum";
-                        row_DataJkDataDetail["allCount"] = 0;
-                        row_DataJkDataDetail["successCount"] = 0;
-                        row_DataJkDataDetail["IsOk"] = 0;
-                        row_DataJkDataDetail["ErrorMsg"] = ex.Message;
-                        dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
-                        return;
+                    for (DateTime tmpDate = beginDate.AddDays(1); (tmpDate.CompareTo(endDate) < 0); )
+                    {
+                        row_DataJkDataDetail = PullDataFromSSgxkByDate(dataService, row_DataJkLog, dt_DataJkDataDetail, ref Id_DataJkDataDetail, dt_TBProjectInfo, tmpDate);
+
+                        //执行完之后，往后推一天
+                        beginDate = tmpDate;
+                        tmpDate = tmpDate.AddDays(1);
                     }
 
-                    Public.WriteLog("获取了共 " + pageCount + " 页施工许可数据：");
-
-                    int allCount_xm = 0, success_xm = 0;
-                    bool is_Ok = false;
-                    string errorMsg = "";
-                    row_DataJkDataDetail = dt_DataJkDataDetail.NewRow();
-                    dt_DataJkDataDetail.Rows.Add(row_DataJkDataDetail);
-                    row_DataJkDataDetail["ID"] = Id_DataJkDataDetail++;
-
-                    row_DataJkDataDetail["DataJkLogID"] = row_DataJkLog["ID"];
-                    row_DataJkDataDetail["tableName"] = "TBBuilderLicenceManage";
-                    row_DataJkDataDetail["MethodName"] = "ShareDataXML2";
-
-                    string resultStringRaw = string.Empty;
-                    string resultXmlString = string.Empty;
-
-                    try
-                    {
-                        for (int pageNum = 1; pageNum <= pageCount; pageNum++)
-                        {
-                            resultStringRaw = dataShareService.ShareDataXML2("3202000", "p3202000", beginDate, endDate, 9, pageNum);
-                            resultXmlString = xmlHelper.ConvertSpecialLetter(resultStringRaw);
-                            is_Ok = true;
-
-                            DataBody dataBody = xmlHelper.DeserializeXML<DataBody>("<DataBody>" + resultXmlString + "</DataBody>");
-                            string message = string.Empty;
-                            if (dataBody.xkxms == null || dataBody.xkxms.Count == 0)
-                            {
-                                row_DataJkDataDetail["ErrorMsg"] = "无数据";
-                                row_DataJkDataDetail["allCount"] = 0;
-                                row_DataJkDataDetail["successCount"] = 0;
-                                row_DataJkDataDetail["IsOk"] = 0;
-
-                                continue;
-                            }
-
-                            //List<Xkxm> toSaveXkxm = dataBody.xkxms.Where(p => (!string.IsNullOrEmpty(p.projectInfo.XiangMuBeiAnNum) && !string.IsNullOrEmpty(p.gcxx.applyConstInfo.XuKeZhengNum) && p.projectInfo.CodeNum.IndexOf("3202") >= 0)).ToList<Xkxm>();
-
-                            List<Xkxm> toSaveXkxm = dataBody.xkxms.Where(p => (
-                               p.projectInfo.XMSuoZaiDi.IndexOf("3202") >= 0
-                               && !string.IsNullOrEmpty(p.projectInfo.XiangMuBeiAnNum)
-                               && !string.IsNullOrEmpty(p.gcxx.applyConstInfo.XuKeZhengNum))).ToList<Xkxm>();
-
-                            Public.WriteLog("第" + pageNum + "页，获取了" + toSaveXkxm.Count + "条施工许可数据！");
-                            if (toSaveXkxm.Count == 0)
-                            {
-                                row_DataJkDataDetail["ErrorMsg"] = "无数据";
-                                row_DataJkDataDetail["allCount"] = 0;
-                                row_DataJkDataDetail["successCount"] = 0;
-                                row_DataJkDataDetail["IsOk"] = 0;
-
-                                continue;
-                            }
-
-                            DataTable dt_SaveDataLog = dataService.GetSchema_SaveDataLog();
-                            allCount_xm += toSaveXkxm.Count;
-                            foreach (Xkxm xkxm in toSaveXkxm)
-                            {
-                                DataRow row_SaveDataLog = dt_SaveDataLog.NewRow();
-                                dt_SaveDataLog.Rows.Add(row_SaveDataLog);
-                                row_SaveDataLog["DataJkDataDetailID"] = row_DataJkDataDetail["ID"];
-                                row_SaveDataLog["DataXml"] = xmlHelper.SerializeXML<Xkxm>(xkxm);
-                                row_SaveDataLog["CreateDate"] = DateTime.Now.ToString();
-
-                                try
-                                {
-                                    if (string.IsNullOrEmpty(xkxm.projectInfo.XiangMuBeiAnNum))
-                                    {
-                                        row_SaveDataLog["SaveState"] = 0;
-                                        row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                        row_SaveDataLog["Msg"] = "项目“" + xkxm.gcxx.applyConstInfo.GongChengName + "”的PrjNum不能为空，施工许可证编号为" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "！";
-
-                                        continue;
-                                    }
-
-                                    if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.XuKeZhengNum))
-                                    {
-                                        row_SaveDataLog["SaveState"] = 0;
-                                        row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                        row_SaveDataLog["Msg"] = "项目编号为“" + xkxm.projectInfo.XiangMuBeiAnNum + "”的项目施工许可证编号不能为空！";
-                                        continue;
-                                    }
-
-                                    if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum)
-                                         && string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.XuKeZhengNum))
-                                    {
-                                        row_SaveDataLog["SaveState"] = 0;
-                                        row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                        row_SaveDataLog["Msg"] = "项目编号为“" + xkxm.projectInfo.XiangMuBeiAnNum + "”的项目BuilderLicenceInnerNum与XuKeZhengNum不能为空！";
-
-                                        continue;
-                                    }
-
-                                    int flag = 0;
-                                    foreach (DataRow row in dt_TBProjectInfo.Rows)
-                                    {
-                                        if (row["PrjNum"].ToString().Equals(xkxm.projectInfo.XiangMuBeiAnNum))
-                                        {
-                                            flag = 1;
-                                            break;
-                                        }
-                                    }
-                                    if (flag == 0)
-                                    {
-                                        row_SaveDataLog["SaveState"] = 0;
-                                        row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                        row_SaveDataLog["Msg"] = "项目编号“" + xkxm.projectInfo.XiangMuBeiAnNum + "”不存在，施工许可证编号为" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "的施工许可添加失败！";
-                                        continue;
-                                    }
-
-                                    DataTable dt = dataService.GetTBData_TBBuilderLicenceManage(xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum, xkxm.gcxx.applyConstInfo.XuKeZhengNum);
-                                    DataRow dataRow;
-                                    StringBuilder str = new StringBuilder();
-
-                                    if (dt.Rows.Count == 0)
-                                    {
-                                        dataRow = dt.NewRow();
-                                        dt.Rows.Add(dataRow);
-                                        dataRow["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid;
-                                    }
-                                    else
-                                    {
-                                        dataRow = dt.Rows[0];
-
-                                        if (dataRow["CreateDate"].ToString2() == xkxm.gcxx.applyConstInfo.TiaoBaoDate)
-                                        {
-                                            continue;
-                                        }
-                                    }
-                                    if (!string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum))
-                                        dataRow["BuilderLicenceInnerNum"] = xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum;
-                                    else
-                                        dataRow["BuilderLicenceInnerNum"] = xkxm.gcxx.applyConstInfo.XuKeZhengNum;
-
-                                    dataRow["BuilderLicenceNum"] = xkxm.gcxx.applyConstInfo.XuKeZhengNum;
-                                    dataRow["BuilderLicenceName"] = xkxm.gcxx.applyConstInfo.GongChengName;
-                                    dataRow["RecordInnerNum"] = xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum;
-
-                                    dataRow["PrjNum"] = xkxm.projectInfo.XiangMuBeiAnNum;
-                                    dataRow["BuldPlanNum"] = "";
-                                    dataRow["ProjectPlanNum"] = "";
-                                    dataRow["CensorNum"] = "";
-                                    if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.HeTongJia))
-                                        dataRow["ContractMoney"] = 0;
-                                    else
-                                        dataRow["ContractMoney"] = xkxm.gcxx.applyConstInfo.HeTongJia;
-
-                                    if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.JianZuArea))
-                                        dataRow["Area"] = "0";
-                                    else
-                                        dataRow["Area"] = xkxm.gcxx.applyConstInfo.JianZuArea;
-                                    dataRow["PrjSize"] = xkxm.gcxx.applyConstInfo.JIanSheGuiMo;
-
-                                    dataRow["IssueCertDate"] = string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.ApplyZSDate) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : xkxm.gcxx.applyConstInfo.ApplyZSDate;
-
-                                    string EconCorpName = String.Empty, EconCorpCode = String.Empty,
-                                        DesignCorpName = String.Empty, DesignCorpCode = String.Empty
-                                        , ConsCorpName = String.Empty, ConsCorpCode = String.Empty
-                                        , ConstructorName = String.Empty, CIDCardTypeNum = String.Empty, ConstructorIDCard = String.Empty, ConstructorPhone = String.Empty
-    , SuperCorpName = String.Empty, SuperCorpCode = String.Empty, SupervisionName = String.Empty, SIDCardTypeNum = String.Empty, SupervisionIDCard = String.Empty, SupervisionPhone = String.Empty;
-
-                                    #region 单位信息
-
-                                    foreach (Jscin_SGXK_CanJianDanW cjdw in xkxm.gcxx.canJianDanW)
-                                    {
-                                        string zzjgdm = "";
-                                        if (!string.IsNullOrEmpty(cjdw.OrganizationRegCode)
-                                            && cjdw.OrganizationRegCode.Length == 9 && cjdw.OrganizationRegCode.IndexOf('-') < 0)
-                                        {
-                                            zzjgdm = cjdw.OrganizationRegCode.Substring(0, 8) + "-" + cjdw.OrganizationRegCode.Substring(8);
-                                        }
-                                        else
-                                        {
-                                            zzjgdm = cjdw.OrganizationRegCode;
-                                        }
-
-                                        //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
-                                        if (zzjgdm.Length != 18)
-                                        {
-                                            string qyShxydm = dataService.Get_UEPP_Qyjbxx_Shxydm(zzjgdm);
-                                            if (!string.IsNullOrEmpty(qyShxydm))
-                                            {
-                                                zzjgdm = qyShxydm;
-                                            }
-                                        }
-
-                                        switch (cjdw.CanJianDWType)
-                                        {
-                                            case "0004"://"勘察单位":
-
-                                                EconCorpName = cjdw.CanJianDWName;
-                                                EconCorpCode = zzjgdm;
-                                                break;
-
-                                            case "0003"://"设计单位":
-
-                                                DesignCorpName = cjdw.CanJianDWName;
-                                                DesignCorpCode = zzjgdm;
-
-                                                break;
-                                            case "0002"://"施工单位（总包）":
-
-                                                ConsCorpName = cjdw.CanJianDWName;
-                                                ConsCorpCode = zzjgdm;
-
-                                                ConstructorName = cjdw.CanJianFZMan;
-                                                CIDCardTypeNum = "1";
-                                                ConstructorIDCard = cjdw.IdentifyNum;
-                                                ConstructorPhone = "";
-                                                break;
-
-                                            case "0001"://"监理单位":
-
-                                                SuperCorpName = cjdw.CanJianDWName;
-                                                SuperCorpCode = zzjgdm;
-
-                                                SupervisionName = cjdw.CanJianFZMan;
-                                                SIDCardTypeNum = "1";
-                                                SupervisionIDCard = cjdw.IdentifyNum;
-                                                SupervisionPhone = "";
-
-                                                break;
-
-                                            case "0005"://"施工单位（分包）":
-
-                                                ConsCorpName = cjdw.CanJianDWName;
-                                                ConsCorpCode = zzjgdm;
-
-                                                ConstructorName = cjdw.CanJianFZMan;
-                                                CIDCardTypeNum = "1";
-                                                ConstructorIDCard = cjdw.IdentifyNum;
-                                                ConstructorPhone = "";
-                                                break;
-                                            case "0006"://"工程总承包":
-
-                                                ConsCorpName = cjdw.CanJianDWName;
-                                                ConsCorpCode = zzjgdm;
-
-                                                ConstructorName = cjdw.CanJianFZMan;
-                                                CIDCardTypeNum = "1";
-                                                ConstructorIDCard = cjdw.IdentifyNum;
-                                                ConstructorPhone = "";
-                                                break;
-
-                                            case "0007"://"专业承包":
-
-                                                ConsCorpName = cjdw.CanJianDWName;
-                                                ConsCorpCode = zzjgdm;
-
-                                                ConstructorName = cjdw.CanJianFZMan;
-                                                CIDCardTypeNum = "1";
-                                                ConstructorIDCard = cjdw.IdentifyNum;
-                                                ConstructorPhone = "";
-                                                break;
-                                        }
-                                    }
-                                    #endregion
-
-                                    if (String.IsNullOrEmpty(EconCorpName))
-                                    {
-                                        dataRow["EconCorpName"] = "/";
-                                    }
-                                    else
-                                    {
-                                        dataRow["EconCorpName"] = EconCorpName;
-                                    }
-                                    if (String.IsNullOrEmpty(EconCorpCode))
-                                    {
-                                        dataRow["EconCorpCode"] = "/";
-                                    }
-                                    else
-                                    {
-                                        dataRow["EconCorpCode"] = EconCorpCode;
-                                    }
-
-                                    if (String.IsNullOrEmpty(DesignCorpName))
-                                    {
-                                        dataRow["DesignCorpName"] = "/";
-                                    }
-                                    else
-                                    {
-                                        dataRow["DesignCorpName"] = DesignCorpName;
-                                    }
-
-                                    if (String.IsNullOrEmpty(DesignCorpCode))
-                                    {
-                                        dataRow["DesignCorpCode"] = "/";
-                                    }
-                                    else
-                                    {
-                                        dataRow["DesignCorpCode"] = DesignCorpCode;
-                                    }
-
-                                    if (String.IsNullOrEmpty(ConsCorpName))
-                                    {
-                                        //dataRow["ConsCorpName"] = "/";
-                                        row_SaveDataLog["SaveState"] = 0;
-                                        row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                        row_SaveDataLog["Msg"] = "施工许可证编号为“" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "”的项目施工单位不能为空！";
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        dataRow["ConsCorpName"] = ConsCorpName;
-                                    }
-
-                                    if (String.IsNullOrEmpty(ConsCorpCode))
-                                    {
-                                        dataRow["ConsCorpCode"] = "/";
-                                    }
-                                    else
-                                    {
-                                        dataRow["ConsCorpCode"] = ConsCorpCode;
-                                    }
-
-                                    if (String.IsNullOrEmpty(ConstructorName))
-                                    {
-                                        dataRow["ConstructorName"] = "/";
-                                        dataRow["CIDCardTypeNum"] = "1";
-                                        dataRow["ConstructorIDCard"] = "/";
-                                    }
-                                    else
-                                    {
-                                        dataRow["ConstructorName"] = ConstructorName;
-                                        dataRow["CIDCardTypeNum"] = CIDCardTypeNum;
-                                        dataRow["ConstructorIDCard"] = ConstructorIDCard;
-                                    }
-
-                                    if (String.IsNullOrEmpty(SuperCorpName))
-                                    {
-                                        dataRow["SuperCorpName"] = "/";
-                                    }
-                                    else
-                                    {
-                                        dataRow["SuperCorpName"] = SuperCorpName;
-                                    }
-
-                                    if (String.IsNullOrEmpty(SuperCorpCode))
-                                    {
-                                        dataRow["SuperCorpCode"] = "/";
-                                    }
-                                    else
-                                    {
-                                        dataRow["SuperCorpCode"] = SuperCorpCode;
-                                    }
-
-                                    if (String.IsNullOrEmpty(SupervisionName))
-                                    {
-                                        dataRow["SupervisionName"] = "/";
-                                        dataRow["SIDCardTypeNum"] = "1";
-                                        dataRow["SupervisionIDCard"] = "/";
-                                        dataRow["SupervisionPhone"] = "";
-                                    }
-                                    else
-                                    {
-                                        dataRow["SupervisionName"] = SupervisionName;
-                                        dataRow["SIDCardTypeNum"] = SIDCardTypeNum;
-                                        dataRow["SupervisionIDCard"] = SupervisionIDCard;
-                                        dataRow["SupervisionPhone"] = SupervisionPhone;
-                                    }
-
-                                    dataRow["SafetyCerID"] = "";
-                                    dataRow["CreateDate"] = xkxm.gcxx.applyConstInfo.TiaoBaoDate;
-                                    dataRow["UpdateFlag"] = "U";
-                                    dataRow["sbdqbm"] = xkxm.projectInfo.XMSuoZaiDi.Substring(0, 6);
-
-                                    if (dt.Rows.Count > 0)
-                                    {
-                                        if (dataService.Submit_TBBuilderLicenceManage(dt))
-                                        {
-                                            row_SaveDataLog["SaveState"] = 1;
-                                            row_SaveDataLog["PKID"] = dataRow["PKID"];
-                                            row_SaveDataLog["Msg"] = "施工许可添加成功！";
-                                            row_SaveDataLog["CreateDate"] = DateTime.Now.ToString();
-                                            success_xm++;
-                                        }
-                                        else
-                                        {
-                                            row_SaveDataLog["SaveState"] = 0;
-                                            row_SaveDataLog["PKID"] = dataRow["PKID"];
-                                            row_SaveDataLog["Msg"] = "施工许可添加失败！";
-                                            row_SaveDataLog["CreateDate"] = DateTime.Now.ToString();
-                                        }
-
-                                        try
-                                        {
-                                            decimal d;
-
-                                            if (!string.IsNullOrEmpty(xkxm.projectInfo.XiangMuBeiAnNum)
-                                                && !string.IsNullOrEmpty(xkxm.projectInfo.Longitude)
-                                                && !string.IsNullOrEmpty(xkxm.projectInfo.Latitude)
-                                                && Decimal.TryParse(xkxm.projectInfo.Longitude, out d)
-                                                && Decimal.TryParse(xkxm.projectInfo.Latitude, out d))
-                                            {
-                                                string sql = "update TBProjectInfo set jd=@jd ,wd=@wd where PrjNum=@PrjNum and (jd=0 or jd is null or jd=0 or wd is null)  ";
-                                                SqlParameterCollection sp = dataService.DB.CreateSqlParameterCollection();
-                                                sp.Add("@PrjNum", xkxm.projectInfo.XiangMuBeiAnNum);
-                                                sp.Add("@jd", xkxm.projectInfo.Longitude);
-                                                sp.Add("@wd", xkxm.projectInfo.Latitude);
-                                                dataService.DB.ExecuteNonQuerySql(sql, sp);
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常1:" + ex.Message);
-                                        }
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常:" + ex.Message);
-                                    Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常:BuilderLicenceInnerNum:" + xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum + ",XuKeZhengNum" + xkxm.gcxx.applyConstInfo.XuKeZhengNum);
-                                 
-                                    row_SaveDataLog["SaveState"] = 0;
-                                    row_SaveDataLog["Msg"] = ex.Message;
-                                }
-                            }
-                            if (dt_SaveDataLog.Rows.Count > 0)
-                            {
-                                dataService.Submit_SaveDataLog(dt_SaveDataLog);
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        errorMsg = ex.Message;
-                        //methodMessage += "GetTatalPageNum:" + ex.Message + ";";
-                    }
-
-                    row_DataJkDataDetail["ErrorMsg"] = errorMsg;
-                    row_DataJkDataDetail["allCount"] = allCount_xm;
-                    row_DataJkDataDetail["successCount"] = success_xm;
-
-                    if (is_Ok)
-                    {
-                        row_DataJkDataDetail["IsOk"] = 1;
-                    }
-                    else
-                    {
-                        row_DataJkDataDetail["IsOk"] = 0;
-                    }
-
-                    #endregion
+                   
 
                     if (dt_DataJkDataDetail.Rows.Count > 0)
                         dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
@@ -1749,6 +1293,498 @@ namespace WxjzgcjczyTimerService
                 }
             }
         }
+
+        private DataRow PullDataFromSSgxkByDate(DataService dataService, DataRow row_DataJkLog, DataTable dt_DataJkDataDetail, ref long Id_DataJkDataDetail, 
+            DataTable dt_TBProjectInfo,
+            DateTime date)
+        {
+            DataRow row_DataJkDataDetail;
+            #region 数据处理
+
+            DataShareServiceSpace.DataShareServiceSoapClient dataShareService = new DataShareServiceSpace.DataShareServiceSoapClient();
+            //DataTable dt_TBProjectInfo = dataService.GetTBData_AllTBProjectInfo();
+
+            /**
+            int pageCount = 0;
+            try
+            {
+                pageCount = dataShareService.GetTatalPageNum("3202000", "p3202000", date, date, 9);
+            }
+            catch (Exception ex)
+            {
+                row_DataJkDataDetail = dt_DataJkDataDetail.NewRow();
+                dt_DataJkDataDetail.Rows.Add(row_DataJkDataDetail);
+
+                row_DataJkDataDetail["ID"] = Id_DataJkDataDetail++;
+                row_DataJkDataDetail["tableName"] = "TBBuilderLicenceManage";
+                row_DataJkDataDetail["MethodName"] = "GetTatalPageNum";
+                row_DataJkDataDetail["allCount"] = 0;
+                row_DataJkDataDetail["successCount"] = 0;
+                row_DataJkDataDetail["IsOk"] = 0;
+                row_DataJkDataDetail["ErrorMsg"] = ex.Message;
+                dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
+                //return;
+            }*/
+
+            Public.WriteLog("获取" + date.ToString() + "施工许可数据：");
+
+            int allCount_xm = 0, success_xm = 0;
+            bool is_Ok = false;
+            string errorMsg = "";
+            row_DataJkDataDetail = dt_DataJkDataDetail.NewRow();
+            dt_DataJkDataDetail.Rows.Add(row_DataJkDataDetail);
+            row_DataJkDataDetail["ID"] = Id_DataJkDataDetail++;
+
+            row_DataJkDataDetail["DataJkLogID"] = row_DataJkLog["ID"];
+            row_DataJkDataDetail["tableName"] = "TBBuilderLicenceManage";
+            row_DataJkDataDetail["MethodName"] = "ShareDataXML2";
+
+            string resultStringRaw = string.Empty;
+            string resultXmlString = string.Empty;
+
+            try
+            {
+                //for (int pageNum = 1; pageNum <= pageCount; pageNum++)
+                //{
+                int pageNum = 0;
+                   // Public.WriteLog("第" + pageNum + "页");
+                    try
+                    {
+                        resultStringRaw = dataShareService.ShareDataXML2("3202000", "p3202000", date, date.AddDays(1), 9, pageNum);
+                    }
+                    catch (Exception ex)
+                    {
+                        errorMsg = ex.Message;
+                        Public.WriteLog("调用接口ShareDataXML2异常:pageNum：" + pageNum + ",beginDate:" + date.ToString()  + ",ex:" + ex.Message);
+                        //continue;
+                    }
+                    Public.WriteLog(resultXmlString);
+                    resultXmlString = xmlHelper.ConvertSpecialLetter(resultStringRaw);
+                    is_Ok = true;
+
+                    DataBody dataBody = xmlHelper.DeserializeXML<DataBody>("<DataBody>" + resultXmlString + "</DataBody>");
+                    string message = string.Empty;
+                    if (dataBody.xkxms == null || dataBody.xkxms.Count == 0)
+                    {
+                        row_DataJkDataDetail["ErrorMsg"] = "无数据";
+                        row_DataJkDataDetail["allCount"] = 0;
+                        row_DataJkDataDetail["successCount"] = 0;
+                        row_DataJkDataDetail["IsOk"] = 0;
+
+                        //continue;
+                    }
+
+                    //List<Xkxm> toSaveXkxm = dataBody.xkxms.Where(p => (!string.IsNullOrEmpty(p.projectInfo.XiangMuBeiAnNum) && !string.IsNullOrEmpty(p.gcxx.applyConstInfo.XuKeZhengNum) && p.projectInfo.CodeNum.IndexOf("3202") >= 0)).ToList<Xkxm>();
+
+                    List<Xkxm> toSaveXkxm = dataBody.xkxms.Where(p => (
+                       p.projectInfo.XMSuoZaiDi.IndexOf("3202") >= 0
+                       && !string.IsNullOrEmpty(p.projectInfo.XiangMuBeiAnNum)
+                       && !string.IsNullOrEmpty(p.gcxx.applyConstInfo.XuKeZhengNum))).ToList<Xkxm>();
+
+                    Public.WriteLog("第" + pageNum + "页，获取了" + toSaveXkxm.Count + "条施工许可数据！原有总条数：" + dataBody.xkxms.Count);
+                    if (toSaveXkxm.Count == 0)
+                    {
+                        row_DataJkDataDetail["ErrorMsg"] = "无数据";
+                        row_DataJkDataDetail["allCount"] = 0;
+                        row_DataJkDataDetail["successCount"] = 0;
+                        row_DataJkDataDetail["IsOk"] = 0;
+
+                        //continue;
+                    }
+
+                    DataTable dt_SaveDataLog = dataService.GetSchema_SaveDataLog();
+                    allCount_xm += toSaveXkxm.Count;
+                    foreach (Xkxm xkxm in toSaveXkxm)
+                    {
+                        DataRow row_SaveDataLog = dt_SaveDataLog.NewRow();
+                        dt_SaveDataLog.Rows.Add(row_SaveDataLog);
+                        row_SaveDataLog["DataJkDataDetailID"] = row_DataJkDataDetail["ID"];
+                        row_SaveDataLog["DataXml"] = xmlHelper.SerializeXML<Xkxm>(xkxm);
+                        row_SaveDataLog["CreateDate"] = DateTime.Now.ToString();
+
+                        try
+                        {
+                            if (string.IsNullOrEmpty(xkxm.projectInfo.XiangMuBeiAnNum))
+                            {
+                                row_SaveDataLog["SaveState"] = 0;
+                                row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
+                                row_SaveDataLog["Msg"] = "项目“" + xkxm.gcxx.applyConstInfo.GongChengName + "”的PrjNum不能为空，施工许可证编号为" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "！";
+
+                                continue;
+                            }
+
+                            if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.XuKeZhengNum))
+                            {
+                                row_SaveDataLog["SaveState"] = 0;
+                                row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
+                                row_SaveDataLog["Msg"] = "项目编号为“" + xkxm.projectInfo.XiangMuBeiAnNum + "”的项目施工许可证编号不能为空！";
+                                continue;
+                            }
+
+                            if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum)
+                                 && string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.XuKeZhengNum))
+                            {
+                                row_SaveDataLog["SaveState"] = 0;
+                                row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
+                                row_SaveDataLog["Msg"] = "项目编号为“" + xkxm.projectInfo.XiangMuBeiAnNum + "”的项目BuilderLicenceInnerNum与XuKeZhengNum不能为空！";
+
+                                continue;
+                            }
+
+                            int flag = 0;
+                            foreach (DataRow row in dt_TBProjectInfo.Rows)
+                            {
+                                if (row["PrjNum"].ToString().Equals(xkxm.projectInfo.XiangMuBeiAnNum))
+                                {
+                                    flag = 1;
+                                    break;
+                                }
+                            }
+                            if (flag == 0)
+                            {
+                                row_SaveDataLog["SaveState"] = 0;
+                                row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
+                                row_SaveDataLog["Msg"] = "项目编号“" + xkxm.projectInfo.XiangMuBeiAnNum + "”不存在，施工许可证编号为" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "的施工许可添加失败！";
+                                continue;
+                            }
+
+                            DataTable dt = dataService.GetTBData_TBBuilderLicenceManage(xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum, xkxm.gcxx.applyConstInfo.XuKeZhengNum);
+                            DataRow dataRow;
+                            StringBuilder str = new StringBuilder();
+
+                            if (dt.Rows.Count == 0)
+                            {
+                                dataRow = dt.NewRow();
+                                dt.Rows.Add(dataRow);
+                                dataRow["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid;
+                            }
+                            else
+                            {
+                                dataRow = dt.Rows[0];
+
+                                if (dataRow["CreateDate"].ToString2() == xkxm.gcxx.applyConstInfo.TiaoBaoDate)
+                                {
+                                    continue;
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum))
+                                dataRow["BuilderLicenceInnerNum"] = xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum;
+                            else
+                                dataRow["BuilderLicenceInnerNum"] = xkxm.gcxx.applyConstInfo.XuKeZhengNum;
+
+                            dataRow["BuilderLicenceNum"] = xkxm.gcxx.applyConstInfo.XuKeZhengNum;
+                            dataRow["BuilderLicenceName"] = xkxm.gcxx.applyConstInfo.GongChengName;
+                            dataRow["RecordInnerNum"] = xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum;
+
+                            dataRow["PrjNum"] = xkxm.projectInfo.XiangMuBeiAnNum;
+                            dataRow["BuldPlanNum"] = "";
+                            dataRow["ProjectPlanNum"] = "";
+                            dataRow["CensorNum"] = "";
+                            if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.HeTongJia))
+                                dataRow["ContractMoney"] = 0;
+                            else
+                                dataRow["ContractMoney"] = xkxm.gcxx.applyConstInfo.HeTongJia;
+
+                            if (string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.JianZuArea))
+                                dataRow["Area"] = "0";
+                            else
+                                dataRow["Area"] = xkxm.gcxx.applyConstInfo.JianZuArea;
+                            dataRow["PrjSize"] = xkxm.gcxx.applyConstInfo.JIanSheGuiMo;
+
+                            dataRow["IssueCertDate"] = string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.ApplyZSDate) ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : xkxm.gcxx.applyConstInfo.ApplyZSDate;
+
+                            string EconCorpName = String.Empty, EconCorpCode = String.Empty,
+                                DesignCorpName = String.Empty, DesignCorpCode = String.Empty
+                                , ConsCorpName = String.Empty, ConsCorpCode = String.Empty
+                                , ConstructorName = String.Empty, CIDCardTypeNum = String.Empty, ConstructorIDCard = String.Empty, ConstructorPhone = String.Empty
+, SuperCorpName = String.Empty, SuperCorpCode = String.Empty, SupervisionName = String.Empty, SIDCardTypeNum = String.Empty, SupervisionIDCard = String.Empty, SupervisionPhone = String.Empty;
+
+                            #region 单位信息
+
+                            foreach (Jscin_SGXK_CanJianDanW cjdw in xkxm.gcxx.canJianDanW)
+                            {
+                                string zzjgdm = "";
+                                if (!string.IsNullOrEmpty(cjdw.OrganizationRegCode)
+                                    && cjdw.OrganizationRegCode.Length == 9 && cjdw.OrganizationRegCode.IndexOf('-') < 0)
+                                {
+                                    zzjgdm = cjdw.OrganizationRegCode.Substring(0, 8) + "-" + cjdw.OrganizationRegCode.Substring(8);
+                                }
+                                else
+                                {
+                                    zzjgdm = cjdw.OrganizationRegCode;
+                                }
+
+                                //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
+                                if (zzjgdm.Length != 18)
+                                {
+                                    string qyShxydm = dataService.Get_UEPP_Qyjbxx_Shxydm(zzjgdm);
+                                    if (!string.IsNullOrEmpty(qyShxydm))
+                                    {
+                                        zzjgdm = qyShxydm;
+                                    }
+                                }
+
+                                switch (cjdw.CanJianDWType)
+                                {
+                                    case "0004"://"勘察单位":
+
+                                        EconCorpName = cjdw.CanJianDWName;
+                                        EconCorpCode = zzjgdm;
+                                        break;
+
+                                    case "0003"://"设计单位":
+
+                                        DesignCorpName = cjdw.CanJianDWName;
+                                        DesignCorpCode = zzjgdm;
+
+                                        break;
+                                    case "0002"://"施工单位（总包）":
+
+                                        ConsCorpName = cjdw.CanJianDWName;
+                                        ConsCorpCode = zzjgdm;
+
+                                        ConstructorName = cjdw.CanJianFZMan;
+                                        CIDCardTypeNum = "1";
+                                        ConstructorIDCard = cjdw.IdentifyNum;
+                                        ConstructorPhone = "";
+                                        break;
+
+                                    case "0001"://"监理单位":
+
+                                        SuperCorpName = cjdw.CanJianDWName;
+                                        SuperCorpCode = zzjgdm;
+
+                                        SupervisionName = cjdw.CanJianFZMan;
+                                        SIDCardTypeNum = "1";
+                                        SupervisionIDCard = cjdw.IdentifyNum;
+                                        SupervisionPhone = "";
+
+                                        break;
+
+                                    case "0005"://"施工单位（分包）":
+
+                                        ConsCorpName = cjdw.CanJianDWName;
+                                        ConsCorpCode = zzjgdm;
+
+                                        ConstructorName = cjdw.CanJianFZMan;
+                                        CIDCardTypeNum = "1";
+                                        ConstructorIDCard = cjdw.IdentifyNum;
+                                        ConstructorPhone = "";
+                                        break;
+                                    case "0006"://"工程总承包":
+
+                                        ConsCorpName = cjdw.CanJianDWName;
+                                        ConsCorpCode = zzjgdm;
+
+                                        ConstructorName = cjdw.CanJianFZMan;
+                                        CIDCardTypeNum = "1";
+                                        ConstructorIDCard = cjdw.IdentifyNum;
+                                        ConstructorPhone = "";
+                                        break;
+
+                                    case "0007"://"专业承包":
+
+                                        ConsCorpName = cjdw.CanJianDWName;
+                                        ConsCorpCode = zzjgdm;
+
+                                        ConstructorName = cjdw.CanJianFZMan;
+                                        CIDCardTypeNum = "1";
+                                        ConstructorIDCard = cjdw.IdentifyNum;
+                                        ConstructorPhone = "";
+                                        break;
+                                }
+                            }
+                            #endregion
+
+                            if (String.IsNullOrEmpty(EconCorpName))
+                            {
+                                dataRow["EconCorpName"] = "/";
+                            }
+                            else
+                            {
+                                dataRow["EconCorpName"] = EconCorpName;
+                            }
+                            if (String.IsNullOrEmpty(EconCorpCode))
+                            {
+                                dataRow["EconCorpCode"] = "/";
+                            }
+                            else
+                            {
+                                dataRow["EconCorpCode"] = EconCorpCode;
+                            }
+
+                            if (String.IsNullOrEmpty(DesignCorpName))
+                            {
+                                dataRow["DesignCorpName"] = "/";
+                            }
+                            else
+                            {
+                                dataRow["DesignCorpName"] = DesignCorpName;
+                            }
+
+                            if (String.IsNullOrEmpty(DesignCorpCode))
+                            {
+                                dataRow["DesignCorpCode"] = "/";
+                            }
+                            else
+                            {
+                                dataRow["DesignCorpCode"] = DesignCorpCode;
+                            }
+
+                            if (String.IsNullOrEmpty(ConsCorpName))
+                            {
+                                //dataRow["ConsCorpName"] = "/";
+                                row_SaveDataLog["SaveState"] = 0;
+                                row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
+                                row_SaveDataLog["Msg"] = "施工许可证编号为“" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "”的项目施工单位不能为空！";
+                                continue;
+                            }
+                            else
+                            {
+                                dataRow["ConsCorpName"] = ConsCorpName;
+                            }
+
+                            if (String.IsNullOrEmpty(ConsCorpCode))
+                            {
+                                dataRow["ConsCorpCode"] = "/";
+                            }
+                            else
+                            {
+                                dataRow["ConsCorpCode"] = ConsCorpCode;
+                            }
+
+                            if (String.IsNullOrEmpty(ConstructorName))
+                            {
+                                dataRow["ConstructorName"] = "/";
+                                dataRow["CIDCardTypeNum"] = "1";
+                                dataRow["ConstructorIDCard"] = "/";
+                            }
+                            else
+                            {
+                                dataRow["ConstructorName"] = ConstructorName;
+                                dataRow["CIDCardTypeNum"] = CIDCardTypeNum;
+                                dataRow["ConstructorIDCard"] = ConstructorIDCard;
+                            }
+
+                            if (String.IsNullOrEmpty(SuperCorpName))
+                            {
+                                dataRow["SuperCorpName"] = "/";
+                            }
+                            else
+                            {
+                                dataRow["SuperCorpName"] = SuperCorpName;
+                            }
+
+                            if (String.IsNullOrEmpty(SuperCorpCode))
+                            {
+                                dataRow["SuperCorpCode"] = "/";
+                            }
+                            else
+                            {
+                                dataRow["SuperCorpCode"] = SuperCorpCode;
+                            }
+
+                            if (String.IsNullOrEmpty(SupervisionName))
+                            {
+                                dataRow["SupervisionName"] = "/";
+                                dataRow["SIDCardTypeNum"] = "1";
+                                dataRow["SupervisionIDCard"] = "/";
+                                dataRow["SupervisionPhone"] = "";
+                            }
+                            else
+                            {
+                                dataRow["SupervisionName"] = SupervisionName;
+                                dataRow["SIDCardTypeNum"] = SIDCardTypeNum;
+                                dataRow["SupervisionIDCard"] = SupervisionIDCard;
+                                dataRow["SupervisionPhone"] = SupervisionPhone;
+                            }
+
+                            dataRow["SafetyCerID"] = "";
+                            dataRow["CreateDate"] = xkxm.gcxx.applyConstInfo.TiaoBaoDate;
+                            dataRow["UpdateFlag"] = "U";
+                            dataRow["sbdqbm"] = xkxm.projectInfo.XMSuoZaiDi.Substring(0, 6);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                if (dataService.Submit_TBBuilderLicenceManage(dt))
+                                {
+                                    row_SaveDataLog["SaveState"] = 1;
+                                    row_SaveDataLog["PKID"] = dataRow["PKID"];
+                                    row_SaveDataLog["Msg"] = "施工许可添加成功！";
+                                    row_SaveDataLog["CreateDate"] = DateTime.Now.ToString();
+                                    success_xm++;
+                                }
+                                else
+                                {
+                                    row_SaveDataLog["SaveState"] = 0;
+                                    row_SaveDataLog["PKID"] = dataRow["PKID"];
+                                    row_SaveDataLog["Msg"] = "施工许可添加失败！";
+                                    row_SaveDataLog["CreateDate"] = DateTime.Now.ToString();
+                                }
+
+                                try
+                                {
+                                    decimal d;
+
+                                    if (!string.IsNullOrEmpty(xkxm.projectInfo.XiangMuBeiAnNum)
+                                        && !string.IsNullOrEmpty(xkxm.projectInfo.Longitude)
+                                        && !string.IsNullOrEmpty(xkxm.projectInfo.Latitude)
+                                        && Decimal.TryParse(xkxm.projectInfo.Longitude, out d)
+                                        && Decimal.TryParse(xkxm.projectInfo.Latitude, out d))
+                                    {
+                                        string sql = "update TBProjectInfo set jd=@jd ,wd=@wd where PrjNum=@PrjNum and (jd=0 or jd is null or jd=0 or wd is null)  ";
+                                        SqlParameterCollection sp = dataService.DB.CreateSqlParameterCollection();
+                                        sp.Add("@PrjNum", xkxm.projectInfo.XiangMuBeiAnNum);
+                                        sp.Add("@jd", xkxm.projectInfo.Longitude);
+                                        sp.Add("@wd", xkxm.projectInfo.Latitude);
+                                        dataService.DB.ExecuteNonQuerySql(sql, sp);
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常1:" + ex.Message);
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常:" + ex.Message);
+                            Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常:BuilderLicenceInnerNum:" + xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum + ",XuKeZhengNum" + xkxm.gcxx.applyConstInfo.XuKeZhengNum);
+
+                            row_SaveDataLog["SaveState"] = 0;
+                            row_SaveDataLog["Msg"] = ex.Message;
+                        }
+                    }
+                    if (dt_SaveDataLog.Rows.Count > 0)
+                    {
+                        dataService.Submit_SaveDataLog(dt_SaveDataLog);
+                    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                errorMsg = ex.Message;
+                Public.WriteLog("--执行YourTask_PullDataFromSSgxk方法出现异常:" + ex.Message);
+                //methodMessage += "GetTatalPageNum:" + ex.Message + ";";
+            }
+
+            row_DataJkDataDetail["ErrorMsg"] = errorMsg;
+            row_DataJkDataDetail["allCount"] = allCount_xm;
+            row_DataJkDataDetail["successCount"] = success_xm;
+
+            if (is_Ok)
+            {
+                row_DataJkDataDetail["IsOk"] = 1;
+            }
+            else
+            {
+                row_DataJkDataDetail["IsOk"] = 0;
+            }
+
+            #endregion
+            return row_DataJkDataDetail;
+        }
+
 
         /// <summary>
         /// 获取一号通系统里的建设单位信息
