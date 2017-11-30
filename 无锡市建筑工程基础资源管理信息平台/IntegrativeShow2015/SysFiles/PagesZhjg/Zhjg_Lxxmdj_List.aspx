@@ -12,13 +12,24 @@
     <script src="../../MyDatePicker/WdatePicker.js" type="text/javascript"></script>
        
     <script type="text/javascript">
-         $(function () {
+        $(function () {
 
-             $("input[FieldType='Date']").click(function () {
-                 WdatePicker({ isShowClear: true, readOnly: true });
-             });
+            $("input[FieldType='Date']").click(function () {
+                WdatePicker({ isShowClear: true, readOnly: true });
+            });
 
-         });
+        });
+        function uploadToSt(pkid) {
+            $.ajax({
+                type: 'POST',
+                url: '/WxjzgcjczyPage/Handler/Data.ashx?type=uploadToStTBProjectInfo&PKID=' + pkid,
+                async: false,
+                data: null,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }
     </script>
 
 </head>
@@ -297,11 +308,17 @@
                                 <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%# Int32.Parse(Eval("OperateState").ToString())==0?"已上报":(Int32.Parse(Eval("OperateState").ToString())==2?"来自省一体化平台":"未上报")%>' 
                                 NavigateUrl='<%#string.Format("/WxjzgcjczyQyb/WxjzgcjczyQybPage/Xxgx/JbZxjk_FailureList.aspx?pkid={0}",Eval("PKID")) %>'
                                     Target="_blank" />
+                                   
+                                <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
+                                <button type="button" id ="uploadToStBtn" value='<%#Eval("PKID") %>' onclick='uploadToSt("<%#Eval("PKID") %>")'>上报</button>
+                                <% } else { %>  <% } %>
 
+                                
                             </ItemTemplate>
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="70px" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:TemplateField>
+                        
                         <asp:BoundField HeaderText="项目编号" DataField="PrjNum">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="120px" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />

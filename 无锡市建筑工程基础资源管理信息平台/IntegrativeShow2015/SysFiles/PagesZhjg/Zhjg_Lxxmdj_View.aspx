@@ -263,7 +263,7 @@
         <!-- 项目补充信息 -->
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
-                <img src="../Images/TitleImgs/Title_tjxx.gif" height="25px" alt="" />
+                <img src="../Images/TitleImgs/Title_bcxx.gif" height="25px" alt="" />
             </td>
         </tr>
         <tr>
@@ -323,6 +323,17 @@
                             <span>项目地址</span></td>
                         <td class="td_value" style="width: 35%;" colspan="3">
                             <Bigdesk8:DBText ID="programme_address" ItemName="programme_address" runat="server"></Bigdesk8:DBText>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td class="td_text" style="width: 15%;">
+                            <span>操作</span></td>
+                        <td class="td_value" style="width: 35%;" colspan="3">
+                            <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
+                                <button type="button" id ="uploadToStBtn" onclick='uploadToStTBProjectAddInfo()'>上报项目补充信息</button>
+                            <% } else { %>  <% } %>
+                             
                         </td>
                        
                     </tr>
@@ -535,7 +546,20 @@
         function setTerrainHybrid() {
             map.setMapType(TMAP_TERRAIN_HYBRID_MAP);
         }
-        
+
+        function uploadToStTBProjectAddInfo() {
+            var prjnum = document.getElementById("PrjNum").innerHTML;
+            $.ajax({
+                type: 'POST',
+                url: '/WxjzgcjczyPage/Handler/Data.ashx?type=uploadToStTBProjectAddInfo&PrjNum=' + prjnum,
+                async: false,
+                data: null,
+                success: function (result) {
+                    alert(result);
+                }
+            });
+        }
+
 
         $(function() {
 
