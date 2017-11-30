@@ -1655,7 +1655,281 @@ WHERE PKID=@PKID
         }
 
         #endregion
-    } 
-    
+    }
+
+    /// <summary>
+    /// 一站式申报：安全报监GridViewSQL处理方法
+    /// </summary>
+    public class Instance_Gdv_AqbjNewInfo : IHandleSQL
+    {
+        #region IHandleSQL 成员
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            //这段SQL用于取出所有安全报监表
+            dh.strSQL = @" SELECT * FROM (
+SELECT a.[uuid]
+      ,a.[xmmc]
+      ,a.[PrjNum]
+      ,a.[PrjName]
+      ,a.[Ajjgmc]
+      ,a.[AjCorpCode]
+      ,a.[PrjSize]
+      ,a.[EconCorpName]
+      ,a.[EconCorpCode]
+      ,a.[PrjApprovalNum]
+      ,a.[BuldPlanNum]
+      ,a.[ProjectPlanNum]
+      ,a.[CityNum]
+      ,a.[CountyNum]
+      ,a.[PrjTypeNum]
+      ,a.[sPrjTypeNum]
+      ,a.[PrjFunctionNum]
+      ,a.[sbr]
+      ,a.[sbryddh]
+      ,a.[CreateDate]
+      ,a.[sfzps]
+      ,a.[sfbz]
+      ,a.[jdz]
+      ,a.[wdz]
+      ,a.[mj]
+      ,a.[zj]
+      ,a.[jgcc]
+      ,a.[sbmb]
+      ,a.[sfjk]
+      ,a.[sgxkz]
+      ,a.[UpdateFlag]
+      ,a.[FetchDate]
+      ,a.[UpdateTime]
+      ,a.[UpdateUser]
+      ,a.[updateDate]
+	  ,b.PKID AS LxPKID
+      ,d.CodeInfo AS Country
+  FROM [dbo].[Ap_ajsbb] a
+    LEFT JOIN [dbo].TBProjectInfo b ON a.PrjNum = b.PrjNum
+    LEFT JOIN [dbo].tbXzqdmDic d on a.CountyNum = d.Code
+                            ) as aaa WHERE 1=1 ";
+            //此处用于自动生成页面查询条件合并入strSQL
+            string strSqlCondition = string.Empty;
+
+            List<IDataItem> list = cl.GetControlValue();
+            list.GetSearchClause(dh.spc, ref strSqlCondition);
+            if (!string.IsNullOrEmpty(strSqlCondition))
+            {
+                dh.strSQL = dh.strSQL + strSqlCondition;
+            }
+            dh.orderBy = "  updateDate DESC ";
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            dh.spc.Add("@PrjNum", strParas[0]);
+            //这段SQL用于取出所有安全报监项目1
+            dh.strSQL = @" SELECT * FROM (
+SELECT a.[uuid]
+      ,a.[xmmc]
+      ,a.[PrjNum]
+      ,a.[PrjName]
+      ,a.[Ajjgmc]
+      ,a.[AjCorpCode]
+      ,a.[PrjSize]
+      ,a.[EconCorpName]
+      ,a.[EconCorpCode]
+      ,a.[PrjApprovalNum]
+      ,a.[BuldPlanNum]
+      ,a.[ProjectPlanNum]
+      ,a.[CityNum]
+      ,a.[CountyNum]
+      ,a.[PrjTypeNum]
+      ,a.[sPrjTypeNum]
+      ,a.[PrjFunctionNum]
+      ,a.[sbr]
+      ,a.[sbryddh]
+      ,a.[CreateDate]
+      ,a.[sfzps]
+      ,a.[sfbz]
+      ,a.[jdz]
+      ,a.[wdz]
+      ,a.[mj]
+      ,a.[zj]
+      ,a.[jgcc]
+      ,a.[sbmb]
+      ,a.[sfjk]
+      ,a.[sgxkz]
+      ,a.[UpdateFlag]
+      ,a.[FetchDate]
+      ,a.[UpdateTime]
+      ,a.[UpdateUser]
+      ,a.[updateDate]
+	  ,b.PKID AS LxPKID
+      ,d.CodeInfo AS Country
+  FROM [dbo].[Ap_ajsbb] a
+    LEFT JOIN [dbo].TBProjectInfo b ON a.PrjNum = b.PrjNum
+    LEFT JOIN [dbo].tbXzqdmDic d on a.CountyNum = d.Code
+                            ) as aaa WHERE 1=1";
+            //此处用于自动生成页面查询条件合并入strSQL
+            string strSqlCondition = string.Empty;
+            ////QueryAssistant.GenerateSearchClauseAndSPC(cl, ref strSqlCondition, dh.spc);
+            List<IDataItem> list = cl.GetControlValue();
+            list.GetSearchClause(dh.spc, ref strSqlCondition);
+
+            if (!string.IsNullOrEmpty(strSqlCondition))
+            {
+                dh.strSQL = dh.strSQL + strSqlCondition;
+            }
+            //dh.strSQL += " order by bjrq desc";
+
+            dh.orderBy = "  updateDate DESC ";
+        }
+
+        #endregion
+    }
+
+
+    /// <summary>
+    /// 一站式申报：质量报监GridViewSQL处理方法
+    /// </summary>
+    public class Instance_Gdv_ZlbjNewInfo : IHandleSQL
+    {
+        #region IHandleSQL 成员
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            //这段SQL用于取出所有质量报监表
+            dh.strSQL = @" SELECT * FROM (
+                SELECT a.[uuid]
+	,a.[xmmc]
+	,a.[PrjNum]
+	,a.[PrjName]
+	,a.[gcdz]
+	,a.[Zjjgmc]
+	,a.[ZjCorpCode]
+	,a.[PrjSize]
+	,a.[EconCorpName]
+	,a.[EconCorpCode]
+	,a.[PrjApprovalNum]
+	,a.[BuldPlanNum]
+	,a.[ProjectPlanNum]
+	,a.[CityNum]
+	,a.[CountyNum]
+	,a.[PrjTypeNum]
+	,a.[PrjFunctionNum]
+	,a.[sbr]
+	,a.[sbryddh]
+	,a.[CreateDate]
+	,a.[sfzps]
+	,a.[UpdateFlag]
+	,a.[FetchDate]
+	,a.[UpdateTime]
+	,a.[UpdateUser]
+	,a.[updateDate]
+	,a.[Status]
+    ,(case a.[Status]
+  when 1 then '审批退回'
+  when 2 then '审批通过'
+  else '未受理' end) StatusLabel
+	,a.[jsxz]
+	,a.[tzlx]
+	,b.PKID AS LxPKID
+	,d.CodeInfo AS Country
+FROM [WJSJZX].[dbo].[Ap_zjsbb] a
+LEFT JOIN [WJSJZX].[dbo].TBProjectInfo b ON a.PrjNum = b.PrjNum
+LEFT JOIN [WJSJZX].[dbo].tbXzqdmDic d ON a.CountyNum = d.Code
+            ) as aaa WHERE 1=1 ";
+            //此处用于自动生成页面查询条件合并入strSQL
+            string strSqlCondition = string.Empty;
+
+            List<IDataItem> list = cl.GetControlValue();
+            list.GetSearchClause(dh.spc, ref strSqlCondition);
+            if (!string.IsNullOrEmpty(strSqlCondition))
+            {
+                dh.strSQL = dh.strSQL + strSqlCondition;
+            }
+            dh.orderBy = "  updateDate DESC ";
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            dh.spc.Add("@PrjNum", strParas[0]);
+            //这段SQL用于取出所有质量报监表
+            dh.strSQL = @" SELECT * FROM (
+SELECT a.[uuid]
+	,a.[xmmc]
+	,a.[PrjNum]
+	,a.[PrjName]
+	,a.[gcdz]
+	,a.[Zjjgmc]
+	,a.[ZjCorpCode]
+	,a.[PrjSize]
+	,a.[EconCorpName]
+	,a.[EconCorpCode]
+	,a.[PrjApprovalNum]
+	,a.[BuldPlanNum]
+	,a.[ProjectPlanNum]
+	,a.[CityNum]
+	,a.[CountyNum]
+	,a.[PrjTypeNum]
+	,a.[PrjFunctionNum]
+	,a.[sbr]
+	,a.[sbryddh]
+	,a.[CreateDate]
+	,a.[sfzps]
+	,a.[UpdateFlag]
+	,a.[FetchDate]
+	,a.[UpdateTime]
+	,a.[UpdateUser]
+	,a.[updateDate]
+	,a.[Status]
+    ,(case a.[Status]
+  when 1 then '审批退回'
+  when 2 then '审批通过'
+  else '未受理' end) StatusLabel
+	,a.[jsxz]
+	,a.[tzlx]
+	,b.PKID AS LxPKID
+	,d.CodeInfo AS Country
+FROM [WJSJZX].[dbo].[Ap_zjsbb] a
+LEFT JOIN [WJSJZX].[dbo].TBProjectInfo b ON a.PrjNum = b.PrjNum
+LEFT JOIN [WJSJZX].[dbo].tbXzqdmDic d ON a.CountyNum = d.Code
+                            ) as aaa WHERE 1=1";
+            //此处用于自动生成页面查询条件合并入strSQL
+            string strSqlCondition = string.Empty;
+            ////QueryAssistant.GenerateSearchClauseAndSPC(cl, ref strSqlCondition, dh.spc);
+            List<IDataItem> list = cl.GetControlValue();
+            list.GetSearchClause(dh.spc, ref strSqlCondition);
+
+            if (!string.IsNullOrEmpty(strSqlCondition))
+            {
+                dh.strSQL = dh.strSQL + strSqlCondition;
+            }
+            dh.orderBy = "  updateDate DESC ";
+        }
+
+        #endregion
+    }
+
     #endregion 
+
+
+
 }

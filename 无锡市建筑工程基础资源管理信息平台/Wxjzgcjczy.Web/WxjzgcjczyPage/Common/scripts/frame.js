@@ -245,7 +245,13 @@ function leftclick(nodeID, id, type) {
         case "01090000":
             document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_Jgba_List.aspx?BeFrom=Zhjg_Menu";
             break;
-
+        //一站式申报之后,安全监督，质量监督使用新菜单
+        case "01100000":
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_AqbjNew_List.aspx?BeFrom=Zhjg_Menu";
+            break;
+        case "01110000":
+            document.getElementById('ItemIf').src = "/IntegrativeShow2/SysFiles/PagesZhjg/Zhjg_ZlbjNew_List.aspx?BeFrom=Zhjg_Menu";
+            break;
 
         //市场主体            
         case "02010000":

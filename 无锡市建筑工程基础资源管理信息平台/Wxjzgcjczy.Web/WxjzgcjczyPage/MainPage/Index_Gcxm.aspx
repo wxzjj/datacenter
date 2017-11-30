@@ -128,7 +128,45 @@
                             </td>
                         </tr>
                         <tr>
-                            <td id="left_icon_1_6" class="left_icon_leave" onmousemove="leftover(this.id);" onmouseout="leftout(this.id);"
+                            <td id="left_icon_1_10" class="left_icon_leave" onmousemove="leftover(this.id);" onmouseout="leftout(this.id);"
+                                onclick="leftclick('01100000',this.id);">
+                                <table >
+                                    <tr>
+                                        <td  class="tdImg">
+                                            <img src="../Common/images/FrameImages/03-01-0.png" />
+                                        </td>
+                                        <td  class="tdFont">
+                                            安全监督（新）
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menuSpan">
+                            </td>
+                        </tr>
+                          <tr>
+                            <td id="left_icon_1_11" class="left_icon_leave" onmousemove="leftover(this.id);" onmouseout="leftout(this.id);"
+                                onclick="leftclick('01110000',this.id);">
+                                <table >
+                                    <tr>
+                                        <td  class="tdImg">
+                                            <img src="../Common/images/FrameImages/01-06-0.png" />
+                                        </td>
+                                        <td  class="tdFont">
+                                            质量报监（新）
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menuSpan">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="Td1" class="left_icon_leave" onmousemove="leftover(this.id);" onmouseout="leftout(this.id);"
                                 onclick="leftclick('01060000',this.id);">
                                 <table >
                                     <tr>
@@ -147,7 +185,7 @@
                             </td>
                         </tr>
                           <tr>
-                            <td id="left_icon_1_7" class="left_icon_leave" onmousemove="leftover(this.id);" onmouseout="leftout(this.id);"
+                            <td id="Td2" class="left_icon_leave" onmousemove="leftover(this.id);" onmouseout="leftout(this.id);"
                                 onclick="leftclick('01070000',this.id);">
                                 <table >
                                     <tr>

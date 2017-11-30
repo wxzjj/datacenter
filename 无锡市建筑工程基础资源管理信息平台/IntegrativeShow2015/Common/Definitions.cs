@@ -86,6 +86,16 @@ namespace IntegrativeShow2
         /// 读取质量报监详细信息
         /// </summary>
         Instance_Read_ZlbjInfo,
+
+        /// <summary>
+        /// 读取安监申报表详细信息
+        /// </summary>
+        Instance_Read_AqbjNewInfo,
+
+        /// <summary>
+        /// 读取质监申报表详细信息
+        /// </summary>
+        Instance_Read_ZlbjNewInfo,
   
     }
 
