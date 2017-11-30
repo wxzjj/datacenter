@@ -127,6 +127,7 @@
     <Compile Include="YhglBLL.cs" />
     <Compile Include="ZlctBLL.cs" />
     <Compile Include="ZyryBLL.cs" />
+    <Compile Include="DataExchangeBLLForUpload.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

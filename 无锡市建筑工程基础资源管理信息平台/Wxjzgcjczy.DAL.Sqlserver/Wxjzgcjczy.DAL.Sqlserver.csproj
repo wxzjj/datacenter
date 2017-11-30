@@ -73,6 +73,7 @@
     <Compile Include="DALHelper.cs" />
     <Compile Include="DatabaseOperator.cs" />
     <Compile Include="DataExchangeDAL.cs" />
+    <Compile Include="DataExchangeDALForGIS.cs" />
     <Compile Include="GcxmDAL.cs" />
     <Compile Include="GzyjDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="YhglDAL.cs" />
     <Compile Include="ZlctDAL.cs" />
     <Compile Include="ZyryDAL.cs" />
+    <Compile Include="DataExchangeDALForUpload.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Wxjzgcjczy.Common\Wxjzgcjczy.Common.csproj">

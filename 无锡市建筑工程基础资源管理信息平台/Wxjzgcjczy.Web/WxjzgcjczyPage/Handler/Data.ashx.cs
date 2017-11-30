@@ -123,6 +123,14 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                     case "xxgx_csjk":
                         json = GetXxgx_Csjk(context);
                         break;
+                    //往省厅上传项目信息
+                    case "uploadToStTBProjectInfo":
+                        json = uploadToStTBProjectInfo(context);
+                        break;
+                    //往省厅上传项目补充信息
+                    case "uploadToStTBProjectAddInfo":
+                        json = uploadToStTBProjectAddInfo(context);
+                        break;
                 }
             }
             catch (Exception ex)
@@ -596,6 +604,56 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             return str.ToString();
         }
 
+
+        /// <summary>
+        /// 手动往省厅上传项目信息
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string uploadToStTBProjectInfo(HttpContext context)
+        {
+            DataExchangeBLLForUpload BLL = new DataExchangeBLLForUpload();
+
+            string pKID = context.Request.Params["PKID"];
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+               result = BLL.SaveTBData_TBProjectInfo(WorkUser.LoginName, pKID);
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        /// <summary>
+        /// 手动往省厅上传项目补充信息
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string uploadToStTBProjectAddInfo(HttpContext context)
+        {
+            DataExchangeBLLForUpload BLL = new DataExchangeBLLForUpload();
+
+            string prjNum = context.Request.Params["PrjNum"];
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                result = BLL.SaveTBData_TBProjectAddInfo(WorkUser.LoginName, prjNum);
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
 
         public bool IsReusable
         {
