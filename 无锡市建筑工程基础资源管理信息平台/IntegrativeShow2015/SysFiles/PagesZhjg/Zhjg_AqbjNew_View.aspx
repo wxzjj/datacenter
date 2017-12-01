@@ -1,8 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Zhjg_AqbjNew_View.aspx.cs"
     Inherits="IntegrativeShow2.SysFiles.PagesZhjg.Zhjg_AqbjNew_View" %>
 
-<%@ Register Assembly="Bigdesk8" Namespace="Bigdesk8.Web.Controls"
-    TagPrefix="Bigdesk8" %>
+<%@ Register Assembly="Bigdesk8" Namespace="Bigdesk8.Web.Controls" TagPrefix="Bigdesk8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -15,43 +14,39 @@
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
                 <!--<img src="../Images/TitleImgs/Title_gcjbxx.gif" height="25px" alt="" />-->
-                <div style="width:200px;height:25px; background:url('../Images/TitleImgs/Title_back.jpg');">&nbsp;&nbsp;&nbsp;安监申报表</div>
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    &nbsp;&nbsp;&nbsp;安监申报表</div>
             </td>
         </tr>
         <tr>
             <td class="view_center">
                 <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table">
-                <!--
+                    <tr>
+                        <td class="td_text" width="15%">
+                            安监申报表编号
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="uuid" ItemName="uuid" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            安监项目名称
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="xmmc" ItemName="xmmc" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
                     <tr>
                         <td class="td_text" width="15%">
                             项目编号
                         </td>
-                        <td class="td_value" colspan="3">
-                            <Bigdesk8:DBText ID="PrjNum" ItemName="xmbm" runat="server"></Bigdesk8:DBText>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="PrjNum" ItemName="PrjNum" runat="server"></Bigdesk8:DBText>
                         </td>
-                    </tr>
-                    <tr>
                         <td class="td_text" width="15%">
-                            安全监督编码
+                            立项项目名称
                         </td>
-                        <td class="td_value" colspan="3">
-                            <Bigdesk8:DBText ID="db_aqjdbm" ItemName="aqjdbm" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            报监工程名称
-                        </td>
-                        <td class="td_value" width="35%" colspan="3">
-                            <Bigdesk8:DBText ID="gcmc" ItemName="gcmc" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            施工招标编码
-                        </td>
-                        <td class="td_value" width="35%" colspan="3">
-                            <Bigdesk8:DBText ID="sgzbbm" ItemName="sgzbbm" runat="server"></Bigdesk8:DBText>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="PrjName" ItemName="PrjName" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
@@ -59,56 +54,175 @@
                             安全监督机构名称
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="Aqjdjgmc" ItemName="Aqjdjgmc" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="Ajjgmc" ItemName="Ajjgmc" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
-                            安全监督组织机构代码<br />
-                            （社会信用代码）
+                            安全监督机构组织机构代码
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="sdCode" ItemName="sdcode" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="AjCorpCode" ItemName="AjCorpCode" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
                         <td class="td_text" width="15%">
-                            工程造价（万元）
+                            建设规模
                         </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="gcgk_yszj" ItemName="gcgkYszj" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            工程面积（平方米）
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="gcgk_jzmj" ItemName="gcgkJzmj" runat="server"></Bigdesk8:DBText>
+                        <td class="td_value" width="35%" colspan="3">
+                            <Bigdesk8:DBText ID="PrjSize" ItemName="PrjSize" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
                         <td class="td_text" width="15%">
-                            结构类型
+                            建设单位名称
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="gcgk_jglx" ItemName="gcgkJglx" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="EconCorpName" ItemName="EconCorpName" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
-                            层次
+                            建设单位组织机构代码
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="gcgk_cc" ItemName="gcgkCc" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="EconCorpCode" ItemName="EconCorpCode" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
                         <td class="td_text" width="15%">
-                            经度
+                            立项批准文号
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="gis_jd" ItemName="gis_jd" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="PrjApprovalNum" ItemName="PrjApprovalNum" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
-                            纬度
+                            建设用地规划许可证号
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="gis_wd" ItemName="gis_wd" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="BuldPlanNum" ItemName="BuldPlanNum" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            建设工程规划许可证号
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="ProjectPlanNum" ItemName="ProjectPlanNum" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            工程用途
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="PrjFunctionLabel" ItemName="PrjFunctionLabel" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            所在市州
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="CityLabel" ItemName="CityLabel" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            所在县区
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="CountryLabel" ItemName="CountryLabel" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            项目分类
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="PrjTypeLabel" ItemName="PrjTypeLabel" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            项目分类小类
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="sPrjTypeLabel" ItemName="sPrjTypeLabel" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            申办人
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="sbr" ItemName="sbr" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            申办人移动电话
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="sbryddh" ItemName="sbryddh" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            是否是装配式
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="sfzps" ItemName="sfzps" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            是否是保障房
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="sfbz" ItemName="sfbz" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            坐标经度
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="jdz" ItemName="jdz" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            坐标纬度
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="wdz" ItemName="wdz" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            项目面积
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="mj" ItemName="mj" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            项目造价
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="zj" ItemName="zj" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            结构层次
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="jgcc" ItemName="jgcc" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            申报目标
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="sbmb" ItemName="sbmb" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" width="15%">
+                            是否符合安装远程监控条件
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="sfjk" ItemName="sfjk" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" width="15%">
+                            施工许可证号
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="sgxkz" ItemName="sgxkz" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
@@ -116,186 +230,29 @@
                             报监日期
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="bjrq" ItemName="bjrq" FieldType="Date" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="updateDate" ItemName="updateDate" FieldType="Date" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
+                            记录登记日期
                         </td>
                         <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="CreateDate" ItemName="CreateDate" FieldType="Date" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
                         <td class="td_text" width="15%">
-                            合同开工日期
+                            四库更新日期
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="gcgk_kgrq" ItemName="gcgkKgrq" FieldType="Date" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="UpdateTime" ItemName="UpdateTime" FieldType="Date" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
-                            合同竣工日期
+                            数据更新标识
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="gcgk_jhjgrq" ItemName="gcgkJhjgrq" FieldType="Date" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="UpdateFlag" ItemName="UpdateFlag" FieldType="Date" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            总包单位名称
-                        </td>
-                        <td class="td_value" width="85%"  colspan="3">
-                           <%-- <Bigdesk8:DBText ID="zbdw_dwmc" ItemName="zbdw_dwmc" runat="server"></Bigdesk8:DBText>--%>
-                           <asp:HyperLink ID="hlk_dwmc" runat="server" Target="_blank"></asp:HyperLink>
-                        </td>
-                    </tr>
-                      <tr>
-                        <td class="td_text" width="15%">
-                            总包单位组织机构代码<br />
-                            （社会信用代码）
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="zbdw_dwdm" ItemName="zbdwDwdm" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            总包单位安全生产许可证
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="zbdw_aqxkzh" ItemName="zbdwAqxkzh" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            总包单位注册建造师
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="zbdw_zcjzs" ItemName="zbdwZcjzs" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            总包单位注册建造师身份证号
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="zbdw_zcjzsdm" ItemName="zbdwZcjzsdm" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            总包单位注册建造师电话
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="zbdw_zcjzs_lxdh" ItemName="zbdwZcjzslxdh" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                        </td>
-                        <td class="td_value" width="35%">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            总包单位专职安全员1
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="zbdw_aqy" ItemName="zbdwAqy" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            总包单位专职安全员证号1
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="zbdw_aqyzh" ItemName="zbdwAqyzh1" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                     <tr>
-                        <td class="td_text" width="15%">
-                            总包单位专职安全员2
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="DBText1" ItemName="zbdwAqy2" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            总包单位专职安全员证号2
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="DBText2" ItemName="zbdwAqyzh2" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                     <tr>
-                        <td class="td_text" width="15%">
-                            总包单位专职安全员3
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="DBText3" ItemName="zbdwAqy3" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            总包单位专职安全员证号3
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="DBText4" ItemName="zbdwAqyzh3" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            监理单位名称
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="jldw_dwmc" ItemName="jldwDwmc" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            监理单位组织机构代码<br />
-                            （社会信用代码）
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="jldw_dwdm" ItemName="jldwDwdm" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            总监姓名
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="jldw_xmzj" ItemName="jldwXmzj" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            总监身份证号
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="jldw_zjdm" ItemName="jldwZjdm" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        
-                        <td class="td_text" width="15%">
-                            监理员1
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="jldw_jlgcs" ItemName="jldwJlgcs1" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                             监理员1
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="DBText5" ItemName="jldwJlgcs2" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        
-                        <td class="td_text" width="15%">
-                            监理员3
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="DBText6" ItemName="jldwJlgcs3" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                          
-                        </td>
-                        <td class="td_value" width="35%">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            备注
-                        </td>
-                        <td class="td_value" width="35%" colspan="3">
-                            <Bigdesk8:DBText ID="bz" ItemName="bz" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    -->
                     <!-- 
                       <tr>
                         <td class="td_text">
@@ -354,6 +311,174 @@
             </td>
         </tr>
     </table>
+    <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    &nbsp;&nbsp;&nbsp;相关合同（<%=this.Gdv_AqbjNew_ht.Rows.Count %>）</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <asp:GridView ID="Gdv_AqbjNew_ht" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                    BorderWidth="1px" Width="100%">
+                    <Columns>
+                        <asp:BoundField HeaderText="合同备案编码" DataField="RecordNum">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="13%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="合同类别" DataField="ContractTypeLabel">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="7%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="合同金额（万元）" DataField="ContractMoney">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="承包单位组织机构代码" DataField="CorpCode">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="承包单位名称" DataField="CorpName">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="13%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="合同建设规模" DataField="PrjSize">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="30%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="项目负责人" DataField="xmfzr">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="7%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="项目负责人身份证号" DataField="xmfzrsfzh">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    &nbsp;&nbsp;&nbsp;单位人员（<%=this.Gdv_AqbjNew_dwry.Rows.Count %>）</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <asp:GridView ID="Gdv_AqbjNew_dwry" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                    BorderWidth="1px" Width="100%">
+                    <Columns>
+                        <asp:BoundField HeaderText="单位类别" DataField="dwlx">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="6%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="单位名称" DataField="CorpName">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="12%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="单位组织机构代码" DataField="CorpCode">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="8%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="岗位" DataField="gw">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="8%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="姓名" DataField="xm">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="8%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="身份证号码" DataField="idCard">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="手机号码" DataField="mp">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="资质证书编号" DataField="zzzs">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="资质类型和等级" DataField="zzlxdj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="资质有效期" DataField="zzyxq">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="资格类型及证号" DataField="zgzh">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="计划进场时间" DataField="jhjcsj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="计划出场时间" DataField="jhccsj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    &nbsp;&nbsp;&nbsp;材料清单（<%=this.Gdv_AqbjNew_clqd.Rows.Count %>）</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <asp:GridView ID="Gdv_AqbjNew_clqd" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                    BorderWidth="1px" Width="100%">
+                    <Columns>
+                        <asp:BoundField HeaderText="序号" DataField="xh">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="申报资料" DataField="sbzl">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="证书（合同）号" DataField="zshth">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="15%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="办理日期" DataField="blrq">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:TemplateField HeaderText="文件查看">
+                            <ItemTemplate>
+                                
+                                 <a href='<%# Eval("smjdz").ToString() == "" ? "#" : string.Format("{0}{1}", Eval("smjdz"), Eval("smjmc"))%>'  Target="_blank"><%# Eval("smjdz").ToString() == "" ? "" : "查看"%></a>
+                                
+                               
+                                <!--<asp:HyperLink ID="HyperLink_View" runat="server" Text='查看' NavigateUrl='<%# Eval("smjdz").ToString() == "" ? "void(0)" : string.Format("{0}{1}", Eval("smjdz"), Eval("smjmc"))%>'
+                                    Target="_blank" />-->
+                            </ItemTemplate>
+                           <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:TemplateField>
+                        
+                    </Columns>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+    <br />
     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
             <td>

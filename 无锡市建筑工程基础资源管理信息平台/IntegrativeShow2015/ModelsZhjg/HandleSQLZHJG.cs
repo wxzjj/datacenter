@@ -1657,6 +1657,8 @@ WHERE PKID=@PKID
         #endregion
     }
 
+
+    #region 一站式申报安监页面
     /// <summary>
     /// 一站式申报：安全报监GridViewSQL处理方法
     /// </summary>
@@ -1797,6 +1799,216 @@ SELECT a.[uuid]
 
 
     /// <summary>
+    /// 一站式申报：安全报监详系信息
+    /// </summary>
+    public class Instance_Read_AqbjNewInfo : IHandleSQL
+    {
+        #region IHandleSQL 成员
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            //获取安全监督详细信息
+            dh.strSQL = @"
+SELECT [uuid] /*安监申报表编号*/ 
+      ,[xmmc] /*安监项目名称*/
+      ,[PrjNum] /*项目编号*/
+      ,[PrjName] /*立项项目名称*/
+      ,[Ajjgmc] /*安全监督机构名称*/
+      ,[AjCorpCode] /*安全监督机构组织机构代码*/
+      ,[PrjSize] /*建设规模*/
+      ,[EconCorpName] /*建设单位名称*/
+      ,[EconCorpCode] /*建设单位组织机构代码*/
+      ,[PrjApprovalNum] /*立项批准文号*/
+      ,[BuldPlanNum] /*建设用地规划许可证号*/
+      ,[ProjectPlanNum] /*建设工程规划许可证号*/
+      ,[CityNum] /*所在市州*/
+	  ,d.CodeInfo AS CityLabel
+      ,[CountyNum] /*所在县区*/
+	  ,d2.CodeInfo AS CountryLabel
+      ,[PrjTypeNum] /*项目分类*/
+	  ,p.CodeInfo AS PrjTypeNumLabel
+      ,[sPrjTypeNum] /*项目分类小类*/
+	  ,p1.CodeInfo AS sPrjTypeLabel
+      ,[PrjFunctionNum] /*工程用途*/
+	  ,f.CodeInfo AS PrjFunctionLabel
+      ,[sbr] /*申办人*/
+      ,[sbryddh] /*申办人移动电话*/
+      ,[CreateDate] /*记录登记日期*/
+      ,[sfzps] /*是否是装配式*/
+      ,[sfbz] /*是否是保障房*/
+      ,[jdz] /*坐标经度*/
+      ,[wdz] /*坐标纬度*/
+      ,[mj] /*项目面积*/
+      ,[zj] /*项目造价*/
+      ,[jgcc] /*结构层次*/
+      ,[sbmb] /*申报目标*/
+      ,[sfjk] /*是否符合安装远程监控条件*/
+      ,[sgxkz] /*施工许可证号*/
+      ,[UpdateFlag]
+      ,[FetchDate]
+      ,[UpdateTime]
+      ,[UpdateUser]
+      ,[updateDate]
+  FROM [dbo].[Ap_ajsbb] b
+  left join dbo.tbXzqdmDic d on  b.CityNum = d.Code
+  left join dbo.tbXzqdmDic d2 on  b.CountyNum = d2.Code
+  left join dbo.tbPrjTypeDic p on b.PrjTypeNum = p.Code
+  left join dbo.tbPrjSmallTypeDic p1 on b.sPrjTypeNum = p1.Code
+  left join dbo.tbPrjFunctionDic f on b.PrjFunctionNum = f.Code
+    WHERE uuid = @uuid
+";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 一站式申报：安全报监-相关合同
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_ht : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+      ,[RecordNum]
+      ,[ContractTypeNum]
+	  ,t.CodeInfo AS ContractTypeLabel
+      ,[ContractMoney]
+      ,[CorpCode]
+      ,[CorpName]
+      ,[PrjSize]
+      ,[xmfzr]
+      ,[xmfzrsfzh]
+  FROM [dbo].[Ap_ajsbb_ht] h
+  left join [dbo].[tbContractTypeDic] t on h.ContractTypeNum = t.Code
+  where uuid = @uuid
+                        ";
+            dh.orderBy += " RecordNum desc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：安全报监-单位人员
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_dwry : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+      ,[idCard]
+      ,[dwlx]
+      ,[CorpCode]
+      ,[CorpName]
+      ,[zzzs]
+      ,[zzlxdj]
+      ,[zzyxq]
+      ,[xm]
+      ,[gw]
+      ,[mp]
+      ,[zgzh]
+      ,[zy]
+      ,[jhjcsj]
+      ,[jhccsj]
+      ,[lhtsx]
+	  ,(case lhtsx
+  when 1 then '联合体主体单位'
+  when 2 then '联合体合作单位'
+  else '非联合体' end) zyzgzshLabel
+      ,[zyzgzsh]
+  FROM [dbo].[Ap_ajsbb_dwry]
+  where uuid = @uuid ";
+            dh.orderBy += " dwlx asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：安全报监-材料清单
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_clqd : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT *
+FROM [dbo].[Ap_ajsbb_clqd]
+WHERE uuid = @uuid";
+            dh.orderBy += " sbzl asc,xh asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    #endregion
+
+    #region 一站式申报：质监相关页面
+    /// <summary>
     /// 一站式申报：质量报监GridViewSQL处理方法
     /// </summary>
     public class Instance_Gdv_ZlbjNewInfo : IHandleSQL
@@ -1927,6 +2139,9 @@ LEFT JOIN [WJSJZX].[dbo].tbXzqdmDic d ON a.CountyNum = d.Code
 
         #endregion
     }
+
+    #endregion
+
 
     #endregion 
 

@@ -30,24 +30,24 @@
                             <table width="100%" cellpadding="2" cellspacing="1" border="0" class="table">
                                 <tr>
                                     <td class="td_text" width="15%">
+                                        安监申报表编号
+                                    </td>
+                                    <td class="td_value" width="35%">
+                                        <Bigdesk8:DBTextBox ID="DBTextBox3" ItemName="uuid" runat="server"></Bigdesk8:DBTextBox>
+                                    </td>
+                                    <td class="td_text" width="15%">
                                         项目编号
                                     </td>
                                     <td class="td_value" width="35%">
                                         <Bigdesk8:DBTextBox ID="DBTextBox1" ItemName="PrjNum" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
+                                </tr>
+                                <tr>
                                     <td class="td_text" width="15%">
                                         立项项目名称
                                     </td>
                                     <td class="td_value" width="35%">
                                         <Bigdesk8:DBTextBox ID="DBTextBox2" ItemName="PrjName" runat="server"></Bigdesk8:DBTextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td_text" width="15%">
-                                        安监申报表编号
-                                    </td>
-                                    <td class="td_value" width="35%">
-                                        <Bigdesk8:DBTextBox ID="DBTextBox3" ItemName="uuid" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
                                     <td class="td_text" width="15%">
                                         报监工程名称

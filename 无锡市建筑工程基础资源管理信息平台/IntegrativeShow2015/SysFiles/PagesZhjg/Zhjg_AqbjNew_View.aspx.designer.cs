@@ -31,6 +31,24 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// uuid 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::Bigdesk8.Web.Controls.DBText uuid;
+        
+        /// <summary>
+        /// xmmc 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::Bigdesk8.Web.Controls.DBText xmmc;
+        
+        /// <summary>
         /// PrjNum 控件。
         /// </summary>
         /// <remarks>
@@ -40,310 +58,274 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         protected global::Bigdesk8.Web.Controls.DBText PrjNum;
         
         /// <summary>
-        /// db_aqjdbm 控件。
+        /// PrjName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText db_aqjdbm;
+        protected global::Bigdesk8.Web.Controls.DBText PrjName;
         
         /// <summary>
-        /// gcmc 控件。
+        /// Ajjgmc 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gcmc;
+        protected global::Bigdesk8.Web.Controls.DBText Ajjgmc;
         
         /// <summary>
-        /// sgzbbm 控件。
+        /// AjCorpCode 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText sgzbbm;
+        protected global::Bigdesk8.Web.Controls.DBText AjCorpCode;
         
         /// <summary>
-        /// Aqjdjgmc 控件。
+        /// PrjSize 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText Aqjdjgmc;
+        protected global::Bigdesk8.Web.Controls.DBText PrjSize;
         
         /// <summary>
-        /// sdCode 控件。
+        /// EconCorpName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText sdCode;
+        protected global::Bigdesk8.Web.Controls.DBText EconCorpName;
         
         /// <summary>
-        /// gcgk_yszj 控件。
+        /// EconCorpCode 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gcgk_yszj;
+        protected global::Bigdesk8.Web.Controls.DBText EconCorpCode;
         
         /// <summary>
-        /// gcgk_jzmj 控件。
+        /// PrjApprovalNum 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gcgk_jzmj;
+        protected global::Bigdesk8.Web.Controls.DBText PrjApprovalNum;
         
         /// <summary>
-        /// gcgk_jglx 控件。
+        /// BuldPlanNum 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gcgk_jglx;
+        protected global::Bigdesk8.Web.Controls.DBText BuldPlanNum;
         
         /// <summary>
-        /// gcgk_cc 控件。
+        /// ProjectPlanNum 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gcgk_cc;
+        protected global::Bigdesk8.Web.Controls.DBText ProjectPlanNum;
         
         /// <summary>
-        /// gis_jd 控件。
+        /// PrjFunctionLabel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gis_jd;
+        protected global::Bigdesk8.Web.Controls.DBText PrjFunctionLabel;
         
         /// <summary>
-        /// gis_wd 控件。
+        /// CityLabel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gis_wd;
+        protected global::Bigdesk8.Web.Controls.DBText CityLabel;
         
         /// <summary>
-        /// bjrq 控件。
+        /// CountryLabel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText bjrq;
+        protected global::Bigdesk8.Web.Controls.DBText CountryLabel;
         
         /// <summary>
-        /// gcgk_kgrq 控件。
+        /// PrjTypeLabel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gcgk_kgrq;
+        protected global::Bigdesk8.Web.Controls.DBText PrjTypeLabel;
         
         /// <summary>
-        /// gcgk_jhjgrq 控件。
+        /// sPrjTypeLabel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText gcgk_jhjgrq;
+        protected global::Bigdesk8.Web.Controls.DBText sPrjTypeLabel;
         
         /// <summary>
-        /// hlk_dwmc 控件。
+        /// sbr 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlk_dwmc;
+        protected global::Bigdesk8.Web.Controls.DBText sbr;
         
         /// <summary>
-        /// zbdw_dwdm 控件。
+        /// sbryddh 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText zbdw_dwdm;
+        protected global::Bigdesk8.Web.Controls.DBText sbryddh;
         
         /// <summary>
-        /// zbdw_aqxkzh 控件。
+        /// sfzps 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText zbdw_aqxkzh;
+        protected global::Bigdesk8.Web.Controls.DBText sfzps;
         
         /// <summary>
-        /// zbdw_zcjzs 控件。
+        /// sfbz 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText zbdw_zcjzs;
+        protected global::Bigdesk8.Web.Controls.DBText sfbz;
         
         /// <summary>
-        /// zbdw_zcjzsdm 控件。
+        /// jdz 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText zbdw_zcjzsdm;
+        protected global::Bigdesk8.Web.Controls.DBText jdz;
         
         /// <summary>
-        /// zbdw_zcjzs_lxdh 控件。
+        /// wdz 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText zbdw_zcjzs_lxdh;
+        protected global::Bigdesk8.Web.Controls.DBText wdz;
         
         /// <summary>
-        /// zbdw_aqy 控件。
+        /// mj 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText zbdw_aqy;
+        protected global::Bigdesk8.Web.Controls.DBText mj;
         
         /// <summary>
-        /// zbdw_aqyzh 控件。
+        /// zj 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText zbdw_aqyzh;
+        protected global::Bigdesk8.Web.Controls.DBText zj;
         
         /// <summary>
-        /// DBText1 控件。
+        /// jgcc 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText DBText1;
+        protected global::Bigdesk8.Web.Controls.DBText jgcc;
         
         /// <summary>
-        /// DBText2 控件。
+        /// sbmb 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText DBText2;
+        protected global::Bigdesk8.Web.Controls.DBText sbmb;
         
         /// <summary>
-        /// DBText3 控件。
+        /// sfjk 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText DBText3;
+        protected global::Bigdesk8.Web.Controls.DBText sfjk;
         
         /// <summary>
-        /// DBText4 控件。
+        /// sgxkz 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText DBText4;
+        protected global::Bigdesk8.Web.Controls.DBText sgxkz;
         
         /// <summary>
-        /// jldw_dwmc 控件。
+        /// updateDate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText jldw_dwmc;
+        protected global::Bigdesk8.Web.Controls.DBText updateDate;
         
         /// <summary>
-        /// jldw_dwdm 控件。
+        /// CreateDate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText jldw_dwdm;
+        protected global::Bigdesk8.Web.Controls.DBText CreateDate;
         
         /// <summary>
-        /// jldw_xmzj 控件。
+        /// UpdateTime 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText jldw_xmzj;
+        protected global::Bigdesk8.Web.Controls.DBText UpdateTime;
         
         /// <summary>
-        /// jldw_zjdm 控件。
+        /// UpdateFlag 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText jldw_zjdm;
-        
-        /// <summary>
-        /// jldw_jlgcs 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText jldw_jlgcs;
-        
-        /// <summary>
-        /// DBText5 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText DBText5;
-        
-        /// <summary>
-        /// DBText6 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText DBText6;
-        
-        /// <summary>
-        /// bz 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText bz;
+        protected global::Bigdesk8.Web.Controls.DBText UpdateFlag;
         
         /// <summary>
         /// Gdv_SgxkCyryInfo 控件。
@@ -353,5 +335,32 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView Gdv_SgxkCyryInfo;
+        
+        /// <summary>
+        /// Gdv_AqbjNew_ht 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView Gdv_AqbjNew_ht;
+        
+        /// <summary>
+        /// Gdv_AqbjNew_dwry 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView Gdv_AqbjNew_dwry;
+        
+        /// <summary>
+        /// Gdv_AqbjNew_clqd 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView Gdv_AqbjNew_clqd;
     }
 }
