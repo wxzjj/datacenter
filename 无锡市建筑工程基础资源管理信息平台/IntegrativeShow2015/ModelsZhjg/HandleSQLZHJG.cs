@@ -2005,6 +2005,70 @@ WHERE uuid = @uuid";
         }
     }
 
+    /// <summary>
+    /// 一站式申报：安全报监-环境及地下设施交底项目
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_hjssjd : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT *
+FROM [dbo].[Ap_ajsbb_hjssjd]
+WHERE uuid = @uuid";
+            dh.orderBy += " xh asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：超大规模危险源工程清单
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_cgmgcqd : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT *
+FROM [dbo].[Ap_ajsbb_cgmgcqd]
+WHERE uuid = @uuid";
+            dh.orderBy += " fbfxgc asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     #endregion
 
     #region 一站式申报：质监相关页面
