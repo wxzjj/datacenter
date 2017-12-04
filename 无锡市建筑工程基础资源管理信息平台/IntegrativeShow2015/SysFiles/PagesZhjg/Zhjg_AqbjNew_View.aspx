@@ -365,11 +365,11 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="计划进场时间" DataField="jhjcsj">
+                        <asp:BoundField HeaderText="计划进场时间" DataField="jhjcsj" DataFormatString="{0:yyyy-MM-dd HH:mm:ss}">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="计划出场时间" DataField="jhccsj">
+                        <asp:BoundField HeaderText="计划出场时间" DataField="jhccsj" DataFormatString="{0:yyyy-MM-dd HH:mm:ss}">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
