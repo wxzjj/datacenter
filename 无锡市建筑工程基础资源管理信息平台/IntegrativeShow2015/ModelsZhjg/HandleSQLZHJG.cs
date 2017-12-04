@@ -2237,7 +2237,7 @@ SELECT [uuid]
 	,[CountyNum]
 	,d2.CodeInfo AS CountryLabel
 	,[PrjTypeNum]
-	,p.CodeInfo AS PrjTypeNumLabel
+	,p.CodeInfo AS PrjTypeLabel
 	,[PrjFunctionNum]
 	,f.CodeInfo AS PrjFunctionLabel
 	,[sbr]
@@ -2252,7 +2252,7 @@ SELECT [uuid]
 	,[Status]
 	,[jsxz]
 	,[tzlx]
-FROM [WJSJZX].[dbo].[Ap_zjsbb] b
+FROM [dbo].[Ap_zjsbb] b
 LEFT JOIN dbo.tbXzqdmDic d ON b.CityNum = d.Code
 LEFT JOIN dbo.tbXzqdmDic d2 ON b.CountyNum = d2.Code
 LEFT JOIN dbo.tbPrjTypeDicNew p ON b.PrjTypeNum = p.Code
@@ -2432,6 +2432,7 @@ SELECT [uuid]
 	,[dwgcbm]
 	,[dwgcmc]
 	,[gcfl]
+	,ISNULL(p.CodeInfo, [gcfl]) AS gcflLabel
 	,[dsjzmj]
 	,[dxjzmj]
 	,[rfmj]
@@ -2444,19 +2445,28 @@ SELECT [uuid]
 	,[gd]
 	,[kd]
 	,[PrjStructureTypeNum]
+	,ISNULL(s.CodeInfo, [PrjStructureTypeNum]) AS PrjStructureTypeLabel
 	,[kzdj]
 	,[xfdj]
 	,[jclx]
+	,ISNULL(j.CodeInfo, [jclx]) AS jclxLabel
 	,[djlx]
+	,ISNULL(d.CodeInfo, [djlx]) AS djlxLabel
 	,[stbh]
 	,[gclx]
 	,[jsyt]
+	,ISNULL(f.CodeInfo, [jsyt]) AS jsytLabel
 	,[zzts]
 	,[sfzps]
 	,[jhkgrq]
 	,[jhjgrq]
 	,[UpdateFlag]
-FROM [dbo].[Ap_zjsbb_dwgc]
+FROM [dbo].[Ap_zjsbb_dwgc] b
+LEFT JOIN dbo.tbPrjTypeZj p ON p.Code = b.gcfl
+LEFT JOIN dbo.tbPrjStructureTypeDic s ON s.Code = b.PrjStructureTypeNum
+LEFT JOIN dbo.tbJCLXDic j ON j.Code = b.jclx
+LEFT JOIN dbo.tbDJLXDic d ON d.Code = b.djlx
+LEFT JOIN dbo.tbPrjFunctionDic f ON f.Code = b.jsyt
 WHERE uuid = @uuid ";
             dh.orderBy += " dwgcbm asc";
             dh.spc.Add("@uuid", strParas[0]);

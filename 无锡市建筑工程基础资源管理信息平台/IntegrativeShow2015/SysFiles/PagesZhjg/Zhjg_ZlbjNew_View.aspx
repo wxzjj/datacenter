@@ -423,7 +423,7 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="质监工程分类" DataField="gcfl">
+                        <asp:BoundField HeaderText="质监工程分类" DataField="gcflLabel">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="15%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
@@ -471,7 +471,7 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="结构类型" DataField="PrjStructureTypeNum">
+                        <asp:BoundField HeaderText="结构类型" DataField="PrjStructureTypeLabel">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
@@ -483,11 +483,11 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="基础类型" DataField="jclx">
+                        <asp:BoundField HeaderText="基础类型" DataField="jclxLabel">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="地基类型" DataField="djlx">
+                        <asp:BoundField HeaderText="地基类型" DataField="djlxLabel">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
@@ -499,7 +499,7 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="建设用途" DataField="jsyt">
+                        <asp:BoundField HeaderText="建设用途" DataField="jsytLabel">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
