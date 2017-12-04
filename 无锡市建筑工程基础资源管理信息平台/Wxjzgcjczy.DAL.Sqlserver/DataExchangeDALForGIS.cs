@@ -29,12 +29,14 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         /// </summary>
         /// <param name="prjNum">项目编号</param>
         /// <param name="prjName">项目名称</param>
+        /// <param name="buildCorpCode">建设单位编号</param>
+        /// <param name="buildCorpName">建设单位名称</param>
         /// <param name="location">项目地点</param>
         /// <param name="countyNum">地区码</param>
         /// <param name="beginDate">起始日期</param>
         /// <param name="endDate">结束日期</param>
         /// <returns></returns>
-        public DataTable GetProject(string prjNum, string prjName, string location, string countyNum, string beginDate, string endDate)
+        public DataTable GetProject(string prjNum, string prjName, String buildCorpCode, String buildCorpName, string location, string countyNum, string beginDate, string endDate)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
@@ -53,7 +55,19 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             if (!string.IsNullOrEmpty(prjName))
             {
                 sp.Add("@prjName", prjName);
-                sb.Append(" and a.PrjName=@prjName");
+                sb.Append(" and a.PrjName like CONCAT('%',@prjName,'%')");
+            }
+
+            if (!string.IsNullOrEmpty(buildCorpCode))
+            {
+                sp.Add("@buildCorpCode", buildCorpCode);
+                sb.Append(" and a.BuildCorpCode=@buildCorpCode");
+            }
+
+            if (!string.IsNullOrEmpty(buildCorpName))
+            {
+                sp.Add("@buildCorpName", buildCorpName);
+                sb.Append(" and a.BuildCorpName like CONCAT('%',@buildCorpName,'%')");
             }
 
             if (!string.IsNullOrEmpty(location))

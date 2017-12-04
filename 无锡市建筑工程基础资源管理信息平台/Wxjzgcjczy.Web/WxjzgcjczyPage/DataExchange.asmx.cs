@@ -4462,6 +4462,24 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         [WebMethod]
         public string queryProjectList(string user, string password, string prjNum, string prjName, string location)
         {
+            return this.queryProjectListEx(user, password, prjNum, prjName, "", "", location);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="prjNum"></param>
+        /// <param name="prjName"></param>
+        /// <param name="buildCorpCode"></param>
+        /// <param name="buildCorpName"></param>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string queryProjectListEx(string user, string password, string prjNum, string prjName, String buildCorpCode, String buildCorpName, string location)
+        {
+
             string apiFlowId = "30";
 
             string mainXml = string.Empty;
@@ -4479,7 +4497,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return result.ResultMessage;
                 }
 
-                DataTable mainDt = SBBLL.GetProject(prjNum, prjName, location);
+                DataTable mainDt = SBBLL.GetProject(prjNum, prjName, buildCorpCode, buildCorpName, location);
 
                 if (mainDt == null || mainDt.Rows.Count == 0)
                 {
@@ -4497,7 +4515,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return str.ToString();
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     result.code = ProcessResult.内部错误;
                     result.message = ex.Message;
@@ -4524,6 +4542,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             }
 
             return result.ResultMessage;
+
         }
 
         /// <summary>
@@ -4698,8 +4717,77 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
             return result.ResultMessage;
         }
-                   
 
+        /// <summary>
+        /// 配套费登录验证
+        /// </summary>
+        /// <param name="prjNum"></param>
+        /// <param name="prjPassword"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string MatchFeeLogin(string prjNum, string prjPassword)
+        {
+            string apiFlowId = "30";
+
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForUpload SBBLL = new DataExchangeBLLForUpload();
+
+            ProcessResultData result = new ProcessResultData();
+
+            string apiMessage = string.Empty;
+            if (isApiOpen(apiFlowId, BLL))
+            {
+
+                DataTable mainDt = SBBLL.GetTBData_TBProjectAdditionalInfo(prjNum);
+
+                if (mainDt == null || mainDt.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "项目编号不存在";
+                    
+                }
+                else
+                {
+                    foreach(DataRow dr in mainDt.Rows)
+                    {
+                        string target = dr["prjpassword"].ToString2();
+                        if (prjPassword.Equals2(target, false))
+                        {
+                            result.code = ProcessResult.数据保存成功;
+                        }
+                        else
+                        {
+                            result.code = ProcessResult.用户名或密码错误;
+                            result.message = "项目编号或密码错误";
+                        }
+                    }
+
+                }
+
+                return result.ResultMessage;
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = apiFlowId;
+                row_apicb["apiMethod"] = "MatchFeeLogin";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt(apiFlowId, string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                result.code = ProcessResult.接口关闭;
+            }
+
+            return result.ResultMessage;
+        }
 
         #endregion
 

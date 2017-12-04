@@ -33,6 +33,11 @@ namespace Wxjzgcjczy.BLL
             DAL.DB = new Wxjzgcjczy.DAL.Sqlserver.DatabaseOperator();
         }
 
+        public DataTable GetTBData_TBProjectAdditionalInfo(string prjNum)
+        {
+            return DAL.GetTBData_TBProjectAdditionalInfo(prjNum);
+        }
+
 
         #region 往省厅推送信息
 

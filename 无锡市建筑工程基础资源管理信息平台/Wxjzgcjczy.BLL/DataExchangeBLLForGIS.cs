@@ -43,7 +43,7 @@ namespace Wxjzgcjczy.BLL
 
         public DataTable GetProjectInfo(string countyNum, string beginDate, string endDate)
         {
-            DataTable dt = DAL.GetProject(null, null, null, countyNum, beginDate, endDate);
+            DataTable dt = DAL.GetProject(null, null, null, null, null, countyNum, beginDate, endDate);
             return dt;
         }
 
@@ -71,9 +71,15 @@ namespace Wxjzgcjczy.BLL
             return dt;
         }
 
+        public DataTable GetProject(string prjNum, string prjName, String buildCorpCode, String buildCorpName, string location)
+        {
+            DataTable dt = DAL.GetProject(prjNum, prjName, buildCorpCode, buildCorpName, location, null, null, null);
+            return dt;
+        }
+
         public DataTable GetProject(string prjNum, string prjName, string location)
         {
-            DataTable dt = DAL.GetProject(prjNum, prjName, location, null, null, null);
+            DataTable dt = DAL.GetProject(prjNum, prjName, null, null, location, null, null, null);
             return dt;
         }
 
@@ -85,7 +91,7 @@ namespace Wxjzgcjczy.BLL
 
         public DataTable GetProject(string prjNum)
         {
-            DataTable dt = DAL.GetProject(prjNum, null, null, null, null, null);
+            DataTable dt = DAL.GetProject(prjNum, null,null, null, null, null, null, null);
             return dt;
         }
 
