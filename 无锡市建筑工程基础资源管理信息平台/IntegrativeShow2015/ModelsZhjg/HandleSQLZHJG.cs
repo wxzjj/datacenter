@@ -30,7 +30,7 @@ namespace IntegrativeShow2
     /// </summary>
     public class Instance_Gdv_LxxmInfo : IHandleSQL
     {
-        #region IHandleSQL 成员        
+        #region IHandleSQL 成员
 
         public void HandleSQL(DataHandle dh)
         {
@@ -90,7 +90,7 @@ where a.UpdateFlag='U' ) as aaa WHERE 1=1 ";
             {
                 dh.strSQL = dh.strSQL + strSqlCondition;
             }
-          
+
             dh.orderBy = " CreateDate desc ";
         }
 
@@ -163,7 +163,7 @@ where a.UpdateFlag='U') as aaa where 1=1   ";
                 }
                 if (strParas.Length > 1 && !string.IsNullOrEmpty(strParas[1]))
                 {
-                   dh.strSQL += " and CountyNum in ("+strParas[1]+")";
+                    dh.strSQL += " and CountyNum in (" + strParas[1] + ")";
 
                 }
             }
@@ -273,12 +273,12 @@ WHERE c.PKID = @PKID and a.UpdateFlag='U'
 
             List<IDataItem> list = cl.GetControlValue();
             list.GetSearchClause(dh.spc, ref strSqlCondition);
-           // cl.GenerateSearchClauseAndSPC(ref strSqlCondition, dh.spc);
+            // cl.GenerateSearchClauseAndSPC(ref strSqlCondition, dh.spc);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
-           // dh.strSQL += " order by CensorEDate desc";
+            // dh.strSQL += " order by CensorEDate desc";
             dh.orderBy = " CensorEDate desc ";
         }
 
@@ -310,9 +310,9 @@ WHERE c.PKID = @PKID and a.UpdateFlag='U'
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
-           // dh.strSQL += " order by CensorEDate desc";   
+            // dh.strSQL += " order by CensorEDate desc";   
             dh.orderBy = " CensorEDate desc ";
         }
 
@@ -357,7 +357,7 @@ LEFT JOIN tbWorkDutyDic AS b3 ON a.PrjDuty = b3.Code
 LEFT JOIN TBProjectCensorInfo AS c ON a.CensorNum = c.CensorNum
 WHERE a.CensorNum = @CensorNum and a.UpdateFlag='U' and c.UpdateFlag='U'
 ";
-           // dh.strSQL += " order by c.PKID desc";
+            // dh.strSQL += " order by c.PKID desc";
             dh.spc.Add("@CensorNum", strParas[0]);
 
             dh.orderBy = " PKID desc ";
@@ -414,14 +414,14 @@ WHERE a.CensorNum = @CensorNum and a.UpdateFlag='U' and c.UpdateFlag='U'
                           ) as aaa WHERE 1=1 ";
             //此处用于自动生成页面查询条件合并入strSQL
             string strSqlCondition = string.Empty;
-            
+
             List<IDataItem> list = cl.GetControlValue();
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
                 dh.strSQL = dh.strSQL + strSqlCondition;
             }
-             dh.orderBy = "  bjrq desc ";
+            dh.orderBy = "  bjrq desc ";
         }
 
         public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
@@ -504,9 +504,9 @@ WHERE a.CensorNum = @CensorNum and a.UpdateFlag='U' and c.UpdateFlag='U'
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
-            dh.orderBy= " ContractDate desc";
+            dh.orderBy = " ContractDate desc";
         }
 
         public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
@@ -562,7 +562,7 @@ WHERE a.CensorNum = @CensorNum and a.UpdateFlag='U' and c.UpdateFlag='U'
                 {
                     dh.strSQL += " and ContractTypeNum in (" + strParas[0] + ") ";
                 }
-               
+
             }
 
             //此处用于自动生成页面查询条件合并入strSQL
@@ -621,7 +621,7 @@ left join TBProjectInfo b on a.PrjNum=b.PrjNum  where a.UpdateFlag='U'
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
             dh.orderBy = "  EDate desc";
         }
@@ -652,7 +652,7 @@ left join TBProjectInfo b on a.PrjNum=b.PrjNum where a.PrjNum=@PrjNum and a.Upda
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
             dh.orderBy = "  EDate desc";
         }
@@ -696,14 +696,14 @@ left join TBProjectInfo b on a.PrjNum=b.PrjNum where a.PrjNum=@PrjNum and a.Upda
 						left join UEPP_Qyjbxx e on e.zzjgdm=a.ConsCorpCode 
                         where a.UpdateFlag='U'
                         ) as aa WHERE 1=1 ";
-             //此处用于自动生成页面查询条件合并入strSQL
+            //此处用于自动生成页面查询条件合并入strSQL
             string strSqlCondition = string.Empty;
             //QueryAssistant.GenerateSearchClauseAndSPC(cl, ref strSqlCondition, dh.spc);
             List<IDataItem> list = cl.GetControlValue();
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
             dh.orderBy = " IssueCertDate desc ";
         }
@@ -735,7 +735,7 @@ left join TBProjectInfo b on a.PrjNum=b.PrjNum where a.PrjNum=@PrjNum and a.Upda
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
             dh.orderBy = " IssueCertDate desc ";
         }
@@ -758,27 +758,27 @@ left join TBProjectInfo b on a.PrjNum=b.PrjNum where a.PrjNum=@PrjNum and a.Upda
         public void HandleSQL(DataHandle dh, string[] strParas)
         {
             //这段SQL用于取出所有施工许可证项目  
-//            dh.strSQL = @"
-//SELECT
-//a.PKID,	/*业务编码 guid值*/ 
-//a.PrjNum,	/*项目编号*/
-//a.BuilderLicenceNum,	/*施工许可证编号 按住建部编码规则统一编号*/
-//a.CorpName,	/*所属单位名称*/
-//a.CorpCode,		/*所属单位组织机构代码*/
-//a.SafetyCerID,		/*安全生产许可证编号*/
-//a.UserName,	/*人员姓名*/
-//a.IDCardTypeNum,	/*证件类型  见代码表*/
-//b.CodeInfo as IDCardType,
-//a.IDCard,	/*人员证件号码*/
-//a.UserPhone,		/*人员电话*/
-//a.CertID,	/*安全生产考核合格证书编号*/
-//(CASE UserType WHEN 1 THEN '主要负责人' WHEN 2 THEN '主要负责人' WHEN '3' THEN '安全员' END ) as UserType
-//
-//FROM TBProjectBuilderUserInfo as a
-//LEFT JOIN tbIDCardTypeDic AS b ON a.IDCardTypeNum = b.Code 
-//LEFT JOIN TBBuilderLicenceManage AS c ON a.PrjNum = c.PrjNum
-//WHERE c.PKID = @PKID
-//";
+            //            dh.strSQL = @"
+            //SELECT
+            //a.PKID,	/*业务编码 guid值*/ 
+            //a.PrjNum,	/*项目编号*/
+            //a.BuilderLicenceNum,	/*施工许可证编号 按住建部编码规则统一编号*/
+            //a.CorpName,	/*所属单位名称*/
+            //a.CorpCode,		/*所属单位组织机构代码*/
+            //a.SafetyCerID,		/*安全生产许可证编号*/
+            //a.UserName,	/*人员姓名*/
+            //a.IDCardTypeNum,	/*证件类型  见代码表*/
+            //b.CodeInfo as IDCardType,
+            //a.IDCard,	/*人员证件号码*/
+            //a.UserPhone,		/*人员电话*/
+            //a.CertID,	/*安全生产考核合格证书编号*/
+            //(CASE UserType WHEN 1 THEN '主要负责人' WHEN 2 THEN '主要负责人' WHEN '3' THEN '安全员' END ) as UserType
+            //
+            //FROM TBProjectBuilderUserInfo as a
+            //LEFT JOIN tbIDCardTypeDic AS b ON a.IDCardTypeNum = b.Code 
+            //LEFT JOIN TBBuilderLicenceManage AS c ON a.PrjNum = c.PrjNum
+            //WHERE c.PKID = @PKID
+            //";
             dh.strSQL = @"
 SELECT
 a.PKID,	/*业务编码 guid值*/ 
@@ -867,7 +867,7 @@ WHERE a.aqjdbm = @aqjdbm and a.UpdateFlag='U'
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
             //dh.strSQL += " order by TenderResultDate desc ";
             dh.orderBy += " TenderResultDate desc ";
@@ -900,7 +900,7 @@ WHERE a.aqjdbm = @aqjdbm and a.UpdateFlag='U'
                         left join UEPP_Qyjbxx  d on a.TenderCorpCode=d.zzjgdm and a.TenderClassNum in ('001,002','003','006')
                         WHERE a.PrjNum=@PrjNum and  a.UpdateFlag='U'
                         ) AS TEMP where 1=1  ";
-                       
+
             //此处用于自动生成页面查询条件合并入strSQL
             string strSqlCondition = string.Empty;
             //QueryAssistant.GenerateSearchClauseAndSPC(cl, ref strSqlCondition, dh.spc);
@@ -908,9 +908,9 @@ WHERE a.aqjdbm = @aqjdbm and a.UpdateFlag='U'
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
-            dh.orderBy =" TenderResultDate desc ";
+            dh.orderBy = " TenderResultDate desc ";
         }
 
         #endregion
@@ -958,7 +958,7 @@ WHERE a.aqjdbm = @aqjdbm and a.UpdateFlag='U'
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
             dh.orderBy = " sbrq desc ";
         }
@@ -989,7 +989,7 @@ WHERE a.aqjdbm = @aqjdbm and a.UpdateFlag='U'
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
-                dh.strSQL = dh.strSQL  + strSqlCondition;
+                dh.strSQL = dh.strSQL + strSqlCondition;
             }
             dh.orderBy = "  sbrq desc ";
         }
@@ -1012,29 +1012,29 @@ WHERE a.aqjdbm = @aqjdbm and a.UpdateFlag='U'
         public void HandleSQL(DataHandle dh, string[] strParas)
         {
             //这段SQL用于取出所有质量报监责任人员
-//            dh.strSQL = @"select * from (
-//SELECT
-//a.PKID,	/*业务编码 guid值*/ 
-//a.zljdbm,	/*市级平台监督注册号*/
-//a.dwlx,	/*单位类型 分为建设单位、勘察单位、设计单位、施工单位、监理单位、质量检测机构、混凝土供应商*/
-//a.Xh,	/*顺序号 每个监督注册号从1开始排序*/
-//a.Dwmc,	/*单位名称*/
-//a.dwdm,	/*单位组织机构代码*/
-//a.xmfzrxm,	/*项目负责人*/
-//a.xmfzrdm,	/*项目负责人身份证号*/
-//a.xmfzr_lxdh,		/*项目负责人电话*/
-//a.jsfzr,		/*项目技术负责人*/
-//a.jsfzr_lxdh,		/*项目技术负责人电话*/
-//a.Zly,		/*质量员*/
-//a.zly_lxdh,		/*质量员电话*/
-//a.qyy,	/*取样员*/
-//a.qyy_lxdh,	/*取样员电话*/
-//c.PrjNum,b.PrjName,b.PKID as LxPKID
-//FROM zj_gcjbxx_zrdw as a
-//LEFT JOIN zj_gcjbxx AS c ON a.zljdbm = c.zljdbm
-//left join TBProjectInfo b on c.PrjNum=b.PrjNum
-//WHERE a.zljdbm = @zljdbm) as aaa  
-//";
+            //            dh.strSQL = @"select * from (
+            //SELECT
+            //a.PKID,	/*业务编码 guid值*/ 
+            //a.zljdbm,	/*市级平台监督注册号*/
+            //a.dwlx,	/*单位类型 分为建设单位、勘察单位、设计单位、施工单位、监理单位、质量检测机构、混凝土供应商*/
+            //a.Xh,	/*顺序号 每个监督注册号从1开始排序*/
+            //a.Dwmc,	/*单位名称*/
+            //a.dwdm,	/*单位组织机构代码*/
+            //a.xmfzrxm,	/*项目负责人*/
+            //a.xmfzrdm,	/*项目负责人身份证号*/
+            //a.xmfzr_lxdh,		/*项目负责人电话*/
+            //a.jsfzr,		/*项目技术负责人*/
+            //a.jsfzr_lxdh,		/*项目技术负责人电话*/
+            //a.Zly,		/*质量员*/
+            //a.zly_lxdh,		/*质量员电话*/
+            //a.qyy,	/*取样员*/
+            //a.qyy_lxdh,	/*取样员电话*/
+            //c.PrjNum,b.PrjName,b.PKID as LxPKID
+            //FROM zj_gcjbxx_zrdw as a
+            //LEFT JOIN zj_gcjbxx AS c ON a.zljdbm = c.zljdbm
+            //left join TBProjectInfo b on c.PrjNum=b.PrjNum
+            //WHERE a.zljdbm = @zljdbm) as aaa  
+            //";
             dh.strSQL = @"SELECT
 a.PKID,	/*业务编码 guid值*/ 
 a.zljdbm,	/*市级平台监督注册号*/
@@ -1396,7 +1396,7 @@ LEFT JOIN tbLxjbDic AS b7 ON a.PrjApprovalLevelNum = b7.Code
 left join uepp_Jsdw c on a.BuildCorpCode=c.zzjgdm 
 LEFT JOIN TBProjectAdditionalInfo ai ON a.PrjNum=ai.prjnum 
 where a.PKID = @PKID ";
-            dh.spc.Add("@PKID",strParas[0]);
+            dh.spc.Add("@PKID", strParas[0]);
 
         }
 
@@ -1599,8 +1599,8 @@ WHERE PKID=@PKID
         }
 
         #endregion
-    } 
-    
+    }
+
     /// <summary>
     /// 获取质监信息
     /// </summary>
@@ -1657,8 +1657,10 @@ WHERE PKID=@PKID
         #endregion
     }
 
+
+    #region 一站式申报安监页面
     /// <summary>
-    /// 一站式申报：安全报监GridViewSQL处理方法
+    /// 一站式申报：安全报监列表
     /// </summary>
     public class Instance_Gdv_AqbjNewInfo : IHandleSQL
     {
@@ -1797,7 +1799,281 @@ SELECT a.[uuid]
 
 
     /// <summary>
-    /// 一站式申报：质量报监GridViewSQL处理方法
+    /// 一站式申报：安全报监详细信息
+    /// </summary>
+    public class Instance_Read_AqbjNewInfo : IHandleSQL
+    {
+        #region IHandleSQL 成员
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            //获取安全监督详细信息
+            dh.strSQL = @"
+SELECT [uuid] /*安监申报表编号*/ 
+      ,[xmmc] /*安监项目名称*/
+      ,[PrjNum] /*项目编号*/
+      ,[PrjName] /*立项项目名称*/
+      ,[Ajjgmc] /*安全监督机构名称*/
+      ,[AjCorpCode] /*安全监督机构组织机构代码*/
+      ,[PrjSize] /*建设规模*/
+      ,[EconCorpName] /*建设单位名称*/
+      ,[EconCorpCode] /*建设单位组织机构代码*/
+      ,[PrjApprovalNum] /*立项批准文号*/
+      ,[BuldPlanNum] /*建设用地规划许可证号*/
+      ,[ProjectPlanNum] /*建设工程规划许可证号*/
+      ,[CityNum] /*所在市州*/
+	  ,d.CodeInfo AS CityLabel
+      ,[CountyNum] /*所在县区*/
+	  ,d2.CodeInfo AS CountryLabel
+      ,[PrjTypeNum] /*项目分类*/
+	  ,p.CodeInfo AS PrjTypeNumLabel
+      ,[sPrjTypeNum] /*项目分类小类*/
+	  ,p1.CodeInfo AS sPrjTypeLabel
+      ,[PrjFunctionNum] /*工程用途*/
+	  ,f.CodeInfo AS PrjFunctionLabel
+      ,[sbr] /*申办人*/
+      ,[sbryddh] /*申办人移动电话*/
+      ,[CreateDate] /*记录登记日期*/
+      ,[sfzps] /*是否是装配式*/
+      ,[sfbz] /*是否是保障房*/
+      ,[jdz] /*坐标经度*/
+      ,[wdz] /*坐标纬度*/
+      ,[mj] /*项目面积*/
+      ,[zj] /*项目造价*/
+      ,[jgcc] /*结构层次*/
+      ,[sbmb] /*申报目标*/
+      ,[sfjk] /*是否符合安装远程监控条件*/
+      ,[sgxkz] /*施工许可证号*/
+      ,[UpdateFlag]
+      ,[FetchDate]
+      ,[UpdateTime]
+      ,[UpdateUser]
+      ,[updateDate]
+  FROM [dbo].[Ap_ajsbb] b
+  left join dbo.tbXzqdmDic d on  b.CityNum = d.Code
+  left join dbo.tbXzqdmDic d2 on  b.CountyNum = d2.Code
+  left join dbo.tbPrjTypeDic p on b.PrjTypeNum = p.Code
+  left join dbo.tbPrjSmallTypeDic p1 on b.sPrjTypeNum = p1.Code
+  left join dbo.tbPrjFunctionDic f on b.PrjFunctionNum = f.Code
+    WHERE uuid = @uuid
+";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 一站式申报：安全报监-相关合同
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_ht : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+      ,[RecordNum]
+      ,[ContractTypeNum]
+	  ,t.CodeInfo AS ContractTypeLabel
+      ,[ContractMoney]
+      ,[CorpCode]
+      ,[CorpName]
+      ,[PrjSize]
+      ,[xmfzr]
+      ,[xmfzrsfzh]
+  FROM [dbo].[Ap_ajsbb_ht] h
+  left join [dbo].[tbContractTypeDic] t on h.ContractTypeNum = t.Code
+  where uuid = @uuid
+                        ";
+            dh.orderBy += " RecordNum asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：安全报监-单位人员
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_dwry : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+      ,[idCard]
+      ,[dwlx]
+      ,[CorpCode]
+      ,[CorpName]
+      ,[zzzs]
+      ,[zzlxdj]
+      ,[zzyxq]
+      ,[xm]
+      ,[gw]
+      ,[mp]
+      ,[zgzh]
+      ,[zy]
+      ,[jhjcsj]
+      ,[jhccsj]
+      ,[lhtsx]
+	  ,(case lhtsx
+  when 1 then '联合体主体单位'
+  when 2 then '联合体合作单位'
+  else '非联合体' end) zyzgzshLabel
+      ,[zyzgzsh]
+  FROM [dbo].[Ap_ajsbb_dwry]
+  where uuid = @uuid ";
+            dh.orderBy += " dwlx asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：安全报监-材料清单
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_clqd : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT *
+FROM [dbo].[Ap_ajsbb_clqd]
+WHERE uuid = @uuid";
+            dh.orderBy += " sbzl asc,xh asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：安全报监-环境及地下设施交底项目
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_hjssjd : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT *
+FROM [dbo].[Ap_ajsbb_hjssjd]
+WHERE uuid = @uuid";
+            dh.orderBy += " xh asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：超大规模危险源工程清单
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_cgmgcqd : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT *
+FROM [dbo].[Ap_ajsbb_cgmgcqd]
+WHERE uuid = @uuid";
+            dh.orderBy += " fbfxgc asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    #endregion
+
+    #region 一站式申报：质监申报相关页面
+    /// <summary>
+    /// 一站式申报：质量报监列表
     /// </summary>
     public class Instance_Gdv_ZlbjNewInfo : IHandleSQL
     {
@@ -1928,7 +2204,322 @@ LEFT JOIN [WJSJZX].[dbo].tbXzqdmDic d ON a.CountyNum = d.Code
         #endregion
     }
 
-    #endregion 
+    /// <summary>
+    /// 一站式申报：质量报监详细信息
+    /// </summary>
+    public class Instance_Read_ZlbjNewInfo : IHandleSQL
+    {
+        #region IHandleSQL 成员
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+	,[xmmc]
+	,[PrjNum]
+	,[PrjName]
+	,[gcdz]
+	,[Zjjgmc]
+	,[ZjCorpCode]
+	,[PrjSize]
+	,[EconCorpName]
+	,[EconCorpCode]
+	,[PrjApprovalNum]
+	,[BuldPlanNum]
+	,[ProjectPlanNum]
+	,[CityNum]
+	,d.CodeInfo AS CityLabel
+	,[CountyNum]
+	,d2.CodeInfo AS CountryLabel
+	,[PrjTypeNum]
+	,p.CodeInfo AS PrjTypeLabel
+	,[PrjFunctionNum]
+	,f.CodeInfo AS PrjFunctionLabel
+	,[sbr]
+	,[sbryddh]
+	,[CreateDate]
+	,[sfzps]
+	,[UpdateFlag]
+	,[FetchDate]
+	,[UpdateTime]
+	,[UpdateUser]
+	,[updateDate]
+	,[Status]
+	,[jsxz]
+	,[tzlx]
+FROM [dbo].[Ap_zjsbb] b
+LEFT JOIN dbo.tbXzqdmDic d ON b.CityNum = d.Code
+LEFT JOIN dbo.tbXzqdmDic d2 ON b.CountyNum = d2.Code
+LEFT JOIN dbo.tbPrjTypeDicNew p ON b.PrjTypeNum = p.Code
+LEFT JOIN dbo.tbPrjFunctionDic f ON b.PrjFunctionNum = f.Code
+    WHERE uuid = @uuid
+";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 一站式申报：质量报监-相关合同
+    /// </summary>
+    public class Instance_Gdv_ZlbjNew_ht : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+	,[RecordNum]
+	,[ContractTypeNum]
+	,t.CodeInfo AS ContractTypeLabel
+	,[ContractMoney]
+	,[CorpCode]
+	,[CorpName]
+	,[PrjSize]
+	,[xmfzr]
+	,[xmfzrsfzh]
+FROM [dbo].[Ap_zjsbb_ht] h
+LEFT JOIN [dbo].[tbContractTypeDic] t ON h.ContractTypeNum = t.Code
+WHERE uuid = @uuid ";
+            dh.orderBy += " RecordNum asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：质量报监-单位人员
+    /// </summary>
+    public class Instance_Gdv_ZlbjNew_dwry : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+	,[idCard]
+	,[dwlx]
+	,[CorpCode]
+	,[CorpName]
+	,[zzzs]
+	,[zzlxdj]
+	,[zzyxq]
+	,[dwdz]
+	,[fddbr]
+	,[fddbrsfz]
+	,[dwlxdh]
+	,[xm]
+	,[gw]
+	,[lxdh]
+	,[zgzh]
+	,[zgdj]
+	,[zy]
+	,[jhjcsj]
+	,[jhccsj]
+	,[lhtsx]
+    ,(case lhtsx
+  when 1 then '联合体主体单位'
+  when 2 then '联合体合作单位'
+  else '非联合体' end) zyzgzshLabel
+	,[zyzgzsh]
+FROM [dbo].[Ap_zjsbb_dwry]
+WHERE uuid = @uuid ";
+            dh.orderBy += " dwlx asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：质量报监-施工图审查合格书
+    /// </summary>
+    public class Instance_Gdv_ZlbjNew_schgs : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+	,[CensorNum]
+	,[CensorName]
+	,[CensorCorpName]
+	,[CensorCorpCode]
+	,[CensorEDate]
+	,[PrjSize]
+	,[UpdateFlag]
+FROM [dbo].[Ap_zjsbb_schgs]
+WHERE uuid = @uuid ";
+            dh.orderBy += " CensorNum asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 一站式申报：质量报监-单位工程
+    /// </summary>
+    public class Instance_Gdv_ZlbjNew_dwgc : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT [uuid]
+	,[dtzljdbm]
+	,[dwgcbm]
+	,[dwgcmc]
+	,[gcfl]
+	,ISNULL(p.CodeInfo, [gcfl]) AS gcflLabel
+	,[dsjzmj]
+	,[dxjzmj]
+	,[rfmj]
+	,[dsjzcd]
+	,[dxjzcd]
+	,[dwgczj]
+	,[ztcs]
+	,[dscs]
+	,[dxcs]
+	,[gd]
+	,[kd]
+	,[PrjStructureTypeNum]
+	,ISNULL(s.CodeInfo, [PrjStructureTypeNum]) AS PrjStructureTypeLabel
+	,[kzdj]
+	,[xfdj]
+	,[jclx]
+	,ISNULL(j.CodeInfo, [jclx]) AS jclxLabel
+	,[djlx]
+	,ISNULL(d.CodeInfo, [djlx]) AS djlxLabel
+	,[stbh]
+	,[gclx]
+	,[jsyt]
+	,ISNULL(f.CodeInfo, [jsyt]) AS jsytLabel
+	,[zzts]
+	,[sfzps]
+	,[jhkgrq]
+	,[jhjgrq]
+	,[UpdateFlag]
+FROM [dbo].[Ap_zjsbb_dwgc] b
+LEFT JOIN dbo.tbPrjTypeZj p ON p.Code = b.gcfl
+LEFT JOIN dbo.tbPrjStructureTypeDic s ON s.Code = b.PrjStructureTypeNum
+LEFT JOIN dbo.tbJCLXDic j ON j.Code = b.jclx
+LEFT JOIN dbo.tbDJLXDic d ON d.Code = b.djlx
+LEFT JOIN dbo.tbPrjFunctionDic f ON f.Code = b.jsyt
+WHERE uuid = @uuid ";
+            dh.orderBy += " dwgcbm asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    /// <summary>
+    /// 一站式申报：质量报监-材料清单
+    /// </summary>
+    public class Instance_Gdv_ZlbjNew_clqd : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT *
+FROM [dbo].[Ap_zjsbb_clqd]
+WHERE uuid = @uuid";
+            dh.orderBy += " sbzl asc,xh asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    #endregion
+
+
+    #endregion
 
 
 

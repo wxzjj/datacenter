@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Zhjg_AqbjNew_View.aspx.cs"
-    Inherits="IntegrativeShow2.SysFiles.PagesZhjg.Zhjg_AqbjNew_View" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Zhjg_ZlbjNew_View.aspx.cs"
+    Inherits="IntegrativeShow2.SysFiles.PagesZhjg.Zhjg_ZlbjNew_View" %>
 
 <%@ Register Assembly="Bigdesk8" Namespace="Bigdesk8.Web.Controls" TagPrefix="Bigdesk8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -14,7 +14,7 @@
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
                 <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
-                    <span class="view_tab_header">安监申报表</span>
+                    <span class="view_tab_header">质监申报表</span>
                 </div>
             </td>
         </tr>
@@ -23,13 +23,13 @@
                 <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table">
                     <tr>
                         <td class="td_text" width="15%">
-                            安监申报表编号
+                            质监申报表编号
                         </td>
                         <td class="td_value" width="35%">
                             <Bigdesk8:DBText ID="uuid" ItemName="uuid" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
-                            安监项目名称
+                            质监项目名称
                         </td>
                         <td class="td_value" width="35%">
                             <Bigdesk8:DBText ID="xmmc" ItemName="xmmc" runat="server"></Bigdesk8:DBText>
@@ -51,23 +51,23 @@
                     </tr>
                     <tr>
                         <td class="td_text" width="15%">
-                            安全监督机构名称
+                            质量监督机构名称
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="Ajjgmc" ItemName="Ajjgmc" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="Zjjgmc" ItemName="Zjjgmc" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
-                            安全监督机构组织机构代码
+                            质量监督机构组织机构代码
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="AjCorpCode" ItemName="AjCorpCode" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="ZjCorpCode" ItemName="ZjCorpCode" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
                         <td class="td_text" width="15%">
                             建设规模
                         </td>
-                        <td class="td_value" width="35%" colspan="3">
+                        <td class="td_value" width="35%" colspan="3" >
                             <Bigdesk8:DBText ID="PrjSize" ItemName="PrjSize" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
@@ -135,10 +135,10 @@
                             <Bigdesk8:DBText ID="PrjTypeLabel" ItemName="PrjTypeLabel" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
-                            项目分类小类
+                            工程地址
                         </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="sPrjTypeLabel" ItemName="sPrjTypeLabel" runat="server"></Bigdesk8:DBText>
+                        <td class="td_value" width="35%" >
+                            <Bigdesk8:DBText ID="gcdz" ItemName="gcdz" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
@@ -163,66 +163,19 @@
                             <Bigdesk8:DBText ID="sfzps" ItemName="sfzps" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
-                            是否是保障房
+                            建设性质
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="sfbz" ItemName="sfbz" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="jsxz" ItemName="jsxz" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
+                    
                     <tr>
                         <td class="td_text" width="15%">
-                            坐标经度
+                            投资类型
                         </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="jdz" ItemName="jdz" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            坐标纬度
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="wdz" ItemName="wdz" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            项目面积
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="mj" ItemName="mj" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            项目造价
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="zj" ItemName="zj" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            结构层次
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="jgcc" ItemName="jgcc" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            申报目标
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="sbmb" ItemName="sbmb" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_text" width="15%">
-                            是否符合安装远程监控条件
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="sfjk" ItemName="sfjk" runat="server"></Bigdesk8:DBText>
-                        </td>
-                        <td class="td_text" width="15%">
-                            施工许可证号
-                        </td>
-                        <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="sgxkz" ItemName="sgxkz" runat="server"></Bigdesk8:DBText>
+                        <td class="td_value" width="35%" colspan="3">
+                            <Bigdesk8:DBText ID="tzlx" ItemName="tzlx" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     <tr>
@@ -262,13 +215,13 @@
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
                 <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
-                    <span class="view_tab_header">相关合同（<%=this.Gdv_AqbjNew_ht.Rows.Count %>）</span>
+                    <span class="view_tab_header">相关合同（<%=this.Gdv_ZlbjNew_ht.Rows.Count %>）</span>
                  </div>
             </td>
         </tr>
         <tr>
             <td class="view_center">
-                <asp:GridView ID="Gdv_AqbjNew_ht" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                <asp:GridView ID="Gdv_ZlbjNew_ht" runat="server" AllowPaging="false" AutoGenerateColumns="false"
                     BorderWidth="1px" Width="100%">
                     <Columns>
                         <asp:BoundField HeaderText="合同备案编码" DataField="RecordNum">
@@ -313,12 +266,12 @@
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
                 <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
-                    <span class="view_tab_header">单位人员（<%=this.Gdv_AqbjNew_dwry.Rows.Count %>）</span></div>
+                    <span class="view_tab_header">单位人员（<%=this.Gdv_ZlbjNew_dwry.Rows.Count %>）</span></div>
             </td>
         </tr>
         <tr>
             <td class="view_center">
-                <asp:GridView ID="Gdv_AqbjNew_dwry" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                <asp:GridView ID="Gdv_ZlbjNew_dwry" runat="server" AllowPaging="false" AutoGenerateColumns="false"
                     BorderWidth="1px" Width="100%">
                     <Columns>
                         <asp:BoundField HeaderText="单位类别" DataField="dwlx">
@@ -330,6 +283,22 @@
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="单位组织机构代码" DataField="CorpCode">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="8%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="单位地址" DataField="dwdz">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="8%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="法定代表人" DataField="fddbr">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="8%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="法定代表人身份证号" DataField="fddbrsfz">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="8%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="单位联系电话" DataField="dwlxdh">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="8%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
@@ -345,7 +314,7 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="手机号码" DataField="mp">
+                        <asp:BoundField HeaderText="联系电话" DataField="lxdh">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
@@ -354,7 +323,7 @@
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="资质类型和等级" DataField="zzlxdj">
-                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="资质有效期" DataField="zzyxq">
@@ -362,6 +331,14 @@
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="资格类型及证号" DataField="zgzh">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="资格等级" DataField="zgdj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="专业" DataField="zy">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
@@ -383,12 +360,185 @@
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
                 <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
-                    <span class="view_tab_header">材料清单（<%=this.Gdv_AqbjNew_clqd.Rows.Count %>）</span></div>
+                    <span class="view_tab_header">施工图审查合格书（<%=this.Gdv_ZlbjNew_schgs.Rows.Count%>）</span>
+                 </div>
             </td>
         </tr>
         <tr>
             <td class="view_center">
-                <asp:GridView ID="Gdv_AqbjNew_clqd" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                <asp:GridView ID="Gdv_ZlbjNew_schgs" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                    BorderWidth="1px" Width="100%">
+                    <Columns>
+                        <asp:BoundField HeaderText="施工图审查合格书编号" DataField="CensorNum">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="施工图审查项目名称" DataField="CensorName">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="施工图审查机构名称" DataField="CensorCorpName">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="施工图审查机构组织机构代码" DataField="CensorCorpCode">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="审查完成日期" DataField="CensorEDate" DataFormatString="{0:yyyy-MM-dd HH:mm:ss}">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="建设规模" DataField="PrjSize">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="数据更新标识" DataField="UpdateFlag">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    <span class="view_tab_header">单位工程（<%=this.Gdv_ZlbjNew_dwgc.Rows.Count %>）</span></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <asp:GridView ID="Gdv_ZlbjNew_dwgc" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                    BorderWidth="1px" Width="100%">
+                    <Columns>
+                        <asp:BoundField HeaderText="单位工程编码" DataField="dwgcbm">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="5%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="单位工程名称" DataField="dwgcmc">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="质监工程分类" DataField="gcflLabel">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="15%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="地上建筑面积(平方米)" DataField="dsjzmj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="地下建筑面积(平方米)" DataField="dxjzmj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="人防建筑面积(平方米)" DataField="rfmj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="地上建筑长度(米)" DataField="dsjzcd">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="地下建筑长度(米)" DataField="dxjzcd">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="单位工程造价(万元)" DataField="dwgczj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="主体层数" DataField="ztcs">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="地上层数" DataField="dscs">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="地下层数" DataField="dxcs">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="高度" DataField="gd">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="跨度" DataField="kd">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="结构类型" DataField="PrjStructureTypeLabel">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="抗震等级" DataField="kzdj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                         <asp:BoundField HeaderText="消防等级" DataField="xfdj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="基础类型" DataField="jclxLabel">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="地基类型" DataField="djlxLabel">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="审图编号" DataField="stbh">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="工程类型" DataField="gclx">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="建设用途" DataField="jsytLabel">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="住宅套数" DataField="zzts">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="是否是装配式" DataField="sfzps">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                         <asp:BoundField HeaderText="计划开工日期" DataField="jhkgrq"  DataFormatString="{0:yyyy-MM-dd HH:mm:ss}">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="计划竣工日期" DataField="jhjgrq"  DataFormatString="{0:yyyy-MM-dd HH:mm:ss}">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="数据更新标识" DataField="UpdateFlag">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    <span class="view_tab_header">材料清单（<%=this.Gdv_ZlbjNew_clqd.Rows.Count %>）</span></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <asp:GridView ID="Gdv_ZlbjNew_clqd" runat="server" AllowPaging="false" AutoGenerateColumns="false"
                     BorderWidth="1px" Width="100%">
                     <Columns>
                         <asp:BoundField HeaderText="序号" DataField="xh">
@@ -418,66 +568,6 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-            </td>
-        </tr>
-    </table>
-    <br />
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-            <td class="view_head" style="height: 25px; vertical-align: bottom">
-                <div style="width: 270px;height: 25px;background: url('../Images/TitleImgs/Title_back.gif');background-repeat: no-repeat;">
-                    <span class="view_tab_header">环境及地下设施交底项目（<%=this.Gdv_AqbjNew_hjssjd.Rows.Count%>）</span></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="view_center">
-                <asp:GridView ID="Gdv_AqbjNew_hjssjd" runat="server" AllowPaging="false" AutoGenerateColumns="false"
-                    BorderWidth="1px" Width="100%">
-                    <Columns>
-                        <asp:BoundField HeaderText="序号" DataField="xh">
-                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="left" />
-                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="交底项目" DataField="jdxm">
-                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="60%" HorizontalAlign="Center" />
-                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="交底情况" DataField="jdqk">
-                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="30%" HorizontalAlign="Center" />
-                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
-                        </asp:BoundField>
-                    </Columns>
-                </asp:GridView>
-            </td>
-        </tr>
-    </table>
-    <br />
-     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-            <td class="view_head" style="height: 25px; vertical-align: bottom">
-                <div style="width: 270px;height: 25px;background: url('../Images/TitleImgs/Title_back.gif');background-repeat: no-repeat;">
-                    <span class="view_tab_header">环境及地下设施交底项目（<%=this.Gdv_AqbjNew_hjssjd.Rows.Count%>）</span></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="view_center">
-                <asp:GridView ID="Gdv_AqbjNew_cgmgcqd" runat="server" AllowPaging="false" AutoGenerateColumns="false"
-                    BorderWidth="1px" Width="100%">
-                    <Columns>
-                        <asp:BoundField HeaderText="分部分项工程" DataField="fbfxgc">
-                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="30%" HorizontalAlign="left" />
-                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="工程内容" DataField="gcnr">
-                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="50%" HorizontalAlign="Center" />
-                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="预计实施时间" DataField="yjsssj">
-                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
-                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
-                        </asp:BoundField>
                     </Columns>
                 </asp:GridView>
             </td>

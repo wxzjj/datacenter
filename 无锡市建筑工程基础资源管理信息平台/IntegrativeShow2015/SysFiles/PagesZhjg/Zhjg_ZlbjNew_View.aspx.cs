@@ -13,7 +13,7 @@ using Bigdesk8;
 
 namespace IntegrativeShow2.SysFiles.PagesZhjg
 {
-    public partial class Zhjg_AqbjNew_View : BasePageGuanli
+    public partial class Zhjg_ZlbjNew_View : BasePageGuanli
     {
         #region 基本配置
         // 常量
@@ -26,9 +26,10 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
         DataTable dtPageData;
         GridView gvHt;
         GridView gvDwry;
+        GridView gvSchgs;
+        GridView gvDwgc;
         GridView gvClqd;
-        GridView gvHjssjd;
-        GridView gvCgmgcqd;
+       
         //接口
         protected IHandleBusiness ihb;
         #endregion
@@ -41,38 +42,39 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
             ihb = new HandleBusinessBase();
             arrParas = new string[]{PKID};
 
-            gvHt = this.Gdv_AqbjNew_ht;
-            gvDwry = this.Gdv_AqbjNew_dwry;
-            gvClqd = this.Gdv_AqbjNew_clqd;
-            gvHjssjd = this.Gdv_AqbjNew_hjssjd;
-            gvCgmgcqd = this.Gdv_AqbjNew_cgmgcqd;
+            gvHt = this.Gdv_ZlbjNew_ht;
+            gvDwry = this.Gdv_ZlbjNew_dwry;
+            gvSchgs = this.Gdv_ZlbjNew_schgs;
+            gvDwgc = this.Gdv_ZlbjNew_dwgc;
+            gvClqd = this.Gdv_ZlbjNew_clqd;
 
-            dtPageData = ihb.SearchInfo(InstanceName.Instance_Read_AqbjNewInfo.ToString(),arrParas);
+            dtPageData = ihb.SearchInfo(InstanceName.Instance_Read_ZlbjNewInfo.ToString(),arrParas);
             if (!IsPostBack)
             {
                 if (dtPageData.Rows.Count > 0)
                 {
                     arrParas = new string[] { dtPageData.Rows[0]["uuid"].ToString() };
-                    //查找合同数据并赋值给合同gridview
+                    //合同
                     gvHt.DataSource = ihb.SearchInfo(InstanceHead + gvHt.ID, arrParas);
                     gvHt.DataBind();
 
-                    //查找单位人员数据并赋值给单位人员gridview
+                    //单位人员
                     gvDwry.DataSource = ihb.SearchInfo(InstanceHead + gvDwry.ID, arrParas);
                     gvDwry.DataBind();
+
+                    //施工图审查合格书
+                    gvSchgs.DataSource = ihb.SearchInfo(InstanceHead + gvSchgs.ID, arrParas);
+                    gvSchgs.DataBind();
+
+                    //单位工程
+                    gvDwgc.DataSource = ihb.SearchInfo(InstanceHead + gvDwgc.ID, arrParas);
+                    gvDwgc.DataBind();
 
                     //材料清单
                     gvClqd.DataSource = ihb.SearchInfo(InstanceHead + gvClqd.ID, arrParas);
                     gvClqd.DataBind();
 
-                    //环境及地下设施交底项目
-                    gvHjssjd.DataSource = ihb.SearchInfo(InstanceHead + gvHjssjd.ID, arrParas);
-                    gvHjssjd.DataBind();
-
-                    //超大规模危险源工程清单
-                    gvCgmgcqd.DataSource = ihb.SearchInfo(InstanceHead + gvCgmgcqd.ID, arrParas);
-                    gvCgmgcqd.DataBind();
-
+                     
                     //数据绑定
                     if (dtPageData.Rows.Count > 0)
                     {
