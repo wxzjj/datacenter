@@ -26,6 +26,17 @@ CREATE TABLE [dbo].[TBProjectInfoDoc](
 	[UpdateDate] [date] NOT NULL
 )
 
+CREATE TABLE [dbo].[TBProjectInfoDocAdd](
+	[PKID] [varchar](50) NOT NULL,
+	[PrjNum] [varchar](20) NOT NULL,
+	[PrjName] [varchar](300) NULL,
+	[DocNumFrom] [varchar](50) NULL,
+	[DocNumTo] [varchar](50) NULL,
+	[DocCount] [int] NULL,
+	[CreateDate] [date] NOT NULL,
+	[UpdateDate] [date] NOT NULL
+)
+
 CREATE TABLE [dbo].[xm_gcdjb_dtxm_doc](
 	[PKID] [varchar](50) NOT NULL,
 	[prjNum] [varchar](25) NOT NULL,
@@ -42,6 +53,18 @@ CREATE TABLE [dbo].[xm_gcdjb_dtxm_doc](
 	[CreateDate] [date] NOT NULL,
 	[UpdateDate] [date] NOT NULL
 )
+
+
+CREATE VIEW [dbo].[VProjectInfoDoc]
+AS
+SELECT a.*, c.DocNum, c.DocCount
+FROM TBProjectInfo a
+LEFT JOIN 
+(SELECT b.prjNum prjNum,sum(DocCount) DocCount, 
+[DocNum]=stuff((select '/'+[DocNumFrom]+':'+[DocNumTo] from TBProjectInfoDocAdd t where prjNum=t.prjNum for xml path('')), 1, 1, '')
+FROM TBProjectInfoDocAdd b
+GROUP BY b.prjNum) c
+ON a.PrjNum=c.prjNum
 
 GO
 
