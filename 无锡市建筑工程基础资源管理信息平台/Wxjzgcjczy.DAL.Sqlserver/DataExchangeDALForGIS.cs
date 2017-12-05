@@ -19,7 +19,8 @@ namespace Wxjzgcjczy.DAL.Sqlserver
     {
         public DBOperator DB { get; set; }
 
-        public static string PROJECTINFO_FIELDS = "a.PrjNum,a.PrjName,a.PrjTypeNum,a.BuildCorpName,a.BuildCorpCode,a.ProvinceNum,a.CityNum,a.CountyNum,a.BDate,a.EDate,a.jd,a.wd,b.programme_address";
+        public static string PROJECTINFO_FIELDS = @"a.PrjNum,a.PrjName,a.PrjTypeNum,a.BuildCorpName,a.BuildCorpCode,a.ProvinceNum,"
+            +"a.CityNum,a.CountyNum,a.BDate,a.EDate,a.jd,a.wd,b.programme_address,a.DocNum,a.DocCount";
      
 
         #region 获取项目数据
@@ -43,7 +44,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             StringBuilder sb = new StringBuilder();
             sb.Append(" select ");
             sb.Append(PROJECTINFO_FIELDS);
-            sb.Append(" from TBProjectInfo a");
+            sb.Append(" from VProjectInfoDoc a");
             sb.Append(" left join TBProjectAdditionalInfo b on b.PrjNum=a.PrjNum");
             sb.Append(" where 1=1");
             if (!string.IsNullOrEmpty(prjNum))
@@ -162,7 +163,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             StringBuilder sb = new StringBuilder();
             sb.Append(" select ");
             sb.Append(PROJECTINFO_FIELDS);
-            sb.Append(" from TBProjectInfo a");
+            sb.Append(" from VProjectInfoDoc a");
             sb.Append(" left join TBProjectAdditionalInfo b on b.PrjNum=a.PrjNum");
             sb.Append(" where 1=1");
 
