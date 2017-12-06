@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -4553,7 +4554,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         /// <param name="range"></param>
         /// <returns></returns>
         [WebMethod]
-        public string queryProjectListByRange(string user, string password, string range)
+        public string queryProjectListByRange(string user, string password, string range, string beginDate, string endDate)
         {
             string apiFlowId = "30";
 
@@ -4572,7 +4573,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return result.ResultMessage;
                 }
 
-                DataTable mainDt = SBBLL.GetProjectByRange(range);
+                DataTable mainDt = SBBLL.GetProjectByRange(range, "", beginDate, endDate);
 
                 if (mainDt == null || mainDt.Rows.Count == 0)
                 {
@@ -4620,6 +4621,216 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         }
 
         /// <summary>
+        /// 统计指定年限、坐标范围内的项目信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="range"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string StatisticsPrjListByRange(string user, string password, string range, string beginDate, string endDate)
+        {
+            string apiFlowId = "30";
+
+            DataExchangeBLL BLL = new DataExchangeBLL();
+
+            ProcessResultData result = new ProcessResultData();
+
+            string apiMessage = string.Empty;
+            if (isApiOpen(apiFlowId, BLL))
+            {
+                if (!accessValidate(user, password, BLL))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    return result.ResultMessage;
+                }
+                try
+                {
+                    DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+                    DataTable dt = SBBLL.GetProjectByRange(range, "", beginDate, endDate);
+                    return this.getStatistics(dt, "");
+                }
+                catch (Exception ex)
+                {
+                    result.code = ProcessResult.内部错误;
+                    result.message = ex.Message;
+                    return result.ResultMessage;
+                }
+
+            }
+            else
+            {
+                result.code = ProcessResult.接口关闭;
+            }
+            return result.ResultMessage;
+        }
+
+        /// <summary>
+        /// 统计指定年限、区域内的项目信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="qy"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string StatisticsPrjListByQy(string user, string password, string qy, string beginDate, string endDate)
+        {
+
+            string apiFlowId = "30";
+
+            DataExchangeBLL BLL = new DataExchangeBLL();
+
+            ProcessResultData result = new ProcessResultData();
+
+            string apiMessage = string.Empty;
+            if (isApiOpen(apiFlowId, BLL))
+            {
+                if (!accessValidate(user, password, BLL))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    return result.ResultMessage;
+                }
+                try
+                {
+                    DataExchangeBLLForGIS SBBLL = new DataExchangeBLLForGIS();
+                    DataTable dt = SBBLL.GetProjectByRange("", qy, beginDate, endDate);
+                    return this.getStatistics(dt, qy);
+                }
+                catch (Exception ex)
+                {
+                    result.code = ProcessResult.内部错误;
+                    result.message = ex.Message;
+                    return result.ResultMessage;
+                }
+
+            }
+            else
+            {
+                result.code = ProcessResult.接口关闭;
+            }
+            return result.ResultMessage;
+        }
+
+        private string getStatistics(DataTable dt, string qy)
+        {
+
+            int prjNum = dt.Rows.Count;
+            int buildNum = 0;
+            int finishNum = 0;
+            int jsdwNum = 0;
+            int kcdwNum = 0;
+            int sjdwNum = 0;
+            int sgdwNum = 0;
+            int jldwNum = 0;
+            int stdwNum = 0;
+            int daNum = 0;
+
+            ArrayList jsdwlist = new ArrayList();
+            ArrayList kcdwlist = new ArrayList();
+            ArrayList sjdwlist = new ArrayList();
+            ArrayList sgdwlist = new ArrayList();
+            ArrayList jldwlist = new ArrayList();
+            ArrayList stdwlist = new ArrayList();
+
+            string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string edate = row["EDate"].ToString2();
+                if (!string.IsNullOrEmpty(edate) && string.Compare(currentDate, edate)>=0)
+                {
+                    finishNum++;
+                }
+                else
+                {
+                    buildNum++;
+                }
+                string jsdw = row["BuildCorpName"].ToString2();
+                string kcdw = row["EconCorpName"].ToString2();
+                string sjdw = row["DesignCorpName"].ToString2();
+                string sgdw = row["ConsCorpName"].ToString2();
+                string jldw = row["SuperCorpName"].ToString2();
+                string stdw = row["CensorCorpName"].ToString2();
+
+                this.parseEntity(jsdwlist, jsdw);
+                this.parseEntity(kcdwlist, kcdw);
+                this.parseEntity(sjdwlist, sjdw);
+                this.parseEntity(sgdwlist, sgdw);
+                this.parseEntity(jldwlist, jldw);
+                this.parseEntity(stdwlist, stdw);
+
+                if (!string.IsNullOrEmpty(row["DocCount"].ToString2()))
+                {
+                    daNum += row["DocCount"].ToInt32();
+                }
+
+            }
+
+            jsdwNum = jsdwlist.ToArray().Length;
+            kcdwNum = kcdwlist.ToArray().Length;
+            sjdwNum = sjdwlist.ToArray().Length;
+            sgdwNum = sgdwlist.ToArray().Length;
+            jldwNum = jldwlist.ToArray().Length;
+            stdwNum = stdwlist.ToArray().Length;
+
+            DataTable resultTable = new DataTable();
+
+            resultTable.Columns.Add("qy", typeof(string));
+            resultTable.Columns.Add("prjNum", typeof(int));
+            resultTable.Columns.Add("buildNum", typeof(int));
+            resultTable.Columns.Add("finishNum", typeof(int));
+            resultTable.Columns.Add("jsdwNum", typeof(int));
+            resultTable.Columns.Add("kcdwNum", typeof(int));
+            resultTable.Columns.Add("sjdwNum", typeof(int));
+            resultTable.Columns.Add("sgdwNum", typeof(int));
+            resultTable.Columns.Add("jldwNum", typeof(int));
+            resultTable.Columns.Add("stdwNum", typeof(int));
+            resultTable.Columns.Add("daNum", typeof(int));
+
+            DataRow dataRow = resultTable.NewRow();
+
+            dataRow["qy"] = qy;
+            dataRow["prjNum"] = prjNum;
+            dataRow["buildNum"] = buildNum;
+            dataRow["finishNum"] = finishNum;
+            dataRow["jsdwNum"] = jsdwNum;
+            dataRow["kcdwNum"] = kcdwNum;
+            dataRow["sjdwNum"] = sjdwNum;
+            dataRow["sgdwNum"] = sgdwNum;
+            dataRow["jldwNum"] = jldwNum;
+            dataRow["stdwNum"] = stdwNum;
+            dataRow["daNum"] = daNum;
+
+            resultTable.Rows.Add(dataRow);
+
+            return xmlHelper.ConvertDataTableToXMLWithBase64Encoding(resultTable, "dataTable", "row");
+        }
+
+        /// <summary>
+        /// parse string and add into list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="str"></param>
+        private void parseEntity(ArrayList list, string str)
+        {
+            if(!string.IsNullOrEmpty(str))
+            {
+                string[] arr = str.Split('/');
+                foreach(string item in arr)
+                {
+                    if (!item.Equals("无") && !item.Equals("-") && !list.Contains(item))
+                    {
+                        list.Add(item);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// 查询项目信息
         /// </summary>
         /// <param name="user"></param>
@@ -4661,11 +4872,72 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
                     DataTable tempDt;
 
+                    /*
+                    mainDt.Columns.Add("EconCorpName", typeof(string));
+                    mainDt.Columns.Add("DesignCorpName", typeof(string));
+                    mainDt.Columns.Add("ConsCorpName", typeof(string));
+                    mainDt.Columns.Add("SuperCorpName", typeof(string));
+                    mainDt.Columns.Add("CensorCorpName", typeof(string));
+                    */
                     foreach (DataRow dataRow in mainDt.Rows)
                     {
                         str.AppendFormat("<{0}>", "data");
 
                         str.AppendFormat("<{0}>", "project");
+
+                        DataTable blDataTable = SBBLL.GetBuildingLicense(prjNum);
+
+                        DataTable cencorDataTable = SBBLL.GetProjectCensor(prjNum);
+
+                        /*改用SQL方式获取
+                        StringBuilder consStr = new StringBuilder();
+                        StringBuilder designStr = new StringBuilder();
+                        StringBuilder econStr = new StringBuilder();
+                        StringBuilder superStr = new StringBuilder();
+                        StringBuilder censorStr = new StringBuilder();
+                        foreach (DataRow dr in blDataTable.Rows)
+                        {
+                            string econ = dr["EconCorpName"].ToString2();
+                            if (!this.isItemEmpty(econ) && !econStr.ToString2().Contains(econ))
+                            {
+                                econStr.Append("/").Append(econ);
+                            }
+                            string design = dr["DesignCorpName"].ToString2();
+                            if (!this.isItemEmpty(design) && !designStr.ToString2().Contains(design))
+                            {
+                                designStr.Append("/").Append(design);
+                            }
+                            string cons = dr["ConsCorpName"].ToString2();
+                            if (!this.isItemEmpty(econ) && !consStr.ToString2().Contains(cons))
+                            {
+                                consStr.Append("/").Append(cons);
+                            }
+                            string super = dr["SuperCorpName"].ToString2();
+                            if (!this.isItemEmpty(super) && !superStr.ToString2().Contains(super))
+                            {
+                                superStr.Append("/").Append(super);
+                            }
+                        }
+
+                        dataRow["EconCorpName"] = this.handleStringBuilder(consStr);
+                        dataRow["DesignCorpName"] = this.handleStringBuilder(designStr);
+                        dataRow["ConsCorpName"] = this.handleStringBuilder(econStr);
+                        dataRow["SuperCorpName"] = this.handleStringBuilder(superStr);
+
+                        
+
+                        foreach (DataRow dr in cencorDataTable.Rows)
+                        {
+                            string censor = dr["CensorCorpName"].ToString2();
+                            if (!this.isItemEmpty(censor) && !censorStr.ToString2().Contains(censor))
+                            {
+                                censorStr.Append("/").Append(censor);
+                            }
+                        }
+
+                        dataRow["CensorCorpName"] = this.handleStringBuilder(censorStr);
+                        */
+
                         mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
                         str.Append(mainXml);
                         str.AppendFormat("</{0}>", "project");
@@ -4673,11 +4945,9 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         tempDt = SBBLL.GetSubProject(prjNum);
                         str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "subProjectList", "subProject"));
 
-                        tempDt = SBBLL.GetBuildingLicense(prjNum);
-                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "buildingLicenseList", "buildingLicense"));
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(blDataTable, "buildingLicenseList", "buildingLicense"));
 
-                        tempDt = SBBLL.GetProjectCensor(prjNum);
-                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "projectCensorList", "projectCensor"));
+                        str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(cencorDataTable, "projectCensorList", "projectCensor"));
 
                         tempDt = SBBLL.GetProjectFinish(prjNum);
                         str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "projectFinishList", "projectFinish"));
@@ -4716,6 +4986,28 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             }
 
             return result.ResultMessage;
+        }
+
+        private bool isItemEmpty(string item)
+        {
+            bool flag = false;
+            if (string.IsNullOrEmpty(item))
+            {
+                flag = true;
+            }else if ("-".Equals(item) || " ".Equals(item))
+            {
+                flag = true;
+            }
+            return flag;
+        }
+
+        private string handleStringBuilder(StringBuilder sb)
+        {
+            if (sb.Length > 0)
+            {
+                sb.Remove(0, 1);
+            }
+            return sb.ToString2();
         }
 
         /// <summary>
