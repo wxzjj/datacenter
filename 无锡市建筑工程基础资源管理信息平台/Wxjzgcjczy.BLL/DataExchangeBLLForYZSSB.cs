@@ -206,7 +206,7 @@ namespace Wxjzgcjczy.BLL
                         string[] excludeColumns = new string[] { "id", "deptcode", "", "sbPassword", "UpdateTime", "UpdateUser" };
                         xmlData = xmlHelper.ConvertDataRowToXML(dataRow);
 
-                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                        str.Append("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
                         str.AppendFormat("<{0}>", "data");
                         str.AppendFormat("<{0}>", "result");
                         str.Append(xmlData);
@@ -371,7 +371,7 @@ namespace Wxjzgcjczy.BLL
                         xmlData = xmlHelper.ConvertDataRowToXML(dataRow, excludeColumns);
                         
 
-                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                        str.Append("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
                         str.AppendFormat("<{0}>", "data");
                         str.AppendFormat("<{0}>", "result");
                         str.Append(xmlData);
@@ -524,7 +524,7 @@ namespace Wxjzgcjczy.BLL
                         excludeColumns.Add("UpdateUser");
                         xmlData = xmlHelper.ConvertDataRowToXML(dataRow, excludeColumns);
 
-                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                        str.Append("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
                         str.AppendFormat("<{0}>", "data");
                         str.AppendFormat("<{0}>", "result");
                         str.Append(xmlData);
@@ -687,7 +687,7 @@ namespace Wxjzgcjczy.BLL
                         dwgcExcludeCols.Add("uuid");
                         //dwgcXmlData = xmlHelper.ConvertDataTableToXML(dwgcDt, "dwgcList", "dwgccontent");
 
-                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                        str.Append("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
                         str.AppendFormat("<{0}>", "data");
                         str.AppendFormat("<{0}>", "result");
                         str.Append(xmlData);
@@ -873,7 +873,7 @@ namespace Wxjzgcjczy.BLL
                         xmlData = xmlHelper.ConvertDataRowToXML(dataRow, excludeColumns);
 
 
-                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+                        str.Append("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
                         str.AppendFormat("<{0}>", "data");
                         str.AppendFormat("<{0}>", "result");
                         str.Append(xmlData);
