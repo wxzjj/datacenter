@@ -302,27 +302,33 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             string prjName = context.Request.Params["prjName"];
             string prjAddress = context.Request.Params["prjAddress"];
             StringBuilder str = new StringBuilder();
+            WebCommon.WriteLog("QueryProjectList");
             try
             {
-                str.Append("[");
+                
                 DataTable dt = BLL.GetProject(prjNum, prjName, prjAddress);
+                WebCommon.WriteLog("dt.Rows.Count:" + dt.Rows.Count);
+                str.Append("{\"landmarkcount\": " + dt.Rows.Count + ",");
+                str.Append("\"pois\":[");
 
                 foreach (DataRow row in dt.Rows)
                 {
                     str.Append("{");
-                    str.AppendFormat("\"title\":\"{0}\",\"point\":\"{1}|{2}\",\"xmmc\":\"{3}\",\"jsdw\":\"{4}\",\"sgdw\":\"{5}\",\"jldw\":\"{6}\",\"kcdw\":\"{7}\",\"sjdw\":\"{8}\",\"kgrq\":\"{9}\",\"jsgm\":\"{10}\",\"xmztz\":\"{11}万元\",\"prjNum\":\"{12}\",\"isSgbz\":{13},\"PKID\":\"{14}\"",
-                        "工程项目概要信息", row["jd"], row["wd"], row["PrjName"].ToString().Replace("\"", ""), row["BuildCorpName"]
-                        , row["SgzcbCorpNames"] == DBNull.Value ? "" : row["SgzcbCorpNames"].ToString2().Trim(';')
-                        , row["JLCorpNames"] == DBNull.Value ? "" : row["JLCorpNames"].ToString2().Trim(';')
-                        , row["EconCorpNames"] == DBNull.Value ? "" : row["EconCorpNames"].ToString2().Trim(';')
-                        , row["DesignCorpNames"] == DBNull.Value ? "" : row["DesignCorpNames"].ToString2().Trim(';')
-                        , row["BDate"] == DBNull.Value ? "" : row["BDate"].ToDateTime().ToString("yyyy-MM-dd")
-                        , row["PrjSize"], row["AllInvest"] == DBNull.Value ? "0" : row["AllInvest"].ToString2()
-                        , row["PrjNum"], row["isSgbz"].ToInt32(0), row["PKID"]);
+                    str.AppendFormat("\"PrjNum\":\"{0}\",\"PrjName\":\"{1}\",\"PrjTypeNum\":\"{2}\",\"BuildCorpName\":\"{3}\",\"BuildCorpCode\":\"{4}\",\"ProvinceNum\":\"{5}\",\"CityNum\":\"{6}\",\"CountyNum\":\"{7}\",\"BDate\":\"{8}\",\"EDate\":\"{9}\",\"jd\":\"{10}\",\"wd\":\"{11}\",\"programme_address\":\"{12}\"",
+                        row["PrjNum"], row["PrjName"], row["PrjTypeNum"],row["BuildCorpName"],row["BuildCorpCode"]
+                        , row["ProvinceNum"] == DBNull.Value ? "" : row["ProvinceNum"].ToString2()
+                        , row["CityNum"] == DBNull.Value ? "" : row["CityNum"].ToString2()
+                        , row["CountyNum"] == DBNull.Value ? "" : row["CountyNum"].ToString2()
+                        , row["BDate"] == DBNull.Value ? "" : row["BDate"].ToString2()
+                        , row["EDate"] == DBNull.Value ? "" : row["EDate"].ToString2()
+                        , row["jd"] == DBNull.Value ? "" : row["jd"].ToString2()
+                        , row["wd"] == DBNull.Value ? "" : row["wd"].ToString2()
+                        , row["programme_address"] == DBNull.Value ? "" : row["programme_address"].ToString2()
+                        );  
                     str.Append("},");
                 }
 
-                return str.ToString().TrimEnd(',') + "]";
+                return str.ToString().TrimEnd(',') + "] }" ;
 
             }
             catch (Exception ex)
