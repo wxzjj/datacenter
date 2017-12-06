@@ -83,9 +83,9 @@ namespace Wxjzgcjczy.BLL
             return dt;
         }
 
-        public DataTable GetProjectByRange(string range)
+        public DataTable GetProjectByRange(string range, string qy, string beginDate, string endDate)
         {
-            DataTable dt = DAL.GetProjectByRange(range);
+            DataTable dt = DAL.GetProjectByRange(range, qy, beginDate, endDate);
             return dt;
         }
 
