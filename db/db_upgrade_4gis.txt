@@ -57,14 +57,37 @@ CREATE TABLE [dbo].[xm_gcdjb_dtxm_doc](
 
 CREATE VIEW [dbo].[VProjectInfoDoc]
 AS
-SELECT a.*, c.DocNum, c.DocCount
+SELECT a.*, aa.DocNum, aa.DocCount,bb.ConsCorpName,bb.DesignCorpName,bb.EconCorpName,bb.SuperCorpName,
+cc.CensorCorpName,dd.EDate EDates, f.Jd jd1, f.Wd wd1
 FROM TBProjectInfo a
 LEFT JOIN 
 (SELECT b.prjNum prjNum,sum(DocCount) DocCount, 
-[DocNum]=stuff((select '/'+[DocNumFrom]+':'+[DocNumTo] from TBProjectInfoDocAdd t where prjNum=t.prjNum for xml path('')), 1, 1, '')
+[DocNum]=stuff((select '/'+[DocNumFrom]+':'+[DocNumTo] from TBProjectInfoDocAdd t1 where b.prjNum=t1.prjNum for xml path('')), 1, 1, '')
 FROM TBProjectInfoDocAdd b
-GROUP BY b.prjNum) c
-ON a.PrjNum=c.prjNum
+GROUP BY b.prjNum) aa
+ON a.PrjNum=aa.prjNum
+LEFT JOIN 
+(SELECT c.prjNum prjNum, 
+[EconCorpName]=stuff((select '/'+[EconCorpName] from TBBuilderLicenceManage t21 where c.prjNum=t21.prjNum for xml path('')), 1, 1, ''),
+[DesignCorpName]=stuff((select '/'+[DesignCorpName] from TBBuilderLicenceManage t22 where c.prjNum=t22.prjNum for xml path('')), 1, 1, ''),
+[ConsCorpName]=stuff((select '/'+[ConsCorpName] from TBBuilderLicenceManage t23 where c.prjNum=t23.prjNum for xml path('')), 1, 1, ''),
+[SuperCorpName]=stuff((select '/'+[SuperCorpName] from TBBuilderLicenceManage t24 where c.prjNum=t24.prjNum for xml path('')), 1, 1, '')
+FROM TBBuilderLicenceManage c
+GROUP BY c.prjNum) bb
+ON a.PrjNum=bb.prjNum
+LEFT JOIN 
+(SELECT d.prjNum prjNum,
+[CensorCorpName]=stuff((select '/'+[CensorCorpName] from TBProjectCensorInfo t3 where d.prjNum=t3.prjNum for xml path('')), 1, 1, '')
+FROM TBProjectCensorInfo d
+GROUP BY d.prjNum) cc
+ON a.PrjNum=cc.prjNum
+LEFT JOIN 
+(SELECT e.prjNum prjNum, 
+[EDate]=stuff((select '/'+CONVERT(varchar(100), [EDate], 23) from TBProjectFinishManage t4 where e.prjNum=t4.prjNum for xml path('')), 1, 1, '')
+FROM TBProjectFinishManage e
+GROUP BY e.prjNum) dd
+ON a.PrjNum=dd.prjNum
+LEFT JOIN TBProjectInfoDoc f on f.PrjNum=a.PrjNum
 
 GO
 
