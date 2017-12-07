@@ -19,7 +19,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
     {
         public DBOperator DB { get; set; }
 
-        public static string PROJECTINFO_FIELDS = @"a.PrjNum,a.PrjName,a.PrjTypeNum,a.BuildCorpCode,a.BuildCorpName,"
+        public static string PROJECTINFO_FIELDS = @"a.PKID, a.PrjNum,a.PrjName,a.PrjTypeNum,a.BuildCorpCode,a.BuildCorpName,"
             + "a.EconCorpName,a.DesignCorpName,a.ConsCorpName,a.SuperCorpName,a.CensorCorpName,"
             + "a.ProvinceNum,a.CityNum,a.CountyNum,a.BDate,a.EDate,ISNULL(a.jd1, a.jd) jd, ISNULL(a.wd1, a.wd) wd,b.programme_address,a.DocNum,a.DocCount,a.EDates";
      
