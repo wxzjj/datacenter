@@ -133,7 +133,7 @@
                     <Columns>
                         <asp:TemplateField HeaderText="质监申报表编号">
                             <ItemTemplate>
-                                <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("uuid") %>' NavigateUrl='<%#string.Format("{0}?viewUrl=../PagesZHJG/Zhjg_Zlbj_View.aspx$LoginID={1}%PKID={2}&titleName={3}",publicViewUrl,this.WorkUser.UserID,Eval("uuid"),"质量报监-"+Eval("xmmc")) %>'
+                                <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("uuid") %>' NavigateUrl='<%#string.Format("{0}?viewUrl=../PagesZHJG/Zhjg_ZlbjNew_View.aspx$LoginID={1}%PKID={2}&titleName={3}",publicViewUrl,this.WorkUser.UserID,Eval("uuid"),"质量报监-"+Eval("xmmc")) %>'
                                     Target="_blank" />
                             </ItemTemplate>
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="left" />
