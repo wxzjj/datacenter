@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+<head id="Head1" runat="server">
     <meta charset="UTF-8"/>
     <meta name="keywords" content="天地图" />
     <title>天地图－地图API－范例－添加标注</title>
@@ -23,6 +23,7 @@
     
     <script>
         var map, zoom = 12;
+        var LoginID = '<%#Eval("this.WorkUser.UserID") %>';
 
         var localsearch;
 
@@ -46,12 +47,12 @@
             //添加鹰眼控件 
             //map.addControl(overviewMap);
 
-            var config = {
-                pageCapacity: 10, //每页显示的数量 
-                onSearchComplete: localSearchResult	//接收数据的回调函数 
-            };
+            //var config = {
+            //    pageCapacity: 10, //每页显示的数量 
+            //    onSearchComplete: localSearchResult	//接收数据的回调函数 
+            //};
             //创建搜索对象 
-            localsearch = new TLocalSearch(map, config);
+            //localsearch = new TLocalSearch(map, config);
 
         }
 
@@ -83,7 +84,9 @@
                         if (obj[i].jd && obj[i].jd.length !== 0) {
                             var lnglat = new TLngLat(obj[i].jd, obj[i].wd);
 
-                            var winHtml = "地址:" + address;
+                            var winHtml = "<a href=\"/IntegrativeShow2/SysFiles/Pages/Index_View.aspx?viewUrl=../PagesZHJG/Zhjg_Lxxmdj_Menu.aspx$LoginID=" + LoginID + "%PKID=" + obj[i].PKID + "%PrjNum=" + obj[i].PKID + "&titleName=" + obj[i].PrjName + "\" target=\"_blank\">"
+							+ name + "</a>";
+                            winHtml += "<br>地址:" + address;
 
                             //创建标注对象 
                             var marker = new TMarker(lnglat);
@@ -119,6 +122,7 @@
                 }
                 //显示地图的最佳级别
                 map.setViewport(zoomArr);
+
                 //显示搜索结果 
                 //divMarker.appendChild(document.createTextNode('共' + obj.length + '条记录，分' + localsearch.getCountPage() + '页,当前第' + localsearch.getPageIndex() + '页'));
 

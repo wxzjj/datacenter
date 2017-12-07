@@ -314,7 +314,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                 foreach (DataRow row in dt.Rows)
                 {
                     str.Append("{");
-                    str.AppendFormat("\"PrjNum\":\"{0}\",\"PrjName\":\"{1}\",\"PrjTypeNum\":\"{2}\",\"BuildCorpName\":\"{3}\",\"BuildCorpCode\":\"{4}\",\"ProvinceNum\":\"{5}\",\"CityNum\":\"{6}\",\"CountyNum\":\"{7}\",\"BDate\":\"{8}\",\"EDate\":\"{9}\",\"jd\":\"{10}\",\"wd\":\"{11}\",\"programme_address\":\"{12}\"",
+                    str.AppendFormat("\"PrjNum\":\"{0}\",\"PrjName\":\"{1}\",\"PrjTypeNum\":\"{2}\",\"BuildCorpName\":\"{3}\",\"BuildCorpCode\":\"{4}\",\"ProvinceNum\":\"{5}\",\"CityNum\":\"{6}\",\"CountyNum\":\"{7}\",\"BDate\":\"{8}\",\"EDate\":\"{9}\",\"jd\":\"{10}\",\"wd\":\"{11}\",\"programme_address\":\"{12}\",\"PKID\":\"{13}\"",
                         row["PrjNum"], row["PrjName"], row["PrjTypeNum"],row["BuildCorpName"],row["BuildCorpCode"]
                         , row["ProvinceNum"] == DBNull.Value ? "" : row["ProvinceNum"].ToString2()
                         , row["CityNum"] == DBNull.Value ? "" : row["CityNum"].ToString2()
@@ -324,6 +324,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                         , row["jd"] == DBNull.Value ? "" : row["jd"].ToString2()
                         , row["wd"] == DBNull.Value ? "" : row["wd"].ToString2()
                         , row["programme_address"] == DBNull.Value ? "" : row["programme_address"].ToString2()
+                        , row["PKID"] == DBNull.Value ? "" : row["PKID"].ToString2()
                         );  
                     str.Append("},");
                 }

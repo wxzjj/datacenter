@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Tdt
 {
-    public partial class LocationView : System.Web.UI.Page
+    public partial class LocationView : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
