@@ -471,16 +471,21 @@
 
             //创建比例尺控件对象 
             var scale = new TScaleControl();
+            //var zoomArr = [];
             //添加比例尺控件 
             map.addControl(scale);
 
             var x = $("[id$='gis_jd']").html();
             var y = $("[id$='gis_wd']").html();
-
+            console.log("x:" + x + ",y:" + y);
             if (x != "" && y != "") {
 
                 var lnglat = new TLngLat(parseFloat(x), parseFloat(y));
+                //zoomArr.push(lnglat);
                 marker = addOverLay(lnglat);
+                //map.setViewport(zoomArr);
+                map.centerAndZoom(lnglat, 15);
+                map.enableScrollWheelZoom(); //滚轮放大缩小
             }
 
         }
@@ -496,7 +501,7 @@
             if ($("[id$='db_IsSgbz']").html() == "1")
                 marker.setIconImage('../../Common/images/marker2.png', new TSize(50, 50));
             else
-                marker.setIconImage('../../Common/images/marker.png', new TSize(50, 50));
+                marker.setIconImage('../../Common/images/marker.png', new TSize(20, 34));
 
         }
 
@@ -561,7 +566,7 @@
         }
 
 
-        $(function() {
+        $(function () {
 
             window.onload = loadMap;
 

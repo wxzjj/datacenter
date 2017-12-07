@@ -1341,7 +1341,7 @@ WHERE PKID = @PKID
 a.PKID,		/*业务编码 guid值*/ 
 a.PrjNum,		/*项目编号 按住建部编码规则统一编号*/
 PrjInnerNum,		/*原业务系统的内部编号*/
-PrjName,		/*项目名称*/
+a.PrjName,		/*项目名称*/
 PrjTypeNum,		/*项目分类 见代码表*/
 b1.CodeInfo as PrjType,
 BuildCorpName,		/*建设单位名称*/
@@ -1374,7 +1374,7 @@ EDate,		/*实际竣工日期*/
 (select count(*) from aj_gcjbxx where xmbm=a.PrjNum) as AqbjCount,
 (select count(*) from zj_gcjbxx where PrjNum=a.PrjNum) as ZlbjCount,
 (select count(*) from xm_gcdjb_dtxm where PrjNum=a.PrjNum) as DxgcCount
-,a.jd,a.wd,a.isSgbz
+,ISNULL(info.jd, a.jd) AS jd,ISNULL(info.Wd,a.wd) AS wd,a.isSgbz
 ,c.jsdwID 
 ,ai.gyzzpl
 ,ai.dzyx
@@ -1395,6 +1395,7 @@ LEFT JOIN tbPrjFunctionDic AS b6 ON a.PrjFunctionNum = b6.Code
 LEFT JOIN tbLxjbDic AS b7 ON a.PrjApprovalLevelNum = b7.Code 
 left join uepp_Jsdw c on a.BuildCorpCode=c.zzjgdm 
 LEFT JOIN TBProjectAdditionalInfo ai ON a.PrjNum=ai.prjnum 
+LEFT JOIN TBProjectInfoDoc info ON a.PrjNum=info.PrjNum 
 where a.PKID = @PKID ";
             dh.spc.Add("@PKID", strParas[0]);
 
