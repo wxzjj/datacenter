@@ -87,6 +87,8 @@
                             var winHtml = "<a href=\"/IntegrativeShow2/SysFiles/Pages/Index_View.aspx?viewUrl=../PagesZHJG/Zhjg_Lxxmdj_Menu.aspx$LoginID=" + LoginID + "%PKID=" + obj[i].PKID + "%PrjNum=" + obj[i].PKID + "&titleName=" + obj[i].PrjName + "\" target=\"_blank\">"
 							+ name + "</a>";
                             winHtml += "<br>地址:" + address;
+                            winHtml += "<br>档号:" + obj[i].DocNum;
+                            winHtml += "<br>案卷数:" + obj[i].DocCount;
 
                             //创建标注对象 
                             var marker = new TMarker(lnglat);

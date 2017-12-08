@@ -1385,6 +1385,9 @@ EDate,		/*实际竣工日期*/
 ,ai.gytzbl
 ,ai.lxtzze
 ,ai.programme_address
+,infoa.DocNumFrom
+,infoa.DocNumTo
+,infoa.DocCount
 from TBProjectInfo as a
 LEFT JOIN tbPrjTypeDic AS b1 ON a.PrjTypeNum = b1.Code 
 LEFT JOIN tbXzqdmDic AS b2 ON a.ProvinceNum = b2.Code 
@@ -1396,6 +1399,7 @@ LEFT JOIN tbLxjbDic AS b7 ON a.PrjApprovalLevelNum = b7.Code
 left join uepp_Jsdw c on a.BuildCorpCode=c.zzjgdm 
 LEFT JOIN TBProjectAdditionalInfo ai ON a.PrjNum=ai.prjnum 
 LEFT JOIN TBProjectInfoDoc info ON a.PrjNum=info.PrjNum 
+LEFT JOIN TBProjectInfoDocAdd infoa ON a.PrjNum=infoa.PrjNum 
 where a.PKID = @PKID ";
             dh.spc.Add("@PKID", strParas[0]);
 
@@ -1718,6 +1722,18 @@ SELECT a.[uuid]
       ,a.[updateDate]
 	  ,b.PKID AS LxPKID
       ,d.CodeInfo AS Country
+    ,(
+		SELECT TOP 1 jg.success
+		FROM WJSJZX.dbo.Ap_ajsbjg jg
+		WHERE jg.uuid = a.uuid
+		ORDER BY jg.slrq DESC
+		) AS SBJG
+	,(
+		SELECT TOP 1 tzs.jdzch
+		FROM WJSJZX.dbo.Ap_ajtzs tzs
+		WHERE tzs.uuid = a.uuid
+		ORDER BY tzs.UpdateTime DESC
+		) AS TZS
   FROM [dbo].[Ap_ajsbb] a
     LEFT JOIN [dbo].TBProjectInfo b ON a.PrjNum = b.PrjNum
     LEFT JOIN [dbo].tbXzqdmDic d on a.CountyNum = d.Code
@@ -1776,6 +1792,18 @@ SELECT a.[uuid]
       ,a.[updateDate]
 	  ,b.PKID AS LxPKID
       ,d.CodeInfo AS Country
+    ,(
+		SELECT TOP 1 jg.success
+		FROM WJSJZX.dbo.Ap_ajsbjg jg
+		WHERE jg.uuid = a.uuid
+		ORDER BY jg.slrq DESC
+		) AS SBJG
+	,(
+		SELECT TOP 1 tzs.jdzch
+		FROM WJSJZX.dbo.Ap_ajtzs tzs
+		WHERE tzs.uuid = a.uuid
+		ORDER BY tzs.UpdateTime DESC
+		) AS TZS
   FROM [dbo].[Ap_ajsbb] a
     LEFT JOIN [dbo].TBProjectInfo b ON a.PrjNum = b.PrjNum
     LEFT JOIN [dbo].tbXzqdmDic d on a.CountyNum = d.Code

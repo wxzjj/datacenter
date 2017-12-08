@@ -414,6 +414,43 @@
         </tr>
     </table>
     
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <!-- 档案信息 -->
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    <span class="view_tab_header">档案信息</span>
+                 </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table">
+                    <tr>
+                        <td class="td_text" style="width: 15%;">
+                            <span>档号（起）</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="DocNumFrom" ItemName="DocNumFrom" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        <td class="td_text" style="width: 15%;">
+                            <span>档号（止）</span></td>
+                        <td class="td_value" style="width: 35%;">
+                            <Bigdesk8:DBText ID="DocNumTo" ItemName="DocNumTo" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text" style="width: 15%;">
+                            <span>案卷数</span></td>
+                        <td class="td_value" style="width: 35%;" colspan="3">
+                            <Bigdesk8:DBText ID="DocCount" ItemName="DocCount" runat="server"></Bigdesk8:DBText>
+                        </td>
+                        
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
             <td>
@@ -477,7 +514,6 @@
 
             var x = $("[id$='gis_jd']").html();
             var y = $("[id$='gis_wd']").html();
-            console.log("x:" + x + ",y:" + y);
             if (x != "" && y != "") {
 
                 var lnglat = new TLngLat(parseFloat(x), parseFloat(y));
