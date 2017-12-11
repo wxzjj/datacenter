@@ -428,23 +428,15 @@
                 <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table">
                     <tr>
                         <td class="td_text" style="width: 15%;">
-                            <span>档号（起）</span></td>
+                            <span>档号</span></td>
                         <td class="td_value" style="width: 35%;">
-                            <Bigdesk8:DBText ID="DocNumFrom" ItemName="DocNumFrom" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="DocNum" ItemName="DocNum" runat="server"></Bigdesk8:DBText>
                         </td>
-                        <td class="td_text" style="width: 15%;">
-                            <span>档号（止）</span></td>
-                        <td class="td_value" style="width: 35%;">
-                            <Bigdesk8:DBText ID="DocNumTo" ItemName="DocNumTo" runat="server"></Bigdesk8:DBText>
-                        </td>
-                    </tr>
-                    <tr>
                         <td class="td_text" style="width: 15%;">
                             <span>案卷数</span></td>
-                        <td class="td_value" style="width: 35%;" colspan="3">
+                        <td class="td_value" style="width: 35%;">
                             <Bigdesk8:DBText ID="DocCount" ItemName="DocCount" runat="server"></Bigdesk8:DBText>
                         </td>
-                        
                     </tr>
                 </table>
             </td>

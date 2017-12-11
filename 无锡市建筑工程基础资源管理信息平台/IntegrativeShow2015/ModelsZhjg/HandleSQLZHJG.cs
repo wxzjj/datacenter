@@ -76,6 +76,8 @@ convert(varchar(10),a.EDate,20) as EDate,convert(varchar(10),a.CreateDate,20) as
 (select count(*) from TBProjectFinishManage where PrjNum=a.PrjNum) as JgbaCount,
 (select count(*) from aj_gcjbxx where xmbm=a.PrjNum) as AqbjCount,
 (select count(*) from zj_gcjbxx where PrjNum=a.PrjNum) as ZlbjCount,
+(select count(*) from Ap_ajsbb where PrjNum=a.PrjNum) as AqbjNewCount,
+(select count(*) from Ap_zjsbb where PrjNum=a.PrjNum) as ZlbjNewCount,
 (select count(*) from xm_gcdjb_dtxm where PrjNum=a.PrjNum) as DxgcCount
 FROM TBProjectInfo a left join SaveToStLog b on b.TableName='TBProjectinfo' and a.PKID=b.PKID 
 left join UEPP_Jsdw c on a.BuildCorpCode=c.zzjgdm 
@@ -126,6 +128,8 @@ convert(varchar(10),a.EDate,20) as EDate,convert(varchar(19),a.CreateDate,20) as
 (select count(*) from TBProjectFinishManage where UpdateFlag='U'and PrjNum=a.PrjNum) as JgbaCount,
 (select count(*) from aj_gcjbxx where xmbm=a.PrjNum) as AqbjCount,
 (select count(*) from zj_gcjbxx where PrjNum=a.PrjNum) as ZlbjCount,
+(select count(*) from Ap_ajsbb where PrjNum=a.PrjNum) as AqbjNewCount,
+(select count(*) from Ap_zjsbb where PrjNum=a.PrjNum) as ZlbjNewCount,
 (select count(*) from xm_gcdjb_dtxm where PrjNum=a.PrjNum) as DxgcCount
 FROM TBProjectInfo a left join SaveToStLog b on b.TableName='TBProjectinfo' and a.PKID=b.PKID 
 left join UEPP_Jsdw c on a.BuildCorpCode=c.zzjgdm 
@@ -1340,32 +1344,32 @@ WHERE PKID = @PKID
             dh.strSQL = @"select  
 a.PKID,		/*业务编码 guid值*/ 
 a.PrjNum,		/*项目编号 按住建部编码规则统一编号*/
-PrjInnerNum,		/*原业务系统的内部编号*/
+a.PrjInnerNum,		/*原业务系统的内部编号*/
 a.PrjName,		/*项目名称*/
-PrjTypeNum,		/*项目分类 见代码表*/
+a.PrjTypeNum,		/*项目分类 见代码表*/
 b1.CodeInfo as PrjType,
-BuildCorpName,		/*建设单位名称*/
-BuildCorpCode,		/*建设单位组织机构代码*/
-ProvinceNum,		/*项目所在省  见代码表*/
+a.BuildCorpName,		/*建设单位名称*/
+a.BuildCorpCode,		/*建设单位组织机构代码*/
+a.ProvinceNum,		/*项目所在省  见代码表*/
 b2.CodeInfo as Province,
-CityNum,		/*项目所在地市  见代码表*/
+a.CityNum,		/*项目所在地市  见代码表*/
 b3.CodeInfo as City,
-CountyNum,		/* 项目所在区县  见代码表*/
+a.CountyNum,		/* 项目所在区县  见代码表*/
 b4.CodeInfo as County,
-PrjApprovalNum,		/*立项文号*/
-PrjApprovalLevelNum,		/*立项级别Num*/
+a.PrjApprovalNum,		/*立项文号*/
+a.PrjApprovalLevelNum,		/*立项级别Num*/
 b7.codeinfo as PrjApprovalLevel,/*立项级别*/
-BuldPlanNum,		/*建设用地规划许可证编号*/
-ProjectPlanNum,		/*建设工程规划许可证编号*/
-AllInvest,		/*总投资（万元）*/
-AllArea,		/*总面积（平方米）*/
-PrjSize,		/*建设规模*/
-PrjPropertyNum,	/*建设性质*/
+a.BuldPlanNum,		/*建设用地规划许可证编号*/
+a.ProjectPlanNum,		/*建设工程规划许可证编号*/
+a.AllInvest,		/*总投资（万元）*/
+a.AllArea,		/*总面积（平方米）*/
+a.PrjSize,		/*建设规模*/
+a.PrjPropertyNum,	/*建设性质*/
 b5.CodeInfo as PrjProperty,
-PrjFunctionNum,	/*工程用途*/
+a.PrjFunctionNum,	/*工程用途*/
 b6.CodeInfo as PrjFunction,
-BDate,		/*实际开工日期*/
-EDate,		/*实际竣工日期*/
+a.BDate,		/*实际开工日期*/
+a.EDate,		/*实际竣工日期*/
 (select count(*) from TBTenderInfo where PrjNum=a.PrjNum) as ZtbxxCount,
 (select count(*) from TBContractRecordManage where PrjNum=a.PrjNum ) as HtbaCount,
 (select count(*) from TBProjectCensorInfo where PrjNum=a.PrjNum) as SgtscCount,
@@ -1374,7 +1378,7 @@ EDate,		/*实际竣工日期*/
 (select count(*) from aj_gcjbxx where xmbm=a.PrjNum) as AqbjCount,
 (select count(*) from zj_gcjbxx where PrjNum=a.PrjNum) as ZlbjCount,
 (select count(*) from xm_gcdjb_dtxm where PrjNum=a.PrjNum) as DxgcCount
-,ISNULL(info.jd, a.jd) AS jd,ISNULL(info.Wd,a.wd) AS wd,a.isSgbz
+,ISNULL(infov.jd1, a.jd) AS jd,ISNULL(infov.wd1,a.wd) AS wd,a.isSgbz
 ,c.jsdwID 
 ,ai.gyzzpl
 ,ai.dzyx
@@ -1385,9 +1389,8 @@ EDate,		/*实际竣工日期*/
 ,ai.gytzbl
 ,ai.lxtzze
 ,ai.programme_address
-,infoa.DocNumFrom
-,infoa.DocNumTo
-,infoa.DocCount
+,infov.DocNum
+,infov.DocCount
 from TBProjectInfo as a
 LEFT JOIN tbPrjTypeDic AS b1 ON a.PrjTypeNum = b1.Code 
 LEFT JOIN tbXzqdmDic AS b2 ON a.ProvinceNum = b2.Code 
@@ -1398,9 +1401,8 @@ LEFT JOIN tbPrjFunctionDic AS b6 ON a.PrjFunctionNum = b6.Code
 LEFT JOIN tbLxjbDic AS b7 ON a.PrjApprovalLevelNum = b7.Code 
 left join uepp_Jsdw c on a.BuildCorpCode=c.zzjgdm 
 LEFT JOIN TBProjectAdditionalInfo ai ON a.PrjNum=ai.prjnum 
-LEFT JOIN TBProjectInfoDoc info ON a.PrjNum=info.PrjNum 
-LEFT JOIN TBProjectInfoDocAdd infoa ON a.PrjNum=infoa.PrjNum 
-where a.PKID = @PKID ";
+LEFT JOIN VProjectInfoDoc infov ON a.PrjNum=infov.prjnum 
+where a.PKID = @PKID";
             dh.spc.Add("@PKID", strParas[0]);
 
         }
@@ -1807,6 +1809,7 @@ SELECT a.[uuid]
   FROM [dbo].[Ap_ajsbb] a
     LEFT JOIN [dbo].TBProjectInfo b ON a.PrjNum = b.PrjNum
     LEFT JOIN [dbo].tbXzqdmDic d on a.CountyNum = d.Code
+    WHERE a.PrjNum=@PrjNum
                             ) as aaa WHERE 1=1";
             //此处用于自动生成页面查询条件合并入strSQL
             string strSqlCondition = string.Empty;
@@ -2216,6 +2219,7 @@ SELECT a.[uuid]
 FROM [WJSJZX].[dbo].[Ap_zjsbb] a
 LEFT JOIN [WJSJZX].[dbo].TBProjectInfo b ON a.PrjNum = b.PrjNum
 LEFT JOIN [WJSJZX].[dbo].tbXzqdmDic d ON a.CountyNum = d.Code
+WHERE a.PrjNum=@PrjNum
                             ) as aaa WHERE 1=1";
             //此处用于自动生成页面查询条件合并入strSQL
             string strSqlCondition = string.Empty;

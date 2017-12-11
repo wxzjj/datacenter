@@ -187,6 +187,12 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="7%" HorizontalAlign="center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
+                        <asp:TemplateField HeaderText="状态">
+                            <ItemTemplate>
+                            <asp:label id="statusLabel" runat="server" Text='<%# Eval("SBJG").ToString() == "" ? "未受理": ( Eval("SBJG").ToString() == "NO"? "已退回":(Eval("TZS").ToString() == "" ? "已受理（已推送申报结果":"已办结") )%> '/>
+                            </ItemTemplate>
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="15%" HorizontalAlign="left" />
+                        </asp:TemplateField>
                         
                     </Columns>
                 </Bigdesk8:PowerDataGrid>

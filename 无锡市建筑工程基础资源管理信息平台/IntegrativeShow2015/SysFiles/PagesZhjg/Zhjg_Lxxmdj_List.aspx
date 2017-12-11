@@ -395,14 +395,20 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="60px" HorizontalAlign="Right" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="安全报监数" DataField="AqbjCount">
+                        <asp:TemplateField HeaderText="安全报监数">
+                            <ItemTemplate>
+                                <%# Int32.Parse(Eval("AqbjCount").ToString()) + Int32.Parse(Eval("AqbjNewCount").ToString()) %>
+                            </ItemTemplate>
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="60px" HorizontalAlign="Right" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="质量报监数" DataField="ZlbjCount">
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="质量报监数">
+                            <ItemTemplate>
+                                <%# Int32.Parse(Eval("ZlbjCount").ToString()) + Int32.Parse(Eval("ZlbjNewCount").ToString())%>
+                            </ItemTemplate>
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="60px" HorizontalAlign="Right" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
-                        </asp:BoundField>
+                        </asp:TemplateField>
                         <asp:BoundField HeaderText="施工许可数" DataField="SgxkCount">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="60px" HorizontalAlign="Right" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />

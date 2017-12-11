@@ -29,7 +29,9 @@
                         <asp:MenuItem Text="招投标信息" Value="1"></asp:MenuItem>
                         <asp:MenuItem Text="合同备案" Value="2"></asp:MenuItem>
                         <asp:MenuItem Text="安全报监" Value="3"></asp:MenuItem>
+                        <asp:MenuItem Text="安全报监(新）" Value="13"></asp:MenuItem>
                         <asp:MenuItem Text="质量报监" Value="4"></asp:MenuItem>
+                        <asp:MenuItem Text="质量报监(新）" Value="14"></asp:MenuItem>
                         <asp:MenuItem Text="施工许可" Value="5"></asp:MenuItem>
                         <asp:MenuItem Text="竣工备案" Value="7"></asp:MenuItem>
                     </Items>

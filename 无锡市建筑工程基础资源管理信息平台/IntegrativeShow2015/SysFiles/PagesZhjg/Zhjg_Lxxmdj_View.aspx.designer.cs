@@ -382,22 +382,13 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         protected global::Bigdesk8.Web.Controls.DBText DBLabel7;
         
         /// <summary>
-        /// DocNumFrom 控件。
+        /// DocNum 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText DocNumFrom;
-        
-        /// <summary>
-        /// DocNumTo 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText DocNumTo;
+        protected global::Bigdesk8.Web.Controls.DBText DocNum;
         
         /// <summary>
         /// DocCount 控件。

@@ -76,6 +76,12 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                 case "7"://竣工验收备案信息
                     this.iframe_url = string.Format("Zhjg_Jgba_List.aspx?LoginID={0}&PrjNum={1}&BeFrom={2}", this.WorkUser.UserID, arrParas[1], BeFrom.Zhjg_Lxxmdj_Menu);
                     break;
+                case "13"://安全报监信息（新）
+                    this.iframe_url = string.Format("Zhjg_AqbjNew_List.aspx?LoginID={0}&PrjNum={1}&BeFrom={2}", this.WorkUser.UserID, arrParas[1], BeFrom.Zhjg_Lxxmdj_Menu);
+                    break;
+                case "14"://质量报监信息（新）
+                    this.iframe_url = string.Format("Zhjg_ZlbjNew_List.aspx?LoginID={0}&PrjNum={1}&BeFrom={2}", this.WorkUser.UserID, arrParas[1], BeFrom.Zhjg_Lxxmdj_Menu);
+                    break;
             }
         }
         #endregion
