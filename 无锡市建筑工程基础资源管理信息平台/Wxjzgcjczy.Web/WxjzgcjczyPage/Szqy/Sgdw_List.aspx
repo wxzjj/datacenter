@@ -124,7 +124,7 @@
                     <option value="0">已上报</option>
                     <option value="1">上报出错</option>
                 </select>--%>
-                 <select class="field s-text" name="county"  op="equal"  style="width: 250px;">
+                 <select class="field s-text" name="CountyID"  op="equal"  style="width: 250px;">
                 </select>
             </td>
              <td width="15%" class="td-text">
@@ -189,7 +189,7 @@
                 success: function(result) {
 
                     if (result) {
-                        $("select[name='county']").html(result);
+                        $("select[name='CountyID']").html(result);
                     }
                 },
                 error: function() {
