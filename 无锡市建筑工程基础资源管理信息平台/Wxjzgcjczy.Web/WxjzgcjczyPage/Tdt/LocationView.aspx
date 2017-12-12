@@ -5,7 +5,7 @@
 <head id="Head1" runat="server">
     <meta charset="UTF-8"/>
     <meta name="keywords" content="天地图" />
-    <title>天地图－地图API－范例－添加标注</title>
+    <title>天地图</title>
     
     <link rel="stylesheet" type="text/css" href="../Common/css/shCore.css" />
 
@@ -105,6 +105,7 @@
                             a.href = "javascript://";
                             a.innerHTML = name;
                             a.onclick = function () {
+                                map.centerAndZoom(lnglat, 14);
                                 showPosition(marker, name, winHtml);
                             }
                             divMarker.appendChild(document.createTextNode((i + 1) + "."));
@@ -123,7 +124,12 @@
                     })(i);
                 }
                 //显示地图的最佳级别
-                map.setViewport(zoomArr);
+                if (zoomArr.length == 1) {
+                    map.centerAndZoom(zoomArr[0], 14);
+                } else {
+                    map.setViewport(zoomArr);
+                }
+
 
                 //显示搜索结果 
                 //divMarker.appendChild(document.createTextNode('共' + obj.length + '条记录，分' + localsearch.getCountPage() + '页,当前第' + localsearch.getPageIndex() + '页'));

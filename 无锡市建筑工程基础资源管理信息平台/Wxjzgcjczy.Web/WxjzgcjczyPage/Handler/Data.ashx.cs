@@ -311,24 +311,44 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                 str.Append("{\"landmarkcount\": " + dt.Rows.Count + ",");
                 str.Append("\"pois\":[");
 
+                decimal jd = 0M, wd=0M;
                 foreach (DataRow row in dt.Rows)
                 {
-                    str.Append("{");
-                    str.AppendFormat("\"PrjNum\":\"{0}\",\"PrjName\":\"{1}\",\"PrjTypeNum\":\"{2}\",\"BuildCorpName\":\"{3}\",\"BuildCorpCode\":\"{4}\",\"ProvinceNum\":\"{5}\",\"CityNum\":\"{6}\",\"CountyNum\":\"{7}\",\"BDate\":\"{8}\",\"EDate\":\"{9}\",\"jd\":\"{10}\",\"wd\":\"{11}\",\"programme_address\":\"{12}\",\"PKID\":\"{13}\",\"DocNum\":\"{14}\",\"DocCount\":\"{15}\"",
-                        row["PrjNum"], row["PrjName"], row["PrjTypeNum"],row["BuildCorpName"],row["BuildCorpCode"]
-                        , row["ProvinceNum"] == DBNull.Value ? "" : row["ProvinceNum"].ToString2()
-                        , row["CityNum"] == DBNull.Value ? "" : row["CityNum"].ToString2()
-                        , row["CountyNum"] == DBNull.Value ? "" : row["CountyNum"].ToString2()
-                        , row["BDate"] == DBNull.Value ? "" : row["BDate"].ToString2()
-                        , row["EDate"] == DBNull.Value ? "" : row["EDate"].ToString2()
-                        , row["jd"] == DBNull.Value ? "" : row["jd"].ToString2()
-                        , row["wd"] == DBNull.Value ? "" : row["wd"].ToString2()
-                        , row["programme_address"] == DBNull.Value ? "" : row["programme_address"].ToString2()
-                        , row["PKID"] == DBNull.Value ? "" : row["PKID"].ToString2()
-                        , row["DocNum"] == DBNull.Value ? "" : row["DocNum"].ToString2()
-                        , row["DocCount"] == DBNull.Value ? "" : row["DocCount"].ToString2()
-                        );  
-                    str.Append("},");
+                    bool isInWuxi = false;
+                    if (row["jd"] != DBNull.Value && row["wd"] != DBNull.Value)
+                    {
+                        jd = row["jd"].ToDecimal();
+                        wd = row["wd"].ToDecimal();
+                        if (jd > 119.51M && jd < 120.58M && wd > 31.21M && wd < 36.97M)
+                        {
+                            isInWuxi = true;
+                        }
+                    }
+                    else
+                    {
+                        isInWuxi = true;
+                    }
+
+                    if (isInWuxi)
+                    {
+                        str.Append("{");
+                        str.AppendFormat("\"PrjNum\":\"{0}\",\"PrjName\":\"{1}\",\"PrjTypeNum\":\"{2}\",\"BuildCorpName\":\"{3}\",\"BuildCorpCode\":\"{4}\",\"ProvinceNum\":\"{5}\",\"CityNum\":\"{6}\",\"CountyNum\":\"{7}\",\"BDate\":\"{8}\",\"EDate\":\"{9}\",\"jd\":\"{10}\",\"wd\":\"{11}\",\"programme_address\":\"{12}\",\"PKID\":\"{13}\",\"DocNum\":\"{14}\",\"DocCount\":\"{15}\"",
+                            row["PrjNum"], row["PrjName"], row["PrjTypeNum"], row["BuildCorpName"], row["BuildCorpCode"]
+                            , row["ProvinceNum"] == DBNull.Value ? "" : row["ProvinceNum"].ToString2()
+                            , row["CityNum"] == DBNull.Value ? "" : row["CityNum"].ToString2()
+                            , row["CountyNum"] == DBNull.Value ? "" : row["CountyNum"].ToString2()
+                            , row["BDate"] == DBNull.Value ? "" : row["BDate"].ToString2()
+                            , row["EDate"] == DBNull.Value ? "" : row["EDate"].ToString2()
+                            , row["jd"] == DBNull.Value ? "" : row["jd"].ToString2()
+                            , row["wd"] == DBNull.Value ? "" : row["wd"].ToString2()
+                            , row["programme_address"] == DBNull.Value ? "" : row["programme_address"].ToString2()
+                            , row["PKID"] == DBNull.Value ? "" : row["PKID"].ToString2()
+                            , row["DocNum"] == DBNull.Value ? "" : row["DocNum"].ToString2()
+                            , row["DocCount"] == DBNull.Value ? "" : row["DocCount"].ToString2()
+                            );
+                        str.Append("},");
+                    }
+                   
                 }
 
                 return str.ToString().TrimEnd(',') + "] }" ;
