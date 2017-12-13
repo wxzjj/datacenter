@@ -249,6 +249,15 @@ namespace Wxjzgcjczy.BLL
                         }
                         else
                         {
+                            //更新申报结果审批状态
+                            if (dataRow["success"].ToString().Equals("Yes"))
+                            {
+                                updateAJSBStatus(dataRow["uuid"].ToString2(), (int)ApproveStatus.已推送申报结果);
+                            }
+                            else
+                            {
+                                updateAJSBStatus(dataRow["uuid"].ToString2(), (int)ApproveStatus.已退回);
+                            }
                             row["OperateState"] = 0;
                             row["Msg"] = "上传成功";
                             result.code = ProcessResult.数据保存成功;
@@ -418,6 +427,8 @@ namespace Wxjzgcjczy.BLL
                         }
                         else
                         {
+                            //已办结
+                            updateAJSBStatus(dataRow["uuid"].ToString2(), (int)ApproveStatus.已办结);
                             row["OperateState"] = 0;
                             row["Msg"] = "上传成功";
                             result.code = ProcessResult.数据保存成功;
@@ -740,14 +751,14 @@ namespace Wxjzgcjczy.BLL
                         }
                         else
                         {
-                            //跟新质监申报结果审批状态
+                            //更新质监申报结果审批状态
                             if (row["success"].ToString().Equals("Yes"))
                             {
-                                updateSBStatus(row["uuid"].ToString2(), 2);
+                                updateZJSBStatus(row["uuid"].ToString2(), (int)ApproveStatus.已推送申报结果);
                             }
                             else
                             {
-                                updateSBStatus(row["uuid"].ToString2(), 1);
+                                updateZJSBStatus(row["uuid"].ToString2(), (int)ApproveStatus.已退回);
                             }
 
                             logRow["OperateState"] = 0;
@@ -920,6 +931,9 @@ namespace Wxjzgcjczy.BLL
                         }
                         else
                         {
+                            //已办结
+                            updateZJSBStatus(dataRow["uuid"].ToString2(),(int)ApproveStatus.已办结);
+                            
                             row["OperateState"] = 0;
                             row["Msg"] = "上传成功";
                             result.code = ProcessResult.数据保存成功;
@@ -973,7 +987,27 @@ namespace Wxjzgcjczy.BLL
             }
         }
 
-        public void updateSBStatus(string uuid , int status)
+        /// <summary>
+        /// 更新安监申报审批状态
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="status"></param>
+        public void updateAJSBStatus(string uuid, int status)
+        {
+            DataTable dt = DAL.GetAp_ajsbb_single_byuuid(uuid);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                dt.Rows[0]["Status"] = status;
+                DAL.SaveAp_ajsbb(dt);
+            }
+        }
+
+        /// <summary>
+        /// 更新质监申报审批状态
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="status"></param>
+        public void updateZJSBStatus(string uuid , int status)
         {
             DataTable dt = DAL.GetAp_zjsbb_single_byuuid(uuid);
             if (dt != null && dt.Rows.Count > 0)
@@ -984,4 +1018,14 @@ namespace Wxjzgcjczy.BLL
         }
 
     }
+
+    
+    public enum ApproveStatus
+    {
+        未受理 = 0,
+        已退回 = 1,
+        已推送申报结果 = 2,
+        已办结 = 3  
+    }
+
 }

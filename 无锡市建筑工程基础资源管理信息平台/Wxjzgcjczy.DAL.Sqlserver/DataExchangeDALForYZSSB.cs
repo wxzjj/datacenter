@@ -123,6 +123,22 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_ajsbb");
 
         }
+        
+        public DataTable GetAp_ajsbb_single_byuuid(string uuid)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT  * FROM dbo.Ap_ajsbb b WHERE b.uuid=@uuid";
+            sp.Add("@uuid", uuid);
+            return DB.ExeSqlForDataTable(sql, sp, "dt_Ap_ajsbb");
+
+        }
+
+        public bool SaveAp_ajsbb(DataTable dt)
+        {
+            string sql = "select *  from Ap_ajsbb where 1=2";
+            return DB.Update(sql, null, dt);
+        }
 
         public DataTable GetAp_ajsbb_ht(string uuid)
         {
