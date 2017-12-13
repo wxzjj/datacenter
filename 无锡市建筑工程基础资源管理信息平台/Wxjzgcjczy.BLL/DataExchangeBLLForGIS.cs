@@ -147,6 +147,36 @@ namespace Wxjzgcjczy.BLL
             return result;
         }
 
+        public ProcessResultData saveProjectDocInfoAdd(DataTable dt)
+        {
+            ProcessResultData result = new ProcessResultData();
+            DataTable dt_InfoAdd = DAL.GetProjectDocAdd();
+            DataRow row;
+            List<string> notCopyFields = new List<string>() { "PKID", "CreateDate", "UpdateDate" };
+            foreach (DataRow item in dt.Rows)
+            {
+                row = dt_InfoAdd.NewRow();
+                DataTableHelp.DataRow2DataRow(item, row, notCopyFields);
+                row["PKID"] = Guid.NewGuid();
+                row["CreateDate"] = DateTime.Now;
+                row["UpdateDate"] = DateTime.Now;
+                dt_InfoAdd.Rows.Add(row);
+            }
+
+            bool flag = DAL.SaveProjectDocAdd(dt_InfoAdd);
+
+            if (flag)
+            {
+                result.code = ProcessResult.数据保存成功;
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// 接收项目位置相关信息
         /// </summary>

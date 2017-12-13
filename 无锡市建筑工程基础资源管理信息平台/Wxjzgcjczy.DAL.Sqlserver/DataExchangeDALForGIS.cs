@@ -630,6 +630,28 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             return effects;
         }
 
+        public bool SaveProjectDocAdd(DataTable dt)
+        {
+            string sql = "select *  from dbo.TBProjectInfoDocAdd where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
+        public DataTable GetProjectDocAdd()
+        {
+            string sql = "select * from dbo.TBProjectInfoDocAdd where 1=2";
+            return DB.ExeSqlForDataTable(sql, null, "dt_ProjectDocAdd");
+        }
+
+        public DataTable GetProjectDocAddByPrjNum(string prjNum)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT  * FROM dbo.TBProjectInfoDocAdd a WHERE a.PrjNum=@prjNum";
+            sp.Add("@prjNum", prjNum);
+            return DB.ExeSqlForDataTable(sql, sp, "dt_ProjectDocAdd");
+
+        }
+       
         public int UpdateProjectDoc(SqlParameterCollection paramCol)
         {
             StringBuilder sb = new StringBuilder();
