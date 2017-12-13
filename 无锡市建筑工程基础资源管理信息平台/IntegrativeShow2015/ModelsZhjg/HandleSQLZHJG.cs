@@ -1722,6 +1722,12 @@ SELECT a.[uuid]
       ,a.[UpdateTime]
       ,a.[UpdateUser]
       ,a.[updateDate]
+      ,a.[Status]
+      ,(case [status]
+      when '1' then '已退回'
+      when '2' then '已受理(已推送申报结果)'
+      when '3' then '已办结'
+      else '未受理' end ) AS StatusLabel
 	  ,b.PKID AS LxPKID
       ,d.CodeInfo AS Country
     ,(
@@ -1792,6 +1798,12 @@ SELECT a.[uuid]
       ,a.[UpdateTime]
       ,a.[UpdateUser]
       ,a.[updateDate]
+      ,a.[Status]
+      ,(case [status]
+      when '1' then '已退回'
+      when '2' then '已受理(已推送申报结果)'
+      when '3' then '已办结'
+      else '未受理' end ) AS StatusLabel
 	  ,b.PKID AS LxPKID
       ,d.CodeInfo AS Country
     ,(
@@ -2070,6 +2082,39 @@ WHERE uuid = @uuid";
     }
 
     /// <summary>
+    /// 一站式申报：危险源较大工程清单
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_wxyjdgcqd : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"
+SELECT *
+FROM [dbo].[Ap_ajsbb_wxyjdgcqd]
+WHERE uuid = @uuid";
+            dh.orderBy += " fbfxgc asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    /// <summary>
     /// 一站式申报：超大规模危险源工程清单
     /// </summary>
     public class Instance_Gdv_AqbjNew_cgmgcqd : IHandleSQL
@@ -2087,6 +2132,55 @@ SELECT *
 FROM [dbo].[Ap_ajsbb_cgmgcqd]
 WHERE uuid = @uuid";
             dh.orderBy += " fbfxgc asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    /// <summary>
+    /// 一站式申报：安监申报审批日志
+    /// </summary>
+    public class Instance_Gdv_AqbjNew_sprz : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"SELECT jg.slry AS TUser
+	,(
+		CASE jg.success
+			WHEN 'Yes'
+				THEN '受理通过'
+			WHEN 'No'
+				THEN '退回:' + jg.thyy
+			ELSE ''
+			END
+		) AS Content
+	,jg.UpdateTime
+FROM [WJSJZX].[dbo].[Ap_ajsbjg] jg
+WHERE uuid = @uuid
+UNION ALL
+SELECT tzs.tzrq AS Tuser
+	,'推送监督通知书-监督注册号（' + tzs.jdzch + ')' AS Content
+	,tzs.UpdateTime
+FROM [WJSJZX].[dbo].[Ap_ajtzs] tzs
+WHERE uuid = @uuid
+";
+            dh.orderBy += " UpdateTime asc";
             dh.spc.Add("@uuid", strParas[0]);
         }
 
@@ -2548,6 +2642,55 @@ WHERE uuid = @uuid";
             throw new NotImplementedException();
         }
     }
+
+    /// <summary>
+    /// 一站式申报：质监申报审批日志
+    /// </summary>
+    public class Instance_Gdv_ZlbjNew_sprz : IHandleSQL
+    {
+
+        public void HandleSQL(DataHandle dh)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas)
+        {
+            dh.strSQL = @"SELECT jg.slry AS TUser
+	,(
+		CASE jg.success
+			WHEN 'Yes'
+				THEN '受理通过'
+			WHEN 'No'
+				THEN '退回:' + jg.thyy
+			ELSE ''
+			END
+		) AS Content
+	,jg.UpdateTime
+FROM [WJSJZX].[dbo].[Ap_zjsbjg] jg
+WHERE uuid = @uuid
+UNION ALL
+SELECT tzs.tzrq AS Tuser
+	,'推送监督通知书-监督注册号（' + tzs.jdzch + ')' AS Content
+	,tzs.UpdateTime
+FROM [WJSJZX].[dbo].[Ap_zjtzs] tzs
+WHERE uuid = @uuid
+";
+            dh.orderBy += " UpdateTime asc";
+            dh.spc.Add("@uuid", strParas[0]);
+        }
+
+        public void HandleSQL(DataHandle dh, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HandleSQL(DataHandle dh, string[] strParas, Control cl)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 
     #endregion
 
