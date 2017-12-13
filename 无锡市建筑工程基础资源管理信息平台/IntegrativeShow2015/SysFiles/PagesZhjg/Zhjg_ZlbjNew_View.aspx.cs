@@ -29,6 +29,7 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
         GridView gvSchgs;
         GridView gvDwgc;
         GridView gvClqd;
+        GridView gvSprz;
        
         //接口
         protected IHandleBusiness ihb;
@@ -47,6 +48,7 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
             gvSchgs = this.Gdv_ZlbjNew_schgs;
             gvDwgc = this.Gdv_ZlbjNew_dwgc;
             gvClqd = this.Gdv_ZlbjNew_clqd;
+            gvSprz = this.Gdv_ZlbjNew_sprz;
 
             dtPageData = ihb.SearchInfo(InstanceName.Instance_Read_ZlbjNewInfo.ToString(),arrParas);
             if (!IsPostBack)
@@ -73,6 +75,10 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                     //材料清单
                     gvClqd.DataSource = ihb.SearchInfo(InstanceHead + gvClqd.ID, arrParas);
                     gvClqd.DataBind();
+
+                    //审批日志
+                    gvSprz.DataSource = ihb.SearchInfo(InstanceHead + gvSprz.ID, arrParas);
+                    gvSprz.DataBind();
 
                      
                     //数据绑定

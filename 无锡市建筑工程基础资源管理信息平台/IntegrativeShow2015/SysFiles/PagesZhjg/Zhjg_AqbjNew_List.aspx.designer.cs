@@ -112,6 +112,15 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         protected global::Bigdesk8.Web.Controls.DBTextBox updateDate2;
         
         /// <summary>
+        /// StatusDropDownlist 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::Bigdesk8.Web.Controls.DBDropDownList StatusDropDownlist;
+        
+        /// <summary>
         /// ImageButton 控件。
         /// </summary>
         /// <remarks>

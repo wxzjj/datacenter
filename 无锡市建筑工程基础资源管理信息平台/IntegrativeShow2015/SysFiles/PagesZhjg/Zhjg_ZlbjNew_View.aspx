@@ -574,6 +574,36 @@
         </tr>
     </table>
     <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 270px;height: 25px;background: url('../Images/TitleImgs/Title_back.gif');background-repeat: no-repeat;">
+                    <span class="view_tab_header">审批日志</span></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <asp:GridView ID="Gdv_ZlbjNew_sprz" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                    BorderWidth="1px" Width="100%">
+                    <Columns>
+                        <asp:BoundField HeaderText="用户" DataField="Tuser">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="30%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="审批情况" DataField="Content">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="50%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="审批时间" DataField="UpdateTime" DataFormatString="{0:yyyy-MM-dd HH:mm:ss}">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+    <br />
     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
             <td>

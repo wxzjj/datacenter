@@ -91,6 +91,23 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="td_text" width="15%">
+                                        审批状态
+                                    </td>
+                                    <td class="td_value" style="width: 35%;" >
+                                        <Bigdesk8:DBDropDownList ID="StatusDropDownlist" runat="server" ItemRelation="Equal"
+                                             ItemName="Status" >
+                                            <asp:ListItem Value=""> </asp:ListItem>
+                                            <asp:ListItem Value="0">未受理</asp:ListItem>
+                                            <asp:ListItem Value="1">已退回</asp:ListItem>
+                                            <asp:ListItem Value="2">已受理(已推送申报结果)</asp:ListItem>
+                                            <asp:ListItem Value="3">已办结</asp:ListItem>
+                                        </Bigdesk8:DBDropDownList>
+                                    </td>
+                                    <td class="td_value" colspan="2"></td>
+                                </tr>
+                                
+                                <tr>
                                     <td style="background-color: White" colspan="6">
                                         <table width="100%" cellpadding="2" cellspacing="0" border="0">
                                             <tr>
@@ -187,12 +204,10 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="7%" HorizontalAlign="center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
-                        <asp:TemplateField HeaderText="状态">
-                            <ItemTemplate>
-                            <asp:label id="statusLabel" runat="server" Text='<%# Eval("SBJG").ToString() == "" ? "未受理": ( Eval("SBJG").ToString() == "NO"? "已退回":(Eval("TZS").ToString() == "" ? "已受理（已推送申报结果":"已办结") )%> '/>
-                            </ItemTemplate>
-                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="15%" HorizontalAlign="left" />
-                        </asp:TemplateField>
+                        <asp:BoundField HeaderText="状态" DataField="StatusLabel" >
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="7%" HorizontalAlign="center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
                         
                     </Columns>
                 </Bigdesk8:PowerDataGrid>

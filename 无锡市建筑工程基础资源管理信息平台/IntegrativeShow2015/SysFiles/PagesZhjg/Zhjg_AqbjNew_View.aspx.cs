@@ -29,6 +29,8 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
         GridView gvClqd;
         GridView gvHjssjd;
         GridView gvCgmgcqd;
+        GridView gvWxyjdgcqd;
+        GridView gvSprz;
         //接口
         protected IHandleBusiness ihb;
         #endregion
@@ -45,7 +47,9 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
             gvDwry = this.Gdv_AqbjNew_dwry;
             gvClqd = this.Gdv_AqbjNew_clqd;
             gvHjssjd = this.Gdv_AqbjNew_hjssjd;
+            gvWxyjdgcqd = this.Gdv_AqbjNew_wxyjdgcqd;
             gvCgmgcqd = this.Gdv_AqbjNew_cgmgcqd;
+            gvSprz = this.Gdv_AqbjNew_sprz;
 
             dtPageData = ihb.SearchInfo(InstanceName.Instance_Read_AqbjNewInfo.ToString(),arrParas);
             if (!IsPostBack)
@@ -69,9 +73,17 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                     gvHjssjd.DataSource = ihb.SearchInfo(InstanceHead + gvHjssjd.ID, arrParas);
                     gvHjssjd.DataBind();
 
+                    //危险源较大工程清单
+                    gvWxyjdgcqd.DataSource = ihb.SearchInfo(InstanceHead + gvWxyjdgcqd.ID, arrParas);
+                    gvWxyjdgcqd.DataBind();
+
                     //超大规模危险源工程清单
                     gvCgmgcqd.DataSource = ihb.SearchInfo(InstanceHead + gvCgmgcqd.ID, arrParas);
                     gvCgmgcqd.DataBind();
+
+                    //审批日志列表
+                    gvSprz.DataSource = ihb.SearchInfo(InstanceHead + gvSprz.ID, arrParas);
+                    gvSprz.DataBind();
 
                     //数据绑定
                     if (dtPageData.Rows.Count > 0)

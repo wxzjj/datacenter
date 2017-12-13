@@ -458,7 +458,37 @@
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
                 <div style="width: 270px;height: 25px;background: url('../Images/TitleImgs/Title_back.gif');background-repeat: no-repeat;">
-                    <span class="view_tab_header">环境及地下设施交底项目（<%=this.Gdv_AqbjNew_hjssjd.Rows.Count%>）</span></div>
+                    <span class="view_tab_header">危险源较大工程清单（<%=this.Gdv_AqbjNew_wxyjdgcqd.Rows.Count%>）</span></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <asp:GridView ID="Gdv_AqbjNew_wxyjdgcqd" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                    BorderWidth="1px" Width="100%">
+                    <Columns>
+                        <asp:BoundField HeaderText="分部分项工程" DataField="fbfxgc">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="30%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="工程内容" DataField="gcnr">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="50%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="预计实施时间" DataField="yjsssj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 270px;height: 25px;background: url('../Images/TitleImgs/Title_back.gif');background-repeat: no-repeat;">
+                    <span class="view_tab_header">超大规模危险源工程清单（<%=this.Gdv_AqbjNew_cgmgcqd.Rows.Count%>）</span></div>
             </td>
         </tr>
         <tr>
@@ -475,6 +505,36 @@
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="预计实施时间" DataField="yjsssj">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+    <br />
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="view_head" style="height: 25px; vertical-align: bottom">
+                <div style="width: 270px;height: 25px;background: url('../Images/TitleImgs/Title_back.gif');background-repeat: no-repeat;">
+                    <span class="view_tab_header">审批日志</span></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="view_center">
+                <asp:GridView ID="Gdv_AqbjNew_sprz" runat="server" AllowPaging="false" AutoGenerateColumns="false"
+                    BorderWidth="1px" Width="100%">
+                    <Columns>
+                        <asp:BoundField HeaderText="用户" DataField="Tuser">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="30%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="审批情况" DataField="Content">
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="50%" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="审批时间" DataField="UpdateTime" DataFormatString="{0:yyyy-MM-dd HH:mm:ss}">
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="20%" HorizontalAlign="Center" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>

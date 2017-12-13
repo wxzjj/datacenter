@@ -80,9 +80,10 @@
                                         <Bigdesk8:DBDropDownList ID="DBDropDownList2" runat="server" ItemRelation="Equal"
                                             ItemName="Status">
                                             <asp:ListItem Value=""> </asp:ListItem>
-                                            <asp:ListItem Value="2">审批通过</asp:ListItem>
-                                            <asp:ListItem Value="1">审批退回</asp:ListItem>
                                             <asp:ListItem Value="0">未受理</asp:ListItem>
+                                            <asp:ListItem Value="1">已退回</asp:ListItem>
+                                            <asp:ListItem Value="2">已受理(已推送申报结果)</asp:ListItem>
+                                            <asp:ListItem Value="3">已办结</asp:ListItem>
                                         </Bigdesk8:DBDropDownList>
                                     </td>
                                     <td class="td_text" width="15%">
