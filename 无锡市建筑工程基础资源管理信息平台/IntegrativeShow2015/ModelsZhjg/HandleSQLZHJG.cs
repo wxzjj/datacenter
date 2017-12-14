@@ -2247,8 +2247,9 @@ WHERE uuid = @uuid
 	,a.[updateDate]
 	,a.[Status]
     ,(case a.[Status]
-  when 1 then '审批退回'
-  when 2 then '审批通过'
+  when 1 then '已退回'
+  when 2 then '已受理(已推送申报结果)'
+  when 3 then '已办结'
   else '未受理' end) StatusLabel
 	,a.[jsxz]
 	,a.[tzlx]
