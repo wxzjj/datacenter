@@ -684,6 +684,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             SqlParameterCollection paramCol = DB.CreateSqlParameterCollection();
 
             string fxbm = row["Fxbm"].ToString2();
+            string xmmc = row["Xmmc"].ToString2();
             string docNum = row["DocNum"].ToString2();
             string gd = row["Gd"].ToString2();
             string dscs = row["Dscs"].ToString2();
@@ -694,6 +695,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             string jglx = row["Jglx"].ToString2();
 
             paramCol.Add("@fxbm", fxbm);
+            paramCol.Add("@xmmc", xmmc);
             paramCol.Add("@docNum", docNum);
             paramCol.Add("@gd", gd);
             paramCol.Add("@dscs", dscs);
@@ -719,6 +721,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             StringBuilder sb = new StringBuilder();
             sb.Append(" update xm_gcdjb_dtxm_doc");
             sb.Append(" set docNum=@docNum,");
+            sb.Append(" xmmc=@xmmc,");
             sb.Append(" gd=@gd,");
             sb.Append(" dscs=@dscs,");
             sb.Append(" dxcs=@dxcs,");
@@ -736,11 +739,11 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         {
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" insert into xm_gcdjb_dtxm_doc(PKID, fxbm, docNum, ");
+            sb.Append(" insert into xm_gcdjb_dtxm_doc(PKID, fxbm,xmmc, docNum, ");
             sb.Append(" gd, dscs,dxcs, jclx,");
             sb.Append(" jzmj, ydmj,jglx,");
             sb.Append(" CreateDate, UpdateDate)");
-            sb.Append(" values(@id, @fxbm, @docNum,");
+            sb.Append(" values(@id, @fxbm,@xmmc, @docNum,");
             sb.Append(" @gd, @dscs, @dxcs, @jclx,");
             sb.Append(" @jzmj, @ydmj, @jglx,");
             sb.Append(" SYSDATETIME(), SYSDATETIME())");
