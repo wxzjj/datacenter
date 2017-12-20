@@ -429,6 +429,9 @@ from uepp_qyjbxx a  where a.qyid in (select qyid from uepp_qycsyw where csywlxid
 		) AS rowno
 	,*
 FROM (
+    SELECT  distinct *
+    FROM
+    (
 	SELECT zzmx.csywlx zzlb
 		,zs.zsbh
 		,(zzmx.zzlb + zzmx.zzxl + zzmx.zzdj) zzmc
@@ -440,6 +443,7 @@ FROM (
 	LEFT JOIN Uepp_Qyjbxx jbxx ON zzmx.qyID = jbxx.qyID
 	WHERE zsyxzrq > GETDATE() AND zzmx.DataState <> -1
 		AND zzmx.qyID=@pQyID
+    ) aaa
 	UNION ALL
 	SELECT qyzs.csywlx
 		,qyzs.zsbh
