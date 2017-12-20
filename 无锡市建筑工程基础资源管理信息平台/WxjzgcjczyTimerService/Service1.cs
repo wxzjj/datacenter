@@ -5420,9 +5420,8 @@ namespace WxjzgcjczyTimerService
                                     //if (dt_jsdw_zzzs.Rows[i].RowState == DataRowState.Deleted)
                                     //    continue;
 
-                                    if (corpCertInfo.CertType == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
-                                        && dt_qy_zzzs.Rows[i]["zsbh"].ToString2() == corpCertInfo.CertCode
-                                        && dt_qy_zzzs.Rows[i]["csywlx"].ToString2() == corpCertInfo.CertType)
+                                    if (qyxx.csywlx == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
+                                        && dt_qy_zzzs.Rows[i]["zsbh"].ToString2() == corpCertInfo.CertCode)
                                     {
                                         rowIndex = i;
                                         break;
