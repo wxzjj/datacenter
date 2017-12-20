@@ -387,6 +387,16 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                 if (dt_Ap_ajsbb != null && dt_Ap_ajsbb.Rows.Count > 0)
                 {
                     toSaveRow = dt_Ap_ajsbb.Rows[0];
+
+                    int cmpFlag = DateTime.Compare(item["updateDate"].ToDateTime(), toSaveRow["updateDate"].ToDateTime());
+                    //Public.WriteLog("====" + toSaveRow["Status"] + "|cmpFlag:" + cmpFlag);
+
+                    if ((toSaveRow["Status"] != null && toSaveRow["Status"].ToInt32() != 0) && cmpFlag > 0)
+                    {
+                        //重新提交,审批状态清零
+                        toSaveRow["Status"] = 0;
+                    }
+
                     DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid" });
 
                 }
