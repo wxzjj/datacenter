@@ -438,7 +438,7 @@ FROM (
 	FROM UEPP_Qyzzmx zzmx
 	LEFT JOIN UEPP_Qyzs zs ON zzmx.zsbh = zs.zsbh
 	LEFT JOIN Uepp_Qyjbxx jbxx ON zzmx.qyID = jbxx.qyID
-	WHERE zsyxzrq > GETDATE()
+	WHERE zsyxzrq > GETDATE() AND zzmx.DataState <> -1
 		AND zzmx.qyID=@pQyID
 	UNION ALL
 	SELECT qyzs.csywlx
@@ -448,7 +448,7 @@ FROM (
 		,CONVERT(VARCHAR(12), qyzs.zsyxzrq, 23) AS yxq
 		,qyzs.fzdw
 	FROM UEPP_Qyzs qyzs
-	WHERE qyzs.zsyxzrq > GETDATE()
+	WHERE qyzs.zsyxzrq > GETDATE() AND qyzs.DataState <> -1
 		AND qyID=@pQyID
 		AND zslxID = 140
 	) t
