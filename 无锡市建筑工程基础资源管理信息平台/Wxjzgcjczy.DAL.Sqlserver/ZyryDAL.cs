@@ -340,7 +340,7 @@ inner join uepp_ryzyzg b on a.ryid=b.ryid and  a.ryzyzglxID=b.ryzyzglxID where b
 select  a.Id,a.ryid,a.ryzyzglxID,a.ryzyzglx,b.ryzslxid,b.ryzslx,b.zsbh,b.zsyxqrq,b.zsyxzrq,e.qyid,e.qymc,'查看明细' ckmx ,f.tag  
 from UEPP_Ryzyzg a inner join uepp_ryzs b on a.ryid=b.ryid and a.ryzyzglxID=b.ryzyzglxID  
  inner join uepp_ryjbxx d on a.ryid=d.ryid
- inner join (select  distinct qyid,ryid,ryzyzglxID,tag from UEPP_QyRy ) f  on d.ryID=f.ryID 
+ inner join (select  distinct qyid,ryid,ryzyzglxID,tag from UEPP_QyRy ) f  on d.ryID=f.ryID and a.ryzyzglxID = f.ryzyzglxID
  left join uepp_qyjbxx e on f.qyid=e.qyid
 where a.ryid=@ryID and a.ryzyzglxid in (" + ryzyzglxID + ")) ryzs  order by Id, ryzyzglxID   ";
 
