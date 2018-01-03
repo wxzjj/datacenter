@@ -77,7 +77,7 @@
                 属地
             </td>
             <td class="td-value" id="Td2">
-                <select class="field s-text" name="County" op="equal" style="width: 250px;">
+                <select class="field s-text" name="CountyID" op="equal" style="width: 250px;">
                 </select>
             </td>
           
@@ -157,7 +157,7 @@
             success: function(result) {
                
                 if (result) {
-                    $("select[name='County']").html(result);
+                    $("select[name='CountyID']").html(result);
                 }
             },
             error: function() {

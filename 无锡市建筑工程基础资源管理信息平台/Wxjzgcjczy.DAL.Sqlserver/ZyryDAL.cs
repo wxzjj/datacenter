@@ -63,7 +63,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             string sql = @"   select  *,(case when SbToStState=1 then '上报失败' when SbToStState=0 then  '上报成功'  else '未上报' end) SbState from ( 
 select   a.ryid,a.xm,a.zjlx,a.zjhm,a.AJ_EXISTINIDCARDS,a.AJ_IsRefuse,
 case when a.AJ_EXISTINIDCARDS='1' then '未实名认证'  when a.AJ_EXISTINIDCARDS='2' then '已实名认证' end sfsmrz,
-c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') lxdh,a.datastate,ISNULL(c.county,'无') county,c.provinceid,c.province,a.xgrqsj     
+c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') lxdh,a.datastate,c.CountyID,ISNULL(c.county,'无') county,c.provinceid,c.province,a.xgrqsj     
  ,ISNULL((select SbToStState from SaveToStLog2 where TableName='uepp_ryjbxx' and PKID=a.ryID ),-1) as SbToStState
 
  from uepp_ryjbxx a left join (select distinct ryid,qyid from uepp_qyry 
@@ -87,9 +87,52 @@ c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') 
                 //ft.Translate();
             }
 
+            
 
             sql += ") ryxx where 1=1 and  ";
 
+            //处理所属地查询，保持跟市场主体一致
+            string countyID = ft.GetValue("CountyID");
+            if (!string.IsNullOrEmpty(countyID))
+            {
+                if (string.Equals(countyID, "320213"))
+                {
+                    sql += " CountyID in (320202, 320203, 320204, 320213) and ";
+                }
+                else if (string.Equals(countyID, "省内企业"))
+                {
+                    sql += " province='江苏省' and city!='无锡市' and";
+                }
+                else if (string.Equals(countyID, "省外企业"))
+                {
+                    sql += " province!='江苏省' and ";
+                }
+                else
+                {
+                    sql += " CountyID =@countyID and ";
+                    sp.Add("@countyID", countyID);
+                }
+                ft.Remove("CountyID");
+            }
+
+            string county = ft.GetValue("county");
+            if (!string.IsNullOrEmpty(county))
+            {
+                if (string.Equals(county, "省内企业"))
+                {
+                    sql += " province='江苏省' and city!='无锡市' and";
+                }
+                else if (string.Equals(county, "省外企业"))
+                {
+                    sql += " province!='江苏省' and ";
+                }
+                else
+                {
+                    sql += " county =@county and ";
+                    sp.Add("@county", county);
+                }
+                ft.Remove("county");
+            }
 
 
 

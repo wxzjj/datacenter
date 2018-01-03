@@ -78,7 +78,7 @@
                 属地
             </td>
             <td class="td-value">
-                <select class="field s-text" name="county" op="equal" style="width: 250px;">
+                <select class="field s-text" name="CountyID" op="equal" style="width: 250px;">
                 </select>
                 
             </td>
@@ -141,7 +141,7 @@
             success: function(result) {
 
                 if (result) {
-                    $("select[name='county']").html(result);
+                    $("select[name='CountyID']").html(result);
                 }
             },
             error: function() {
@@ -155,7 +155,7 @@
             });
 
 
-            $("[name='county']").ligerComboBox({
+            $("[name='CountyID']").ligerComboBox({
                 isMultiSelect: false
             });
 
