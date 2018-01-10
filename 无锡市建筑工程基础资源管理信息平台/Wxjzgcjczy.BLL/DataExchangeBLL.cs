@@ -1028,6 +1028,131 @@ namespace Wxjzgcjczy.BLL
         }
 
         /// <summary>
+        /// 向无锡数据中心传送信用考评数据(Xypj_kpjlhz)
+        /// </summary>
+        /// <param name="xmlData">XML内容</param>
+        /// <returns>处理结果信息</returns>
+        public ProcessResultData SaveTBData_Xykp(string user, DataTable dt_Data)
+        {
+            ProcessResultData result = new ProcessResultData();
+            StringBuilder prjInnerNumSb = new StringBuilder();
+
+            string msg = String.Empty;
+            string[] fields = new string[] { "kp_nf", "kp_jd", "kpqymc", "kpqy_zzjgdm", "zhdf"};
+
+            //一次传送一条信用考评数据
+            DataRow item = dt_Data.Rows[0];
+            List<string> novalidates = new List<string>();
+            novalidates.Add(String.Empty);
+            novalidates.Add(" ");
+            novalidates.Add("无");
+            novalidates.Add("无数据");
+            novalidates.Add("/");
+
+            if (BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = msg + "不能为空！";
+                return result;
+            }
+            
+            if (!Validator.IsUnifiedSocialCreditCodeOrOrgCode(item["kpqy_zzjgdm"].ToString2()))
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "企业组织机构代码kpqy_zzjgdm格式不正确，必须XXXXXXXX-X或者统一社会信用代码";
+                return result;
+            }
+            else if (Validator.IsUnifiedSocialCreditCode(item["kpqy_zzjgdm"].ToString2()))
+            {
+                //统一社会信用代码转换成组织机构代码
+                item["kpqy_zzjgdm"] = item["kpqy_zzjgdm"].ToString2().Substring(8, 8) + "-" + item["kpqy_zzjgdm"].ToString2().Substring(16, 1);
+            }
+
+            if (string.IsNullOrEmpty(item["khnf"].ToString2()))
+            {
+                item["khnf"] = item["kp_nf"];
+            }
+            if (string.IsNullOrEmpty(item["khyf"].ToString2()))
+            {
+                item["khyf"] = item["kp_jd"];
+            }
+
+
+            DataTable dt_Xykp = DAL.GetTBData_Xykp(item["kpqy_zzjgdm"].ToString2(), item["kp_nf"].ToInt32(), item["kp_jd"].ToInt32());
+            DataRow row;
+
+            if (dt_Xykp != null && dt_Xykp.Rows.Count > 0)
+            {
+                row = dt_Xykp.Rows[0];
+                DataTableHelp.DataRow2DataRow(item, row, new List<string>() { "kpqy_zzjgdm", "kp_nf", "kp_jd" });
+                row["updateTime"] = DateTime.Now;
+            }
+            else
+            {
+                row = dt_Xykp.NewRow();
+                DataTableHelp.DataRow2DataRow(item, row);
+                row["createTime"] = DateTime.Now;
+                row["updateTime"] = row["createTime"];
+                dt_Xykp.Rows.Add(row);
+            }
+            row["updateUser"] = user;
+
+            if (dt_Xykp.Rows.Count > 0)
+            {
+                if (DAL.SaveTBData_Xpkp(dt_Xykp))
+                {
+                    //BLLCommon.WriteLog("获取了 " + dt_Xykp.Rows.Count + " 条TBProjectAdditionalInfo数据！");
+                    string xmlData = "";
+
+                    DataRow dataRow = dt_Xykp.Rows[0];
+                    //dataRow["sbdqbm"] = "320200";//设置上报地区编码为无锡市
+
+                    try
+                    {
+                        //向省一体化平台传送项目登记补充数据
+                        xmlData = xmlHelper.ConvertDataRowToXMLWithBase64EncodingInclude(dataRow, new string[] { "kp_nf", "kp_jd", "kpqymc", "kpqy_zzjgdm", "zhdf", "khnf", "khyf" });
+                        string addResultSt = client.SaveStData("xypj_kpjlhz", xmlData, userName, "W123YheAge", dataRow["updateFlag"].ToString2());
+                        BLLCommon.WriteLog("向省一体化平台传送信用考评数据:" + xmlData + "\n结果：" + addResultSt);
+
+                        if (addResultSt != "OK"){
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = addResultSt;
+                        }
+                        else
+                        {
+                            result.code = ProcessResult.数据保存成功;
+                            result.message = addResultSt;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            BLLCommon.WriteLog(ex.Message);
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = ex.Message;
+                        }
+                        catch { }
+                    }
+                   
+                }
+                else
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "网络故障，数据保存失败！";
+                }
+            }
+            else
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = "非法格式的数据！";
+            }
+            BLLCommon.WriteLog("SaveTBData_Xykp结果：" + result.message);
+            return result;
+        }
+
+        /// <summary>
         /// 向无锡数据中心传送数据(xm_gcdjb_dtxm)
         /// </summary>
         /// <param name="xmlData">XML内容</param>

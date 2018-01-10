@@ -5170,6 +5170,22 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         result = BLL.SaveTBData_TBProjectAdditionalInfo(user, dt_Data);
 
                         break;
+                    case "xykp"://xypj_kpjlhz, 信用考评数据 
+                        if (dt_user.Rows[0]["Has_Xykp_Write"].ToString2() == "0")
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "该用户不允许保存" + tableName + "表数据！";
+                            return result.ResultMessage;
+                        }
+                        else if (dt_Data.Rows == null || dt_Data.Rows.Count != 1)
+                        {
+                            result.code = ProcessResult.保存失败和失败原因;
+                            result.message = "一次请传入一条信用考评";
+                            return result.ResultMessage;
+                        }
+                        result = BLL.SaveTBData_Xykp(user, dt_Data);
+
+                        break;
 
                     case "xm_gcdjb_dtxm":
                         if (dt_user.Rows[0]["Has_xm_gcdjb_dtxm_Write"].ToString2() == "0")
