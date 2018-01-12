@@ -539,7 +539,7 @@ namespace WxjzgcjczyTimerService
 
                 //DateTime beginDate = DateTime.Today.AddDays(-730);
                 DateTime beginDate = DateTime.Today.AddDays(-5);
-                DateTime endDate = DateTime.Today;
+                DateTime endDate = DateTime.Today.AddDays(1);
 
 
                 //往数据监控日志表项添加一条记录
@@ -751,6 +751,7 @@ namespace WxjzgcjczyTimerService
                 is_OK = 0;
 
                 DateTime jgBeginDate = DateTime.Today.AddDays(-5);
+                DateTime jgEndDate = DateTime.Today.AddDays(1);
 
                 try
                 {
@@ -761,7 +762,7 @@ namespace WxjzgcjczyTimerService
 
                     #region 竣工备案
 
-                    xmlData = client.RetrieveData("TBProjectFinishManage", "", jgBeginDate.ToString(), DateTime.Now.Date.ToString(), userName_jgba, password_jgba);
+                    xmlData = client.RetrieveData("TBProjectFinishManage", "", jgBeginDate.ToString(), jgEndDate.ToString(), userName_jgba, password_jgba);
 
                     is_OK = 1;
                     xmlData = xmlData.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<ResultSet>", "").Replace("</ResultSet>", "");

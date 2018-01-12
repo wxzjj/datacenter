@@ -202,23 +202,32 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
 
                                 foreach (DataRow row in dt.Rows)
                                 {
-                                    //根据uuid获取安监申报详细数据
-
-                                    Public.WriteLog("根据uuid获取安监申报详细数据：" + row[0].ToString());
-                                    getDetailDataXml = client.getAJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row[0].ToString());
-                                    //Public.WriteLog("结果：" + getDetailDataXml);
-                                    if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
+                                    try
                                     {
-                                        getDetailDataXml = getDetailDataXml.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
-                                        saveAJSBXmlDataToDb(row[0].ToString(), rowUser["deptCode"].ToString2(), getDetailDataXml, pullDate);
+                                        //根据uuid获取安监申报详细数据
 
+                                        Public.WriteLog("根据uuid获取安监申报详细数据：" + row[0].ToString());
+                                        getDetailDataXml = client.getAJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row[0].ToString());
+                                        //Public.WriteLog("结果：" + getDetailDataXml);
+                                        if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
+                                        {
+                                            getDetailDataXml = getDetailDataXml.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
+                                            saveAJSBXmlDataToDb(row[0].ToString(), rowUser["deptCode"].ToString2(), getDetailDataXml, pullDate);
+
+                                        }
+                                        else
+                                        {
+                                            //错误处理, 往数据监控详细日志表项添加一条记录
+                                            createMonitorLog(dataService, dt_DataJkDataDetail, dataJkLogID, "Ap_ajsbb", "getAJSBBByUuid");
+
+                                        }
                                     }
-                                    else
+                                    catch (Exception ex)
                                     {
-                                        //错误处理, 往数据监控详细日志表项添加一条记录
-                                        createMonitorLog(dataService, dt_DataJkDataDetail, dataJkLogID, "Ap_ajsbb", "getAJSBBByUuid");
-
+                                        Public.WriteLog("根据uuid获取安监申报详细数据方法出现异常:" + ex.Message);
+                                        apiMessage += ex.Message;
                                     }
+                                    
 
                                 }
 
@@ -725,23 +734,32 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
 
                                 foreach (DataRow row in dt.Rows)
                                 {
-                                    //根据uuid获取质监申报详细数据
-                                    Public.WriteLog("根据uuid获取质监申报详细数据：" + row[0].ToString());
-                                    getDetailDataXml = client.getZJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row[0].ToString());
-                                    //Public.WriteLog("getZJSBBByUuid结果：" + getDetailDataXml);
-                                    if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
+                                    try
                                     {
-                                        getDetailDataXml = getDetailDataXml.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
+                                        //根据uuid获取质监申报详细数据
+                                        Public.WriteLog("根据uuid获取质监申报详细数据：" + row[0].ToString());
+                                        getDetailDataXml = client.getZJSBBByUuid(rowUser["deptCode"].ToString2(), rowUser["password"].ToString2(), row[0].ToString());
+                                        //Public.WriteLog("getZJSBBByUuid结果：" + getDetailDataXml);
+                                        if (getDetailDataXml.Contains("<?xml version=\"1.0\" encoding=\"gb2312\"?>"))
+                                        {
+                                            getDetailDataXml = getDetailDataXml.Replace("<?xml version=\"1.0\" encoding=\"gb2312\"?>", "").Replace("<body>", "").Replace("</body>", "");
 
-                                        saveZJSBXmlDataToDb( row[0].ToString(), rowUser["deptCode"].ToString2(), getDetailDataXml, pullDate);
+                                            saveZJSBXmlDataToDb(row[0].ToString(), rowUser["deptCode"].ToString2(), getDetailDataXml, pullDate);
 
+                                        }
+                                        else
+                                        {
+                                            //错误处理, 往数据监控详细日志表项添加一条记录
+                                            createMonitorLog(dataService, dt_DataJkDataDetail, dataJkLogID, "Ap_zjsbb", "getZJSBBByUuid");
+
+                                        }
                                     }
-                                    else
+                                    catch (Exception ex)
                                     {
-                                        //错误处理, 往数据监控详细日志表项添加一条记录
-                                        createMonitorLog(dataService, dt_DataJkDataDetail, dataJkLogID, "Ap_zjsbb", "getZJSBBByUuid");
-
+                                        Public.WriteLog("根据uuid获取质监申报详细数据出现异常:" + ex.Message);
+                                        apiMessage += ex.Message;
                                     }
+                                    
 
                                 }
 
