@@ -235,7 +235,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                         }
                         catch (Exception ex)
                         {
-                            Public.WriteLog("执行YourTask_PullAJSBDataFromSythpt方法出现异常:" + ex.Message);
+                            Public.WriteLog("执行YourTask_PullAJSBDataFromSythpt方法出现异常1:" + ex.Message);
                             apiMessage += ex.Message;
                         }
                         
@@ -250,7 +250,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                 }
                 catch (Exception ex)
                 {
-                    Public.WriteLog("执行YourTask_PullAJSBDataFromSythpt方法出现异常:" + ex.Message);
+                    Public.WriteLog("执行YourTask_PullAJSBDataFromSythpt方法出现异常2:" + ex.Message);
                     apiMessage += ex.Message;
                 }
                 finally
@@ -304,7 +304,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                 }
                 catch (Exception ex)
                 {
-                    Public.WriteLog("执行YourTask_PullAJSBDataFromSythpt方法出现异常:" + ex.Message);
+                    Public.WriteLog("执行YourTask_PullAJSBDataFromSythptByUUID方法出现异常:" + ex.Message);
                     apiMessage += ex.Message;
                 } 
             }
@@ -379,101 +379,120 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
 
         public string saveMainListXmlDataToDb(string user, string xmlData, DateTime pullDate)
         {
-            string message = string.Empty;
-            DataTable mainDt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
-            if (mainDt == null || mainDt.Rows.Count < 1)
+            try
             {
-                return message;
-            }
-            else
-            {
-                //一个安监申报表编号，对应一条安监申报表
-                DataRow item = mainDt.Rows[0];
-
-                DataTable dt_Ap_ajsbb = dataService.Get_Ap_ajsbb(item["uuid"].ToString2());
-                DataRow toSaveRow;
-
-                if (dt_Ap_ajsbb != null && dt_Ap_ajsbb.Rows.Count > 0)
+                string message = string.Empty;
+                DataTable mainDt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
+                if (mainDt == null || mainDt.Rows.Count < 1)
                 {
-                    toSaveRow = dt_Ap_ajsbb.Rows[0];
-
-                    int cmpFlag = DateTime.Compare(item["updateDate"].ToDateTime(), toSaveRow["updateDate"].ToDateTime());
-                    //Public.WriteLog("====" + toSaveRow["Status"] + "|cmpFlag:" + cmpFlag);
-
-                    if ((toSaveRow["Status"] != null && toSaveRow["Status"].ToInt32() != 0) && cmpFlag > 0)
-                    {
-                        //重新提交,审批状态清零
-                        toSaveRow["Status"] = 0;
-                    }
-
-                    DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid" });
-
+                    return message;
                 }
                 else
                 {
-                    toSaveRow = dt_Ap_ajsbb.NewRow();
-                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                    dt_Ap_ajsbb.Rows.Add(toSaveRow);
-                }
-                //只有申报表有UpdateTime跟UpdateUser
-                toSaveRow["UpdateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                toSaveRow["UpdateUser"] = user;
-                toSaveRow["FetchDate"] = pullDate;
+                    //一个安监申报表编号，对应一条安监申报表
+                    DataRow item = mainDt.Rows[0];
 
-                //Public.WriteLog("====" + toSaveRow["uuid"] + toSaveRow["PrjNum"]);
+                    DataTable dt_Ap_ajsbb = dataService.Get_Ap_ajsbb(item["uuid"].ToString2());
+                    DataRow toSaveRow;
 
-                if (dt_Ap_ajsbb.Rows.Count > 0)
-                {
-                    if (!dataService.Save_Ap_ajsbb(dt_Ap_ajsbb))
+                    if (dt_Ap_ajsbb != null && dt_Ap_ajsbb.Rows.Count > 0)
                     {
-                        //保存失败的错误处理
-                        Public.WriteLog("Save_Ap_ajsbb:fail");
+                        toSaveRow = dt_Ap_ajsbb.Rows[0];
+
+                        int cmpFlag = DateTime.Compare(item["updateDate"].ToDateTime(), toSaveRow["updateDate"].ToDateTime());
+                        //Public.WriteLog("====" + toSaveRow["Status"] + "|cmpFlag:" + cmpFlag);
+
+                        if ((!string.IsNullOrEmpty(toSaveRow["Status"].ToString()) && toSaveRow["Status"].ToInt32() != 0) && cmpFlag > 0)
+                        {
+                            //重新提交,审批状态清零
+                            toSaveRow["Status"] = 0;
+                        }
+
+                        DataTableHelp.DataRow2DataRow(item, toSaveRow, new List<string>() { "uuid" });
+
                     }
+                    else
+                    {
+                        toSaveRow = dt_Ap_ajsbb.NewRow();
+                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                        dt_Ap_ajsbb.Rows.Add(toSaveRow);
+                    }
+                    //只有申报表有UpdateTime跟UpdateUser
+                    toSaveRow["UpdateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    toSaveRow["UpdateUser"] = user;
+                    toSaveRow["FetchDate"] = pullDate;
+
+                    //Public.WriteLog("====" + toSaveRow["uuid"] + toSaveRow["PrjNum"]);
+
+                    if (dt_Ap_ajsbb.Rows.Count > 0)
+                    {
+                        if (!dataService.Save_Ap_ajsbb(dt_Ap_ajsbb))
+                        {
+                            //保存失败的错误处理
+                            Public.WriteLog("Save_Ap_ajsbb:fail");
+                        }
+                    }
+
+                    return "success";
+
                 }
-
-                return "success";
-
             }
+            catch (Exception ex)
+            {
+                Public.WriteLog("执行saveMainListXmlDataToDb方法出现异常:" + ex.Message);
+                return "fail";
+            }
+            
         }
 
         public string saveHtListXmlDataToDb(string uuid, string xmlData)
         {
-            string message = string.Empty;
-            DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
-            if (dt == null || dt.Rows.Count < 1)
+            try
             {
-                return message;
-            }
-            else
-            {
-                dataService.Delete_ApTable(AP_AJSBB_HT,uuid);
-                DataTable existDt = dataService.Get_ApTable(AP_AJSBB_HT);
-
-                foreach (DataRow item in dt.Rows)
+                string message = string.Empty;
+                DataTable dt = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
+                if (dt == null || dt.Rows.Count < 1)
                 {
-                    DataRow toSaveRow = existDt.NewRow();
-                    DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                    existDt.Rows.Add(toSaveRow);
-
-                    //由于文档跟实际获取的xml不一致，特殊处理字段
-                    //toSaveRow["CorpCode"] = item["contractorCorpCode"];
-                    //toSaveRow["CorpName"] = item["contractorCorpName"];
-                    //toSaveRow["RecordNum"] = item["recordNum"];
-                    //toSaveRow["xmfzrsfzh"] = item["iDCard"];
-                    //toSaveRow["xmfzr"] = item["prjHead"];
-
+                    return message;
                 }
-                if (existDt.Rows.Count > 0)
+                else
                 {
-                    if (!dataService.Save_Ap_ajsbb_ht(existDt))
+                    dataService.Delete_ApTable(AP_AJSBB_HT, uuid);
+                    DataTable existDt = dataService.Get_ApTable(AP_AJSBB_HT);
+
+                    foreach (DataRow item in dt.Rows)
                     {
-                        //保存失败的错误处理
-                        Public.WriteLog("Save_Ap_ajsbb:fail");
-                    }
-                }
-                return "success";
+                        DataRow toSaveRow = existDt.NewRow();
+                        DataTableHelp.DataRow2DataRow(item, toSaveRow);
+                        existDt.Rows.Add(toSaveRow);
 
+                        //由于文档跟实际获取的xml不一致，特殊处理字段
+                        //toSaveRow["CorpCode"] = item["contractorCorpCode"];
+                        //toSaveRow["CorpName"] = item["contractorCorpName"];
+                        //toSaveRow["RecordNum"] = item["recordNum"];
+                        //toSaveRow["xmfzrsfzh"] = item["iDCard"];
+                        //toSaveRow["xmfzr"] = item["prjHead"];
+
+                    }
+                    if (existDt.Rows.Count > 0)
+                    {
+                        if (!dataService.Save_Ap_ajsbb_ht(existDt))
+                        {
+                            //保存失败的错误处理
+                            Public.WriteLog("Save_Ap_ajsbb:fail");
+                        }
+                    }
+                    return "success";
+
+                }
             }
+            catch (Exception ex)
+            {
+                Public.WriteLog("执行saveHtListXmlDataToDb方法出现异常:" + ex.Message);
+                return "fail";
+            }
+             
+            
         }
 
         public string saveDwryListXmlDataToDb(string uuid ,string xmlData)
@@ -931,7 +950,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                     int cmpFlag = DateTime.Compare(item["updateDate"].ToDateTime() , toSaveRow["updateDate"].ToDateTime());
                     //Public.WriteLog("====" + toSaveRow["Status"] + "|cmpFlag:" + cmpFlag);
 
-                    if ((toSaveRow["Status"] != null && toSaveRow["Status"].ToInt32() != 0) && cmpFlag > 0)
+                    if ((!string.IsNullOrEmpty(toSaveRow["Status"].ToString()) && toSaveRow["Status"].ToInt32() != 0) && cmpFlag > 0)
                     {
                         //重新提交,审批状态清零
                         toSaveRow["Status"] = 0;
