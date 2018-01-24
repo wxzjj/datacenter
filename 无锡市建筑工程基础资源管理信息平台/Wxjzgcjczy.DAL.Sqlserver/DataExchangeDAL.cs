@@ -768,20 +768,21 @@ where 1=1 ";
             return DB.ExeSqlForDataTable(sql, null, "dt");
         }
         /// <summary>
-        /// 根据企业组织机构代码、年份、季度获取考评
+        /// 根据企业组织机构代码、年份、季度、考评类型获取考评
         /// </summary>
         /// <param name="zzjgdm"></param>
         /// <param name="kpnf"></param>
         /// <param name="kpjd"></param>
         /// <returns></returns>
-        public DataTable GetTBData_Xykp(string zzjgdm, int kpnf, int kpjd)
+        public DataTable GetTBData_Xykp(string zzjgdm, int kpnf, int kpjd, int kptype)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
             sp.Add("@zzjgdm", zzjgdm);
             sp.Add("@kpnf", kpnf);
             sp.Add("@kpjd", kpjd);
+            sp.Add("@kptype", kptype);
 
-            string sql = @" SELECT id,kp_nf, kp_jd, kpqymc, kpqy_zzjgdm, zhdf, khnf, khyf,updateFlag,updateUser,createTime,updateTime FROM Xypj_kpjlhz WHERE kpqy_zzjgdm=@zzjgdm and kp_nf=@kpnf and kp_jd = @kpjd ";
+            string sql = @" SELECT id,kp_nf, kp_jd,kp_type,kpqymc, kpqy_zzjgdm, zhdf, khnf, khyf,oper,updateUser,createTime,updateTime FROM Xypj_kpjlhz WHERE kpqy_zzjgdm=@zzjgdm and kp_nf=@kpnf and kp_jd = @kpjd and kp_type = @kptype ";
 
             return DB.ExeSqlForDataTable(sql, sp, "dt_Xykp");
         }

@@ -1077,14 +1077,19 @@ namespace Wxjzgcjczy.BLL
                 item["khyf"] = item["kp_jd"];
             }
 
+            //kp_type为空值或者没填，默认设置为0
+            if (string.IsNullOrEmpty(item["kp_type"].ToString2()))
+            {
+                item["kp_type"] = 0;
+            }
 
-            DataTable dt_Xykp = DAL.GetTBData_Xykp(item["kpqy_zzjgdm"].ToString2(), item["kp_nf"].ToInt32(), item["kp_jd"].ToInt32());
+            DataTable dt_Xykp = DAL.GetTBData_Xykp(item["kpqy_zzjgdm"].ToString2(), item["kp_nf"].ToInt32(), item["kp_jd"].ToInt32(), item["kp_type"].ToInt32());
             DataRow row;
 
             if (dt_Xykp != null && dt_Xykp.Rows.Count > 0)
             {
                 row = dt_Xykp.Rows[0];
-                DataTableHelp.DataRow2DataRow(item, row, new List<string>() { "kpqy_zzjgdm", "kp_nf", "kp_jd" });
+                DataTableHelp.DataRow2DataRow(item, row, new List<string>() { "kpqy_zzjgdm", "kp_nf", "kp_jd","kp_type" });
                 row["updateTime"] = DateTime.Now;
             }
             else
@@ -1109,21 +1114,29 @@ namespace Wxjzgcjczy.BLL
 
                     try
                     {
-                        //向省一体化平台传送项目登记补充数据
-                        xmlData = xmlHelper.ConvertDataRowToXMLWithBase64EncodingInclude(dataRow, new string[] { "kp_nf", "kp_jd", "kpqymc", "kpqy_zzjgdm", "zhdf", "khnf", "khyf" });
-                        string addResultSt = client.SaveStData("xypj_kpjlhz", xmlData, userName, "W123YheAge", dataRow["updateFlag"].ToString2());
-                        BLLCommon.WriteLog("向省一体化平台传送信用考评数据:" + xmlData + "\n结果：" + addResultSt);
+                        //向省一体化平台传送项目登记补充数据, 目前考评类型kp_type为2的市政的，只保存在四库，不往省里推送
+                        if (dataRow["kp_type"].ToString() == null || dataRow["kp_type"].ToInt32() != 2)
+                        {
+                            xmlData = xmlHelper.ConvertDataRowToXMLWithBase64EncodingInclude(dataRow, new string[] { "kp_nf", "kp_jd", "kpqymc", "kpqy_zzjgdm", "zhdf", "khnf", "khyf" });
+                            string addResultSt = client.SaveStData("xypj_kpjlhz", xmlData, userName, "W123YheAge", dataRow["oper"].ToString2());
+                            BLLCommon.WriteLog("向省一体化平台传送信用考评数据:" + xmlData + "\n结果：" + addResultSt);
 
-                        if (addResultSt != "OK"){
-                            result.code = ProcessResult.保存失败和失败原因;
-                            result.message = addResultSt;
+                            if (addResultSt != "OK")
+                            {
+                                result.code = ProcessResult.保存失败和失败原因;
+                                result.message = addResultSt;
+                            }
+                            else
+                            {
+                                result.code = ProcessResult.数据保存成功;
+                                result.message = addResultSt;
+                            }
                         }
                         else
                         {
                             result.code = ProcessResult.数据保存成功;
-                            result.message = addResultSt;
+                            result.message = "成功保存到四库";
                         }
-
                     }
                     catch (Exception ex)
                     {
@@ -1552,7 +1565,7 @@ namespace Wxjzgcjczy.BLL
                 row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 row["updateUser"] = user;
 
-                row["Tag"] = Tag.省一体化平台.ToString();
+                row["Tag"] = Tag.无锡市勘察设计行业信息管理系统.ToString();
 
                 if (!DAL.SaveTBData_TBContractRecordManage(dt))
                 {
