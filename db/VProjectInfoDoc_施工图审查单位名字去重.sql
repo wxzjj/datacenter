@@ -44,24 +44,28 @@ LEFT JOIN (
 				SELECT '/' + [EconCorpName]
 				FROM TBBuilderLicenceManage t21
 				WHERE c.prjNum = t21.prjNum
+				GROUP BY t21.[EconCorpName]
 				FOR XML path('')
 				), 1, 1, '')
 		,[DesignCorpName] = stuff((
 				SELECT '/' + [DesignCorpName]
 				FROM TBBuilderLicenceManage t22
 				WHERE c.prjNum = t22.prjNum
+				GROUP BY t22.[DesignCorpName]
 				FOR XML path('')
 				), 1, 1, '')
 		,[ConsCorpName] = stuff((
 				SELECT '/' + [ConsCorpName]
 				FROM TBBuilderLicenceManage t23
 				WHERE c.prjNum = t23.prjNum
+				GROUP BY t23.[ConsCorpName]
 				FOR XML path('')
 				), 1, 1, '')
 		,[SuperCorpName] = stuff((
 				SELECT '/' + [SuperCorpName]
 				FROM TBBuilderLicenceManage t24
 				WHERE c.prjNum = t24.prjNum
+				GROUP BY t24.[SuperCorpName]
 				FOR XML path('')
 				), 1, 1, '')
 	FROM TBBuilderLicenceManage c
