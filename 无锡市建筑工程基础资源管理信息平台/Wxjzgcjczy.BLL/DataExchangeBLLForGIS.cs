@@ -41,9 +41,15 @@ namespace Wxjzgcjczy.BLL
 
         #region 获取项目信息
 
+        public DataTable GetProjectInfoWithAddressPoint(string beginDate, string endDate, string hasAddressPoint)
+        {
+            DataTable dt = DAL.GetProject(null, null, null, null, null, null, beginDate, endDate,hasAddressPoint);
+            return dt;
+        }
+
         public DataTable GetProjectInfo(string countyNum, string beginDate, string endDate)
         {
-            DataTable dt = DAL.GetProject(null, null, null, null, null, countyNum, beginDate, endDate);
+            DataTable dt = DAL.GetProject(null, null, null, null, null, countyNum, beginDate, endDate , null);
             return dt;
         }
 
@@ -73,13 +79,13 @@ namespace Wxjzgcjczy.BLL
 
         public DataTable GetProject(string prjNum, string prjName, String buildCorpCode, String buildCorpName, string location)
         {
-            DataTable dt = DAL.GetProject(prjNum, prjName, buildCorpCode, buildCorpName, location, null, null, null);
+            DataTable dt = DAL.GetProject(prjNum, prjName, buildCorpCode, buildCorpName, location, null, null, null,null);
             return dt;
         }
 
         public DataTable GetProject(string prjNum, string prjName, string location)
         {
-            DataTable dt = DAL.GetProject(prjNum, prjName, null, null, location, null, null, null);
+            DataTable dt = DAL.GetProject(prjNum, prjName, null, null, location, null, null, null,null);
             return dt;
         }
 
@@ -91,7 +97,7 @@ namespace Wxjzgcjczy.BLL
 
         public DataTable GetProject(string prjNum)
         {
-            DataTable dt = DAL.GetProject(prjNum, null,null, null, null, null, null, null);
+            DataTable dt = DAL.GetProject(prjNum, null,null, null, null, null, null, null,null);
             return dt;
         }
 
@@ -207,10 +213,43 @@ namespace Wxjzgcjczy.BLL
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        public ProcessResultData saveSubProjectDocInfo(DataRow row)
+        public ProcessResultData saveSubProjectDocInfo(DataRow item)
         {
             ProcessResultData result = new ProcessResultData();
 
+            DataTable dt_SubPrjDoc = DAL.GetSubProjectDocInfo(item["PrjNum"].ToString2(), item["Fxbm"].ToString2(), item["Xmmc"].ToString2());
+            DataRow rowInDb;
+
+            if (dt_SubPrjDoc != null && dt_SubPrjDoc.Rows.Count > 0)
+            {
+                rowInDb = dt_SubPrjDoc.Rows[0];
+                DataTableHelp.DataRow2DataRow(item, rowInDb, new List<string>() { "PKID", "PrjNum", "Fxbm" ,"Xmmc"});
+                rowInDb["UpdateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            else
+            {
+                rowInDb = dt_SubPrjDoc.NewRow();
+                DataTableHelp.DataRow2DataRow(item, rowInDb);
+                rowInDb["PKID"] = Guid.NewGuid();
+                rowInDb["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                rowInDb["UpdateDate"] = rowInDb["CreateDate"];
+                dt_SubPrjDoc.Rows.Add(rowInDb);
+            }
+
+            if (dt_SubPrjDoc.Rows.Count > 0)
+            {
+                bool successFlag = DAL.SaveSubProjectDocInfo(dt_SubPrjDoc);
+                if (successFlag)
+                {
+                    result.code = ProcessResult.数据保存成功;
+                }
+                else
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                }
+            }
+
+            /**
             int effects = DAL.SaveSubProjectDoc(row);
 
             if (effects > 0)
@@ -220,7 +259,8 @@ namespace Wxjzgcjczy.BLL
             else
             {
                 result.code = ProcessResult.保存失败和失败原因;
-            }
+            }*/
+
 
             return result;
         }

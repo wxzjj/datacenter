@@ -84,7 +84,7 @@
                         if (obj[i].jd && obj[i].jd.length !== 0) {
                             var lnglat = new TLngLat(obj[i].jd, obj[i].wd);
 
-                            var winHtml = "<a href=\"/IntegrativeShow2/SysFiles/Pages/Index_View.aspx?viewUrl=../PagesZHJG/Zhjg_Lxxmdj_Menu.aspx$LoginID=" + LoginID + "%PKID=" + obj[i].PKID + "%PrjNum=" + obj[i].PKID + "&titleName=" + obj[i].PrjName + "\" target=\"_blank\">"
+                            var winHtml = "<a href=\"/IntegrativeShow2/SysFiles/Pages/Index_View.aspx?viewUrl=../PagesZHJG/Zhjg_Lxxmdj_Menu.aspx$LoginID=" + LoginID + "%PKID=" + obj[i].PKID + "%PrjNum=" + obj[i].PrjNum + "&titleName=" + obj[i].PrjName + "\" target=\"_blank\">"
 							+ name + "</a>";
                             winHtml += "<br>地址:" + address;
                             winHtml += "<br>档号:" + obj[i].DocNum;

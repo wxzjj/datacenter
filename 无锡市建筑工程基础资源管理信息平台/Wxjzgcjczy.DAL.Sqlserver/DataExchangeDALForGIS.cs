@@ -37,8 +37,9 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         /// <param name="countyNum">地区码</param>
         /// <param name="beginDate">起始日期</param>
         /// <param name="endDate">结束日期</param>
+        /// <param name="hasAddressPoint">是否带经纬度坐标点</param>
         /// <returns></returns>
-        public DataTable GetProject(string prjNum, string prjName, String buildCorpCode, String buildCorpName, string location, string countyNum, string beginDate, string endDate)
+        public DataTable GetProject(string prjNum, string prjName, String buildCorpCode, String buildCorpName, string location, string countyNum, string beginDate, string endDate , string hasAddressPoint)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
@@ -108,6 +109,20 @@ namespace Wxjzgcjczy.DAL.Sqlserver
                 sp.Add("@endDate", endDate);
                 sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)<=@endDate");
             }
+
+            if (!string.IsNullOrEmpty(hasAddressPoint))
+            {
+                if( "TURE".Equals(hasAddressPoint.ToUpper()))
+                {
+                    sb.Append(" and (a.jd is not null or a.jd1 is not null)");
+                }
+                else if ("FALSE".Equals(hasAddressPoint.ToUpper()))
+                {
+                    sb.Append(" and (a.jd is null and a.jd1 is null)");
+                }
+               
+            }
+
             
             return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectInfo");
 
@@ -683,6 +698,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
             SqlParameterCollection paramCol = DB.CreateSqlParameterCollection();
 
+            string prjNum = row["PrjNum"].ToString2();
             string fxbm = row["Fxbm"].ToString2();
             string xmmc = row["Xmmc"].ToString2();
             string docNum = row["DocNum"].ToString2();
@@ -694,6 +710,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             string ydmj = row["Ydmj"].ToString2();
             string jglx = row["Jglx"].ToString2();
 
+            paramCol.Add("@prjNum", prjNum);
             paramCol.Add("@fxbm", fxbm);
             paramCol.Add("@xmmc", xmmc);
             paramCol.Add("@docNum", docNum);
@@ -705,13 +722,25 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             paramCol.Add("@ydmj", ydmj);
             paramCol.Add("@jglx", jglx);
 
-            int effects = this.UpdateSubProjectDoc(paramCol);
-            if (effects == 0)
+            int effects = 0;
+            if (string.IsNullOrEmpty(fxbm))
             {
                 Guid id = Guid.NewGuid();
                 paramCol.Add("@id", id);
                 effects = this.InsertSubProjectDoc(paramCol);
             }
+            else
+            {
+                effects = this.UpdateSubProjectDoc(paramCol);
+            }
+
+            /**
+            if (effects == 0)
+            {
+                Guid id = Guid.NewGuid();
+                paramCol.Add("@id", id);
+                effects = this.InsertSubProjectDoc(paramCol);
+            }*/
 
             return effects;
         }
@@ -720,7 +749,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(" update xm_gcdjb_dtxm_doc");
-            sb.Append(" set docNum=@docNum,");
+            sb.Append(" set prjNum=@prjNum, docNum=@docNum,");
             sb.Append(" xmmc=@xmmc,");
             sb.Append(" gd=@gd,");
             sb.Append(" dscs=@dscs,");
@@ -739,16 +768,40 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         {
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" insert into xm_gcdjb_dtxm_doc(PKID, fxbm,xmmc, docNum, ");
+            sb.Append(" insert into xm_gcdjb_dtxm_doc(PKID, prjNum, fxbm,xmmc, docNum, ");
             sb.Append(" gd, dscs,dxcs, jclx,");
             sb.Append(" jzmj, ydmj,jglx,");
             sb.Append(" CreateDate, UpdateDate)");
-            sb.Append(" values(@id, @fxbm,@xmmc, @docNum,");
+            sb.Append(" values(@id, @prjNum, @fxbm,@xmmc, @docNum,");
             sb.Append(" @gd, @dscs, @dxcs, @jclx,");
             sb.Append(" @jzmj, @ydmj, @jglx,");
             sb.Append(" SYSDATETIME(), SYSDATETIME())");
 
             return DB.ExecuteNonQuerySql(sb.ToString(), paramCol);
+        }
+
+        /// <summary>
+        /// 查询单体项目档案信息
+        /// </summary>
+        /// <param name="prjNum">项目编号</param>
+        /// <param name="fxbm">单项编码</param>
+        /// <param name="xmmc">单项名称</param>
+        /// <returns></returns>
+        public DataTable GetSubProjectDocInfo(string prjNum,string fxbm, string xmmc)
+        {
+            string sql = "select * from xm_gcdjb_dtxm_doc where PrjNum=@PrjNum and Fxbm=@Fxbm and Xmmc=@Xmmc";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            sp.Add("@PrjNum", prjNum);
+            sp.Add("@Fxbm", fxbm);
+            sp.Add("@Xmmc", xmmc);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        public bool SaveSubProjectDocInfo(DataTable dt)
+        {
+            string sql = "select *  from dbo.xm_gcdjb_dtxm_doc where 1=2";
+            return DB.Update(sql, null, dt);
         }
 
         #endregion
