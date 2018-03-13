@@ -1502,6 +1502,7 @@ namespace Wxjzgcjczy.BLL
                 }
 
                 //if (!reg.IsMatch(item["PropietorCorpCode"].ToString2()))
+                /** 勘察设计系统以前发包单位的组织机构代码是用户填写，有可能格式不准确或者为空，放开发包单位限制
                 if ((item["PropietorCorpCode"].ToString2().Length != 10 || item["PropietorCorpCode"].ToString2().IndexOf('-') != 8) && item["PropietorCorpCode"].ToString2().Length != 18)
                 {
                     if (item["PropietorCorpCode"].ToString2().Length == 9)
@@ -1514,7 +1515,7 @@ namespace Wxjzgcjczy.BLL
                         result.message = "PropietorCorpCode不合法,格式不正确，应该为“XXXXXXXX-X”格式！";
                         return result;
                     }
-                }
+                }*/
                 //if (!reg.IsMatch(item["ContractorCorpCode"].ToString2()))
                 if ((item["ContractorCorpCode"].ToString2().Length != 10 || item["ContractorCorpCode"].ToString2().IndexOf('-') != 8) && item["ContractorCorpCode"].ToString2().Length != 18)
                 {
@@ -1562,7 +1563,11 @@ namespace Wxjzgcjczy.BLL
                     dt.Rows.Add(row);
 
                 }
-                row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                row["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                if (string.IsNullOrEmpty(row["CreateDate"].ToString()))
+                {
+                    row["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                }
                 row["updateUser"] = user;
 
                 row["Tag"] = Tag.无锡市勘察设计行业信息管理系统.ToString();
