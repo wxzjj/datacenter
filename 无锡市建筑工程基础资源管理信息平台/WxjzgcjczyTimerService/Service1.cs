@@ -165,7 +165,6 @@ namespace WxjzgcjczyTimerService
                                 YourTask_PullDataFromSxxzx_Jiangsu_qyxx(row_DataJkLog["ID"].ToString2(), cityCode["Code"].ToString2());
                             }
 
-
                             //获取省内注册执业人员信息
                             YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
 
@@ -5222,10 +5221,14 @@ namespace WxjzgcjczyTimerService
                                 {
                                     row = dt_jsdw_zzmx.Rows[rowIndex];
                                     if (!string.IsNullOrEmpty(corpCertQual.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString2()))
-                                        if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertQual.UpdateDate).ToString("yyyy-MM-dd"))
+                                    {
+                                        int cmpFlag = DateTime.Compare(DateTime.Parse(corpCertQual.UpdateDate), row["xgrqsj"].ToDateTime());
+                                        //if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertQual.UpdateDate).ToString("yyyy-MM-dd"))
+                                        if (cmpFlag < 0)
                                         {
                                             continue;
                                         }
+                                    }
                                 }
                                 if (corpCertQual.IsMaster == "主项")
                                     row["zzbz"] = "主项";
@@ -6383,6 +6386,11 @@ namespace WxjzgcjczyTimerService
                                             //{
                                             //    row["tag"] = row["tag"].ToString2().TrimEnd(',') + "," + tag;
                                             //}
+                                            if (!row["needUpdateFlag"].ToBoolean())
+                                            {
+                                                //needUpdateFlag默认为1都需要更新，不需要更新的企业需要在四库数据库手动配置为0
+                                                continue;
+                                            }
                                         }
                                         row["tag"] = tag;
                                         row["qyID"] = corpBasicInfo.CorpCode;
@@ -6648,10 +6656,14 @@ namespace WxjzgcjczyTimerService
                                     {
                                         row = dt_jsdw_zzmx.Rows[rowIndex];
                                         if (!string.IsNullOrEmpty(corpCertQual.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString2()))
-                                            if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertQual.UpdateDate).ToString("yyyy-MM-dd"))
+                                        {
+                                            int cmpFlag = DateTime.Compare(DateTime.Parse(corpCertQual.UpdateDate), row["xgrqsj"].ToDateTime());
+                                            //if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertQual.UpdateDate).ToString("yyyy-MM-dd"))
+                                            if (cmpFlag < 0)
                                             {
                                                 continue;
                                             }
+                                        }        
                                     }
                                     if (corpCertQual.IsMaster == "主项")
                                         row["zzbz"] = "主项";
@@ -7087,6 +7099,10 @@ namespace WxjzgcjczyTimerService
                                             //{
                                             //    row["tag"] = row["tag"].ToString2().TrimEnd(',') + "," + tag;
                                             //}
+                                            if (!row["needUpdateFlag"].ToBoolean())
+                                            {
+                                                continue;
+                                            }
                                         }
                                         row["tag"] = tag;
                                         row["qyID"] = corpBasicInfo.CorpCode;
@@ -7425,10 +7441,14 @@ namespace WxjzgcjczyTimerService
                                     {
                                         row = dt_jsdw_zzmx.Rows[rowIndex];
                                         if (!string.IsNullOrEmpty(corpCertQual.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString2()))
-                                            if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertQual.UpdateDate).ToString("yyyy-MM-dd"))
+                                        {
+                                            int cmpFlag = DateTime.Compare(DateTime.Parse(corpCertQual.UpdateDate), row["xgrqsj"].ToDateTime());
+                                            //if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertQual.UpdateDate).ToString("yyyy-MM-dd"))
+                                            if (cmpFlag < 0)
                                             {
                                                 continue;
                                             }
+                                        }
                                     }
                                     if (corpCertQual.IsMaster == "主项")
                                         row["zzbz"] = "主项";
@@ -13820,9 +13840,13 @@ namespace WxjzgcjczyTimerService
 
                         DataTable dt = dataService.Get_Enterprise_Tab_Skcsj();
 
+                        Public.WriteLog("获取省勘察设计系统勘察设计单位信息:" + dt.Rows.Count);
+
                         foreach (DataRow row in dt.Rows)
                         {
                             string qyID = row["ZZJGDM"].ToString2();
+
+                            Public.WriteLog("qyID:" + qyID);
 
                             if (qyID.Length == 9)
                             {
@@ -14392,6 +14416,7 @@ namespace WxjzgcjczyTimerService
                     }
                     catch (Exception ex)
                     {
+                        Public.WriteLog("Exception1:" + ex.Message);
                         row_DataJkDataDetail_qyxx["allCount"] = allCount_qyxx;
                         row_DataJkDataDetail_qyxx["successCount"] = successCount_qyxx;
                         row_DataJkDataDetail_qyxx["IsOk"] = 0;

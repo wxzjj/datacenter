@@ -2326,11 +2326,11 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         {
 
             string sql = @"  select * from (
-select *
+select RowGuid,ZZJGDM, OperateDate,DWName,YYZZZCH,GSZCSZD_XZQHDM,GSZCDZ,XXAddress,ZCZJ,CLDate,PostNo,ChuanZheng,LXR_Name,LXR_LXDH,FRDBDW_FZRName,JSFZ
 ,(select count(*) from Enterprise_ZZ_Tab where IsValid=1 and  ZZName like '勘察-%' and DWRowGuid=a.RowGuid) as 'IsKc'
 ,(select count(*) from Enterprise_ZZ_Tab where IsValid=1 and  ZZName like '设计-%' and DWRowGuid=a.RowGuid) as 'IsSj'
  from Enterprise_Tab a where a.IsValid=1 and LEN(a.ZZJGDM)>=9 and a.RowGuid in (
-    select DWRowGuid from Epoint_Jskcsj..Enterprise_ZZ_Tab where IsValid=1 and (ZZName like '勘察-%' or  ZZName like '设计-%'))
+    select DWRowGuid from Epoint_Jskcsj.dbo.Enterprise_ZZ_Tab where IsValid=1 and (ZZName like '勘察-%' or  ZZName like '设计-%'))
  ) aaa where (IsKc>0 or IsSj >0) ";
 
             //--and convert(varchar(10),a.OperateDate ,120)=convert(varchar(10),GETDATE() ,120)
