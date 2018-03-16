@@ -1326,7 +1326,7 @@ namespace WxjzgcjczyTimerService
                 //return;
             }*/
 
-            Public.WriteLog("获取" + date.ToString() + "施工许可数据：");
+            Public.WriteLog(date.ToString() + "获取" + date.ToString() + "施工许可数据：");
 
             int allCount_xm = 0, success_xm = 0;
             bool is_Ok = false;
@@ -13845,8 +13845,6 @@ namespace WxjzgcjczyTimerService
                         foreach (DataRow row in dt.Rows)
                         {
                             string qyID = row["ZZJGDM"].ToString2();
-
-                            Public.WriteLog("qyID:" + qyID);
 
                             if (qyID.Length == 9)
                             {
