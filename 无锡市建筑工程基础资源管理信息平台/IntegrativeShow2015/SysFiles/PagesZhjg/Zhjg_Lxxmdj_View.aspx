@@ -40,7 +40,7 @@
                         <td class="td_value" width="35%">
                             <Bigdesk8:DBText ID="PrjNum" ItemName="PrjNum" runat="server"></Bigdesk8:DBText>
                         </td>
-                        <td class="td_value"  colspan="2" rowspan="20">
+                        <td class="td_value"  colspan="2" rowspan="21">
                          <div style=" display:none;">
                          <Bigdesk8:DBText ID="db_IsSgbz" ItemName="IsSgbz" runat="server" ></Bigdesk8:DBText>
                         </div>
@@ -158,6 +158,15 @@
                         </td>
                         <td class="td_value" width="35%">
                             <Bigdesk8:DBText ID="County" ItemName="County" runat="server"></Bigdesk8:DBText>
+                        </td>
+                       
+                    </tr>
+		  <tr>
+                        <td class="td_text" width="15%">
+                            项目地址
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="programme_address" ItemName="programme_address" runat="server"></Bigdesk8:DBText>
                         </td>
                        
                     </tr>
@@ -318,14 +327,7 @@
                             <Bigdesk8:DBText ID="lxtzze" ItemName="lxtzze" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="td_text" style="width: 15%;">
-                            <span>项目地址</span></td>
-                        <td class="td_value" style="width: 35%;" colspan="3">
-                            <Bigdesk8:DBText ID="programme_address" ItemName="programme_address" runat="server"></Bigdesk8:DBText>
-                        </td>
-                       
-                    </tr>
+   
                     <tr>
                         <td class="td_text" style="width: 15%;">
                             <span>操作</span></td>
@@ -526,10 +528,10 @@
             marker = new TMarker(lnglat);
             map.addOverLay(marker);
             //marker.setIconImage(url:String,size:TSize,anchor:Array);
-            if ($("[id$='db_IsSgbz']").html() == "1")
-                marker.setIconImage('../../Common/images/marker2.png', new TSize(50, 50));
-            else
-                marker.setIconImage('../../Common/images/marker.png', new TSize(20, 34));
+            //if ($("[id$='db_IsSgbz']").html() == "1")
+            //    marker.setIconImage('../../Common/images/marker2.png', new TSize(50, 50));
+            //else
+            marker.setIconImage('../../Common/images/marker.png', new TSize(20, 34));
 
         }
 

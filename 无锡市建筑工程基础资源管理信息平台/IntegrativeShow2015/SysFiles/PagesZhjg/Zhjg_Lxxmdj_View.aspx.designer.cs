@@ -157,6 +157,15 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         protected global::Bigdesk8.Web.Controls.DBText County;
         
         /// <summary>
+        /// programme_address 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::Bigdesk8.Web.Controls.DBText programme_address;
+        
+        /// <summary>
         /// PrjApprovalLevelNum 控件。
         /// </summary>
         /// <remarks>
@@ -300,14 +309,6 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         /// </remarks>
         protected global::Bigdesk8.Web.Controls.DBText lxtzze;
         
-        /// <summary>
-        /// programme_address 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText programme_address;
         
         /// <summary>
         /// DBLabel8 控件。
