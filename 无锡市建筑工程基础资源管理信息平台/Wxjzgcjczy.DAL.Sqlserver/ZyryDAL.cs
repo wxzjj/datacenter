@@ -63,7 +63,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             string sql = @"   select  *,(case when SbToStState=1 then '上报失败' when SbToStState=0 then  '上报成功'  else '未上报' end) SbState from ( 
 select   a.ryid,a.xm,a.zjlx,a.zjhm,a.AJ_EXISTINIDCARDS,a.AJ_IsRefuse,
 case when a.AJ_EXISTINIDCARDS='1' then '未实名认证'  when a.AJ_EXISTINIDCARDS='2' then '已实名认证' end sfsmrz,
-c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') lxdh,a.datastate,c.CountyID,ISNULL(c.county,'无') county,c.provinceid,c.province,a.xgrqsj     
+c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') lxdh,a.datastate,c.CountyID,ISNULL(c.county,'无') county,ISNULL(c.City,'无') city,c.provinceid,c.province,a.xgrqsj     
  ,ISNULL((select SbToStState from SaveToStLog2 where TableName='uepp_ryjbxx' and PKID=a.ryID ),-1) as SbToStState
 
  from uepp_ryjbxx a left join (select distinct ryid,qyid from uepp_qyry 
