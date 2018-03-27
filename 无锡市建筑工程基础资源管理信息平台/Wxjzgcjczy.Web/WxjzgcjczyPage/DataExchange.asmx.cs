@@ -4072,6 +4072,62 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             return result.ResultMessage;
         }
 
+
+        /// <summary>
+        /// 按uuid获取质监申报数据
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="uuid"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string fetchDataByUuid(string user, string apiPassword, string uuid, string deptCode, string password , string deptType )
+        {
+            string result = String.Empty;
+            string mainXml = string.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSBDownload SBBLL = new DataExchangeBLLForYZSSBDownload();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("27");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(apiPassword))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, apiPassword);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+                 
+                try
+                {
+                    if ("AJ".Equals(deptType))
+                    {
+                        result = SBBLL.YourTask_PullAJSBDataFromSythptByUUID(deptCode, password, uuid);
+                    }
+                    else {
+                        result = SBBLL.YourTask_PullZJSBDataFromSythptByUUID(deptCode, password, uuid);
+                    }
+
+                }
+                catch(Exception e)
+                {
+                    result = e.Message; 
+                }
+ 
+
+            }
+             
+
+            return result;
+
+        }
+
+
         /// <summary>
         /// 获取没有标注位置信息的项目
         /// </summary>

@@ -131,6 +131,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                     case "uploadToStTBProjectAddInfo":
                         json = uploadToStTBProjectAddInfo(context);
                         break;
+                    //从一站式申报平台按uuid下行安监、质监申报数据
+                    case "downloadByUuid":
+                        json = downloadByUuid(context);
+                        break;
                 }
             }
             catch (Exception ex)
@@ -683,6 +687,44 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             return result.ResultMessage;
 
         }
+
+        /// <summary>
+        /// 手动从一站式申报平台按uuid下行安监、质监申报数据
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public string downloadByUuid(HttpContext context)
+        {
+            DataExchangeBLLForYZSSBDownload BLL = new DataExchangeBLLForYZSSBDownload();
+
+            string uuid = context.Request.Params["uuid"];
+            string deptType = context.Request.Params["deptType"];
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                string msg = null;
+                if ("AJ".Equals(deptType))
+                {
+                    msg = BLL.PullAJSBDataFromSythptByUUID(uuid);
+                }
+                else
+                {
+                    msg = BLL.PullZJSBDataFromSythptByUUID(uuid);
+                }
+                result.message = msg;
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        
 
         public bool IsReusable
         {
