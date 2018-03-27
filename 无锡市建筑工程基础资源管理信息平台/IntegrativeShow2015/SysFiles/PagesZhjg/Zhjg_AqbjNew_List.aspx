@@ -6,8 +6,8 @@
 <head id="Head1" runat="server">
     <title></title>
     <link href="../../App_Themes/Themes_Standard/Stylesheet1.css" rel="Stylesheet" type="text/css" />
-   <script src="../../Common/jquery-1.3.2.min.js" type="text/javascript"></script>
-       <script src="../../MyDatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script src="../../Common/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="../../MyDatePicker/WdatePicker.js" type="text/javascript"></script>
        
      <script type="text/javascript">
          $(function () {
@@ -17,6 +17,8 @@
              });
 
          });
+
+          
      </script>
 </head>
 <body class="body_haveBackImg">
@@ -141,6 +143,16 @@
                     PageSize="20" Width="100%" DataKeyNames="uuid" AutoGenerateColumns="false" OnRowDataBound="powerGridView_RowDataBound"
                     AllowPaging="true">
                     <Columns>
+                        
+                        <asp:TemplateField HeaderText="手动下行数据">
+                            <ItemTemplate>    
+                                <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
+                                <button type="button" name ="downloadByUuidBtn" value='<%#Eval("uuid") %>' onclick='downloadByUuid("<%#Eval("uuid") %>")' style="width:100px">手动下行数据</button>
+                                <% } else { %>  <% } %>
+                            </ItemTemplate>
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="70px" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:TemplateField>
                       
                         <asp:TemplateField HeaderText="安监申报表编号">
                             <ItemTemplate>
@@ -215,5 +227,19 @@
         </tr>
     </table>
     </form>
+
+     <script type="text/javascript">
+         function downloadByUuid(uuid) {
+             $.ajax({
+                 type: 'POST',
+                 url: '/WxjzgcjczyPage/Handler/Data.ashx?type=downloadByUuid&deptType=AJ&uuid=' + uuid,
+                 async: false,
+                 data: null,
+                 success: function (result) {
+                     alert(result);
+                 }
+             });
+         }
+     </script>
 </body>
 </html>

@@ -36,33 +36,44 @@
                                         <Bigdesk8:DBTextBox ID="DBTextBox1" ItemName="uuid" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
                                     <td class="td_text" width="15%">
+                                        项目编号
+                                    </td>
+                                    <td class="td_value" width="35%">
+                                        <Bigdesk8:DBTextBox ID="PrjNum" ItemName="PrjNum" runat="server"></Bigdesk8:DBTextBox>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="td_text" width="15%">
                                         项目名称
                                     </td>
                                     <td class="td_value" width="35%">
-                                        <Bigdesk8:DBTextBox ID="DBTextBox2" ItemName="PrjName" runat="server"></Bigdesk8:DBTextBox>
+                                        <Bigdesk8:DBTextBox ID="PrjName" ItemName="PrjName" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td class="td_text" width="15%">
                                         质量监督机构名称
                                     </td>
                                     <td class="td_value" width="35%">
                                         <Bigdesk8:DBTextBox ID="Zjjgmc" ItemName="Zjjgmc" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
+                                    
+                                </tr>
+                                <tr>
                                     <td class="td_text" width="15%">
                                         报监工程名称
                                     </td>
                                     <td class="td_value" width="35%">
                                         <Bigdesk8:DBTextBox ID="xmmc" ItemName="xmmc" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td class="td_text" width="15%">
                                         建设单位名称
                                     </td>
                                     <td class="td_value" width="35%">
                                         <Bigdesk8:DBTextBox ID="EconCorpName" ItemName="EconCorpName" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
+                                    
+                                </tr>
+                                <tr>
                                     <td class="td_text" width="15%">
                                         项目属地
                                     </td>
@@ -71,8 +82,6 @@
                                             ForeColor="Blue" ToolTip="Xzqdm" runat="server">
                                         </Bigdesk8:DBDropDownList>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td class="td_text" width="15%">
                                         状态
                                     </td>
@@ -86,18 +95,24 @@
                                             <asp:ListItem Value="3">已办结</asp:ListItem>
                                         </Bigdesk8:DBDropDownList>
                                     </td>
+                                    
+                                    </td>
+                                </tr>
+
+                                <tr>
                                     <td class="td_text" width="15%">
                                         报监日期
                                     </td>
-                                    <td class="td_value" width="35%">
+                                    <td class="td_value" width="35%"  >
                                         <Bigdesk8:DBTextBox ID="updateDate1" FieldType="Date" Width="40%" ItemName="updateDate" ItemRelation="GreaterThanOrEqual"
                                             runat="server"></Bigdesk8:DBTextBox>
                                         至
                                         <Bigdesk8:DBTextBox ID="updateDate2" FieldType="Date" Width="40%" ItemName="updateDate" ItemRelation="LessThanOrEqual"
                                             runat="server"></Bigdesk8:DBTextBox>
                                     </td>
-                                    </td>
-                                </tr>
+                                    <td class="td_text" width="15%"> </td>
+                                    <td class="td_value" width="35%"  > </td>
+                               </tr>
                                 <tr>
                                     <td style="background-color: White" colspan="6">
                                         <table width="100%" cellpadding="2" cellspacing="0" border="0">
@@ -132,6 +147,17 @@
                     PageSize="20" Width="100%" DataKeyNames="uuid" AutoGenerateColumns="false" OnRowDataBound="powerGridView_RowDataBound"
                     AllowPaging="true">
                     <Columns>
+
+                     <asp:TemplateField HeaderText="手动下行数据">
+                            <ItemTemplate>    
+                                <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
+                                <button type="button" name ="downloadByUuidBtn" value='<%#Eval("uuid") %>' onclick='downloadByUuid("<%#Eval("uuid") %>")' style="width:100px">手动下行数据</button>
+                                <% } else { %>  <% } %>
+                            </ItemTemplate>
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="70px" HorizontalAlign="Center" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
+                        </asp:TemplateField>
+
                         <asp:TemplateField HeaderText="质监申报表编号">
                             <ItemTemplate>
                                 <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("uuid") %>' NavigateUrl='<%#string.Format("{0}?viewUrl=../PagesZHJG/Zhjg_ZlbjNew_View.aspx$LoginID={1}%PKID={2}&titleName={3}",publicViewUrl,this.WorkUser.UserID,Eval("uuid"),"质量报监-"+Eval("xmmc")) %>'
@@ -190,5 +216,19 @@
         </tr>
     </table>
     </form>
+
+     <script type="text/javascript">
+         function downloadByUuid(uuid) {
+             $.ajax({
+                 type: 'POST',
+                 url: '/WxjzgcjczyPage/Handler/Data.ashx?type=downloadByUuid&deptType=ZJ&uuid=' + uuid,
+                 async: false,
+                 data: null,
+                 success: function (result) {
+                     alert(result);
+                 }
+             });
+         }
+     </script>
 </body>
 </html>
