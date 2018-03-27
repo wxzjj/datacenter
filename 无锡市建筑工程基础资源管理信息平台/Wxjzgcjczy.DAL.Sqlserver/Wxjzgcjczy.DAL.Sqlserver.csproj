@@ -88,6 +88,7 @@
     <Compile Include="ZlctDAL.cs" />
     <Compile Include="ZyryDAL.cs" />
     <Compile Include="DataExchangeDALForUpload.cs" />
+    <Compile Include="DataExchangeDALForYZSSBDownload.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Wxjzgcjczy.Common\Wxjzgcjczy.Common.csproj">
