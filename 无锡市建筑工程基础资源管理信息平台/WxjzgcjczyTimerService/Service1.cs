@@ -2189,6 +2189,7 @@ namespace WxjzgcjczyTimerService
                             temp["qymc"] = row["DWName"];
                             temp["zzjgdm"] = row["ZZJGDM"];
                             temp["yyzzzch"] = row["YYZZZCH"];
+                            temp["tyshxydm"] = row["YYZZZCH"];
                             if (row["ZaiSuSuoZDCode"] != DBNull.Value && !string.IsNullOrEmpty(row["ZaiSuSuoZDCode"].ToString2()))
                             {
                                 temp["ProvinceID"] = row["ZaiSuSuoZDCode"].ToString2().Substring(0, 2) + "0000";
@@ -4964,6 +4965,7 @@ namespace WxjzgcjczyTimerService
                                 {
                                     row = dt.NewRow();
                                     dt.Rows.Add(row);
+                                    row["tyshxydm"] = corpBasicInfo.LicenseNo;
                                 }
                                 else
                                 {
@@ -4980,6 +4982,7 @@ namespace WxjzgcjczyTimerService
 
                                 row["qymc"] = corpBasicInfo.CorpName;
                                 row["yyzzzch"] = corpBasicInfo.LicenseNo;
+                               
 
                                 if (!string.IsNullOrEmpty(corpBasicInfo.ProvinceCode.ToString2()))
                                 {
@@ -6373,6 +6376,7 @@ namespace WxjzgcjczyTimerService
                                         {
                                             row = dt.NewRow();
                                             dt.Rows.Add(row);
+                                            row["tyshxydm"] = corpBasicInfo.LicenseNo;
                                         }
                                         else
                                         {
@@ -6397,6 +6401,7 @@ namespace WxjzgcjczyTimerService
                                         row["qymc"] = corpBasicInfo.CorpName;
                                         row["zzjgdm"] = corpBasicInfo.CorpCode;
                                         row["yyzzzch"] = corpBasicInfo.LicenseNo;
+                                        
 
                                         if (!string.IsNullOrEmpty(corpBasicInfo.ProvinceCode.ToString2()))
                                         {
@@ -7086,6 +7091,7 @@ namespace WxjzgcjczyTimerService
                                         {
                                             row = dt.NewRow();
                                             dt.Rows.Add(row);
+                                            row["tyshxydm"] = corpBasicInfo.LicenseNo;
                                         }
                                         else
                                         {
@@ -7109,6 +7115,7 @@ namespace WxjzgcjczyTimerService
                                         row["qymc"] = corpBasicInfo.CorpName;
                                         row["zzjgdm"] = corpBasicInfo.CorpCode;
                                         row["yyzzzch"] = corpBasicInfo.LicenseNo;
+                                        
 
                                         if (!string.IsNullOrEmpty(corpBasicInfo.ProvinceCode.ToString2()))
                                         {
@@ -13950,6 +13957,8 @@ namespace WxjzgcjczyTimerService
                                 temp["qymc"] = row["DWName"];
                                 temp["zzjgdm"] = qyID;
                                 temp["yyzzzch"] = row["YYZZZCH"];
+                                temp["tyshxydm"] = row["YYZZZCH"];
+                                
                                 if (row["GSZCSZD_XZQHDM"] != DBNull.Value && !string.IsNullOrEmpty(row["GSZCSZD_XZQHDM"].ToString2()))
                                 {
                                     temp["ProvinceID"] = row["GSZCSZD_XZQHDM"].ToString2().Substring(0, 2) + "0000";
