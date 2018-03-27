@@ -1475,7 +1475,7 @@ namespace Wxjzgcjczy.BLL
                 return result;
             }
             List<string> list_ContractType = this.GetContractType();
-            string[] fields = new string[] { "RecordName", "RecordInnerNum", "ContractNum", "ContractTypeNum", "ContractMoney", "ContractDate", "PropietorCorpName", "PropietorCorpCode", "ContractorCorpName", "ContractorCorpCode", "PrjHead" };
+            string[] fields = new string[] { "RecordName", "RecordInnerNum", "ContractNum", "ContractTypeNum", "ContractMoney", "ContractDate", "PropietorCorpName", "ContractorCorpName", "ContractorCorpCode", "PrjHead" };
             string msg = String.Empty;
             List<string> novalidates = new List<string>();
             novalidates.Add(String.Empty);
