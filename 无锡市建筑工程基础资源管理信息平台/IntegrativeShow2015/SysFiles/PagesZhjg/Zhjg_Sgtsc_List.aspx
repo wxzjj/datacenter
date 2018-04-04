@@ -61,6 +61,12 @@
                                 </tr>
                                 <tr>
                                     <td class="td_text" width="15%">
+                                        施工图审查名称
+                                    </td>
+                                    <td class="td_value" width="35%">
+                                        <Bigdesk8:DBTextBox ID="CensorName" ItemName="CensorName" runat="server"></Bigdesk8:DBTextBox>
+                                    </td>
+                                    <td class="td_text" width="15%">
                                         审查完成日期
                                     </td>
                                     <td class="td_value" width="35%">
@@ -70,10 +76,7 @@
                                         <Bigdesk8:DBTextBox ID="CensorEDate2" FieldType="Date" Width="40%" ItemName="CensorEDate"
                                             ItemRelation="LessThanOrEqual" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
-                                    <td class="td_text" width="15%">
-                                    </td>
-                                    <td class="td_value" width="35%">
-                                    </td>
+                                   
                                 </tr>
                                 <tr>
                                     <td style="background-color: White" colspan="6">
@@ -125,7 +128,14 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="16%" HorizontalAlign="left" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" ForeColor="Yellow" />
                         </asp:TemplateField>
-                        
+                        <asp:TemplateField HeaderText="施工图审查名称">
+                            <ItemTemplate>
+                                <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("CensorName") %>' NavigateUrl='<%#string.Format("{0}?viewUrl=../PagesZHJG/Zhjg_Sgtsc_View.aspx$LoginID={1}%PKID={2}&titleName={3}",publicViewUrl,this.WorkUser.UserID,Eval("PKID"),"施工图审查-"+Eval("CensorName")) %>'
+                                    Target="_blank" />
+                            </ItemTemplate>
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="10%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" ForeColor="Yellow" />
+                        </asp:TemplateField>
                          <asp:TemplateField HeaderText="施工图审查合格书编号">
                             <ItemTemplate>
                                 <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("CensorNum") %>' NavigateUrl='<%#string.Format("{0}?viewUrl=../PagesZHJG/Zhjg_Sgtsc_View.aspx$LoginID={1}%PKID={2}&titleName={3}",publicViewUrl,this.WorkUser.UserID,Eval("PKID"),"施工图审查-"+Eval("PrjName")) %>'
