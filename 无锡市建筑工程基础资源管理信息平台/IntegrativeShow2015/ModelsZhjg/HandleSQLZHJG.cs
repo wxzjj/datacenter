@@ -260,7 +260,7 @@ WHERE c.PKID = @PKID and a.UpdateFlag='U'
                         SELECT * FROM(
                         select 
                         a.PKID,
-                        a.CensorNum,
+                        a.CensorNum,a.CensorName,
                         a.PrjNum,
                         a.EconCorpName,
                         a.CensorCorpName,
@@ -294,7 +294,7 @@ WHERE c.PKID = @PKID and a.UpdateFlag='U'
             SELECT * FROM(
               select 
                 a.PKID,
-                a.CensorNum,
+                a.CensorNum,  a.CensorName,
                 a.PrjNum,
                 a.EconCorpName,
                 a.CensorCorpName,
