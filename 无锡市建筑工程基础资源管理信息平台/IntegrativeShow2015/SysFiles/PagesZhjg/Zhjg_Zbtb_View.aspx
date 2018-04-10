@@ -14,7 +14,9 @@
         <!-- 招标投标基本信息 -->
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
-                <img src="../Images/TitleImgs/Title_zbtbxx.gif" height="25px" alt="" />
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    <span class="view_tab_header">招标投标信息</span>
+                </div>
             </td>
         </tr>        
         <tr>

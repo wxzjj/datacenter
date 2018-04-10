@@ -14,7 +14,9 @@
         <!-- 质量报监基本信息 -->
         <tr>
             <td class="view_head" style="height: 25px; vertical-align: bottom">
-                <img src="../Images/TitleImgs/Title_gcjbxx.gif" height="25px" alt="" />
+                <div style="width: 200px; height: 25px; background: url('../Images/TitleImgs/Title_back.gif');">
+                    <span class="view_tab_header">质量监督信息</span>
+                </div>
             </td>
         </tr>        
         <tr>
