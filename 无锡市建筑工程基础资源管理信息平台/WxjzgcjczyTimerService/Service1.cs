@@ -5170,7 +5170,7 @@ namespace WxjzgcjczyTimerService
                                 if (!string.IsNullOrEmpty(corpCertQual.UpdateDate))
                                     tempRow_qycsyw["xgrqsj"] = corpCertQual.UpdateDate;
                                 else
-                                    tempRow_qycsyw["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd");
+                                    tempRow_qycsyw["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                                 if (dt_qycsyw.Rows.Count > 0)
                                 {
@@ -5178,7 +5178,7 @@ namespace WxjzgcjczyTimerService
                                 }
                                 #endregion
 
-                                DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx(corpCertQual.CorpCode, qycsywlx.csywlxID);
+                                DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx_nostatus(corpCertQual.CorpCode, qycsywlx.csywlxID);
 
                                 int rowIndex = -1;
 
@@ -5188,6 +5188,7 @@ namespace WxjzgcjczyTimerService
                                     //    continue;
 
                                     if (qycsywlx.csywlxID == dt_jsdw_zzmx.Rows[i]["csywlxID"].ToString2()
+                                         && corpCertQual.CertCode == dt_jsdw_zzmx.Rows[i]["zsbh"].ToString2()
                                         && (
                                          corpCertQual.TradeType == "工程勘察综合类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "综合类"
                                          || corpCertQual.TradeType == "工程勘察专业类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "专业类"
@@ -6605,7 +6606,7 @@ namespace WxjzgcjczyTimerService
                                     if (!string.IsNullOrEmpty(corpCertQual.UpdateDate))
                                         tempRow_qycsyw["xgrqsj"] = corpCertQual.UpdateDate;
                                     else
-                                        tempRow_qycsyw["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd");
+                                        tempRow_qycsyw["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
 
 
@@ -6615,7 +6616,7 @@ namespace WxjzgcjczyTimerService
                                     }
                                     #endregion
 
-                                    DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx(corpCertQual.CorpCode, qycsywlx.csywlxID);
+                                    DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx_nostatus(corpCertQual.CorpCode, qycsywlx.csywlxID);
 
                                     int rowIndex = -1;
 
@@ -6625,6 +6626,7 @@ namespace WxjzgcjczyTimerService
                                         //    continue;
 
                                         if (qycsywlx.csywlxID == dt_jsdw_zzmx.Rows[i]["csywlxID"].ToString2()
+                                            && corpCertQual.CertCode == dt_jsdw_zzmx.Rows[i]["zsbh"].ToString2()
                                             && (
                                              corpCertQual.TradeType == "工程勘察综合类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "综合类"
                                              || corpCertQual.TradeType == "工程勘察专业类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "专业类"
@@ -6800,8 +6802,19 @@ namespace WxjzgcjczyTimerService
                                     else
                                     {
                                         row["DataState"] = -1;
+                                        //还没到注销日期
+                                        if (!string.IsNullOrEmpty(corpCertQual.CancelDate.ToString()))
+                                        {
+                                            int cancelDateFlag = DateTime.Compare(corpCertQual.CancelDate.ToDateTime(), DateTime.Now);
+                                            if (cancelDateFlag > 0)
+                                            {
+                                                row["DataState"] = 0;
+                                            }
+                                        }
                                     }
 
+                                    
+                                    
                                     row["tag"] = tag;
                                     row["xgrqsj"] = corpCertQual.UpdateDate;
 
@@ -6857,6 +6870,50 @@ namespace WxjzgcjczyTimerService
                                     Qyxx qycsywlx = getCsywlx(corpCertInfo.CertType);
                                     if (string.IsNullOrEmpty(qycsywlx.csywlxID))
                                         continue;
+
+                                    #region 设计与施工一体化证书的企业，没有企业资质，只能通过证书信息产生企业从事业务类型
+
+                                    if ("2".Equals(qycsywlx.csywlxID))
+                                    {
+                                        DataTable dt_qycsyw = dataService.Get_uepp_Qycsyw_sjsgyth(corpCertInfo.CorpCode, qycsywlx.csywlxID);
+
+                                        DataRow tempRow_qycsyw;
+
+                                        if (dt_qycsyw.Rows.Count == 0)
+                                        {
+                                            tempRow_qycsyw = dt_qycsyw.NewRow();
+                                            dt_qycsyw.Rows.Add(tempRow_qycsyw);
+                                            tempRow_qycsyw["qyID"] = corpCertInfo.CorpCode;
+                                        }
+                                        else
+                                        {
+                                            tempRow_qycsyw = dt_qycsyw.Rows[0];
+                                        }
+
+                                        tempRow_qycsyw["csywlxID"] = qycsywlx.csywlxID;
+                                        tempRow_qycsyw["csywlx"] = qycsywlx.csywlx;
+
+                                        tempRow_qycsyw["balxID"] = "1";
+                                        tempRow_qycsyw["balx"] = "长期备案";
+                                        tempRow_qycsyw["DataState"] = "0";
+                                        tempRow_qycsyw["tag"] = tag;
+                                        tempRow_qycsyw["xgr"] = "qlmsoft";
+
+                                        if (!string.IsNullOrEmpty(corpCertInfo.UpdateDate)){
+                                            tempRow_qycsyw["xgrqsj"] = corpCertInfo.UpdateDate;
+                                        }else{
+                                            tempRow_qycsyw["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd");
+                                        }
+
+
+                                        if (dt_qycsyw.Rows.Count > 0)
+                                        {
+                                            dataService.Submit_uepp_qycsyw(dt_qycsyw);
+                                        }
+                                    }
+
+                                    
+                                    #endregion
 
                                     DataTable dt_qy_zzzs = dataService.Get_uepp_zzzsxx_qyxx(corpCertInfo.CorpCode);
 
@@ -7392,7 +7449,7 @@ namespace WxjzgcjczyTimerService
                                     if (!string.IsNullOrEmpty(corpCertQual.UpdateDate))
                                         tempRow_qycsyw["xgrqsj"] = corpCertQual.UpdateDate;
                                     else
-                                        tempRow_qycsyw["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd");
+                                        tempRow_qycsyw["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
 
 
@@ -7402,7 +7459,7 @@ namespace WxjzgcjczyTimerService
                                     }
                                     #endregion
 
-                                    DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx(corpCertQual.CorpCode, csywlxID);
+                                    DataTable dt_jsdw_zzmx = dataService.Get_uepp_zzmxxx_qyxx_nostatus(corpCertQual.CorpCode, csywlxID);
 
                                     int rowIndex = -1;
 
@@ -7412,6 +7469,7 @@ namespace WxjzgcjczyTimerService
                                         //    continue;
 
                                         if (csywlxID == dt_jsdw_zzmx.Rows[i]["csywlxID"].ToString2()
+                                             && corpCertQual.CertCode == dt_jsdw_zzmx.Rows[i]["zsbh"].ToString2()
                                             && (
                                              corpCertQual.TradeType == "工程勘察综合类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "综合类"
                                              || corpCertQual.TradeType == "工程勘察专业类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "专业类"
@@ -7587,6 +7645,15 @@ namespace WxjzgcjczyTimerService
                                     else
                                     {
                                         row["DataState"] = -1;
+                                        //还没到注销日期
+                                        if (!string.IsNullOrEmpty(corpCertQual.CancelDate.ToString()))
+                                        {
+                                            int cancelDateFlag = DateTime.Compare(corpCertQual.CancelDate.ToDateTime(), DateTime.Now);
+                                            if (cancelDateFlag > 0)
+                                            {
+                                                row["DataState"] = 0;
+                                            }
+                                        }
                                     }
 
                                     row["tag"] = tag;
