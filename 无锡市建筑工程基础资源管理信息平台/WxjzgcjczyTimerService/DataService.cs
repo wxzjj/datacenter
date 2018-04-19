@@ -1363,6 +1363,20 @@ select PKID, RecordName, RecordNum, RecordInnerNum, PrjNum, ContractNum, Contrac
         }
 
         /// <summary>
+        /// 企业资质明细
+        /// </summary>
+        /// <param name="jsdwID"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_zzmxxx_qyxx_nostatus(string qyID, string csywlxid)
+        {
+            string sql = @"select * from  UEPP_Qyzzmx  where qyID=@qyID and csywlxid=@csywlxid ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@qyID", qyID);
+            sp.Add("@csywlxid", csywlxid);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
         /// 获取建设单位资质证书信息
         /// </summary>
         /// <param name="jsdwID"></param>
