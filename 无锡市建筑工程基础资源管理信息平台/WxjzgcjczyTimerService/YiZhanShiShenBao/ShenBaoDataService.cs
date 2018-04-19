@@ -1,8 +1,10 @@
 ﻿using System.Configuration;
 using System.Data;
+using System;
 using Bigdesk8;
 using Bigdesk8.Data;
 using WxsjzxTimerService;
+
 
 namespace WxjzgcjczyTimerService.YiZhanShiShenBao
 {
@@ -33,6 +35,19 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
             string sql = @"select * from dbo.Ap_need_refetch where status = 0";
             return DB.ExeSqlForDataTable(sql, null, "Ap_need_refetch_dt");
         }
+
+        /// <summary>
+        /// 按日期获取需要重新获取的日期
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAp_need_refetch_bydate(DateTime currentDay)
+        {
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            string sql = @"SELECT * FROM dbo.Ap_need_refetch WHERE convert(varchar(10),fetchDate,120)=@currentDay";
+            sp.Add("@currentDay", currentDay.ToString("yyyy-MM-dd"));
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+       
 
         public bool Submit_Ap_need_refetch(DataTable dt)
         {
