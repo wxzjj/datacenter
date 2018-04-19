@@ -68,7 +68,35 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
 
         public void YourTask_PullSBDataFromSythpt()
         {
+            
+
             DateTime now = DateTime.Now;
+            DateTime lastDay = now.AddDays(-1);
+
+            DataTable lastDayDt = dataService.GetAp_need_refetch_bydate(lastDay);
+            DataRow lastDayRow = null; 
+            if (lastDayDt.Rows.Count <= 0)
+            {
+                Public.WriteLog("refetch last day : " + lastDay);
+                YourTask_PullAJSBDataFromSythpt(lastDay);
+                YourTask_PullZJSBDataFromSythpt(lastDay);
+                lastDayRow = lastDayDt.NewRow();
+                lastDayRow["fetchDate"] = lastDay;
+                lastDayRow["status"] = 1;
+                dataService.Submit_Ap_need_refetch(lastDayDt);
+            }
+            else if(lastDayDt.Rows[0]["status"].ToString() == "0")
+            {
+                Public.WriteLog("retry last day : " + lastDay);
+                YourTask_PullAJSBDataFromSythpt(lastDay);
+                YourTask_PullZJSBDataFromSythpt(lastDay);
+
+                lastDayRow = lastDayDt.Rows[0];
+                lastDayRow["status"] = 1;
+                Public.WriteLog("update " + lastDay.ToString("yyyy-MM-dd"));
+                dataService.Submit_Ap_need_refetch(lastDayDt);
+            }
+
             YourTask_PullAJSBDataFromSythpt(now);
             YourTask_PullZJSBDataFromSythpt(now);
 
@@ -396,7 +424,7 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                     DataRow toSaveRow;
 
                     if (dt_Ap_ajsbb != null && dt_Ap_ajsbb.Rows.Count > 0)
-                    {
+                    {   
                         toSaveRow = dt_Ap_ajsbb.Rows[0];
 
                         int cmpFlag = DateTime.Compare(item["updateDate"].ToDateTime(), toSaveRow["updateDate"].ToDateTime());
