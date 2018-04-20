@@ -5224,6 +5224,11 @@ namespace WxjzgcjczyTimerService
                                 else
                                 {
                                     row = dt_jsdw_zzmx.Rows[rowIndex];
+                                    if ("qlmsoft".Equals(row["xgr"].ToString2()))
+                                    {
+                                        //如果是手动修改的数据，则不更新，如果需要更新，则把xgr栏设置为空
+                                        continue;
+                                    }
                                     if (!string.IsNullOrEmpty(corpCertQual.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString2()))
                                     {
                                         int cmpFlag = DateTime.Compare(DateTime.Parse(corpCertQual.UpdateDate), row["xgrqsj"].ToDateTime());
@@ -5445,6 +5450,11 @@ namespace WxjzgcjczyTimerService
                                 else
                                 {
                                     row = dt_qy_zzzs.Rows[rowIndex];
+                                    if ("qlmsoft".Equals(row["xgr"].ToString2()))
+                                    {
+                                        //如果是手动修改的数据，则不更新，如果需要更新，则把xgr栏设置为空
+                                        continue;
+                                    }
                                     if (!string.IsNullOrEmpty(corpCertInfo.UpdateDate))
                                         if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertInfo.UpdateDate).ToString("yyyy-MM-dd"))
                                         {
@@ -6662,6 +6672,11 @@ namespace WxjzgcjczyTimerService
                                     else
                                     {
                                         row = dt_jsdw_zzmx.Rows[rowIndex];
+                                        if("qlmsoft".Equals(row["xgr"].ToString2())){
+                                            //如果是手动修改的数据，则不更新，如果需要更新，则把xgr栏设置为空
+                                            continue;
+                                        }
+                                        
                                         if (!string.IsNullOrEmpty(corpCertQual.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString2()))
                                         {
                                             int cmpFlag = DateTime.Compare(DateTime.Parse(corpCertQual.UpdateDate), row["xgrqsj"].ToDateTime());
@@ -6947,8 +6962,13 @@ namespace WxjzgcjczyTimerService
                                     }
                                     else
                                     {
-                                        row = dt_qy_zzzs.Rows[rowIndex];
-                                        if (!string.IsNullOrEmpty(corpCertInfo.UpdateDate))
+                                       row = dt_qy_zzzs.Rows[rowIndex];
+                                       if ("qlmsoft".Equals(row["xgr"].ToString2()))
+                                       {
+                                           //如果是手动修改的数据，则不更新，如果需要更新，则把xgr栏设置为空
+                                           continue;
+                                       }
+                                       if (!string.IsNullOrEmpty(corpCertInfo.UpdateDate))
                                             if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertInfo.UpdateDate).ToString("yyyy-MM-dd"))
                                             {
                                                 continue;
@@ -7083,6 +7103,7 @@ namespace WxjzgcjczyTimerService
                     for (int cttp = 0; cttp < certType.Length; cttp++)
                     {
                         string xzqdm = row_xzqdm["Code"].ToString2();
+
 
                         #region 获取企业基本信息
                         byte[] bytes = newDataService.getCorpInfo(userID, aCityCode, xzqdm, certType[cttp], "0");
@@ -7505,6 +7526,11 @@ namespace WxjzgcjczyTimerService
                                     else
                                     {
                                         row = dt_jsdw_zzmx.Rows[rowIndex];
+                                        if ("qlmsoft".Equals(row["xgr"].ToString2()))
+                                        {
+                                            //如果是手动修改的数据，则不更新，如果需要更新，则把xgr栏设置为空
+                                            continue;
+                                        }
                                         if (!string.IsNullOrEmpty(corpCertQual.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString2()))
                                         {
                                             int cmpFlag = DateTime.Compare(DateTime.Parse(corpCertQual.UpdateDate), row["xgrqsj"].ToDateTime());
@@ -7818,6 +7844,11 @@ namespace WxjzgcjczyTimerService
                                     else
                                     {
                                         row = dt_qy_zzzs.Rows[rowIndex];
+                                        if ("qlmsoft".Equals(row["xgr"].ToString2()))
+                                        {
+                                            //如果是手动修改的数据，则不更新，如果需要更新，则把xgr栏设置为空
+                                            continue;
+                                        }
                                         if (!string.IsNullOrEmpty(corpCertInfo.UpdateDate))
                                             if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertInfo.UpdateDate).ToString("yyyy-MM-dd"))
                                             {
