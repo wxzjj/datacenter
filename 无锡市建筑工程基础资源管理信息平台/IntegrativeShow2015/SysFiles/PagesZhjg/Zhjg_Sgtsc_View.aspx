@@ -44,6 +44,14 @@
                             <Bigdesk8:DBText ID="DBLabel1" ItemName="CensorInnerNum" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
+                     <tr>
+                        <td class="td_text" width="15%">
+                            施工图审查名称
+                        </td>
+                        <td class="td_value" colspan="3">
+                            <Bigdesk8:DBText ID="CensorName" ItemName="CensorName" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>
                     <tr>
                         <td class="td_text" width="15%">
                             项目名称
