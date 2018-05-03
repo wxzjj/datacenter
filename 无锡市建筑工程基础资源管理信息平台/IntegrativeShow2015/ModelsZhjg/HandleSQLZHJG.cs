@@ -1492,7 +1492,8 @@ WHERE PKID=@PKID
 select
 b.PrjName,
 a.PKID,	/*业务编码 guid值*/ 
-a.CensorNum,	/*施工图审查合格书编号*/
+a.CensorName,	/*施工图审查合格书编号*/
+a.CensorNum,/*施工图审查名称*/
 a.CensorInnerNum,	/*施工图审查合格书内部编号*/
 a.PrjNum,	/*项目编号*/
 a.CensorCorpName,	/*施工图审查机构名称*/
