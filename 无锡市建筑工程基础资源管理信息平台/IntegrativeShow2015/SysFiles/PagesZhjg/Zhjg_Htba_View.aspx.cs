@@ -73,8 +73,24 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                     {
                         this.hl_htbaxxView.Enabled = true;
                         string htbabm = dtPageData.Rows[0]["RecordInnerNum"].ToString();
-                        string key =  SecurityUtility.MD5(dtPageData.Rows[0]["RecordInnerNum"].ToString()+ "htba"+DateTime.Now.ToString("yyyyMMdd"));
-                        this.hl_htbaxxView.NavigateUrl = string.Format("http://58.213.147.230:8089/Jsjzyxyglpt/faces/sghtba.jsp?htbabm={0}&key={1}",htbabm,key);
+
+                        string contractTypeNum = dtPageData.Rows[0]["ContractTypeNum"].ToString();
+                        string htlx = null;
+                        if (contractTypeNum.StartsWith("3"))
+                        {
+                            htlx = "sght";
+                        }
+                        else if (contractTypeNum.StartsWith("4"))
+                        {
+                            htlx = "jlht";
+                        }
+                        else
+                        {
+                            htlx = "sght";
+                        }
+
+                        string key = SecurityUtility.MD5(dtPageData.Rows[0]["RecordInnerNum"].ToString() + "wx98jkd2sf" + DateTime.Now.ToString("yyyyMMdd"));
+                        this.hl_htbaxxView.NavigateUrl = string.Format("http://58.213.147.230:8089/Jsjzyxyglpt/faces/sthtba.jsp?htbabm={0}&key={1}&yhmc=wxht&htlx={2}", htbabm, key,htlx);
                     }
                     else
                     {
