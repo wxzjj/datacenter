@@ -457,7 +457,7 @@ FROM (
 		,CONVERT(VARCHAR(12), qyzs.zsyxzrq, 23) AS yxq
 		,qyzs.fzdw
 	FROM UEPP_Qyzs qyzs
-	WHERE qyzs.zsyxzrq > GETDATE() AND qyzs.DataState <> -1
+	WHERE  qyzs.DataState <> -1
 		AND qyID=@pQyID
 		AND zslxID = 140
 	) t
@@ -548,7 +548,7 @@ ORDER BY zzlb
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@qyID", qyID);
             string csywlx = "";
-            string sql = "select distinct csywlx from uepp_qycsyw where qyid=@qyID ";
+            string sql = "select distinct csywlx from uepp_qycsyw where qyid=@qyID and DataState != -1";
             DataTable dt = DB.ExeSqlForDataTable(sql, sp, "t");
 
             if (dt.Rows.Count > 0)
