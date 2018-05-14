@@ -315,7 +315,7 @@ from uepp_qyzs where qyID=@qyID and DataState<>-1 ";
  select a.qyid,a.zzjgdm,a.yyzzzch,a.qymc,a.zcdd,a.xxdd,a.lxdh lxdh,a.lxr lxr,a.sylxid,a.sylx,a.province, a.city, a.county ,a.datastate,a.tag,a.CountyID,CONVERT(varchar(10),xgrqsj,120) xgrqsj 
 ,ISNULL((select  SbToStState from SaveToStLog2 where TableName='uepp_qyjbxx' and PKID=a.qyid ),-1) as SbToStState
 ,(select  SbToStMsg from SaveToStLog2 where TableName='uepp_qyjbxx' and PKID=a.qyid ) as SbToStMsg
-from uepp_qyjbxx a  where a.qyid in (select qyid from uepp_qycsyw where csywlxid in(" + csywlxID + ") ";
+from uepp_qyjbxx a  where a.qyid in (select qyid from uepp_qycsyw where csywlxid in(" + csywlxID + ") and DataState != -1";
 
                 string _csywlxid = ft.GetValue("csywlxid");
                 if (!string.IsNullOrEmpty(_csywlxid))
