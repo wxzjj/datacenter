@@ -1092,16 +1092,16 @@ namespace WxjzgcjczyTimerService
                             {
                                 allCount_ry += dt.Rows.Count;
 
-                                DataTable dt_SaveDataLog = dataService.GetSchema_SaveDataLog();
+                                //DataTable dt_SaveDataLog = dataService.GetSchema_SaveDataLog();
 
                                 foreach (DataRow item in dt.Rows)
                                 {
-                                    DataRow row_SaveDataLog = dt_SaveDataLog.NewRow();
-                                    dt_SaveDataLog.Rows.Add(row_SaveDataLog);
+                                    //DataRow row_SaveDataLog = dt_SaveDataLog.NewRow();
+                                    //dt_SaveDataLog.Rows.Add(row_SaveDataLog);
 
-                                    row_SaveDataLog["DataJkDataDetailID"] = row_DataJkDataDetail2["ID"];
+                                    //row_SaveDataLog["DataJkDataDetailID"] = row_DataJkDataDetail2["ID"];
 
-                                    row_SaveDataLog["DataXml"] = xmlHelper.ConvertDataRowToXML(item);
+                                    //row_SaveDataLog["DataXml"] = xmlHelper.ConvertDataRowToXML(item);
 
                                     try
                                     {
@@ -1119,25 +1119,27 @@ namespace WxjzgcjczyTimerService
 
                                         if (!dataService.SaveTBData_TBProjectDesignEconUserInfo(dt_TBProjectDesignEconUserInfo))
                                         {
-                                            row_SaveDataLog["SaveState"] = 0;
-                                            row_SaveDataLog["Msg"] = "保存施工图审查人员信息时失败：CensorNum：" + item["CensorNum"] + ",UserName：" + item["UserName"];
+                                            Public.WriteLog("保存施工图审查合格证失败:" + xmlHelper.ConvertDataRowToXML(item));
+                                            //row_SaveDataLog["SaveState"] = 0;
+                                            //row_SaveDataLog["Msg"] = "保存施工图审查人员信息时失败：CensorNum：" + item["CensorNum"] + ",UserName：" + item["UserName"];
                                         }
                                         else
                                         {
-                                            row_SaveDataLog["SaveState"] = 1;
+                                            //row_SaveDataLog["SaveState"] = 1;
                                             successCount_ry++;
                                         }
                                     }
                                     catch (Exception ex)
                                     {
-                                        row_SaveDataLog["Msg"] = ex.Message;
+                                        Public.WriteLog("保存施工图审查合格证失败:" + xmlHelper.ConvertDataRowToXML(item));
+                                        Public.WriteLog("错误信息：" + ex.Message);
+                                        //row_SaveDataLog["Msg"] = ex.Message;
                                     }
-                                    row_SaveDataLog["PKID"] = item["PKID"].ToString();
-                                    row_SaveDataLog["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                    //row_SaveDataLog["PKID"] = item["PKID"].ToString();
+                                    //row_SaveDataLog["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                                 }
-                                if (dt_SaveDataLog.Rows.Count > 0)
-                                    dataService.Submit_SaveDataLog(dt_SaveDataLog);
+                                //if (dt_SaveDataLog.Rows.Count > 0) dataService.Submit_SaveDataLog(dt_SaveDataLog);
                             }
                             else
                             {
@@ -1593,6 +1595,45 @@ namespace WxjzgcjczyTimerService
                                         ConstructorPhone = "";
                                         break;
                                 }
+
+                                //新增TBBuilderLicenceManageCanJianDanW
+                                DataTable cjdwDt = dataService.GetTBData_TBBuilderLicenceManageCanJianDanW(cjdw.RowGuid);
+                                DataRow cjdwRow;
+                                if (cjdwDt.Rows.Count == 0)
+                                {
+                                    cjdwRow = cjdwDt.NewRow();
+                                    cjdwDt.Rows.Add(cjdwRow);
+                                    cjdwRow["RowGuid"] = cjdw.RowGuid;
+                                    cjdwRow["GCRowGuid"] = cjdw.GCRowGuid;
+                                    cjdwRow["JSGuid"] = cjdw.JSGuid;
+                                    cjdwRow["CanJianDWType"] = cjdw.CanJianDWType;
+                                    cjdwRow["CanJianDWName"] = cjdw.CanJianDWName;
+                                    cjdwRow["CanJianDWZiZhi"] = cjdw.CanJianDWZiZhi;
+                                    cjdwRow["CanJianDWZiZhiDJ"] = cjdw.CanJianDWZiZhiDJ;
+                                    cjdwRow["CanJianFZMan"] = cjdw.CanJianFZMan;
+                                    cjdwRow["FZManZhenshu"] = cjdw.FZManZhenshu;
+                                    cjdwRow["OrderNumber"] = cjdw.OrderNumber;
+                                    cjdwRow["IdentifyNum"] = cjdw.IdentifyNum;
+                                    cjdwRow["OrganizationRegCode"] = zzjgdm;
+                                    cjdwRow["BuilderLicenceNum"] = dataRow["BuilderLicenceNum"];
+                                    try
+                                    {
+                                        if (!dataService.Submit_TBBuilderLicenceManageCanJianDanW(cjdwDt))
+                                        {
+                                            Public.WriteLog("保存参建单位出错:" + cjdw.RowGuid + ", zzjgdm:" + zzjgdm + ",CanJianDWName:" + cjdw.CanJianDWName);
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                            Public.WriteLog("保存参建单位出错:" + cjdw.RowGuid + ", zzjgdm:" + zzjgdm + ",CanJianDWName:" + cjdw.CanJianDWName);
+                                         
+                                    }
+
+                                   
+                                }
+                                
+
+
                             }
                             #endregion
 

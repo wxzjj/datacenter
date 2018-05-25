@@ -868,6 +868,16 @@ c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') 
 
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
+
+        public DataTable GetTBData_TBBuilderLicenceManageCanJianDanW(string rowGuid)
+        {
+
+            string sql = @"select * from TBBuilderLicenceManageCanJianDanW  where RowGuid=@rowGuid ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@rowGuid", rowGuid);
+
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
         /// <summary>
         /// 获取企业从事业务类型
         /// </summary>
@@ -2089,6 +2099,12 @@ where a.qyID in (select qyID from uepp_qycsyw where csywlxid in ('5','6')) ";
         public bool Submit_TBBuilderLicenceManage(DataTable dt)
         {
             string sql = "select * from  TBBuilderLicenceManage where 1=2 ";
+            return DB.Update(sql, null, dt);
+        }
+
+        public bool Submit_TBBuilderLicenceManageCanJianDanW(DataTable dt)
+        {
+            string sql = "select * from  TBBuilderLicenceManageCanJianDanW where 1=2 ";
             return DB.Update(sql, null, dt);
         }
 
