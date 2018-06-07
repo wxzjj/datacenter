@@ -2256,7 +2256,7 @@ namespace WxjzgcjczyTimerService
                             temp["cz"] = row["ChuanZheng"];
                             temp["lxr"] = row["LXR_Name"];
                             temp["lxdh"] = row["LXR_LXDH"];
-                            temp["fddbr_ryid"] = row["fddbr_ryid"];
+                            temp["fddbr_ryid"] = row["FRDB_ZJNO"];
                             temp["fddbr"] = row["FRDBDW_FZRName"].ToString2().Length > 12 ? row["FRDBDW_FZRName"].ToString2().Substring(0, 12) : row["FRDBDW_FZRName"].ToString2();
                             temp["jsfzr"] = row["JSFZ"];
 
