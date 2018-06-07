@@ -1747,6 +1747,21 @@ SELECT a.[uuid]
             string strSqlCondition = string.Empty;
 
             List<IDataItem> list = cl.GetControlValue();
+            string specialCountryNum = string.Empty;
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if ("CountyNum".Equals(list[i].ItemName) && "320213".Equals(list[i].ItemData))
+                {
+                    specialCountryNum = "320213,320202,320203,320204";
+                    list.RemoveAt(i);
+                    break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(specialCountryNum))
+            {
+                dh.strSQL += " and CountyNum in (" + specialCountryNum + ") ";
+            }
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
@@ -1824,6 +1839,21 @@ SELECT a.[uuid]
             string strSqlCondition = string.Empty;
             ////QueryAssistant.GenerateSearchClauseAndSPC(cl, ref strSqlCondition, dh.spc);
             List<IDataItem> list = cl.GetControlValue();
+            string specialCountryNum = string.Empty;
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if ("CountyNum".Equals(list[i].ItemName) && "320213".Equals(list[i].ItemData))
+                {
+                    specialCountryNum = "320213,320202,320203,320204";
+                    list.RemoveAt(i);
+                    break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(specialCountryNum))
+            {
+                dh.strSQL += " and CountyNum in (" + specialCountryNum + ") ";
+            }
             list.GetSearchClause(dh.spc, ref strSqlCondition);
 
             if (!string.IsNullOrEmpty(strSqlCondition))
@@ -2260,6 +2290,22 @@ LEFT JOIN [WJSJZX].[dbo].tbXzqdmDic d ON a.CountyNum = d.Code
             string strSqlCondition = string.Empty;
 
             List<IDataItem> list = cl.GetControlValue();
+            string specialCountryNum = string.Empty;
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if ("CountyNum".Equals(list[i].ItemName) && "320213".Equals(list[i].ItemData))
+                {
+                    specialCountryNum = "320213,320202,320203,320204";
+                    list.RemoveAt(i);
+                    break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(specialCountryNum))
+            {
+                dh.strSQL += " and CountyNum in (" + specialCountryNum + ") ";
+            }
+
             list.GetSearchClause(dh.spc, ref strSqlCondition);
             if (!string.IsNullOrEmpty(strSqlCondition))
             {
@@ -2317,6 +2363,23 @@ WHERE a.PrjNum=@PrjNum
             string strSqlCondition = string.Empty;
             ////QueryAssistant.GenerateSearchClauseAndSPC(cl, ref strSqlCondition, dh.spc);
             List<IDataItem> list = cl.GetControlValue();
+
+            string specialCountryNum = string.Empty;
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if ("CountyNum".Equals(list[i].ItemName) && "320213".Equals(list[i].ItemData))
+                {
+                    specialCountryNum = "320213,320202,320203,320204";
+                    list.RemoveAt(i);
+                    break;
+                } 
+            }
+
+            if (!string.IsNullOrEmpty(specialCountryNum))
+            {
+                dh.strSQL += " and CountyNum in (" + specialCountryNum + ") ";
+            }
+
             list.GetSearchClause(dh.spc, ref strSqlCondition);
 
             if (!string.IsNullOrEmpty(strSqlCondition))
