@@ -2439,12 +2439,14 @@ SELECT [uuid]
 	,[updateDate]
 	,[Status]
 	,[jsxz]
+    ,x.CodeInfo AS jsxzLabel
 	,[tzlx]
 FROM [dbo].[Ap_zjsbb] b
 LEFT JOIN dbo.tbXzqdmDic d ON b.CityNum = d.Code
 LEFT JOIN dbo.tbXzqdmDic d2 ON b.CountyNum = d2.Code
 LEFT JOIN dbo.tbPrjTypeDicNew p ON b.PrjTypeNum = p.Code
 LEFT JOIN dbo.tbPrjFunctionDic f ON b.PrjFunctionNum = f.Code
+LEFT JOIN dbo.tbPrjPropertyDic x ON b.jsxz = x.Code
     WHERE uuid = @uuid
 ";
             dh.spc.Add("@uuid", strParas[0]);

@@ -166,7 +166,7 @@
                             建设性质
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="jsxz" ItemName="jsxz" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBText ID="jsxz" ItemName="jsxzLabel" runat="server"></Bigdesk8:DBText>
                         </td>
                     </tr>
                     
