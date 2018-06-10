@@ -40,6 +40,16 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                 WebCommon.DropDownListDataBind(this.DDL_xmsd, true);
                 powerGridViewDataBind(0);
             }
+            
+            //控制手动下行列是否显示
+            if ("wangxp" == this.WorkUser.LoginName.ToString() || "wangyj"  == this.WorkUser.LoginName.ToString())
+            {
+                this.Gdv_ZlbjNewInfo.Columns[9].Visible = true;
+            }
+            else
+            {
+                this.Gdv_ZlbjNewInfo.Columns[9].Visible = false;
+            }
         }
 
         //数据绑定
