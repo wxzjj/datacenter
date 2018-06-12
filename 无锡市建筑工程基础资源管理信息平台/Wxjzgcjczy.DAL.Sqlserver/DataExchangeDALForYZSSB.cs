@@ -114,6 +114,8 @@ namespace Wxjzgcjczy.DAL.Sqlserver
       ,b.UpdateTime
       ,b.UpdateUser
       ,b.updateDate
+      ,b.FetchDate
+      ,b.Status
 	  ,u.countryCode
     FROM dbo.Ap_ajsbb b 
     LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
@@ -337,6 +339,8 @@ namespace Wxjzgcjczy.DAL.Sqlserver
       ,b.UpdateTime
       ,b.UpdateUser
       ,b.UpdateDate
+      ,b.FetchDate
+      ,b.Status
       ,b.jsxz
       ,b.tzlx
 	  ,u.countryCode
