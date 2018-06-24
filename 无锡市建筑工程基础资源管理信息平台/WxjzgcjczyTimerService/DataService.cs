@@ -194,6 +194,12 @@ namespace WxsjzxTimerService
             return DB.ExeSqlForDataTable(sql, null, "dt");
         }
 
+        public DataTable Get_tbXzqdmDic_AllCountryExceptWuxi()
+        {
+            string sql = "select Code,CodeInfo,parentCode from tbXzqdmDicNew where parentCode in (select Code from tbXzqdmDicNew where parentCode='320000' and Code !='320200')";
+            return DB.ExeSqlForDataTable(sql, null, "dt");
+        }
+
         public DataTable Get_tbXzqdmDic_Country(string cityCode)
         {
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();

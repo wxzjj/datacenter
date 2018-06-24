@@ -34,5 +34,13 @@ namespace Wxjzgcjczy.Common
             byte[] bytes = Convert.FromBase64String(decodedStr);
             return encode.GetString(bytes);
         }
+
+        public byte[] Base64DecodeToBytes(string decodedStr)
+        {
+            if (string.IsNullOrEmpty(decodedStr))
+                return null;
+            byte[] bytes = Convert.FromBase64String(decodedStr);
+            return bytes;
+        }
     }
 }

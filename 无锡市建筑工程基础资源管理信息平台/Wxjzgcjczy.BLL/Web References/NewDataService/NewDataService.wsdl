@@ -1,0 +1,3228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax23="http://data.datecenter.jscedc/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://webservice.datecenter.jscedc" xmlns:ns1="http://org.apache.axis2/xsd" targetNamespace="http://webservice.datecenter.jscedc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+        This service is to process the datainterface
+    </wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://data.datecenter.jscedc/xsd">
+      <xs:complexType name="TDataServiceUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="citycode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="condition" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="countycode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="endtime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="newuserid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="usertype" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax24="http://data.datecenter.jscedc/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.datecenter.jscedc">
+      <xs:import namespace="http://data.datecenter.jscedc/xsd" />
+      <xs:complexType name="Exception">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Exception" nillable="true" type="xs:anyType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Exception">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Exception" nillable="true" type="ns:Exception" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getProjectDataStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TableName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PKID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getProjectDataStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_Single">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IDCardNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_SingleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_Corp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert_CorpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCert">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonTitleCertResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_Single">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IDCardNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_SingleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_Corp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto_CorpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhoto">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegPhotoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_Single">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IDCardNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_SingleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_Corp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert_CorpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCert">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="RegType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonRegCertResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_Single">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IDCardNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_SingleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_Corp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert_CorpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCert">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPersonJobCertResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert_Corp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert_CorpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCert">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutPersonCertResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual_Corp">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual_CorpResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQual">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpQualResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo_Single_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo_Single_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo_Single">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo_SingleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOutCorpInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDataUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDataUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax24:TDataServiceUser" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo_Single_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo_Single_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo_Single">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo_SingleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert_Single_CorpName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert_Single_CorpNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert_Single">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CorpCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert_SingleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert_Packet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PacketNo" type="xs:int" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert_PacketResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert_Inc">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert_IncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCert">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CountyCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="CertType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsZip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCorpCertResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getClientIpAxisResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getOutCorpQual_IncRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQual_IncResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="parameters" element="ns:Exception" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCert_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getCorpCert_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCert_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getCorpCert_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfo_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getCorpInfo_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfo_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getCorpInfo_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQual_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQual_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfo_Single_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo_Single_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfo_Single_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo_Single_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCert_SingleRequest">
+    <wsdl:part name="parameters" element="ns:getCorpCert_Single" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCert_SingleResponse">
+    <wsdl:part name="parameters" element="ns:getCorpCert_SingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProjectDataStatusRequest">
+    <wsdl:part name="parameters" element="ns:getProjectDataStatus" />
+  </wsdl:message>
+  <wsdl:message name="getProjectDataStatusResponse">
+    <wsdl:part name="parameters" element="ns:getProjectDataStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQual_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQual_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCertRequest">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCertResponse">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCertResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataUserRequest">
+    <wsdl:part name="parameters" element="ns:getDataUser" />
+  </wsdl:message>
+  <wsdl:message name="getDataUserResponse">
+    <wsdl:part name="parameters" element="ns:getDataUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_IncRequest">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_IncResponse">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfo_IncRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfo_IncResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_CorpRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_Corp" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_CorpResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_CorpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCertRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCertResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegCertResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_SingleRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_Single" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_SingleResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_SingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCert_IncRequest">
+    <wsdl:part name="parameters" element="ns:getCorpCert_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCert_IncResponse">
+    <wsdl:part name="parameters" element="ns:getCorpCert_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_SingleRequest">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_Single" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_SingleResponse">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_SingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfoRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfoResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getClientIpAxisRequest" />
+  <wsdl:message name="getClientIpAxisResponse">
+    <wsdl:part name="parameters" element="ns:getClientIpAxisResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCert_Single_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getCorpCert_Single_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCert_Single_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getCorpCert_Single_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCert_CorpRequest">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert_Corp" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCert_CorpResponse">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert_CorpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_IncRequest">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_IncResponse">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCert_IncRequest">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCert_IncResponse">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCert_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCert_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_CorpRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_Corp" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_CorpResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_CorpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_IncRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_IncResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_SingleRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_Single" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhoto_SingleResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto_SingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCertRequest">
+    <wsdl:part name="parameters" element="ns:getCorpCert" />
+  </wsdl:message>
+  <wsdl:message name="getCorpCertResponse">
+    <wsdl:part name="parameters" element="ns:getCorpCertResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQualRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQualResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpQualResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfo_SingleRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo_Single" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfo_SingleResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo_SingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQual_CorpRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual_Corp" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpQual_CorpResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpQual_CorpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCertRequest">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCertResponse">
+    <wsdl:part name="parameters" element="ns:getOutPersonCertResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCertRequest">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCertResponse">
+    <wsdl:part name="parameters" element="ns:getPersonJobCertResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_CorpRequest">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_Corp" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_CorpResponse">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_CorpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfo_SingleRequest">
+    <wsdl:part name="parameters" element="ns:getCorpInfo_Single" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfo_SingleResponse">
+    <wsdl:part name="parameters" element="ns:getCorpInfo_SingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfo_Single_CorpNameRequest">
+    <wsdl:part name="parameters" element="ns:getCorpInfo_Single_CorpName" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfo_Single_CorpNameResponse">
+    <wsdl:part name="parameters" element="ns:getCorpInfo_Single_CorpNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_IncRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegCert_IncResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegCert_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCert_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getOutPersonCert_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getOutPersonCert_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_CorpRequest">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_Corp" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_CorpResponse">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_CorpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_SingleRequest">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_Single" />
+  </wsdl:message>
+  <wsdl:message name="getPersonTitleCert_SingleResponse">
+    <wsdl:part name="parameters" element="ns:getPersonTitleCert_SingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfoRequest">
+    <wsdl:part name="parameters" element="ns:getCorpInfo" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfoResponse">
+    <wsdl:part name="parameters" element="ns:getCorpInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfo_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getOutCorpInfo_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getOutCorpInfo_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfo_IncRequest">
+    <wsdl:part name="parameters" element="ns:getCorpInfo_Inc" />
+  </wsdl:message>
+  <wsdl:message name="getCorpInfo_IncResponse">
+    <wsdl:part name="parameters" element="ns:getCorpInfo_IncResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_PacketRequest">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_Packet" />
+  </wsdl:message>
+  <wsdl:message name="getPersonJobCert_PacketResponse">
+    <wsdl:part name="parameters" element="ns:getPersonJobCert_PacketResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhotoRequest">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhoto" />
+  </wsdl:message>
+  <wsdl:message name="getPersonRegPhotoResponse">
+    <wsdl:part name="parameters" element="ns:getPersonRegPhotoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="NewDataServicePortType">
+    <wsdl:operation name="getOutCorpQual_Inc">
+      <wsdl:input wsaw:Action="urn:getOutCorpQual_Inc" message="ns:getOutCorpQual_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpQual_IncResponse" message="ns:getOutCorpQual_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpQual_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Packet">
+      <wsdl:input wsaw:Action="urn:getCorpCert_Packet" message="ns:getCorpCert_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpCert_PacketResponse" message="ns:getCorpCert_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpCert_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Packet">
+      <wsdl:input wsaw:Action="urn:getCorpInfo_Packet" message="ns:getCorpInfo_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpInfo_PacketResponse" message="ns:getCorpInfo_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpInfo_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_CorpName">
+      <wsdl:input wsaw:Action="urn:getOutCorpQual_CorpName" message="ns:getOutCorpQual_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpQual_CorpNameResponse" message="ns:getOutCorpQual_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpQual_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_CorpName">
+      <wsdl:input wsaw:Action="urn:getPersonTitleCert_CorpName" message="ns:getPersonTitleCert_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonTitleCert_CorpNameResponse" message="ns:getPersonTitleCert_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonTitleCert_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Single_CorpName">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfo_Single_CorpName" message="ns:getOutCorpInfo_Single_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfo_Single_CorpNameResponse" message="ns:getOutCorpInfo_Single_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfo_Single_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Single">
+      <wsdl:input wsaw:Action="urn:getCorpCert_Single" message="ns:getCorpCert_SingleRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpCert_SingleResponse" message="ns:getCorpCert_SingleResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpCert_SingleException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getProjectDataStatus">
+      <wsdl:input wsaw:Action="urn:getProjectDataStatus" message="ns:getProjectDataStatusRequest" />
+      <wsdl:output wsaw:Action="urn:getProjectDataStatusResponse" message="ns:getProjectDataStatusResponse" />
+      <wsdl:fault wsaw:Action="urn:getProjectDataStatusException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_Packet">
+      <wsdl:input wsaw:Action="urn:getOutCorpQual_Packet" message="ns:getOutCorpQual_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpQual_PacketResponse" message="ns:getOutCorpQual_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpQual_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert">
+      <wsdl:input wsaw:Action="urn:getPersonTitleCert" message="ns:getPersonTitleCertRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonTitleCertResponse" message="ns:getPersonTitleCertResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonTitleCertException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataUser">
+      <wsdl:input wsaw:Action="urn:getDataUser" message="ns:getDataUserRequest" />
+      <wsdl:output wsaw:Action="urn:getDataUserResponse" message="ns:getDataUserResponse" />
+      <wsdl:fault wsaw:Action="urn:getDataUserException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Inc">
+      <wsdl:input wsaw:Action="urn:getPersonJobCert_Inc" message="ns:getPersonJobCert_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonJobCert_IncResponse" message="ns:getPersonJobCert_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonJobCert_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Inc">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfo_Inc" message="ns:getOutCorpInfo_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfo_IncResponse" message="ns:getOutCorpInfo_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfo_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Corp">
+      <wsdl:input wsaw:Action="urn:getPersonRegCert_Corp" message="ns:getPersonRegCert_CorpRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegCert_CorpResponse" message="ns:getPersonRegCert_CorpResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegCert_CorpException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert">
+      <wsdl:input wsaw:Action="urn:getPersonRegCert" message="ns:getPersonRegCertRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegCertResponse" message="ns:getPersonRegCertResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegCertException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Packet">
+      <wsdl:input wsaw:Action="urn:getPersonRegPhoto_Packet" message="ns:getPersonRegPhoto_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegPhoto_PacketResponse" message="ns:getPersonRegPhoto_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegPhoto_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Single">
+      <wsdl:input wsaw:Action="urn:getPersonRegCert_Single" message="ns:getPersonRegCert_SingleRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegCert_SingleResponse" message="ns:getPersonRegCert_SingleResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegCert_SingleException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Inc">
+      <wsdl:input wsaw:Action="urn:getCorpCert_Inc" message="ns:getCorpCert_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpCert_IncResponse" message="ns:getCorpCert_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpCert_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_CorpName">
+      <wsdl:input wsaw:Action="urn:getPersonRegPhoto_CorpName" message="ns:getPersonRegPhoto_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegPhoto_CorpNameResponse" message="ns:getPersonRegPhoto_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegPhoto_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Packet">
+      <wsdl:input wsaw:Action="urn:getPersonTitleCert_Packet" message="ns:getPersonTitleCert_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonTitleCert_PacketResponse" message="ns:getPersonTitleCert_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonTitleCert_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Single">
+      <wsdl:input wsaw:Action="urn:getPersonJobCert_Single" message="ns:getPersonJobCert_SingleRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonJobCert_SingleResponse" message="ns:getPersonJobCert_SingleResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonJobCert_SingleException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfo" message="ns:getOutCorpInfoRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfoResponse" message="ns:getOutCorpInfoResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfoException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getClientIpAxis">
+      <wsdl:input wsaw:Action="urn:getClientIpAxis" message="ns:getClientIpAxisRequest" />
+      <wsdl:output wsaw:Action="urn:getClientIpAxisResponse" message="ns:getClientIpAxisResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Single_CorpName">
+      <wsdl:input wsaw:Action="urn:getCorpCert_Single_CorpName" message="ns:getCorpCert_Single_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpCert_Single_CorpNameResponse" message="ns:getCorpCert_Single_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpCert_Single_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Corp">
+      <wsdl:input wsaw:Action="urn:getOutPersonCert_Corp" message="ns:getOutPersonCert_CorpRequest" />
+      <wsdl:output wsaw:Action="urn:getOutPersonCert_CorpResponse" message="ns:getOutPersonCert_CorpResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutPersonCert_CorpException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Inc">
+      <wsdl:input wsaw:Action="urn:getPersonTitleCert_Inc" message="ns:getPersonTitleCert_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonTitleCert_IncResponse" message="ns:getPersonTitleCert_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonTitleCert_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Inc">
+      <wsdl:input wsaw:Action="urn:getOutPersonCert_Inc" message="ns:getOutPersonCert_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getOutPersonCert_IncResponse" message="ns:getOutPersonCert_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutPersonCert_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_CorpName">
+      <wsdl:input wsaw:Action="urn:getOutPersonCert_CorpName" message="ns:getOutPersonCert_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getOutPersonCert_CorpNameResponse" message="ns:getOutPersonCert_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutPersonCert_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Corp">
+      <wsdl:input wsaw:Action="urn:getPersonRegPhoto_Corp" message="ns:getPersonRegPhoto_CorpRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegPhoto_CorpResponse" message="ns:getPersonRegPhoto_CorpResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegPhoto_CorpException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Inc">
+      <wsdl:input wsaw:Action="urn:getPersonRegPhoto_Inc" message="ns:getPersonRegPhoto_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegPhoto_IncResponse" message="ns:getPersonRegPhoto_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegPhoto_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Packet">
+      <wsdl:input wsaw:Action="urn:getPersonRegCert_Packet" message="ns:getPersonRegCert_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegCert_PacketResponse" message="ns:getPersonRegCert_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegCert_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Single">
+      <wsdl:input wsaw:Action="urn:getPersonRegPhoto_Single" message="ns:getPersonRegPhoto_SingleRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegPhoto_SingleResponse" message="ns:getPersonRegPhoto_SingleResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegPhoto_SingleException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_CorpName">
+      <wsdl:input wsaw:Action="urn:getPersonJobCert_CorpName" message="ns:getPersonJobCert_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonJobCert_CorpNameResponse" message="ns:getPersonJobCert_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonJobCert_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert">
+      <wsdl:input wsaw:Action="urn:getCorpCert" message="ns:getCorpCertRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpCertResponse" message="ns:getCorpCertResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpCertException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual">
+      <wsdl:input wsaw:Action="urn:getOutCorpQual" message="ns:getOutCorpQualRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpQualResponse" message="ns:getOutCorpQualResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpQualException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Single">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfo_Single" message="ns:getOutCorpInfo_SingleRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfo_SingleResponse" message="ns:getOutCorpInfo_SingleResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfo_SingleException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_Corp">
+      <wsdl:input wsaw:Action="urn:getOutCorpQual_Corp" message="ns:getOutCorpQual_CorpRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpQual_CorpResponse" message="ns:getOutCorpQual_CorpResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpQual_CorpException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert">
+      <wsdl:input wsaw:Action="urn:getOutPersonCert" message="ns:getOutPersonCertRequest" />
+      <wsdl:output wsaw:Action="urn:getOutPersonCertResponse" message="ns:getOutPersonCertResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutPersonCertException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert">
+      <wsdl:input wsaw:Action="urn:getPersonJobCert" message="ns:getPersonJobCertRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonJobCertResponse" message="ns:getPersonJobCertResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonJobCertException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Corp">
+      <wsdl:input wsaw:Action="urn:getPersonJobCert_Corp" message="ns:getPersonJobCert_CorpRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonJobCert_CorpResponse" message="ns:getPersonJobCert_CorpResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonJobCert_CorpException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_CorpName">
+      <wsdl:input wsaw:Action="urn:getPersonRegCert_CorpName" message="ns:getPersonRegCert_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegCert_CorpNameResponse" message="ns:getPersonRegCert_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegCert_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Single">
+      <wsdl:input wsaw:Action="urn:getCorpInfo_Single" message="ns:getCorpInfo_SingleRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpInfo_SingleResponse" message="ns:getCorpInfo_SingleResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpInfo_SingleException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Single_CorpName">
+      <wsdl:input wsaw:Action="urn:getCorpInfo_Single_CorpName" message="ns:getCorpInfo_Single_CorpNameRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpInfo_Single_CorpNameResponse" message="ns:getCorpInfo_Single_CorpNameResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpInfo_Single_CorpNameException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Inc">
+      <wsdl:input wsaw:Action="urn:getPersonRegCert_Inc" message="ns:getPersonRegCert_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegCert_IncResponse" message="ns:getPersonRegCert_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegCert_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Packet">
+      <wsdl:input wsaw:Action="urn:getOutPersonCert_Packet" message="ns:getOutPersonCert_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getOutPersonCert_PacketResponse" message="ns:getOutPersonCert_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutPersonCert_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Corp">
+      <wsdl:input wsaw:Action="urn:getPersonTitleCert_Corp" message="ns:getPersonTitleCert_CorpRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonTitleCert_CorpResponse" message="ns:getPersonTitleCert_CorpResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonTitleCert_CorpException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Single">
+      <wsdl:input wsaw:Action="urn:getPersonTitleCert_Single" message="ns:getPersonTitleCert_SingleRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonTitleCert_SingleResponse" message="ns:getPersonTitleCert_SingleResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonTitleCert_SingleException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo">
+      <wsdl:input wsaw:Action="urn:getCorpInfo" message="ns:getCorpInfoRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpInfoResponse" message="ns:getCorpInfoResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpInfoException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Packet">
+      <wsdl:input wsaw:Action="urn:getOutCorpInfo_Packet" message="ns:getOutCorpInfo_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getOutCorpInfo_PacketResponse" message="ns:getOutCorpInfo_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getOutCorpInfo_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Inc">
+      <wsdl:input wsaw:Action="urn:getCorpInfo_Inc" message="ns:getCorpInfo_IncRequest" />
+      <wsdl:output wsaw:Action="urn:getCorpInfo_IncResponse" message="ns:getCorpInfo_IncResponse" />
+      <wsdl:fault wsaw:Action="urn:getCorpInfo_IncException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Packet">
+      <wsdl:input wsaw:Action="urn:getPersonJobCert_Packet" message="ns:getPersonJobCert_PacketRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonJobCert_PacketResponse" message="ns:getPersonJobCert_PacketResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonJobCert_PacketException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto">
+      <wsdl:input wsaw:Action="urn:getPersonRegPhoto" message="ns:getPersonRegPhotoRequest" />
+      <wsdl:output wsaw:Action="urn:getPersonRegPhotoResponse" message="ns:getPersonRegPhotoResponse" />
+      <wsdl:fault wsaw:Action="urn:getPersonRegPhotoException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NewDataServiceSoap11Binding" type="ns:NewDataServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getOutCorpQual_Inc">
+      <soap:operation soapAction="urn:getOutCorpQual_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Packet">
+      <soap:operation soapAction="urn:getCorpCert_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Packet">
+      <soap:operation soapAction="urn:getCorpInfo_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_CorpName">
+      <soap:operation soapAction="urn:getPersonTitleCert_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_CorpName">
+      <soap:operation soapAction="urn:getOutCorpQual_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Single_CorpName">
+      <soap:operation soapAction="urn:getOutCorpInfo_Single_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectDataStatus">
+      <soap:operation soapAction="urn:getProjectDataStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Single">
+      <soap:operation soapAction="urn:getCorpCert_Single" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert">
+      <soap:operation soapAction="urn:getPersonTitleCert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_Packet">
+      <soap:operation soapAction="urn:getOutCorpQual_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDataUser">
+      <soap:operation soapAction="urn:getDataUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Inc">
+      <soap:operation soapAction="urn:getPersonJobCert_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Corp">
+      <soap:operation soapAction="urn:getPersonRegCert_Corp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Inc">
+      <soap:operation soapAction="urn:getOutCorpInfo_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Packet">
+      <soap:operation soapAction="urn:getPersonRegPhoto_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert">
+      <soap:operation soapAction="urn:getPersonRegCert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Single">
+      <soap:operation soapAction="urn:getPersonRegCert_Single" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Inc">
+      <soap:operation soapAction="urn:getCorpCert_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_CorpName">
+      <soap:operation soapAction="urn:getPersonRegPhoto_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Packet">
+      <soap:operation soapAction="urn:getPersonTitleCert_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Single">
+      <soap:operation soapAction="urn:getPersonJobCert_Single" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo">
+      <soap:operation soapAction="urn:getOutCorpInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getClientIpAxis">
+      <soap:operation soapAction="urn:getClientIpAxis" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Corp">
+      <soap:operation soapAction="urn:getOutPersonCert_Corp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Single_CorpName">
+      <soap:operation soapAction="urn:getCorpCert_Single_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Inc">
+      <soap:operation soapAction="urn:getPersonTitleCert_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Inc">
+      <soap:operation soapAction="urn:getOutPersonCert_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_CorpName">
+      <soap:operation soapAction="urn:getOutPersonCert_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Corp">
+      <soap:operation soapAction="urn:getPersonRegPhoto_Corp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Inc">
+      <soap:operation soapAction="urn:getPersonRegPhoto_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_CorpName">
+      <soap:operation soapAction="urn:getPersonJobCert_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Single">
+      <soap:operation soapAction="urn:getPersonRegPhoto_Single" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Packet">
+      <soap:operation soapAction="urn:getPersonRegCert_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert">
+      <soap:operation soapAction="urn:getCorpCert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual">
+      <soap:operation soapAction="urn:getOutCorpQual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Single">
+      <soap:operation soapAction="urn:getOutCorpInfo_Single" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_Corp">
+      <soap:operation soapAction="urn:getOutCorpQual_Corp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert">
+      <soap:operation soapAction="urn:getOutPersonCert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert">
+      <soap:operation soapAction="urn:getPersonJobCert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Corp">
+      <soap:operation soapAction="urn:getPersonJobCert_Corp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Single">
+      <soap:operation soapAction="urn:getCorpInfo_Single" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_CorpName">
+      <soap:operation soapAction="urn:getPersonRegCert_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Inc">
+      <soap:operation soapAction="urn:getPersonRegCert_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Single_CorpName">
+      <soap:operation soapAction="urn:getCorpInfo_Single_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Packet">
+      <soap:operation soapAction="urn:getOutPersonCert_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Single">
+      <soap:operation soapAction="urn:getPersonTitleCert_Single" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Corp">
+      <soap:operation soapAction="urn:getPersonTitleCert_Corp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Packet">
+      <soap:operation soapAction="urn:getOutCorpInfo_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo">
+      <soap:operation soapAction="urn:getCorpInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Inc">
+      <soap:operation soapAction="urn:getCorpInfo_Inc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto">
+      <soap:operation soapAction="urn:getPersonRegPhoto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Packet">
+      <soap:operation soapAction="urn:getPersonJobCert_Packet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NewDataServiceSoap12Binding" type="ns:NewDataServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getOutCorpQual_Inc">
+      <soap12:operation soapAction="urn:getOutCorpQual_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Packet">
+      <soap12:operation soapAction="urn:getCorpCert_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Packet">
+      <soap12:operation soapAction="urn:getCorpInfo_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_CorpName">
+      <soap12:operation soapAction="urn:getPersonTitleCert_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_CorpName">
+      <soap12:operation soapAction="urn:getOutCorpQual_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Single_CorpName">
+      <soap12:operation soapAction="urn:getOutCorpInfo_Single_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectDataStatus">
+      <soap12:operation soapAction="urn:getProjectDataStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Single">
+      <soap12:operation soapAction="urn:getCorpCert_Single" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert">
+      <soap12:operation soapAction="urn:getPersonTitleCert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_Packet">
+      <soap12:operation soapAction="urn:getOutCorpQual_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDataUser">
+      <soap12:operation soapAction="urn:getDataUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Inc">
+      <soap12:operation soapAction="urn:getPersonJobCert_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Corp">
+      <soap12:operation soapAction="urn:getPersonRegCert_Corp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Inc">
+      <soap12:operation soapAction="urn:getOutCorpInfo_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Packet">
+      <soap12:operation soapAction="urn:getPersonRegPhoto_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert">
+      <soap12:operation soapAction="urn:getPersonRegCert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Single">
+      <soap12:operation soapAction="urn:getPersonRegCert_Single" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Inc">
+      <soap12:operation soapAction="urn:getCorpCert_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_CorpName">
+      <soap12:operation soapAction="urn:getPersonRegPhoto_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Packet">
+      <soap12:operation soapAction="urn:getPersonTitleCert_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Single">
+      <soap12:operation soapAction="urn:getPersonJobCert_Single" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo">
+      <soap12:operation soapAction="urn:getOutCorpInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getClientIpAxis">
+      <soap12:operation soapAction="urn:getClientIpAxis" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Corp">
+      <soap12:operation soapAction="urn:getOutPersonCert_Corp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Single_CorpName">
+      <soap12:operation soapAction="urn:getCorpCert_Single_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Inc">
+      <soap12:operation soapAction="urn:getPersonTitleCert_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Inc">
+      <soap12:operation soapAction="urn:getOutPersonCert_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_CorpName">
+      <soap12:operation soapAction="urn:getOutPersonCert_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Corp">
+      <soap12:operation soapAction="urn:getPersonRegPhoto_Corp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Inc">
+      <soap12:operation soapAction="urn:getPersonRegPhoto_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_CorpName">
+      <soap12:operation soapAction="urn:getPersonJobCert_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Single">
+      <soap12:operation soapAction="urn:getPersonRegPhoto_Single" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Packet">
+      <soap12:operation soapAction="urn:getPersonRegCert_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert">
+      <soap12:operation soapAction="urn:getCorpCert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual">
+      <soap12:operation soapAction="urn:getOutCorpQual" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Single">
+      <soap12:operation soapAction="urn:getOutCorpInfo_Single" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_Corp">
+      <soap12:operation soapAction="urn:getOutCorpQual_Corp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert">
+      <soap12:operation soapAction="urn:getOutPersonCert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert">
+      <soap12:operation soapAction="urn:getPersonJobCert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Corp">
+      <soap12:operation soapAction="urn:getPersonJobCert_Corp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Single">
+      <soap12:operation soapAction="urn:getCorpInfo_Single" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_CorpName">
+      <soap12:operation soapAction="urn:getPersonRegCert_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Inc">
+      <soap12:operation soapAction="urn:getPersonRegCert_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Single_CorpName">
+      <soap12:operation soapAction="urn:getCorpInfo_Single_CorpName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Packet">
+      <soap12:operation soapAction="urn:getOutPersonCert_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Single">
+      <soap12:operation soapAction="urn:getPersonTitleCert_Single" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Corp">
+      <soap12:operation soapAction="urn:getPersonTitleCert_Corp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Packet">
+      <soap12:operation soapAction="urn:getOutCorpInfo_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo">
+      <soap12:operation soapAction="urn:getCorpInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Inc">
+      <soap12:operation soapAction="urn:getCorpInfo_Inc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto">
+      <soap12:operation soapAction="urn:getPersonRegPhoto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Packet">
+      <soap12:operation soapAction="urn:getPersonJobCert_Packet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NewDataServiceHttpBinding" type="ns:NewDataServicePortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getOutCorpQual_Inc">
+      <http:operation location="NewDataService/getOutCorpQual_Inc" />
+      <wsdl:input>
+        <mime:content part="getOutCorpQual_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpQual_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Packet">
+      <http:operation location="NewDataService/getCorpCert_Packet" />
+      <wsdl:input>
+        <mime:content part="getCorpCert_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpCert_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Packet">
+      <http:operation location="NewDataService/getCorpInfo_Packet" />
+      <wsdl:input>
+        <mime:content part="getCorpInfo_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpInfo_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_CorpName">
+      <http:operation location="NewDataService/getPersonTitleCert_CorpName" />
+      <wsdl:input>
+        <mime:content part="getPersonTitleCert_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonTitleCert_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_CorpName">
+      <http:operation location="NewDataService/getOutCorpQual_CorpName" />
+      <wsdl:input>
+        <mime:content part="getOutCorpQual_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpQual_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Single_CorpName">
+      <http:operation location="NewDataService/getOutCorpInfo_Single_CorpName" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfo_Single_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfo_Single_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectDataStatus">
+      <http:operation location="NewDataService/getProjectDataStatus" />
+      <wsdl:input>
+        <mime:content part="getProjectDataStatus" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getProjectDataStatus" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Single">
+      <http:operation location="NewDataService/getCorpCert_Single" />
+      <wsdl:input>
+        <mime:content part="getCorpCert_Single" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpCert_Single" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert">
+      <http:operation location="NewDataService/getPersonTitleCert" />
+      <wsdl:input>
+        <mime:content part="getPersonTitleCert" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonTitleCert" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_Packet">
+      <http:operation location="NewDataService/getOutCorpQual_Packet" />
+      <wsdl:input>
+        <mime:content part="getOutCorpQual_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpQual_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDataUser">
+      <http:operation location="NewDataService/getDataUser" />
+      <wsdl:input>
+        <mime:content part="getDataUser" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getDataUser" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Inc">
+      <http:operation location="NewDataService/getPersonJobCert_Inc" />
+      <wsdl:input>
+        <mime:content part="getPersonJobCert_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonJobCert_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Corp">
+      <http:operation location="NewDataService/getPersonRegCert_Corp" />
+      <wsdl:input>
+        <mime:content part="getPersonRegCert_Corp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegCert_Corp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Inc">
+      <http:operation location="NewDataService/getOutCorpInfo_Inc" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfo_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfo_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Packet">
+      <http:operation location="NewDataService/getPersonRegPhoto_Packet" />
+      <wsdl:input>
+        <mime:content part="getPersonRegPhoto_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegPhoto_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert">
+      <http:operation location="NewDataService/getPersonRegCert" />
+      <wsdl:input>
+        <mime:content part="getPersonRegCert" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegCert" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Single">
+      <http:operation location="NewDataService/getPersonRegCert_Single" />
+      <wsdl:input>
+        <mime:content part="getPersonRegCert_Single" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegCert_Single" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Inc">
+      <http:operation location="NewDataService/getCorpCert_Inc" />
+      <wsdl:input>
+        <mime:content part="getCorpCert_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpCert_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_CorpName">
+      <http:operation location="NewDataService/getPersonRegPhoto_CorpName" />
+      <wsdl:input>
+        <mime:content part="getPersonRegPhoto_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegPhoto_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Packet">
+      <http:operation location="NewDataService/getPersonTitleCert_Packet" />
+      <wsdl:input>
+        <mime:content part="getPersonTitleCert_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonTitleCert_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Single">
+      <http:operation location="NewDataService/getPersonJobCert_Single" />
+      <wsdl:input>
+        <mime:content part="getPersonJobCert_Single" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonJobCert_Single" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo">
+      <http:operation location="NewDataService/getOutCorpInfo" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClientIpAxis">
+      <http:operation location="NewDataService/getClientIpAxis" />
+      <wsdl:input>
+        <mime:content part="getClientIpAxis" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getClientIpAxis" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Corp">
+      <http:operation location="NewDataService/getOutPersonCert_Corp" />
+      <wsdl:input>
+        <mime:content part="getOutPersonCert_Corp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutPersonCert_Corp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert_Single_CorpName">
+      <http:operation location="NewDataService/getCorpCert_Single_CorpName" />
+      <wsdl:input>
+        <mime:content part="getCorpCert_Single_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpCert_Single_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Inc">
+      <http:operation location="NewDataService/getPersonTitleCert_Inc" />
+      <wsdl:input>
+        <mime:content part="getPersonTitleCert_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonTitleCert_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Inc">
+      <http:operation location="NewDataService/getOutPersonCert_Inc" />
+      <wsdl:input>
+        <mime:content part="getOutPersonCert_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutPersonCert_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_CorpName">
+      <http:operation location="NewDataService/getOutPersonCert_CorpName" />
+      <wsdl:input>
+        <mime:content part="getOutPersonCert_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutPersonCert_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Corp">
+      <http:operation location="NewDataService/getPersonRegPhoto_Corp" />
+      <wsdl:input>
+        <mime:content part="getPersonRegPhoto_Corp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegPhoto_Corp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Inc">
+      <http:operation location="NewDataService/getPersonRegPhoto_Inc" />
+      <wsdl:input>
+        <mime:content part="getPersonRegPhoto_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegPhoto_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_CorpName">
+      <http:operation location="NewDataService/getPersonJobCert_CorpName" />
+      <wsdl:input>
+        <mime:content part="getPersonJobCert_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonJobCert_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto_Single">
+      <http:operation location="NewDataService/getPersonRegPhoto_Single" />
+      <wsdl:input>
+        <mime:content part="getPersonRegPhoto_Single" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegPhoto_Single" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Packet">
+      <http:operation location="NewDataService/getPersonRegCert_Packet" />
+      <wsdl:input>
+        <mime:content part="getPersonRegCert_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegCert_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpCert">
+      <http:operation location="NewDataService/getCorpCert" />
+      <wsdl:input>
+        <mime:content part="getCorpCert" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpCert" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual">
+      <http:operation location="NewDataService/getOutCorpQual" />
+      <wsdl:input>
+        <mime:content part="getOutCorpQual" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpQual" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Single">
+      <http:operation location="NewDataService/getOutCorpInfo_Single" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfo_Single" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfo_Single" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpQual_Corp">
+      <http:operation location="NewDataService/getOutCorpQual_Corp" />
+      <wsdl:input>
+        <mime:content part="getOutCorpQual_Corp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpQual_Corp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert">
+      <http:operation location="NewDataService/getOutPersonCert" />
+      <wsdl:input>
+        <mime:content part="getOutPersonCert" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutPersonCert" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert">
+      <http:operation location="NewDataService/getPersonJobCert" />
+      <wsdl:input>
+        <mime:content part="getPersonJobCert" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonJobCert" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Corp">
+      <http:operation location="NewDataService/getPersonJobCert_Corp" />
+      <wsdl:input>
+        <mime:content part="getPersonJobCert_Corp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonJobCert_Corp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Single">
+      <http:operation location="NewDataService/getCorpInfo_Single" />
+      <wsdl:input>
+        <mime:content part="getCorpInfo_Single" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpInfo_Single" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_CorpName">
+      <http:operation location="NewDataService/getPersonRegCert_CorpName" />
+      <wsdl:input>
+        <mime:content part="getPersonRegCert_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegCert_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegCert_Inc">
+      <http:operation location="NewDataService/getPersonRegCert_Inc" />
+      <wsdl:input>
+        <mime:content part="getPersonRegCert_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegCert_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Single_CorpName">
+      <http:operation location="NewDataService/getCorpInfo_Single_CorpName" />
+      <wsdl:input>
+        <mime:content part="getCorpInfo_Single_CorpName" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpInfo_Single_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutPersonCert_Packet">
+      <http:operation location="NewDataService/getOutPersonCert_Packet" />
+      <wsdl:input>
+        <mime:content part="getOutPersonCert_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutPersonCert_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Single">
+      <http:operation location="NewDataService/getPersonTitleCert_Single" />
+      <wsdl:input>
+        <mime:content part="getPersonTitleCert_Single" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonTitleCert_Single" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonTitleCert_Corp">
+      <http:operation location="NewDataService/getPersonTitleCert_Corp" />
+      <wsdl:input>
+        <mime:content part="getPersonTitleCert_Corp" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonTitleCert_Corp" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOutCorpInfo_Packet">
+      <http:operation location="NewDataService/getOutCorpInfo_Packet" />
+      <wsdl:input>
+        <mime:content part="getOutCorpInfo_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getOutCorpInfo_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo">
+      <http:operation location="NewDataService/getCorpInfo" />
+      <wsdl:input>
+        <mime:content part="getCorpInfo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpInfo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCorpInfo_Inc">
+      <http:operation location="NewDataService/getCorpInfo_Inc" />
+      <wsdl:input>
+        <mime:content part="getCorpInfo_Inc" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getCorpInfo_Inc" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonRegPhoto">
+      <http:operation location="NewDataService/getPersonRegPhoto" />
+      <wsdl:input>
+        <mime:content part="getPersonRegPhoto" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonRegPhoto" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonJobCert_Packet">
+      <http:operation location="NewDataService/getPersonJobCert_Packet" />
+      <wsdl:input>
+        <mime:content part="getPersonJobCert_Packet" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPersonJobCert_Packet" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NewDataService">
+    <wsdl:port name="NewDataServiceHttpSoap11Endpoint" binding="ns:NewDataServiceSoap11Binding">
+      <soap:address location="http://58.213.147.243:8080/jscedc/services/NewDataService.NewDataServiceHttpSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="NewDataServiceHttpSoap12Endpoint" binding="ns:NewDataServiceSoap12Binding">
+      <soap12:address location="http://58.213.147.243:8080/jscedc/services/NewDataService.NewDataServiceHttpSoap12Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="NewDataServiceHttpEndpoint" binding="ns:NewDataServiceHttpBinding">
+      <http:address location="http://58.213.147.243:8080/jscedc/services/NewDataService.NewDataServiceHttpEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

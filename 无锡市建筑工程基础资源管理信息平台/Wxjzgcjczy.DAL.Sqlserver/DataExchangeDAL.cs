@@ -1652,5 +1652,108 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
             return this.DB.Update(sql, null, dt);
         }
 
+
+        #region 企业注册人员
+
+        public DataTable Get_uepp_Ryzymx(string ryID)
+        {
+            //为避免重复人员数据
+            //string sql = @" select * from UEPP_Ryzymx where ryID=@ryID and ryzyzglxID in ('1','2')  ";
+            string sql = @" select * from UEPP_Ryzymx where ryID=@ryID";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@ryID", ryID);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+
+        }
+
+        public DataTable Get_uepp_Ryjbxx(string ryID)
+        {
+            string sql = @" select * from UEPP_Ryjbxx where ryID=@ryID   ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@ryID", ryID);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
+        /// 提交人员信息修改到数据库
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public bool Submit_uepp_ryjbxx(DataTable dt)
+        {
+            string sql = @"select * from UEPP_Ryjbxx  where 1=2 ";
+            return DB.Update(sql, null, dt);
+        }
+
+        public bool Submit_uepp_Ryzyzg(DataTable dt)
+        {
+            string sql = @"select * from UEPP_Ryzyzg  where 1=2 ";
+            return this.DB.Update(sql, null, dt);
+        }
+
+        public bool Submit_uepp_Ryzs(DataTable dt)
+        {
+            string sql = @"select * from UEPP_Ryzs  where 1=2 ";
+            return this.DB.Update(sql, null, dt);
+        }
+        public bool Submit_uepp_Ryzymx(DataTable dt)
+        {
+            string sql = @"select * from UEPP_Ryzymx  where 1=2 ";
+            return this.DB.Update(sql, null, dt);
+        }
+        public DataTable Get_uepp_Qyry(string ryID, string qyID, string ryzyzglxID)
+        {
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@ryID", ryID);
+            sp.Add("@qyID", qyID);
+            sp.Add("@ryzyzglxID", ryzyzglxID);
+            string sql = @" select * from  UEPP_QyRy where ryID=@ryID and qyID=@qyID and ryzyzglxID=@ryzyzglxID ";
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        public DataTable Get_uepp_Ryzs(string ryID)
+        {
+            string sql = @" select * from UEPP_Ryzs where ryID=@ryID ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@ryID", ryID);
+
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        public DataTable Get_uepp_Ryzyzg(string ryID)
+        {
+            string sql = @" select * from UEPP_Ryzyzg where ryID=@ryID  ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@ryID", ryID);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        public bool Submit_uepp_qyry(DataTable dt)
+        {
+            string sql = @"select * from UEPP_QyRy  where 1=2 ";
+            return this.DB.Update(sql, null, dt);
+        }
+
+        public string Get_uepp_RyzsNewID()
+        {
+            string sql = @" select ISNULL(MAX(CONVERT(int ,zsjlId)),0)+1 from  UEPP_Ryzs  ";
+            return DB.ExeSqlForString(sql, null);
+        }
+
+        /// <summary>
+        /// 获取人员信息
+        /// </summary>
+        /// <param name="ryID"></param>
+        /// <returns></returns>
+        public DataTable Get_UEPP_Ryjbxx(string ryID)
+        {
+            string sql = @"  select * from UEPP_Ryjbxx where ryID=@ryID  ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@ryID", ryID);
+            return this.DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        #endregion
+
     }
 }

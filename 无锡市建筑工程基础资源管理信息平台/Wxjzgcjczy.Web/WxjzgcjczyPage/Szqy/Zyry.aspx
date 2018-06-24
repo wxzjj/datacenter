@@ -77,15 +77,15 @@
         <div id="maingrid" style="background-color: White;">
         </div>
     </div>
-   <%-- <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table-bk">
+   <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table-bk">
         <tr>
             <td colspan="6" class="td-value" style="text-align: center">
-                <br />
-                <input type="button" value="领导批示" onclick="openLdpsWindow()" class="button" style="width: 100px;
-                    height: 30px;" />
+
+                <button type="button" id ="PullDataBtn" onclick='PullDataCorpRegStaff()' style="width: 100px; height: 30px;" class="button button2 buttonnoicon">同步</button>
+                <!--<input type="button" value="手动同步" onclick="openLdpsWindow()" class="button" style="width: 100px; height: 30px;" />-->
             </td>
         </tr>
-    </table>--%>
+    </table>
 
     <script type="text/javascript">
 
@@ -167,6 +167,19 @@
             LG.appendSearchButtons1("#formsearch", "#btn_search", manager);
         })
 
+        function PullDataCorpRegStaff() {
+            $.ajax({
+                type: 'POST',
+                url: '/WxjzgcjczyPage/Handler/Data.ashx?type=downloadCorpRegStaff&qyid=<%=qyID %>',
+                async: false,
+                data: null,
+                success: function (result) {
+                    alert(result);
+                    //$('#btn_search').click();
+                    manager.loadData();
+                }
+            });
+        }
 
         function openLdpsWindow() {
             var url = "../Zlct/Gzzs_Gzzs_Edit.aspx?operate=add";

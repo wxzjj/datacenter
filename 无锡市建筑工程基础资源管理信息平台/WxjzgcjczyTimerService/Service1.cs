@@ -146,7 +146,7 @@ namespace WxjzgcjczyTimerService
                         try
                         {
                             //获取省外企业信息
-                            YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
+                             YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
                             //获取省外企业人员信息
                             YourTask_PullDataFromSxxzx_Swryxx(row_DataJkLog["ID"].ToString2());
 
@@ -159,11 +159,13 @@ namespace WxjzgcjczyTimerService
 
                             //获取省内市外企业信息
                             
+                            
                             DataTable dtCityCodes= dataService.Get_tbXzqdmDic_AllCityExceptWuxi();
                             foreach (DataRow cityCode in dtCityCodes.Rows)
                             {
                                 YourTask_PullDataFromSxxzx_Jiangsu_qyxx(row_DataJkLog["ID"].ToString2(), cityCode["Code"].ToString2());
                             }
+                             
 
                             //获取省内注册执业人员信息
                             YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
@@ -894,9 +896,7 @@ namespace WxjzgcjczyTimerService
                 #endregion
 
                 DateTime endTime = DateTime.Now;
-                TimeSpan span1 = new TimeSpan(beginTime.Hour, beginTime.Minute, beginTime.Second);
-                TimeSpan span2 = new TimeSpan(endTime.Hour, endTime.Minute, endTime.Second);
-                TimeSpan span = span2 - span1;
+                TimeSpan span = compareDateTime(beginTime, endTime);
                 Public.WriteLog(string.Format("结束YourTask_PullDataFromSythpt任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
             }
             catch (Exception ex)
@@ -1175,9 +1175,7 @@ namespace WxjzgcjczyTimerService
                     #endregion
 
                     DateTime endTime = DateTime.Now;
-                    TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                    TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                    TimeSpan span = span2 - span1;
+                    TimeSpan span = compareDateTime(beginTime, endTime);
                     Public.WriteLog(string.Format("结束YourTask_PullDataFromStTBProjectCensorInfo任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
                 }
@@ -1203,6 +1201,14 @@ namespace WxjzgcjczyTimerService
 
                 }
             }
+        }
+
+        private static TimeSpan compareDateTime(DateTime beginTime, DateTime endTime)
+        {
+            TimeSpan span1 = new TimeSpan(beginTime.Hour, beginTime.Minute, beginTime.Second);
+            TimeSpan span2 = new TimeSpan(endTime.Hour, endTime.Minute, endTime.Second);
+            TimeSpan span = span2 - span1;
+            return span;
         }
 
         /// <summary>
@@ -1267,9 +1273,7 @@ namespace WxjzgcjczyTimerService
                         dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
 
                     DateTime endTime = DateTime.Now;
-                    TimeSpan span1 = new TimeSpan(beginTime.Hour, beginTime.Minute, beginTime.Second);
-                    TimeSpan span2 = new TimeSpan(endTime.Hour, endTime.Minute, endTime.Second);
-                    TimeSpan span = span2 - span1;
+                    TimeSpan span = compareDateTime(beginTime, endTime);
                     Public.WriteLog(string.Format("结束YourTask_PullDataFromSSgxk任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
                 }
                 catch (Exception ex)
@@ -3008,9 +3012,7 @@ namespace WxjzgcjczyTimerService
                 #endregion
 
                 DateTime endTime = DateTime.Now;
-                TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                TimeSpan span = span2 - span1;
+                TimeSpan span = compareDateTime(beginTime, endTime);
                 Public.WriteLog(string.Format("结束YourTask_PullDataFromWxkcsj_qyry任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
@@ -5558,9 +5560,7 @@ namespace WxjzgcjczyTimerService
                 #endregion
 
                 DateTime endTime = DateTime.Now;
-                TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                TimeSpan span = span2 - span1;
+                TimeSpan span = compareDateTime(beginTime, endTime);
                 Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Swqyxx方法:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
@@ -6105,9 +6105,7 @@ namespace WxjzgcjczyTimerService
                 }
 
                 DateTime endTime = DateTime.Now;
-                TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                TimeSpan span = span2 - span1;
+                TimeSpan span = compareDateTime(beginTime, endTime);
                 Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Swryxx方法:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
             }
@@ -6286,9 +6284,7 @@ namespace WxjzgcjczyTimerService
 
 
                 DateTime endTime = DateTime.Now;
-                TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                TimeSpan span = span2 - span1;
+                TimeSpan span = compareDateTime(beginTime, endTime);
                 Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Jsdw任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
@@ -7077,9 +7073,7 @@ namespace WxjzgcjczyTimerService
                     dataService.Submit_SaveDataLog(dt_SaveDataLog);
 
                 DateTime endTime = DateTime.Now;
-                TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                TimeSpan span = span2 - span1;
+                TimeSpan span = compareDateTime(beginTime, endTime);
                 Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_qyxx任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
@@ -8031,9 +8025,7 @@ namespace WxjzgcjczyTimerService
                     dataService.Submit_SaveDataLog(dt_SaveDataLog);
 
                 DateTime endTime = DateTime.Now;
-                TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                TimeSpan span = span2 - span1;
+                TimeSpan span = compareDateTime(beginTime, endTime);
                 Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_qyxx任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
@@ -8074,6 +8066,7 @@ namespace WxjzgcjczyTimerService
 
                 DataService dataService = new DataService();
                 DataTable dt_xzqhdm = dataService.Get_tbXzqdmDic();
+                //DataTable dt_xzqhdm = dataService.Get_tbXzqdmDic_AllCountryExceptWuxi();
                 XmlHelper helper = new XmlHelper();
                 Base64EncodeHelper base64EncodeHelper = new Base64EncodeHelper();
 
@@ -8102,12 +8095,13 @@ namespace WxjzgcjczyTimerService
                         for (int retp = 0; retp < regType.Length; retp++)
                         {
                             string xzqdm = row_xzqdm["Code"].ToString2();
+                            string citeCode = row_xzqdm["parentCode"].ToString2();
                             byte[] bytes;
                             string result = String.Empty;
                             int index = -1;
 
                             #region 获取注册执业人员信息
-                            Public.WriteLog("获取" + tag + "注册执业人员信息：" + regType[retp] + ",xzqdm:" + xzqdm);
+                           
 
                             //默认每次获取7天前到今天这段时间段更新的人员数据，如需要全量更新，请将App.config中的ZczyrybeginDate更改为其他值即可
                             string grobleStartDate = ConfigurationManager.AppSettings["ZczyrybeginDate"].ToString();
@@ -8115,7 +8109,8 @@ namespace WxjzgcjczyTimerService
                                 grobleStartDate = DateTime.Now.AddDays(-14).ToString("yyyy-MM-dd");
                             }
 
-                            bytes = newdataService.getPersonRegCert_Inc(userID, "320200", xzqdm, regType[retp], grobleStartDate, DateTime.Now.ToString("yyyy-MM-dd"), "0");
+                            //Public.WriteLog("获取" + tag + "注册执业人员信息：" + regType[retp] + ",xzqdm:" + xzqdm + " from " + grobleStartDate + " to " + DateTime.Now.ToString("yyyy-MM-dd"));
+                            bytes = newdataService.getPersonRegCert_Inc(userID, citeCode, xzqdm, regType[retp], grobleStartDate, DateTime.Now.ToString("yyyy-MM-dd"), "0");
                             result = System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
                             #endregion
 
@@ -8150,7 +8145,8 @@ namespace WxjzgcjczyTimerService
                                 #region 人员（基本信息+执业资格信息+证书+企业与人员及其执业资格对应关系）
                                 if (personRegCertBody != null)
                                 {
-                                    Public.WriteLog("获取注册执业人员数目：" + personRegCertBody.array.Count);
+                                    Public.WriteLog("获取" + tag + "注册执业人员信息：" + regType[retp] + ",xzqdm:" + xzqdm + " from " + grobleStartDate + " to " + DateTime.Now.ToString("yyyy-MM-dd") + ",num:" + personRegCertBody.array.Count);
+                                    //Public.WriteLog("获取注册执业人员数目：" + personRegCertBody.array.Count);
                                     foreach (PersonRegCert personRegCert in personRegCertBody.array)
                                     {
                                         string ryzyzglxID = String.Empty;
@@ -8175,6 +8171,7 @@ namespace WxjzgcjczyTimerService
                                         {
                                             #region 人员基本信息
                                             DataTable dt_ryxx = dataService.Get_UEPP_Ryjbxx(personRegCert.IDCardNo);
+                                            bool needUpdateBasicInfo = true;
                                             if (dt_ryxx.Rows.Count == 0)
                                             {
                                                 row = dt_ryxx.NewRow();
@@ -8182,70 +8179,75 @@ namespace WxjzgcjczyTimerService
                                                 row["ryID"] = personRegCert.IDCardNo;
                                             }
                                             else
-                                            {
+                                            { 
                                                 row = dt_ryxx.Rows[0];
                                                 if (!string.IsNullOrEmpty(row["xgrqsj"].ToString2()) && !string.IsNullOrEmpty(personRegCert.UpdateDate))
                                                     if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(personRegCert.UpdateDate).ToString("yyyy-MM-dd"))
                                                     {
-                                                        continue;
+                                                        //continue;
+                                                        needUpdateBasicInfo = false;
                                                     }
                                             }
-                                            row["tag"] = tag;
-                                            row["xm"] = personRegCert.PersonName;
-                                            switch (personRegCert.IDCardType)
+                                            if (needUpdateBasicInfo)
                                             {
-                                                case "身份证":
-                                                    row["zjlxID"] = "1";
-                                                    break;
-                                                case "护照":
-                                                    row["zjlxID"] = "3";
-                                                    break;
-                                                case "军官证":
-                                                    row["zjlxID"] = "2";
-                                                    break;
-                                                case "台湾居民身份证":
-                                                    row["zjlxID"] = "4";
-                                                    break;
-                                                case "香港永久性居民身份证":
-                                                    row["zjlxID"] = "5";
-                                                    break;
-                                                case "警官证":
-                                                    row["zjlxID"] = "6";
-                                                    break;
-                                                case "其他":
-                                                    row["zjlxID"] = "9";
-                                                    break;
-                                            }
+                                                row["tag"] = tag;
+                                                row["xm"] = personRegCert.PersonName;
+                                                switch (personRegCert.IDCardType)
+                                                {
+                                                    case "身份证":
+                                                        row["zjlxID"] = "1";
+                                                        break;
+                                                    case "护照":
+                                                        row["zjlxID"] = "3";
+                                                        break;
+                                                    case "军官证":
+                                                        row["zjlxID"] = "2";
+                                                        break;
+                                                    case "台湾居民身份证":
+                                                        row["zjlxID"] = "4";
+                                                        break;
+                                                    case "香港永久性居民身份证":
+                                                        row["zjlxID"] = "5";
+                                                        break;
+                                                    case "警官证":
+                                                        row["zjlxID"] = "6";
+                                                        break;
+                                                    case "其他":
+                                                        row["zjlxID"] = "9";
+                                                        break;
+                                                }
 
-                                            row["zjlx"] = personRegCert.IDCardType;
-                                            row["zjhm"] = personRegCert.IDCardNo;
+                                                row["zjlx"] = personRegCert.IDCardType;
+                                                row["zjhm"] = personRegCert.IDCardNo;
 
-                                            if (string.IsNullOrEmpty(personRegCert.UpdateDate))
-                                                personRegCert.UpdateDate = DateTime.Now.ToString("yyyy-MM-dd");
-                                            row["xgrqsj"] = personRegCert.UpdateDate;
-                                            row["xgr"] = "定时服务";
-                                            row["DataState"] = 0;
-                                            row["sfzsmj"] = base64EncodeHelper.Base64DecodeToBytes(personRegCert.PhotoBase64);
-                                            row["AJ_EXISTINIDCARDS"] = "2";
-                                            row["AJ_IsRefuse"] = "0";
-                                            row["UpdateTime"] = DateTime.Now;
-                                            allCount_ryxx++;
-                                            if (!dataService.Submit_uepp_ryjbxx(dt_ryxx))
-                                            {
-                                                //Public.WriteLog("建设单位人员信息保存失败，ryID：" + personBasicInfo.IDCardNo);
-                                                row_SaveDataLog["SaveState"] = 0;
-                                                row_SaveDataLog["Msg"] = "建设单位人员信息保存失败，ryID：" + personRegCert.IDCardNo;
-                                            }
-                                            else
-                                            {
-                                                success_count_ryxx++;
+                                                if (string.IsNullOrEmpty(personRegCert.UpdateDate))
+                                                    personRegCert.UpdateDate = DateTime.Now.ToString("yyyy-MM-dd");
+                                                row["xgrqsj"] = personRegCert.UpdateDate;
+                                                row["xgr"] = "定时服务";
+                                                row["DataState"] = 0;
+                                                row["sfzsmj"] = base64EncodeHelper.Base64DecodeToBytes(personRegCert.PhotoBase64);
+                                                row["AJ_EXISTINIDCARDS"] = "2";
+                                                row["AJ_IsRefuse"] = "0";
+                                                row["UpdateTime"] = DateTime.Now;
+                                                allCount_ryxx++;
+                                                if (!dataService.Submit_uepp_ryjbxx(dt_ryxx))
+                                                {
+                                                    //Public.WriteLog("建设单位人员信息保存失败，ryID：" + personBasicInfo.IDCardNo);
+                                                    row_SaveDataLog["SaveState"] = 0;
+                                                    row_SaveDataLog["Msg"] = "建设单位人员信息保存失败，ryID：" + personRegCert.IDCardNo;
+                                                }
+                                                else
+                                                {
+                                                    success_count_ryxx++;
 
-                                                row_SaveDataLog["SaveState"] = 1;
-                                                row_SaveDataLog["Msg"] = "";
-                                            }
+                                                    row_SaveDataLog["SaveState"] = 1;
+                                                    row_SaveDataLog["Msg"] = "";
+                                                }
                                             #endregion
 
-                                            dt_SaveDataLog.Rows.Add(row_SaveDataLog);
+                                                dt_SaveDataLog.Rows.Add(row_SaveDataLog);
+                                            }
+                                            
 
                                             #region 人员执业资格
 
@@ -8931,9 +8933,7 @@ namespace WxjzgcjczyTimerService
                         dataService.Submit_SaveDataLog(dt_SaveDataLog);
 
                     DateTime endTime = DateTime.Now;
-                    TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                    TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                    TimeSpan span = span2 - span1;
+                    TimeSpan span = compareDateTime(beginTime, endTime);
                     Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Ryxx_Zczyry任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
@@ -9007,7 +9007,7 @@ namespace WxjzgcjczyTimerService
                     {
                         string xzqdm = row_xzqdm["Code"].ToString2();
 
-                        Public.WriteLog("获取" + tag + "A类安全员：");
+                        //Public.WriteLog("获取" + tag + "A类安全员：");
                         #region A类安全人员
                         string rygwlx = "021A";
                         string ryzyzglxid = "4";
@@ -9335,7 +9335,7 @@ namespace WxjzgcjczyTimerService
                         }
                         #endregion
 
-                        Public.WriteLog("获取" + tag + "B类安全员：");
+                        //Public.WriteLog("获取" + tag + "B类安全员：");
                         #region B类安全人员
                         rygwlx = "021B";
                         ryzyzglxid = "5";
@@ -9659,7 +9659,7 @@ namespace WxjzgcjczyTimerService
                         }
                         #endregion
 
-                        Public.WriteLog("获取" + tag + "C类安全员：");
+                        //Public.WriteLog("获取" + tag + "C类安全员：");
                         #region C类安全人员
                         rygwlx = "021C";
                         ryzyzglxid = "6";
@@ -9995,9 +9995,7 @@ namespace WxjzgcjczyTimerService
 
 
                     DateTime endTime = DateTime.Now;
-                    TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                    TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                    TimeSpan span = span2 - span1;
+                    TimeSpan span = compareDateTime(beginTime, endTime);
                     Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Ryxx_Aqscgl任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
@@ -10062,7 +10060,7 @@ namespace WxjzgcjczyTimerService
                     {
                         string xzqdm = row_xzqdm["Code"].ToString2();
 
-                        Public.WriteLog("获取" + tag + "施工员：");
+                        //Public.WriteLog("获取" + tag + "施工员：");
                         #region 施工员
                         string rygwlx = "0201";
                         string ryzyzglxid = "7";
@@ -10376,7 +10374,7 @@ namespace WxjzgcjczyTimerService
                         }
 
                         #endregion
-                        Public.WriteLog("获取" + tag + "质量员：");
+                        //Public.WriteLog("获取" + tag + "质量员：");
                         #region 质量员
                         rygwlx = "0202";
                         ryzyzglxid = "8";
@@ -10692,7 +10690,7 @@ namespace WxjzgcjczyTimerService
                         }
 
                         #endregion
-                        Public.WriteLog("获取" + tag + "机械员：");
+                        //Public.WriteLog("获取" + tag + "机械员：");
                         #region 机械员
                         rygwlx = "0204";
                         ryzyzglxid = "11";
@@ -11326,7 +11324,7 @@ namespace WxjzgcjczyTimerService
                         }
 
                         #endregion
-                        Public.WriteLog("获取" + tag + "材料员：");
+                        //Public.WriteLog("获取" + tag + "材料员：");
                         #region 材料员
                         rygwlx = "0206";
                         ryzyzglxid = "9";
@@ -11640,7 +11638,7 @@ namespace WxjzgcjczyTimerService
                         }
 
                         #endregion
-                        Public.WriteLog("获取" + tag + "造价员：");
+                        //Public.WriteLog("获取" + tag + "造价员：");
                         #region 造价员
                         rygwlx = "0207";
                         ryzyzglxid = "42";
@@ -11963,7 +11961,7 @@ namespace WxjzgcjczyTimerService
                         }
 
                         #endregion
-                        Public.WriteLog("获取" + tag + "劳务员：");
+                        //Public.WriteLog("获取" + tag + "劳务员：");
                         #region 劳务员
                         rygwlx = "0208";
                         ryzyzglxid = "91";
@@ -12279,7 +12277,7 @@ namespace WxjzgcjczyTimerService
                             }
                         }
                         #endregion
-                        Public.WriteLog("获取" + tag + "测量员：");
+                        //Public.WriteLog("获取" + tag + "测量员：");
                         #region 测量员
                         rygwlx = "0209";
                         ryzyzglxid = "92";
@@ -12596,7 +12594,7 @@ namespace WxjzgcjczyTimerService
 
 
                         #endregion
-                        Public.WriteLog("获取" + tag + "试验员：");
+                        //Public.WriteLog("获取" + tag + "试验员：");
                         #region 试验员
                         rygwlx = "0210";
                         ryzyzglxid = "14";
@@ -12910,7 +12908,7 @@ namespace WxjzgcjczyTimerService
 
 
                         #endregion
-                        Public.WriteLog("获取" + tag + "标准员：");
+                        //Public.WriteLog("获取" + tag + "标准员：");
                         #region 标准员
                         rygwlx = "0211";
                         ryzyzglxid = "93";
@@ -13225,7 +13223,7 @@ namespace WxjzgcjczyTimerService
 
                         #endregion
 
-                        Public.WriteLog("获取" + tag + "技术工人：");
+                        //Public.WriteLog("获取" + tag + "技术工人：");
                         #region 技术工人
                         DataTable dt_jsgrlb = dataService.GetTable("select * from UEPP_Code where CodeType='人员资质类别' and ParentCodeType='人员执业资格类型' and ParentCode=18 order by OrderID", null);
 
@@ -13239,7 +13237,7 @@ namespace WxjzgcjczyTimerService
                             string zyzglxid = row_zyzglb["Code"].ToString2();
                             string zyzglx = row_zyzglb["CodeInfo"].ToString2();
 
-                            Public.WriteLog("获取" + tag + "技术工人-" + zyzglx + "：");
+                           // Public.WriteLog("获取" + tag + "技术工人-" + zyzglx + "：");
 
                             try
                             {
@@ -13565,7 +13563,7 @@ namespace WxjzgcjczyTimerService
 
                         #endregion
 
-                        Public.WriteLog("获取" + tag + "特种作业人员：");
+                        //Public.WriteLog("获取" + tag + "特种作业人员：");
                         #region 特种作业人员
                         DataTable dt_tzzyry = dataService.GetTable("select * from UEPP_Code where CodeType='人员资质类别' and ParentCodeType='人员执业资格类型' and ParentCode=17 order by OrderID", null);
 
@@ -13578,7 +13576,7 @@ namespace WxjzgcjczyTimerService
                             string zyzglxid = row_zyzglb["Code"].ToString2();
                             string zyzglx = row_zyzglb["CodeInfo"].ToString2();
 
-                            Public.WriteLog("获取" + tag + "技术工人-" + zyzglx + "：");
+                            //Public.WriteLog("获取" + tag + "技术工人-" + zyzglx + "：");
 
                             try
                             {
@@ -13918,9 +13916,7 @@ namespace WxjzgcjczyTimerService
 
 
                     DateTime endTime = DateTime.Now;
-                    TimeSpan span1 = new TimeSpan(beginTime.Year, beginTime.Month, beginTime.Second);
-                    TimeSpan span2 = new TimeSpan(endTime.Year, endTime.Month, endTime.Second);
-                    TimeSpan span = span2 - span1;
+                    TimeSpan span = compareDateTime(beginTime, endTime);
                     Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Ryxx_Zygwgl任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
                     dataService.ExecuteSql("exec proc_DealZyrySameData");//2017-1-9新增；处理执业人员重复数据

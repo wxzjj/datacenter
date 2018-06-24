@@ -135,6 +135,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                     case "downloadByUuid":
                         json = downloadByUuid(context);
                         break;
+                    //下载企业注册人员数据
+                    case "downloadCorpRegStaff":
+                        json = downloadCorpRegStaff(context);
+                        break;
                 }
             }
             catch (Exception ex)
@@ -711,6 +715,29 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                 {
                     msg = BLL.PullZJSBDataFromSythptByUUID(uuid);
                 }
+                result.message = msg;
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        public string downloadCorpRegStaff(HttpContext context)
+        {
+            DataExchangeBLLForJSCEDC BLL = new DataExchangeBLLForJSCEDC();
+
+            string qyID = context.Request.Params["qyID"]; 
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                string msg = null;
+                msg = BLL.PullDataCorpRegStaff(qyID);
                 result.message = msg;
 
             }
