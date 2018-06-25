@@ -139,6 +139,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                     case "downloadCorpRegStaff":
                         json = downloadCorpRegStaff(context);
                         break;
+                    //下载企业资质信息
+                    case "downloadCorpCert":
+                        json = downloadCorpCert(context);
+                        break;
                 }
             }
             catch (Exception ex)
@@ -738,6 +742,29 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             {
                 string msg = null;
                 msg = BLL.PullDataCorpRegStaff(qyID);
+                result.message = msg;
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        public string downloadCorpCert(HttpContext context)
+        {
+            DataExchangeBLLForJSCEDC BLL = new DataExchangeBLLForJSCEDC();
+
+            string qyID = context.Request.Params["qyID"];
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                string msg = null;
+                msg = BLL.PullDataCorpCert(qyID);
                 result.message = msg;
 
             }

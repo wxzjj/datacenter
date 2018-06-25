@@ -1595,6 +1595,7 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
             sp.Add("@zzjgdm", zzjgdm);
             return DB.ExeSqlForDataTable(sql, sp, "uepp_qyjbxx");
         }
+
         #endregion
 
         /// <summary>
@@ -1754,6 +1755,110 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         }
 
         #endregion
+
+
+        #region 企业资质信息
+        /// <summary>
+        /// 根据企业十位组织机构代码获取对应的社会信用代码
+        /// </summary>
+        /// <param name="qyZzjgdm"></param>
+        /// <returns></returns>
+        public string Get_UEPP_Qyjbxx_Shxydm(string qyZzjgdm)
+        {
+            string sql = @" select top 1 qyID from UEPP_Qyjbxx where len(qyID)=18 and substring(qyID,9,8)+'-'+substring(qyID,17,1)=@qyZzjgdm  ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@qyZzjgdm", qyZzjgdm);
+            return this.DB.ExeSqlForString(sql, sp);
+        }
+
+
+
+        public SqlParameterCollection CreateSqlParameterCollection()
+        {
+            return this.DB.CreateSqlParameterCollection();
+        }
+
+        public string ExecuteSql(string sql, SqlParameterCollection sp)
+        {
+            return this.DB.ExeSqlForString(sql, sp);
+        }
+
+        /// <summary>
+        /// 提交企业信息修改到数据库
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public bool Submit_uepp_qyjbxx(DataTable dt)
+        {
+            string sql = @"select * from UEPP_Qyjbxx  where 1=2 ";
+            return this.DB.Update(sql, null, dt);
+        }
+
+        public bool Submit_uepp_qycsyw(DataTable dt)
+        {
+            string sql = @"select * from uepp_qycsyw  where 1=2 ";
+            return this.DB.Update(sql, null, dt);
+        }
+
+        /// <summary>
+        /// 企业资质明细
+        /// </summary>
+        /// <param name="jsdwID"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_zzmxxx_qyxx_nostatus(string qyID, string csywlxid)
+        {
+            string sql = @"select * from  UEPP_Qyzzmx  where qyID=@qyID and csywlxid=@csywlxid ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@qyID", qyID);
+            sp.Add("@csywlxid", csywlxid);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+        public string Get_uepp_qyxxmx_NewID()
+        {
+            string sql = @" select ISNULL(MAX(CONVERT(int ,ID)),0)+1 from  UEPP_Qyzzmx ";
+            return DB.ExeSqlForString(sql, null);
+        }
+
+        public bool Submit_uepp_qyzzmx(DataTable dt)
+        {
+            string sql = @"select * from UEPP_Qyzzmx  where 1=2 ";
+            return this.DB.Update(sql, null, dt);
+        }
+
+        public DataTable Get_uepp_Qycsyw_sjsgyth(string qyID, string csywlxid)
+        {
+            string sql = @" select * from UEPP_Qycsyw where qyID=@qyID and csywlxid =@csywlxid ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@qyID", qyID);
+            sp.Add("@csywlxid", csywlxid);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
+        /// 企业资质证书新纪录ID
+        /// </summary>
+        /// <returns></returns>
+        public string Get_uepp_qyQyzs_NewID()
+        {
+            string sql = @" select ISNULL(MAX(CONVERT(int ,zsjlId)),0)+1 from  UEPP_Qyzs ";
+            return DB.ExeSqlForString(sql, null);
+        }
+
+        public bool Submit_uepp_qyzzzs(DataTable dt)
+        {
+            string sql = @"select * from UEPP_Qyzs  where 1=2 ";
+            return this.DB.Update(sql, null, dt);
+        }
+
+        public DataTable Get_uepp_zzzsxx_qyxx(string qyID)
+        {
+            string sql = @" select * from  UEPP_Qyzs where   DataState=0 and qyID=@qyID ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@qyID", qyID);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+        #endregion
+
 
     }
 }

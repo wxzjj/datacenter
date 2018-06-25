@@ -32,5 +32,16 @@ namespace Wxjzgcjczy.BLL.Properties {
                 return ((string)(this["MunSupervisionProject_BLL_WebReference_WebServiceSendMSG"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://58.213.147.243:8080/jscedc/services/NewDataService.NewDataServiceHttpSoap1" +
+            "1Endpoint/")]
+        public string Wxjzgcjczy_BLL_NewDataService_NewDataService {
+            get {
+                return ((string)(this["Wxjzgcjczy_BLL_NewDataService_NewDataService"]));
+            }
+        }
     }
 }

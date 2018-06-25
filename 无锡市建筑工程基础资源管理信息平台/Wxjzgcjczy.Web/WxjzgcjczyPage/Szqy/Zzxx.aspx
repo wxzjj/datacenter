@@ -49,6 +49,15 @@
         <div id="maingrid" style="background-color: White;">
         </div>
     </div>
+       <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table-bk">
+        <tr>
+            <td colspan="6" class="td-value" style="text-align: center">
+
+                <button type="button" id ="PullDataBtn" onclick='PullDataCorpCert()' style="width: 100px; height: 30px;" class="button button2 buttonnoicon">同步</button>
+                <!--<input type="button" value="手动同步" onclick="openLdpsWindow()" class="button" style="width: 100px; height: 30px;" />-->
+            </td>
+        </tr>
+    </table>
   <%--  <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>
@@ -96,9 +105,9 @@
                 });
             });
         }
-
+        var manager;
         $(function () {
-            var manager;
+            
             manager = $("#maingrid").ligerGrid({
                 columns: [
                 { display: '序号', name: 'rowno', align: 'center', type: "text", width: "5%" },
@@ -129,7 +138,19 @@
             });
         })
 
-
+        function PullDataCorpCert() {
+            $.ajax({
+                type: 'POST',
+                url: '/WxjzgcjczyPage/Handler/Data.ashx?type=downloadCorpCert&qyid=<%=qyID %>',
+                async: false,
+                data: null,
+                success: function (result) {
+                    alert(result);
+                    //$('#btn_search').click();
+                    manager.loadData();
+                }
+            });
+        }
 
         function openLdpsWindow() {
             var url = "../Zlct/Gzzs_Gzzs_Edit.aspx?operate=add";

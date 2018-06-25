@@ -5,5 +5,8 @@
     <Setting Name="MunSupervisionProject_BLL_WebReference_WebServiceSendMSG" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://221.224.147.148/ZJGSMGService/WebServiceSendMSG.asmx</Value>
     </Setting>
+    <Setting Name="Wxjzgcjczy_BLL_NewDataService_NewDataService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://58.213.147.243:8080/jscedc/services/NewDataService.NewDataServiceHttpSoap11Endpoint/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
