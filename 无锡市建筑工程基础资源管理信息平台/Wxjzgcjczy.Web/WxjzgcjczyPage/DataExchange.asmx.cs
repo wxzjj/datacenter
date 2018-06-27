@@ -6135,6 +6135,365 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
         #endregion
 
+        #region 各区读取数据接口
+        /// <summary>
+        /// 功能： 从无锡数据中心读取数据
+        /// 作者：孙刚
+        /// 时间：2015-03-31
+        /// </summary>
+        /// <param name="tableName">表名称</param>
+        /// <param name="user">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="beginDate">开始日期</param>
+        /// <param name="endDate">结束日期</param>
+        /// <param name="password"></param>
+        /// <returns>返回查询到的XML格式数据的字符串表示</returns>
+        [WebMethod]
+        public string ReadTBDataForCounty(string tableName, string user, string password, string beginDate, string endDate)
+        {
+            string xmlData = String.Empty;
+            DataExchangeBLLForCounty BLL = new DataExchangeBLLForCounty();
+
+            string apiMessage = string.Empty; 
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return xmlData;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return xmlData;
+                }
+
+                List<IDataItem> list = new List<IDataItem>();
+                IDataItem item;
+
+                if (string.IsNullOrEmpty(tableName))
+                {
+                    return xmlData;
+                }
+                DataTable dt;
+
+                if (!string.IsNullOrEmpty(beginDate))
+                {
+                    DateTime date;
+                    if (DateTime.TryParse(beginDate, out date))
+                    {
+                        item = new DataItem();
+                        item.ItemName = "CREATEDATE";
+                        item.ItemRelation = Bigdesk8.Data.DataRelation.GreaterThanOrEqual;
+                        item.ItemType = DataType.String;
+                        item.ItemData = date.ToString("yyyy-MM-dd");
+                        list.Add(item);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(endDate))
+                {
+                    DateTime date;
+                    if (DateTime.TryParse(endDate, out date))
+                    {
+                        item = new DataItem();
+                        item.ItemName = "CREATEDATE";
+                        item.ItemData = date.ToString("yyyy-MM-dd");
+                        item.ItemType = DataType.String;
+                        item.ItemRelation = Bigdesk8.Data.DataRelation.LessThanOrEqual;
+                        list.Add(item);
+                    }
+                }
+                //从接口用户中提取区划编码
+                string countyNum = null;
+                if (user.Length > 6)
+                {
+                    countyNum = user.Substring(0,6);
+                }
+                else
+                {
+                    countyNum = user;
+                }
+
+
+                switch (tableName.ToLower())
+                {
+                    case "tbprojectinfo"://TBProjectInfo
+
+                        if (dt_user.Rows[0]["Has_TBProjectInfo"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "CountyNum";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+
+                        dt = BLL.GetTBData_TBProjectInfo(list);
+
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+
+                    case "xm_gcdjb_dtxm":
+
+                        if (dt_user.Rows[0]["Has_xm_gcdjb_dtxm"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+
+
+                        dt = BLL.GetTBData_xm_gcdjb_dtxm(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+
+                    case "tbtenderinfo"://TBTenderInfo
+
+                        if (dt_user.Rows[0]["Has_TBTenderInfo"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "CountyNum";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = countyNum;
+                            list.Add(item);
+                        }
+
+
+                        dt = BLL.GetTBData_TBTenderInfo(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "tbcontractrecordmanage": //TBContractRecordManage
+
+                        if (dt_user.Rows[0]["Has_TBContractRecordManage"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+                        dt = BLL.GetTBData_TBContractRecordManage(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "tbprojectcensorinfo"://TBProjectCensorInfo
+
+                        if (dt_user.Rows[0]["Has_TBProjectCensorInfo"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+
+                        dt = BLL.GetTBData_TBProjectCensorInfo(list);
+                        //xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        StringBuilder str = new StringBuilder();
+                        str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
+
+                        DataTable tempDt;
+                        string mainXml = string.Empty;
+
+                        foreach (DataRow dataRow in dt.Rows)
+                        {
+                            str.AppendFormat("<{0}>", "data");
+                             
+                            str.AppendFormat("<{0}>", "TBProjectCensorInfo");
+                            mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                            str.Append(mainXml);
+                            str.AppendFormat("</{0}>", "TBProjectCensorInfo");
+
+                            tempDt = BLL.GetTBData_TBProjectDesignEconUserInfo(dataRow["CensorNum"].ToString()); 
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "TBProjectDesignEconUserInfoList", "TBProjectDesignEconUserInfo"));
+                            str.AppendFormat("</{0}>", "data");
+                        }
+
+                        xmlData = str.ToString();
+
+                        break;
+                    case "tbbuilderlicencemanage"://TBBuilderLicenceManage
+
+                        if (dt_user.Rows[0]["Has_TBBuilderLicenceManage"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+
+                        dt = BLL.GetTBData_TBBuilderLicenceManage(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "tbprojectBuilderuserinfo"://TBProjectBuilderUserInfo
+
+                        if (dt_user.Rows[0]["Has_TBProjectBuilderUserInfo"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+
+                        dt = BLL.GetTBData_TBProjectBuilderUserInfo(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "tbprojectfinishmanage"://TBProjectFinishManage
+
+                        if (dt_user.Rows[0]["Has_TBProjectFinishManage"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+
+                        dt = BLL.GetTBData_TBProjectFinishManage(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "aj_gcjbxx":
+
+                        if (dt_user.Rows[0]["Has_aj_gcjbxx"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+
+                        dt = BLL.GetTBData_aj_gcjbxx(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "zj_gcjbxx":
+                        if (dt_user.Rows[0]["Has_zj_gcjbxx"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
+                        }
+
+                        dt = BLL.GetTBData_zj_gcjbxx(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "zj_gcjbxx_zrdw":
+
+                        if (dt_user.Rows[0]["Has_zj_gcjbxx"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        dt = BLL.GetTBData_zj_gcjbxx_zrdw(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "aj_zj_sgxk_relation":
+                        if (dt_user.Rows[0]["Has_aj_zj_sgxk_relation"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+                        dt = BLL.GetTBData_zj_gcjbxx_zrdw(list);
+                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    default:
+
+                        break;
+                }
+
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "ReadTBDataFromZx";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return xmlData;
+
+        }
+
+        #endregion
 
         [WebMethod]
         public string DecodeString(string xmlData)
