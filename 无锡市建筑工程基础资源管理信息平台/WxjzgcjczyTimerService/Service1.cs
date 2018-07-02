@@ -1002,8 +1002,8 @@ namespace WxjzgcjczyTimerService
                                     DataTable dt_TBProjectCensorInfo = dataService.GetTBData_TBProjectCensorInfoByPkId(item["PKID"].ToString());
                                     if (dt_TBProjectCensorInfo.Rows.Count == 0)
                                     {
-
                                         dt_TBProjectCensorInfo.Rows.Add(dt_TBProjectCensorInfo.NewRow());
+                                        dt_TBProjectCensorInfo.Rows[0]["cjrqsj"] = DateTime.Now;
                                     }
 
                                     DataTableHelp.DataRow2DataRow(item, dt_TBProjectCensorInfo.Rows[0]);
@@ -1045,6 +1045,9 @@ namespace WxjzgcjczyTimerService
                                             }
                                         }
                                     }
+
+                                    dt_TBProjectCensorInfo.Rows[0]["xgrqsj"] = DateTime.Now;
+
 
                                     try
                                     {
