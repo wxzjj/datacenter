@@ -767,6 +767,15 @@ where 1=1 ";
             string sql = "select * from TBProjectAdditionalInfo where prjnum  ='" + prjNum + "' ";
             return DB.ExeSqlForDataTable(sql, null, "dt");
         }
+
+        public DataTable GetTBProjectInfo_PrjApprovalNum(string prjNum)
+        {
+            string sql = @"select (lxwh_type+fb_year+num) FROM DG_Programme_Info where PrjNum=@prjNum		  ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@prjNum", prjNum);
+            return this.DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         /// <summary>
         /// 根据企业组织机构代码、年份、季度、考评类型获取考评
         /// </summary>

@@ -779,6 +779,19 @@ namespace Wxjzgcjczy.BLL
                 row["updateUser"] = user;
                 row["xgrqsj"] = DateTime.Now;
 
+                //如果立项文号为空，则重新补充立项文号：(lxwh_type+fb_year+num) FROM [WJSJZX].[dbo].[DG_Programme_Info]
+                if (string.IsNullOrEmpty(row["PrjApprovalNum"].ToString()))
+                {
+                    BLLCommon.WriteLog(row["PrjNum"].ToString() + " 立项文号为空:");
+                    DataTable dtPrjApprovalNum = DAL.GetTBProjectInfo_PrjApprovalNum(row["PrjNum"].ToString2());
+                    if (dtPrjApprovalNum != null && dtPrjApprovalNum.Rows.Count > 0)
+                    {
+                        row["PrjApprovalNum"] = dtPrjApprovalNum.Rows[0][0].ToString();
+                        BLLCommon.WriteLog("重新获取立项文号:" + row["PrjApprovalNum"].ToString());
+                    }
+                    
+                }
+
             }
             if (dt_TBProjectInfo.Rows.Count > 0)
             {
