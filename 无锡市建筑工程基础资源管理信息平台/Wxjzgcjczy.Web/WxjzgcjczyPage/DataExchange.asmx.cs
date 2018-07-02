@@ -6295,10 +6295,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         if (dt_user.Rows[0]["Flag"].ToString2() == "1")
                         {
                             item = new DataItem();
-                            item.ItemName = "sbdqbm";
+                            item.ItemName = "CountyNum";
                             item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
                             item.ItemType = DataType.String;
-                            item.ItemData = user;
+                            item.ItemData = countyNum;
                             list.Add(item);
                         }
                         dt = BLL.GetTBData_TBContractRecordManage(list);

@@ -176,11 +176,36 @@ WHERE 1 = 1";
         {
 
 
-            string sql = @"select * from (
-select PKID, RecordName, RecordNum, RecordInnerNum, PrjNum, ContractNum, ContractTypeNum, ContractMoney, PrjSize, ContractDate, PropietorCorpName, PropietorCorpCode, ContractorCorpName, ContractorCorpCode, UnionCorpName, UnionCorpCode,SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CreateDate, UpdateFlag, PrjHead, PrjHeadPhone, IDCard, sbdqbm
-from TBContractRecordManage
-) aaa where 1=1 ";
-
+//            string sql = @"select * from (
+//select PKID, RecordName, RecordNum, RecordInnerNum, PrjNum, ContractNum, ContractTypeNum, ContractMoney, PrjSize, ContractDate, PropietorCorpName, PropietorCorpCode, ContractorCorpName, ContractorCorpCode, UnionCorpName, UnionCorpCode,SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CreateDate, UpdateFlag, PrjHead, PrjHeadPhone, IDCard, sbdqbm
+//from TBContractRecordManage
+//) aaa where 1=1 ";
+            string sql = @" SELECT * FROM( SELECT a.PKID
+	,a.RecordName
+	,a.RecordNum
+	,a.RecordInnerNum
+	,a.PrjNum
+	,a.ContractNum
+	,a.ContractTypeNum
+	,a.ContractMoney
+	,a.PrjSize
+	,a.ContractDate
+	,a.PropietorCorpName
+	,a.PropietorCorpCode
+	,a.ContractorCorpName
+	,a.ContractorCorpCode
+	,a.UnionCorpName
+	,a.UnionCorpCode
+	,SUBSTRING(convert(VARCHAR(30), a.CREATEDATE, 120), 1, 10) CreateDate
+	,a.UpdateFlag
+	,a.PrjHead
+	,a.PrjHeadPhone
+	,a.IDCard
+	,a.sbdqbm
+    ,i.CountyNum
+FROM TBContractRecordManage a
+left join TBProjectInfo i on i.PrjNum = a.PrjNum ) aaa
+WHERE 1 = 1";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
             conditions.GetSearchClause(sp, ref sql);
