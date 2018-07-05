@@ -133,6 +133,18 @@ namespace Wxjzgcjczy.BLL
             return dt;
 
         }
+
+        /// <summary>
+        /// 读取无锡数据中心数据(TBBuilderLicenceManageCanJianDanW)
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetTBData_TBBuilderLicenceManageCanJianDanW(string builderLicenceNum)
+        {
+            DataTable dt = DAL.GetTBData_TBBuilderLicenceManageCanJianDanW(builderLicenceNum);
+            return dt;
+
+        }
+
         /// <summary>
         /// 读取无锡数据中心数据(TBProjectBuilderUserInfo)
         /// </summary>
@@ -180,6 +192,13 @@ namespace Wxjzgcjczy.BLL
         public DataTable GetTBData_zj_gcjbxx_zrdw(List<IDataItem> conditions)
         {
             DataTable dt = DAL.GetTBData_zj_gcjbxx_zrdw(conditions);
+            return dt;
+
+        }
+
+        public DataTable GetTBData_zj_gcjbxx_zrdw(string zljdbm)
+        {
+            DataTable dt = DAL.GetTBData_zj_gcjbxx_zrdw(zljdbm);
             return dt;
 
         }

@@ -6152,6 +6152,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         public string ReadTBDataForCounty(string tableName, string user, string password, string beginDate, string endDate)
         {
             string xmlData = String.Empty;
+       
             DataExchangeBLLForCounty BLL = new DataExchangeBLLForCounty();
 
             string apiMessage = string.Empty; 
@@ -6216,7 +6217,8 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     countyNum = user;
                 }
 
-
+                StringBuilder str = new StringBuilder();
+                string mainXml = string.Empty;
                 switch (tableName.ToLower())
                 {
                     case "tbprojectinfo"://TBProjectInfo
@@ -6314,20 +6316,20 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         if (dt_user.Rows[0]["Flag"].ToString2() == "1")
                         {
                             item = new DataItem();
-                            item.ItemName = "sbdqbm";
+                            item.ItemName = "CountyNum";
                             item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
                             item.ItemType = DataType.String;
-                            item.ItemData = user;
+                            item.ItemData = countyNum;
                             list.Add(item);
                         }
 
                         dt = BLL.GetTBData_TBProjectCensorInfo(list);
                         //xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
-                        StringBuilder str = new StringBuilder();
+                        
                         str.AppendLine("<?xml version=\"1.0\" encoding=\"gb2312\"?>");
 
                         DataTable tempDt;
-                        string mainXml = string.Empty;
+                        
 
                         foreach (DataRow dataRow in dt.Rows)
                         {
@@ -6356,15 +6358,33 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         if (dt_user.Rows[0]["Flag"].ToString2() == "1")
                         {
                             item = new DataItem();
-                            item.ItemName = "sbdqbm";
+                            item.ItemName = "CountyNum";
                             item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
                             item.ItemType = DataType.String;
-                            item.ItemData = user;
+                            item.ItemData = countyNum;
                             list.Add(item);
                         }
 
                         dt = BLL.GetTBData_TBBuilderLicenceManage(list);
-                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        //xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+
+                        str.AppendFormat("<{0}>", "result");
+                        foreach (DataRow dataRow in dt.Rows)
+                        {
+                            str.AppendFormat("<{0}>", "data");
+
+                            str.AppendFormat("<{0}>", "TBBuilderLicenceManage");
+                            mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                            str.Append(mainXml);
+                            str.AppendFormat("</{0}>", "TBBuilderLicenceManage");
+
+                            tempDt = BLL.GetTBData_TBBuilderLicenceManageCanJianDanW(dataRow["BuilderLicenceNum"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "TBBuilderLicenceManageCanJianDanWList", "TBBuilderLicenceManageCanJianDanW"));
+                            str.AppendFormat("</{0}>", "data");
+                        }
+                        str.AppendFormat("</{0}>", "result");
+
+                        xmlData = str.ToString();
                         break;
                     case "tbprojectBuilderuserinfo"://TBProjectBuilderUserInfo
 
@@ -6396,10 +6416,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         if (dt_user.Rows[0]["Flag"].ToString2() == "1")
                         {
                             item = new DataItem();
-                            item.ItemName = "sbdqbm";
+                            item.ItemName = "CountyNum";
                             item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
                             item.ItemType = DataType.String;
-                            item.ItemData = user;
+                            item.ItemData = countyNum;
                             list.Add(item);
                         }
 
@@ -6416,10 +6436,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         if (dt_user.Rows[0]["Flag"].ToString2() == "1")
                         {
                             item = new DataItem();
-                            item.ItemName = "sbdqbm";
+                            item.ItemName = "CountyNum";
                             item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
                             item.ItemType = DataType.String;
-                            item.ItemData = user;
+                            item.ItemData = countyNum;
                             list.Add(item);
                         }
 
@@ -6435,15 +6455,31 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         if (dt_user.Rows[0]["Flag"].ToString2() == "1")
                         {
                             item = new DataItem();
-                            item.ItemName = "sbdqbm";
+                            item.ItemName = "CountyNum";
                             item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
                             item.ItemType = DataType.String;
-                            item.ItemData = user;
+                            item.ItemData = countyNum;
                             list.Add(item);
                         }
 
                         dt = BLL.GetTBData_zj_gcjbxx(list);
-                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        //xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        str.AppendFormat("<{0}>", "result");
+                        foreach (DataRow dataRow in dt.Rows)
+                        {
+                            str.AppendFormat("<{0}>", "data");
+
+                            str.AppendFormat("<{0}>", "zj_gcjbxx");
+                            mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                            str.Append(mainXml);
+                            str.AppendFormat("</{0}>", "zj_gcjbxx");
+
+                            tempDt = BLL.GetTBData_zj_gcjbxx_zrdw(dataRow["zljdbm"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "zj_gcjbxx_zrdwList", "zj_gcjbxx_zrdw"));
+                            str.AppendFormat("</{0}>", "data");
+                        }
+                        str.AppendFormat("</{0}>", "result");
+                        xmlData = str.ToString();
                         break;
                     case "zj_gcjbxx_zrdw":
 

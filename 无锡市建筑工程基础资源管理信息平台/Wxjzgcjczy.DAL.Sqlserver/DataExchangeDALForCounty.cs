@@ -292,15 +292,59 @@ from TBProjectCensorInfo  a where 1=1  ";
 
         public DataTable GetTBData_TBBuilderLicenceManage(List<IDataItem> conditions)
         {
-            //string sql = "select * from TBBuilderLicenceManage ";
-            string sql = @"select * from (
-select PKID, BuilderLicenceName, BuilderLicenceNum, BuilderLicenceInnerNum, PrjNum, BuldPlanNum, ProjectPlanNum, CensorNum, ContractMoney, Area, PrjSize, IssueCertDate, EconCorpName, EconCorpCode, DesignCorpName, DesignCorpCode, ConsCorpName, SafetyCerID, SuperCorpName, SuperCorpCode, ConstructorName, CIDCardTypeNum, ConstructorIDCard, ConstructorPhone, SupervisionName, SIDCardTypeNum, SupervisionIDCard, SupervisionPhone, SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CreateDate, UpdateFlag, sbdqbm
-from dbo.TBBuilderLicenceManage
-) as aaa where 1=1 ";
-
+//            string sql = @"select * from (
+//select PKID, BuilderLicenceName, BuilderLicenceNum, BuilderLicenceInnerNum, PrjNum, BuldPlanNum, ProjectPlanNum, CensorNum, ContractMoney, Area, PrjSize, IssueCertDate, EconCorpName, EconCorpCode, DesignCorpName, DesignCorpCode, ConsCorpName, SafetyCerID, SuperCorpName, SuperCorpCode, ConstructorName, CIDCardTypeNum, ConstructorIDCard, ConstructorPhone, SupervisionName, SIDCardTypeNum, SupervisionIDCard, SupervisionPhone, SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CreateDate, UpdateFlag, sbdqbm
+//from dbo.TBBuilderLicenceManage
+//) as aaa where 1=1 ";
+            string sql = @"SELECT *
+FROM (
+	SELECT a.PKID
+		,a.BuilderLicenceName
+		,a.BuilderLicenceNum
+		,a.BuilderLicenceInnerNum
+		,a.PrjNum
+		,a.BuldPlanNum
+		,a.ProjectPlanNum
+		,a.CensorNum
+		,a.ContractMoney
+		,a.Area
+		,a.PrjSize
+		,a.IssueCertDate
+		,a.EconCorpName
+		,a.EconCorpCode
+		,a.DesignCorpName
+		,a.DesignCorpCode
+		,a.ConsCorpName
+		,a.SafetyCerID
+		,a.SuperCorpName
+		,a.SuperCorpCode
+		,a.ConstructorName
+		,a.CIDCardTypeNum
+		,a.ConstructorIDCard
+		,a.ConstructorPhone
+		,a.SupervisionName
+		,a.SIDCardTypeNum
+		,a.SupervisionIDCard
+		,a.SupervisionPhone
+		,SUBSTRING(convert(VARCHAR(30), a.CREATEDATE, 120), 1, 10) CreateDate
+		,a.UpdateFlag
+		,a.sbdqbm
+		,i.CountyNum
+	FROM dbo.TBBuilderLicenceManage a
+	LEFT JOIN TBProjectInfo i ON i.PrjNum = a.PrjNum
+	) AS aaa
+WHERE 1 = 1";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
             conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        public DataTable GetTBData_TBBuilderLicenceManageCanJianDanW(string builderLicenceNum)
+        {
+            string sql = @"select * from TBBuilderLicenceManageCanJianDanW  where BuilderLicenceNum=@builderLicenceNum ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@builderLicenceNum", builderLicenceNum);
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
@@ -337,10 +381,52 @@ from TBProjectFinishManage ) as aaa where 1=1 ";
         public DataTable GetTBData_aj_gcjbxx(List<IDataItem> conditions)
         {
             //string sql = "select * from aj_gcjbxx ";
-            string sql = @"select * from (
-select PKID, aqjdbm, gcmc, PrjNum, sgzbbm, aqjdjgmc, sdCode, gcgk_yszj, gcgk_jzmj, gcgk_jglx, gcgk_cc, bjrq, gcgk_kgrq, gcgk_jhjgrq, zbdw_dwdm, zbdw_dwmc, zbdw_aqxkzh, zbdw_zcjzs, zbdw_zcjzsdm, zbdw_zcjzs_lxdh, zbdw_aqy, zbdw_aqyzh, jldw_dwdm, jldw_dwmc, jldw_xmzj, jldw_zjdm, jldw_xmzj_lxdh, jldw_jlgcs, bz,SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CreateDate, UpdateFlag, sbdqbm
- from aj_gcjbxx
-) as aaa where 1=1 ";
+            string sql = @"SELECT *
+FROM (
+	SELECT a.[PKID]
+		,a.[aqjdbm]
+		,a.[gcmc]
+		,a.[xmbm]
+		,a.[sgzbbm]
+		,a.[aqjdjgmc]
+		,a.[sdcode]
+		,a.[gcgkYszj]
+		,a.[gcgkJzmj]
+		,a.[gcgkJglx]
+		,a.[gcgkCc]
+		,a.[gis_jd]
+		,a.[gis_wd]
+		,a.[bjrq]
+		,a.[gcgkKgrq]
+		,a.[gcgkJhjgrq]
+		,a.[zbdwDwdm]
+		,a.[zbdwDwmc]
+		,a.[zbdwAqxkzh]
+		,a.[zbdwZcjzs]
+		,a.[zbdwZcjzsdm]
+		,a.[zbdwZcjzslxdh]
+		,a.[zbdwAqy1]
+		,a.[zbdwAqyzh1]
+		,a.[zbdwAqy2]
+		,a.[zbdwAqyzh2]
+		,a.[zbdwAqy3]
+		,a.[zbdwAqyzh3]
+		,a.[jldwDwdm]
+		,a.[jldwDwmc]
+		,a.[jldwXmzj]
+		,a.[jldwZjdm]
+		,a.[jldwJlgcs1]
+		,a.[jldwJlgcs2]
+		,a.[jldwJlgcs3]
+		,a.[bz]
+		,a.[createDate]
+		,a.[updateFlag]
+		,a.[sbdqbm]
+		,i.CountyNum
+	FROM aj_gcjbxx a
+	INNER JOIN TBProjectInfo i ON i.PrjNum = a.xmbm
+	) AS aaa
+WHERE 1 = 1";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
             conditions.GetSearchClause(sp, ref sql);
@@ -349,10 +435,34 @@ select PKID, aqjdbm, gcmc, PrjNum, sgzbbm, aqjdjgmc, sdCode, gcgk_yszj, gcgk_jzm
         public DataTable GetTBData_zj_gcjbxx(List<IDataItem> conditions)
         {
             //string sql = "select * from zj_gcjbxx ";
-            string sql = @"select * from (
-select  PKID, zljdbm, gcmc, PrjNum, sgzbbm, zljdjgmc, zjzbm, gczj, jzmj, dlcd, jglx, cc, jzgm, sbrq, kgrq, jhjgrq, xxjd, bz,SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CreateDate, UpdateFlag, sbdqbm
-from dbo.zj_gcjbxx
-) as aaa where 1=1 ";
+            string sql = @"SELECT *
+FROM (
+	SELECT a.PKID
+		,zljdbm
+		,gcmc
+		,a.PrjNum
+		,sgzbbm
+		,zljdjgmc
+		,zjzbm
+		,gczj
+		,jzmj
+		,dlcd
+		,jglx
+		,cc
+		,jzgm
+		,sbrq
+		,kgrq
+		,jhjgrq
+		,xxjd
+		,bz
+		,SUBSTRING(convert(VARCHAR(30), a.CREATEDATE, 120), 1, 10) CreateDate
+		,a.UpdateFlag
+		,a.sbdqbm
+		,i.CountyNum
+	FROM dbo.zj_gcjbxx a
+	INNER JOIN dbo.TBProjectInfo i ON i.PrjNum = a.prjNum
+	) AS aaa
+WHERE 1 = 1";
 
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
@@ -365,6 +475,13 @@ from dbo.zj_gcjbxx
             string sql = "select * from zj_gcjbxx_zrdw ";
 
             return DB.ExeSqlForDataTable(sql, null, "dt");
+        }
+        public DataTable GetTBData_zj_gcjbxx_zrdw(string zljdbm)
+        {
+            string sql = @"select * from zj_gcjbxx_zrdw where zljdbm=@zljdbm ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@zljdbm", zljdbm);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
         public DataTable GetTBData_aj_zj_sgxk_relation(List<IDataItem> conditions)
         {
