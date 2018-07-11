@@ -62,8 +62,8 @@ cc.CensorCorpName,dd.EDate EDates, f.Jd jd1, f.Wd wd1
 FROM TBProjectInfo a
 LEFT JOIN 
 (SELECT b.prjNum prjNum,sum(DocCount) DocCount, 
-[DocNum]=stuff((select '/'+[DocNumFrom]+':'+[DocNumTo] from TBProjectInfoDocAdd t1 where b.prjNum=t1.prjNum for xml path('')), 1, 1, '')
-FROM TBProjectInfoDocAdd b
+[DocNum]=stuff((select '/'+[DocNumFrom]+':'+[DocNumTo] from xm_gcdjb_dtxm_doc t1 where b.prjNum=t1.prjNum for xml path('')), 1, 1, '')
+FROM xm_gcdjb_dtxm_doc b
 GROUP BY b.prjNum) aa
 ON a.PrjNum=aa.prjNum
 LEFT JOIN 
