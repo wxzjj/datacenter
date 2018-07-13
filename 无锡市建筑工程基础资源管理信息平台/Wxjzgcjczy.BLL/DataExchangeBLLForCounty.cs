@@ -135,6 +135,37 @@ namespace Wxjzgcjczy.BLL
         }
 
         /// <summary>
+        /// 读取无锡数据中心数据-一站式安监申报(ap_ajsbb)
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetTBData_ap_ajsbb(List<IDataItem> conditions)
+        {
+            DataTable dt = DAL.GetTBData_ap_ajsbb(conditions);
+            return dt;
+        }
+
+        /// <summary>
+        /// 按uuid获取安监申报审批数据
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public DataTable GetTBData_ap_ajsbb_jg(string uuid)
+        {
+            DataTable dt = DAL.GetTBData_ap_ajsbb_jg(uuid);
+            return dt;
+        }
+
+        /// <summary>
+        /// 读取无锡数据中心数据-一站式安监申报(zp_ajsbb)
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetTBData_ap_zjsbb(List<IDataItem> conditions)
+        {
+            DataTable dt = DAL.GetTBData_ap_zjsbb(conditions);
+            return dt;
+        }
+
+        /// <summary>
         /// 读取无锡数据中心数据(TBBuilderLicenceManageCanJianDanW)
         /// </summary>
         /// <returns></returns>
@@ -409,6 +440,11 @@ namespace Wxjzgcjczy.BLL
             return DAL.Get_uepp_jsdwByDwfl(dwfl);
         }
 
+        public DataTable Get_uepp_jsdw_by_qyid(string qyid)
+        {
+            return DAL.Get_uepp_jsdw_by_qyid(qyid);
+        }
+
         /// <summary>
         /// 获取企业从事业务类型
         /// </summary>
@@ -444,6 +480,11 @@ namespace Wxjzgcjczy.BLL
         public DataTable Get_uepp_Sgdw(string dwfl,string clrqS,string clrqE)
         {
             return DAL.Get_uepp_Sgdw(dwfl, clrqS, clrqE);
+        }
+
+        public DataTable Get_uepp_sgdw_single(string corpCode)
+        {
+            return DAL.Get_uepp_sgdw_single(corpCode);
         }
 
         /// <summary>
@@ -554,6 +595,17 @@ namespace Wxjzgcjczy.BLL
         {
             return DAL.Get_uepp_SgQyzzByQyID(qyID);
         }
+
+        /// <summary>
+        /// 获取企业所有资质信息
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_all_qyzz(string qyID)
+        {
+            return DAL.Get_uepp_all_qyzz(qyID);
+        }
+
         public DataTable Get_uepp_KcQyzzByQyID(string qyID)
         {
             return DAL.Get_uepp_KcQyzzByQyID(qyID);
@@ -578,6 +630,17 @@ namespace Wxjzgcjczy.BLL
         {
             return DAL.Get_uepp_SgQyzsByQyID(qyID);
         }
+
+        /// <summary>
+        /// 获取企业所有证书信息
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_all_qyzs(string qyID)
+        {
+            return DAL.Get_uepp_all_qyzs(qyID);
+        }
+
         public DataTable Get_uepp_ZjjgQyzzByQyID(string qyID)
         {
             return DAL.Get_uepp_ZjjgQyzzByQyID(qyID);

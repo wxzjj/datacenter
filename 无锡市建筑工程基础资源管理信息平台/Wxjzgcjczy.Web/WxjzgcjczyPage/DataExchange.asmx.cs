@@ -1570,6 +1570,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             str.Append("</SparkSoftDataBody>");
             return str.ToString();
         }
+        
         /// <summary>
         /// 根据企业从事业务类型获取企业信息
         /// </summary>
@@ -6173,6 +6174,9 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 List<IDataItem> list = new List<IDataItem>();
                 IDataItem item;
 
+                List<IDataItem> ajsbbList = new List<IDataItem>();
+                IDataItem ajsbbItem;
+
                 if (string.IsNullOrEmpty(tableName))
                 {
                     return xmlData;
@@ -6499,8 +6503,137 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         dt = BLL.GetTBData_zj_gcjbxx_zrdw(list);
                         xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
                         break;
-                    default:
+                    case "ap_ajsbb"://ap_ajsbb
 
+                        if (dt_user.Rows[0]["Has_aj_gcjbxx"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (!string.IsNullOrEmpty(beginDate))
+                        {
+                            DateTime date;
+                            if (DateTime.TryParse(beginDate, out date))
+                            {
+                                ajsbbItem = new DataItem();
+                                ajsbbItem.ItemName = "updateDate";
+                                ajsbbItem.ItemRelation = Bigdesk8.Data.DataRelation.GreaterThanOrEqual;
+                                ajsbbItem.ItemType = DataType.String;
+                                ajsbbItem.ItemData = date.ToString("yyyy-MM-dd");
+                                ajsbbList.Add(ajsbbItem);
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(endDate))
+                        {
+                            DateTime date;
+                            if (DateTime.TryParse(endDate, out date))
+                            {
+                                ajsbbItem = new DataItem();
+                                ajsbbItem.ItemName = "updateDate";
+                                ajsbbItem.ItemData = date.ToString("yyyy-MM-dd");
+                                ajsbbItem.ItemType = DataType.String;
+                                ajsbbItem.ItemRelation = Bigdesk8.Data.DataRelation.LessThanOrEqual;
+                                ajsbbList.Add(ajsbbItem);
+                            }
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            ajsbbItem = new DataItem();
+                            ajsbbItem.ItemName = "CountyNum";
+                            ajsbbItem.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            ajsbbItem.ItemType = DataType.String;
+                            ajsbbItem.ItemData = countyNum;
+                            ajsbbList.Add(ajsbbItem);
+                        }
+
+                        dt = BLL.GetTBData_ap_ajsbb(ajsbbList);
+                        //xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+
+                        str.AppendFormat("<{0}>", "result");
+                        foreach (DataRow dataRow in dt.Rows)
+                        {
+                            str.AppendFormat("<{0}>", "data");
+
+                            str.AppendFormat("<{0}>", "ap_ajsbb");
+                            mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                            str.Append(mainXml);
+                            str.AppendFormat("</{0}>", "ap_ajsbb");
+
+                            tempDt = BLL.GetTBData_ap_ajsbb_jg(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "ap_ajsbb_approvelist", "ap_ajsbb_approve"));
+                            str.AppendFormat("</{0}>", "data");
+                        }
+                        str.AppendFormat("</{0}>", "result");
+
+                        xmlData = str.ToString();
+                        break;
+                    case "ap_zjsbb"://ap_zjsbb
+
+                        if (dt_user.Rows[0]["Has_zj_gcjbxx"].ToString2() == "0")
+                        {
+                            return xmlData;
+                        }
+
+                        if (!string.IsNullOrEmpty(beginDate))
+                        {
+                            DateTime date;
+                            if (DateTime.TryParse(beginDate, out date))
+                            {
+                                ajsbbItem = new DataItem();
+                                ajsbbItem.ItemName = "updateDate";
+                                ajsbbItem.ItemRelation = Bigdesk8.Data.DataRelation.GreaterThanOrEqual;
+                                ajsbbItem.ItemType = DataType.String;
+                                ajsbbItem.ItemData = date.ToString("yyyy-MM-dd");
+                                ajsbbList.Add(ajsbbItem);
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(endDate))
+                        {
+                            DateTime date;
+                            if (DateTime.TryParse(endDate, out date))
+                            {
+                                ajsbbItem = new DataItem();
+                                ajsbbItem.ItemName = "updateDate";
+                                ajsbbItem.ItemData = date.ToString("yyyy-MM-dd");
+                                ajsbbItem.ItemType = DataType.String;
+                                ajsbbItem.ItemRelation = Bigdesk8.Data.DataRelation.LessThanOrEqual;
+                                ajsbbList.Add(ajsbbItem);
+                            }
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            ajsbbItem = new DataItem();
+                            ajsbbItem.ItemName = "CountyNum";
+                            ajsbbItem.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            ajsbbItem.ItemType = DataType.String;
+                            ajsbbItem.ItemData = countyNum;
+                            ajsbbList.Add(ajsbbItem);
+                        }
+
+                        dt = BLL.GetTBData_ap_zjsbb(ajsbbList);
+                        //xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+
+                        str.AppendFormat("<{0}>", "result");
+                        foreach (DataRow dataRow in dt.Rows)
+                        {
+                            str.AppendFormat("<{0}>", "data");
+
+                            str.AppendFormat("<{0}>", "ap_zjsbb");
+                            mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                            str.Append(mainXml);
+                            str.AppendFormat("</{0}>", "ap_zjsbb");
+
+                            str.AppendFormat("</{0}>", "data");
+                        }
+                        str.AppendFormat("</{0}>", "result");
+
+                        xmlData = str.ToString();
+                        break;
+                    default:
                         break;
                 }
 
@@ -6528,6 +6661,211 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             return xmlData;
 
         }
+
+        /// <summary>
+        /// 按企业组织机构代码获取建设单位信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="dwfl"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string Read_Jsdwxx_Single(string user, string password, string corpCode)
+        {
+            DataExchangeBLLForCounty BLL = new DataExchangeBLLForCounty();
+            //SparkSoftDataBody sparkSoftDataBody = new SparkSoftDataBody();
+            StringBuilder str = new StringBuilder();
+            str.Append("<ResultSet><ReturnInfo>");
+
+            string apiMessage = string.Empty;
+            //string methodMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    str.Append("<Status>0</Status>");
+                    str.Append("<Description>用户名或密码不正确！</Description>");
+                    str.Append("</ReturnInfo></ResultSet>");
+                    return str.ToString();
+                }
+                //if (dt_user.Rows[0]["Has_Jsdw"].ToString2() == "0")
+                //{
+                //    str.Append("<Status>0</Status>");
+                //    str.Append("<Description>该用户没有权限获取建设单位信息！</Description>");
+                //    str.Append("</ReturnInfo></SparkSoftDataBody>");
+                //    return str.ToString();
+                //}
+
+                if (string.IsNullOrEmpty(corpCode))
+                {
+                    str.Append("<Status>0</Status>");
+                    str.Append("<Description>请填写正确格式的企业组织机构代码如：xxxxxxxx-x</Description>");
+                    str.Append("</ReturnInfo></ResultSet>");
+                    return str.ToString();
+                }
+                str.Append("<Status>1</Status>");
+                str.Append("<Description></Description></ReturnInfo>");
+
+                DataTable dt_jsdw = BLL.Get_uepp_jsdw_by_qyid(corpCode);
+                //List<string> excludeColumns = new List<string>(); 
+                if (dt_jsdw.Rows.Count > 0)
+                {
+                    str.Append("<Qyjbxx>");
+                    foreach (DataRow row in dt_jsdw.Rows)
+                    {
+                        str.Append(xmlHelper.ConvertDataRowToXML(row));
+                    }
+                    str.Append("</Qyjbxx>");
+                }
+                else
+                {
+                    str.Append("<Qyjbxx></Qyjbxx>");
+                }
+
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "Read_Jsdwxx";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+            }
+            else
+            {
+                str.Append("<msg>接口关闭</msg>");
+                str.Append("</ReturnInfo>");
+                return str.ToString();
+            }
+
+            str.Append("</ResultSet>");
+            return str.ToString();
+        }
+
+
+        [WebMethod]
+        public string Read_Sgdwxx_Single(string user, string password, string corpCode)
+        { 
+            StringBuilder str = new StringBuilder();
+            DataExchangeBLLForCounty BLL = new DataExchangeBLLForCounty();
+
+            str.Append("<ResultSet><ReturnInfo>");
+
+            string apiMessage = string.Empty;// 2016.10.21
+            //string methodMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    str.Append("<Status>0</Status>");
+                    str.Append("<Description>用户名或密码不正确！</Description>");
+                    str.Append("</ReturnInfo></ResultSet>");
+                    return str.ToString();
+                }
+                //if (dt_user.Rows[0]["Has_Sgdw"].ToString2() == "0")
+                //{
+                //    str.Append("<Status>0</Status>");
+                //    str.Append("<Description>该用户没有权限获取施工单位信息！</Description>");
+                //    str.Append("</ReturnInfo></ResultSet>");
+                //    return str.ToString();
+                //}
+
+                str.Append("<Status>1</Status>");
+                str.Append("<Description></Description></ReturnInfo>");
+
+                DataTable dt_Sgqyxx = BLL.Get_uepp_sgdw_single(corpCode);
+
+                List<string> excludeColumns = new List<string>();
+                excludeColumns.Add("UserID");
+                excludeColumns.Add("xgr");
+                excludeColumns.Add("needUpdateFlag");
+
+                if (dt_Sgqyxx.Rows.Count > 0)
+                {
+                    str.Append("<Qyxx>");
+                    foreach (DataRow row in dt_Sgqyxx.Rows)
+                    {
+                        #region 企业基本信息
+                        str.Append("<Qyjbxx>");
+                        str.Append(xmlHelper.ConvertDataRowToXML(row, excludeColumns));
+                        str.Append("</Qyjbxx>");
+                        #endregion
+
+                        #region 企业资质信息
+                        DataTable dt_qyzzxx = BLL.Get_uepp_all_qyzz(row["qyID"].ToString2());
+                        str.Append("<QyzzArray>");
+                        foreach (DataRow row_qyzzmx in dt_qyzzxx.Rows)
+                        {
+                            str.Append("<Qyzz>");
+                            foreach (DataColumn col in dt_qyzzxx.Columns)
+                            {
+                                str.AppendFormat("<{0}>{1}</{2}>", col.ColumnName, row_qyzzmx[col.ColumnName].ToString2(), col.ColumnName);
+                            }
+                            str.Append("</Qyzz>");
+
+                        }
+                        str.Append("</QyzzArray>");
+                        #endregion
+
+                        #region 企业证书信息
+                        DataTable dt_qyzs = BLL.Get_uepp_SgQyzsByQyID(row["qyID"].ToString2());
+                        str.Append("<QyzsArray>");
+                        foreach (DataRow row_qyzsmx in dt_qyzs.Rows)
+                        {
+                            str.Append("<Qyzs>");
+                            foreach (DataColumn col in dt_qyzs.Columns)
+                            {
+                                str.AppendFormat("<{0}>{1}</{2}>", col.ColumnName, row_qyzsmx[col.ColumnName].ToString2(), col.ColumnName);
+                            }
+                            str.Append("</Qyzs>");
+
+                        }
+                        str.Append("</QyzsArray>");
+                        #endregion
+                        str.Append("</Qyxx>");
+                    }
+                    str.Append("</QyxxArray>");
+                }
+                else
+                {
+                    str.Append("<QyxxArray></QyxxArray>");
+                }
+
+                DataTable dtapicb = BLL.GetSchema_API_cb();
+                DataRow row_apicb = dtapicb.NewRow();
+                dtapicb.Rows.Add(row_apicb);
+                row_apicb["apiCbID"] = BLL.Get_apiCbNewID();
+                row_apicb["apiFlow"] = "29";
+                row_apicb["apiMethod"] = "Read_Sgdwxx";
+                row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                row_apicb["apiDyMessage"] = apiMessage;
+                row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                BLL.Submit_API_cb(dtapicb);
+
+                BLL.UpdateZbJkzt("29", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+            }
+            else
+            {
+                str.Append("<Description>接口关闭</Description>");
+                str.Append("</ReturnInfo>");
+                return str.ToString();
+            }
+
+            str.Append("</ResultSet>");
+            return str.ToString();
+        }
+
 
         #endregion
 
