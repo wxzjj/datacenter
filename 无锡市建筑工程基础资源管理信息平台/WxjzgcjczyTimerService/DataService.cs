@@ -204,7 +204,8 @@ namespace WxsjzxTimerService
         {
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@cityCode", cityCode);
-            string sql = " select Code,CodeInfo from tbXzqdmDicNew where parentCode=@cityCode  ";
+            string sql = " select Code,CodeInfo from tbXzqdmDicNew where parentCode=@cityCode or Code = @cityCode";
+            //string sql = " select Code,CodeInfo from tbXzqdmDicNew where Code = @cityCode";
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
