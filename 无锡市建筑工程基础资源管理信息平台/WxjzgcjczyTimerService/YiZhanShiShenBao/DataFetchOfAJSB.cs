@@ -492,7 +492,12 @@ namespace WxjzgcjczyTimerService.YiZhanShiShenBao
                     {
                         DataRow toSaveRow = existDt.NewRow();
                         DataTableHelp.DataRow2DataRow(item, toSaveRow);
-                        existDt.Rows.Add(toSaveRow);
+                       
+                        if (!string.IsNullOrEmpty(toSaveRow["contractMoney"].ToString())
+                            && !string.IsNullOrEmpty(toSaveRow["recordNum"].ToString()))
+                        {
+                            existDt.Rows.Add(toSaveRow);
+                        }  
 
                         //由于文档跟实际获取的xml不一致，特殊处理字段
                         //toSaveRow["CorpCode"] = item["contractorCorpCode"];
