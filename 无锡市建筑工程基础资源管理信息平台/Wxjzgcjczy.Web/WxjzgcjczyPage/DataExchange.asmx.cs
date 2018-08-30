@@ -6155,6 +6155,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             string xmlData = String.Empty;
        
             DataExchangeBLLForCounty BLL = new DataExchangeBLLForCounty();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
 
             string apiMessage = string.Empty; 
             DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
@@ -6563,6 +6564,22 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
                             tempDt = BLL.GetTBData_ap_ajsbb_jg(dataRow["uuid"].ToString());
                             str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "ap_ajsbb_approvelist", "ap_ajsbb_approve"));
+
+                            tempDt = SBBLL.GetAp_ajsbb_dwry(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                            tempDt = SBBLL.GetAp_ajsbb_clqd(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
+
+                            tempDt = SBBLL.GetAp_ajsbb_hjssjd(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "hjssjdList", "hjssjdcontent"));
+
+                            tempDt = SBBLL.GetAp_ajsbb_wxyjdgcqd(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "wxygcList", "wxygccontent"));
+
+                            tempDt = SBBLL.GetAp_ajsbb_cgmgcqd(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "cgmgcList", "cgmgccontent"));
+
                             str.AppendFormat("</{0}>", "data");
                         }
                         str.AppendFormat("</{0}>", "result");
@@ -6626,6 +6643,21 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                             mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
                             str.Append(mainXml);
                             str.AppendFormat("</{0}>", "ap_zjsbb");
+
+                            tempDt = SBBLL.GetAp_zjsbb_ht(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
+                            tempDt = SBBLL.GetAp_zjsbb_dwry(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
+
+                            tempDt = SBBLL.GetAp_zjsbb_schgs(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "sgtscList", "sgtsccontent"));
+
+                            tempDt = SBBLL.GetAp_zjsbb_dwgc(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwgcList", "dwgccontent"));
+
+                            tempDt = SBBLL.GetAp_zjsbb_clqd(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "clList", "clcontent"));
 
                             str.AppendFormat("</{0}>", "data");
                         }
