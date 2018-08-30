@@ -146,7 +146,7 @@ namespace WxjzgcjczyTimerService
                         try
                         {
                             //获取省外企业信息
-                             YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
+                            YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
                             //获取省外企业人员信息
                             YourTask_PullDataFromSxxzx_Swryxx(row_DataJkLog["ID"].ToString2());
 
@@ -158,8 +158,7 @@ namespace WxjzgcjczyTimerService
                             Public.WriteLog("\r\n");
 
                             //获取省内市外企业信息
-                            
-                            
+
                             DataTable dtCityCodes= dataService.Get_tbXzqdmDic_AllCityExceptWuxi();
                             foreach (DataRow cityCode in dtCityCodes.Rows)
                             {
@@ -4974,7 +4973,7 @@ namespace WxjzgcjczyTimerService
                     {
                         foreach (OutCorpBasicInfo corpBasicInfo in outCorpBasicInfoBody.array)
                         {
-
+                            //Public.WriteLog("corpBasicInfo.CorpCode：" + corpBasicInfo.CorpCode);
                             if (corpBasicInfo.CorpCode.Length == 9)
                             {
                                 corpBasicInfo.CorpCode = corpBasicInfo.CorpCode.Substring(0, 8) + '-' + corpBasicInfo.CorpCode.Substring(8, 1);

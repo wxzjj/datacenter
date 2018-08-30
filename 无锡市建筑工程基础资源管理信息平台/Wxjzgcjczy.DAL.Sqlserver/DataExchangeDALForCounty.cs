@@ -340,6 +340,52 @@ WHERE 1 = 1";
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
+        public DataTable GetTBData_ap_ajsbb(List<IDataItem> conditions)
+        {
+            string sql = @"SELECT *
+FROM ( select * from dbo.Ap_ajsbb) AS aaa
+WHERE 1 = 1";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        public DataTable GetTBData_ap_ajsbb_jg(string uuid)
+        {
+            string sql = @"SELECT jg.slry AS TUser
+	,(
+		CASE jg.success
+			WHEN 'Yes'
+				THEN '受理通过'
+			WHEN 'No'
+				THEN '退回:' + jg.thyy
+			ELSE ''
+			END
+		) AS Content
+	,jg.UpdateTime
+FROM dbo.Ap_ajsbjg jg
+WHERE uuid = @uuid
+UNION ALL
+SELECT tzs.tzrq AS Tuser
+	,'推送监督通知书-监督注册号（' + tzs.jdzch + ')' AS Content
+	,tzs.UpdateTime
+FROM dbo.Ap_ajtzs tzs
+WHERE uuid = @uuid order by UpdateTime asc";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@uuid", uuid);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        public DataTable GetTBData_ap_zjsbb(List<IDataItem> conditions)
+        {
+            string sql = @"SELECT * FROM ( select * from dbo.Ap_zjsbb) AS aaa WHERE 1 = 1";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         public DataTable GetTBData_TBBuilderLicenceManageCanJianDanW(string builderLicenceNum)
         {
             string sql = @"select * from TBBuilderLicenceManageCanJianDanW  where BuilderLicenceNum=@builderLicenceNum ";
@@ -370,9 +416,31 @@ WHERE 1 = 1";
         public DataTable GetTBData_TBProjectFinishManage(List<IDataItem> conditions)
         {
             //string sql = "select * from TBProjectFinishManage ";
-            string sql = @"select * from (
-select PKID, PrjFinishName, PrjFinishNum, PrjFinishInnerNum, PrjNum, BuilderLincenceNum, QCCorpName, QCCorpCode, FactCost, FactArea, FactSize, PrjStructureTypeNum, BDate, EDate, Mark, SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CreateDate, UpdateFlag, sbdqbm
-from TBProjectFinishManage ) as aaa where 1=1 ";
+            string sql = @"SELECT *
+                FROM (
+	                SELECT a.PKID
+		                ,PrjFinishName
+		                ,PrjFinishNum
+		                ,PrjFinishInnerNum
+		                ,a.PrjNum
+		                ,BuilderLicenceNum
+		                ,QCCorpName
+		                ,QCCorpCode
+		                ,FactCost
+		                ,FactArea
+		                ,FactSize
+		                ,PrjStructureTypeNum
+		                ,a.BDate
+		                ,a.EDate
+		                ,Mark
+		                ,SUBSTRING(convert(VARCHAR(30), a.CREATEDATE, 120), 1, 10) CreateDate
+		                ,a.UpdateFlag
+		                ,a.sbdqbm
+		                ,i.CountyNum
+	                FROM TBProjectFinishManage a
+	                LEFT JOIN TBProjectInfo i ON i.PrjNum = a.PrjNum
+	                ) AS aaa
+                WHERE 1 = 1";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
             conditions.GetSearchClause(sp, ref sql);
@@ -513,6 +581,33 @@ WHERE 1 = 1";
             return DB.ExeSqlForDataTable(sql, sp, "uepp_jsdw");
         }
 
+        /// <summary>
+        /// 按组织机构代码获取建设单位
+        /// </summary>
+        /// <param name="jsdwID"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_jsdw_by_qyid(string jsdwID)
+        {
+            string sql = "";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            if (jsdwID.Length == 9)
+            {
+                sql = @"select top 1 * from uepp_jsdw  where jsdwID=@jsdwID or substring(jsdwID,1,8)+substring(jsdwID,10,1)=@jsdwID or (substring(jsdwID,9,9))=@jsdwID order by len(jsdwID) desc ";
+            }
+            else
+                if (jsdwID.Length == 10)
+                {
+                    sql = @"select top 1 * from uepp_jsdw  where jsdwID=@jsdwID or substring(jsdwID,1,8)+'-'+substring(jsdwID,9,1)=@jsdwID or substring(jsdwID,9,8)+'-'+substring(jsdwID,17,1) =@jsdwID  order by len(jsdwID) desc  ";
+                }
+                else
+                {
+                    sql = @"select top 1  * from uepp_jsdw  where jsdwID=@jsdwID  order by len(jsdwID) desc  ";
+                }
+
+            sp.Add("@jsdwID", jsdwID);
+            return DB.ExeSqlForDataTable(sql, sp, "uepp_jsdw");
+        }
+
 
         /// <summary>
         /// 获取企业从事业务类型
@@ -544,6 +639,21 @@ WHERE 1 = 1";
             
             return DB.ExeSqlForDataTable(sql, sp, "uepp_sgdw");
 
+        }
+
+        /// <summary>
+        /// 根据企业组织机构代码获取施工单位信息
+        /// </summary>
+        /// <param name="dwfl"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_sgdw_single(string corpCode)
+        {
+            string sql = "";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sql = @" SELECT a.* FROM uepp_qyjbxx a WHERE DataState != - 1 and  qyID=@qyID";
+
+            sp.Add("@qyID", corpCode);
+            return DB.ExeSqlForDataTable(sql, sp, "uepp_sgdw");
         }
 
 
@@ -748,6 +858,22 @@ select PKID, RecordName, RecordNum, RecordInnerNum, PrjNum, ContractNum, Contrac
 
         }
 
+        /// <summary>
+        /// 获取企业所有资质信息
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_all_qyzz(string qyID)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@qyID", qyID);
+
+            string sql = @"select * from UEPP_Qyzzmx where DataState=0 and qyID=@qyID ";
+
+            return DB.ExeSqlForDataTable(sql, sp, "uepp_sgdw");
+
+        }
+
         public DataTable Get_uepp_KcQyzzByQyID(string qyID)
         {
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
@@ -801,6 +927,21 @@ select PKID, RecordName, RecordNum, RecordInnerNum, PrjNum, ContractNum, Contrac
 
             string sql = @"select ID, qyID, csywlxID, csywlx, zslxID, zslx, zzbz, zzxlID, zzxl, zzhyID, zzhy, zzlbID, zzlb, zzdjID, zzdj, cjywfw, bz, tag, xgr, xgrqsj from UEPP_Qyzzmx where csywlxID in (7,4,8,9,15,16,17)  and DataState=0 and qyID=@qyID ";
 
+            return DB.ExeSqlForDataTable(sql, sp, "dt_qyzz");
+
+        }
+
+        /// <summary>
+        /// 获取企业所有证书
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_all_qyzs(string qyID)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@qyID", qyID);
+
+            string sql = @"  select * from UEPP_Qyzs where DataState=0 and qyID=@qyID ";
             return DB.ExeSqlForDataTable(sql, sp, "dt_qyzz");
 
         }

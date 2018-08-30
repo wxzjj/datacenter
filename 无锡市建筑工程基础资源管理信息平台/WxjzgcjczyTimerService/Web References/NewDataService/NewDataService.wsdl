@@ -34,6 +34,22 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="getProjectDataStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TableName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="PKID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getProjectDataStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="getPersonTitleCert_Single">
         <xs:complexType>
           <xs:sequence>
@@ -950,6 +966,12 @@
   <wsdl:message name="getCorpCert_SingleResponse">
     <wsdl:part name="parameters" element="ns:getCorpCert_SingleResponse" />
   </wsdl:message>
+  <wsdl:message name="getProjectDataStatusRequest">
+    <wsdl:part name="parameters" element="ns:getProjectDataStatus" />
+  </wsdl:message>
+  <wsdl:message name="getProjectDataStatusResponse">
+    <wsdl:part name="parameters" element="ns:getProjectDataStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="getOutCorpQual_PacketRequest">
     <wsdl:part name="parameters" element="ns:getOutCorpQual_Packet" />
   </wsdl:message>
@@ -1248,6 +1270,11 @@
       <wsdl:output wsaw:Action="urn:getCorpCert_SingleResponse" message="ns:getCorpCert_SingleResponse" />
       <wsdl:fault wsaw:Action="urn:getCorpCert_SingleException" name="Exception" message="ns:Exception" />
     </wsdl:operation>
+    <wsdl:operation name="getProjectDataStatus">
+      <wsdl:input wsaw:Action="urn:getProjectDataStatus" message="ns:getProjectDataStatusRequest" />
+      <wsdl:output wsaw:Action="urn:getProjectDataStatusResponse" message="ns:getProjectDataStatusResponse" />
+      <wsdl:fault wsaw:Action="urn:getProjectDataStatusException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
     <wsdl:operation name="getOutCorpQual_Packet">
       <wsdl:input wsaw:Action="urn:getOutCorpQual_Packet" message="ns:getOutCorpQual_PacketRequest" />
       <wsdl:output wsaw:Action="urn:getOutCorpQual_PacketResponse" message="ns:getOutCorpQual_PacketResponse" />
@@ -1532,6 +1559,18 @@
     </wsdl:operation>
     <wsdl:operation name="getOutCorpInfo_Single_CorpName">
       <soap:operation soapAction="urn:getOutCorpInfo_Single_CorpName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectDataStatus">
+      <soap:operation soapAction="urn:getProjectDataStatus" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2154,6 +2193,18 @@
         <soap12:fault use="literal" name="Exception" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="getProjectDataStatus">
+      <soap12:operation soapAction="urn:getProjectDataStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="getCorpCert_Single">
       <soap12:operation soapAction="urn:getCorpCert_Single" style="document" />
       <wsdl:input>
@@ -2746,6 +2797,15 @@
       </wsdl:input>
       <wsdl:output>
         <mime:content part="getOutCorpInfo_Single_CorpName" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectDataStatus">
+      <http:operation location="NewDataService/getProjectDataStatus" />
+      <wsdl:input>
+        <mime:content part="getProjectDataStatus" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getProjectDataStatus" type="text/xml" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getCorpCert_Single">

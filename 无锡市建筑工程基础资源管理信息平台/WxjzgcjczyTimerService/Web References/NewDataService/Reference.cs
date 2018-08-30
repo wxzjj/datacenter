@@ -43,6 +43,8 @@ namespace WxjzgcjczyTimerService.NewDataService {
         
         private System.Threading.SendOrPostCallback getCorpCert_SingleOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getProjectDataStatusOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getOutCorpQual_PacketOperationCompleted;
         
         private System.Threading.SendOrPostCallback getPersonTitleCertOperationCompleted;
@@ -189,6 +191,9 @@ namespace WxjzgcjczyTimerService.NewDataService {
         
         /// <remarks/>
         public event getCorpCert_SingleCompletedEventHandler getCorpCert_SingleCompleted;
+        
+        /// <remarks/>
+        public event getProjectDataStatusCompletedEventHandler getProjectDataStatusCompleted;
         
         /// <remarks/>
         public event getOutCorpQual_PacketCompletedEventHandler getOutCorpQual_PacketCompleted;
@@ -577,6 +582,40 @@ namespace WxjzgcjczyTimerService.NewDataService {
             if ((this.getCorpCert_SingleCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getCorpCert_SingleCompleted(this, new getCorpCert_SingleCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:getProjectDataStatus", RequestNamespace="http://webservice.datecenter.jscedc", ResponseNamespace="http://webservice.datecenter.jscedc", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return", DataType="base64Binary", IsNullable=true)]
+        public byte[] getProjectDataStatus([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string UserID, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string TableName, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string PKID) {
+            object[] results = this.Invoke("getProjectDataStatus", new object[] {
+                        UserID,
+                        TableName,
+                        PKID});
+            return ((byte[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getProjectDataStatusAsync(string UserID, string TableName, string PKID) {
+            this.getProjectDataStatusAsync(UserID, TableName, PKID, null);
+        }
+        
+        /// <remarks/>
+        public void getProjectDataStatusAsync(string UserID, string TableName, string PKID, object userState) {
+            if ((this.getProjectDataStatusOperationCompleted == null)) {
+                this.getProjectDataStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetProjectDataStatusOperationCompleted);
+            }
+            this.InvokeAsync("getProjectDataStatus", new object[] {
+                        UserID,
+                        TableName,
+                        PKID}, this.getProjectDataStatusOperationCompleted, userState);
+        }
+        
+        private void OngetProjectDataStatusOperationCompleted(object arg) {
+            if ((this.getProjectDataStatusCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getProjectDataStatusCompleted(this, new getProjectDataStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2541,6 +2580,32 @@ namespace WxjzgcjczyTimerService.NewDataService {
         private object[] results;
         
         internal getCorpCert_SingleCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void getProjectDataStatusCompletedEventHandler(object sender, getProjectDataStatusCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getProjectDataStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getProjectDataStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
