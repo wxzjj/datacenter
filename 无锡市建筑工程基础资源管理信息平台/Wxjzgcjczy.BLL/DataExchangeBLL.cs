@@ -3147,16 +3147,18 @@ namespace Wxjzgcjczy.BLL
                 {
                     row = dt_Xzcf.Rows[rowIndex];
                     DataTableHelp.DataRow2DataRow(item, row, new List<string>() { "ajNo" });
+                    row["updateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 }
                 else
                 {
                     row = dt_Xzcf.NewRow();
                     DataTableHelp.DataRow2DataRow(item, row);
                     dt_Xzcf.Rows.Add(row);
+                    row["createDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    row["updateDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 }
 
                 row["updateUser"] = user;
-                row["createDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             }
             if (dt_Xzcf.Rows.Count > 0)
