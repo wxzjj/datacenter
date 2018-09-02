@@ -610,6 +610,47 @@ WHERE 1 = 1";
 
 
         /// <summary>
+        /// 获取江阴项目建设单位列表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_jsdw_bycounty(string countyNum,string startDate, string endDate)
+        {
+            string sql = "";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sql = @"SELECT * FROM WJSJZX.dbo.UEPP_Jsdw
+                    WHERE OperateDate > @startDate and OperateDate < @endDate
+                    AND WJSJZX.dbo.GetCorpZZJGDM(jsdwID) IN (
+		                    SELECT WJSJZX.dbo.GetCorpZZJGDM(BuildCorpCode)
+		                    FROM WJSJZX.dbo.tbprojectinfo
+		                    WHERE CountyNum = @countyNum
+		                    )";
+            sp.Add("@countyNum", countyNum);
+            sp.Add("@startDate", startDate);
+            sp.Add("@endDate", endDate);
+            return DB.ExeSqlForDataTable(sql, sp, "buildCorp");
+        }
+
+        /// <summary>
+        /// 获取江阴项目建设单位代码列表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_jsdw_code_bycounty(string countyNum)
+        {
+            string sql = "";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sql = @"SELECT BuildCorpName
+	                    ,BuildCorpCode
+                    FROM WJSJZX.dbo.tbprojectinfo
+                    WHERE CountyNum = @countyNum
+                    ORDER BY CreateDate DESC";
+            sp.Add("@countyNum", countyNum);
+            return DB.ExeSqlForDataTable(sql, sp, "buildCorp");
+        }
+
+
+        /// <summary>
         /// 获取企业从事业务类型
         /// </summary>
         /// <returns></returns>

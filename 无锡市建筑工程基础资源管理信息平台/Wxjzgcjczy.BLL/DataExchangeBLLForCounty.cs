@@ -445,6 +445,11 @@ namespace Wxjzgcjczy.BLL
             return DAL.Get_uepp_jsdw_by_qyid(qyid);
         }
 
+        public DataTable Get_uepp_jsdw_bycounty(string countyNum, string startDate, string endDate)
+        {
+            return DAL.Get_uepp_jsdw_bycounty(countyNum, startDate, endDate); ;
+        }
+
         /// <summary>
         /// 获取企业从事业务类型
         /// </summary>

@@ -6694,6 +6694,48 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
         }
 
+        [WebMethod]
+        public string ReadJsdwxxForCounty(string user, string password, string beginDate, string endDate)
+        {
+             string xmlData = String.Empty;
+       
+            DataExchangeBLLForCounty BLL = new DataExchangeBLLForCounty(); 
+
+            string apiMessage = string.Empty; 
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return xmlData;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return xmlData;
+                }
+
+                //从接口用户中提取区划编码
+                string countyNum = null;
+                if (user.Length > 6)
+                {
+                    countyNum = user.Substring(0, 6);
+                }
+                else
+                {
+                    countyNum = user;
+                }
+
+                DataTable dt = BLL.Get_uepp_jsdw_bycounty(countyNum, beginDate, endDate);
+
+                xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+
+            }
+
+            return xmlData;
+        }
+
         /// <summary>
         /// 按企业组织机构代码获取建设单位信息
         /// </summary>
