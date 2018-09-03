@@ -6565,6 +6565,9 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                             tempDt = BLL.GetTBData_ap_ajsbb_jg(dataRow["uuid"].ToString());
                             str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "ap_ajsbb_approvelist", "ap_ajsbb_approve"));
 
+                            tempDt = SBBLL.GetAp_ajsbb_ht(dataRow["uuid"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "htList", "htcontent"));
+
                             tempDt = SBBLL.GetAp_ajsbb_dwry(dataRow["uuid"].ToString());
                             str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "dwryList", "dwrycontent"));
 
