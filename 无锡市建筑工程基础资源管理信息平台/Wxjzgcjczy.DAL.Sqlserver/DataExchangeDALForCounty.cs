@@ -632,6 +632,122 @@ WHERE 1 = 1";
         }
 
         /// <summary>
+        /// 获取江阴项目施工单位列表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_sgdw_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT *
+                FROM (
+                    SELECT *, SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10) CreateDate
+FROM WJSJZX.dbo.UEPP_Qyjbxx a
+WHERE CountyID = @countyNum  AND (a.qyID in (select qyid from uepp_qycsyw where csywlxid in (1,3,2,13,14)))
+	 ) AS aaa
+                WHERE 1 = 1";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
+        /// 获取江阴项目勘察单位列表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_kcdw_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT *
+                FROM (
+                    SELECT *, SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10) CreateDate
+FROM WJSJZX.dbo.UEPP_Qyjbxx a
+WHERE CountyID = @countyNum  AND (a.qyID in (select qyid from uepp_qycsyw where csywlxid in (5)))
+	OR (
+		qyID IN (
+			SELECT SUBSTRING(replace(EconCorpCode, '-', ''), 1, 8) + '-' + SUBSTRING(replace(EconCorpCode, '-', ''), 9, 1)
+			FROM [dbo].[TBProjectCensorInfo] b
+			LEFT JOIN .dbo.TBProjectInfo i ON b.PrjNum = i.PrjNum
+			WHERE i.CountyNum = @countyNum
+				AND EconCorpCode != ''
+			)
+		)
+	                ) AS aaa
+                WHERE 1 = 1";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+
+        /// <summary>
+        /// 获取江阴项目设计单位列表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_sjdw_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT *
+FROM WJSJZX.dbo.UEPP_Qyjbxx a
+WHERE CountyID = '320281' AND (a.qyID in (select qyid from uepp_qycsyw where csywlxid in (6,2)))
+	OR (
+		qyID IN (
+			SELECT SUBSTRING(replace(DesignCorpCode, '-', ''), 1, 8) + '-' + SUBSTRING(replace(DesignCorpCode, '-', ''), 9, 1)
+			FROM [WJSJZX].[dbo].[TBProjectCensorInfo] b
+			LEFT JOIN WJSJZX.dbo.TBProjectInfo i ON b.PrjNum = i.PrjNum
+			WHERE i.CountyNum = @countyNum
+				AND EconCorpCode != ''
+			)
+		)
+ORDER BY xgrqsj ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+
+        /// <summary>
+        /// 获取江阴项目中介机构列表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_zjjg_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT *
+                FROM (
+                    SELECT *, SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10) CreateDate
+FROM WJSJZX.dbo.UEPP_Qyjbxx a
+WHERE CountyID = @countyNum  AND (a.qyID in (select qyid from uepp_qycsyw where csywlxid in (7,4,8,9,15,16,17))) ) AS aaa
+                WHERE 1 = 1";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+
+
+        /// <summary>
+        /// 获取企业基本信息（建设单位除外）
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public DataTable GetQyjbxx(string qyID)
+        {
+            string sql = "";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sql = @"select top 1 * from UEPP_Qyjbxx  where qyID=@qyID";
+            sp.Add("@qyID", qyID);
+            return DB.ExeSqlForDataTable(sql, sp, "qyjbxx");
+        }
+
+        /// <summary>
         /// 获取江阴项目建设单位代码列表
         /// </summary>
         /// <param name="countyNum"></param>
@@ -649,6 +765,126 @@ WHERE 1 = 1";
             return DB.ExeSqlForDataTable(sql, sp, "buildCorp");
         }
 
+        /// <summary>
+        /// 获取企业证书信息
+        /// </summary>
+        /// <param name="qyid"></param>
+        /// <returns></returns>
+        public DataTable GetCorpCert(string qyid)
+        {
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT ROW_NUMBER() OVER (
+		ORDER BY zzlb
+			,zsbh
+		) AS rowno
+	,*
+FROM (
+	SELECT DISTINCT *
+	FROM (
+		SELECT zzmx.csywlx zzlb
+			,zs.zsbh
+			,zzmx.zzlb AS zylb
+			,zzmx.zzlbID AS zylbID
+			,zzmx.zzxl
+			,zzmx.zzxlID AS zzxlID
+			,zzmx.zzdj
+			,CONVERT(VARCHAR(12), zs.zsyxqrq, 23) AS fzrq
+			,CONVERT(VARCHAR(12), zs.zsyxzrq, 23) AS yxq
+			,zs.fzdw
+		FROM UEPP_Qyzzmx zzmx
+		LEFT JOIN UEPP_Qyzs zs ON zzmx.zsbh = zs.zsbh
+		LEFT JOIN Uepp_Qyjbxx jbxx ON zzmx.qyID = jbxx.qyID
+		WHERE zsyxzrq > GETDATE()
+			AND zzmx.DataState <> - 1
+			AND zzmx.qyID = @pQyID
+		) aaa
+	
+	UNION ALL
+	
+	SELECT qyzs.csywlx
+		,qyzs.zsbh
+		,qyzs.zslx AS zylb
+		,''
+		,''
+		,''
+		,''
+		,CONVERT(VARCHAR(12), qyzs.zsyxqrq, 23) AS fzrq
+		,CONVERT(VARCHAR(12), qyzs.zsyxzrq, 23) AS yxq
+		,qyzs.fzdw
+	FROM UEPP_Qyzs qyzs
+	WHERE qyzs.DataState <> - 1
+		AND qyID = @pQyID
+		AND zslxID = 140
+	) t
+ORDER BY zzlb
+	,zsbh";
+            sp.Add("@pQyID", qyid);
+
+            return DB.ExeSqlForDataTable(sql, sp, "t");
+        }
+
+        /// <summary>
+        /// 获取企业人员信息
+        /// </summary>
+        /// <param name="qyid"></param>
+        /// <returns></returns>
+        public DataTable GetCorpStaff(string qyid)
+        {
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT ROW_NUMBER() OVER (
+		ORDER BY ryid
+			,zsbh
+		) AS rowno
+	,qymc
+	,qyid
+	,ryid
+	,xm
+	,zjhm
+	,lxdh
+	,ryzyzglxid
+	,ryzyzglx
+	,zsjlId
+	,ryzslxid
+	,ryzslx
+	,zsbh
+	,zsyxqrq
+	,zsyxzrq
+FROM (
+	SELECT DISTINCT *
+	FROM (
+		SELECT a.qymc
+			,b.qyid
+			,b.ryid
+			,c.xm
+			,c.zjhm
+			,ISNULL(c.lxdh, c.yddh) lxdh
+			,b.ryzyzglxid
+			,b.ryzyzglx
+			,d.zsjlId
+			,d.ryzslxid
+			,d.ryzslx
+			,d.zsbh
+			,CONVERT(VARCHAR(10), d.zsyxqrq, 120) zsyxqrq
+			,CONVERT(VARCHAR(10), d.zsyxzrq, 120) zsyxzrq
+		FROM uepp_qyjbxx a
+		INNER JOIN UEPP_QyRy b ON a.qyid = b.qyid
+			AND b.DataState <> - 1
+		INNER JOIN uepp_ryjbxx c ON b.ryid = c.ryid
+			AND c.DataState <> - 1
+		LEFT JOIN uepp_ryzs d ON c.ryid = d.ryid
+			AND d.DataState <> - 1
+			AND b.ryzyzglxID = d.ryzyzglxID
+		WHERE 1 = 1
+			AND a.qyID = @qyID
+		) mid
+	) ryxx
+WHERE 1 = 1";
+            sp.Add("@qyID", qyid);
+
+            return DB.ExeSqlForDataTable(sql, sp, "t");
+        }
 
         /// <summary>
         /// 获取企业从事业务类型

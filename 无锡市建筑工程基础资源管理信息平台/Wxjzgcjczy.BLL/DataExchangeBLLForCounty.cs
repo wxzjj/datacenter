@@ -449,6 +449,51 @@ namespace Wxjzgcjczy.BLL
         {
             return DAL.Get_uepp_jsdw_bycounty(countyNum, startDate, endDate); ;
         }
+        public DataTable Get_uepp_sgdw_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return DAL.Get_uepp_sgdw_bycounty(countyNum,conditions); ;
+        }
+        public DataTable Get_uepp_kcdw_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return DAL.Get_uepp_kcdw_bycounty(countyNum, conditions); ;
+        }
+        public DataTable Get_uepp_sjdw_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return DAL.Get_uepp_sjdw_bycounty(countyNum, conditions); ;
+        }
+        public DataTable Get_uepp_zjjg_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return DAL.Get_uepp_zjjg_bycounty(countyNum, conditions); ;
+        }
+
+       
+
+        public DataTable GetQyjbxx(string qyid)
+        {
+            return DAL.GetQyjbxx(qyid);
+        }
+
+        /// <summary>
+        /// 获取企业证书信息
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public DataTable GetCorpCert(String qyID )
+        {
+            return DAL.GetCorpCert(qyID); ;
+        }
+
+        /// <summary>
+        /// 获取企业人员信息
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public DataTable GetCorpStaff(String qyID)
+        {
+            return DAL.GetCorpStaff(qyID); ;
+        }
+
+
 
         /// <summary>
         /// 获取企业从事业务类型
