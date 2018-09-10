@@ -6440,7 +6440,7 @@ namespace WxjzgcjczyTimerService
                                             //{
                                             //    row["tag"] = row["tag"].ToString2().TrimEnd(',') + "," + tag;
                                             //}
-                                            if (!row["needUpdateFlag"].ToBoolean())
+                                            if (!string.IsNullOrEmpty(row["needUpdateFlag"].ToString()) && !row["needUpdateFlag"].ToBoolean())
                                             {
                                                 //needUpdateFlag默认为1都需要更新，不需要更新的企业需要在四库数据库手动配置为0
                                                 continue;
@@ -7220,7 +7220,7 @@ namespace WxjzgcjczyTimerService
                                             //{
                                             //    row["tag"] = row["tag"].ToString2().TrimEnd(',') + "," + tag;
                                             //}
-                                            if (!row["needUpdateFlag"].ToBoolean())
+                                            if (!string.IsNullOrEmpty(row["needUpdateFlag"].ToString()) && !row["needUpdateFlag"].ToBoolean())
                                             {
                                                 continue;
                                             }
