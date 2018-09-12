@@ -1180,12 +1180,13 @@ UnionCorpCode,		/*联合体承包单位组织代码*/
 PrjHead,	/*项目负责人*/
 PrjHeadPhone,		/*项目负责人联系电话*/
 IDCard	/*项目负责人证件号码*/
-,c.jsdwID,d.qyID,e.ryID,a.tag
+,c.jsdwID,d.qyID,e.ryID,a.tag,a.PrjType,ptdic.CodeInfo as PrjTypeLabel
 FROM TBContractRecordManage AS a
 LEFT JOIN tbContractTypeDic AS b1 ON a.ContractTypeNum = b1.Code 
 left join uepp_Jsdw c on a.PropietorCorpCode=c.zzjgdm 
 left join UEPP_Qyjbxx d on a.ContractorCorpCode=d.zzjgdm 
 left join UEPP_Ryjbxx e on a.IDCard=e.zjhm 
+left join tbPrjTypeDic ptdic on ptdic.Code =a.PrjType
 WHERE PKID = @PKID
 ";
             dh.spc.Add("@PKID", strParas[0]);

@@ -656,6 +656,13 @@ namespace WxjzgcjczyTimerService
                                     row3["Tag"] = Tag.省一体化平台.ToString();
                                     row3["updateUser"] = userName_htba;
 
+                                    //新增工程类型
+                                    if (string.IsNullOrEmpty(row3["PrjType"].ToString()))
+                                    {
+                                        row3["PrjType"] = row3["PrjNum"].ToString().Substring(12, 2);
+                                    }
+                                    
+
                                     if (!dataService.Submit_TBContractRecordManage(dt_TBContractRecordManage))
                                     {
                                         row_SaveDataLog2["SaveState"] = 0;

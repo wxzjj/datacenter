@@ -84,8 +84,10 @@
                             <Bigdesk8:DBText ID="ContractDate" ItemName="ContractDate" FieldType="Date" runat="server"></Bigdesk8:DBText>
                         </td>
                         <td class="td_text" width="15%">
+                            工程类型
                         </td>
-                        <td class="td_value" width="35%">                            
+                        <td class="td_value" width="35%">  
+                            <Bigdesk8:DBText ID="PrjTypeLabel" ItemName="PrjTypeLabel" runat="server"></Bigdesk8:DBText>                          
                         </td>
                     </tr>
                     <tr>
