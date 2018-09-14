@@ -691,18 +691,21 @@ WHERE CountyID = @countyNum  AND (a.qyID in (select qyid from uepp_qycsyw where 
         public DataTable Get_uepp_sjdw_bycounty(string countyNum, List<IDataItem> conditions)
         {
             string sql = @"SELECT *
+                FROM (
+                    SELECT *, SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10) CreateDate
 FROM WJSJZX.dbo.UEPP_Qyjbxx a
-WHERE CountyID = '320281' AND (a.qyID in (select qyid from uepp_qycsyw where csywlxid in (6,2)))
+WHERE CountyID = @countyNum  AND (a.qyID in (select qyid from uepp_qycsyw where csywlxid in (5)))
 	OR (
 		qyID IN (
 			SELECT SUBSTRING(replace(DesignCorpCode, '-', ''), 1, 8) + '-' + SUBSTRING(replace(DesignCorpCode, '-', ''), 9, 1)
-			FROM [WJSJZX].[dbo].[TBProjectCensorInfo] b
-			LEFT JOIN WJSJZX.dbo.TBProjectInfo i ON b.PrjNum = i.PrjNum
+			FROM [dbo].[TBProjectCensorInfo] b
+			LEFT JOIN .dbo.TBProjectInfo i ON b.PrjNum = i.PrjNum
 			WHERE i.CountyNum = @countyNum
-				AND EconCorpCode != ''
+				AND DesignCorpCode != ''
 			)
 		)
-ORDER BY xgrqsj ";
+	                ) AS aaa
+                WHERE 1 = 1"; 
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@countyNum", countyNum);
 
