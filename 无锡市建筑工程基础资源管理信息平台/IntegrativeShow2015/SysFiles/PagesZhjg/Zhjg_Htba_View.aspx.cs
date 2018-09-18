@@ -38,7 +38,10 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
             dtPageData = ihb.SearchInfo(InstanceName.Instance_Read_HtbaInfo.ToString(), arrParas);
             if (!IsPostBack)
             {
+
                 //数据绑定
+                WebCommon.DropDownListDataBind(this.ddl_Xmfl, true);
+                
                 if (dtPageData.Rows.Count > 0)
                 {
                     //dtPageData.Rows[0].SetControlValue(this);
@@ -68,6 +71,8 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                     {
                         this.hlk_PrjHead.NavigateUrl = string.Format("/WxjzgcjczyPage/RyxxToolBar.aspx?ryid={0}&rylx=zczyry", dtPageData.Rows[0]["ryID"]);
                     }
+
+                    this.ddl_Xmfl.SelectedValue = dtPageData.Rows[0]["PrjType"].ToString();
 
                     if (dtPageData.Rows[0]["tag"].ToString() == "省一体化平台")
                     {

@@ -7,6 +7,7 @@
 <head id="Head1" runat="server">
     <title></title>
     <link href="../../App_Themes/Themes_Standard/Stylesheet1.css" rel="Stylesheet" type="text/css" />
+    <script src="../../Common/jquery-1.3.2.min.js" type="text/javascript"></script>
 </head>
 <body class="body_haveBackImg">
     <form id="form1" runat="server">
@@ -87,7 +88,13 @@
                             工程类型
                         </td>
                         <td class="td_value" width="35%">  
-                            <Bigdesk8:DBText ID="PrjTypeLabel" ItemName="PrjTypeLabel" runat="server"></Bigdesk8:DBText>                          
+                            <Bigdesk8:DBDropDownList ID="ddl_Xmfl" runat="server"  ItemRelation="Equal" 
+                                            ToolTip="PrjType" ItemName="PrjType" >
+                            </Bigdesk8:DBDropDownList> 
+                            &nbsp;&nbsp;
+                            <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
+                                <button type="button" id ="saveBtn" onclick='savePrjType()'>保存</button>
+                            <% } else { %>  <% } %>                      
                         </td>
                     </tr>
                     <tr>
@@ -197,6 +204,24 @@
         </tr>
     </table>
     </form>
+     <script type="text/javascript">
+         function savePrjType() {
+             var RecordNum = $("#RecordNum").text();
+             var prjType = $("#ddl_Xmfl  option:selected").val();
+             console.log("prjType:" + prjType + ",RecordNum:" + RecordNum);
+             $.ajax({
+                 type: 'POST',
+                 url: '/WxjzgcjczyPage/Handler/Data.ashx?type=saveHtbaPrjType&RecordNum=' + RecordNum + '&prjType=' + prjType,
+                 async: false,
+                 data: null,
+                 success: function (result) {
+                     alert(result);
+                     window.location.reload();
+                 }
+             });
+         }
+
+    </script>
 </body>
 </html>
 

@@ -143,6 +143,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                     case "downloadCorpCert":
                         json = downloadCorpCert(context);
                         break;
+                    //保存合同备案-工程类型
+                    case "saveHtbaPrjType":
+                        json = saveHtbaPrjType(context);
+                        break;
                 }
             }
             catch (Exception ex)
@@ -772,6 +776,32 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             {
                 result.code = ProcessResult.保存失败和失败原因;
                 result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        public string saveHtbaPrjType(HttpContext context)
+        {
+            HtbaBLL BLL = new HtbaBLL();
+
+            string recordNum = context.Request.Params["RecordNum"];
+            string prjType = context.Request.Params["prjType"];
+            
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                BLLCommon.WriteLog("recordNum : " + recordNum + ",prjType:" + prjType);
+                BLL.saveHtbaPrjType(recordNum, prjType);
+                result.message = "OK";
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+                BLLCommon.WriteLog("message:" + result.message);
 
             }
             return result.ResultMessage;

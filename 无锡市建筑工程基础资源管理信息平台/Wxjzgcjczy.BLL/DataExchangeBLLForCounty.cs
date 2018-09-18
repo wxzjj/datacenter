@@ -447,23 +447,23 @@ namespace Wxjzgcjczy.BLL
 
         public DataTable Get_uepp_jsdw_bycounty(string countyNum, string startDate, string endDate)
         {
-            return DAL.Get_uepp_jsdw_bycounty(countyNum, startDate, endDate); ;
+            return DAL.Get_uepp_jsdw_bycounty(countyNum, startDate, endDate); 
         }
         public DataTable Get_uepp_sgdw_bycounty(String countyNum, List<IDataItem> conditions)
         {
-            return DAL.Get_uepp_sgdw_bycounty(countyNum,conditions); ;
+            return DAL.Get_uepp_sgdw_bycounty(countyNum,conditions); 
         }
         public DataTable Get_uepp_kcdw_bycounty(String countyNum, List<IDataItem> conditions)
         {
-            return DAL.Get_uepp_kcdw_bycounty(countyNum, conditions); ;
+            return DAL.Get_uepp_kcdw_bycounty(countyNum, conditions); 
         }
         public DataTable Get_uepp_sjdw_bycounty(String countyNum, List<IDataItem> conditions)
         {
-            return DAL.Get_uepp_sjdw_bycounty(countyNum, conditions); ;
+            return DAL.Get_uepp_sjdw_bycounty(countyNum, conditions); 
         }
         public DataTable Get_uepp_zjjg_bycounty(String countyNum, List<IDataItem> conditions)
         {
-            return DAL.Get_uepp_zjjg_bycounty(countyNum, conditions); ;
+            return DAL.Get_uepp_zjjg_bycounty(countyNum, conditions); 
         }
 
        
