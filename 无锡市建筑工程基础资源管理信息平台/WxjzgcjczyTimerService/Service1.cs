@@ -5477,6 +5477,11 @@ namespace WxjzgcjczyTimerService
                                 Qyxx qyxx = getCsywlx(corpCertInfo.CertType);
                                 if (string.IsNullOrEmpty(qyxx.csywlxID))
                                     continue;
+                                //特殊处理国基建设集团有限公司错误的安全生产许可证
+                                if ("(晋)JZ安许证字[2011]00045843".Equals(corpCertInfo.CertCode))
+                                {
+                                    continue;
+                                }
 
                                 DataTable dt_qy_zzzs = dataService.Get_uepp_zzzsxx_qyxx(corpCertInfo.CorpCode);
 
