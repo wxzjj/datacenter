@@ -792,7 +792,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             ProcessResultData result = new ProcessResultData();
             try
             {
-                BLLCommon.WriteLog("recordNum : " + recordNum + ",prjType:" + prjType);
+                //BLLCommon.WriteLog("recordNum : " + recordNum + ",prjType:" + prjType);
                 BLL.saveHtbaPrjType(recordNum, prjType);
                 result.message = "OK";
 

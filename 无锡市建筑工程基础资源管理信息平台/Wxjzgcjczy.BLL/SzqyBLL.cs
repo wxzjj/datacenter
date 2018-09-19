@@ -206,6 +206,22 @@ namespace Wxjzgcjczy.BLL
             return DAL.getCsywlxid(qyID);
         }
 
+        public string saveRegArea(string qyID, string city, string county)
+        {
+            string result = "OK";
+            try
+            {
+                //BLLCommon.WriteLog("qyID: " + qyID + "city : " + city + ",county:" + county);
+                DAL.UpdateRegArea(qyID, city, county);
+
+            }
+            catch (Exception ex)
+            {
+                result = ex.Message; 
+
+            }
+            return result;
+        }
 
         #region 其它
 

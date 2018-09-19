@@ -34,5 +34,14 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Szqy
                 this.SetControlValue(list);
             }
         }
+
+        protected void saveBtnClick(object sender, EventArgs e)
+        {
+            string corpID = this.qyID;
+            string city = this.DBTextCity.Text;
+            string county = this.DBTextCounty.Text;
+            BLL.saveRegArea(corpID, city, county);
+
+        }
     }
 }

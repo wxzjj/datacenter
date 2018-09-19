@@ -572,5 +572,16 @@ ORDER BY zzlb
             sp.Add("@qyid", qyID);
             return DB.ExeSqlForDataTable(sql, sp,"dt");
         }
+
+        public void UpdateRegArea(string qyID, string city, string county)
+        {
+            string sql = " update [dbo].[UEPP_Qyjbxx] set City=@city,County=@county WHERE qyID=@qyID";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@city", city);
+            sp.Add("@county", county);
+            sp.Add("@qyID", qyID);
+            this.DB.ExecuteNonQuerySql(sql, sp);
+        }
+
     }
 }

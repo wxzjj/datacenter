@@ -87,10 +87,13 @@
                         <td class="td-value">
                             <Bigdesk8:DBText ID="DBText9" runat="server" ItemName="Province">
                             </Bigdesk8:DBText>&nbsp;&nbsp;
-                            <Bigdesk8:DBText ID="DBText29" runat="server" ItemName="City">
-                            </Bigdesk8:DBText>&nbsp;&nbsp;
-                            <Bigdesk8:DBText ID="DBText69" runat="server" ItemName="County">
-                            </Bigdesk8:DBText>
+                            <Bigdesk8:DBTextBox ID="DBTextCity" ItemName="City" runat="server" style="width: 70px"></Bigdesk8:DBTextBox>
+                            &nbsp;&nbsp;
+                            <Bigdesk8:DBTextBox ID="DBTextCounty" ItemName="County" runat="server" style="width: 70px"></Bigdesk8:DBTextBox>
+                           &nbsp;&nbsp;
+                           <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
+                               <asp:Button ID="saveButton" runat="server" Text="保存"  OnClick="saveBtnClick" />
+                            <% } else { %>  <% } %>
                         </td>
                         <td class="td-text">
                             企业注册地点
