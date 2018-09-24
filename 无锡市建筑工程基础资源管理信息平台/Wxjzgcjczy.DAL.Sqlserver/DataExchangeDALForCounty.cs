@@ -240,6 +240,7 @@ FROM (
 		,SUBSTRING(convert(VARCHAR(30), a.CREATEDATE, 120), 1, 10) CreateDate
 		,a.UpdateFlag
 		,a.sbdqbm
+        ,a.CensorName
 		,i.CountyNum
 	FROM TBProjectCensorInfo a
 	left join TBProjectInfo i on i.PrjNum = a.PrjNum
@@ -768,6 +769,22 @@ WHERE CountyID = @countyNum  AND (a.qyID in (select qyid from uepp_qycsyw where 
             return DB.ExeSqlForDataTable(sql, sp, "buildCorp");
         }
 
+
+        /// <summary>
+        /// 获取企业从事业务类型
+        /// </summary>
+        /// <param name="qyid"></param>
+        /// <returns></returns>
+        public DataTable GetQycsywlx(string qyID)
+        {
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT csywlxID ,csywlx ,DataState FROM WJSJZX.dbo.UEPP_Qycsyw WHERE qyID = @qyID ";
+            sp.Add("@qyID", qyID);
+
+            return DB.ExeSqlForDataTable(sql, sp, "t");
+        }
+
         /// <summary>
         /// 获取企业证书信息
         /// </summary>
@@ -899,6 +916,178 @@ WHERE 1 = 1";
             DataTable dt = DB.ExeSqlForDataTable(sql, null, "dt_qycsywlx");
             return dt;
         }
+
+        #region 人员信息相关表
+        /// <summary>
+        /// 获取江阴注册执业人员
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_ryjbxx_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT [ryID]
+      ,[xm]
+      ,[zjlxID]
+      ,[zjlx]
+      ,[zjhm]
+      ,[xb]
+      ,[csrq]
+      ,[mz]
+      ,[xlID]
+      ,[xl]
+      ,[byyx]
+      ,[zcID]
+      ,[zc]
+      ,[zcjb]
+      ,[zczy]
+      ,[zw]
+      ,[lxdh]
+      ,[yddh]
+      ,[bz]
+      ,[DataState]
+      ,[xgrqsj]
+      ,[ryzz]
+      ,[fzjg]
+      ,[sfzyxqs]
+      ,[sfzyxqz]
+      ,[UpdateTime]
+FROM [WJSJZX].[dbo].[UEPP_Ryjbxx] ry
+WHERE ry.DataState <> - 1 AND tag = '江苏建设公共基础数据平台'
+	AND ry.ryID IN (
+		SELECT DISTINCT ryID
+		FROM WJSJZX.dbo.UEPP_QyRy a
+		WHERE EXISTS (
+				SELECT 1
+				FROM WJSJZX.dbo.UEPP_Qyjbxx
+				WHERE CountyID = @countyNum
+					AND qyID = a.qyID
+				)
+		)";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
+        /// 获取江阴企业人员表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_qyry_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT [ID]
+      ,[qyID]
+      ,[ryID]
+      ,[ryzyzglxID]
+      ,[ryzyzglx]
+      ,[xgrqsj]
+      ,[DataState]
+FROM WJSJZX.dbo.UEPP_QyRy a 
+WHERE a.tag = '江苏建设公共基础数据平台'
+	AND EXISTS (
+		SELECT 1
+		FROM WJSJZX.dbo.UEPP_Qyjbxx
+		WHERE CountyID = @countyNum
+			AND qyID = a.qyID
+		)";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
+        /// 获取江阴人员证书表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_ryzs_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT [zsjlId]
+	,[ryID]
+	,[ryzyzglxID]
+	,[ryzyzglx]
+	,[ryzslxID]
+	,[ryzslx]
+	,[sfzzz]
+	,[zsbh]
+	,[zsyxqrq]
+	,[zsyxzrq]
+	,[fzdw]
+	,[fzrq]
+	,[bz]
+	,[xgrqsj]
+	,[DataState]
+	,[Status]
+	,[QualIssueDate]
+	,[StampNo]
+	,[RegNo]
+FROM [WJSJZX].[dbo].[UEPP_Ryzs] a
+WHERE a.DataState <> - 1 AND a.tag = '江苏建设公共基础数据平台'
+	AND a.ryID IN (
+		SELECT DISTINCT ryID
+		FROM WJSJZX.dbo.UEPP_QyRy b
+		WHERE EXISTS (
+				SELECT 1
+				FROM WJSJZX.dbo.UEPP_Qyjbxx
+				WHERE CountyID = @countyNum
+					AND qyID = b.qyID
+				)
+		)";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
+        /// 获取江阴人员执业明细表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_ryzymx_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT [ID]
+      ,[ryID]
+      ,[ryzyzglxID]
+      ,[ryzyzglx]
+      ,[ryzslxID]
+      ,[ryzslx]
+      ,[zzbz]
+      ,[zyzgdjID]
+      ,[zyzgdj]
+      ,[bz]
+      ,[xgrqsj]
+      ,[DataState]
+      ,[RegIssueDate]
+      ,[QualIssueDate]
+      ,[RegValidDate]
+      ,[QualCertNo]
+  FROM [WJSJZX].[dbo].[UEPP_Ryzymx] a
+WHERE a.DataState <> - 1 AND a.tag = '江苏建设公共基础数据平台'
+	AND a.ryID IN (
+		SELECT DISTINCT ryID
+		FROM WJSJZX.dbo.UEPP_QyRy b
+		WHERE EXISTS (
+				SELECT 1
+				FROM WJSJZX.dbo.UEPP_Qyjbxx
+				WHERE CountyID = @countyNum
+					AND qyID = b.qyID
+				)
+		)";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        #endregion
+
 
         /// <summary>
         /// 根据单位从事业务类型获取施工单位信息

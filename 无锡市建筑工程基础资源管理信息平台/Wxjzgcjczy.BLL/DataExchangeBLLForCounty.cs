@@ -451,7 +451,10 @@ namespace Wxjzgcjczy.BLL
         }
         public DataTable Get_uepp_sgdw_bycounty(String countyNum, List<IDataItem> conditions)
         {
-            return DAL.Get_uepp_sgdw_bycounty(countyNum,conditions); 
+            DataTable dt = DAL.Get_uepp_sgdw_bycounty(countyNum,conditions);
+
+
+            return dt;
         }
         public DataTable Get_uepp_kcdw_bycounty(String countyNum, List<IDataItem> conditions)
         {
@@ -466,11 +469,41 @@ namespace Wxjzgcjczy.BLL
             return DAL.Get_uepp_zjjg_bycounty(countyNum, conditions); 
         }
 
-       
+
+        #region 人员相关信息
+        public DataTable Get_uepp_ryjbxx_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return  DAL.Get_uepp_ryjbxx_bycounty(countyNum, conditions);
+        }
+        public DataTable Get_uepp_qyry_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return DAL.Get_uepp_qyry_bycounty(countyNum, conditions);
+        }
+        public DataTable Get_uepp_ryzs_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return DAL.Get_uepp_ryzs_bycounty(countyNum, conditions);
+        }
+        public DataTable Get_uepp_ryzymx_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return DAL.Get_uepp_ryzymx_bycounty(countyNum, conditions);
+        }
+
+        #endregion
 
         public DataTable GetQyjbxx(string qyid)
         {
             return DAL.GetQyjbxx(qyid);
+        }
+
+
+        /// <summary>
+        /// 获取企业从事业务类型
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public DataTable GetQycsywlx(String qyID)
+        {
+            return DAL.GetQycsywlx(qyID); ;
         }
 
         /// <summary>
