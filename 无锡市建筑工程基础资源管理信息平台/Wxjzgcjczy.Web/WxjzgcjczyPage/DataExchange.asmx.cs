@@ -6449,7 +6449,23 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         }
 
                         dt = BLL.GetTBData_aj_gcjbxx(list);
-                        xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        //xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                         str.AppendFormat("<{0}>", "result");
+                        foreach (DataRow dataRow in dt.Rows)
+                        {
+                            str.AppendFormat("<{0}>", "data");
+
+                            str.AppendFormat("<{0}>", "aj_gcjbxx");
+                            mainXml = xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow);
+                            str.Append(mainXml);
+                            str.AppendFormat("</{0}>", "aj_gcjbxx");
+
+                            tempDt = BLL.GetTBProjectBuilderUserInfo(dataRow["aqjdbm"].ToString());
+                            str.Append(xmlHelper.ConvertDataTableToXMLWithBase64Encoding(tempDt, "BuilderUserInfoList", "BuilderUserInfo"));
+                            str.AppendFormat("</{0}>", "data");
+                        }
+                        str.AppendFormat("</{0}>", "result");
+                        xmlData = str.ToString();
                         break;
                     case "zj_gcjbxx":
                         if (dt_user.Rows[0]["Has_zj_gcjbxx"].ToString2() == "0")

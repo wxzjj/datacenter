@@ -501,6 +501,31 @@ WHERE 1 = 1";
             conditions.GetSearchClause(sp, ref sql);
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
+
+        public DataTable GetTBProjectBuilderUserInfo(string aqjdbm)
+        {
+            string sql = @"SELECT
+a.PKID,	/*业务编码 guid值*/ 
+a.PrjNum,	/*项目编号*/
+a.BuilderLicenceNum,	/*施工许可证编号 按住建部编码规则统一编号*/
+a.CorpName,	/*所属单位名称*/
+a.CorpCode,		/*所属单位组织机构代码*/
+a.SafetyCerID,		/*安全生产许可证编号*/
+a.UserName,	/*人员姓名*/
+a.IDCardTypeNum,	/*证件类型  见代码表*/
+b.CodeInfo as IDCardType,
+a.IDCard,	/*人员证件号码*/
+a.UserPhone,		/*人员电话*/
+a.CertID,	/*安全生产考核合格证书编号*/
+(CASE UserType WHEN 1 THEN '主要负责人' WHEN 2 THEN '主要负责人' WHEN '3' THEN '安全员' END ) as UserType
+FROM TBProjectBuilderUserInfo as a
+LEFT JOIN tbIDCardTypeDic AS b ON a.IDCardTypeNum = b.Code 
+where aqjdbm=@aqjdbm ";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@aqjdbm", aqjdbm);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         public DataTable GetTBData_zj_gcjbxx(List<IDataItem> conditions)
         {
             //string sql = "select * from zj_gcjbxx ";
@@ -985,7 +1010,7 @@ WHERE ry.DataState <> - 1 AND tag = '江苏建设公共基础数据平台'
       ,[xgrqsj]
       ,[DataState]
 FROM WJSJZX.dbo.UEPP_QyRy a 
-WHERE a.tag = '江苏建设公共基础数据平台'
+WHERE a.DataState <> - 1 
 	AND EXISTS (
 		SELECT 1
 		FROM WJSJZX.dbo.UEPP_Qyjbxx
@@ -1058,6 +1083,8 @@ WHERE a.DataState <> - 1 AND a.tag = '江苏建设公共基础数据平台'
       ,[ryzslxID]
       ,[ryzslx]
       ,[zzbz]
+      ,[zyzglbID]
+      ,[zyzglb]
       ,[zyzgdjID]
       ,[zyzgdj]
       ,[bz]

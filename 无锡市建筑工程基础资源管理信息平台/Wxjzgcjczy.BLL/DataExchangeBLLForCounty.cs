@@ -206,6 +206,14 @@ namespace Wxjzgcjczy.BLL
             return dt;
 
         }
+
+        public DataTable GetTBProjectBuilderUserInfo(string aqjdbm)
+        {
+            DataTable dt = DAL.GetTBProjectBuilderUserInfo(aqjdbm);
+            return dt;
+
+        }
+
         /// <summary>
         /// 读取无锡数据中心数据(zj_gcjbxx)
         /// </summary>
