@@ -7090,6 +7090,97 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             return xmlData;
         }
 
+        [WebMethod]
+        public string ReadQyxxForCounty(string tableName, string user, string password, string beginDate, string endDate)
+        {
+            string xmlData = String.Empty;
+
+            DataExchangeBLLForCounty BLL = new DataExchangeBLLForCounty();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            StringBuilder str = new StringBuilder();
+
+
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return xmlData;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return xmlData;
+                }
+
+                //从接口用户中提取区划编码
+                string countyNum = null;
+                if (user.Length > 6)
+                {
+                    countyNum = user.Substring(0, 6);
+                }
+                else
+                {
+                    countyNum = user;
+                }
+                List<IDataItem> list = new List<IDataItem>();
+                IDataItem item;
+                if (!string.IsNullOrEmpty(beginDate))
+                {
+                    DateTime date;
+                    if (DateTime.TryParse(beginDate, out date))
+                    {
+                        item = new DataItem();
+                        item.ItemName = "xgrqsj";
+                        item.ItemRelation = Bigdesk8.Data.DataRelation.GreaterThanOrEqual;
+                        item.ItemType = DataType.String;
+                        item.ItemData = date.ToString("yyyy-MM-dd");
+                        list.Add(item);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(endDate))
+                {
+                    DateTime date;
+                    if (DateTime.TryParse(endDate, out date))
+                    {
+                        item = new DataItem();
+                        item.ItemName = "xgrqsj";
+                        item.ItemData = date.ToString("yyyy-MM-dd");
+                        item.ItemType = DataType.String;
+                        item.ItemRelation = Bigdesk8.Data.DataRelation.LessThanOrEqual;
+                        list.Add(item);
+                    }
+                }
+
+                DataTable dt = null;
+
+                switch (tableName)
+                {
+                    case "UEPP_Qycsyw":
+                        dt = BLL.Get_uepp_qycsyw_bycounty(countyNum, list);
+                        break;
+                    case "UEPP_Qyzs":
+                        dt = BLL.Get_uepp_qyzs_bycounty(countyNum, list);
+                        break;
+                    case "UEPP_Qyzzmx":
+                        dt = BLL.Get_uepp_qyzzmx_bycounty(countyNum, list);
+                        break;
+                }
+
+                //DataTable tempDt;
+                //string mainXml = string.Empty;
+
+                xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+
+
+            }
+
+            return xmlData;
+        }
+
 
         [WebMethod]
         public string ReadQyxxForCountySingle(string user, string password, string qyID)

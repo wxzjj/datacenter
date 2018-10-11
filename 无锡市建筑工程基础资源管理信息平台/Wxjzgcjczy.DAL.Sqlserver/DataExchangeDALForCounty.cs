@@ -614,20 +614,53 @@ WHERE 1 = 1";
         /// <returns></returns>
         public DataTable Get_uepp_jsdw_by_qyid(string jsdwID)
         {
+            string column = @"[jsdwID]
+      ,[UserID]
+      ,[jsdw]
+      ,[zzjgdm]
+      ,[dwlxID]
+      ,[dwlx]
+      ,[dwflID]
+      ,[dwfl]
+      ,[dwdz]
+      ,[yb]
+      ,[fax]
+      ,[fddbr]
+      ,[lxr]
+      ,[lxdh]
+      ,[bz]
+      ,[tag]
+      ,[xgr]
+      ,[xgrqsj]
+      ,[OperateDate]
+      ,[fddbrdh]
+      ,[yyzz]
+      ,[DataState]
+      ,[zgbm]
+      ,[clsj]
+      ,[pzsj]
+      ,[zzdj]
+      ,[zzzsbh]
+      ,[zzyxqrq]
+      ,[zzyxzrq]
+      ,[wz]
+      ,[qyjj]
+      ,[eamail]
+      ,[fddbr_ryid]";
             string sql = "";
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
             if (jsdwID.Length == 9)
             {
-                sql = @"select top 1 * from uepp_jsdw  where jsdwID=@jsdwID or substring(jsdwID,1,8)+substring(jsdwID,10,1)=@jsdwID or (substring(jsdwID,9,9))=@jsdwID order by len(jsdwID) desc ";
+                sql = @"select top 1 " + column  + " from uepp_jsdw  where jsdwID=@jsdwID or substring(jsdwID,1,8)+substring(jsdwID,10,1)=@jsdwID or (substring(jsdwID,9,9))=@jsdwID order by len(jsdwID) desc ";
             }
             else
                 if (jsdwID.Length == 10)
                 {
-                    sql = @"select top 1 * from uepp_jsdw  where jsdwID=@jsdwID or substring(jsdwID,1,8)+'-'+substring(jsdwID,9,1)=@jsdwID or substring(jsdwID,9,8)+'-'+substring(jsdwID,17,1) =@jsdwID  order by len(jsdwID) desc  ";
+                    sql = @"select top 1 " + column + " from uepp_jsdw  where jsdwID=@jsdwID or substring(jsdwID,1,8)+'-'+substring(jsdwID,9,1)=@jsdwID or substring(jsdwID,9,8)+'-'+substring(jsdwID,17,1) =@jsdwID  order by len(jsdwID) desc  ";
                 }
                 else
                 {
-                    sql = @"select top 1  * from uepp_jsdw  where jsdwID=@jsdwID  order by len(jsdwID) desc  ";
+                    sql = @"select top 1  " + column + " from uepp_jsdw  where jsdwID=@jsdwID  order by len(jsdwID) desc  ";
                 }
 
             sp.Add("@jsdwID", jsdwID);
@@ -644,7 +677,39 @@ WHERE 1 = 1";
         {
             string sql = "";
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
-            sql = @"SELECT * FROM WJSJZX.dbo.UEPP_Jsdw
+            sql = @"SELECT [jsdwID]
+      ,[UserID]
+      ,[jsdw]
+      ,[zzjgdm]
+      ,[dwlxID]
+      ,[dwlx]
+      ,[dwflID]
+      ,[dwfl]
+      ,[dwdz]
+      ,[yb]
+      ,[fax]
+      ,[fddbr]
+      ,[lxr]
+      ,[lxdh]
+      ,[bz]
+      ,[tag]
+      ,[xgr]
+      ,[xgrqsj]
+      ,[OperateDate]
+      ,[fddbrdh]
+      ,[yyzz]
+      ,[DataState]
+      ,[zgbm]
+      ,[clsj]
+      ,[pzsj]
+      ,[zzdj]
+      ,[zzzsbh]
+      ,[zzyxqrq]
+      ,[zzyxzrq]
+      ,[wz]
+      ,[qyjj]
+      ,[eamail]
+      ,[fddbr_ryid] FROM WJSJZX.dbo.UEPP_Jsdw
                     WHERE OperateDate > @startDate and OperateDate < @endDate
                     AND WJSJZX.dbo.GetCorpZZJGDM(jsdwID) IN (
 		                    SELECT WJSJZX.dbo.GetCorpZZJGDM(BuildCorpCode)
@@ -1106,6 +1171,127 @@ WHERE a.DataState <> - 1 AND a.tag = '江苏建设公共基础数据平台'
 					AND qyID = b.qyID
 				)
 		)";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        #endregion
+
+
+        #region 企业资质信息
+
+        /// <summary>
+        /// 获取江阴企业从事业务类型表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_qycsyw_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT   [Id]
+      ,[qyID]
+      ,[csywlxID]
+      ,[csywlx]
+      ,[balxID]
+      ,[balx]
+      ,[DataState]
+      ,[tag]
+      ,[xgr]
+      ,[xgrqsj]
+  FROM [WJSJZX].[dbo].[UEPP_Qycsyw] a
+WHERE a.tag = '江苏建设公共基础数据平台'
+	AND EXISTS (
+				SELECT 1
+				FROM WJSJZX.dbo.UEPP_Qyjbxx b
+				WHERE CountyID = @countyNum
+					AND b.qyID = a.qyID
+				)";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
+        /// 获取江阴企业证书表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_qyzs_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT [zsjlId]
+      ,[qyID]
+      ,[csywlxID]
+      ,[csywlx]
+      ,[zslxID]
+      ,[zslx]
+      ,[sfzzz]
+      ,[zsbh]
+      ,[zsyxqrq]
+      ,[zsyxzrq]
+      ,[fzdw]
+      ,[fzrq]
+      ,[bz]
+      ,[tag]
+      ,[xgr]
+      ,[xgrqsj]
+      ,[DataState]
+      ,[PrintNo]
+  FROM [WJSJZX].[dbo].[UEPP_Qyzs] a
+WHERE a.tag = '江苏建设公共基础数据平台'
+	AND EXISTS (
+				SELECT 1
+				FROM WJSJZX.dbo.UEPP_Qyjbxx b
+				WHERE CountyID =@countyNum
+					AND b.qyID = a.qyID
+				)";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
+        /// <summary>
+        /// 获取江阴企业资质明细表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_qyzzmx_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @"SELECT  [ID]
+      ,[qyID]
+      ,[csywlxID]
+      ,[csywlx]
+      ,[zslxID]
+      ,[zslx]
+      ,[zzbz]
+      ,[zzxlID]
+      ,[zzxl]
+      ,[zzhyID]
+      ,[zzhy]
+      ,[zzlbID]
+      ,[zzlb]
+      ,[zzdjID]
+      ,[zzdj]
+      ,[cjywfw]
+      ,[bz]
+      ,[tag]
+      ,[xgr]
+      ,[xgrqsj]
+      ,[DataState]
+      ,[zsbh]
+  FROM [WJSJZX].[dbo].[UEPP_Qyzzmx] a
+WHERE a.tag = '江苏建设公共基础数据平台'
+	AND EXISTS (
+				SELECT 1
+				FROM WJSJZX.dbo.UEPP_Qyjbxx b
+				WHERE CountyID =@countyNum
+					AND b.qyID = a.qyID
+				)";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@countyNum", countyNum);
 
