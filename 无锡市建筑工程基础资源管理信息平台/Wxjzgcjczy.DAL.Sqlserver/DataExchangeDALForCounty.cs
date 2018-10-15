@@ -1204,9 +1204,8 @@ WHERE a.DataState <> - 1 AND a.tag = '江苏建设公共基础数据平台'
 WHERE a.tag = '江苏建设公共基础数据平台'
 	AND EXISTS (
 				SELECT 1
-				FROM WJSJZX.dbo.UEPP_Qyjbxx b
-				WHERE CountyID = @countyNum
-					AND b.qyID = a.qyID
+				FROM WJSJZX.dbo.GetWuFangZhuTiForCounty(@countyNum) b
+				WHERE b.qyID = a.qyID
 				)";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@countyNum", countyNum);
@@ -1244,9 +1243,8 @@ WHERE a.tag = '江苏建设公共基础数据平台'
 WHERE a.tag = '江苏建设公共基础数据平台'
 	AND EXISTS (
 				SELECT 1
-				FROM WJSJZX.dbo.UEPP_Qyjbxx b
-				WHERE CountyID =@countyNum
-					AND b.qyID = a.qyID
+				FROM WJSJZX.dbo.GetWuFangZhuTiForCounty(@countyNum) b
+				WHERE b.qyID = a.qyID
 				)";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@countyNum", countyNum);
@@ -1288,9 +1286,8 @@ WHERE a.tag = '江苏建设公共基础数据平台'
 WHERE a.tag = '江苏建设公共基础数据平台'
 	AND EXISTS (
 				SELECT 1
-				FROM WJSJZX.dbo.UEPP_Qyjbxx b
-				WHERE CountyID =@countyNum
-					AND b.qyID = a.qyID
+				FROM WJSJZX.dbo.GetWuFangZhuTiForCounty(@countyNum) b
+				WHERE b.qyID = a.qyID
 				)";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@countyNum", countyNum);
