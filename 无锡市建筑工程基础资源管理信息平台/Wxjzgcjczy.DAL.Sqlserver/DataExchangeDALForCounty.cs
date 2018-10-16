@@ -1177,6 +1177,28 @@ WHERE a.DataState <> - 1 AND a.tag = '江苏建设公共基础数据平台'
         #endregion
 
 
+
+        /// <summary>
+        /// 获取江阴企业从事业务类型表
+        /// </summary>
+        /// <param name="countyNum"></param>
+        /// <returns></returns>
+        public DataTable Get_uepp_qyjbxx_bycounty(string countyNum, List<IDataItem> conditions)
+        {
+            string sql = @" SELECT * FROM WJSJZX.dbo.UEPP_Qyjbxx a
+WHERE a.tag = '江苏建设公共基础数据平台'
+	AND EXISTS (
+				SELECT 1
+				FROM WJSJZX.dbo.GetWuFangZhuTiForCounty(@countyNum) b
+				WHERE b.qyID = a.qyID
+				)";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         #region 企业资质信息
 
         /// <summary>

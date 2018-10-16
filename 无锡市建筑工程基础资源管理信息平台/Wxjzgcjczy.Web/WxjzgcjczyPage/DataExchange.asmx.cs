@@ -7159,6 +7159,9 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
                 switch (tableName)
                 {
+                    case "UEPP_Qyjbxx":
+                        dt = BLL.Get_uepp_qyjbxx_bycounty(countyNum, list);
+                        break;
                     case "UEPP_Qycsyw":
                         dt = BLL.Get_uepp_qycsyw_bycounty(countyNum, list);
                         break;

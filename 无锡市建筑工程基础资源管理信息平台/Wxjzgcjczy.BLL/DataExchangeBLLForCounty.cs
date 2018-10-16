@@ -499,6 +499,11 @@ namespace Wxjzgcjczy.BLL
         #endregion
 
         #region 企业资质信息
+        public DataTable Get_uepp_qyjbxx_bycounty(String countyNum, List<IDataItem> conditions)
+        {
+            return DAL.Get_uepp_qyjbxx_bycounty(countyNum, conditions);
+        }
+
         public DataTable Get_uepp_qycsyw_bycounty(String countyNum, List<IDataItem> conditions)
         {
             return DAL.Get_uepp_qycsyw_bycounty(countyNum, conditions);
