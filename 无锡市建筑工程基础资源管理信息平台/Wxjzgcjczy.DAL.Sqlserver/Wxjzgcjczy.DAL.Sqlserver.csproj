@@ -90,6 +90,9 @@
     <Compile Include="DataExchangeDALForUpload.cs" />
     <Compile Include="DataExchangeDALForYZSSBDownload.cs" />
     <Compile Include="DataExchangeDALForCounty.cs" />
+    <Compile Include="HtbaDAL.cs" />
+    <Compile Include="DataExchangeDALForYHT.cs" />
+    <Compile Include="DatabaseOperatorYHT.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Wxjzgcjczy.Common\Wxjzgcjczy.Common.csproj">

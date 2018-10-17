@@ -137,6 +137,8 @@
     <Compile Include="DataExchangeBLLForYZSSBDownload.cs" />
     <Compile Include="DataExchangeBLLForJSCEDC.cs" />
     <Compile Include="DataExchangeBLLForCounty.cs" />
+    <Compile Include="HtbaBLL.cs" />
+    <Compile Include="DataExchangeBLLForYHT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

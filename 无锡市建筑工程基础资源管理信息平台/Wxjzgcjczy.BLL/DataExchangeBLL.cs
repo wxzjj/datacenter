@@ -29,6 +29,8 @@ namespace Wxjzgcjczy.BLL
         private readonly Wxjzgcjczy.DAL.Sqlserver.DataExchangeDAL DAL = new Wxjzgcjczy.DAL.Sqlserver.DataExchangeDAL();
         string userName = "320200", password = "we&gjh45H";
 
+        private readonly Wxjzgcjczy.DAL.Sqlserver.DataExchangeDALForYHT DALYHT = new Wxjzgcjczy.DAL.Sqlserver.DataExchangeDALForYHT();
+
         XmlHelper xmlHelper = new XmlHelper();
         ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient client = new ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient();
 
@@ -780,17 +782,24 @@ namespace Wxjzgcjczy.BLL
                 row["xgrqsj"] = DateTime.Now;
 
                 //如果立项文号为空，则重新补充立项文号：(lxwh_type+fb_year+num) FROM [WJSJZX].[dbo].[DG_Programme_Info]
-                if (string.IsNullOrEmpty(row["PrjApprovalNum"].ToString()))
+                try
                 {
-                    BLLCommon.WriteLog(row["PrjNum"].ToString() + " 立项文号为空:");
-                    DataTable dtPrjApprovalNum = DAL.GetTBProjectInfo_PrjApprovalNum(row["PrjNum"].ToString2());
-                    if (dtPrjApprovalNum != null && dtPrjApprovalNum.Rows.Count > 0)
+                    if (string.IsNullOrEmpty(row["PrjApprovalNum"].ToString()))
                     {
-                        row["PrjApprovalNum"] = dtPrjApprovalNum.Rows[0][0].ToString();
-                        BLLCommon.WriteLog("重新获取立项文号:" + row["PrjApprovalNum"].ToString());
+                        BLLCommon.WriteLog(row["PrjNum"].ToString() + " 立项文号为空:");
+                        DataTable dtPrjApprovalNum = DALYHT.GetTBProjectInfo_PrjApprovalNum(row["PrjNum"].ToString2());
+                        if (dtPrjApprovalNum != null && dtPrjApprovalNum.Rows.Count > 0)
+                        {
+                            row["PrjApprovalNum"] = dtPrjApprovalNum.Rows[0][0].ToString();
+                            BLLCommon.WriteLog("重新获取立项文号:" + row["PrjApprovalNum"].ToString());
+                        }
                     }
-                    
                 }
+                catch (Exception e)
+                {
+                    BLLCommon.WriteLog("重新补充立项文号出错:" + e.Message);
+                }
+                
 
             }
             if (dt_TBProjectInfo.Rows.Count > 0)

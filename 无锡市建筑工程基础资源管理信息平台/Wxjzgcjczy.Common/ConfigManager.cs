@@ -101,6 +101,11 @@ namespace Wxjzgcjczy
             return GetConfig("ConnectionString_Sqlserver").ToString();
         }
 
+        public static string GetConnectionString_YHTSqlserver()
+        {
+            return GetConfig("ConnectionString_YHTSqlserver").ToString();
+        }
+
        
         public static string GetCqfxConnectionString()
         {
