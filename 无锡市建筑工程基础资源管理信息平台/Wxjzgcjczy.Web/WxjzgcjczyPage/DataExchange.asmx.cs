@@ -7066,6 +7066,20 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 {
                     case "UEPP_Ryjbxx":
                         dt = BLL.Get_uepp_ryjbxx_bycounty(countyNum, list);
+                        if (!string.IsNullOrEmpty(beginDate) && !string.IsNullOrEmpty(endDate))
+                        {
+                            DataRow[] filterDataRows = dt.Select("xgrqsj>=#" + beginDate + "# AND xgrqsj <#" + endDate + "#");
+
+                            str.AppendFormat("<{0}>", "dataTable");
+                            foreach (DataRow dataRow in filterDataRows)
+                            {
+                                str.AppendFormat("<{0}>", "row");
+                                str.Append(xmlHelper.ConvertDataRowToXMLWithBase64Encoding(dataRow));
+                                str.AppendFormat("</{0}>", "row");
+                            }
+                            str.AppendFormat("</{0}>", "dataTable");
+                            xmlData = str.ToString2();
+                        }  
                         break;
                     case "UEPP_QyRy":
                         dt = BLL.Get_uepp_qyry_bycounty(countyNum, list);
@@ -7081,10 +7095,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
                 //DataTable tempDt;
                 //string mainXml = string.Empty;
-
-                xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
-                 
-
+                if (string.IsNullOrEmpty(xmlData))
+                {
+                    xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                }
             }
 
             return xmlData;

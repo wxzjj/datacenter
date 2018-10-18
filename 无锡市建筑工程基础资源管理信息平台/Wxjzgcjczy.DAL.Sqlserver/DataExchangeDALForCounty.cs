@@ -1055,7 +1055,7 @@ WHERE ry.DataState <> - 1 AND tag = '江苏建设公共基础数据平台'
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@countyNum", countyNum);
 
-            conditions.GetSearchClause(sp, ref sql);
+            //conditions.GetSearchClause(sp, ref sql);
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
