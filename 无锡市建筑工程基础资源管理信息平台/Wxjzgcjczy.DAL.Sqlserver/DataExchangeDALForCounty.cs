@@ -409,10 +409,35 @@ WHERE uuid = @uuid order by UpdateTime asc";
             return DB.ExeSqlForDataTable(sql, sp, "t");
         }
 
-        public DataTable GetTBData_TBProjectBuilderUserInfo(List<IDataItem> conditions)
+        public DataTable GetTBData_TBProjectBuilderUserInfoForCounty(string countyNum)
         {
-            string sql = "select * from TBProjectBuilderUserInfo ";
-            return DB.ExeSqlForDataTable(sql, null, "dt");
+            string sql = @"SELECT a.[PKID]
+      ,a.[PrjNum]
+      ,a.[aqjdbm]
+      ,a.[BuilderLicenceNum]
+      ,a.[CorpName]
+      ,a.[CorpCode]
+      ,a.[SafetyCerID]
+      ,a.[UserName]
+      ,a.[IDCardTypeNum]
+      ,a.[IDCard]
+      ,a.[UserPhone]
+      ,a.[CertID]
+      ,a.[UserType]
+      ,a.[UpdateFlag]
+      ,b.CountyNum AS [sbdqbm]
+      ,a.[DataState]
+      ,a.[cjrqsj]
+      ,a.[xgrqsj]
+      ,a.[scrqsj]
+      ,a.[returnResult]
+      ,a.[updateUser]
+  FROM [WJSJZX].[dbo].[TBProjectBuilderUserInfo] a
+  left join WJSJZX.dbo.TBProjectInfo b on a.PrjNum = b.PrjNum 
+    where b.countyNum = @countyNum";
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+            sp.Add("@countyNum", countyNum);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
         public DataTable GetTBData_TBProjectFinishManage(List<IDataItem> conditions)
         {

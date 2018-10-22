@@ -180,6 +180,13 @@ namespace Wxjzgcjczy.BLL
 
         }
 
+        public DataTable GetTBData_aj_zj_sgxk_relation(List<IDataItem> conditions)
+        {
+            DataTable dt = DAL.GetTBData_aj_zj_sgxk_relation(conditions);
+            return dt;
+
+        }
+
 
 
         #region 获取代码表里的代码信息

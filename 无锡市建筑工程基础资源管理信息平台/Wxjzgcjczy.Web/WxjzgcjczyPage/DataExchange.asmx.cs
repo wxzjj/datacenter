@@ -351,7 +351,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         {
                             return xmlData;
                         }
-                        dt = BLL.GetTBData_zj_gcjbxx_zrdw(list);
+                        dt = BLL.GetTBData_aj_zj_sgxk_relation(list);
                         xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
                         break;
                     default:
@@ -737,6 +737,16 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         if (dt_user.Rows[0]["Has_zj_gcjbxx"].ToString2() == "0")
                         {
                             return xmlData;
+                        }
+
+                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
+                        {
+                            item = new DataItem();
+                            item.ItemName = "sbdqbm";
+                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
+                            item.ItemType = DataType.String;
+                            item.ItemData = user;
+                            list.Add(item);
                         }
 
                         dt = BLL.GetTBData_zj_gcjbxx_zrdw(list);
@@ -6391,24 +6401,14 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
                         xmlData = str.ToString();
                         break;
-                    case "tbprojectBuilderuserinfo"://TBProjectBuilderUserInfo
+                    case "tbprojectbuilderuserinfo"://TBProjectBuilderUserInfo
 
-                        if (dt_user.Rows[0]["Has_TBProjectBuilderUserInfo"].ToString2() == "0")
+                        if (dt_user.Rows[0]["Has_aj_gcjbxx"].ToString2() == "0")
                         {
                             return xmlData;
                         }
-
-                        if (dt_user.Rows[0]["Flag"].ToString2() == "1")
-                        {
-                            item = new DataItem();
-                            item.ItemName = "sbdqbm";
-                            item.ItemRelation = Bigdesk8.Data.DataRelation.Equal;
-                            item.ItemType = DataType.String;
-                            item.ItemData = user;
-                            list.Add(item);
-                        }
-
-                        dt = BLL.GetTBData_TBProjectBuilderUserInfo(list);
+ 
+                        dt = BLL.GetTBData_TBProjectBuilderUserInfoForCounty(user);
                         xmlData = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
                         break;
                     case "tbprojectfinishmanage"://TBProjectFinishManage

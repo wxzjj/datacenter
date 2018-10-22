@@ -180,9 +180,9 @@ namespace Wxjzgcjczy.BLL
         /// 读取无锡数据中心数据(TBProjectBuilderUserInfo)
         /// </summary>
         /// <returns></returns>
-        public DataTable GetTBData_TBProjectBuilderUserInfo(List<IDataItem> conditions)
+        public DataTable GetTBData_TBProjectBuilderUserInfoForCounty(string countyNum)
         {
-            DataTable dt = DAL.GetTBData_TBProjectBuilderUserInfo(conditions);
+            DataTable dt = DAL.GetTBData_TBProjectBuilderUserInfoForCounty(countyNum);
             return dt;
 
         }
