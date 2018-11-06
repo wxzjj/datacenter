@@ -938,7 +938,8 @@ c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') 
                 }
                 else
                 {
-                    sql = @"select top 1  * from uepp_jsdw  where jsdwID=@jsdwID  order by len(jsdwID) desc  ";
+                   // sql = @"select top 1  * from uepp_jsdw  where jsdwID=@jsdwID  order by len(jsdwID) desc  ";
+                   sql = @"select top 1 * from WJSJZX.dbo.UEPP_Jsdw where jsdwID = [dbo].[GetCorpZZJGDM](@jsdwID) or jsdwID = @jsdwID order by len(jsdwID) asc  ";
                 }
         
             sp.Add("@jsdwID", jsdwID);
