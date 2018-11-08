@@ -55,7 +55,7 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                     }
                     else
                     {
-                        this.hlk_BuildCorpName.NavigateUrl = string.Format("/WxjzgcjczyPage/Szqy/QyxxToolBar.aspx?qyid={0}", dtPageData.Rows[0]["BuildCorpCode"]);
+                        this.hlk_BuildCorpName.NavigateUrl = string.Format("/WxjzgcjczyPage/Szqy/JsdwxxToolBar.aspx?jsdwid={0}", dtPageData.Rows[0]["BuildCorpCode"]);
                     }
 
                     this.hlk_EconCorpName.Text = dtPageData.Rows[0]["EconCorpName"].ToString();

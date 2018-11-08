@@ -192,7 +192,7 @@
                         <asp:TemplateField HeaderText="建设单位名称">
                             <ItemTemplate>
                                 <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("BuildCorpName") %>'
-                                    NavigateUrl='<%#string.Format("/WxjzgcjczyPage/Szqy/QyxxToolBar.aspx?qyid={0}",Eval("BuildCorpCode")) %>'
+                                    NavigateUrl='<%#string.Format("/WxjzgcjczyPage/Szqy/JsdwxxToolBar.aspx?jsdwid={0}",Eval("BuildCorpCode")) %>'
                                     Target="_blank" Enabled='<%# Eval("BuildCorpCode")!=DBNull.Value %>' />
                             </ItemTemplate>
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="11%" HorizontalAlign="left" />
