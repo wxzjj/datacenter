@@ -688,7 +688,8 @@ left join TBProjectInfo b on a.PrjNum=b.PrjNum where a.PrjNum=@PrjNum and a.Upda
                         a.BuilderLicenceNum,a.CensorNum,
                         convert(char(10),a.IssueCertDate,20) as IssueCertDate,
                         a.EconCorpName,a.DesignCorpName,a.ConsCorpName,a.SuperCorpName,
-                        a.PrjNum, b.PrjName,b.PKID as LxPKID,c.qyID as kcqyID,d.qyID as sjqyID,e.qyID as sgqyID,b.CountyNum
+                        a.PrjNum, b.PrjName,b.PKID as LxPKID,c.qyID as kcqyID,d.qyID as sjqyID,e.qyID as sgqyID,b.CountyNum,
+                        b.BuildCorpName,b.BuildCorpCode
                         FROM TBBuilderLicenceManage a 
                         left join TBProjectInfo b on a.PrjNum=b.PrjNum 
 						left join UEPP_Qyjbxx c on c.zzjgdm=a.EconCorpCode  
@@ -720,7 +721,8 @@ left join TBProjectInfo b on a.PrjNum=b.PrjNum where a.PrjNum=@PrjNum and a.Upda
                         a.BuilderLicenceNum,a.CensorNum,
                         convert(char(10),a.IssueCertDate,20) as IssueCertDate,
                         a.EconCorpName,a.DesignCorpName,a.ConsCorpName,a.SuperCorpName,
-                        a.PrjNum, b.PrjName,b.PKID as LxPKID,c.qyID as kcqyID,d.qyID as sjqyID,e.qyID as sgqyID,b.CountyNum
+                        a.PrjNum, b.PrjName,b.PKID as LxPKID,c.qyID as kcqyID,d.qyID as sjqyID,e.qyID as sgqyID,b.CountyNum,
+                        b.BuildCorpName,b.BuildCorpCode
                         FROM TBBuilderLicenceManage a 
                         left join TBProjectInfo b on a.PrjNum=b.PrjNum 
 						left join UEPP_Qyjbxx c on c.zzjgdm=a.EconCorpCode  
@@ -1550,45 +1552,47 @@ WHERE a.PKID=@PKID
             //这段SQL用于取出所有单项项目
             dh.strSQL = @"
 select
-PKID,	/*业务编码 guid值*/ 
-BuilderLicenceName,	/*项目名称*/
-BuilderLicenceNum,	/*施工许可证编号 按住建部编码规则统一编号*/
-BuilderLicenceInnerNum,	/*施工许可证内部编号*/
-PrjNum,	/*项目编号*/
-BuldPlanNum,		/*建设用地规划许可证编号*/
-ProjectPlanNum,		/*建设工程规划许可证编号*/
-CensorNum,		/*施工图审查合格书编号*/
-ContractMoney,		/*合同金额(万元)*/
-Area,	/*面积（平方米）*/
-PrjSize,		/*建设规模*/
-IssueCertDate,	/*发证日期*/
-EconCorpName,	/*勘察单位名称*/
-EconCorpCode,	/*勘察单位组织机构代码*/
-DesignCorpName,	/*设计单位名称*/
-DesignCorpCode,	/*设计单位组织机构代码*/
-ConsCorpName,	/*施工单位名称*/
-ConsCorpCode,	/*施工单位组织机构代码*/
-SafetyCerID,		/*施工单位安全生产许可证编号*/
-SuperCorpName,	/*监理单位名称*/
-SuperCorpCode,	/*监理单位组织机构代码*/
-ConstructorName,	/*项目经理姓名*/
-CIDCardTypeNum,	/*项目经理证件类型  见代码表*/
+a.PKID,	/*业务编码 guid值*/ 
+a.BuilderLicenceName,	/*项目名称*/
+a.BuilderLicenceNum,	/*施工许可证编号 按住建部编码规则统一编号*/
+a.BuilderLicenceInnerNum,	/*施工许可证内部编号*/
+a.PrjNum,	/*项目编号*/
+a.BuldPlanNum,		/*建设用地规划许可证编号*/
+a.ProjectPlanNum,		/*建设工程规划许可证编号*/
+a.CensorNum,		/*施工图审查合格书编号*/
+a.ContractMoney,		/*合同金额(万元)*/
+a.Area,	/*面积（平方米）*/
+a.PrjSize,		/*建设规模*/
+a.IssueCertDate,	/*发证日期*/
+a.EconCorpName,	/*勘察单位名称*/
+a.EconCorpCode,	/*勘察单位组织机构代码*/
+a.DesignCorpName,	/*设计单位名称*/
+a.DesignCorpCode,	/*设计单位组织机构代码*/
+a.ConsCorpName,	/*施工单位名称*/
+a.ConsCorpCode,	/*施工单位组织机构代码*/
+a.SafetyCerID,		/*施工单位安全生产许可证编号*/
+a.SuperCorpName,	/*监理单位名称*/
+a.SuperCorpCode,	/*监理单位组织机构代码*/
+a.ConstructorName,	/*项目经理姓名*/
+a.CIDCardTypeNum,	/*项目经理证件类型  见代码表*/
 b1.CodeInfo as CIDCardType,
-ConstructorIDCard,	/*项目经理证件号码*/
-ConstructorPhone	,		/*项目经理电话号码*/
-SupervisionName,	/*总监理工程师姓名*/
-SIDCardTypeNum,	/*总监理工程师证件类型 见代码表*/
+a.ConstructorIDCard,	/*项目经理证件号码*/
+a.ConstructorPhone	,		/*项目经理电话号码*/
+a.SupervisionName,	/*总监理工程师姓名*/
+a.SIDCardTypeNum,	/*总监理工程师证件类型 见代码表*/
 b2.CodeInfo as SIDCardType,
-SupervisionIDCard,	/*总监理工程师证件号码*/
-SupervisionPhone		/*总监理工程师电话*/
-,c.qyID as kcqyID,d.qyID as sjqyID,e.qyID as sgqyID
+a.SupervisionIDCard,	/*总监理工程师证件号码*/
+a.SupervisionPhone		/*总监理工程师电话*/
+,c.qyID as kcqyID,d.qyID as sjqyID,e.qyID as sgqyID,
+b.BuildCorpName,b.BuildCorpCode
 FROM TBBuilderLicenceManage as a
 LEFT JOIN tbIDCardTypeDic AS b1 ON a.CIDCardTypeNum = b1.Code 
 LEFT JOIN tbIDCardTypeDic AS b2 ON a.SIDCardTypeNum = b2.Code 
 left join UEPP_Qyjbxx c on a.EconCorpCode =c.zzjgdm 
 left join UEPP_Qyjbxx d on a.DesignCorpCode =d.zzjgdm 
 left join UEPP_Qyjbxx e on a.ConsCorpCode =e.zzjgdm 
-WHERE PKID=@PKID
+left join TBProjectInfo b on a.PrjNum=b.PrjNum 
+WHERE a.PKID=@PKID
 ";
             dh.spc.Add("@PKID", strParas[0]);
         }

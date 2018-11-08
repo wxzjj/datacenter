@@ -47,6 +47,17 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                 {
                     //dtPageData.Rows[0].SetControlValue(this);
                     this.SetControlValue(dtPageData.Rows[0].ToDataItem());
+
+                    this.hlk_BuildCorpName.Text = dtPageData.Rows[0]["BuildCorpName"].ToString();
+                    if (string.IsNullOrEmpty(dtPageData.Rows[0]["BuildCorpCode"].ToString()))
+                    {
+                        this.hlk_BuildCorpName.Enabled = false;
+                    }
+                    else
+                    {
+                        this.hlk_BuildCorpName.NavigateUrl = string.Format("/WxjzgcjczyPage/Szqy/QyxxToolBar.aspx?qyid={0}", dtPageData.Rows[0]["BuildCorpCode"]);
+                    }
+
                     this.hlk_EconCorpName.Text = dtPageData.Rows[0]["EconCorpName"].ToString();
                     if (string.IsNullOrEmpty(dtPageData.Rows[0]["kcqyID"].ToString()))
                     {

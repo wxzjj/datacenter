@@ -166,6 +166,22 @@
                     </tr>
                     <tr>
                         <td class="td_text" width="15%">
+                            建设单位名称
+                        </td>
+                        <td class="td_value" width="35%">
+                           <%-- <Bigdesk8:DBText ID="EconCorpName" ItemName="EconCorpName" runat="server"></Bigdesk8:DBText>--%>
+                           <asp:HyperLink ID="hlk_BuildCorpName" runat="server"  Target="_blank"></asp:HyperLink>
+                        </td>
+                        <td class="td_text" width="15%">
+                            建设单位组织机构代码<br />
+                            （社会信用代码）
+                        </td>
+                        <td class="td_value" width="35%">
+                            <Bigdesk8:DBText ID="BuildCorpCode" ItemName="BuildCorpCode" runat="server"></Bigdesk8:DBText>
+                        </td>
+                    </tr>   
+                    <tr>
+                        <td class="td_text" width="15%">
                             勘察单位名称
                         </td>
                         <td class="td_value" width="35%">

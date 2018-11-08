@@ -89,6 +89,12 @@
                                 </tr>
                                 <tr>
                                     <td class="td_text" width="15%">
+                                        建设单位名称
+                                    </td>
+                                    <td class="td_value" width="35%">
+                                        <Bigdesk8:DBTextBox ID="BuildCorpName" ItemName="BuildCorpName" runat="server"></Bigdesk8:DBTextBox>
+                                    </td>
+                                    <td class="td_text" width="15%">
                                         发证日期
                                     </td>
                                     <td class="td_value" width="35%">
@@ -98,6 +104,9 @@
                                         <Bigdesk8:DBTextBox ID="IssueCertDate2" FieldType="Date" Width="40%" ItemName="IssueCertDate"
                                             ItemRelation="LessThanOrEqual" runat="server"></Bigdesk8:DBTextBox>
                                     </td>
+                                </tr>
+                                <tr>
+                                    
                                     <td class="td_text" width="15%">
                                         项目属地
                                     </td>
@@ -105,6 +114,8 @@
                                         <Bigdesk8:DBDropDownList ID="DDL_xmsd" ItemName="CountyNum" DropDownListType="Value"
                                             ForeColor="Blue" ToolTip="Xzqdm" runat="server">
                                         </Bigdesk8:DBDropDownList>
+                                    </td>
+                                    <td class="td_value" width="50%" colspan="2" >
                                     </td>
                                 </tr>
                                 <tr>
@@ -178,6 +189,15 @@
                             <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="11%" HorizontalAlign="left" />
                             <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" />
                         </asp:BoundField>   --%>
+                        <asp:TemplateField HeaderText="建设单位名称">
+                            <ItemTemplate>
+                                <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("BuildCorpName") %>'
+                                    NavigateUrl='<%#string.Format("/WxjzgcjczyPage/Szqy/QyxxToolBar.aspx?qyid={0}",Eval("BuildCorpCode")) %>'
+                                    Target="_blank" Enabled='<%# Eval("BuildCorpCode")!=DBNull.Value %>' />
+                            </ItemTemplate>
+                            <ItemStyle BorderWidth="1px" BorderColor="#7B7B7B" Width="11%" HorizontalAlign="left" />
+                            <HeaderStyle BorderWidth="1px" BorderColor="#7B7B7B" ForeColor="Yellow" />
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="勘察单位名称">
                             <ItemTemplate>
                                 <asp:HyperLink ID="HyperLink_View" runat="server" Text='<%#Eval("EconCorpName") %>'
