@@ -29,7 +29,7 @@ namespace Wxjzgcjczy.BLL
         private readonly Wxjzgcjczy.DAL.Sqlserver.DataExchangeDAL DAL = new Wxjzgcjczy.DAL.Sqlserver.DataExchangeDAL();
         string userName = "320200", password = "we&gjh45H";
 
-        private readonly Wxjzgcjczy.DAL.Sqlserver.DataExchangeDALForYHT DALYHT = new Wxjzgcjczy.DAL.Sqlserver.DataExchangeDALForYHT();
+        private readonly DataExchangeBLLForYHT DALYHT = new DataExchangeBLLForYHT();
 
         XmlHelper xmlHelper = new XmlHelper();
         ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient client = new ReceiveDataServiceSpace.ReceiveDataServicePortTypeClient();
