@@ -890,6 +890,14 @@ where 1=1 ";
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
+        public DataTable GetTBData_Ap_ajsbb_gis(string pointId)
+        {
+            string sql = "select * from Ap_ajsbb_gis where pointId =@pointId  ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@pointId", pointId); ;
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         public DataTable GetTBData_zj_gcjbxx(string zljdbmString)
         {
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
@@ -1225,6 +1233,13 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
             string sql = "select * from TBProjectFinishManage where 1=2";
             return DB.Update(sql, null, dt);
         }
+
+        public bool SaveTBData_Ap_ajsbb_gis(DataTable dt)
+        {
+            string sql = "select * from Ap_ajsbb_gis where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
         public bool SaveTBData_aj_gcjbxx(DataTable dt)
         {
             string sql = "select * from aj_gcjbxx where 1=2";

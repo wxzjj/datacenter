@@ -5590,7 +5590,71 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
         }
 
+        /// <summary>
+        /// 保存安监项目GIS坐标信息
+        /// </summary>
+        /// <param name="xmlData"></param>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string SaveAjsbbGisToZx(string xmlData, string user, string password)
+        {
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                DataExchangeBLL BLL = new DataExchangeBLL();
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
 
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result.code = ProcessResult.用户名或密码错误;
+                    result.message = "用户名或密码错误！";
+                    return result.ResultMessage;
+                }
+
+                if (string.IsNullOrEmpty(xmlData))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "传入的XML格式数据为空！";
+                    return result.ResultMessage;
+                }
+                string message;
+                DataTable dt_Data = xmlHelper.ConvertXMLToDataTableWithBase64Decoding(xmlData, out message);
+
+                if (dt_Data == null)
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = message;
+                    return result.ResultMessage;
+                }
+                string xml = xmlHelper.ConvertDataTableToXML(dt_Data, "dataTable", "row");
+                WebCommon.WriteLog("\r\nSaveAjsbbGisToZx：DateTime:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "\r\ndata:" + xml + "\r\n");
+
+                if (dt_user.Rows[0]["Has_Ap_ajsbb_gis_Write"].ToString2() == "0")
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "该用户不允许保存Ap_ajsbb_gis表数据！";
+                    return result.ResultMessage;
+                }
+                result = BLL.SaveAjsbbGis(user, dt_Data);
+                
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+            }
+
+            return result.ResultMessage;
+
+        }
 
         /// <summary>
         /// 保存无锡市保障办（保障房源信息）

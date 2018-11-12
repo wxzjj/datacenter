@@ -3378,6 +3378,65 @@ namespace Wxjzgcjczy.BLL
         }
 
 
+        public ProcessResultData SaveAjsbbGis(string user, DataTable dt_Data)
+        {
+            ProcessResultData result = new ProcessResultData();
+
+            /**
+            List<string> novalidates = new List<string>();
+            novalidates.Add(String.Empty);
+            novalidates.Add("无");
+            novalidates.Add("/");
+            string[] fields = new string[] { "pointId", "uuid", "modified", "mapLat", "mapLng", "pointOrder", "pointTeam", "pointType" ,"updateFlag"};
+            string msg = String.Empty;
+            foreach (DataRow item in dt_Data.Rows)
+            {
+                if (BLL.BLLCommon.DataFieldIsNullOrEmpty(novalidates, fields, item, out msg))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = msg + "不能为空！";
+                    return result;
+                }
+            }
+             */
+
+            DataTable dt;
+            DataRow row;
+
+            foreach (DataRow item in dt_Data.Rows)
+            {
+                dt = DAL.GetTBData_Ap_ajsbb_gis(item["pointId"].ToString2());
+
+                if (dt.Rows.Count > 0)
+                {
+                    row = dt.Rows[0];
+                    DataTableHelp.DataRow2DataRow(item, row, new List<string>() { "pointId" });
+                }
+                else
+                {
+                    row = dt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, row);
+                    row["CreateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    dt.Rows.Add(row);
+                }
+                row["updateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                row["updateUser"] = user;
+
+                if (DAL.SaveTBData_Ap_ajsbb_gis(dt))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "数据保存失败！";
+                }
+
+            }
+
+            result.code = ProcessResult.数据保存成功;
+            result.message = "数据保存成功！";
+
+            return result;
+        }
+
+
         #endregion
 
 
