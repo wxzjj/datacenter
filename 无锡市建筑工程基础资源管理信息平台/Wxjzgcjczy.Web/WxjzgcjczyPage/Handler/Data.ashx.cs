@@ -147,6 +147,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                     case "saveHtbaPrjType":
                         json = saveHtbaPrjType(context);
                         break;
+                    //保存合同备案-联合体
+                    case "saveHtbaUnion":
+                        json = saveHtbaUnion(context);
+                        break;
                 }
             }
             catch (Exception ex)
@@ -794,6 +798,33 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             {
                 //BLLCommon.WriteLog("recordNum : " + recordNum + ",prjType:" + prjType);
                 BLL.saveHtbaPrjType(recordNum, prjType);
+                result.message = "OK";
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+                BLLCommon.WriteLog("message:" + result.message);
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        public string saveHtbaUnion(HttpContext context)
+        {
+            HtbaBLL BLL = new HtbaBLL();
+
+            string recordNum = context.Request.Params["RecordNum"];
+            string unionCorpName = context.Request.Params["unionCorpName"];
+            string unionCorpCode = context.Request.Params["unionCorpCode"];
+
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                //BLLCommon.WriteLog("recordNum : " + recordNum + ",unionCorpName:" + unionCorpName + ",unionCorpCode" + unionCorpCode);
+                BLL.saveHtbaUnion(recordNum, unionCorpName, unionCorpCode);
                 result.message = "OK";
 
             }

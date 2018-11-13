@@ -33,6 +33,11 @@ namespace Wxjzgcjczy.BLL
             DAL.UpdateHtbaPrjType(recordNum, prjType);
         }
 
+        public void saveHtbaUnion(string recordNum, string unionCorpName, string unionCorpCode)
+        {
+            DAL.UpdateHtbaUnion(recordNum, unionCorpName, unionCorpCode);
+        }
+
 
     }
 

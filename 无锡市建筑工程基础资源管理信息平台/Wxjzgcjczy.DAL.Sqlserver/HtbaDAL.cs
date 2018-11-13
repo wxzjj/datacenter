@@ -27,6 +27,15 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sp.Add("@recordNum", recordNum);
             this.DB.ExecuteNonQuerySql(sql, sp);
         }
+        public void UpdateHtbaUnion(string recordNum, string unionCorpName, string unionCorpCode)
+        {
+            string sql = "update [dbo].[TBContractRecordManage] set UnionCorpName=@unionCorpName,UnionCorpCode=@unionCorpCode where RecordNum=@recordNum ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@unionCorpName", unionCorpName);
+            sp.Add("@unionCorpCode", unionCorpCode);
+            sp.Add("@recordNum", recordNum);
+            this.DB.ExecuteNonQuerySql(sql, sp);
+        }
  
     }
 

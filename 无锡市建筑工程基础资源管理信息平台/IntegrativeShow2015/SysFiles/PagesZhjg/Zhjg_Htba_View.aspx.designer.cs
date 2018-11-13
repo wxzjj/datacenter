@@ -163,7 +163,7 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText UnionCorpName;
+        protected global::Bigdesk8.Web.Controls.DBTextBox UnionCorpName;
         
         /// <summary>
         /// UnionCorpCode 控件。
@@ -172,7 +172,7 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Bigdesk8.Web.Controls.DBText UnionCorpCode;
+        protected global::Bigdesk8.Web.Controls.DBTextBox UnionCorpCode;
         
         /// <summary>
         /// hlk_PrjHead 控件。

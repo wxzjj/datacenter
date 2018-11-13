@@ -6,6 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="../../App_Themes/Themes_Standard/Stylesheet1.css" rel="Stylesheet" type="text/css" />
     <script src="../../Common/jquery-1.3.2.min.js" type="text/javascript"></script>
 </head>
@@ -143,13 +144,17 @@
                             联合体承包单位名称
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="UnionCorpName" ItemName="UnionCorpName" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBTextBox ID="UnionCorpName" ItemName="UnionCorpName" runat="server"></Bigdesk8:DBTextBox>
                         </td>
                         <td class="td_text" width="15%">
                             联合体承包单位组织代码
                         </td>
                         <td class="td_value" width="35%">
-                            <Bigdesk8:DBText ID="UnionCorpCode" ItemName="UnionCorpCode" runat="server"></Bigdesk8:DBText>
+                            <Bigdesk8:DBTextBox ID="UnionCorpCode" ItemName="UnionCorpCode" runat="server"></Bigdesk8:DBTextBox>
+                            &nbsp;&nbsp;
+                             <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
+                                <button type="button" id ="saveUnionBtn" onclick='saveUnion()'>保存</button>
+                            <% } else { %>  <% } %> 
                         </td>
                     </tr>
                     <tr>
@@ -212,6 +217,25 @@
              $.ajax({
                  type: 'POST',
                  url: '/WxjzgcjczyPage/Handler/Data.ashx?type=saveHtbaPrjType&RecordNum=' + RecordNum + '&prjType=' + prjType,
+                 async: false,
+                 data: null,
+                 success: function (result) {
+                     alert(result);
+                     window.location.reload();
+                 }
+             });
+         }
+         function saveUnion() {
+             var RecordNum = $("#RecordNum").text();
+             //解决中文乱码
+             var unionCorpName = encodeURIComponent($("#UnionCorpName").val());
+             var unionCorpCode = $("#UnionCorpCode").val();
+
+             console.log("unionCorpName:" + unionCorpName + ",unionCorpCode:" + unionCorpCode);
+             $.ajax({
+                 type: 'POST',
+                 //contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+                 url: '/WxjzgcjczyPage/Handler/Data.ashx?type=saveHtbaUnion&RecordNum='+RecordNum+'&unionCorpName=' + unionCorpName + '&unionCorpCode=' + unionCorpCode,
                  async: false,
                  data: null,
                  success: function (result) {
