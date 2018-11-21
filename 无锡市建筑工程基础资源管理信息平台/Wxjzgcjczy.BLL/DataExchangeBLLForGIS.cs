@@ -127,6 +127,17 @@ namespace Wxjzgcjczy.BLL
 
         #endregion
 
+        #region  查询项目和实体
+
+        public DataTable queryProjectAndEntity(string projectId, string projectName, string partyCode, string partyName)
+        {
+            DataTable dt = DAL.queryProjectAndEntity(projectId, projectName, partyCode, partyName);
+            return dt;
+        }
+        
+
+        #endregion
+
 
         #region 接收档案相关信息
 

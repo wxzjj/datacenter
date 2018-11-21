@@ -572,6 +572,121 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
         #endregion
 
+        #region 获取项目和实体
+
+        public DataTable queryProjectAndEntity(string projectId, string projectName, string partyCode, string partyName)
+        {
+            DataTable dt = this.queryProjectAndEntity4Jsdw(projectId, projectName, partyCode, partyName);
+
+            DataTable dt1 = this.queryProjectAndEntity4Others(projectId, projectName, partyCode, partyName);
+
+            dt.Merge(dt1);
+
+            return dt;
+        }
+
+        public DataTable queryProjectAndEntity4Jsdw(string projectId, string projectName, string partyCode, string partyName)
+        {
+            DataTable dt = new DataTable();
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("SELECT a.PrjNum");
+            sb.Append(",a.PrjName");
+            sb.Append(",p.PrjAddress");
+            sb.Append(",'建设' as TenderType");
+            sb.Append(",qy.zzjgdm as orgCode");
+            sb.Append(",qy.jsdw as orgName");
+            sb.Append(",qy.dwdz as orgAddress");
+            sb.Append(",qy.lxr as orgResponsiblePerson");
+            sb.Append(",qy.lxdh as orgPhone");
+            sb.Append(",qy.fddbr_ryid");
+            sb.Append(",qy.fddbr as orgAgent");
+            sb.Append(" FROM Ap_ajsbb a");
+            sb.Append(" LEFT JOIN TBProjectInfoDoc p on p.PrjNum=a.PrjNum");
+            sb.Append(" LEFT JOIN UEPP_Jsdw qy on a.EconCorpCode=qy.zzjgdm");
+
+            if (!string.IsNullOrEmpty(projectId))
+            {
+                sp.Add("@PrjNum", projectId);
+                sb.Append(" and a.PrjNum=@PrjNum");
+            }
+
+            if (!string.IsNullOrEmpty(projectName))
+            {
+                sp.Add("@PrjName", projectName);
+                sb.Append(" and a.PrjName like CONCAT('%',@prjName,'%')");
+            }
+
+            if (!string.IsNullOrEmpty(partyCode))
+            {
+                sp.Add("@partyCode", partyCode);
+                sb.Append(" and qy.zzjgdm=@partyCode");
+            }
+
+            if (!string.IsNullOrEmpty(partyName))
+            {
+                sp.Add("@partyName", partyName);
+                sb.Append(" and qy.jsdw like CONCAT('%',@partyName,'%')");
+            }
+
+            return DB.ExeSqlForDataTable(sb.ToString(), sp, "ProjectAndEntity");
+        }
+
+        public DataTable queryProjectAndEntity4Others(string projectId, string projectName, string partyCode, string partyName)
+        {
+            DataTable dt = new DataTable();
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("SELECT a.PrjNum");
+            sb.Append(",a.PrjName");
+            sb.Append(",p.PrjAddress");
+            sb.Append(",ct.TenderType");
+            sb.Append(",qy.tyshxydm as orgCode");
+            sb.Append(",qy.qymc as orgName");
+            sb.Append(",qy.zcdd as orgAddress");
+            sb.Append(",qy.lxr as orgResponsiblePerson");
+            sb.Append(",qy.lxdh as orgPhone");
+            sb.Append(",qy.fddbr_ryid");
+            sb.Append(",qy.fddbr as orgAgent");
+            sb.Append(" FROM Ap_ajsbb a");
+            sb.Append(" LEFT JOIN TBProjectInfoDoc p on p.PrjNum=a.PrjNum");
+            sb.Append(" LEFT JOIN Ap_ajsbb_ht ht on ht.uuid=a.uuid");
+            sb.Append(" LEFT JOIN tbContractTypeDic ct on ct.Code=ht.ContractTypeNum");
+            sb.Append(" LEFT JOIN UEPP_Qyjbxx qy on ht.CorpCode=qy.zzjgdm");
+
+            if (!string.IsNullOrEmpty(projectId))
+            {
+                sp.Add("@PrjNum", projectId);
+                sb.Append(" and a.PrjNum=@PrjNum");
+            }
+
+            if (!string.IsNullOrEmpty(projectName))
+            {
+                sp.Add("@PrjName", projectName);
+                sb.Append(" and a.PrjName like CONCAT('%',@prjName,'%')");
+            }
+
+            if (!string.IsNullOrEmpty(partyCode))
+            {
+                sp.Add("@partyCode", partyCode);
+                sb.Append(" and qy.tyshxydm=@partyCode");
+            }
+
+            if (!string.IsNullOrEmpty(partyName))
+            {
+                sp.Add("@partyName", partyName);
+                sb.Append(" and qy.qymc like CONCAT('%',@partyName,'%')");
+            }
+
+            return DB.ExeSqlForDataTable(sb.ToString(), sp, "ProjectAndEntity");
+        }
+
+        #endregion
+
         #region 保存项目位置相关信息
         public int SaveProjectPosition(DataRow row)
         {
@@ -676,6 +791,9 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sb.Append(" update TBProjectInfoDoc");
             sb.Append(" set prjName=@prjName,prjAddress=@prjAddress,lxpzwh=@lxpzwh,");
             sb.Append(" ydghxkzh=@ydghxkzh,ghxkzh=@ghxkzh,gytdsyzh=@gytdsyzh,");
+
+            sb.Append(" docnumfrom=@docnumfrom,docnumto=@docnumto,doccount=@doccount,");
+
             sb.Append(" UpdateDate=SYSDATETIME()");
             sb.Append(" where prjNum=@prjNum");
 
@@ -725,6 +843,10 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             paramCol.Add("@ydmj", ydmj);
             paramCol.Add("@jglx", jglx);
 
+            paramCol.Add("@docnumfrom", row["DocNumFrom"].ToString2());
+            paramCol.Add("@docnumto", row["DocNumTo"].ToString2());
+            paramCol.Add("@doccount", row["DocCount"].ToString2());
+
             int effects = 0;
             if (string.IsNullOrEmpty(fxbm))
             {
@@ -761,6 +883,9 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sb.Append(" jzmj=@jzmj,");
             sb.Append(" ydmj=@ydmj,");
             sb.Append(" jglx=@jglx,");
+            sb.Append(" docnumfrom=@docnumfrom,");
+            sb.Append(" docnumto=@docnumto,");
+            sb.Append(" doccount=@doccount,");
             sb.Append(" UpdateDate=SYSDATETIME()");
             sb.Append(" where fxbm=@fxbm");
 
@@ -774,10 +899,12 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sb.Append(" insert into xm_gcdjb_dtxm_doc(PKID, prjNum, fxbm,xmmc, docNum, ");
             sb.Append(" gd, dscs,dxcs, jclx,");
             sb.Append(" jzmj, ydmj,jglx,");
+            sb.Append(" docnumfrom, docnumto,doccount,");
             sb.Append(" CreateDate, UpdateDate)");
             sb.Append(" values(@id, @prjNum, @fxbm,@xmmc, @docNum,");
             sb.Append(" @gd, @dscs, @dxcs, @jclx,");
             sb.Append(" @jzmj, @ydmj, @jglx,");
+            sb.Append(" @docnumfrom, @docnumto, @doccount,");
             sb.Append(" SYSDATETIME(), SYSDATETIME())");
 
             return DB.ExecuteNonQuerySql(sb.ToString(), paramCol);
