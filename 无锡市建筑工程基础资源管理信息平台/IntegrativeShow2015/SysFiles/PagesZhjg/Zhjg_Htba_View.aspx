@@ -231,7 +231,7 @@
              var unionCorpName = encodeURIComponent($("#UnionCorpName").val());
              var unionCorpCode = $("#UnionCorpCode").val();
 
-             console.log("unionCorpName:" + unionCorpName + ",unionCorpCode:" + unionCorpCode);
+             //console.log("unionCorpName:" + unionCorpName + ",unionCorpCode:" + unionCorpCode);
              $.ajax({
                  type: 'POST',
                  //contentType:'application/x-www-form-urlencoded; charset=UTF-8',

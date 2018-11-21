@@ -5591,14 +5591,14 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         }
 
         /// <summary>
-        /// 保存安监项目GIS坐标信息
+        /// 保存安监申报项目信息
         /// </summary>
         /// <param name="xmlData"></param>
         /// <param name="user"></param>
         /// <param name="password"></param>
         /// <returns></returns>
         [WebMethod]
-        public string SaveAjsbbGisToZx(string xmlData, string user, string password)
+        public string SaveAjsbbToZx(string tableName, string xmlData, string user, string password)
         {
             ProcessResultData result = new ProcessResultData();
             try
@@ -5643,7 +5643,20 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     result.message = "该用户不允许保存Ap_ajsbb_gis表数据！";
                     return result.ResultMessage;
                 }
-                result = BLL.SaveAjsbbGis(user, dt_Data);
+                switch (tableName.ToLower())
+                {
+                    case "ap_ajsbb_gis": 
+                        result = BLL.SaveAjsbbGis(user, dt_Data);
+                        break;
+                    case "ap_ajsbb_info":
+                        result = BLL.SaveAjsbbSuperviseInfo(user, dt_Data);
+                        break;
+                    default:
+                        result.code = ProcessResult.数据表名不正确;
+                        result.message = "传入的表名不正确！";
+                        break;
+
+                }  
                 
             }
             catch (Exception ex)

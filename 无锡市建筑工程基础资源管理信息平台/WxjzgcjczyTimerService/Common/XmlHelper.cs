@@ -431,6 +431,8 @@ namespace WxsjzxTimerService.Common
             //objString = objString.Replace(">", "&gt;");
             //objString = objString.Replace("\"", "&quot;");
             //objString = objString.Replace("\'", "&apos;");
+            objString = objString.Replace("<2017>", "&lt;2017&gt;");
+            objString = objString.Replace("<2018>", "&lt;2018&gt;");
             return objString;
         }
 
