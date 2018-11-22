@@ -67,8 +67,10 @@ namespace Wxjzgcjczy.DAL.Sqlserver
       ,b.UpdateUser
       ,b.updateDate
 	  ,u.countryCode
+      ,i.superviseStatus
     FROM dbo.Ap_ajsbb b 
     LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
+    LEFT JOIN dbo.Ap_ajsbb_info i ON i.uuid = b.uuid
     WHERE SUBSTRING(convert(VARCHAR(30), b.updateDate, 120), 1, 10)=@date
     AND countryCode in (" + AntiSqlInjection.ParameterizeInClause(countryCodes, "@para", ref sp) + ")";
 
@@ -117,8 +119,10 @@ namespace Wxjzgcjczy.DAL.Sqlserver
       ,b.FetchDate
       ,b.Status
 	  ,u.countryCode
+      ,i.superviseStatus
     FROM dbo.Ap_ajsbb b 
     LEFT JOIN dbo.Ap_api_user u ON u.deptCode = b.UpdateUser
+    LEFT JOIN dbo.Ap_ajsbb_info i ON i.uuid = b.uuid
     WHERE b.uuid=@uuid";
 
             sp.Add("@uuid", uuid);
