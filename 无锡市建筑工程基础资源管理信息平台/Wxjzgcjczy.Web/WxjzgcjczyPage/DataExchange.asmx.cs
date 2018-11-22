@@ -5227,7 +5227,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
         #region 关于处罚系统的接口
         [WebMethod]
-        public string queryProjectAndEntity(string user, string password, string projectId, string projectName, string partyCode, string partyName)
+        public string queryProjectAndEntity(string user, string password, string prjNum, string projectName, string partyCode, string partyName)
         {
 
             string apiFlowId = "30";
@@ -5247,7 +5247,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return result.ResultMessage;
                 }
 
-                DataTable mainDt = BLLGIS.queryProjectAndEntity(prjNum);
+                DataTable mainDt = BLLGIS.queryProjectAndEntity(prjNum, projectName, partyCode, partyName);
 
                 if (mainDt == null || mainDt.Rows.Count == 0)
                 {
