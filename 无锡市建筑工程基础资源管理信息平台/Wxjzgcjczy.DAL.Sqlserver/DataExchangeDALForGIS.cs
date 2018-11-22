@@ -603,9 +603,9 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sb.Append(",qy.lxdh as orgPhone");
             sb.Append(",qy.fddbr_ryid");
             sb.Append(",qy.fddbr as orgAgent");
-            sb.Append(" FROM Ap_ajsbb a");
+            sb.Append(" FROM TBProjectInfo a");
             sb.Append(" LEFT JOIN TBProjectInfoDoc p on p.PrjNum=a.PrjNum");
-            sb.Append(" LEFT JOIN UEPP_Jsdw qy on a.EconCorpCode=qy.zzjgdm");
+            sb.Append(" LEFT JOIN UEPP_Jsdw qy on a.BuildCorpCode=qy.zzjgdm");
             sb.Append(" WHERE 1=1");
 
             if (!string.IsNullOrEmpty(projectId))
