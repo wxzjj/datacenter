@@ -606,6 +606,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sb.Append(" FROM Ap_ajsbb a");
             sb.Append(" LEFT JOIN TBProjectInfoDoc p on p.PrjNum=a.PrjNum");
             sb.Append(" LEFT JOIN UEPP_Jsdw qy on a.EconCorpCode=qy.zzjgdm");
+            sb.Append(" WHERE 1=1");
 
             if (!string.IsNullOrEmpty(projectId))
             {
@@ -657,6 +658,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             sb.Append(" LEFT JOIN Ap_ajsbb_ht ht on ht.uuid=a.uuid");
             sb.Append(" LEFT JOIN tbContractTypeDic ct on ct.Code=ht.ContractTypeNum");
             sb.Append(" LEFT JOIN UEPP_Qyjbxx qy on ht.CorpCode=qy.zzjgdm");
+            sb.Append(" WHERE 1=1");
 
             if (!string.IsNullOrEmpty(projectId))
             {
