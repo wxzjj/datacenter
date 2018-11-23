@@ -592,7 +592,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("SELECT a.PrjNum");
+            sb.Append("SELECT TOP 100 a.PrjNum");
             sb.Append(",a.PrjName");
             sb.Append(",p.PrjAddress");
             sb.Append(",'建设' as TenderType");
@@ -642,7 +642,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("SELECT a.PrjNum");
+            sb.Append("SELECT TOP 100 a.PrjNum");
             sb.Append(",a.PrjName");
             sb.Append(",p.PrjAddress");
             sb.Append(",ct.TenderType");
