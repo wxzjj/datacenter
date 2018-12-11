@@ -855,6 +855,15 @@ c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') 
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
+        public DataTable GetTBData_TBContractRecordManageByRecordNum(string recordNum, string recordInnerNum)
+        {
+            string sql = @"select * from  TBContractRecordManage where RecordNum=@RecordNum and RecordInnerNum=@RecordInnerNum";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@RecordNum", recordNum);
+            sp.Add("@RecordInnerNum", recordInnerNum);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
 
         public DataTable GetTBData_TBProjectFinishManage(string PKID)
         {
@@ -2362,14 +2371,22 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         /// <returns></returns>
         public DataTable Get_Enterprise_Tab_Skcsj()
         {
-
+            
             string sql = @"  select * from (
 select RowGuid,ZZJGDM, OperateDate,DWName,YYZZZCH,GSZCSZD_XZQHDM,GSZCDZ,XXAddress,ZCZJ,CLDate,PostNo,ChuanZheng,LXR_Name,LXR_LXDH,FRDBDW_FZRName,JSFZ
 ,(select count(*) from Enterprise_ZZ_Tab where IsValid=1 and  ZZName like '勘察-%' and DWRowGuid=a.RowGuid) as 'IsKc'
 ,(select count(*) from Enterprise_ZZ_Tab where IsValid=1 and  ZZName like '设计-%' and DWRowGuid=a.RowGuid) as 'IsSj'
- from Enterprise_Tab a where a.IsValid=1 and LEN(a.ZZJGDM)>=9 and a.RowGuid in (
+ from Enterprise_Tab a where a.IsValid=1 and (LEN(a.ZZJGDM)>=9 or LEN(a.YYZZZCH)=18) and a.RowGuid in (
     select DWRowGuid from Epoint_Jskcsj.dbo.Enterprise_ZZ_Tab where IsValid=1 and (ZZName like '勘察-%' or  ZZName like '设计-%'))
  ) aaa where (IsKc>0 or IsSj >0) ";
+            /**
+            string sql = @"  select * from (
+select RowGuid,ZZJGDM, OperateDate,DWName,YYZZZCH,GSZCSZD_XZQHDM,GSZCDZ,XXAddress,ZCZJ,CLDate,PostNo,ChuanZheng,LXR_Name,LXR_LXDH,FRDBDW_FZRName,JSFZ
+,(select count(*) from Enterprise_ZZ_Tab where IsValid=1 and  ZZName like '勘察-%' and DWRowGuid=a.RowGuid) as 'IsKc'
+,(select count(*) from Enterprise_ZZ_Tab where IsValid=1 and  ZZName like '设计-%' and DWRowGuid=a.RowGuid) as 'IsSj'
+ from Enterprise_Tab a where a.IsValid=1 AND DWName = '大连都市发展设计有限公司' and a.RowGuid in (
+    select DWRowGuid from Epoint_Jskcsj.dbo.Enterprise_ZZ_Tab where IsValid=1 and (ZZName like '勘察-%' or  ZZName like '设计-%'))
+ ) aaa where (IsKc>0 or IsSj >0) ";*/
 
             //--and convert(varchar(10),a.OperateDate ,120)=convert(varchar(10),GETDATE() ,120)
 
@@ -2387,6 +2404,39 @@ select RowGuid,ZZJGDM, OperateDate,DWName,YYZZZCH,GSZCSZD_XZQHDM,GSZCDZ,XXAddres
             sp.Add("@DWRowGuid", DWRowGuid);
             return this.DB_Epoint_Jskcsj.ExeSqlForDataTable(sql, sp, "dt");
 
+        }
+
+        /// <summary>
+        /// 省勘察设计系统获取勘察设计合同备案信息
+        /// </summary>
+        /// <returns></returns>
+        public DataTable Get_Enterprise_Tab_Skcsj_htba()
+        {
+            string sql = @"SELECT RowGuid AS PKID
+	,XMName AS RecordName
+	,XMWSNum AS RecordNum
+	,HTBANumber AS RecordInnerNum
+	,XMNum AS PrjNum
+	,ContractTypeNum AS ContractTypeNum
+	,HTJG AS ContractMoney
+	,HTaddDate AS ContractDate
+	,JSDW_FBF AS PropietorCorpName
+	,JSDW_ZZDM AS PropietorCorpCode
+	,ISNULL(KCSJDW_FBF,'') AS ContractorCorpName
+	,KCDW_ZZDM AS ContractorCorpCode
+	,TJDate AS CreateDate
+	,XMFZR AS PrjHead
+    ,TJQHCode
+FROM [Epoint_Jskcsj].[dbo].[HT_BA_Tab]
+WHERE TJQHCode LIKE '3202%'
+AND XMNum IS NOT NULL
+	AND TJDate IS NOT NULL
+	AND ContractTypeNum IS NOT NULL
+	AND HTBANumber IS NOT NULL
+    AND TJDate <= getdate()
+	AND TJDate >= dateadd(day, -3, getdate())
+"; 
+            return DB_Epoint_Jskcsj.ExeSqlForDataTable(sql, null, "dt");
         }
 
         #endregion 
