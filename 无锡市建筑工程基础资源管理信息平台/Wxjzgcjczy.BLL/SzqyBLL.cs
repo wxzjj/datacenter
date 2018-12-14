@@ -169,8 +169,18 @@ namespace Wxjzgcjczy.BLL
 
         public FunctionResult<DataTable> RetrieveQyxxViewList(string qyid)
         {
-            DataTable dt = DAL.RetrieveQyxxViewList(qyid);
+            DataTable csywlxDt = DAL.getCsywlxid(qyid);
+            DataRow[] kcsjRows = csywlxDt.Select("csywlxid in(2,5,6)");
 
+            DataTable dt = null;
+            if (kcsjRows != null && !kcsjRows.IsEmpty() && kcsjRows.Length > 0)
+            {
+                dt  = DAL.RetrieveQyxxViewListForKcsj(qyid);
+            }
+            else
+            {
+                dt = DAL.RetrieveQyxxViewList(qyid);
+            }
 
             return new FunctionResult<DataTable>() { Result = dt };
         }
@@ -206,13 +216,13 @@ namespace Wxjzgcjczy.BLL
             return DAL.getCsywlxid(qyID);
         }
 
-        public string saveRegArea(string qyID, string city, string county)
+        public string saveRegArea(string qyID, string city, string county, string tyshxydm)
         {
             string result = "OK";
             try
             {
                 //BLLCommon.WriteLog("qyID: " + qyID + "city : " + city + ",county:" + county);
-                DAL.UpdateRegArea(qyID, city, county);
+                DAL.UpdateRegArea(qyID, city, county, tyshxydm);
 
             }
             catch (Exception ex)

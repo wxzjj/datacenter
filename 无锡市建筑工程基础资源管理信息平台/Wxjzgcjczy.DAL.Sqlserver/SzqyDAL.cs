@@ -22,7 +22,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         {
             string sql = @" select a.*,b.zsyxzrq  jgdmyxq,c.zsbh  zzzsbh,c.fzdw  zzzsfzdw,c.zsyxzrq  zzzsyxq ,c.bz  zzzsbz,
               d.zsbh  yyzzzch, d.zsyxzrq  yyzzzch,e.zsbh  aqscxkzbh,e.fzdw  aqscxkzfzdw ,e.fzrq  aqscxkzfzrq,
-              e.zsyxzrq  aqscxkzyxq, f.zsbh  scbh, f.zsyxzrq  xyscyxq,f.fzdw  xyscfzdw, g.zc  frdbzc ,h.zc  qyjlzc,i.zc  jsfzrzc 
+              e.zsyxzrq  aqscxkzyxq, f.zsbh  scbh, f.zsyxzrq  xyscyxq,f.fzdw  xyscfzdw, g.zc  frdbzc ,h.zc  qyjlzc,i.zc  jsfzrzc,a.tyshxydm 
                from UEPP_Qyjbxx a left join UEPP_Qyzs b on a.qyid=b.qyid and b.DataState<>-1  and b.zslxID=1 
                left join UEPP_Qyzs c on a.qyid=c.qyid and c.DataState<>-1 and c.zslxID=10
                left join UEPP_Qyzs d on a.qyid=d.qyid and d.DataState<>-1 and d.zslxID=2
@@ -468,6 +468,35 @@ ORDER BY zzlb
             return DB.ExeSqlForDataTable(sql, sp, "t");
         }
 
+        public DataTable RetrieveQyxxViewListForKcsj(string qyid)
+        {
+            //if (string.IsNullOrEmpty(orderby.Trim()))
+            //    orderby = " zzbz  ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            string sql = @"SELECT ROW_NUMBER() OVER (
+		ORDER BY zzlb
+			,zsbh
+		) AS rowno
+	,*
+FROM (
+	SELECT c.cert_type AS zzlb
+		,c.cert_no AS zsbh
+		,c.cert_name AS zzmc
+		,c.issue_date AS fzrq
+		,c.valid_date AS yxq
+		,c.issue_authority AS fzdw
+	FROM WJSJZX.dbo.Corp_Cert c
+	WHERE c.corp_id = @pQyID
+	) t
+ORDER BY zzlb
+	,zsbh
+";
+            sp.Add("@pQyID", qyid);
+
+            return DB.ExeSqlForDataTable(sql, sp, "t");
+        }
+
         public DataTable ReadZzmx(string ID)
         {
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
@@ -573,13 +602,14 @@ ORDER BY zzlb
             return DB.ExeSqlForDataTable(sql, sp,"dt");
         }
 
-        public void UpdateRegArea(string qyID, string city, string county)
+        public void UpdateRegArea(string qyID, string city, string county, string tyshxydm)
         {
-            string sql = " update [dbo].[UEPP_Qyjbxx] set City=@city,County=@county WHERE qyID=@qyID";
+            string sql = " update [dbo].[UEPP_Qyjbxx] set City=@city,County=@county ,tyshxydm=@tyshxydm WHERE qyID=@qyID";
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
             sp.Add("@city", city);
             sp.Add("@county", county);
             sp.Add("@qyID", qyID);
+            sp.Add("@tyshxydm", tyshxydm);
             this.DB.ExecuteNonQuerySql(sql, sp);
         }
 

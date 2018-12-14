@@ -52,8 +52,12 @@
        <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0" class="table-bk">
         <tr>
             <td colspan="6" class="td-value" style="text-align: center">
-
+                <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
                 <button type="button" id ="PullDataBtn" onclick='PullDataCorpCert()' style="width: 100px; height: 30px;" class="button button2 buttonnoicon">同步</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" id ="synchCertFromMourd" onclick='PullDataCorpCertMourd()' style="width: 200px; height: 30px;" class="button button2 buttonnoicon">同步勘察设计资质</button>
+
+                 <% } else { %>  <% } %>
                 <!--<input type="button" value="手动同步" onclick="openLdpsWindow()" class="button" style="width: 100px; height: 30px;" />-->
             </td>
         </tr>
@@ -147,6 +151,19 @@
                 success: function (result) {
                     alert(result);
                     //$('#btn_search').click();
+                    manager.loadData();
+                }
+            });
+        }
+
+        function PullDataCorpCertMourd() {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8181/crawler/qyzs/kanchashejiByZzjgdm?zzjgdm=<%=qyID %>',
+                dataType: "jsonp",
+                jsonp: "jsoncallback",
+                jsonpCallback: "success_jsonpCallback",
+                success: function (json) {
                     manager.loadData();
                 }
             });

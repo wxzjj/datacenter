@@ -326,6 +326,18 @@
                     </tr>
                     <tr>
                         <td class="td-text">
+                            统一社会信用代码
+                        </td>
+                        <td class="td-value" colspan="3">
+                            <Bigdesk8:DBTextBox ID="tyshxydm" ItemName="tyshxydm" runat="server" style="width: 170px"></Bigdesk8:DBTextBox>
+                           &nbsp;&nbsp;
+                           <% if ("wangyj" == this.WorkUser.LoginName.ToString() || "wangxp" == this.WorkUser.LoginName.ToString()) { %> 
+                               <asp:Button ID="Button1" runat="server" Text="保存"  OnClick="saveBtnClick" />
+                            <% } else { %>  <% } %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-text">
                             数据来源
                         </td>
                         <td class="td-value">
