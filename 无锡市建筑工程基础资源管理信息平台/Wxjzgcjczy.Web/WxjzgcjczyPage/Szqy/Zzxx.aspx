@@ -158,12 +158,13 @@
 
         function PullDataCorpCertMourd() {
             $.ajax({
-                type: 'GET',
-                url: 'http://localhost:8181/crawler/qyzs/kanchashejiByZzjgdm?zzjgdm=<%=qyID %>',
-                dataType: "jsonp",
-                jsonp: "jsoncallback",
-                jsonpCallback: "success_jsonpCallback",
-                success: function (json) {
+                type: 'POST',
+                url: '/WxjzgcjczyPage/Handler/Data.ashx?type=downloadCorpCertFromMohurd&qyid=<%=qyID %>',
+                async: false,
+                data: null,
+                success: function (result) {
+                    alert(result);
+                    //$('#btn_search').click();
                     manager.loadData();
                 }
             });
