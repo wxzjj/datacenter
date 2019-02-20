@@ -1649,7 +1649,8 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         {
             string sql = "";
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
-            string zzjgdm = qyID.Substring(8, 8) + "-" + qyID.Substring(16, 1);
+            //string zzjgdm = qyID.Substring(8, 8) + "-" + qyID.Substring(16, 1);
+            string zzjgdm = qyID;
             if (qyID.Length == 9)
             {
                 sql = @"select top 1 * from UEPP_Qyjbxx  where qyID=@qyID or substring(qyID,1,8)+substring(qyID,10,1)=@qyID or (substring(qyID,9,9))=@qyID order by len(qyID) desc ";
@@ -1660,6 +1661,7 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
             }
             else
             {
+                zzjgdm = qyID.Substring(8, 8) + "-" + qyID.Substring(16, 1);
                 sql = @"select top 1  * from UEPP_Qyjbxx  where qyID=@qyID or qyID=@zzjgdm  order by len(qyID) desc  ";
             }
 

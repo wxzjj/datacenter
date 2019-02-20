@@ -488,6 +488,8 @@ FROM (
 		,c.issue_authority AS fzdw
 	FROM WJSJZX.dbo.Corp_Cert c
 	WHERE c.corp_id = @pQyID
+   AND (c.STATUS IS NULL
+	OR c.STATUS <> - 1)
 	) t
 ORDER BY zzlb
 	,zsbh
