@@ -183,13 +183,13 @@ c.qyid,c.qymc,a.zczh,ISNULL(a.zcjb,'无') zcjb,ISNULL(ISNULL(a.lxdh,a.yddh),'') 
                 case "zczyry":
                     ryzyzglxID = "1,2,21,41,51,61";
 
-                    sql = @"select distinct a.ryzyzglx,a.zsbh,a.ryid from uepp_ryzs a  
+                    sql = @"select distinct a.ryzyzglx,ISNULL( a.RegNo, a.zsbh) AS zsbh,a.ryid from uepp_ryzs a  
 inner join uepp_ryzyzg b on a.ryid=b.ryid and  a.ryzyzglxID=b.ryzyzglxID where b.ryid in " + ryid + " and a.ryzslxID in (11,12,21,22,91,131,151,511,161) and b.ryzyzglxid in (" + ryzyzglxID + ") ";
 
                     break;
                 case "aqscglry":
                     ryzyzglxID = "4,5,6";
-                    sql = "select distinct a.ryzyzglx,a.zsbh,a.ryid from uepp_ryzs a inner join uepp_ryzyzg b on a.ryid=b.ryid where b.ryid in " + ryid + " and a.ryzslxID in (41,42,43) and b.ryzyzglxid in (" + ryzyzglxID + ")";
+                    sql = "select distinct a.ryzyzglx,a.zsbh,a.ryid from uepp_ryzs a inner join uepp_ryzyzg b on a.ryid=b.ryid where b.ryid in " + ryid + " and a.ryzslxID in (41,42,43,51) and b.ryzyzglxid in (" + ryzyzglxID + ")";
                     break;
                 case "qyjjry":
                     ryzyzglxID = "11,12";
