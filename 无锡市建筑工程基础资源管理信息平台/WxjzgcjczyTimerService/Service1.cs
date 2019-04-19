@@ -149,15 +149,12 @@ namespace WxjzgcjczyTimerService
 
                         try
                         {
-                            //获取省外企业信息
-                            YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
-                            //获取省外企业人员信息
-                            YourTask_PullDataFromSxxzx_Swryxx(row_DataJkLog["ID"].ToString2());
+                            
 
                             //获取省内建设单位信息
                             YourTask_PullDataFromSxxzx_Jsdw(row_DataJkLog["ID"].ToString2());
                             Public.WriteLog("\r\n");
-                            //获取省内企业信息
+                            //获取市内企业信息
                             YourTask_PullDataFromSxxzx_qyxx(row_DataJkLog["ID"].ToString2());
                             Public.WriteLog("\r\n");
 
@@ -168,8 +165,12 @@ namespace WxjzgcjczyTimerService
                             {
                                 YourTask_PullDataFromSxxzx_Jiangsu_qyxx(row_DataJkLog["ID"].ToString2(), cityCode["Code"].ToString2());
                             }
-                             
 
+                            //获取省外企业信息
+                            YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
+                            //获取省外企业人员信息
+                            YourTask_PullDataFromSxxzx_Swryxx(row_DataJkLog["ID"].ToString2());
+                             
                             //获取省内注册执业人员信息
                             YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
 
@@ -973,6 +974,7 @@ namespace WxjzgcjczyTimerService
                     try
                     {
                         client = new WxjzgcjczyTimerService.WebServiceStxm.WebServiceStxm();
+                        client.Timeout = 6000000;
                         resultStringRaw = client.ReadStxmByStStandard(sstxmUserName, sstxmPwd, "", "", "320200");
                         resultString = xmlHelper.ConvertSpecialLetter(resultStringRaw);
                         //Public.WriteLog(resultString);
@@ -6482,20 +6484,32 @@ namespace WxjzgcjczyTimerService
                                                 sp.Clear();
                                                 if (!string.IsNullOrEmpty(corpBasicInfo.CityCode.ToString2()))
                                                 {
-                                                    row["City"] = corpBasicInfo.CityCode;
+                                                    if (string.IsNullOrEmpty(row["City"].ToString2()))
+                                                    {
+                                                        row["City"] = corpBasicInfo.CityCode;
+                                                    }
+                                                   
 
                                                     sp.Add("@CodeInfo", corpBasicInfo.CityCode.ToString2());
                                                     sp.Add("@parentCode", provinceCode);
                                                     string cityCode = dataService.ExecuteSql("select top 1 Code from  UEPP_Code where CodeType='城市地区' and ParentCode=@parentCode and  CodeInfo=@CodeInfo", sp);
                                                     if (!string.IsNullOrEmpty(cityCode))
                                                     {
-                                                        row["CityID"] = cityCode;
+                                                        if (string.IsNullOrEmpty( row["CityID"].ToString2()))
+                                                        {
+                                                            row["CityID"] = cityCode;
+                                                        }
+                                                       
                                                     }
 
                                                     sp.Clear();
                                                     if (!string.IsNullOrEmpty(corpBasicInfo.CountyCode.ToString2()))
                                                     {
-                                                        row["County"] = corpBasicInfo.CountyCode;
+                                                        if (string.IsNullOrEmpty( row["County"].ToString2()))
+                                                        {
+                                                            row["County"] = corpBasicInfo.CountyCode;
+                                                        }
+                                                        
 
                                                         sp.Add("@CodeInfo", corpBasicInfo.CountyCode.ToString2());
                                                         sp.Add("@parentCode", cityCode);
