@@ -3716,7 +3716,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 result.code = ProcessResult.保存失败和失败原因;
                 result.message = ex.Message;
             }
-
+            WebCommon.WriteLog("pushAJSBJG:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "|" + result.ResultMessage + "\r\n");
             return result.ResultMessage;
         }
 
@@ -3818,7 +3818,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 WebCommon.WriteLog("ex.Message:" + ex.Message);
             
             }
-
+            WebCommon.WriteLog("pushAJTZS:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "|" + result.ResultMessage + "\r\n");
             return result.ResultMessage;
         }
 
