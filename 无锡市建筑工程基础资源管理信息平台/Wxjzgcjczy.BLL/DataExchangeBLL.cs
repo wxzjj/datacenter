@@ -378,6 +378,17 @@ namespace Wxjzgcjczy.BLL
 
         }
 
+        /// <summary>
+        /// 获取四库内部接口用户信息
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public DataTable GetInterfaceUserInfoForDataCenter(string userName, string pwd)
+        {
+            return DAL.GetInterfaceUserInfoForDataCenter(userName, pwd);
+        }
+
 
         #endregion
 

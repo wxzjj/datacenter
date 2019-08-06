@@ -964,6 +964,8 @@ namespace Wxjzgcjczy.BLL
                                 {
                                     #region  更新企业基本信息
 
+                                    Boolean needUpdateFlag = true;
+
                                     DataTable dt = DAL.Get_uepp_qyjbxx(corpBasicInfo.CorpCode);
 
                                     if (dt.Rows.Count == 0)
@@ -984,10 +986,11 @@ namespace Wxjzgcjczy.BLL
                                         //{
                                         //    row["tag"] = row["tag"].ToString2().TrimEnd(',') + "," + tag;
                                         //}
-                                        if (!row["needUpdateFlag"].ToBoolean())
+                                        if (!string.IsNullOrEmpty(row["needUpdateFlag"].ToString()) && !row["needUpdateFlag"].ToBoolean())
                                         {
-                                            continue;
+                                            continue;//needUpdateFlag = 0为手动更新过，不需要更新
                                         }
+
                                     }
                                     row["tag"] = tag;
                                     row["qyID"] = corpBasicInfo.CorpCode;
@@ -1792,8 +1795,832 @@ namespace Wxjzgcjczy.BLL
 
         }
 
+        /// <summary>
+        /// 获取外省企业信息以及证书
+        /// </summary>
+        /// <param name="qyID"></param>
+        /// <returns></returns>
+        public string PullDataOutCorpCert(String qyID)
+        {
+            DateTime beginTime = DateTime.Now;
+            BLLCommon.WriteLog("开始执行 PullDataOutCorpCert方法：" + qyID + " at time : " + beginTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            string tag = Tag.江苏建设公共基础数据平台.ToString();
+            string userID = "wxszjj01";
+           
+            XmlHelper helper = new XmlHelper();
+            DataRow row;
+            try
+            {
+                NewDataService.NewDataService newDataService = new Wxjzgcjczy.BLL.NewDataService.NewDataService();
+                
+                byte[] bytes;
+                int index;
+                string result;
+
+                #region  获取省外企业信息
+                bytes = newDataService.getOutCorpInfo_Single(userID, qyID, "0");
+                result = System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+
+                index = result.IndexOf("<ReturnInfo>");
+                if (index >= 0)
+                {
+                    string returnResult = result.Substring(index, result.LastIndexOf("</ReturnInfo>") - index + 13);
+                    if (string.IsNullOrEmpty(returnResult))
+                    {
+                        return "fail";
+                    }
+                    ReturnInfo returnInfo = helper.DeserializeXML<ReturnInfo>(returnResult);
+                    if (!returnInfo.Status)
+                    {
+                        return "fail";
+                    }
+                }
+
+                index = result.IndexOf("<OutCorpBasicInfo>");
+                if (index >= 0)
+                {
+                    string corpBasicInfoString = result.Substring(index, result.LastIndexOf("</OutCorpBasicInfo>") - index + 19);
+                    OutCorpBasicInfoBody outCorpBasicInfoBody = helper.DeserializeXML<OutCorpBasicInfoBody>("<OutCorpBasicInfoBody><OutCorpBasicInfoArray>" + corpBasicInfoString + "</OutCorpBasicInfoArray></OutCorpBasicInfoBody>");
+                    if (outCorpBasicInfoBody != null)
+                    {
+                        foreach (OutCorpBasicInfo corpBasicInfo in outCorpBasicInfoBody.array)
+                        {
+                            //Public.WriteLog("corpBasicInfo.CorpCode：" + corpBasicInfo.CorpCode);
+                            if (corpBasicInfo.CorpCode.Length == 9)
+                            {
+                                corpBasicInfo.CorpCode = corpBasicInfo.CorpCode.Substring(0, 8) + '-' + corpBasicInfo.CorpCode.Substring(8, 1);
+                            }
+                            //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
+                            if (corpBasicInfo.CorpCode.Length == 10)
+                            {
+                                string qyShxydm = DAL.Get_UEPP_Qyjbxx_Shxydm(corpBasicInfo.CorpCode);
+                                if (!string.IsNullOrEmpty(qyShxydm))
+                                {
+                                    corpBasicInfo.CorpCode = qyShxydm;
+
+                                    string sql = "update  UEPP_Qyzs set qyID=@qyIDNew where qyID=@qyID;update UEPP_Qyzzmx set qyID=@qyIDNew where qyID=@qyID;update  UEPP_Qycsyw set qyID=@qyIDNew where qyID=@qyID";
+                                    SqlParameterCollection sp = DAL.CreateSqlParameterCollection();
+                                    sp.Add("@qyID", corpBasicInfo.CorpCode);
+                                    sp.Add("@qyIDNew", qyShxydm);
+                                    DAL.ExecuteNonQuerySql2(sql, sp);
+                                }
+                            }
+
+                            
+
+                            try
+                            {
+                                #region  更新企业基本信息
+                                Boolean needUpdateFlag = true;
+                                DataTable dt = DAL.Get_uepp_qyjbxx(corpBasicInfo.CorpCode);
+                                if (dt.Rows.Count == 0)
+                                {
+                                    row = dt.NewRow();
+                                    dt.Rows.Add(row);
+                                    row["tyshxydm"] = corpBasicInfo.LicenseNo;
+                                }
+                                else
+                                {
+                                    row = dt.Rows[0];
+
+                                    if (!string.IsNullOrEmpty(row["needUpdateFlag"].ToString()) && !row["needUpdateFlag"].ToBoolean())
+                                    {
+                                        needUpdateFlag = false;//needUpdateFlag = 0为手动更新过，不需要更新
+                                    }
+                                    if (needUpdateFlag && !string.IsNullOrEmpty(corpBasicInfo.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString2()))
+                                    {
+                                        if (DateTime.Parse(row["xgrqsj"].ToString2()).ToString("yyyy-MM-dd") == DateTime.Parse(corpBasicInfo.UpdateDate).ToString("yyyy-MM-dd"))
+                                        {
+                                            needUpdateFlag = false;
+                                        }
+                                    }
+                                        
+                                }
+
+                                if (needUpdateFlag)
+                                {
+                                    row["qyID"] = corpBasicInfo.CorpCode;
+                                    row["zzjgdm"] = corpBasicInfo.CorpCode;
+                                    row["tag"] = tag;
+
+                                    row["qymc"] = corpBasicInfo.CorpName;
+                                    row["yyzzzch"] = corpBasicInfo.LicenseNo;
+
+
+                                    if (!string.IsNullOrEmpty(corpBasicInfo.ProvinceCode.ToString2()))
+                                    {
+                                        SqlParameterCollection sp = DAL.CreateSqlParameterCollection();
+
+                                        row["Province"] = corpBasicInfo.ProvinceCode;
+                                        sp.Add("@CodeInfo", corpBasicInfo.ProvinceCode.ToString2());
+                                        string provinceCode = DAL.ExecuteSql("select top 1 Code from  UEPP_Code where CodeType='城市地区' and  CodeInfo=@CodeInfo", sp);
+                                        if (!string.IsNullOrEmpty(provinceCode))
+                                        {
+                                            row["ProvinceID"] = provinceCode;
+                                            sp.Clear();
+                                            if (!string.IsNullOrEmpty(corpBasicInfo.CityCode.ToString2()))
+                                            {
+                                                row["City"] = corpBasicInfo.CityCode;
+
+                                                sp.Add("@CodeInfo", corpBasicInfo.CityCode.ToString2());
+                                                sp.Add("@parentCode", provinceCode);
+                                                string cityCode = DAL.ExecuteSql("select top 1 Code from  UEPP_Code where CodeType='城市地区' and ParentCode=@parentCode and  CodeInfo=@CodeInfo", sp);
+                                                if (!string.IsNullOrEmpty(cityCode))
+                                                {
+                                                    row["CityID"] = cityCode;
+                                                }
+
+                                                sp.Clear();
+                                                if (!string.IsNullOrEmpty(corpBasicInfo.CountyCode.ToString2()))
+                                                {
+                                                    row["County"] = corpBasicInfo.CountyCode;
+
+                                                    sp.Add("@CodeInfo", corpBasicInfo.CountyCode.ToString2());
+                                                    sp.Add("@parentCode", cityCode);
+                                                    string countyCode = DAL.ExecuteSql("select top 1 Code from  UEPP_Code where CodeType='城市地区' and ParentCode=@parentCode and  CodeInfo=@CodeInfo", sp);
+                                                    if (!string.IsNullOrEmpty(countyCode))
+                                                    {
+                                                        row["CountyID"] = countyCode;
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    row["zcdd"] = corpBasicInfo.RegAddress;
+                                    row["xxdd"] = corpBasicInfo.CorpAddress;
+                                    if (!string.IsNullOrEmpty(corpBasicInfo.FoundDate))
+                                        row["clrq"] = corpBasicInfo.FoundDate;
+                                    row["jjxz"] = corpBasicInfo.CorpTypeDesc.ToString2().Trim();
+                                    if (!string.IsNullOrEmpty(corpBasicInfo.CorpTypeDesc))
+                                    {
+                                        SqlParameterCollection sp = DAL.CreateSqlParameterCollection();
+                                        sp.Add("@CodeInfo", corpBasicInfo.CorpTypeDesc.ToString2().Trim());
+                                        string jjxzID = DAL.ExecuteSql("select * from  UEPP_Code where CodeType='企业经济性质' and  CodeInfo=@CodeInfo", sp);
+                                        if (!string.IsNullOrEmpty(jjxzID))
+                                        {
+                                            row["jjxzID"] = jjxzID;
+                                        }
+                                    }
+
+                                    row["zczb"] = corpBasicInfo.RegCapital;
+                                    row["cz"] = corpBasicInfo.Fax;
+                                    row["lxdh"] = corpBasicInfo.LinkPhone;
+                                    row["fddbr"] = corpBasicInfo.LegalMan;
+
+                                    if (!string.IsNullOrEmpty(corpBasicInfo.UpdateDate))
+                                        row["xgrqsj"] = corpBasicInfo.UpdateDate;
+                                    else
+                                        row["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd");
+
+                                    row["DataState"] = 0;
+
+                                    DAL.Submit_uepp_qyjbxx(dt);
+
+                                }   
+                                 
+                                #endregion
+                            }
+                            catch (Exception ex)
+                            {
+                                BLLCommon.WriteLog("执行异常：" + ex.Message);
+                            }
+                        }
+                    }
+                }
+                #endregion
+
+                #region 获取企业资质信息
+                bytes = newDataService.getOutCorpQual_Corp(userID,qyID,"0");
+
+                result = System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+                //Public.WriteLog("省外企业资质信息.txt",  result);
+
+                index = result.IndexOf("<ReturnInfo>");
+
+                if (index >= 0)
+                {
+                    string returnResult = result.Substring(index, result.LastIndexOf("</ReturnInfo>") - index + 13);
+                    if (string.IsNullOrEmpty(returnResult))
+                    {
+                        return "fail";
+                    }
+                    ReturnInfo returnInfo = helper.DeserializeXML<ReturnInfo>(returnResult);
+                    if (!returnInfo.Status)
+                    {
+                        return "fail";
+                    }
+                }
+
+                #region 更新企业资质(TCorpCertQual)
+                index = result.IndexOf("<OutCorpCertQual>");
+                if (index >= 0)
+                {
+                    string returnResult = result.Substring(index, result.LastIndexOf("</OutCorpCertQual>") - index + 18);
+                    if (string.IsNullOrEmpty(returnResult))
+                    {
+                        return "fail";
+                    }
+                    OutCorpCertQualBody outCorpCertQualBody = helper.DeserializeXML<OutCorpCertQualBody>("<OutCorpCertQualBody><OutCorpCertQualArray>" + returnResult + "</OutCorpCertQualArray></OutCorpCertQualBody>");
+
+
+                    if (outCorpCertQualBody != null)
+                    {
+                        foreach (OutCorpCertQual corpCertQual in outCorpCertQualBody.array)
+                        {
+                            try
+                            {
+                                if (corpCertQual.CorpCode.Length == 9)
+                                {
+                                    corpCertQual.CorpCode = corpCertQual.CorpCode.Substring(0, 8) + '-' + corpCertQual.CorpCode.Substring(8, 1);
+                                }
+                                //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
+                                if (corpCertQual.CorpCode.Length == 10)
+                                {
+                                    string qyShxydm = DAL.Get_UEPP_Qyjbxx_Shxydm(corpCertQual.CorpCode);
+                                    if (!string.IsNullOrEmpty(qyShxydm))
+                                    {
+                                        corpCertQual.CorpCode = qyShxydm;
+
+                                        string sql = "update  UEPP_Qyzs set qyID=@qyIDNew where qyID=@qyID;update UEPP_Qyzzmx set qyID=@qyIDNew where qyID=@qyID;update  UEPP_Qycsyw set qyID=@qyIDNew where qyID=@qyID";
+                                        SqlParameterCollection sp = DAL.CreateSqlParameterCollection();
+                                        sp.Add("@qyID", corpCertQual.CorpCode);
+                                        sp.Add("@qyIDNew", qyShxydm);
+                                        DAL.ExecuteNonQuerySql2(sql, sp);
+                                    }
+                                }
+
+                                //string csywlxID = "", csywlx = "";
+                                Qyxx qycsywlx = getCsywlx(corpCertQual.CertType);
+                                if (string.IsNullOrEmpty(qycsywlx.csywlxID))
+                                    continue;
+
+                                #region 企业从事业务类型
+
+                                DataTable dt_qycsyw = DAL.Get_uepp_Qycsyw_sjsgyth(corpCertQual.CorpCode, qycsywlx.csywlxID);
+
+                                DataRow tempRow_qycsyw;
+
+                                if (dt_qycsyw.Rows.Count == 0)
+                                {
+                                    tempRow_qycsyw = dt_qycsyw.NewRow();
+                                    dt_qycsyw.Rows.Add(tempRow_qycsyw);
+                                    tempRow_qycsyw["qyID"] = corpCertQual.CorpCode;
+                                }
+                                else
+                                {
+                                    tempRow_qycsyw = dt_qycsyw.Rows[0];
+                                }
+
+                                tempRow_qycsyw["csywlxID"] = qycsywlx.csywlxID;
+                                tempRow_qycsyw["csywlx"] = qycsywlx.csywlx;
+
+                                tempRow_qycsyw["balxID"] = "1";
+                                tempRow_qycsyw["balx"] = "长期备案";
+                                tempRow_qycsyw["DataState"] = "0";
+                                tempRow_qycsyw["tag"] = tag;
+
+                                if (!string.IsNullOrEmpty(corpCertQual.UpdateDate))
+                                    tempRow_qycsyw["xgrqsj"] = corpCertQual.UpdateDate;
+                                else
+                                    tempRow_qycsyw["xgrqsj"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                                if (dt_qycsyw.Rows.Count > 0)
+                                {
+                                    DAL.Submit_uepp_qycsyw(dt_qycsyw);
+                                }
+                                #endregion
+
+                                DataTable dt_jsdw_zzmx = DAL.Get_uepp_zzmxxx_qyxx_nostatus(corpCertQual.CorpCode, qycsywlx.csywlxID);
+
+                                int rowIndex = -1;
+
+                                for (int i = 0; i < dt_jsdw_zzmx.Rows.Count; i++)
+                                {
+                                    //if (dt_jsdw_zzmx.Rows[i].RowState == DataRowState.Deleted)
+                                    //    continue;
+
+                                    if (qycsywlx.csywlxID == dt_jsdw_zzmx.Rows[i]["csywlxID"].ToString2()
+                                         && corpCertQual.CertCode == dt_jsdw_zzmx.Rows[i]["zsbh"].ToString2()
+                                        && (
+                                         corpCertQual.TradeType == "工程勘察综合类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "综合类"
+                                         || corpCertQual.TradeType == "工程勘察专业类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "专业类"
+                                         || corpCertQual.TradeType == "工程勘察劳务类" && dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2() == "劳务类"
+                                         || corpCertQual.TradeType == dt_jsdw_zzmx.Rows[i]["zzxl"].ToString2()
+                                        )
+                                        && (dt_jsdw_zzmx.Rows[i]["zzlb"].ToString2() == "岩土工程勘察" && corpCertQual.MajorType == "岩土工程（勘察）"
+                                        || dt_jsdw_zzmx.Rows[i]["zzlb"].ToString2() == "岩土工程设计" && corpCertQual.MajorType == "岩土工程（设计）"
+                                          || dt_jsdw_zzmx.Rows[i]["zzlb"].ToString2() == "岩土工程测试、监测、检测" && corpCertQual.MajorType == "岩土工程（物探测试检测监测）"
+                                          || dt_jsdw_zzmx.Rows[i]["zzlb"].ToString2() == "岩土工程咨询、监理" && corpCertQual.MajorType == "岩土工程（咨询监理）"
+
+                                          || dt_jsdw_zzmx.Rows[i]["zzlb"].ToString2() == "建筑装修装饰" && corpCertQual.MajorType == "建筑装饰装修工程"
+                                          || dt_jsdw_zzmx.Rows[i]["zzlb"].ToString2() == "模板作业" && corpCertQual.MajorType == "模板作业分包"
+                                          || dt_jsdw_zzmx.Rows[i]["zzlb"].ToString2() == "脚手架搭设作业" && corpCertQual.MajorType == "脚手架作业分包"
+                                          || dt_jsdw_zzmx.Rows[i]["zzlb"].ToString2() == corpCertQual.MajorType
+                                        )
+                                        )
+                                    {
+                                        rowIndex = i;
+                                        break;
+                                    }
+                                }
+
+                                if (rowIndex < 0)
+                                {
+                                    row = dt_jsdw_zzmx.NewRow();
+                                    dt_jsdw_zzmx.Rows.Add(row);
+                                    row["ID"] = DAL.Get_uepp_qyxxmx_NewID();
+                                    row["qyID"] = corpCertQual.CorpCode;
+                                    row["csywlx"] = qycsywlx.csywlx;
+                                    row["csywlxID"] = qycsywlx.csywlxID;
+                                }
+                                else
+                                {
+                                    row = dt_jsdw_zzmx.Rows[rowIndex];
+                                    if ("qlmsoft".Equals(row["xgr"].ToString2()))
+                                    {
+                                        //如果是手动修改的数据，则不更新，如果需要更新，则把xgr栏设置为空
+                                        continue;
+                                    }
+                                    if (!string.IsNullOrEmpty(corpCertQual.UpdateDate) && !string.IsNullOrEmpty(row["xgrqsj"].ToString2()))
+                                    {
+                                        int cmpFlag = DateTime.Compare(DateTime.Parse(corpCertQual.UpdateDate), row["xgrqsj"].ToDateTime());
+                                        //if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertQual.UpdateDate).ToString("yyyy-MM-dd"))
+                                        if (cmpFlag < 0)
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                }
+                                if (corpCertQual.IsMaster == "主项")
+                                    row["zzbz"] = "主项";
+                                else
+                                    row["zzbz"] = "增项";
+
+                                if (corpCertQual.TradeType == "工程勘察综合类")
+                                {
+                                    row["zzxl"] = "综合类";
+                                    row["zzxlID"] = "9";
+                                }
+                                else
+                                    if (corpCertQual.TradeType == "工程勘察专业类")
+                                    {
+                                        row["zzxl"] = "专业类";
+                                        row["zzxlID"] = "10";
+                                    }
+                                    else
+                                        if (corpCertQual.TradeType == "工程勘察劳务类")
+                                        {
+                                            row["zzxl"] = "劳务类";
+                                            row["zzxlID"] = "11";
+                                        }
+                                        else
+                                            if (corpCertQual.TradeType == "工程设计综合")
+                                            {
+                                                row["zzxl"] = "综合资质";
+                                                row["zzxlID"] = "12";
+                                            }
+                                            else
+                                            {
+                                                row["zzxl"] = corpCertQual.TradeType;
+                                                if (!string.IsNullOrEmpty(qycsywlx.csywlxID))
+                                                {
+                                                    string sql = @"select Code from UEPP_Code where  CodeType='企业资质序列' and ParentCodeType='企业从事业务类型'
+ and ParentCode=@parentCode and CodeInfo=@CodeInfo ";
+                                                    SqlParameterCollection sp = DAL.CreateSqlParameterCollection();
+                                                    sp.Add("@CodeInfo", corpCertQual.TradeType);
+                                                    sp.Add("@parentCode", qycsywlx.csywlxID);
+                                                    string zzxlID = DAL.ExecuteSql(sql, sp);
+                                                    if (!string.IsNullOrEmpty(zzxlID))
+                                                        row["zzxlID"] = zzxlID;
+                                                }
+                                            }
+
+                                if (corpCertQual.MajorType == "岩土工程（勘察）")
+                                {
+                                    row["zzlb"] = "岩土工程勘察";
+                                    row["zzlbID"] = "300";
+                                }
+                                else
+                                    if (corpCertQual.MajorType == "岩土工程（设计）")
+                                    {
+                                        row["zzlb"] = "岩土工程设计";
+                                        row["zzlbID"] = "301";
+                                    }
+                                    else
+                                        if (corpCertQual.MajorType == "岩土工程（物探测试检测监测）")
+                                        {
+                                            row["zzlb"] = "岩土工程测试、监测、检测";
+                                            row["zzlbID"] = "302";
+                                        }
+                                        else
+                                            if (corpCertQual.MajorType == "岩土工程（咨询监理））")
+                                            {
+                                                row["zzlb"] = "岩土工程咨询、监理";
+                                                row["zzlbID"] = "303";
+                                            }
+                                            else
+                                                if (corpCertQual.TradeType == "建筑装饰装修工程")
+                                                {
+                                                    row["zzlb"] = "建筑装修装饰";
+                                                    row["zzlbID"] = "33";
+                                                }
+                                                else if (corpCertQual.TradeType == "模板作业分包")
+                                                {
+                                                    row["zzlb"] = "模板作业";
+                                                    row["zzlbID"] = "128";
+                                                }
+                                                else
+                                                    if (corpCertQual.TradeType == "脚手架作业分包")
+                                                    {
+                                                        row["zzlb"] = "脚手架搭设作业";
+                                                        row["zzlbID"] = "127";
+                                                    }
+                                                    else
+                                                    {
+                                                        row["zzlb"] = corpCertQual.MajorType;
+                                                        if (!string.IsNullOrEmpty(row["zzxlID"].ToString2().Trim()))
+                                                        {
+                                                            string sql = @"select Code from UEPP_Code where  CodeType='企业资质类别' and  ParentCodeType='企业资质序列'
+ and ParentCode=@parentCode and (CodeInfo=@CodeInfo or CodeInfo=@CodeInfo1) ";
+                                                            SqlParameterCollection sp = DAL.CreateSqlParameterCollection();
+                                                            sp.Add("@CodeInfo", corpCertQual.MajorType);
+                                                            sp.Add("@parentCode", row["zzxlID"]);
+                                                            sp.Add("@CodeInfo1", corpCertQual.MajorType.ToString2().Replace("分包", ""));
+                                                            string zzlbID = DAL.ExecuteSql(sql, sp);
+                                                            if (!string.IsNullOrEmpty(zzlbID))
+                                                                row["zzlbID"] = zzlbID;
+                                                        }
+                                                    }
+
+
+
+
+                                row["zzdj"] = corpCertQual.TitleLevel;
+                                //新增证书跟资质的一对多关联关系
+                                row["zsbh"] = corpCertQual.CertCode;
+
+                                if (!string.IsNullOrEmpty(corpCertQual.TitleLevel))
+                                {
+                                    SqlParameterCollection sp = DAL.CreateSqlParameterCollection();
+                                    sp.Add("@CodeInfo", corpCertQual.TitleLevel);
+
+                                    string sql = "select Code from UEPP_Code  where  CodeType='企业资质等级' and ParentCodeType='企业资质序列' and CodeInfo=@CodeInfo ";
+                                    string zzdjID = DAL.ExecuteSql(sql, sp);
+                                    if (!string.IsNullOrEmpty(zzdjID))
+                                        row["zzdjID"] = zzdjID;
+                                    else
+                                    {
+                                        // 新增代码表
+                                    }
+                                }
+
+                                if (corpCertQual.Status == "0")
+                                {
+                                    row["DataState"] = -1;
+                                }
+                                else
+                                {
+                                    row["DataState"] = 0;
+                                }
+
+                                row["tag"] = tag;
+                                row["xgrqsj"] = corpCertQual.UpdateDate;
+
+                                if (!DAL.Submit_uepp_qyzzmx(dt_jsdw_zzmx))
+                                {
+                                    BLLCommon.WriteLog("单位ID：" + corpCertQual.CorpCode + "，企业资质保存失败！");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                BLLCommon.WriteLog("保存企业资质时出现异常：" + ex.Message);
+                            }
+                        }
+                    }
+
+                }
+                #endregion
+
+                #region 更新企业资质证书信息(OutCorpCertInfo)
+
+                index = result.IndexOf("<OutCorpCertInfo>");
+                if (index >= 0)
+                {
+                    string outCorpCertInfoResult = result.Substring(index, result.LastIndexOf("</OutCorpCertInfo>") - index + 18);
+                    if (string.IsNullOrEmpty(outCorpCertInfoResult))
+                    {
+                        return "fail";
+                    }
+                    OutCorpCertInfoBody outCorpCertInfoBody = helper.DeserializeXML<OutCorpCertInfoBody>("<OutCorpCertInfoBody><OutCorpCertInfoArray>" + outCorpCertInfoResult + "</OutCorpCertInfoArray></OutCorpCertInfoBody>");
+                    if (outCorpCertInfoBody != null)
+                    {
+                        foreach (OutCorpCertInfo corpCertInfo in outCorpCertInfoBody.certArray)
+                        {
+                            try
+                            {
+                                if (corpCertInfo.CorpCode.Length == 9)
+                                {
+                                    corpCertInfo.CorpCode = corpCertInfo.CorpCode.Substring(0, 8) + '-' + corpCertInfo.CorpCode.Substring(8, 1);
+                                }
+                                //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
+                                if (corpCertInfo.CorpCode.Length == 10)
+                                {
+                                    string qyShxydm = DAL.Get_UEPP_Qyjbxx_Shxydm(corpCertInfo.CorpCode);
+                                    if (!string.IsNullOrEmpty(qyShxydm))
+                                    {
+                                        corpCertInfo.CorpCode = qyShxydm;
+                                    }
+                                }
+
+                                int rowIndex = -1;
+                                //string csywlxID = "", csywlx = "";
+                                Qyxx qyxx = getCsywlx(corpCertInfo.CertType);
+                                if (string.IsNullOrEmpty(qyxx.csywlxID))
+                                    continue;
+                                //特殊处理国基建设集团有限公司错误的安全生产许可证
+                                if ("(晋)JZ安许证字[2011]00045843".Equals(corpCertInfo.CertCode))
+                                {
+                                    continue;
+                                }
+
+                                DataTable dt_qy_zzzs = DAL.Get_uepp_zzzsxx_qyxx(corpCertInfo.CorpCode);
+
+                                for (int i = 0; i < dt_qy_zzzs.Rows.Count; i++)
+                                {
+                                    //if (dt_jsdw_zzzs.Rows[i].RowState == DataRowState.Deleted)
+                                    //    continue;
+
+                                    if (qyxx.csywlx == dt_qy_zzzs.Rows[i]["csywlx"].ToString2()
+                                        && dt_qy_zzzs.Rows[i]["zsbh"].ToString2() == corpCertInfo.CertCode)
+                                    {
+                                        rowIndex = i;
+                                        break;
+                                    }
+                                }
+
+                                if (rowIndex < 0)
+                                {
+                                    row = dt_qy_zzzs.NewRow();
+                                    dt_qy_zzzs.Rows.Add(row);
+                                    row["zsjlId"] = DAL.Get_uepp_qyQyzs_NewID();
+                                }
+                                else
+                                {
+                                    row = dt_qy_zzzs.Rows[rowIndex];
+                                    if ("qlmsoft".Equals(row["xgr"].ToString2()))
+                                    {
+                                        //如果是手动修改的数据，则不更新，如果需要更新，则把xgr栏设置为空
+                                        continue;
+                                    }
+                                    if (!string.IsNullOrEmpty(corpCertInfo.UpdateDate))
+                                        if (DateTime.Parse(row["xgrqsj"].ToString()).ToString("yyyy-MM-dd") == DateTime.Parse(corpCertInfo.UpdateDate).ToString("yyyy-MM-dd"))
+                                        {
+                                            continue;
+                                        }
+                                }
+                                row["qyID"] = corpCertInfo.CorpCode;
+                                row["csywlx"] = qyxx.csywlx;
+                                row["csywlxID"] = qyxx.csywlxID;
+
+                                //if (!string.IsNullOrEmpty(corpCertInfo.CertType))
+                                //{
+                                //    SqlParameterCollection sp = dataService.CreateSqlParameterCollection();
+                                //    sp.Add("@parentCode", csywlxID);
+                                //    sp.Add("@CodeInfo", corpCertInfo.CertType);
+
+                                //    string sql = @"select * from UEPP_Code  where  CodeType ='企业证书类型' and ParentCodeType='企业从事业务类型' and ParentCode=@parentCode and CodeInfo=@CodeInfo ";
+                                //    string zslxID = dataService.ExecuteSql(sql, sp);
+                                //    if (!string.IsNullOrEmpty(zslxID))
+                                //    {
+                                //        row["zslxID"] = zslxID;
+                                //    }
+                                //}
+                                //row["zslx"] = "开发企业资质证书";
+
+                                row["sfzzz"] = "1";
+                                //string zslx = "", zslxID = "";
+                                Qyxx qyzslx = getZslx(corpCertInfo.CertType);
+                                row["zslxID"] = qyzslx.zslxID;
+                                row["zslx"] = qyzslx.zslx;
+                                row["zsbh"] = corpCertInfo.CertCode;
+                                if (!string.IsNullOrEmpty(corpCertInfo.ValidDate.Trim()))
+                                    row["zsyxzrq"] = corpCertInfo.ValidDate;
+                                if (!string.IsNullOrEmpty(corpCertInfo.IssueDate.Trim()))
+                                {
+                                    row["fzrq"] = corpCertInfo.IssueDate;
+                                    row["zsyxqrq"] = corpCertInfo.IssueDate;
+                                }
+
+                                row["fzdw"] = corpCertInfo.IssueOrgan;
+                                row["xgrqsj"] = corpCertInfo.UpdateDate;
+                                row["xgr"] = "定时服务";
+                                row["tag"] = tag;
+                                row["DataState"] = 0;
+
+                                if (!DAL.Submit_uepp_qyzzzs(dt_qy_zzzs))
+                                {
+                                    BLLCommon.WriteLog("单位ID：" + corpCertInfo.CorpCode + "，企业资质证书信息保存失败！");
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                BLLCommon.WriteLog("保存企业资质证书信息时出现异常：" + corpCertInfo.CorpCode + ex.Message);
+                            }
+                        }
+                    }
+                }
+
+                #endregion
+
+                DateTime endTime = DateTime.Now;
+                TimeSpan span = compareDateTime(beginTime, endTime);
+                BLLCommon.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Swqyxx方法:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
+
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                BLLCommon.WriteLog( "从江苏建设公共基础数据平台获取省外企业信息时出现异常:" + ex.Message);
+                return "fail";
+            }
+            return "OK";
+
+        }
+   
         #endregion
 
+
+        #region 公共方法
+        private Qyxx getCsywlx(string certType)
+        {
+            Qyxx result = new Qyxx();
+            string csywlxID = string.Empty, csywlx = string.Empty;
+            switch (certType)
+            {
+                //施工
+                case "建筑业":
+                    csywlxID = "1";
+                    csywlx = "建筑施工";
+                    break;
+                case "城市园林绿化":
+                    csywlxID = "3";
+                    csywlx = "园林绿化";
+                    break;
+                case "设计与施工一体化":
+                    csywlxID = "2";
+                    csywlx = "设计施工一体化";
+                    break;
+                case "房屋拆迁":
+                    csywlxID = "13";
+                    csywlx = "房屋拆迁";
+                    break;
+                case "安全生产许可证":
+                    csywlxID = "14";
+                    csywlx = "安全生产许可证";
+                    break;
+                //勘察
+                case "工程勘察":
+                    csywlxID = "5";
+                    csywlx = "工程勘察";
+                    break;
+                //设计
+                case "工程设计":
+                    csywlxID = "6";
+                    csywlx = "工程设计";
+                    break;
+                case "城市规划":
+                    csywlxID = "18";
+                    csywlx = "城市规划";
+                    break;
+                case "外商城市规划":
+                    csywlxID = "19";
+                    csywlx = "外商城市规划";
+                    break;
+
+                //中介机构
+                case "工程招标代理":
+                    csywlxID = "7";
+                    csywlx = "招标代理";
+                    break;
+                case "工程监理":
+                    csywlxID = "4";
+                    csywlx = "工程监理";
+                    break;
+                case "工程造价咨询":
+                    csywlxID = "8";
+                    csywlx = "造价咨询";
+                    break;
+                case "工程质量检测":
+                    csywlxID = "9";
+                    csywlx = "工程检测";
+                    break;
+                case "施工图审查":
+                    csywlxID = "15";
+                    csywlx = "施工图审查";
+                    break;
+                case "房地产估价":
+                    csywlxID = "16";
+                    csywlx = "房地产估价";
+                    break;
+                case "物业服务":
+                    csywlxID = "17";
+                    csywlx = "物业服务";
+                    break;
+                default:
+                    break;
+            }
+            result.csywlx = csywlx;
+            result.csywlxID = csywlxID;
+            return result;
+        }
+
+        private Qyxx getZslx(string certType)
+        {
+            Qyxx result = new Qyxx();
+            switch (certType)
+            {
+                //施工
+                case "建筑业":
+                    result.zslxID = "10";
+                    result.zslx = "建筑业资质证";
+                    break;
+                case "城市园林绿化":
+                    result.zslxID = "30";
+                    result.zslx = "园林绿化资质证";
+                    break;
+                case "设计与施工一体化":
+                    result.zslxID = "20";
+                    result.zslx = "设计施工一体化资质证";
+                    break;
+                case "房屋拆迁":
+                    result.zslxID = "130";
+                    result.zslx = "房屋拆迁资质证";
+                    break;
+                case "安全生产许可证":
+                    result.zslxID = "140";
+                    result.zslx = "安全生产许可证";
+                    break;
+                //勘察
+                case "工程勘察":
+                    result.zslxID = "51";
+                    result.zslx = "省工程勘察资质证";
+                    break;
+                //设计
+                case "工程设计":
+                    result.zslxID = "61";
+                    result.zslx = "省工程设计资质证";
+                    break;
+                case "城市规划":
+                    result.zslxID = "18";
+                    result.zslx = "城市规划资质证";
+                    break;
+                case "外商城市规划":
+                    result.zslxID = "19";
+                    result.zslx = "外商城市规划资质证";
+                    break;
+
+                //中介机构
+                case "工程招标代理":
+                    result.zslxID = "70";
+                    result.zslx = "招标代理资质证";
+                    break;
+                case "工程监理":
+                    result.zslxID = "40";
+                    result.zslx = "工程监理资质证";
+                    break;
+                case "工程造价咨询":
+                    result.zslxID = "80";
+                    result.zslx = "造价咨询资质证";
+                    //result.csywlx = "造价咨询资质证";
+                    break;
+                case "工程质量检测":
+                    result.zslxID = "90";
+                    result.zslx = "工程检测资质证";
+                    break;
+                case "施工图审查":
+                    result.zslxID = "150";
+                    result.zslx = "施工图审查资质证";
+                    //result.csywlx = "施工图审查资质证";
+                    break;
+                case "房地产估价":
+                    result.zslxID = "160";
+                    result.zslx = "房地产估价资质证";
+                    break;
+                case "物业服务":
+                    result.zslxID = "170";
+                    result.zslx = "物业服务资质证";
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+
+        #endregion
 
 
         private static TimeSpan compareDateTime(DateTime beginTime, DateTime endTime)

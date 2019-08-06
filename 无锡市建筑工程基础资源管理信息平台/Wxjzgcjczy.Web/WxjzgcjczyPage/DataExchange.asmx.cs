@@ -7823,6 +7823,113 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
         #endregion
 
 
+
+        #region 省系统同步代码
+
+        [WebMethod]
+        public string synchCorpFromProvincialDC(string user, string apiPassword, string qyid, string type)
+        {
+            string result = String.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL(); 
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("31");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(apiPassword) || string.IsNullOrEmpty(qyid))
+                {
+                    result = "请检查传入的参数";
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfoForDataCenter(user, apiPassword);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result = "无同步权限";
+                    return result;
+                }
+
+                DataExchangeBLLForJSCEDC synchBLL = new DataExchangeBLLForJSCEDC();
+
+                try
+                {
+                    string msg = null;
+                    if (type == "2")
+                    {
+                        msg = synchBLL.PullDataOutCorpCert(qyid);
+
+                    }
+                    else if (type == "1")
+                    {
+                        msg = synchBLL.PullDataCorpCert(qyid);
+                    }
+                    else
+                    {
+                        msg = "不支持的类型";
+                    }
+                   
+                    result = msg;
+
+                }
+                catch (Exception ex)
+                {
+                    result = ex.Message;
+
+                } 
+
+            }
+
+            return result;
+
+        }
+
+        [WebMethod]
+        public string downloadCorpCert(string user, string apiPassword, string qyid)
+        {
+            string result = String.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("31");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(apiPassword) || string.IsNullOrEmpty(qyid))
+                {
+                    result = "请检查传入的参数";
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfoForDataCenter(user, apiPassword);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result = "无同步权限";
+                    return result;
+                }
+
+                DataExchangeBLLForJSCEDC synchBLL = new DataExchangeBLLForJSCEDC(); 
+
+                try
+                {
+                    string msg = null;
+                    msg = synchBLL.PullDataCorpCert(qyid);
+                    result = msg;
+
+                }
+                catch (Exception ex)
+                {
+                    result = ex.Message;
+
+                }
+
+            }
+
+            return result;
+
+        }
+        
+        #endregion
+
+
     }
 }
 

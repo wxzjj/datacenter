@@ -144,6 +144,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                     case "downloadCorpCert":
                         json = downloadCorpCert(context);
                         break;
+                    //下载外省企业资质信息
+                    case "downloadOutCorpCert":
+                        json = downloadOutCorpCert(context);
+                        break;
                     //从部里下载企业资质信息
                     case "downloadCorpCertFromMohurd":
                         json = downloadCorpCertFromMohurd(context);
@@ -778,6 +782,29 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
             {
                 string msg = null;
                 msg = BLL.PullDataCorpCert(qyID);
+                result.message = msg;
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        public string downloadOutCorpCert(HttpContext context)
+        {
+            DataExchangeBLLForJSCEDC BLL = new DataExchangeBLLForJSCEDC();
+
+            string qyID = context.Request.Params["qyID"];
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                string msg = null;
+                msg = BLL.PullDataOutCorpCert(qyID);
                 result.message = msg;
 
             }

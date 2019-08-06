@@ -1583,6 +1583,17 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
 
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
+
+        public DataTable GetInterfaceUserInfoForDataCenter(string userName, string pwd)
+        {
+            string sql = " select * from uepp_InterfaceUser where UserName=@userName and Pwd=@pwd and DataState=0 and FullName='无锡数据中心' ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@userName", userName);
+            sp.Add("@pwd", pwd);
+
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         public DataTable Read_zj_gcjbxx(string zljdbm)
         {
             string sql = " select * from zj_gcjbxx where zljdbm=@zljdbm and UpdateFlag='U' ";
@@ -1855,6 +1866,16 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         public string ExecuteSql(string sql, SqlParameterCollection sp)
         {
             return this.DB.ExeSqlForString(sql, sp);
+        }
+
+        public int ExecuteNonQuerySql(string sql, SqlParameterCollection sp)
+        {
+            return this.DB.ExecuteNonQuerySql(sql, sp);
+        }
+
+        public int ExecuteNonQuerySql2(string sql, SqlParameterCollection sp)
+        {
+            return this.DB.ExecuteNonQuerySql2(sql, sp);
         }
 
         /// <summary>

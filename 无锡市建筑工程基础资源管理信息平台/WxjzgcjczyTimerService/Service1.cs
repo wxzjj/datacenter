@@ -152,33 +152,99 @@ namespace WxjzgcjczyTimerService
                             
 
                             //获取省内建设单位信息
-                            YourTask_PullDataFromSxxzx_Jsdw(row_DataJkLog["ID"].ToString2());
-                            Public.WriteLog("\r\n");
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Jsdw(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            } 
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog( DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取省内建设单位信息异常:" + ex.Message);
+                            }
+                            
                             //获取市内企业信息
-                            YourTask_PullDataFromSxxzx_qyxx(row_DataJkLog["ID"].ToString2());
-                            Public.WriteLog("\r\n");
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_qyxx(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n"); 
+                            } 
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取市内企业信息异常:" + ex.Message);
+                            }
+                           
 
                             //获取省内市外企业信息
 
                             DataTable dtCityCodes= dataService.Get_tbXzqdmDic_AllCityExceptWuxi();
                             foreach (DataRow cityCode in dtCityCodes.Rows)
                             {
-                                YourTask_PullDataFromSxxzx_Jiangsu_qyxx(row_DataJkLog["ID"].ToString2(), cityCode["Code"].ToString2());
+                                try
+                                {
+                                    YourTask_PullDataFromSxxzx_Jiangsu_qyxx(row_DataJkLog["ID"].ToString2(), cityCode["Code"].ToString2());
+                                    Public.WriteLog("\r\n");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取市内企业信息异常:" + cityCode["Code"].ToString2() + "\n" + ex.Message);
+                                }
+                                
                             }
 
                             //获取省外企业信息
-                            YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取省外企业信息异常:" + ex.Message);
+                            }
+                            
                             //获取省外企业人员信息
-                            YourTask_PullDataFromSxxzx_Swryxx(row_DataJkLog["ID"].ToString2());
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Swryxx(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取省外企业人员信息异常:" + ex.Message);
+                            }
+                           
                              
                             //获取省内注册执业人员信息
-                            YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取省内注册执业人员信息异常:" + ex.Message);
+                            }
 
-                            Public.WriteLog("\r\n");
-                            YourTask_PullDataFromSxxzx_Ryxx_Aqscgl(row_DataJkLog["ID"].ToString2());
-                            Public.WriteLog("\r\n");
-                            YourTask_PullDataFromSxxzx_Ryxx_Zygwgl(row_DataJkLog["ID"].ToString2());
-                            Public.WriteLog("\r\n");
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Ryxx_Aqscgl(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-YourTask_PullDataFromSxxzx_Ryxx_Aqscgl异常:" + ex.Message);
+                            }
+
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Ryxx_Zygwgl(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-YourTask_PullDataFromSxxzx_Ryxx_Zygwgl异常:" + ex.Message);
+                            }
+                            
                         }
                         catch (Exception ex)
                         {
@@ -8058,7 +8124,7 @@ namespace WxjzgcjczyTimerService
 
                 DateTime endTime = DateTime.Now;
                 TimeSpan span = compareDateTime(beginTime, endTime);
-                Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_qyxx任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
+                Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Jiangsu_qyxx任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
                 row_DataJkDataDetail_qyxx["allCount"] = allCount_qyxx;
