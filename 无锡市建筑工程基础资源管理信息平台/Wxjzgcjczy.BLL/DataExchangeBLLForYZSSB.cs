@@ -93,6 +93,16 @@ namespace Wxjzgcjczy.BLL
             return dt;
         }
 
+        public DataTable GetAp_ajsbb_bytable(string date, string countryCodes)
+        {
+            DataTable dt = DAL.GetAp_ajsbb(date, countryCodes);
+            return dt;
+        }
+        public DataTable GetAp_ajsbb_bytable(List<IDataItem> conditions)
+        {
+            return DAL.GetAp_aj_info(conditions);
+        }
+
         #endregion
 
         #region 读取质监申报数据

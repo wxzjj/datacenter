@@ -4,6 +4,7 @@ using System.Data;
 using Bigdesk8;
 using Bigdesk8.Business;
 using Bigdesk8.Web;
+using Wxjzgcjczy.Common;
 
 namespace Wxjzgcjczy
 {
@@ -90,15 +91,19 @@ namespace Wxjzgcjczy
         /// 数据库连接字符串，如data source=.;user id=sa;password=1;database=SCIC82。
         /// </summary>
         public static string GetConnectionString()
-        {
-            return GetConfig("ConnectionString").ToString();
+        { 
+            DecryptAndEncryptionHelper helper = new DecryptAndEncryptionHelper(ConfigInformation.Key, ConfigInformation.Vector);
+            string encrytStr = GetConfig("ConnectionString").ToString();
+            return helper.Decrypto(encrytStr);
         }
         /// <summary>
         /// 数据库连接字符串，如data source=.;user id=sa;password=1;database=SCIC82。
         /// </summary>
         public static string GetConnectionString_Sqlserver()
         {
-            return GetConfig("ConnectionString_Sqlserver").ToString();
+            DecryptAndEncryptionHelper helper = new DecryptAndEncryptionHelper(ConfigInformation.Key, ConfigInformation.Vector);
+            string encrytStr = GetConfig("ConnectionString_Sqlserver").ToString();
+            return helper.Decrypto(encrytStr);
         }
 
         public static string GetConnectionString_YHTSqlserver()

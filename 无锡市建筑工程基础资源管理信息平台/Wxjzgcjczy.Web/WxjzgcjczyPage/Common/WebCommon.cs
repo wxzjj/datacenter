@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Bigdesk8;
-using Bigdesk8.Business;
 using Bigdesk8.Data;
 using Bigdesk8.Web;
 using Bigdesk8.Web.Controls;
@@ -24,7 +23,9 @@ namespace Wxjzgcjczy.Web
         {
             get
             {
-                return ConfigurationManager.AppSettings["ConnectionString"];
+                DecryptAndEncryptionHelper helper = new DecryptAndEncryptionHelper(ConfigInformation.Key, ConfigInformation.Vector);
+                string encrytStr =ConfigurationManager.AppSettings["ConnectionString"];
+                return helper.Decrypto(encrytStr);
             }
         }
 
