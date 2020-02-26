@@ -4728,7 +4728,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     return result.ResultMessage;
                 }
 
-                DataTable mainDt = SBBLL.GetProject(prjNum, prjName, buildCorpCode, buildCorpName, location);
+                DataTable mainDt = SBBLL.GetProject_Additional(prjNum, prjName, buildCorpCode, buildCorpName, location);
 
                 if (mainDt == null || mainDt.Rows.Count == 0)
                 {

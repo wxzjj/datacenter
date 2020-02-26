@@ -132,6 +132,107 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         }
 
         /// <summary>
+        /// 获取项目及附加信息
+        /// </summary>
+        /// <param name="prjNum">项目编号</param>
+        /// <param name="prjName">项目名称</param>
+        /// <param name="buildCorpCode">建设单位编号</param>
+        /// <param name="buildCorpName">建设单位名称</param>
+        /// <param name="location">项目地点</param>
+        /// <param name="countyNum">地区码</param>
+        /// <param name="beginDate">起始日期</param>
+        /// <param name="endDate">结束日期</param>
+        /// <param name="hasAddressPoint">是否带经纬度坐标点</param>
+        /// <returns></returns>
+        public DataTable GetProject_Additional(string prjNum, string prjName, String buildCorpCode, String buildCorpName, string location, string countyNum, string beginDate, string endDate, string hasAddressPoint)
+        {
+            SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select a.*");
+            sb.Append(" from VProjectInfo_Additional a");
+            sb.Append(" where 1=1");
+            if (!string.IsNullOrEmpty(prjNum))
+            {
+                sp.Add("@prjNum", prjNum);
+                sb.Append(" and a.PrjNum=@prjNum");
+            }
+
+            if (!string.IsNullOrEmpty(prjName))
+            {
+                sp.Add("@prjName", prjName);
+                sb.Append(" and a.PrjName like CONCAT('%',@prjName,'%')");
+            }
+
+            if (!string.IsNullOrEmpty(buildCorpCode))
+            {
+                sp.Add("@buildCorpCode", buildCorpCode);
+                sb.Append(" and a.BuildCorpCode=@buildCorpCode");
+            }
+
+            if (!string.IsNullOrEmpty(buildCorpName))
+            {
+                sp.Add("@buildCorpName", buildCorpName);
+                sb.Append(" and a.BuildCorpName like CONCAT('%',@buildCorpName,'%')");
+            }
+
+            if (!string.IsNullOrEmpty(location))
+            {
+                sp.Add("@location", location);
+                sb.Append(" and a.programme_address like CONCAT('%',@location,'%')");
+            }
+
+            if (!string.IsNullOrEmpty(countyNum))
+            {
+                sp.Add("@countyNum", countyNum);
+                if ("320000".Equals(countyNum))
+                {
+                    sb.Append(" and a.ProvinceNum=@countyNum");
+                }
+                else
+                if ("320200".Equals(countyNum))
+                {
+                    sb.Append(" and a.CityNum=@countyNum");
+                }
+                else
+                {
+                    sb.Append(" and a.CountyNum=@countyNum");
+                }
+                
+            }
+
+            if (!string.IsNullOrEmpty(beginDate))
+            {
+                sp.Add("@beginDate", beginDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)>=@beginDate");
+            }
+
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                sp.Add("@endDate", endDate);
+                sb.Append(" and SUBSTRING(convert(VARCHAR(30), a.xgrqsj, 120), 1, 10)<=@endDate");
+            }
+
+            if (!string.IsNullOrEmpty(hasAddressPoint))
+            {
+                if( "TURE".Equals(hasAddressPoint.ToUpper()))
+                {
+                    sb.Append(" and (a.jd is not null or a.jd1 is not null)");
+                }
+                else if ("FALSE".Equals(hasAddressPoint.ToUpper()))
+                {
+                    sb.Append(" and (a.jd is null and a.jd1 is null)");
+                }
+               
+            }
+
+            sb.Append(" order by a.CreateDate desc");
+  
+            return DB.ExeSqlForDataTable(sb.ToString(), sp, "TBProjectInfo");
+
+        }
+
+        /// <summary>
         /// 获取项目
         /// </summary>
         /// <param name="range">经纬度范围</param>

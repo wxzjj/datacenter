@@ -89,6 +89,18 @@ namespace Wxjzgcjczy.BLL
             return dt;
         }
 
+        public DataTable GetProject_Additional(string prjNum, string prjName, String buildCorpCode, String buildCorpName, string location)
+        {
+            DataTable dt = DAL.GetProject_Additional(prjNum, prjName, buildCorpCode, buildCorpName, location, null, null, null, null);
+            return dt;
+        }
+
+        public DataTable GetProject_Additional(string prjNum, string prjName, string location)
+        {
+            DataTable dt = DAL.GetProject_Additional(prjNum, prjName, null, null, location, null, null, null, null);
+            return dt;
+        }
+
         public DataTable GetProjectByRange(string range, string qy, string beginDate, string endDate)
         {
             DataTable dt = DAL.GetProjectByRange(range, qy, beginDate, endDate);
