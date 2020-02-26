@@ -3129,7 +3129,7 @@ namespace Wxjzgcjczy.BLL
             ProcessResultData result = new ProcessResultData();
             StringBuilder ids = new StringBuilder();
             string msg = String.Empty;
-            string[] fields = new string[] { "ajNo", "wfwgxm", "wfwgdwry", "wfxw", "updateFlag" };
+            string[] fields = new string[] { "ajNo", "cflx", "wfwgxm", "wfwgdwry", "wfxw", "updateFlag" };
 
             //List<string> PrjTypes = this.GetPrjType();
 
