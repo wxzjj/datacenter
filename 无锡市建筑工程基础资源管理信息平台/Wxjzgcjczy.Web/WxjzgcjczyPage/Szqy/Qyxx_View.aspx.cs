@@ -40,8 +40,9 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Szqy
             string corpID = this.qyID;
             string city = this.DBTextCity.Text;
             string county = this.DBTextCounty.Text;
-            BLL.saveRegArea(corpID, city, county);
-
+            string tyshxydm = this.tyshxydm.Text;
+            BLL.saveRegArea(corpID, city, county, tyshxydm);
         }
+
     }
 }

@@ -33,7 +33,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             DataSet ds = BLL.GetDs(start,end);
 
             SaveExcel_Fb1(fileName, ds, this,filepath);
-            filepath = "http://218.90.162.110:8889//Z_ToExcel//" + fileName;
+            filepath = "http://58.215.18.222:8889//Z_ToExcel//" + fileName;
             this.WindowLocation(filepath);
         }
 

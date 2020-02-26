@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
-       <script language="javascript" src="http://api.tianditu.com/js/maps.js" type="text/javascript"></script>
+      <script src="http://api.tianditu.gov.cn/api?v=3.0&tk=2c07f1d908e4a411586d2c66ba11e0a3" type="text/javascript"></script>
 
 
     <script src="../../SparkClient/jquery-1.3.2.min.js" type="text/javascript"></script>

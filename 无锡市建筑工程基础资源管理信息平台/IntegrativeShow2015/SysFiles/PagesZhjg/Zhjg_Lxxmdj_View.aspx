@@ -8,7 +8,7 @@
     <title></title>
     <link href="../../App_Themes/Themes_Standard/Stylesheet1.css" rel="Stylesheet" type="text/css" />
 
-    <script language="javascript" src="http://api.tianditu.com/js/maps.js" type="text/javascript"></script>
+    <script src="http://api.tianditu.gov.cn/api?v=3.0&tk=2c07f1d908e4a411586d2c66ba11e0a3" type="text/javascript"></script>
 
     <script src="../../Common/jquery-1.3.2.min.js" type="text/javascript"></script>
 

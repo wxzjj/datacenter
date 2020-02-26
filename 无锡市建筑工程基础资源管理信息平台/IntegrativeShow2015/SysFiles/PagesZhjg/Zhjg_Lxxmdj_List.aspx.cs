@@ -42,6 +42,7 @@ namespace IntegrativeShow2.SysFiles.PagesZhjg
                 WebCommon.DropDownListDataBind(this.ddl_jsxz, true);
                 //WebCommon.DropDownListDataBind(this.ddl_ssdq, true);
                 WebCommon.CheckBoxListDataBind(this.cbl_ssdq);
+                this.cbl_ssdq.Items.Add(new ListItem("市管", "320200"));
             
                 //数据绑定  
                 powerGridViewDataBind(0);

@@ -28,7 +28,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 Response.Clear();
                 if (Encoding.UTF8.GetString(returnvalue) == "true")
                 {
-                    Response.Write("http://218.90.162.110:8889/WxjzgcjczyPage/UserAuthorization.aspx");
+                    Response.Write("http://58.215.18.222:8889/WxjzgcjczyPage/UserAuthorization.aspx");
                 }
                 else
                 {

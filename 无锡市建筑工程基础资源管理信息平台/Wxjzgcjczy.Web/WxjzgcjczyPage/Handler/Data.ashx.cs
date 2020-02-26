@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using System.Text;
 
 using System.IO;
+using System.Net;
 
 namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
 { //getXmtzjg
@@ -142,6 +143,14 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                     //下载企业资质信息
                     case "downloadCorpCert":
                         json = downloadCorpCert(context);
+                        break;
+                    //下载外省企业资质信息
+                    case "downloadOutCorpCert":
+                        json = downloadOutCorpCert(context);
+                        break;
+                    //从部里下载企业资质信息
+                    case "downloadCorpCertFromMohurd":
+                        json = downloadCorpCertFromMohurd(context);
                         break;
                     //保存合同备案-工程类型
                     case "saveHtbaPrjType":
@@ -775,6 +784,58 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Handler
                 msg = BLL.PullDataCorpCert(qyID);
                 result.message = msg;
 
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        public string downloadOutCorpCert(HttpContext context)
+        {
+            DataExchangeBLLForJSCEDC BLL = new DataExchangeBLLForJSCEDC();
+
+            string qyID = context.Request.Params["qyID"];
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                string msg = null;
+                msg = BLL.PullDataOutCorpCert(qyID);
+                result.message = msg;
+
+            }
+            catch (Exception ex)
+            {
+                result.code = ProcessResult.保存失败和失败原因;
+                result.message = ex.Message;
+
+            }
+            return result.ResultMessage;
+
+        }
+
+        public string downloadCorpCertFromMohurd(HttpContext context)
+        {
+            
+            string qyID = context.Request.Params["qyID"];
+            ProcessResultData result = new ProcessResultData();
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:8181/crawler/qyzs/kanchashejiByZzjgdm?zzjgdm=" + qyID);
+                request.Method = "GET";
+                request.ContentType = "text/html;charset=UTF-8";
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream myResponseStream = response.GetResponseStream();
+                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+                string retString = myStreamReader.ReadToEnd();
+                myStreamReader.Close();
+                myResponseStream.Close();
+                result.message = retString;
             }
             catch (Exception ex)
             {

@@ -26,7 +26,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
     /// <summary>
     /// DataExchange 服务：无锡数据中心与各县市业务系统的数据交换接口
     /// </summary>
-    [WebService(Namespace = "http://218.90.162.110:8889/WxjzgcjczyPage/")]
+    [WebService(Namespace = "http://58.215.18.222:8889/WxjzgcjczyPage/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.None)]
     [System.ComponentModel.ToolboxItem(false)]
     // 若要允许使用 ASP.NET AJAX 从脚本中调用此 Web 服务，请取消对下行的注释。
@@ -3192,6 +3192,94 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
         }
 
+
+        /// <summary>
+        /// 获取安监状态信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <param name="tableName"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getAJInfo(string user, string password, string tableName, string beginDate, string endDate)
+        {
+            string result = String.Empty;
+            string xmlData = String.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL();
+            DataExchangeBLLForYZSSB SBBLL = new DataExchangeBLLForYZSSB();
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("29");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfo(user, password);
+                if (dt_user.Rows.Count == 0)
+                {
+                    return result;
+                }
+
+                List<IDataItem> list = new List<IDataItem>();
+                IDataItem item;
+
+                if (string.IsNullOrEmpty(tableName))
+                {
+                    return xmlData;
+                }
+                DataTable dt;
+
+                if (!string.IsNullOrEmpty(beginDate))
+                {
+                    DateTime date;
+                    if (DateTime.TryParse(beginDate, out date))
+                    {
+                        item = new DataItem();
+                        item.ItemName = "modified";
+                        item.ItemRelation = Bigdesk8.Data.DataRelation.GreaterThanOrEqual;
+                        item.ItemType = DataType.String;
+                        item.ItemData = date.ToString("yyyy-MM-dd");
+                        list.Add(item);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(endDate))
+                {
+                    DateTime date;
+                    if (DateTime.TryParse(endDate, out date))
+                    {
+                        item = new DataItem();
+                        item.ItemName = "modified";
+                        item.ItemData = date.ToString("yyyy-MM-dd");
+                        item.ItemType = DataType.String;
+                        item.ItemRelation = Bigdesk8.Data.DataRelation.LessThanOrEqual;
+                        list.Add(item);
+                    }
+                }
+
+                dt = SBBLL.GetAp_ajsbb_bytable(list);
+
+
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                
+
+            }
+            else
+            {
+                DataTable dt = BLL.GetAPIUnable();
+                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+            }
+
+            return result;
+
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -3716,7 +3804,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 result.code = ProcessResult.保存失败和失败原因;
                 result.message = ex.Message;
             }
-
+            WebCommon.WriteLog("pushAJSBJG:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "|" + result.ResultMessage + "\r\n");
             return result.ResultMessage;
         }
 
@@ -3818,7 +3906,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                 WebCommon.WriteLog("ex.Message:" + ex.Message);
             
             }
-
+            WebCommon.WriteLog("pushAJTZS:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + "|" + result.ResultMessage + "\r\n");
             return result.ResultMessage;
         }
 
@@ -7615,6 +7703,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
 
                 if (dt_Sgqyxx.Rows.Count > 0)
                 {
+                    str.Append("<QyxxArray>");
                     str.Append("<Qyxx>");
                     foreach (DataRow row in dt_Sgqyxx.Rows)
                     {
@@ -7818,6 +7907,69 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
             }
 
             return flag;
+        }
+
+        #endregion
+
+
+
+        #region 省系统同步代码
+
+        [WebMethod]
+        public string synchCorpFromProvincialDC(string user, string apiPassword, string qyid, string type)
+        {
+            string result = String.Empty;
+            DataExchangeBLL BLL = new DataExchangeBLL(); 
+
+            string apiMessage = string.Empty;
+            DataTable dtapizb = BLL.Get_API_zb_apiFlow("31");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(apiPassword) || string.IsNullOrEmpty(qyid))
+                {
+                    result = "请检查传入的参数";
+                    return result;
+                }
+
+                DataTable dt_user = BLL.GetInterfaceUserInfoForDataCenter(user, apiPassword);
+                if (dt_user.Rows.Count == 0)
+                {
+                    result = "无同步权限";
+                    return result;
+                }
+
+                DataExchangeBLLForJSCEDC synchBLL = new DataExchangeBLLForJSCEDC();
+
+                try
+                {
+                    string msg = null;
+                    if (type == "2")
+                    {
+                        msg = synchBLL.PullDataOutCorpCert(qyid);
+
+                    }
+                    else if (type == "1")
+                    {
+                        msg = synchBLL.PullDataCorpCert(qyid);
+                    }
+                    else
+                    {
+                        msg = "不支持的类型";
+                    }
+                   
+                    result = msg;
+
+                }
+                catch (Exception ex)
+                {
+                    result = ex.Message;
+
+                } 
+
+            }
+
+            return result;
+
         }
 
         #endregion

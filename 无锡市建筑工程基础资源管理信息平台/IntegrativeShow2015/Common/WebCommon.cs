@@ -26,7 +26,9 @@ namespace IntegrativeShow2
         {
             get
             {
-                return ConfigurationManager.AppSettings["ConnectionString"];
+                DecryptAndEncryptionHelper helper = new DecryptAndEncryptionHelper(ConfigInformation.Key, ConfigInformation.Vector);
+                string encrytStr = ConfigurationManager.AppSettings["ConnectionString"];
+                return helper.Decrypto(encrytStr);
             }
         }
 

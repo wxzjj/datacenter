@@ -72,7 +72,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Report
 
             //  strReportDir = Server.MapPath("~/WxjzgcjczyPage/UploadFile" + "/" + filename + ".doc");
             // System.IO.File.Delete(strReportDir);
-            //   Response.Write("<script type='text/javascript'> window.open('http://218.90.162.110:8889/WxjzgcjczyPage/UploadFile/" + filename + ".pdf" + "');</script>");
+            //   Response.Write("<script type='text/javascript'> window.open('http://58.215.18.222:8889/WxjzgcjczyPage/UploadFile/" + filename + ".pdf" + "');</script>");
             #endregion
 
             #region 微软报表
@@ -97,7 +97,7 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage.Report
             tblb = tblb.Trim(',');
 
             condition = "htqdRqStart=" + ContractDate1.Text + "&htqdRqEnd=" + ContractDate2.Text + "&ssdq=" + ssdq + "&ContractTypeNum=" + tblb;
-            this.OpenNewWindow("http://218.90.162.110:8889/WxjzgcjczyBb/WebForm1.aspx?" + condition);
+            this.OpenNewWindow("http://58.215.18.222:8889/WxjzgcjczyBb/WebForm1.aspx?" + condition);
             #endregion
         }
 

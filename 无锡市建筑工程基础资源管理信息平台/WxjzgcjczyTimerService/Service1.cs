@@ -127,6 +127,10 @@ namespace WxjzgcjczyTimerService
                     YourTask_PullDataFromSKcsj_qyxx();
                     Public.WriteLog("\r\n");
 
+                    //获取省勘察设计系统勘察设计合同备案
+                    YourTask_PullDataFromSKcsj_htba();
+                    Public.WriteLog("\r\n");
+
                     //往数据监控日志表添加一条记录---江苏建设公共基础数据平台到无锡数据中心
                     string apiMessage = string.Empty;// 2016.10.21
                     //string methodMessage = string.Empty;
@@ -145,35 +149,102 @@ namespace WxjzgcjczyTimerService
 
                         try
                         {
-                            //获取省外企业信息
-                            YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
-                            //获取省外企业人员信息
-                            YourTask_PullDataFromSxxzx_Swryxx(row_DataJkLog["ID"].ToString2());
+                            
 
                             //获取省内建设单位信息
-                            YourTask_PullDataFromSxxzx_Jsdw(row_DataJkLog["ID"].ToString2());
-                            Public.WriteLog("\r\n");
-                            //获取省内企业信息
-                            YourTask_PullDataFromSxxzx_qyxx(row_DataJkLog["ID"].ToString2());
-                            Public.WriteLog("\r\n");
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Jsdw(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            } 
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog( DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取省内建设单位信息异常:" + ex.Message);
+                            }
+                            
+                            //获取市内企业信息
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_qyxx(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n"); 
+                            } 
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取市内企业信息异常:" + ex.Message);
+                            }
+                           
 
                             //获取省内市外企业信息
 
                             DataTable dtCityCodes= dataService.Get_tbXzqdmDic_AllCityExceptWuxi();
                             foreach (DataRow cityCode in dtCityCodes.Rows)
                             {
-                                YourTask_PullDataFromSxxzx_Jiangsu_qyxx(row_DataJkLog["ID"].ToString2(), cityCode["Code"].ToString2());
+                                try
+                                {
+                                    YourTask_PullDataFromSxxzx_Jiangsu_qyxx(row_DataJkLog["ID"].ToString2(), cityCode["Code"].ToString2());
+                                    Public.WriteLog("\r\n");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取市内企业信息异常:" + cityCode["Code"].ToString2() + "\n" + ex.Message);
+                                }
+                                
                             }
+
+                            //获取省外企业信息
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Swqyxx(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取省外企业信息异常:" + ex.Message);
+                            }
+                            
+                            //获取省外企业人员信息
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Swryxx(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取省外企业人员信息异常:" + ex.Message);
+                            }
+                           
                              
-
                             //获取省内注册执业人员信息
-                            YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-获取省内注册执业人员信息异常:" + ex.Message);
+                            }
 
-                            Public.WriteLog("\r\n");
-                            YourTask_PullDataFromSxxzx_Ryxx_Aqscgl(row_DataJkLog["ID"].ToString2());
-                            Public.WriteLog("\r\n");
-                            YourTask_PullDataFromSxxzx_Ryxx_Zygwgl(row_DataJkLog["ID"].ToString2());
-                            Public.WriteLog("\r\n");
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Ryxx_Aqscgl(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-YourTask_PullDataFromSxxzx_Ryxx_Aqscgl异常:" + ex.Message);
+                            }
+
+                            try
+                            {
+                                YourTask_PullDataFromSxxzx_Ryxx_Zygwgl(row_DataJkLog["ID"].ToString2());
+                                Public.WriteLog("\r\n");
+                            }
+                            catch (Exception ex)
+                            {
+                                Public.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "-YourTask_PullDataFromSxxzx_Ryxx_Zygwgl异常:" + ex.Message);
+                            }
+                            
                         }
                         catch (Exception ex)
                         {
@@ -969,6 +1040,7 @@ namespace WxjzgcjczyTimerService
                     try
                     {
                         client = new WxjzgcjczyTimerService.WebServiceStxm.WebServiceStxm();
+                        client.Timeout = 6000000;
                         resultStringRaw = client.ReadStxmByStStandard(sstxmUserName, sstxmPwd, "", "", "320200");
                         resultString = xmlHelper.ConvertSpecialLetter(resultStringRaw);
                         //Public.WriteLog(resultString);
@@ -6478,20 +6550,32 @@ namespace WxjzgcjczyTimerService
                                                 sp.Clear();
                                                 if (!string.IsNullOrEmpty(corpBasicInfo.CityCode.ToString2()))
                                                 {
-                                                    row["City"] = corpBasicInfo.CityCode;
+                                                    if (string.IsNullOrEmpty(row["City"].ToString2()))
+                                                    {
+                                                        row["City"] = corpBasicInfo.CityCode;
+                                                    }
+                                                   
 
                                                     sp.Add("@CodeInfo", corpBasicInfo.CityCode.ToString2());
                                                     sp.Add("@parentCode", provinceCode);
                                                     string cityCode = dataService.ExecuteSql("select top 1 Code from  UEPP_Code where CodeType='城市地区' and ParentCode=@parentCode and  CodeInfo=@CodeInfo", sp);
                                                     if (!string.IsNullOrEmpty(cityCode))
                                                     {
-                                                        row["CityID"] = cityCode;
+                                                        if (string.IsNullOrEmpty( row["CityID"].ToString2()))
+                                                        {
+                                                            row["CityID"] = cityCode;
+                                                        }
+                                                       
                                                     }
 
                                                     sp.Clear();
                                                     if (!string.IsNullOrEmpty(corpBasicInfo.CountyCode.ToString2()))
                                                     {
-                                                        row["County"] = corpBasicInfo.CountyCode;
+                                                        if (string.IsNullOrEmpty( row["County"].ToString2()))
+                                                        {
+                                                            row["County"] = corpBasicInfo.CountyCode;
+                                                        }
+                                                        
 
                                                         sp.Add("@CodeInfo", corpBasicInfo.CountyCode.ToString2());
                                                         sp.Add("@parentCode", cityCode);
@@ -8040,7 +8124,7 @@ namespace WxjzgcjczyTimerService
 
                 DateTime endTime = DateTime.Now;
                 TimeSpan span = compareDateTime(beginTime, endTime);
-                Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_qyxx任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
+                Public.WriteLog(string.Format("结束YourTask_PullDataFromSxxzx_Jiangsu_qyxx任务:{0}，历时：{1}时{2}分{3}秒", endTime.ToString("yyyy-MM-dd HH:mm:ss"), span.Hours, span.Minutes, span.Seconds));
 
 
                 row_DataJkDataDetail_qyxx["allCount"] = allCount_qyxx;
@@ -14001,10 +14085,16 @@ namespace WxjzgcjczyTimerService
                         foreach (DataRow row in dt.Rows)
                         {
                             string qyID = row["ZZJGDM"].ToString2();
-
-                            if (qyID.Length == 9)
+                            if (string.IsNullOrEmpty(qyID))
+                            {
+                                qyID = Public.ShxydmToZzjgdm(row["YYZZZCH"].ToString2());
+                            }else if (qyID.Length == 9)
                             {
                                 qyID = Public.ZzjgdmToStandard(qyID);
+                            }
+                            if (string.IsNullOrEmpty(qyID))
+                            {
+                                continue;
                             }
 
                             DataRow row_SaveDataLog = dt_SaveDataLog.NewRow();
@@ -14606,6 +14696,170 @@ namespace WxjzgcjczyTimerService
                 }
             }
         }
+
+        /// <summary>
+        /// 省勘察设计系统获取勘察设计合同备案
+        /// </summary>
+        /// <param name="DataJkLogID"></param>
+        void YourTask_PullDataFromSKcsj_htba()
+        {
+            string apiMessage = string.Empty; 
+            DataTable dtapizb = dataService.Get_API_zb_apiFlow("28");
+            if (dtapizb.Rows[0][0].ToString() == "1")
+            {
+                //往数据监控日志表添加一条记录
+                DataTable dt_DataJkLog = dataService.GetSchema_DataJkLog();
+                DataRow row_DataJkLog = dt_DataJkLog.NewRow();
+                dt_DataJkLog.Rows.Add(row_DataJkLog);
+                row_DataJkLog["ID"] = dataService.Get_DataJkLogNewID();
+                row_DataJkLog["DataFlow"] = DataFlow.省勘察设计系统到无锡数据中心.ToInt32();
+                row_DataJkLog["DataFlowName"] = DataFlow.省勘察设计系统到无锡数据中心.ToString();
+                row_DataJkLog["ServiceUrl"] = "";
+                row_DataJkLog["csTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                dataService.Submit_DataJkLog(dt_DataJkLog);
+
+                int allCount_qyxx = 0, successCount_qyxx = 0;
+                try
+                {
+                    string tag = Tag.省勘察设计系统.ToString();
+
+                    //往数据监控日志表项添加一条记录
+                    DataTable dt_DataJkDataDetail_qyxx = dataService.GetSchema_DataJkDataDetail();
+                    DataRow row_DataJkDataDetail_qyxx = dt_DataJkDataDetail_qyxx.NewRow();
+                    dt_DataJkDataDetail_qyxx.Rows.Add(row_DataJkDataDetail_qyxx);
+
+                    row_DataJkDataDetail_qyxx["ID"] = dataService.Get_DataJkDataDetailNewID().ToInt64();
+                    row_DataJkDataDetail_qyxx["DataJkLogID"] = row_DataJkLog["ID"];
+                    row_DataJkDataDetail_qyxx["tableName"] = "TBContractRecordManage";
+                    row_DataJkDataDetail_qyxx["MethodName"] = "直接从省勘察设计数据库读取";
+                    row_DataJkDataDetail_qyxx["bz"] = "从省勘察设计系统拉取勘察设计合同备案";
+
+                    try
+                    {
+                        DataTable dt_SaveDataLog = dataService.GetSchema_SaveDataLog();
+
+                        DataTable dt = dataService.Get_Enterprise_Tab_Skcsj_htba();
+
+                        Public.WriteLog("获取省勘察设计系统勘察设计合同备案:" + dt.Rows.Count);
+
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            allCount_qyxx++;
+                            DataRow row_SaveDataLog = dt_SaveDataLog.NewRow();
+                            row_SaveDataLog["DataJkDataDetailID"] = row_DataJkDataDetail_qyxx["ID"];
+                            row_SaveDataLog["DataXml"] = "";
+                            row_SaveDataLog["PKID"] = row["PKID"].ToString2();
+                            row_SaveDataLog["CreateDate"] = DateTime.Now.ToString("yyyy-MM-dd");
+
+                            try
+                            {
+                                #region 合同备案
+                                string recordNum = row["RecordNum"].ToString2();
+                                string recordInnerNum = row["RecordInnerNum"].ToString2();
+
+                                DataTable dt_TBContractRecordManage = dataService.GetTBData_TBContractRecordManageByRecordNum(recordNum, recordInnerNum);
+                                DataRow toSaveRow;
+                                if (dt_TBContractRecordManage.Rows.Count == 0)
+                                {
+                                    toSaveRow = dt_TBContractRecordManage.NewRow();
+                                    dt_TBContractRecordManage.Rows.Add(toSaveRow);
+                                    DataTableHelp.DataRow2DataRow(row, toSaveRow);
+                                    toSaveRow["cjrqsj"] = DateTime.Now;
+                                    toSaveRow["xgrqsj"] = DateTime.Now;
+                                    
+                                }
+                                else
+                                {
+                                    toSaveRow = dt_TBContractRecordManage.Rows[0];
+                                    DataTableHelp.DataRow2DataRow(row, toSaveRow, new List<string>() { "PKID" });
+                                    toSaveRow["xgrqsj"] = DateTime.Now;
+                                }
+                                toSaveRow["updateUser"] = "dbsynch";
+                                toSaveRow["UpdateFlag"] = "U";
+
+                                if (toSaveRow["PropietorCorpCode"].ToString2().Length > 18)
+                                {
+                                    toSaveRow["PropietorCorpCode"] = toSaveRow["PropietorCorpCode"].ToString2().Substring(0, 18);
+                                }
+                                if (toSaveRow["ContractorCorpCode"].ToString2().Length > 18)
+                                {
+                                    toSaveRow["ContractorCorpCode"] = toSaveRow["ContractorCorpCode"].ToString2().Substring(0, 18);
+                                }
+                                toSaveRow["sbdqbm"] = row["TJQHCode"].ToString2().Substring(0, 6);
+                                toSaveRow["tag"] = Tag.省勘察设计系统;
+                                if (dataService.Submit_TBContractRecordManage(dt_TBContractRecordManage))
+                                {
+                                    successCount_qyxx++;
+                                }
+                                else
+                                {
+                                    row_SaveDataLog["SaveState"] = 0;
+                                    row_SaveDataLog["Msg"] = "勘察设计合同备案保存失败！";
+                                    dt_SaveDataLog.Rows.Add(row_SaveDataLog);
+                                    continue;
+                                }
+
+                                
+
+                                #endregion
+                                 
+                            }
+                            catch (Exception ex)
+                            {
+                                row_SaveDataLog["SaveState"] = 0;
+                                row_SaveDataLog["Msg"] = "勘察设计合同备案保存出现异常：" + ex.Message;
+                                dt_SaveDataLog.Rows.Add(row_SaveDataLog);
+                            }
+                           
+                        }
+                        if (dt_SaveDataLog.Rows.Count > 0)
+                            dataService.Submit_SaveDataLog(dt_SaveDataLog);
+
+                        row_DataJkDataDetail_qyxx["allCount"] = allCount_qyxx;
+                        row_DataJkDataDetail_qyxx["successCount"] = successCount_qyxx;
+                        row_DataJkDataDetail_qyxx["IsOk"] = 1;
+                        row_DataJkDataDetail_qyxx["ErrorMsg"] = "";
+
+                        if (dt_DataJkDataDetail_qyxx.Rows.Count > 0)
+                            dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail_qyxx);
+                    }
+                    catch (Exception ex)
+                    {
+                        Public.WriteLog("Exception1:" + ex.Message);
+                        row_DataJkDataDetail_qyxx["allCount"] = allCount_qyxx;
+                        row_DataJkDataDetail_qyxx["successCount"] = successCount_qyxx;
+                        row_DataJkDataDetail_qyxx["IsOk"] = 0;
+                        row_DataJkDataDetail_qyxx["ErrorMsg"] = ex.Message;
+
+                        if (dt_DataJkDataDetail_qyxx.Rows.Count > 0)
+                            dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail_qyxx);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Public.WriteLog("Exception:" + ex.Message);
+                    apiMessage += ex.Message;
+                }
+
+                finally
+                {
+                    DataTable dtapicb = dataService.GetSchema_API_cb();
+                    DataRow row_apicb = dtapicb.NewRow();
+                    dtapicb.Rows.Add(row_apicb);
+                    row_apicb["apiCbID"] = dataService.Get_apiCbNewID();
+                    row_apicb["apiFlow"] = "28";
+                    row_apicb["apiMethod"] = "Get_Enterprise_Tab_Skcsj";
+                    row_apicb["apiDyResult"] = string.IsNullOrEmpty(apiMessage) == true ? "成功" : "失败";
+                    row_apicb["apiDyMessage"] = apiMessage;
+                    row_apicb["apiDyTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    dataService.Submit_API_cb(dtapicb);
+
+                    dataService.UpdateZbJkzt("28", string.IsNullOrEmpty(apiMessage) == true ? "1" : "0", apiMessage);
+
+                }
+            }
+        }
+
 
         #endregion
 

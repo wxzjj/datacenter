@@ -106,13 +106,37 @@ namespace Wxjzgcjczy.DAL.Sqlserver
         {
 
 
-            string sql = @"select * from (
-                            select p.PKID   ,p.PrjNum ,p.PrjInnerNum ,p.PrjName ,p.PrjTypeNum ,
-            	            p.BuildCorpName ,p.BuildCorpCode ,p.ProvinceNum ,p.CityNum ,p.CountyNum ,p.PrjApprovalNum ,p.PrjApprovalLevelNum ,p.BuldPlanNum,p.ProjectPlanNum 
-                            ,p.AllInvest ,p.AllArea  ,p.PrjSize ,p.PrjPropertyNum ,p.PrjFunctionNum , SUBSTRING(convert(varchar(30),p.BDate,120),1,10) BDate 
-                            ,SUBSTRING(convert(varchar(30),p.EDate,120),1,10) EDate ,SUBSTRING(convert(varchar(30),p.CREATEDATE,120),1,10) CREATEDATE ,p.UpdateFlag ,p.sbdqbm
-                            , pa.prjpassword,pa.gyzzpl,pa.dzyx,pa.lxr,pa.yddh,pa.xmtz ,pa.gytze ,pa.gytzbl ,pa.lxtzze, pa.programme_address
-                            from TBProjectInfo p LEFT JOIN TBProjectAdditionalInfo pa ON p.PrjNum = pa.prjnum ) aaa where 1=1 ";
+            string sql = @"SELECT *
+FROM (
+	SELECT p.PKID, p.PrjNum, p.PrjInnerNum, p.PrjName, p.PrjTypeNum
+		, p.BuildCorpName, p.BuildCorpCode, p.ProvinceNum, p.CityNum, p.CountyNum
+		, p.PrjApprovalNum, p.PrjApprovalLevelNum, p.BuldPlanNum, p.ProjectPlanNum, p.AllInvest
+		, p.AllArea, p.PrjSize, p.PrjPropertyNum, p.PrjFunctionNum
+		, SUBSTRING(convert(varchar(30), p.BDate, 120), 1, 10) AS BDate
+		, SUBSTRING(convert(varchar(30), p.EDate, 120), 1, 10) AS EDate
+		, SUBSTRING(convert(varchar(30), p.CREATEDATE, 120), 1, 10) AS CREATEDATE
+		, p.UpdateFlag, p.sbdqbm, pa.prjpassword, pa.gyzzpl, pa.dzyx
+		, pa.lxr, pa.yddh, pa.xmtz, pa.gytze, pa.gytzbl
+		, pa.lxtzze, pa.programme_address
+	FROM WJSJZX.dbo.TBProjectInfo p
+		LEFT JOIN WJSJZX.dbo.TBProjectAdditionalInfo pa ON p.PrjNum = pa.prjnum
+	UNION ALL
+	SELECT p.id AS PKID, p.PrjNum, '' AS PrjInnerNum, p.PrjName, p.PrjTypeNum
+		, p.BuildCorpName, p.BuildCorpCode, p.ProvinceNum, p.CityNum, p.CountyNum
+		, p.PrjApprovalNum, p.PrjApprovalLevelNum, p.BuildPlanNum AS BuldPlanNum, p.ProjectPlanNum
+		, CASE p.AllInvest WHEN NULL THEN p.AllInvest WHEN '' THEN NULL ELSE CONVERT(DECIMAL(15, 2), p.AllInvest) END AllInvest
+		, CASE p.AllArea WHEN NULL THEN p.AllArea WHEN '' THEN NULL ELSE CONVERT(DECIMAL(15, 2), p.AllArea) END AllArea
+		, p.PrjSize, p.PrjPropertyNum, p.PrjFunctionNum
+		, SUBSTRING(convert(varchar(30), p.beginDete, 120), 1, 10) AS BDate
+		, SUBSTRING(convert(varchar(30), p.endDate, 120), 1, 10) AS EDate
+		, SUBSTRING(convert(varchar(30), GETDATE(), 120), 1, 10) AS CREATEDATE
+		, '' AS UpdateFlag, '' AS sbdqbm, pa.prjpassword, pa.gyzzpl, pa.dzyx
+		, pa.lxr, pa.yddh, pa.xmtz, pa.gytze, pa.gytzbl
+		, pa.lxtzze, pa.programme_address
+	FROM lib4.dbo.TBProjectInfo p
+		LEFT JOIN lib4.dbo.TBProjectAdditionalInfo pa ON p.PrjNum = pa.prjnum
+) aaa
+WHERE 1 = 1";
 
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
 
@@ -1583,6 +1607,17 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
 
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
+
+        public DataTable GetInterfaceUserInfoForDataCenter(string userName, string pwd)
+        {
+            string sql = " select * from uepp_InterfaceUser where UserName=@userName and Pwd=@pwd and DataState=0 and FullName='无锡数据中心' ";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@userName", userName);
+            sp.Add("@pwd", pwd);
+
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         public DataTable Read_zj_gcjbxx(string zljdbm)
         {
             string sql = " select * from zj_gcjbxx where zljdbm=@zljdbm and UpdateFlag='U' ";
@@ -1649,7 +1684,8 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         {
             string sql = "";
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
-            string zzjgdm = qyID.Substring(8, 8) + "-" + qyID.Substring(16, 1);
+            //string zzjgdm = qyID.Substring(8, 8) + "-" + qyID.Substring(16, 1);
+            string zzjgdm = qyID;
             if (qyID.Length == 9)
             {
                 sql = @"select top 1 * from UEPP_Qyjbxx  where qyID=@qyID or substring(qyID,1,8)+substring(qyID,10,1)=@qyID or (substring(qyID,9,9))=@qyID order by len(qyID) desc ";
@@ -1660,6 +1696,7 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
             }
             else
             {
+                zzjgdm = qyID.Substring(8, 8) + "-" + qyID.Substring(16, 1);
                 sql = @"select top 1  * from UEPP_Qyjbxx  where qyID=@qyID or qyID=@zzjgdm  order by len(qyID) desc  ";
             }
 
@@ -1853,6 +1890,16 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         public string ExecuteSql(string sql, SqlParameterCollection sp)
         {
             return this.DB.ExeSqlForString(sql, sp);
+        }
+
+        public int ExecuteNonQuerySql(string sql, SqlParameterCollection sp)
+        {
+            return this.DB.ExecuteNonQuerySql(sql, sp);
+        }
+
+        public int ExecuteNonQuerySql2(string sql, SqlParameterCollection sp)
+        {
+            return this.DB.ExecuteNonQuerySql2(sql, sp);
         }
 
         /// <summary>
