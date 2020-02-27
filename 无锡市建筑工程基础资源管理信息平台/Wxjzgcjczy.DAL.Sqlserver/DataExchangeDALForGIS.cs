@@ -24,6 +24,9 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             + "a.ProvinceNum,a.CityNum,a.CountyNum,"
             + "a.PrjApprovalNum, a.PrjApprovalLevelNum,a.BuldPlanNum,a.ProjectPlanNum, a.AllInvest,a.AllArea,a.PrjPropertyNum,a.PrjFunctionNum,a.CreateDate,"
             + "a.BDate,a.EDate,ISNULL(a.jd1, a.jd) jd, ISNULL(a.wd1, a.wd) wd,b.programme_address,a.DocNum,a.DocCount,a.EDates,b.lxr,b.yddh";
+
+        public static string PROJECTINFO_ADDITIONAL_FIELDS = @"a.PKID, a.PrjNum,a.PrjName,a.PrjTypeNum,a.BuildCorpCode,a.BuildCorpName,"
+            + "a.programme_address,a.lxr,a.yddh";
      
 
         #region 获取项目数据
@@ -149,7 +152,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             SqlParameterCollection sp = this.DB.CreateSqlParameterCollection();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select a.*");
+            sb.Append(" select " + PROJECTINFO_ADDITIONAL_FIELDS);
             sb.Append(" from VProjectInfo_Additional a");
             sb.Append(" where 1=1");
             if (!string.IsNullOrEmpty(prjNum))
