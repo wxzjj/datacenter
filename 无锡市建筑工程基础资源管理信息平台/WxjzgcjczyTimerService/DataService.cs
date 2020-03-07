@@ -8,16 +8,18 @@ using System.Data;
 using Bigdesk8.Security;
 using WxjzgcjczyTimerService;
 using Bigdesk8;
+using WxsjzxTimerService.Common;
 
 namespace WxsjzxTimerService
 {
 
     public class DataService
     {
+        private static DecryptAndEncryptionHelper helper = new DecryptAndEncryptionHelper(ConfigInformation.Key, ConfigInformation.Vector);
         /// <summary>
         /// 无锡数据中心与无锡建筑工程基础资源管理平台（新库）数据访问DBOperator
         /// </summary>
-        public DBOperator DB = DBOperatorFactory.GetDBOperator(ConfigurationManager.AppSettings["ConnectionString"],
+        public DBOperator DB = DBOperatorFactory.GetDBOperator(helper.Decrypto(ConfigurationManager.AppSettings["ConnectionString"]),
    ConfigurationManager.AppSettings["SQLSERVER"]);
         /// <summary>
         /// 无锡局一号通系统数据访问DBOperator

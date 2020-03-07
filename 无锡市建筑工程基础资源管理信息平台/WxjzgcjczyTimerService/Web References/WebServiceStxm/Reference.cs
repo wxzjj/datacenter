@@ -112,23 +112,25 @@ namespace WxjzgcjczyTimerService.WebServiceStxm {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ReadStxmByStStandard", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string ReadStxmByStStandard(string userName, string password, string zzjgdm, string ssqx, string sscs) {
+        public string ReadStxmByStStandard(string userName, string password, string zzjgdm, string ssqx, string sscs, string beginDate, string endDate) {
             object[] results = this.Invoke("ReadStxmByStStandard", new object[] {
                         userName,
                         password,
                         zzjgdm,
                         ssqx,
-                        sscs});
+                        sscs,
+                        beginDate,
+                        endDate});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void ReadStxmByStStandardAsync(string userName, string password, string zzjgdm, string ssqx, string sscs) {
-            this.ReadStxmByStStandardAsync(userName, password, zzjgdm, ssqx, sscs, null);
+        public void ReadStxmByStStandardAsync(string userName, string password, string zzjgdm, string ssqx, string sscs, string beginDate, string endDate) {
+            this.ReadStxmByStStandardAsync(userName, password, zzjgdm, ssqx, sscs, beginDate, endDate, null);
         }
         
         /// <remarks/>
-        public void ReadStxmByStStandardAsync(string userName, string password, string zzjgdm, string ssqx, string sscs, object userState) {
+        public void ReadStxmByStStandardAsync(string userName, string password, string zzjgdm, string ssqx, string sscs, string beginDate, string endDate, object userState) {
             if ((this.ReadStxmByStStandardOperationCompleted == null)) {
                 this.ReadStxmByStStandardOperationCompleted = new System.Threading.SendOrPostCallback(this.OnReadStxmByStStandardOperationCompleted);
             }
@@ -137,7 +139,9 @@ namespace WxjzgcjczyTimerService.WebServiceStxm {
                         password,
                         zzjgdm,
                         ssqx,
-                        sscs}, this.ReadStxmByStStandardOperationCompleted, userState);
+                        sscs,
+                        beginDate,
+                        endDate}, this.ReadStxmByStStandardOperationCompleted, userState);
         }
         
         private void OnReadStxmByStStandardOperationCompleted(object arg) {

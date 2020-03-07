@@ -217,7 +217,7 @@ namespace WxjzgcjczyTimerService
                             //获取省内注册执业人员信息
                             try
                             {
-                                YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
+                                 YourTask_PullDataFromSxxzx_Ryxx_Zczyry(row_DataJkLog["ID"].ToString2());
                                 Public.WriteLog("\r\n");
                             }
                             catch (Exception ex)
@@ -1039,9 +1039,11 @@ namespace WxjzgcjczyTimerService
                     string resultString = "", resultStringRaw = "";
                     try
                     {
+                        DateTime beginDate = DateTime.Today.AddDays(-7);
+     
                         client = new WxjzgcjczyTimerService.WebServiceStxm.WebServiceStxm();
                         client.Timeout = 6000000;
-                        resultStringRaw = client.ReadStxmByStStandard(sstxmUserName, sstxmPwd, "", "", "320200");
+                        resultStringRaw = client.ReadStxmByStStandard(sstxmUserName, sstxmPwd, "", "", "320200", beginDate.ToString("yyyy-MM-dd"), DateTime.Now.ToString("yyyy-MM-dd"));
                         resultString = xmlHelper.ConvertSpecialLetter(resultStringRaw);
                         //Public.WriteLog(resultString);
                         is_OK = 1;

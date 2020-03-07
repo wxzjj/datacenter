@@ -26,6 +26,8 @@
             <s:element minOccurs="0" maxOccurs="1" name="zzjgdm" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="ssqx" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="sscs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="beginDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>

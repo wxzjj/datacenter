@@ -92,7 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Base64EncodeHelper.cs" />
+    <Compile Include="Common\ConfigInformation.cs" />
     <Compile Include="Common\DataTableHelp.cs" />
+    <Compile Include="Common\DecryptAndEncryptionHelper.cs" />
     <Compile Include="Common\Public.cs" />
     <Compile Include="Common\XmlHelper.cs" />
     <Compile Include="model\Ap_sgxksqb_clqd.cs" />
@@ -187,6 +189,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
