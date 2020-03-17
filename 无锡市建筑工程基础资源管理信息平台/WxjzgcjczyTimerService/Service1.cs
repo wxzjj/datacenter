@@ -120,15 +120,15 @@ namespace WxjzgcjczyTimerService
                     Public.WriteLog("\r\n");
 
                     //获取一号通系统里的建设单位信息
-                    YourTask_PullDataFromYht_Jsdwxx();
-                    Public.WriteLog("\r\n");
+                    //TO REMOVE YourTask_PullDataFromYht_Jsdwxx();
+                    //Public.WriteLog("\r\n");
 
                     //获取省勘察设计系统勘察设计单位信息
-                    YourTask_PullDataFromSKcsj_qyxx();
+                    //TO REMOVE YourTask_PullDataFromSKcsj_qyxx();
                     Public.WriteLog("\r\n");
 
                     //获取省勘察设计系统勘察设计合同备案
-                    YourTask_PullDataFromSKcsj_htba();
+                    //TO REMOVE YourTask_PullDataFromSKcsj_htba();
                     Public.WriteLog("\r\n");
 
                     //往数据监控日志表添加一条记录---江苏建设公共基础数据平台到无锡数据中心
@@ -1040,10 +1040,11 @@ namespace WxjzgcjczyTimerService
                     try
                     {
                         DateTime beginDate = DateTime.Today.AddDays(-7);
+                        DateTime endDate = DateTime.Today.AddDays(+1);
      
                         client = new WxjzgcjczyTimerService.WebServiceStxm.WebServiceStxm();
                         client.Timeout = 6000000;
-                        resultStringRaw = client.ReadStxmByStStandard(sstxmUserName, sstxmPwd, "", "", "320200", beginDate.ToString("yyyy-MM-dd"), DateTime.Now.ToString("yyyy-MM-dd"));
+                        resultStringRaw = client.ReadStxmByStStandard(sstxmUserName, sstxmPwd, "", "", "320200", beginDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
                         resultString = xmlHelper.ConvertSpecialLetter(resultStringRaw);
                         //Public.WriteLog(resultString);
                         is_OK = 1;
@@ -1534,7 +1535,7 @@ namespace WxjzgcjczyTimerService
                                 row_SaveDataLog["SaveState"] = 0;
                                 row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
                                 row_SaveDataLog["Msg"] = "项目编号“" + xkxm.projectInfo.XiangMuBeiAnNum + "”不存在，施工许可证编号为" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "的施工许可添加失败！";
-                                continue;
+                                //continue;
                             }
 
                             DataTable dt = dataService.GetTBData_TBBuilderLicenceManage(xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum, xkxm.gcxx.applyConstInfo.XuKeZhengNum);
@@ -1556,6 +1557,14 @@ namespace WxjzgcjczyTimerService
                                     continue;
                                 }
                             }
+
+                            if (flag == 0)
+                            {
+                                //项目编号不存在，此记录添加，DataState设置为-1
+                                dataRow["returnResult"] = "项目编号“" + xkxm.projectInfo.XiangMuBeiAnNum + "”不存在，施工许可证编号为" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "的施工许可添加失败！";
+                                dataRow["DataState"] = -1;
+                            }
+
                             if (!string.IsNullOrEmpty(xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum))
                                 dataRow["BuilderLicenceInnerNum"] = xkxm.gcxx.applyConstInfo.BuilderLicenceInnerNum;
                             else
@@ -1761,11 +1770,14 @@ namespace WxjzgcjczyTimerService
 
                             if (String.IsNullOrEmpty(ConsCorpName))
                             {
-                                //dataRow["ConsCorpName"] = "/";
-                                row_SaveDataLog["SaveState"] = 0;
-                                row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
-                                row_SaveDataLog["Msg"] = "施工许可证编号为“" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "”的项目施工单位不能为空！";
-                                continue;
+                                dataRow["ConsCorpName"] = "/";
+                                //row_SaveDataLog["SaveState"] = 0;
+                                //row_SaveDataLog["PKID"] = xkxm.gcxx.applyConstInfo.RowGuid.ToString2();
+                                //row_SaveDataLog["Msg"] = "施工许可证编号为“" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "”的项目施工单位不能为空！";
+                                //continue;
+                                //项目施工单位不存在，此记录添加，DataState设置为-2
+                                dataRow["returnResult"] = "施工许可证编号为“" + xkxm.gcxx.applyConstInfo.XuKeZhengNum + "”的项目施工单位不能为空！";
+                                dataRow["DataState"] = -1;
                             }
                             else
                             {
@@ -1836,10 +1848,11 @@ namespace WxjzgcjczyTimerService
                             {
                                 if (dataService.Submit_TBBuilderLicenceManage(dt))
                                 {
-                                    row_SaveDataLog["SaveState"] = 1;
-                                    row_SaveDataLog["PKID"] = dataRow["PKID"];
-                                    row_SaveDataLog["Msg"] = "施工许可添加成功！";
-                                    row_SaveDataLog["CreateDate"] = DateTime.Now.ToString();
+                                    //成功不添加日志
+                                    //row_SaveDataLog["SaveState"] = 1;
+                                    //row_SaveDataLog["PKID"] = dataRow["PKID"];
+                                    //row_SaveDataLog["Msg"] = "施工许可添加成功！";
+                                    //row_SaveDataLog["CreateDate"] = DateTime.Now.ToString();
                                     success_xm++;
                                 }
                                 else
@@ -1882,6 +1895,19 @@ namespace WxjzgcjczyTimerService
                             row_SaveDataLog["SaveState"] = 0;
                             row_SaveDataLog["Msg"] = ex.Message;
                         }
+
+                        try
+                        {
+                            if (String.IsNullOrEmpty(row_SaveDataLog["PKID"].ToString()))
+                            {
+                                dt_SaveDataLog.Rows.Remove(row_SaveDataLog);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Public.WriteLog("执行YourTask_PullDataFromSSgxk方法出现异常==:" + ex.Message);
+                        }
+                        
                     }
                     if (dt_SaveDataLog.Rows.Count > 0)
                     {
@@ -6486,6 +6512,8 @@ namespace WxjzgcjczyTimerService
                                         corpBasicInfo.CorpCode = corpBasicInfo.CorpCode.Substring(0, 8) + '-' + corpBasicInfo.CorpCode.Substring(8, 1);
                                     }
                                     //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
+                                    //TODO： 因一号通导入的企业有统一社会信用代码为qyID，所以暂时取消，等省平台全部使用统一社会信用代码为主键时再做使用
+                                    /**
                                     if (corpBasicInfo.CorpCode.Length == 10)
                                     {
                                         string qyShxydm = dataService.Get_UEPP_Qyjbxx_Shxydm(corpBasicInfo.CorpCode);
@@ -6493,7 +6521,7 @@ namespace WxjzgcjczyTimerService
                                         {
                                             corpBasicInfo.CorpCode = qyShxydm;
                                         }
-                                    }
+                                    } */
 
                                     DataRow row_SaveDataLog = dt_SaveDataLog.NewRow();
                                     row_SaveDataLog["DataJkDataDetailID"] = row_DataJkDataDetail_qyxx["ID"];
@@ -7278,6 +7306,8 @@ namespace WxjzgcjczyTimerService
                                         corpBasicInfo.CorpCode = corpBasicInfo.CorpCode.Substring(0, 8) + '-' + corpBasicInfo.CorpCode.Substring(8, 1);
                                     }
                                     //检查该企业是否存在社会信用代码，若存在，则转化为社会信用代码
+                                    //TODO： 因一号通导入的企业有统一社会信用代码为qyID，所以暂时取消，等省平台全部使用统一社会信用代码为主键时再做使用
+                                    /**
                                     if (corpBasicInfo.CorpCode.Length == 10)
                                     {
                                         string qyShxydm = dataService.Get_UEPP_Qyjbxx_Shxydm(corpBasicInfo.CorpCode);
@@ -7285,7 +7315,7 @@ namespace WxjzgcjczyTimerService
                                         {
                                             corpBasicInfo.CorpCode = qyShxydm;
                                         }
-                                    }
+                                    }*/
 
                                     DataRow row_SaveDataLog = dt_SaveDataLog.NewRow();
                                     row_SaveDataLog["DataJkDataDetailID"] = row_DataJkDataDetail_qyxx["ID"];

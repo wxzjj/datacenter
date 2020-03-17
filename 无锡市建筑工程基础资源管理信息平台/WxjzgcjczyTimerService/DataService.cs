@@ -226,7 +226,27 @@ namespace WxsjzxTimerService
             	            BuildCorpName ,BuildCorpCode ,ProvinceNum ,CityNum ,CountyNum ,PrjApprovalNum ,PrjApprovalLevelNum ,BuldPlanNum,ProjectPlanNum 
                             ,AllInvest ,AllArea  ,PrjSize ,PrjPropertyNum ,PrjFunctionNum , SUBSTRING(convert(varchar(30),BDate,120),1,10) BDate 
                             ,SUBSTRING(convert(varchar(30),EDate,120),1,10) EDate ,SUBSTRING(convert(varchar(30),CREATEDATE,120),1,10) CREATEDATE , UpdateFlag ,sbdqbm 
-                            from TBProjectInfo ) aaa where 1=1 ";
+                            from WJSJZX.dbo.TBProjectInfo 
+UNION ALL
+SELECT p.id AS PKID, p.PrjNum, '' AS PrjInnerNum, p.PrjName, p.PrjTypeNum
+	, p.BuildCorpName, p.BuildCorpCode, p.ProvinceNum, p.CityNum, p.CountyNum
+	, p.PrjApprovalNum, p.PrjApprovalLevelNum, p.BuildPlanNum AS BuldPlanNum, p.ProjectPlanNum
+	, CASE p.AllInvest
+		WHEN NULL THEN p.AllInvest
+		WHEN '' THEN NULL
+		ELSE CONVERT(DECIMAL(15, 2), p.AllInvest)
+	END AS AllInvest
+	, CASE p.AllArea
+		WHEN NULL THEN p.AllArea
+		WHEN '' THEN NULL
+		ELSE CONVERT(DECIMAL(15, 2), p.AllArea)
+	END AS AllArea, p.PrjSize, p.PrjPropertyNum, p.PrjFunctionNum
+	, SUBSTRING(convert(varchar(30), p.beginDete, 120), 1, 10) AS BDate
+	, SUBSTRING(convert(varchar(30), p.endDate, 120), 1, 10) AS EDate
+	, SUBSTRING(convert(varchar(30), GETDATE(), 120), 1, 10) AS CREATEDATE
+	, '' AS UpdateFlag, '' AS sbdqbm
+FROM lib4.dbo.TBProjectInfo p
+) aaa where 1=1 ";
 
             return DB.ExeSqlForDataTable(sql, null, "dt");
         }
