@@ -259,7 +259,7 @@ namespace WxjzgcjczyTimerService
                 {
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
-                    string resultSt = Contact(json, "http://58.215.18.222:8008/zhujianju_dpl1/certif_person");
+                    string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/certif_person");
 
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("uepp_ryjbxx_zczyry_szxspt", PK);
 
@@ -365,7 +365,7 @@ namespace WxjzgcjczyTimerService
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
 
-                    string resultSt = Contact(json, "http://58.215.18.222:8008/zhujianju_dpl2/complete_acc");
+                    string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/complete_acc");
 
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("TBProjectFinishManage_szxspt", PK);
 
@@ -470,7 +470,7 @@ namespace WxjzgcjczyTimerService
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
 
-                    string resultSt = Contact(json, "http://58.215.18.222:8008/zhujianju_dpl3/constr_licence");
+                    string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/constr_licence");
 
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("TBBuilderLicenceManage_szxspt", PK);
 
@@ -575,7 +575,7 @@ namespace WxjzgcjczyTimerService
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
 
-                    string resultSt = Contact(json, "http://58.215.18.222:8008/zhujianju_dpl4/constr_project_info");
+                    string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/constr_project_info");
 
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("TBProjectInfo_szxspt", PK);
 
@@ -679,7 +679,7 @@ namespace WxjzgcjczyTimerService
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
 
-                    string resultSt = Contact(json, "http://58.215.18.222:8008/zhujianju_dpl5/eng_bid_info");
+                    string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/eng_bid_info");
 
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("TBTenderInfo_szxspt", PK);
 
@@ -782,7 +782,7 @@ namespace WxjzgcjczyTimerService
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
 
-                    string resultSt = Contact(json, "http://58.215.18.222:8008/zhujianju_dpl6/prof_adm_per");
+                    string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/prof_adm_per");
 
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("uepp_ryjbxx_zygwglry_szxspt", PK);
 
@@ -886,7 +886,7 @@ namespace WxjzgcjczyTimerService
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
 
-                    string resultSt = Contact(json, "http://58.215.18.222:8008/zhujianju_dpl7/safe_prod_adm_per");
+                    string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/safe_prod_adm_per");
 
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("uepp_ryjbxx_aqscglry_szxspt", PK);
 
@@ -1022,6 +1022,9 @@ namespace WxjzgcjczyTimerService
             request = (HttpWebRequest)HttpWebRequest.Create(address);
             request.ContentType = "application/json";
             request.Method = "POST";
+            string authorization = "zjj_jk" + ":" + "zjj_jk@2020";
+            string base64 = Convert.ToBase64String(Encoding.Default.GetBytes(authorization));
+            request.Headers.Add("Authorization", "Basic " + base64);
             try
             {
                 byte[] bytes;
