@@ -16,6 +16,7 @@ using System.Collections;
 using System.Net;
 using System.IO;
 using System.Threading;
+using WxjzgcjczyTimerService.model;
 
 namespace WxjzgcjczyTimerService
 {
@@ -252,6 +253,11 @@ namespace WxjzgcjczyTimerService
             #region 保存至市一中心四平台（uepp_ryjbxx_zczyry_szxspt）
             try
             {
+                String url = "http://2.20.101.170:8000/zhujianju_dpl/certif_person";
+                sendToSzxspt(url, dt, ref all_count, ref success_count);
+
+                WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条uepp_ryjbxx_zczyry_szxspt数据！");
+                /**
                 string json = "";
 
                 DataRow row;
@@ -260,7 +266,7 @@ namespace WxjzgcjczyTimerService
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
                     string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/certif_person");
-
+                    WriteLog_New("注册执业人员 resultSt " + resultSt);
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("uepp_ryjbxx_zczyry_szxspt", PK);
 
                     if (dt_log_TBProjectInfo.Rows.Count > 0)
@@ -302,6 +308,7 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["successCount"] = success_count;
                 row_DataJkDataDetail["IsOk"] = 1;
                 row_DataJkDataDetail["ErrorMsg"] = "";
+            */
 
             }
             catch (Exception ex)
@@ -313,12 +320,13 @@ namespace WxjzgcjczyTimerService
             }
             finally
             {
+                /**
                 long Id_DataJkDataDetail = dataService.Get_DataJkDataDetailNewID().ToInt64();
                 row_DataJkDataDetail["ID"] = Id_DataJkDataDetail;
                 if (dt_DataJkDataDetail.Rows.Count > 0)
                 {
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
-                }
+                }*/
             }
 
             #endregion
@@ -357,15 +365,16 @@ namespace WxjzgcjczyTimerService
             #region 保存至市一中心四平台（TBProjectFinishManage_szxspt）
             try
             {
-                string json = "";
+                String url = "http://2.20.101.170:8000/zhujianju_dpl/complete_acc";
+                sendToSzxspt(url, dt, ref all_count, ref success_count);
 
-                DataRow row;
+                /**
                 foreach (DataRow dataRow in dt.Rows)
                 {
                     string PK = dataRow["PKID"].ToString();
                     json = ToJson(dataRow);
-
                     string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/complete_acc");
+                    WriteLog_New("竣工验收备案信息 resultSt " + resultSt);
 
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("TBProjectFinishManage_szxspt", PK);
 
@@ -408,7 +417,7 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["successCount"] = success_count;
                 row_DataJkDataDetail["IsOk"] = 1;
                 row_DataJkDataDetail["ErrorMsg"] = "";
-
+                */
             }
             catch (Exception ex)
             {
@@ -416,19 +425,68 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["successCount"] = success_count;
                 row_DataJkDataDetail["IsOk"] = 0;
                 row_DataJkDataDetail["ErrorMsg"] = ex.Message;
+                WriteLog_New("error msg:" + ex.Message);
             }
             finally
             {
+                /**
                 long Id_DataJkDataDetail = dataService.Get_DataJkDataDetailNewID().ToInt64();
                 row_DataJkDataDetail["ID"] = Id_DataJkDataDetail;
                 if (dt_DataJkDataDetail.Rows.Count > 0)
                 {
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
-                }
+                }*/
             }
 
             #endregion
 
+        }
+
+        private void sendToSzxspt(String url, DataTable dt, ref int all_count, ref int success_count)
+        {
+            string json = "";
+            JavaScriptSerializer js = new JavaScriptSerializer();
+
+            DataTable sendDataTable = dt.Clone();
+            sendDataTable.Clear();
+            for (int i = 1; i <= dt.Rows.Count; i++)
+            {
+                sendDataTable.Rows.Add(dt.Rows[i - 1].ItemArray);
+
+                if ((i % 100) == 0 || i == dt.Rows.Count)
+                {
+                    try
+                    {
+                        //每100个发送一次或者最后发送一次
+                        json = DataTableToJson(sendDataTable);
+                        string resultSt = Contact(json, url);
+                        WriteLog_New("resultSt" + resultSt);
+                        ReturnBean model = js.Deserialize<ReturnBean>(resultSt);
+
+                        // && "200000".Equals(model.code)
+                        if (model != null)
+                        {
+                            all_count += model.size;
+                            success_count += model.SuccessSize;
+                        }
+                        else
+                        {
+                            WriteLog_New(url + "return model null" );
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                         
+                        WriteLog_New(url + "|error msg:" + ex.Message);
+                    }
+                    finally
+                    {
+                        sendDataTable.Clear();
+                    }
+                  
+                }
+
+            }
         }
 
         /// <summary>
@@ -462,6 +520,12 @@ namespace WxjzgcjczyTimerService
             #region 保存至市一中心四平台（TBBuilderLicenceManage_szxspt）
             try
             {
+
+                String url = "http://2.20.101.170:8000/zhujianju_dpl/constr_licence";
+                sendToSzxspt(url, dt, ref all_count, ref success_count);
+
+                WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条TBBuilderLicenceManage_szxspt数据！");
+                /**
                 string json = "";
 
                 DataRow row;
@@ -471,7 +535,7 @@ namespace WxjzgcjczyTimerService
                     json = ToJson(dataRow);
 
                     string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/constr_licence");
-
+                    WriteLog_New("施工许可证发放信息 resultSt " + resultSt);
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("TBBuilderLicenceManage_szxspt", PK);
 
                     if (dt_log_TBProjectInfo.Rows.Count > 0)
@@ -513,6 +577,7 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["successCount"] = success_count;
                 row_DataJkDataDetail["IsOk"] = 1;
                 row_DataJkDataDetail["ErrorMsg"] = "";
+                 */
 
             }
             catch (Exception ex)
@@ -524,12 +589,13 @@ namespace WxjzgcjczyTimerService
             }
             finally
             {
+                /**
                 long Id_DataJkDataDetail = dataService.Get_DataJkDataDetailNewID().ToInt64();
                 row_DataJkDataDetail["ID"] = Id_DataJkDataDetail;
                 if (dt_DataJkDataDetail.Rows.Count > 0)
                 {
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
-                }
+                }*/
             }
 
             #endregion
@@ -567,6 +633,11 @@ namespace WxjzgcjczyTimerService
             #region 保存至市一中心四平台（TBProjectInfo_szxspt）
             try
             {
+                String url = "http://2.20.101.170:8000/zhujianju_dpl/constr_project_info";
+                sendToSzxspt(url, dt, ref all_count, ref success_count);
+
+                WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条TBProjectInfo_szxspt数据！");
+                /**
                 string json = "";
 
                 DataRow row;
@@ -576,7 +647,7 @@ namespace WxjzgcjczyTimerService
                     json = ToJson(dataRow);
 
                     string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/constr_project_info");
-
+                    WriteLog_New("工程项目基本信息 resultSt " + resultSt);
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("TBProjectInfo_szxspt", PK);
 
                     if (dt_log_TBProjectInfo.Rows.Count > 0)
@@ -618,7 +689,7 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["successCount"] = success_count;
                 row_DataJkDataDetail["IsOk"] = 1;
                 row_DataJkDataDetail["ErrorMsg"] = "";
-
+                */
             }
             catch (Exception ex)
             {
@@ -628,13 +699,13 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["ErrorMsg"] = ex.Message;
             }
             finally
-            {
+            {   /**
                 long Id_DataJkDataDetail = dataService.Get_DataJkDataDetailNewID().ToInt64();
                 row_DataJkDataDetail["ID"] = Id_DataJkDataDetail;
                 if (dt_DataJkDataDetail.Rows.Count > 0)
                 {
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
-                }
+                }*/
             }
             #endregion
 
@@ -671,7 +742,14 @@ namespace WxjzgcjczyTimerService
             #region 保存至市一中心四平台（TBTenderInfo_szxspt）
             try
             {
+                String url = "http://2.20.101.170:8000/zhujianju_dpl/eng_bid_info";
+                sendToSzxspt(url, dt, ref all_count, ref success_count);
+
+                WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条TBTenderInfo_szxspt数据！");
+                /**
                 string json = "";
+
+            
 
                 DataRow row;
                 foreach (DataRow dataRow in dt.Rows)
@@ -680,7 +758,7 @@ namespace WxjzgcjczyTimerService
                     json = ToJson(dataRow);
 
                     string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/eng_bid_info");
-
+                    WriteLog_New("工程招标中标信息 resultSt " + resultSt);
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("TBTenderInfo_szxspt", PK);
 
                     if (dt_log_TBProjectInfo.Rows.Count > 0)
@@ -722,7 +800,7 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["successCount"] = success_count;
                 row_DataJkDataDetail["IsOk"] = 1;
                 row_DataJkDataDetail["ErrorMsg"] = "";
-
+                */
             }
             catch (Exception ex)
             {
@@ -732,13 +810,13 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["ErrorMsg"] = ex.Message;
             }
             finally
-            {
+            {   /**
                 long Id_DataJkDataDetail = dataService.Get_DataJkDataDetailNewID().ToInt64();
                 row_DataJkDataDetail["ID"] = Id_DataJkDataDetail;
                 if (dt_DataJkDataDetail.Rows.Count > 0)
                 {
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
-                }
+                }*/
             }
             #endregion
 
@@ -774,6 +852,11 @@ namespace WxjzgcjczyTimerService
             #region 保存至市一中心四平台（uepp_ryjbxx_zygwglry_szxspt）
             try
             {
+                String url = "http://2.20.101.170:8000/zhujianju_dpl/prof_adm_per";
+                sendToSzxspt(url, dt, ref all_count, ref success_count);
+
+                WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条uepp_ryjbxx_zygwglry_szxspt数据！");
+                /**
                 string json = "";
 
                 DataRow row;
@@ -783,7 +866,7 @@ namespace WxjzgcjczyTimerService
                     json = ToJson(dataRow);
 
                     string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/prof_adm_per");
-
+                    WriteLog_New("专业岗位管理人员 resultSt " + resultSt);
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("uepp_ryjbxx_zygwglry_szxspt", PK);
 
                     if (dt_log_TBProjectInfo.Rows.Count > 0)
@@ -825,7 +908,7 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["successCount"] = success_count;
                 row_DataJkDataDetail["IsOk"] = 1;
                 row_DataJkDataDetail["ErrorMsg"] = "";
-
+                */
             }
             catch (Exception ex)
             {
@@ -836,13 +919,13 @@ namespace WxjzgcjczyTimerService
             }
 
             finally
-            {
+            {   /**
                 long Id_DataJkDataDetail = dataService.Get_DataJkDataDetailNewID().ToInt64();
                 row_DataJkDataDetail["ID"] = Id_DataJkDataDetail;
                 if (dt_DataJkDataDetail.Rows.Count > 0)
                 {
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
-                }
+                }*/
             }
             #endregion
 
@@ -878,6 +961,11 @@ namespace WxjzgcjczyTimerService
             #region 保存至市一中心四平台（uepp_ryjbxx_aqscglry_szxspt）
             try
             {
+                String url = "http://2.20.101.170:8000/zhujianju_dpl/safe_prod_adm_per";
+                sendToSzxspt(url, dt, ref all_count, ref success_count);
+
+                WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条uepp_ryjbxx_aqscglry_szxspt数据！");
+                /**
                 string json = "";
 
                 DataRow row;
@@ -887,7 +975,7 @@ namespace WxjzgcjczyTimerService
                     json = ToJson(dataRow);
 
                     string resultSt = Contact(json, "http://2.20.101.170:8000/zhujianju_dpl/safe_prod_adm_per");
-
+                    WriteLog_New("安全生产管理人员 resultSt " + resultSt);
                     DataTable dt_log_TBProjectInfo = dataService.GetTBData_SaveToStLog("uepp_ryjbxx_aqscglry_szxspt", PK);
 
                     if (dt_log_TBProjectInfo.Rows.Count > 0)
@@ -929,7 +1017,7 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["successCount"] = success_count;
                 row_DataJkDataDetail["IsOk"] = 1;
                 row_DataJkDataDetail["ErrorMsg"] = "";
-
+                */
             }
             catch (Exception ex)
             {
@@ -939,13 +1027,13 @@ namespace WxjzgcjczyTimerService
                 row_DataJkDataDetail["ErrorMsg"] = ex.Message;
             }
             finally
-            {
+            {   /**
                 long Id_DataJkDataDetail = dataService.Get_DataJkDataDetailNewID().ToInt64();
                 row_DataJkDataDetail["ID"] = Id_DataJkDataDetail;
                 if (dt_DataJkDataDetail.Rows.Count > 0)
                 {
                     dataService.Submit_DataJkDataDetail(dt_DataJkDataDetail);
-                }
+                }*/
             }
             #endregion
 
@@ -1014,17 +1102,39 @@ namespace WxjzgcjczyTimerService
             return javaScriptSerializer.Serialize(arrayList);  //返回一个json字符串
         }
 
+        public string DataTableToJson(DataTable dt)  
+        {
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值
+            ArrayList arrayList = new ArrayList();
+
+            foreach (DataRow dataRow in dt.Rows)
+            {
+                Dictionary<string, object> dictionary = new Dictionary<string, object>();  //实例化一个参数集合
+                foreach (DataColumn dataColumn in dataRow.Table.Columns)
+                {
+                    if (dataColumn.ColumnName != "PKID")
+                    {
+                        dictionary.Add(dataColumn.ColumnName, dataRow[dataColumn.ColumnName].ToString());
+                    }
+                }
+                arrayList.Add(dictionary); //ArrayList集合中添加键值
+            }
+
+            return javaScriptSerializer.Serialize(arrayList);  //返回一个json字符串
+        }
+
 
         public string Contact(string content, string _url) //2016.9.14 往市一中心四平台
         {
+            //WriteLog_New("json: " + content);
             HttpWebRequest request = null;
             Uri address = new Uri(_url);//拼接完整的url
             request = (HttpWebRequest)HttpWebRequest.Create(address);
             request.ContentType = "application/json";
             request.Method = "POST";
-            string authorization = "zjj_jk" + ":" + "zjj_jk@2020";
-            string base64 = Convert.ToBase64String(Encoding.Default.GetBytes(authorization));
-            request.Headers.Add("Authorization", "Basic " + base64);
+            string base64Credentials = GetEncodedCredentials();
+            request.Headers.Add("Authorization", "Basic " + base64Credentials);
             try
             {
                 byte[] bytes;
@@ -1050,8 +1160,15 @@ namespace WxjzgcjczyTimerService
             WebResponse response = request.GetResponse();
             StreamReader reader1 = new StreamReader(response.GetResponseStream());
             string temp_resultStr = reader1.ReadToEnd().Replace("<br>", "").Replace("\\", "");
-            temp_resultStr = temp_resultStr.Substring(1, temp_resultStr.Length - 2);
+            //temp_resultStr = temp_resultStr.Substring(1, temp_resultStr.Length - 2);
             return temp_resultStr;
+        }
+        
+        private string GetEncodedCredentials()
+        {
+            string mergedCredentials = string.Format("{0}:{1}", "zjj_jk", "zjj_jk@2020");
+            byte[] byteCredentials = UTF8Encoding.UTF8.GetBytes(mergedCredentials);
+            return Convert.ToBase64String(byteCredentials);
         }
         #endregion
 
