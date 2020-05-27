@@ -244,7 +244,7 @@ namespace WxjzgcjczyTimerService
             DataTable dt = dataService.Get_CertifPerson();
 
             WriteLog_New("获取了 " + dt.Rows.Count + " 条uepp_ryjbxx_zczyry_szxspt数据！");
-
+            all_count = dt.Rows.Count;
             if (dt.Rows.Count == 0)
             {
                 return;
@@ -254,7 +254,7 @@ namespace WxjzgcjczyTimerService
             try
             {
                 String url = "http://2.20.101.170:8000/zhujianju_dpl/certif_person";
-                sendToSzxspt(url, dt, ref all_count, ref success_count);
+                sendToSzxspt(url, dt, ref success_count);
 
                 WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条uepp_ryjbxx_zczyry_szxspt数据！");
                 /**
@@ -356,7 +356,7 @@ namespace WxjzgcjczyTimerService
             DataTable dt = dataService.Get_CompleteAcc();
 
             WriteLog_New("获取了 " + dt.Rows.Count + " 条TBProjectFinishManage_szxspt数据！");
-
+            all_count = dt.Rows.Count;
             if (dt.Rows.Count == 0)
             {
                 return;
@@ -366,7 +366,7 @@ namespace WxjzgcjczyTimerService
             try
             {
                 String url = "http://2.20.101.170:8000/zhujianju_dpl/complete_acc";
-                sendToSzxspt(url, dt, ref all_count, ref success_count);
+                sendToSzxspt(url, dt, ref success_count);
 
                 /**
                 foreach (DataRow dataRow in dt.Rows)
@@ -442,52 +442,7 @@ namespace WxjzgcjczyTimerService
 
         }
 
-        private void sendToSzxspt(String url, DataTable dt, ref int all_count, ref int success_count)
-        {
-            string json = "";
-            JavaScriptSerializer js = new JavaScriptSerializer();
-
-            DataTable sendDataTable = dt.Clone();
-            sendDataTable.Clear();
-            for (int i = 1; i <= dt.Rows.Count; i++)
-            {
-                sendDataTable.Rows.Add(dt.Rows[i - 1].ItemArray);
-
-                if ((i % 100) == 0 || i == dt.Rows.Count)
-                {
-                    try
-                    {
-                        //每100个发送一次或者最后发送一次
-                        json = DataTableToJson(sendDataTable);
-                        string resultSt = Contact(json, url);
-                        WriteLog_New("resultSt" + resultSt);
-                        ReturnBean model = js.Deserialize<ReturnBean>(resultSt);
-
-                        // && "200000".Equals(model.code)
-                        if (model != null)
-                        {
-                            all_count += model.size;
-                            success_count += model.SuccessSize;
-                        }
-                        else
-                        {
-                            WriteLog_New(url + "return model null" );
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                         
-                        WriteLog_New(url + "|error msg:" + ex.Message);
-                    }
-                    finally
-                    {
-                        sendDataTable.Clear();
-                    }
-                  
-                }
-
-            }
-        }
+        
 
         /// <summary>
         /// 施工许可证发放信息
@@ -511,7 +466,7 @@ namespace WxjzgcjczyTimerService
             DataTable dt = dataService.Get_Constrlicence();
 
             WriteLog_New("获取了 " + dt.Rows.Count + " 条TBBuilderLicenceManage_szxspt数据！");
-
+            all_count = dt.Rows.Count;
             if (dt.Rows.Count == 0)
             {
                 return;
@@ -522,7 +477,7 @@ namespace WxjzgcjczyTimerService
             {
 
                 String url = "http://2.20.101.170:8000/zhujianju_dpl/constr_licence";
-                sendToSzxspt(url, dt, ref all_count, ref success_count);
+                sendToSzxspt(url, dt, ref success_count);
 
                 WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条TBBuilderLicenceManage_szxspt数据！");
                 /**
@@ -624,7 +579,7 @@ namespace WxjzgcjczyTimerService
             DataTable dt = dataService.Get_ConstrProjectInfo();
 
             WriteLog_New("获取了 " + dt.Rows.Count + " 条TBProjectInfo_szxspt数据！");
-
+            all_count = dt.Rows.Count;
             if (dt.Rows.Count == 0)
             {
                 return;
@@ -634,7 +589,7 @@ namespace WxjzgcjczyTimerService
             try
             {
                 String url = "http://2.20.101.170:8000/zhujianju_dpl/constr_project_info";
-                sendToSzxspt(url, dt, ref all_count, ref success_count);
+                sendToSzxspt(url, dt, ref success_count);
 
                 WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条TBProjectInfo_szxspt数据！");
                 /**
@@ -733,7 +688,7 @@ namespace WxjzgcjczyTimerService
             DataTable dt = dataService.Get_EngBidInfo();
 
             WriteLog_New("获取了 " + dt.Rows.Count + " 条TBTenderInfo_szxspt数据！");
-
+            all_count = dt.Rows.Count;
             if (dt.Rows.Count == 0)
             {
                 return;
@@ -743,7 +698,7 @@ namespace WxjzgcjczyTimerService
             try
             {
                 String url = "http://2.20.101.170:8000/zhujianju_dpl/eng_bid_info";
-                sendToSzxspt(url, dt, ref all_count, ref success_count);
+                sendToSzxspt(url, dt, ref success_count);
 
                 WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条TBTenderInfo_szxspt数据！");
                 /**
@@ -843,7 +798,7 @@ namespace WxjzgcjczyTimerService
             DataTable dt = dataService.Get_ProFadmper();
 
             WriteLog_New("获取了 " + dt.Rows.Count + " 条uepp_ryjbxx_zygwglry_szxspt数据！");
-
+            all_count = dt.Rows.Count;
             if (dt.Rows.Count == 0)
             {
                 return;
@@ -853,7 +808,7 @@ namespace WxjzgcjczyTimerService
             try
             {
                 String url = "http://2.20.101.170:8000/zhujianju_dpl/prof_adm_per";
-                sendToSzxspt(url, dt, ref all_count, ref success_count);
+                sendToSzxspt(url, dt, ref success_count);
 
                 WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条uepp_ryjbxx_zygwglry_szxspt数据！");
                 /**
@@ -952,7 +907,7 @@ namespace WxjzgcjczyTimerService
             DataTable dt = dataService.Get_SafeProdadmper();
 
             WriteLog_New("获取了 " + dt.Rows.Count + " 条uepp_ryjbxx_aqscglry_szxspt数据！");
-
+            all_count = dt.Rows.Count;
             if (dt.Rows.Count == 0)
             {
                 return;
@@ -962,7 +917,7 @@ namespace WxjzgcjczyTimerService
             try
             {
                 String url = "http://2.20.101.170:8000/zhujianju_dpl/safe_prod_adm_per";
-                sendToSzxspt(url, dt, ref all_count, ref success_count);
+                sendToSzxspt(url, dt, ref success_count);
 
                 WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条uepp_ryjbxx_aqscglry_szxspt数据！");
                 /**
@@ -1122,6 +1077,62 @@ namespace WxjzgcjczyTimerService
             }
 
             return javaScriptSerializer.Serialize(arrayList);  //返回一个json字符串
+        }
+
+        private void sendToSzxspt(String url, DataTable dt, ref int success_count)
+        {
+            string json = "";
+            JavaScriptSerializer js = new JavaScriptSerializer();
+
+            int recordNum = ConfigurationManager.AppSettings["RecordNum_ToSzxspt"].ToInt32();
+            //WriteLog_New("recordNum:" + recordNum);
+
+            DataTable sendDataTable = dt.Clone();
+            sendDataTable.Clear();
+            for (int i = 1; i <= dt.Rows.Count; i++)
+            {
+                sendDataTable.Rows.Add(dt.Rows[i - 1].ItemArray);
+
+                if ((i % recordNum) == 0 || i == dt.Rows.Count)
+                {
+                    try
+                    {
+                        //每100个发送一次或者最后发送一次
+                        json = DataTableToJson(sendDataTable);
+                        string resultSt = Contact(json, url);
+                        //WriteLog_New("resultSt" + resultSt);
+                        ReturnBean model = js.Deserialize<ReturnBean>(resultSt);
+
+                        // && 
+                        if (model != null)
+                        {
+                            //all_count += model.size;
+                            success_count += model.SuccessSize;
+                            if (!"200000".Equals(model.code))
+                            {
+                                WriteLog_New(url + "\n" + json);
+                                WriteLog_New("resultSt" + resultSt);
+                            }
+
+                        }
+                        else
+                        {
+                            WriteLog_New(url + "return model null");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        WriteLog_New(url + "|error msg:" + ex.Message);
+                    }
+                    finally
+                    {
+                        sendDataTable.Clear();
+                    }
+
+                }
+
+            }
         }
 
 
