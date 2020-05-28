@@ -752,7 +752,7 @@ where a.UpdateFlag='U'
 						left join UEPP_Qyjbxx d on d.zzjgdm=a.DesignCorpCode  
 						left join UEPP_Qyjbxx e on e.zzjgdm=a.ConsCorpCode 
                         where a.UpdateFlag='U'
-                        ) as aa WHERE 1=1 ";
+                        ) as aa WHERE 1=1 AND aa.PrjNum != ''";
 
             return this.DB.ExeSqlForDataTable(sql, null, "dt");
         }
@@ -807,7 +807,7 @@ where a.UpdateFlag='U' ) as aaa WHERE 1=1 ";
                         b1.CodeInfo as TenderClass,
                         b2.CodeInfo as TenderType,
                         c.PrjName,
-                        c.PrjNum,c.PKID as LxPKID,d.qyID,c.CountyNum
+                        a.PrjNum,c.PKID as LxPKID,d.qyID,c.CountyNum
 ,(select count(*) from SaveToStLog where TableName='TBTenderInfo' and  PKID=a.pKID and OperateState=0) OperateState
                         from TBTenderInfo as a
                         left join tbTenderClassDic as b1 on a.TenderClassNum = b1.Code 
