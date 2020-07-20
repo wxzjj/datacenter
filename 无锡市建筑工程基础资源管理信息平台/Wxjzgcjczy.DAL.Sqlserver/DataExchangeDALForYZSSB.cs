@@ -216,6 +216,15 @@ namespace Wxjzgcjczy.DAL.Sqlserver
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
+        public DataTable GetAp_aj_status_info(List<IDataItem> conditions)
+        {
+            string sql = @"select * from Ap_ajsbb_status_info where 1=1";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+
+            conditions.GetSearchClause(sp, ref sql);
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         #region 推送安监通知书
 
         public bool SaveAp_ajtzs(DataTable dt)

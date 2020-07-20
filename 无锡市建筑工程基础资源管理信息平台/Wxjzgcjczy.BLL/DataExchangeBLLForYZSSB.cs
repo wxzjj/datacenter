@@ -102,6 +102,10 @@ namespace Wxjzgcjczy.BLL
         {
             return DAL.GetAp_aj_info(conditions);
         }
+        public DataTable GetAp_ajsbb_status_bytable(List<IDataItem> conditions)
+        {
+            return DAL.GetAp_aj_status_info(conditions);
+        }
 
         #endregion
 

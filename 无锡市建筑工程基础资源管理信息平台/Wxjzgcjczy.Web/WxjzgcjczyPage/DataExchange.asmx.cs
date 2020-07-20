@@ -3261,12 +3261,21 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         list.Add(item);
                     }
                 }
+                switch (tableName.ToLower())
+                {
+                    case "ap_ajsbb_info":
+                        dt = SBBLL.GetAp_ajsbb_bytable(list);
+                        result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    case "ap_ajsbb_status_info":
+                        dt = SBBLL.GetAp_ajsbb_status_bytable(list);
+                        result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
+                        break;
+                    default:
+                        result = "传入的表名不正确！";
+                        break;
 
-                dt = SBBLL.GetAp_ajsbb_bytable(list);
-
-
-                result = xmlHelper.ConvertDataTableToXMLWithBase64Encoding(dt, "dataTable", "row");
-                
+                }   
 
             }
             else
@@ -5808,7 +5817,10 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                         result = BLL.SaveAjsbbGis(user, dt_Data);
                         break;
                     case "ap_ajsbb_info":
-                        result = BLL.SaveAjsbbSuperviseInfo(user, dt_Data);
+                        //result = BLL.SaveAjsbbSuperviseInfo(user, dt_Data);
+                        break;
+                    case "ap_ajsbb_status_info":
+                        result = BLL.SaveAjsbbStausInfo(user, dt_Data);
                         break;
                     default:
                         result.code = ProcessResult.数据表名不正确;

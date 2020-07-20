@@ -3487,6 +3487,46 @@ namespace Wxjzgcjczy.BLL
             return result;
         }
 
+        public ProcessResultData SaveAjsbbStausInfo(string user, DataTable dt_Data)
+        {
+            ProcessResultData result = new ProcessResultData();
+
+            DataTable dt;
+            DataRow row;
+
+            foreach (DataRow item in dt_Data.Rows)
+            {
+                dt = DAL.GetTBData_Ap_ajsbb_status_info(item["uuid"].ToString2());
+
+                if (dt.Rows.Count > 0)
+                {
+                    row = dt.Rows[0];
+                    DataTableHelp.DataRow2DataRow(item, row, new List<string>() { "uuid" });
+                }
+                else
+                {
+                    row = dt.NewRow();
+                    DataTableHelp.DataRow2DataRow(item, row);
+                    row["CreateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    dt.Rows.Add(row);
+                }
+                row["updateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                row["updateUser"] = user;
+
+                if (DAL.SaveTBData_Ap_ajsbb_status_info(dt))
+                {
+                    result.code = ProcessResult.保存失败和失败原因;
+                    result.message = "数据保存失败！";
+                }
+
+            }
+
+            result.code = ProcessResult.数据保存成功;
+            result.message = "数据保存成功！";
+
+            return result;
+        }
+
 
         #endregion
 

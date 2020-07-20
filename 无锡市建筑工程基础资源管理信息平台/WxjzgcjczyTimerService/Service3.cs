@@ -367,7 +367,7 @@ namespace WxjzgcjczyTimerService
             {
                 String url = "http://2.20.101.170:8000/zhujianju_dpl/complete_acc";
                 sendToSzxspt(url, dt, ref success_count);
-
+                WriteLog_New("总条数" + all_count + ",上报了 " + success_count + " 条TBProjectFinishManage_szxspt数据！");
                 /**
                 foreach (DataRow dataRow in dt.Rows)
                 {

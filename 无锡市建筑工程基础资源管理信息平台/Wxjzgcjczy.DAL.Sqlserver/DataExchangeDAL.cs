@@ -930,6 +930,14 @@ where 1=1 ";
             return DB.ExeSqlForDataTable(sql, sp, "dt");
         }
 
+        public DataTable GetTBData_Ap_ajsbb_status_info(string uuid)
+        {
+            string sql = "select * from Ap_ajsbb_status_info where uuid =@uuid";
+            SqlParameterCollection sp = DB.CreateSqlParameterCollection();
+            sp.Add("@uuid", uuid); ;
+            return DB.ExeSqlForDataTable(sql, sp, "dt");
+        }
+
         public DataTable GetTBData_zj_gcjbxx(string zljdbmString)
         {
             SqlParameterCollection sp = DB.CreateSqlParameterCollection();
@@ -1275,6 +1283,12 @@ where a.aqjdbm=b.aqjdbm and b.BuilderLicenceNum=c.BuilderLicenceInnerNum  and a.
         public bool SaveTBData_Ap_ajsbb_info(DataTable dt)
         {
             string sql = "select * from Ap_ajsbb_info where 1=2";
+            return DB.Update(sql, null, dt);
+        }
+
+        public bool SaveTBData_Ap_ajsbb_status_info(DataTable dt)
+        {
+            string sql = "select * from Ap_ajsbb_status_info where 1=2";
             return DB.Update(sql, null, dt);
         }
 
