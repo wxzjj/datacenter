@@ -109,7 +109,7 @@ namespace Wxjzgcjczy.DAL.Sqlserver
 
             string sql = @"SELECT *
 FROM (
-	SELECT p.PKID, p.PrjNum, p.PrjInnerNum, p.PrjName, p.PrjTypeNum
+	SELECT '' AS prjCode,p.PKID, p.PrjNum, p.PrjInnerNum, p.PrjName, p.PrjTypeNum
 		, p.BuildCorpName, p.BuildCorpCode, p.ProvinceNum, p.CityNum, p.CountyNum
 		, p.PrjApprovalNum, p.PrjApprovalLevelNum, p.BuldPlanNum, p.ProjectPlanNum, p.AllInvest
 		, p.AllArea, p.PrjSize, p.PrjPropertyNum, p.PrjFunctionNum
@@ -122,10 +122,12 @@ FROM (
 	FROM WJSJZX.dbo.TBProjectInfo p
 		LEFT JOIN WJSJZX.dbo.TBProjectAdditionalInfo pa ON p.PrjNum = pa.prjnum
 	UNION ALL
-	SELECT p.id AS PKID, p.PrjNum, '' AS PrjInnerNum, p.PrjName, p.PrjTypeNum
+	SELECT p.prjCode AS prjCode, p.id AS PKID, p.PrjNum, '' AS PrjInnerNum, p.PrjName, p.PrjTypeNum
 		, p.BuildCorpName, p.BuildCorpCode, p.ProvinceNum, p.CityNum, p.CountyNum
-		, p.PrjApprovalNum, p.PrjApprovalLevelNum, p.BuildPlanNum AS BuldPlanNum, p.ProjectPlanNum, p.AllInvest
-		, p.AllArea, p.PrjSize, p.PrjPropertyNum, p.PrjFunctionNum
+		, p.PrjApprovalNum, p.PrjApprovalLevelNum, p.BuildPlanNum AS BuldPlanNum, p.ProjectPlanNum
+		, CASE p.AllInvest WHEN NULL THEN p.AllInvest WHEN '' THEN NULL ELSE CONVERT(DECIMAL(15, 2), p.AllInvest) END AllInvest
+		, CASE p.AllArea WHEN NULL THEN p.AllArea WHEN '' THEN NULL ELSE CONVERT(DECIMAL(15, 2), p.AllArea) END AllArea
+		, p.PrjSize, p.PrjPropertyNum, p.PrjFunctionNum
 		, SUBSTRING(convert(varchar(30), p.beginDete, 120), 1, 10) AS BDate
 		, SUBSTRING(convert(varchar(30), p.endDate, 120), 1, 10) AS EDate
 		, SUBSTRING(convert(varchar(30), GETDATE(), 120), 1, 10) AS CREATEDATE

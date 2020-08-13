@@ -5819,6 +5819,9 @@ namespace Wxjzgcjczy.Web.WxjzgcjczyPage
                     case "ap_ajsbb_info":
                         //result = BLL.SaveAjsbbSuperviseInfo(user, dt_Data);
                         break;
+                    case "ap_ajsbb_info_manual":
+                        result = BLL.SaveAjsbbSuperviseInfo(user, dt_Data);
+                        break;
                     case "ap_ajsbb_status_info":
                         result = BLL.SaveAjsbbStausInfo(user, dt_Data);
                         break;
